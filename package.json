@@ -1,0 +1,22 @@
+{
+  "name": "semantic-cueing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adarshjp/Semantic-Cueing.git"
+  },
+  "author": "Adarsh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adarshjp/Semantic-Cueing/issues"
+  },
+  "homepage": "https://github.com/adarshjp/Semantic-Cueing#readme",
+  "dependencies": {
+    "mongoose": "^6.0.11"
+  }
+}
