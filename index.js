@@ -49,8 +49,9 @@ app.use(function (req, res, next) {
 });
 
 const adminRoutes = require("./routes/admin");
+const generalRoutes = require("./routes/general");
 app.use(adminRoutes)
-
+app.use(generalRoutes)
 app.listen(process.env.PORT || 3000, () => {
   console.log("server started at port 3000");
 });
