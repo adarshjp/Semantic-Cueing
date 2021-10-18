@@ -7,15 +7,15 @@ const userSchema = new mongoose.Schema({
     required: true,
     maxlength: 13,
     minlength: 13,
-    pattern: "",
+    // pattern: "",
   },
   password: {
     type: String,
-    required: true,
-    maxlength: 10,
-    minlength: 8,
-    pattern:
-      "^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{8,10}$",
+    // required: true,
+    // maxlength: 10,
+    // minlength: 8,
+    // pattern:
+      // "^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{8,10}$",
   },
   email: {
     type: String,
@@ -23,6 +23,7 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
+    required: true,
   },
   doctorid: {
     type: mongoose.Schema.Types.ObjectId,
