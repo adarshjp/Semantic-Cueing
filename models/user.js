@@ -5,8 +5,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     unique: true,
     required: true,
-    maxlength: 13,
-    minlength: 13,
+    // maxlength: 13,
+    // minlength: 13,
     // pattern: "",
   },
   password: {
@@ -40,6 +40,14 @@ const userSchema = new mongoose.Schema({
       },
     },
   ],
+  name:{
+    type: String,
+    required: true,
+  },  
+  age:{
+    type: Number,
+    required: true,
+  },
 });
 userSchema.plugin(passportLocalMongoose);
 module.exports = new mongoose.model("User", userSchema);
