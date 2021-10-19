@@ -24,8 +24,16 @@ exports.isAdmin = (req, res, next) => {
 };
 
 exports.register_get = (req, res) => {
-  res.status(200);
-  res.send("register get");
+  User.find({role:'doctor'},{_id:1,name:1},(err,docs)=>{
+    if(err){
+      res.status(400);
+      res.send(err);
+    }else{
+      res.status(200);
+      res.send(docs);
+    }
+  })
+  // res.send("register get");
 };
 
 exports.register_post = (req, res) => {
