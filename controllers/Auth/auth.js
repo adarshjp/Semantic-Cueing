@@ -1,27 +1,5 @@
 const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
-const User = require("../models/user");
-
-exports.isLoggedIn = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    return next();
-  } else {
-    res.status(401);
-    res.send("You must be logged in to do that!");
-    // req.flash('error','You must be logged in to do that!');
-    // res.redirect('/login');
-  }
-};
-exports.isAdmin = (req, res, next) => {
-  if (req.user.role === "admin") {
-    return next();
-  } else {
-    res.status(401);
-    res.send("You must be an admin to do that!");
-    // req.flash('error','You must be an admin to do that!');
-    // res.redirect('/');
-  }
-};
+const User = require("../../models/user");
 
 exports.register_get = (req, res) => {
   User.find({role:'doctor'},{_id:1,name:1},(err,docs)=>{
@@ -61,13 +39,9 @@ exports.login_get = (req, res) => {
 };
 
 exports.login_post = (req, res) => {
-  res.status(200);
-  res.send("login successful");
-};
-
-exports.admin_get = (req, res) => {
-  res.status(200);
-  res.send("admin");
+  //res.status(200);
+  //res.send("login successful");
+  res.redirect("/home/admin")
 };
 
 exports.change_password = (req, res) => {

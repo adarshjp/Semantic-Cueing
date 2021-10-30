@@ -2,14 +2,15 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 
-const{change_password,login_get,login_post,isLoggedIn,set_password}=require('../controllers/auth');
+const{change_password,login_get,login_post,set_password}=require('../controllers/Auth/auth');
+const {isLoggedIn}=require('../controllers/Auth/middlewares');
 router.post(
   "/login",
   passport.authenticate("local", {
     failureRedirect: "/login",
     failureFlash: true,
+    successRedirect: "/admin/home",
   }),
-  login_post
 );
 router.get("/logout", isLoggedIn, (req, res) => {
   req.logout();
