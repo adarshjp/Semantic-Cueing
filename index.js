@@ -49,7 +49,7 @@ app.use(function (req, res, next) {
 });
 
 app.get("/test",(req,res)=>{
-  res.render("login");
+  res.render("add_questions");
   })
 
 const adminRoutes = require("./routes/admin");
