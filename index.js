@@ -7,7 +7,7 @@ const LocalStrategy = require("passport-local");
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
+app.set("view engine","ejs")
 const connectionParams = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -47,6 +47,10 @@ app.use(function (req, res, next) {
   res.locals.message = req.flash();
   next();
 });
+
+app.get("/test",(req,res)=>{
+  res.render("login");
+  })
 
 const adminRoutes = require("./routes/admin");
 const generalRoutes = require("./routes/general");

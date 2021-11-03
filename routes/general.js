@@ -3,13 +3,14 @@ const router = express.Router();
 const passport = require('passport');
 
 const{change_password,login_get,login_post,set_password}=require('../controllers/Auth/auth');
-const {isLoggedIn}=require('../controllers/Auth/middlewares');
+const {isLoggedIn, isAdmin}=require('../controllers/Auth/middlewares');
+const { addquestions_get } = require('../controllers/general');
 router.post(
   "/login",
   passport.authenticate("local", {
     failureRedirect: "/login",
     failureFlash: true,
-    successRedirect: "/admin/home",
+    successRedirect: "/home/admin",
   }),
 );
 router.get("/logout", isLoggedIn, (req, res) => {
@@ -21,4 +22,5 @@ router.get("/logout", isLoggedIn, (req, res) => {
 router.post("/changepassword", isLoggedIn, change_password);
 router.get("/login", login_get);
 router.post("/setpassword",isLoggedIn,set_password);
+router.get("/addquestion",isLoggedIn,isAdmin,addquestions_get)
 module.exports = router;
