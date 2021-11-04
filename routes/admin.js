@@ -5,7 +5,7 @@ const {
   register_post,
 } = require("../controllers/Auth/auth");
 const {isAdmin,isLoggedIn}=require('../controllers/Auth/middlewares')
-const {admin_get}=require('../controllers/admin')
+const {admin_get,assign_get}=require('../controllers/admin')
 const router = express.Router();
 
 router.get("/register", isLoggedIn, isAdmin, register_get);
