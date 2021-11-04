@@ -19,7 +19,14 @@ exports.register_post = (req, res) => {
     username: req.body.username,
     email: req.body.email,
     role: req.body.role,
+    age: req.body.age,
+    name: req.body.name,
+    email: req.body.email,
   });
+  if(req.body.doctorid)
+  {
+    user.doctorid = req.body.doctorid;
+  }
   User.register(user, req.body.password, (err, newUser) => {
     if (err) {
       res.status(400);
