@@ -48,7 +48,12 @@ exports.login_get = (req, res) => {
 exports.login_post = (req, res) => {
   //res.status(200);
   //res.send("login successful");
-  res.redirect("/home/admin")
+  if(req.user.role==="admin")
+    res.redirect("/home/admin")
+  else if(req.user.role==="doctor")
+    res.redirect("/home/doctor")
+  else
+    res.redirect("/home/patient")
 };
 
 exports.change_password = (req, res) => {

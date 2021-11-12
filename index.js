@@ -26,7 +26,7 @@ const flash = require("connect-flash");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 app.use(cookieParser("keyboard cat"));
-app.use(session({ cookie: { maxAge: 60000 } }));
+app.use(session({ cookie: { maxAge: 120000 } }));
 app.use(flash());
 
 const User = require("./models/user");
@@ -58,8 +58,10 @@ app.get("/test",(req,res)=>{
 
 const adminRoutes = require("./routes/admin");
 const generalRoutes = require("./routes/general");
+const doctorRoutes = require("./routes/doctor");
 app.use(adminRoutes)
 app.use(generalRoutes)
+app.use(doctorRoutes)
 app.listen(process.env.PORT || 3000, () => {
   console.log("server started at port 3000");
 });

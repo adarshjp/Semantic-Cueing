@@ -18,9 +18,9 @@ router.post(
   "/login",
   passport.authenticate("local", {
     failureRedirect: "/login",
-    failureFlash: true,
-    successRedirect: "/home/admin",
+    failureFlash: true
   }),
+  login_post
 );
 router.get("/logout", isLoggedIn, (req, res) => {
   req.logout();
