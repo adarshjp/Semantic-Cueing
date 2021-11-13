@@ -47,13 +47,6 @@ app.use(function (req, res, next) {
   res.locals.message = req.flash();
   next();
 });
-
-app.get("/test",(req,res)=>{
-  res.render("add_questions");
-  })
-app.get("/test1",(req,res)=>{
-  res.render("signup")
-})
 const adminRoutes = require("./routes/admin");
 const generalRoutes = require("./routes/general");
 const doctorRoutes = require("./routes/doctor");
