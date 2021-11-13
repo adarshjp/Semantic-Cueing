@@ -1,5 +1,5 @@
 /* Create test css  start*/
-main {
+#test-main {
     display: block;
     margin: 0 auto;
     max-width: 40rem;
@@ -82,8 +82,7 @@ ol.gradient-list > li + li {
   top: 20px; 
   left:0;
  }
-
-.form-check-input {
+#q-checkbox {
   border: 5px solid #6C63FF;
   height: 25px;
   width: 25px;
@@ -91,6 +90,7 @@ ol.gradient-list > li + li {
 }
 #qimg{
     background-color: #6C63FF;
+}
 /* Create test css end */
 
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
@@ -242,14 +242,14 @@ input.f {
    display: flex;
   flex-wrap: wrap;
 }
-a {
+#login-a {
 	color: #333;
 	font-size: 14px;
 	text-decoration: none;
 	margin: 15px 0;
 }
 
-form {
+#login-form {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -259,7 +259,7 @@ form {
 	text-align: center;
 }
 
-input {
+#login-input {
 	background-color: #eee;
 	border: none;
 	padding: 12px 15px;
@@ -271,8 +271,8 @@ input {
 	min-height: 85vh; /* These two lines are counted as one :-)       */
 	display: flex;
 	align-items: center;
-  }
+}
 
-  #review{
+#review{
 	background-color:#6C63FF;
-  }
+}

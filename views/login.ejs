@@ -2,7 +2,7 @@
 <div class="container my-5 shadow-lg rounded">
 	<div class="row justify-content-center vertical-center">
 		<div class="col-12 col-md-6">
-			<form action="/login" method="post" class="p-3">
+			<form action="/login" method="post" class="p-3" id="login-form">
 				<h1 class="p-2"><b>Sign In</b></h1>
 				<% if(message.error){ %>
 					<div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -10,13 +10,13 @@
 						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 					</div>
 				<% } %>
-				<input type="text" name="username" placeholder="Username" required>
-				<input type="password" name="password" placeholder="Password" required>
-				<a href="#">Forgot Your Password</a>		
-				<input type="submit" class="btn btn-primary rounded-pill" value="Sign In">
+				<input type="text" name="username" placeholder="Username" id="login-input" required>
+				<input type="password" name="password" placeholder="Password" id="login-input" required>
+				<a href="#" id="login-a">Forgot Your Password</a>		
+				<input type="submit" class="btn btn-primary btn-lg rounded-pill" value="Sign In">
 			</form>
 		</div>
-		<div class="col-12 col-md-6 d-none d-md-block" id="review">
+		<div class="col-12 col-md-6 d-none d-md-block bg-primary" id="review">
 			
 		</div>
 	</div>
