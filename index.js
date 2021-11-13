@@ -52,10 +52,6 @@ app.get("/test",(req,res)=>{
   res.render("add_questions");
   })
 
-  app.get("/test1",(req,res)=>{
-    res.render("login");
-    })
-
 const adminRoutes = require("./routes/admin");
 const generalRoutes = require("./routes/general");
 const doctorRoutes = require("./routes/doctor");
