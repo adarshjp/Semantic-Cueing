@@ -42,7 +42,7 @@ exports.register_post = (req, res) => {
 
 exports.login_get = (req, res) => {
   res.status(200);
-  res.send("login");
+  res.render("login");
 };
 
 exports.login_post = (req, res) => {
