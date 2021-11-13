@@ -18,9 +18,9 @@ router.post(
   "/login",
   passport.authenticate("local", {
     failureRedirect: "/login",
-    failureFlash: true,
-    successRedirect: "/home/admin",
+    failureFlash: true
   }),
+  login_post
 );
 router.get("/logout", isLoggedIn, (req, res) => {
   req.logout();
@@ -30,6 +30,9 @@ router.get("/logout", isLoggedIn, (req, res) => {
 });
 router.post("/changepassword", isLoggedIn, change_password);
 router.get("/login", login_get);
+router.get("/",(req,res)=>{
+  res.redirect("/login");
+})
 router.post("/setpassword",isLoggedIn,set_password);
 router.get("/addquestion",isLoggedIn,isAdmin,addquestions_get)
 router.post("/addquestion",upload.array("image",5),isLoggedIn,isAdmin,addquestions_post)

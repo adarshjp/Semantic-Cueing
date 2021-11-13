@@ -2,7 +2,8 @@ const fs = require("fs");
 const path = require("path");
 const Question = require("../models/question");
 exports.addquestions_get = (req, res) => {
-  res.status(200).send("add questions get");
+  res.status(200)
+  res.render('add_questions')
 };
 
 exports.addquestions_post = (req, res, next) => {
@@ -28,10 +29,14 @@ exports.addquestions_post = (req, res, next) => {
     .save()
     .then((result) => {
       //console.log(result);
-      res.status(200).send(result);
+      req.flash('success', 'Question added successfully');
+      res.status(200)
+      res.redirect('/addquestion')
     })
     .catch((err) => {
-      res.status(500).send(err);
+      res.status(500);
+      req.flash('error', err.message);
+      res.redirect('/addquestion');
     });
 };
 
@@ -40,7 +45,7 @@ function covert_img(files) {
   files.forEach((file) => {
     var obj = {
       data: fs.readFileSync(
-        path.join("D:/Semantic-Cueing/uploads/" + file.filename)
+        path.join("E:/Semantic-Cueing/uploads/" + file.filename)
       ),
       contentType: "image/png",
     };

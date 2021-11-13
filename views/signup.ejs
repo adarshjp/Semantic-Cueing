@@ -1,0 +1,71 @@
+<%- include("partials/header") %>
+<div class="container">
+  <% if(message.error){ %>
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong><%= message.error%></strong>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+  <% } %>
+  <% if(message.success){ %>
+	<div class="alert alert-warning alert-dismissible fade show" role="alert">
+	  <strong><%= message.success%></strong>
+	  <button
+		type="button"
+		class="btn-close"
+		data-bs-dismiss="alert"
+		aria-label="Close"
+	  ></button>
+	</div>
+	<% } %>
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-5">
+      <form action="/register" method="post">
+        <h1>Sign Up</h1>
+        <input
+          type="text"
+          name="username"
+          placeholder="Enter The Username"
+          required
+        />
+        <input type="text" name="name" placeholder="Enter The Name" required />
+        <input type="number" name="age" placeholder="Enter The Age" required />
+        <input
+          type="email"
+          name="email"
+          placeholder="Enter The Email"
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter The Password"
+          required
+        />
+        <label for="role">Choose The Role:</label>
+        <select name="role" id="role" required>
+          <option value="admin">Admin</option>
+          <option value="doctor">Doctor</option>
+          <option value="patient">Patient</option>
+        </select>
+        <label for="doctorid">Choose doctor : Only for Patient</label>
+        <select name="doctorid" id="doctorid" required>
+          <% doctors.forEach((doctor) => { %>
+          <option value="<%=doctor.id%>"><%=doctor.name%></option>
+          <% }) %>
+        </select>
+        <input
+          type="submit"
+          class="btn btn-primary rounded-pill"
+          value="SUBMIT"
+        />
+      </form>
+    </div>
+    <div class="col-12 col-sm-5 d-none d-sm-block"></div>
+  </div>
+</div>
+<%- include("partials/footer") %>

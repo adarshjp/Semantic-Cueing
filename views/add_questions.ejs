@@ -1,3 +1,188 @@
 <%- include("partials/header") %>
-<p>add question</p>
+<div class="container">
+   <% if(message.error){ %>
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong><%= message.error%></strong>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+      <% } %>
+      <% if(message.success){ %>
+       <div class="alert alert-warning alert-dismissible fade show" role="alert">
+         <strong><%= message.success%></strong>
+         <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+         ></button>
+       </div>
+       <% } %>
+   <form action="/addquestion" method="POST" enctype="multipart/form-data">
+      <div class="row justify-content-center">
+         <div class="col-12 col-md-6">
+            <h2>Add question</h2>
+            <hr>
+               <div class="form-group">
+                  <input type="file" name="image" class="form-control" placeholder="Enter Image" id="upload_file" onchange="getImagePreview(event)">
+               </div>
+               <div id="preview">
+
+               </div>
+               <div>
+                  <label>Enter Answer:</label>
+                  <input type="text" name="answer">
+               </div>
+               <div>
+                  <label>Enter Level:</label>
+                  <input type="number" name="level">
+               </div>
+               <div>
+                  <label>Enter Score:</label>
+                  <input type="number" name="score">
+               </div>
+         </div>
+      </div>
+ <script>
+     function getImagePreview(event)
+  {
+    var image=URL.createObjectURL(event.target.files[0]);
+    var imagediv= document.getElementById('preview');
+    var newimg=document.createElement('img');
+    imagediv.innerHTML='';
+    newimg.src=image;
+    newimg.width="300";
+    imagediv.appendChild(newimg);
+  }
+
+ </script>
+<div class="row justify-content-center">
+   <div class="col-12 col-md-6">
+      <h2>Add hint1</h2>
+      <hr>
+      
+         <div class="form-group">
+            <input type="file" name="image" class="form-control" placeholder="Enter Image" id="upload_hint1" onchange="getHint1Preview(event)">
+         </div>
+         <div id="preview-hint1">
+
+         </div>
+         <div>
+            <label>Enter Score:</label>
+            <input type="number" name="nscore[0]">
+         </div>
+    </div>
+
+<script>
+  function getHint1Preview(event)
+{
+ var image1=URL.createObjectURL(event.target.files[0]);
+ var imagediv1= document.getElementById('preview-hint1');
+ var newimg1=document.createElement('img');
+ imagediv1.innerHTML='';
+ newimg1.src=image1;
+ newimg1.width="300";
+ imagediv1.appendChild(newimg1);
+}
+
+</script>
+   <div class="col-12 col-md-6">
+   <h2>Add hint2</h2>
+   <hr>
+    
+      <div class="form-group">
+         <input type="file" name="image" class="form-control" placeholder="Enter Image" id="upload_hint2" onchange="getHint2Preview(event)">
+      </div>
+      <div id="preview-hint2">
+
+      </div>
+      <div>
+         <label>Enter Score:</label>
+         <input type="number" name="nscore[1]">
+      </div>
+</div>
+<script>
+  function getHint2Preview(event)
+{
+ var image2=URL.createObjectURL(event.target.files[0]);
+ var imagediv2= document.getElementById('preview-hint2');
+ var newimg2=document.createElement('img');
+ imagediv2.innerHTML='';
+ newimg2.src=image2;
+ newimg2.width="300";
+ imagediv2.appendChild(newimg2);
+}
+
+</script>
+   <div class="col-12 col-md-6">
+   <h2>Add hint3</h2>
+   <hr>
+   
+      <div class="form-group">
+         <input type="file" name="image" class="form-control" placeholder="Enter Image" id="upload_hint3" onchange="getHint3Preview(event)">
+      </div>
+      <div id="preview-hint3">
+
+      </div>
+      <div>
+         <label>Enter Score:</label>
+         <input type="number" name="nscore[2]">
+      </div>
+     
+    
+</div>
+
+<script>
+  function getHint3Preview(event)
+{
+ var image3=URL.createObjectURL(event.target.files[0]);
+ var imagediv3= document.getElementById('preview-hint3');
+ var newimg3=document.createElement('img');
+ imagediv3.innerHTML='';
+ newimg3.src=image3;
+ newimg3.width="300";
+ imagediv3.appendChild(newimg3);
+}
+
+</script>
+   <div class="col-12 col-md-6">
+      <h2>Add hint4</h2>
+      <hr>
+      
+         <div class="form-group">
+            <input type="file" name="image" class="form-control" placeholder="Enter Image" id="upload_hint4" onchange="getHint4Preview(event)">
+         </div>
+         <div id="preview-hint4">
+
+         </div>
+         <div>
+            <label>Enter Score:</label>
+            <input type="number" name="nscore[3]">
+         </div>
+      </div>
+      <div class="form-group text-center">
+         <input type="submit" name="submit" class="btn btn-primary btn-lg rounded-pill">
+      </div>
+   </form>
+</div>
+
+<script>
+  function getHint4Preview(event)
+{
+ var image4=URL.createObjectURL(event.target.files[0]);
+ var imagediv4= document.getElementById('preview-hint4');
+ var newimg4=document.createElement('img');
+ imagediv4.innerHTML='';
+ newimg4.src=image4;
+ newimg4.width="300";
+ imagediv4.appendChild(newimg4);
+}
+
+</script>
+
 <%- include("partials/footer") %>
+
