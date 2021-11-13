@@ -4,10 +4,16 @@
 		<div class="col-12 col-md-6">
 			<form action="/login" method="post" class="p-3">
 				<h1 class="p-2"><b>Sign In</b></h1>
-				<input type="text" name="username" placeholder="Username">
-				<input type="password" name="password" placeholder="Password">
+				<% if(message.error){ %>
+					<div class="alert alert-warning alert-dismissible fade show" role="alert">
+						<strong><%= message.error%></strong>
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+				<% } %>
+				<input type="text" name="username" placeholder="Username" required>
+				<input type="password" name="password" placeholder="Password" required>
 				<a href="#">Forgot Your Password</a>		
-				<input type="button" class="btn btn-primary rounded-pill" value="Sign In">
+				<input type="submit" class="btn btn-primary rounded-pill" value="Sign In">
 			</form>
 		</div>
 		<div class="col-12 col-md-6 d-none d-md-block" id="review">
