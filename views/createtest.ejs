@@ -1,8 +1,8 @@
 <%- include("partials/header") %>
-<main>
+<main id="test-main">
     <form action="" method="POST">
-        <ol class="gradient-list">  
-            <% for(var i=1;i<= 4; i++) { %>
+        <ol class="gradient-list">
+            <% question.forEach((question)=>{ %>
                 <li class="row shadow-lg mb-5 bg-body rounded-lg">
                     <div class="card-image row p-2">
                         <div class="hover-img">
@@ -11,14 +11,14 @@
                             </span>
                         </div>
                         <div class="col-10">
-                            <p>this is the quetion no. <%= i%></p>
+                            <p>this is the quetion no. 0</p>
                         </div>
                         <div class="col-1">
                             <input class="form-check-input" type="checkbox" id="q-checkbox" value="" name="">
                         </div>
                     </div>   
                 </li>
-            <% } %>
+            <% }) %>
         </ol>
         <div class="row justify-content-center">
             <div class="col-3">
