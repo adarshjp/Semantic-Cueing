@@ -1,40 +1,18 @@
-<%- include("partials/header") %>
-
-<section>
-	
-<div class="container" id="container">
-
-<div class="form-container sign-in-container">
-	<form action="/login" method="post">
-		<h1>Sign In</h1>
-	<span>or use your account</span>
-	<input type="text" name="username" placeholder="Username">
-	<input type="password" name="password" placeholder="Password">
-	<a href="#">Forgot Your Password</a>		
-
-	<button>Sign In</button>
-	</form>
-	
-</div>
-<div class="overlay-container">
-	<div class="overlay">
-		<div class="overlay-panel overlay-left">
-			<h1>Welcome Back!</h1>
-			<p>To keep connected with us please login with your personal info</p>
-			<button class="ghost" id="signIn">Sign In</button>
+<%- include("partials/header") %>	
+<div class="container my-5 shadow-lg rounded">
+	<div class="row justify-content-center vertical-center">
+		<div class="col-12 col-md-6">
+			<form action="/login" method="post" class="p-3">
+				<h1 class="p-2"><b>Sign In</b></h1>
+				<input type="text" name="username" placeholder="Username">
+				<input type="password" name="password" placeholder="Password">
+				<a href="#">Forgot Your Password</a>		
+				<input type="button" class="btn btn-primary rounded-pill" value="Sign In">
+			</form>
 		</div>
-		<div class="overlay-panel overlay-right">
-			<!-- <h1>Hello, Friend!</h1>
-			<p>Enter your details and start journey with us</p>
-			<button class="ghost" id="signUp">Sign Up</button> -->
+		<div class="col-12 col-md-6 d-none d-md-block" id="review">
+			
 		</div>
 	</div>
 </div>
-</div>
-
-
-
-</section>
-
-
 <%- include("partials/footer") %>
