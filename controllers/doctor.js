@@ -6,7 +6,8 @@ exports.get_create_test = (req, res) => {
     .then((patient) => {
       Question.find({}, { hints: 0 })
         .then((question) => {
-          res.status(200).send({ patient, question });
+          res.status(200)
+          res.render('createtest',{question: question, patient: patient})
         })
         .catch((err) => {
           res.status(500).json({
