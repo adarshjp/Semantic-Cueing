@@ -49,11 +49,11 @@ app.use(function (req, res, next) {
 });
 
 app.get("/test",(req,res)=>{
-  res.render("add_questions");
+  res.render("testexecute");
   })
 
   app.get("/test1",(req,res)=>{
-    res.render("login");
+    res.render("createtest");
     })
 
 const adminRoutes = require("./routes/admin");
