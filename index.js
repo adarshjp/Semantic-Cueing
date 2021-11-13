@@ -47,6 +47,7 @@ app.use(function (req, res, next) {
   res.locals.message = req.flash();
   next();
 });
+
 const adminRoutes = require("./routes/admin");
 const generalRoutes = require("./routes/general");
 const doctorRoutes = require("./routes/doctor");

@@ -1,0 +1,30 @@
+<%- include("partials/header") %>
+<main>
+    <form action="" method="POST">
+        <ol class="gradient-list">  
+            <% for(var i=1;i<= 4; i++) { %>
+                <li class="row shadow-lg mb-5 bg-body rounded-lg">
+                    <div class="card-image row p-2">
+                        <div class="hover-img">
+                            <span class="p-1 rounded-lg my-3" id="qimg">
+                                    <img src="https://images.ctfassets.net/hrltx12pl8hq/7yQR5uJhwEkRfjwMFJ7bUK/dc52a0913e8ff8b5c276177890eb0129/offset_comp_772626-opt.jpg?fit=fill&w=800&h=300" alt="image" class="img-fluid"/>      
+                            </span>
+                        </div>
+                        <div class="col-10">
+                            <p>this is the quetion no. <%= i%></p>
+                        </div>
+                        <div class="col-1">
+                            <input class="form-check-input" type="checkbox" id="q-checkbox" value="" name="">
+                        </div>
+                    </div>   
+                </li>
+            <% } %>
+        </ol>
+        <div class="row justify-content-center">
+            <div class="col-3">
+                <input type="submit" class="btn btn-primary btn-lg rounded-pill" value="Create Test">
+            </div>
+        </div>
+    </form>
+</main>
+<%- include("partials/footer") %>
