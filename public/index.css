@@ -1,3 +1,149 @@
-p{
-    color: red;
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+/*html,body{
+    display: inline;
+    height: 100%;
+  place-items: center;
+  text-align: center;
+}*/
+/*.container{
+  height: 350px;
+  width: 430px;
+  position: relative;
+}
+
+
+.container .wrapper{
+  position: relative;
+  margin-left:400px;
+  height: 300px;
+  width: 30%;
+  border-radius: 10px;
+  background: #fff;
+  border: 2px dashed #c2cdda;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.wrapper .active{
+  border: none;
+}
+.wrapper .image{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+.wrapper img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.wrapper .icon{
+  font-size: 100px;
+  color: #6C63FF;
+}
+
+
+
+
+
+
+.wrapper .text{
+  font-size: 20px;
+  font-weight: 500;
+  color: #6C63FF;
+}
+.wrapper #cancel-btn i{
+  position: absolute;
+  font-size: 20px;
+  right: 15px;
+  top: 15px;
+  color: #6C63FF;
+  cursor: pointer;
+  display: none;
+}
+.wrapper.active:hover #cancel-btn i{
+  display: block;
+}
+.wrapper #cancel-btn i:hover{
+  color: #e74c3c;
+}
+.wrapper .file-name{
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  padding: 8px 0;
+  font-size: 18px;
+  color: #fff;
+  display: none;
+  background: linear-gradient(135deg,#3a8ffe 0%,#9658fe 100%);
+}
+.wrapper.active:hover .file-name{
+  display: block;
+}
+.container #custom-btn{
+    margin-bottom:5px;
+  margin-top: 5px;
+  margin-left:450px;
+  display: block;
+  width: 20%;
+  height: 40px;
+  border: none;
+  outline: none;
+  border-radius: 25px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: linear-gradient(135deg,#3a8ffe 0%,#9658fe 100%);
+}
+ */
+
+/*
+.image_container {
+	height: 120px;
+	width: 120px;
+	border-radius: 6px;
+	overflow: hidden;
+ 	margin: 10px;
+}
+.image_container img {
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+}
+.image_container span {
+	top: -6px;
+	right: 8px;
+	color: red;
+	font-size: 28px;
+	font-weight: normal;
+	cursor: pointer;
+}
+
+
+.image {
+  height:300px;
+  border-radius:10px;
+}
+
+input.f {
+
+}
+*/
+#main {
+   display: flex;
+  flex-wrap: wrap;
 }
