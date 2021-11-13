@@ -8,7 +8,7 @@ exports.register_get = (req, res) => {
       res.send(err);
     }else{
       res.status(200);
-      res.send(docs);
+      res.render('signup',{doctors:docs});
     }
   })
   // res.send("register get");
@@ -19,15 +19,27 @@ exports.register_post = (req, res) => {
     username: req.body.username,
     email: req.body.email,
     role: req.body.role,
+    age: req.body.age,
+    name: req.body.name,
+    email: req.body.email,
   });
+  if(user.role==='patient' && req.body.doctorid)
+  {
+    user.doctorid = req.body.doctorid;
+  }
+  // console.log(user);
   User.register(user, req.body.password, (err, newUser) => {
     if (err) {
       res.status(400);
-      res.send(err);
+      //res.send(err);
+      req.flash("error",err.message)
+      res.redirect("/register");
     } else {
       passport.authenticate("local")(req, res, () => {
         res.status(200);
-        res.send("User created!");
+        //res.send("User created!");
+        req.flash("success","User created!!")
+        res.redirect("/register");
       });
     }
   });
@@ -35,13 +47,19 @@ exports.register_post = (req, res) => {
 
 exports.login_get = (req, res) => {
   res.status(200);
-  res.send("login");
+  res.render("login");
 };
 
 exports.login_post = (req, res) => {
   //res.status(200);
   //res.send("login successful");
-  res.redirect("/home/admin")
+  req.flash("success","Welcome!")
+  if(req.user.role==="admin")
+    res.redirect("/home/admin")
+  else if(req.user.role==="doctor")
+    res.redirect("/home/doctor")
+  else
+    res.redirect("/home/patient")
 };
 
 exports.change_password = (req, res) => {
