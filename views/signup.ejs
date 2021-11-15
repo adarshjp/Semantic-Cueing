@@ -53,7 +53,7 @@
           <option value="patient">Patient</option>
         </select>
         <label for="doctorid">Choose doctor : Only for Patient</label>
-        <select name="doctorid" id="doctorid" required>
+        <select name="doctorid" id="doctorid">
           <% doctors.forEach((doctor) => { %>
           <option value="<%=doctor.id%>"><%=doctor.name%></option>
           <% }) %>

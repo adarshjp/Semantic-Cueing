@@ -45,7 +45,7 @@ function covert_img(files) {
   files.forEach((file) => {
     var obj = {
       data: fs.readFileSync(
-        path.join("E:/Semantic-Cueing/uploads/" + file.filename)
+        path.join("E:/FYP/Semantic-Cueing/uploads/" + file.filename)
       ),
       contentType: "image/png",
     };

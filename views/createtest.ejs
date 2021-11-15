@@ -1,26 +1,34 @@
 <%- include("partials/header") %>
 <main id="test-main">
-    <form action="" method="POST">
+    <form action="/create/test" method="POST">
         <ol class="gradient-list">
             <% question.forEach((question)=>{ %>
                 <li class="row shadow-lg mb-5 bg-body rounded-lg">
                     <div class="card-image row p-2">
                         <div class="hover-img">
                             <span class="p-1 rounded-lg my-3" id="qimg">
-                                    <img src="https://images.ctfassets.net/hrltx12pl8hq/7yQR5uJhwEkRfjwMFJ7bUK/dc52a0913e8ff8b5c276177890eb0129/offset_comp_772626-opt.jpg?fit=fill&w=800&h=300" alt="image" class="img-fluid"/>      
+                                    <img src="data:image/<%=question.question.contentType%>;base64,<%=question.question.data.toString('base64')%>" alt="image" class="img-fluid"/>      
                             </span>
                         </div>
                         <div class="col-10">
                             <p>this is the quetion no. 0</p>
                         </div>
                         <div class="col-1">
-                            <input class="form-check-input" type="checkbox" id="q-checkbox" value="" name="">
+                            <input class="form-check-input" type="checkbox" id="q-checkbox" value="<%=question._id %>" name="questions">
                         </div>
                     </div>   
                 </li>
             <% }) %>
         </ol>
         <div class="row justify-content-center">
+            <div class="col-3">
+                <select name="patientid" id="">
+                    <% patient.forEach((patient)=> { %>
+                    <option value="<%=patient._id%>"><%=patient.name%></option>
+                    <% }) %>
+                </select>
+                <input type="number" name="level"/>
+            </div>
             <div class="col-3">
                 <input type="submit" class="btn btn-primary btn-lg rounded-pill" value="Create Test">
             </div>
