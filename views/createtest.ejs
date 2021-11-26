@@ -2,36 +2,42 @@
 <main id="test-main">
     <form action="/create/test" method="POST">
         <ol class="gradient-list">
+            <% var i=1;%>
             <% question.forEach((question)=>{ %>
                 <li class="row shadow-lg mb-5 bg-body rounded-lg">
-                    <div class="card-image row p-2">
+                    <div class="card-image p-2">
+                        <div class="inputGroup">
+                            <input id="option<%=i%>" class="form-check-input" type="checkbox" id="q-checkbox" value="<%=question._id %>" name="questions">
+                            <label for="option<%=i%>">this is the quetion no. 0</label> 
+                        </div>
                         <div class="hover-img">
                             <span class="p-1 rounded-lg my-3" id="qimg">
-                                    <img src="data:image/<%=question.question.contentType%>;base64,<%=question.question.data.toString('base64')%>" alt="image" class="img-fluid"/>      
+                                <img src="data:image/<%=question.question.contentType%>;base64,<%=question.question.data.toString('base64')%>" alt="image" class="img-fluid" style="max-height: 18rem;"/>      
                             </span>
                         </div>
-                        <div class="col-10">
-                            <p>this is the quetion no. 0</p>
-                        </div>
-                        <div class="col-1">
-                            <input class="form-check-input" type="checkbox" id="q-checkbox" value="<%=question._id %>" name="questions">
-                        </div>
+                        
                     </div>   
                 </li>
+                <%i++;%>
             <% }) %>
         </ol>
         <div class="row justify-content-center">
-            <div class="col-3">
-                <select name="patientid" id="">
+            <div class="col-6">
+                <label for="patient">Choose Patient</label>
+                <select name="doctorid" id="doctorid" class="form-select form-select-lg my-2 p-2" aria-label=".form-select-lg" required>
                     <% patient.forEach((patient)=> { %>
-                    <option value="<%=patient._id%>"><%=patient.name%></option>
+                        <option value="<%=patient._id%>"><%=patient.name%></option>
                     <% }) %>
-                </select>
-                <input type="number" name="level"/>
+                  </select>
             </div>
-            <div class="col-3">
-                <input type="submit" class="btn btn-primary btn-lg rounded-pill" value="Create Test">
+            <div class="col-6">
+                <label for="level">Enter Level</label>
+                <input type="number" name="level" id="login-input" placeholder="1-5" required/>
             </div>
+        </div>
+        <div class="text-center p-3">
+            <input type="submit" class="btn btn-primary btn-lg rounded-pill" value="Create Test" onClick="this.form.submit(); this.disabled=true; this.value='Creating test..'; ">
+        </div>
         </div>
     </form>
 </main>

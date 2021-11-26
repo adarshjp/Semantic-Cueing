@@ -1,71 +1,61 @@
 <%- include("partials/header") %>
-<div class="container">
-  <% if(message.error){ %>
-  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong><%= message.error%></strong>
-    <button
-      type="button"
-      class="btn-close"
-      data-bs-dismiss="alert"
-      aria-label="Close"
-    ></button>
-  </div>
-  <% } %>
-  <% if(message.success){ %>
-	<div class="alert alert-warning alert-dismissible fade show" role="alert">
-	  <strong><%= message.success%></strong>
-	  <button
-		type="button"
-		class="btn-close"
-		data-bs-dismiss="alert"
-		aria-label="Close"
-	  ></button>
-	</div>
-	<% } %>
-  <div class="row justify-content-center">
-    <div class="col-12 col-sm-5">
-      <form action="/register" method="post">
-        <h1>Sign Up</h1>
-        <input
-          type="text"
-          name="username"
-          placeholder="Enter The Username"
-          required
-        />
-        <input type="text" name="name" placeholder="Enter The Name" required />
-        <input type="number" name="age" placeholder="Enter The Age" required />
-        <input
-          type="email"
-          name="email"
-          placeholder="Enter The Email"
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Enter The Password"
-          required
-        />
-        <label for="role">Choose The Role:</label>
-        <select name="role" id="role" required>
-          <option value="admin">Admin</option>
-          <option value="doctor">Doctor</option>
-          <option value="patient">Patient</option>
-        </select>
-        <label for="doctorid">Choose doctor : Only for Patient</label>
-        <select name="doctorid" id="doctorid">
-          <% doctors.forEach((doctor) => { %>
-          <option value="<%=doctor.id%>"><%=doctor.name%></option>
-          <% }) %>
-        </select>
-        <input
-          type="submit"
-          class="btn btn-primary rounded-pill"
-          value="SUBMIT"
-        />
-      </form>
+<div class="container my-5">
+    <% if(message.error){ %>
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong><%= message.error%></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% } %>
+    <% if(message.success){ %>
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong><%= message.success%></strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+	  <% } %>
+    <div class="row justify-content-center vertical-center shadow-lg rounded">
+        <div class="col-12 col-md-6 text-center">
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-10">
+                  <form action="/register" method="post" class="p-2">
+                    <h1 class="text-center p-2">Sign Up</h1>
+                    <input type="text" name="name" placeholder="Name" id="login-input" required />
+                    <input type="number" name="age" placeholder="Age" id="login-input" required />
+                    <input type="email" name="email" placeholder="Email" id="login-input" required/>
+                    <input type="text" name="username" placeholder="Username" id="login-input" required/>
+                    <input type="password" name="password" placeholder="Password" id="login-input" required/>
+                    <div class="row align-items-center">
+                      <div class="col-4">
+                        <label for="role">Select Role</label>
+                      </div>
+                      <div class="col-8">
+                        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg" required>
+                          <option value="admin">Admin</option>
+                          <option value="doctor">Doctor</option>
+                          <option value="patient">Patient</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row align-items-center">
+                      <div class="col-4">
+                        <label for="doctorid">Choose doctor(Only for Patient)</label>
+                      </div>
+                      <div class="col-8">
+                        <select name="doctorid" id="doctorid" class="form-select form-select-lg mb-3" aria-label=".form-select-lg">
+                          <% doctors.forEach((doctor) => { %>
+                            <option value="<%=doctor.id%>"><%=doctor.name%></option>
+                          <% }) %>
+                        </select>
+                      </div>
+                    </div>
+                    <input type="submit" class="btn btn-primary btn-lg rounded-pill p-2" value="Sign up"/>
+                </form>
+              </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 d-none d-sm-block" id="review">
+
+        </div>
     </div>
-    <div class="col-12 col-sm-5 d-none d-sm-block"></div>
-  </div>
 </div>
 <%- include("partials/footer") %>
