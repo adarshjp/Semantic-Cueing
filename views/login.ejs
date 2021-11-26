@@ -1,23 +1,75 @@
 <%- include("partials/header") %>	
-<div class="container my-5 shadow-lg rounded">
-	<div class="row justify-content-center vertical-center">
-		<div class="col-12 col-md-6">
-			<form action="/login" method="post" class="p-3" id="login-form">
-				<h1 class="p-2"><b>Sign In</b></h1>
-				<% if(message.error){ %>
-					<div class="alert alert-warning alert-dismissible fade show" role="alert">
-						<strong><%= message.error%></strong>
-						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-					</div>
-				<% } %>
-				<input type="text" name="username" placeholder="Username" id="login-input" required>
-				<input type="password" name="password" placeholder="Password" id="login-input" required>
-				<a href="#" id="login-a">Forgot Your Password</a>		
-				<input type="submit" class="btn btn-primary btn-lg rounded-pill" value="Sign In">
-			</form>
+<div class="container my-5">
+	<div class="row justify-content-center vertical-center shadow-lg rounded">
+		<div class="col-12 col-md-5 my-5 p-3">
+			<div class="row my-2 my-5">
+				<div class="col-1"></div>
+				<div class="col-10 p-2">
+					<form action="/login" method="post" class="p-3" id="login-form">
+						<h1 class="p-3"><b>Sign In</b></h1>
+						<% if(message.error){ %>
+							<div class="alert alert-warning alert-dismissible fade show" role="alert">
+								<strong><%= message.error%></strong>
+								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+							</div>
+						<% } %>
+						<input  type="text" name="username" placeholder="Username" id="login-input" required>
+						<input  type="password" name="password" placeholder="Password" id="login-input" required>
+						<a href="#" id="login-a" class="p-2">Forgot Your Password</a>		
+						<input type="submit" class="btn btn-primary btn-lg rounded-pill p-2 mt-2 shadow" value="Sign In" onClick="this.form.submit(); this.disabled=true; this.value='Signing in…'; "/>
+					</form>
+				</div>
+			</div>
 		</div>
-		<div class="col-12 col-md-6 d-none d-md-block bg-primary" id="review">
-			
+		<div class="col-12 col-md-7 d-none d-md-block" id="review">
+			<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+				<div class="carousel-indicators">
+					<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+					<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+					<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+				</div>
+				<div class="carousel-inner">
+					<div class="carousel-item active" data-bs-interval="10000">
+						<div class="row justify-content-center my-5">
+							<div class="col-12 text-center my-auto">
+								<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR2ucRog4QpNwOQzffz6zmaND1v0IJpZ5LLaTHLc2zLRw&usqp=CAU&ec=45714077" alt="" width="45%" class="rounded-circle d-inline-block" height="50%"/>
+							</div>
+							<div class="col-6 text-center my-2">
+								<div class="card shadow-lg p-2 text-center bg-light rounded">
+									<h1 class="font-weight-bold">James Bond</h1>
+									<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="carousel-item" data-bs-interval="10000">
+						<div class="row justify-content-center my-5">
+							<div class="col-12 text-center my-auto">
+								<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR2ucRog4QpNwOQzffz6zmaND1v0IJpZ5LLaTHLc2zLRw&usqp=CAU&ec=45714077" alt="" width="45%" class="rounded-circle d-inline-block" height="50%"/>
+							</div>
+							<div class="col-6 text-center my-2">
+								<div class="card shadow-lg p-2 text-center bg-light rounded">
+									<h1 class="font-weight-bold">James Bond</h1>
+									<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="carousel-item" data-bs-interval="10000">
+						<div class="row justify-content-center my-5">
+							<div class="col-12 text-center my-auto">
+								<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR2ucRog4QpNwOQzffz6zmaND1v0IJpZ5LLaTHLc2zLRw&usqp=CAU&ec=45714077" alt="" width="45%" class="rounded-circle d-inline-block" height="50%"/>
+							</div>
+							<div class="col-6 text-center my-2">
+								<div class="card shadow-lg p-2 text-center bg-light rounded">
+									<h1 class="font-weight-bold">James Bond</h1>
+									<p >Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

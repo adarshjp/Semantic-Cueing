@@ -2,7 +2,7 @@
 #test-main {
     display: block;
     margin: 0 auto;
-    max-width: 40rem;
+    max-width: 43rem;
     padding: 1rem;
 }
 ol.gradient-list {
@@ -91,157 +91,93 @@ ol.gradient-list > li + li {
 #qimg{
     background-color: #6C63FF;
 }
-/* Create test css end */
 
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+.form-select{
+  border-radius: 0;
+  border: 2px solid #6C63FF;
+  font-size:1.15rem;
+  background-color: #eee;
 }
-/*html,body{
-    display: inline;
-    height: 100%;
-  place-items: center;
-  text-align: center;
-}*/
-/*.container{
-  height: 350px;
-  width: 430px;
+/*  */
+.inputGroup {
+  display: block;
   position: relative;
 }
-
-
-.container .wrapper{
+.inputGroup label {
+  padding: 12px 15px;
+  width: 100%;
+  display: block;
+  text-align: left;
+  color: #3C454C;
+  cursor: pointer;
   position: relative;
-  margin-left:400px;
-  height: 300px;
-  width: 30%;
-  border-radius: 10px;
-  background: #fff;
-  border: 2px dashed #c2cdda;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  z-index: 2;
+  transition: color 200ms ease-in;
   overflow: hidden;
 }
-.wrapper .active{
-  border: none;
-}
-.wrapper .image{
+.inputGroup label:before {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  content: '';
   position: absolute;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale3d(1, 1, 1);
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  z-index: -1;
+}
+.inputGroup label:after {
+  width: 32px;
+  height: 32px;
+  content: '';
+  border: 2px solid #D1D7DC;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.414 11L4 12.414l5.414 5.414L20.828 6.414 19.414 5l-10 10z' fill='%23fff' fill-rule='nonzero'/%3E%3C/svg%3E ");
+  background-repeat: no-repeat;
+  background-position: 2px 3px;
+  border-radius: 50%;
+  z-index: 2;
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  transition: all 200ms ease-in;
+  border-color:#6C63FF;
+}
+.inputGroup input:checked ~ label:before {
+  transform: translate(-50%, -50%) scale3d(56, 56, 1);
+  opacity: 1;
   
 }
-.wrapper img{
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
+.inputGroup input:checked ~ label:after {
+  background-color: #54E0C7;
+  border-color: #6C63FF;
 }
-.wrapper .icon{
-  font-size: 100px;
-  color: #6C63FF;
-}
-
-
-
-
-
-
-.wrapper .text{
-  font-size: 20px;
-  font-weight: 500;
-  color: #6C63FF;
-}
-.wrapper #cancel-btn i{
+.inputGroup input {
+  width: 32px;
+  height: 32px;
+  order: 1;
+  z-index: 2;
   position: absolute;
-  font-size: 20px;
-  right: 15px;
-  top: 15px;
-  color: #6C63FF;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
   cursor: pointer;
-  display: none;
+  visibility: hidden;
 }
-.wrapper.active:hover #cancel-btn i{
-  display: block;
-}
-.wrapper #cancel-btn i:hover{
-  color: #e74c3c;
-}
-.wrapper .file-name{
-  position: absolute;
-  bottom: 0px;
-  width: 100%;
-  padding: 8px 0;
-  font-size: 18px;
-  color: #fff;
-  display: none;
-  background: linear-gradient(135deg,#3a8ffe 0%,#9658fe 100%);
-}
-.wrapper.active:hover .file-name{
-  display: block;
-}
-.container #custom-btn{
-    margin-bottom:5px;
-  margin-top: 5px;
-  margin-left:450px;
-  display: block;
-  width: 20%;
-  height: 40px;
-  border: none;
-  outline: none;
-  border-radius: 25px;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  cursor: pointer;
-  background: linear-gradient(135deg,#3a8ffe 0%,#9658fe 100%);
-}
- */
-
-/*
-.image_container {
-	height: 120px;
-	width: 120px;
-	border-radius: 6px;
-	overflow: hidden;
- 	margin: 10px;
-}
-.image_container img {
-	height: 100%;
-	width: 100%;
-	object-fit: cover;
-}
-.image_container span {
-	top: -6px;
-	right: 8px;
-	color: red;
-	font-size: 28px;
-	font-weight: normal;
-	cursor: pointer;
-}
-
-
-.image {
-  height:300px;
-  border-radius:10px;
-}
-
-input.f {
-
-}
-*/
+/*-----------------------------------
+        Create test css end 
+-----------------------------------*/
 #main {
-   display: flex;
+  display: flex;
   flex-wrap: wrap;
 }
+/*------------------------------------
+          LOGIN PAGE
+------------------------------------*/
 #login-a {
 	color: #333;
 	font-size: 14px;
@@ -261,18 +197,28 @@ input.f {
 
 #login-input {
 	background-color: #eee;
-	border: none;
-	padding: 12px 15px;
+	border: 2px solid #6C63FF;
+	padding: 10px 15px;
 	margin: 8px 0;
 	width: 100%;
 }
 .vertical-center {
-	min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
 	min-height: 85vh; /* These two lines are counted as one :-)       */
 	display: flex;
-	align-items: center;
 }
-
 #review{
 	background-color:#6C63FF;
+}
+
+.carousel-indicators [data-bs-target]{
+  border-radius: 100%;
+  height:15px;
+  width:15px;
+}
+.form-control{
+  border-radius: 0;
+  border: 2px solid #6C63FF;
+  font-size:1.15rem;
+  background-color: #eee;
 }
