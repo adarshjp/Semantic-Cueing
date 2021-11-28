@@ -238,3 +238,9 @@ ol.gradient-list > li + li {
   background-color:#6C63FF; ;
   
 }
+.outline-color{
+  outline-color: #6C63FF;
+}
+.select-color:focus{
+  margin: 0;
+}
