@@ -32,7 +32,7 @@
             </div>
             <div class="col-6">
                 <label for="level">Enter Level</label>
-                <input type="number" name="level" id="login-input" placeholder="1-5" required/>
+                <input type="number" name="level" id="login-input" placeholder="1-5" onchange="funlevel(this.value)" required/>
             </div>
         </div>
         <div class="text-center p-3">
@@ -41,4 +41,12 @@
         </div>
     </form>
 </main>
+<script>
+    function funlevel(value) {
+        if(value<=0 || value>5){
+            alert("Please enter Level between 1-5");
+            document.getElementById("login-input").value = "";
+        }
+    }
+</script>
 <%- include("partials/footer") %>
