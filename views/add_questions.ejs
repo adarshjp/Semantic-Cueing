@@ -1,188 +1,85 @@
 <%- include("partials/header") %>
-<div class="container">
+<div class="container my-4">
    <% if(message.error){ %>
       <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong><%= message.error%></strong>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="alert"
-          aria-label="Close"
-        ></button>
+         <strong><%= message.error%></strong>
+         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
-      <% } %>
-      <% if(message.success){ %>
-       <div class="alert alert-warning alert-dismissible fade show" role="alert">
+   <% } %>
+   <% if(message.success){ %>
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
          <strong><%= message.success%></strong>
-         <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="alert"
-          aria-label="Close"
-         ></button>
-       </div>
-       <% } %>
+         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+   <% } %>
    <form action="/addquestion" method="POST" enctype="multipart/form-data">
       <div class="row justify-content-center">
-         <div class="col-12 col-md-6">
-            <h2>Add question</h2>
+         <div class="col-12 col-md-6 card p-3 shadow">
+            <h2 class="card-title text-center">Add question</h2>
             <hr>
-               <div class="form-group">
-                  <input type="file" name="image" class="form-control" placeholder="Enter Image" id="upload_file" onchange="getImagePreview(event)">
+            <div class="form-group">
+               <input type="file" name="image" class="form-control form-control-lg fi" placeholder="Enter Image" id="upload_file" onchange="getImagePreview(event,'preview','upload_file')" id="login-input">
+            </div>
+            <div id="preview" class="my-2"></div>
+            <div class="row justify-content-center">
+                  <div class="col-12 col-md-6">
+                     <input type="text" name="answer" id="login-input" placeholder="Enter Answer" required> 
+                  </div>
+                  <div class="col-12 col-md-6">
+                     <input type="number" name="level" id="login-input" placeholder="Enter Level" required>
+                  </div>
+                  <div class="col-12 col-md-6">
+                     <input type="number" name="score" id="login-input" placeholder="Enter Score" required>
+                  </div>
+            </div>
+         </div>
+      </div>
+      <div class="row justify-content-center mt-3">
+         <% for (var i = 0; i < 4; i++) { %>
+         <div class="col-12 col-md-3 card shadow  my-2">
+            <h2 class="card-title text-center">Add hint<%= i+1 %></h2>
+            <hr>
+            <div class="row">
+               <div class="form-group col-12">
+                  <input type="file" name="image" class="form-control form-control-lg" placeholder="Enter Image" id="upload_hint<%= i %>" onchange="getImagePreview(event,'preview-hint<%= i %>','upload_hint<%= i %>')">
                </div>
-               <div id="preview">
-
+               <div id="preview-hint<%= i %>" class="my-2 col-12"></div>
+               <div class="col-12">
+                  <input type="number" name="nscore[<%= i %>]" id="login-input" placeholder="Enter Score" required>
                </div>
-               <div>
-                  <label>Enter Answer:</label>
-                  <input type="text" name="answer">
-               </div>
-               <div>
-                  <label>Enter Level:</label>
-                  <input type="number" name="level">
-               </div>
-               <div>
-                  <label>Enter Score:</label>
-                  <input type="number" name="score">
-               </div>
+            </div>    
          </div>
-      </div>
- <script>
-     function getImagePreview(event)
-  {
-    var image=URL.createObjectURL(event.target.files[0]);
-    var imagediv= document.getElementById('preview');
-    var newimg=document.createElement('img');
-    imagediv.innerHTML='';
-    newimg.src=image;
-    newimg.width="300";
-    imagediv.appendChild(newimg);
-  }
-
- </script>
-<div class="row justify-content-center">
-   <div class="col-12 col-md-6">
-      <h2>Add hint1</h2>
-      <hr>
-      
-         <div class="form-group">
-            <input type="file" name="image" class="form-control" placeholder="Enter Image" id="upload_hint1" onchange="getHint1Preview(event)">
+         <% } %>
+         <div class="form-group text-center mt-3">
+            <input type="submit" name="submit" value="Submit" class="btn btn-primary btn-lg rounded-pill" onClick="this.form.submit(); this.disabled=true;this.value='Submitting..'">
          </div>
-         <div id="preview-hint1">
-
-         </div>
-         <div>
-            <label>Enter Score:</label>
-            <input type="number" name="nscore[0]">
-         </div>
-    </div>
-
-<script>
-  function getHint1Preview(event)
-{
- var image1=URL.createObjectURL(event.target.files[0]);
- var imagediv1= document.getElementById('preview-hint1');
- var newimg1=document.createElement('img');
- imagediv1.innerHTML='';
- newimg1.src=image1;
- newimg1.width="300";
- imagediv1.appendChild(newimg1);
-}
-
-</script>
-   <div class="col-12 col-md-6">
-   <h2>Add hint2</h2>
-   <hr>
-    
-      <div class="form-group">
-         <input type="file" name="image" class="form-control" placeholder="Enter Image" id="upload_hint2" onchange="getHint2Preview(event)">
-      </div>
-      <div id="preview-hint2">
-
-      </div>
-      <div>
-         <label>Enter Score:</label>
-         <input type="number" name="nscore[1]">
-      </div>
-</div>
-<script>
-  function getHint2Preview(event)
-{
- var image2=URL.createObjectURL(event.target.files[0]);
- var imagediv2= document.getElementById('preview-hint2');
- var newimg2=document.createElement('img');
- imagediv2.innerHTML='';
- newimg2.src=image2;
- newimg2.width="300";
- imagediv2.appendChild(newimg2);
-}
-
-</script>
-   <div class="col-12 col-md-6">
-   <h2>Add hint3</h2>
-   <hr>
-   
-      <div class="form-group">
-         <input type="file" name="image" class="form-control" placeholder="Enter Image" id="upload_hint3" onchange="getHint3Preview(event)">
-      </div>
-      <div id="preview-hint3">
-
-      </div>
-      <div>
-         <label>Enter Score:</label>
-         <input type="number" name="nscore[2]">
-      </div>
-     
-    
-</div>
-
-<script>
-  function getHint3Preview(event)
-{
- var image3=URL.createObjectURL(event.target.files[0]);
- var imagediv3= document.getElementById('preview-hint3');
- var newimg3=document.createElement('img');
- imagediv3.innerHTML='';
- newimg3.src=image3;
- newimg3.width="300";
- imagediv3.appendChild(newimg3);
-}
-
-</script>
-   <div class="col-12 col-md-6">
-      <h2>Add hint4</h2>
-      <hr>
-      
-         <div class="form-group">
-            <input type="file" name="image" class="form-control" placeholder="Enter Image" id="upload_hint4" onchange="getHint4Preview(event)">
-         </div>
-         <div id="preview-hint4">
-
-         </div>
-         <div>
-            <label>Enter Score:</label>
-            <input type="number" name="nscore[3]">
-         </div>
-      </div>
-      <div class="form-group text-center">
-         <input type="submit" name="submit" class="btn btn-primary btn-lg rounded-pill">
       </div>
    </form>
 </div>
-
 <script>
-  function getHint4Preview(event)
-{
- var image4=URL.createObjectURL(event.target.files[0]);
- var imagediv4= document.getElementById('preview-hint4');
- var newimg4=document.createElement('img');
- imagediv4.innerHTML='';
- newimg4.src=image4;
- newimg4.width="300";
- imagediv4.appendChild(newimg4);
-}
-
-</script>
+   function getImagePreview(event,preview_id,upload_id){
+      const fi = document.getElementById(upload_id);
+      const fsize = fi.files.item(0).size;
+      const file = Math.round((fsize / 1024));
+      if (file >= 1024) {
+         alert("File too Big, please select a file less than 1mb");
+         document.getElementById(upload_id).value = '';
+         var imagediv= document.getElementById(preview_id);
+         var newimg=document.createElement('img');
+         imagediv.innerHTML='';
+         newimg.src='';
+      }
+      else{
+         var image=URL.createObjectURL(event.target.files[0]);
+         var imagediv= document.getElementById(preview_id);
+         var newimg=document.createElement('img');
+         imagediv.innerHTML='';
+         newimg.src=image;
+         newimg.width="300";
+         imagediv.appendChild(newimg);
+      }
+  }
+ </script>
 
 <%- include("partials/footer") %>
 
