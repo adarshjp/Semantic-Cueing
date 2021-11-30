@@ -1,6 +1,6 @@
 <%- include("partials/header") %>
 <main id="test-main">
-    <form action="/create/test" method="POST">
+    <form action="/create/test" method="POST" id="testForm" onsubmit="return noofqval();"> 
         <ol class="gradient-list">
             <% var i=1;%>
             <% question.forEach((question)=>{ %>
@@ -36,12 +36,25 @@
             </div>
         </div>
         <div class="text-center p-3">
-            <input type="submit" class="btn btn-primary btn-lg rounded-pill" value="Create Test" onClick="this.form.submit(); this.disabled=true; this.value='Creating test..'; ">
+            <input type="submit" class="btn btn-primary btn-lg rounded-pill" value="Create Test" id="formsubmit"/>
         </div>
         </div>
     </form>
 </main>
 <script>
+    function noofqval() {
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+        if(checkboxes.length<10){
+            alert("Please select atleast 10 questions..");
+            return false;
+        }
+        else{
+            var ele=document.getElementById("formsubmit");
+            ele.disabled=true;
+            ele.value="Creating..."
+            return true;
+        }
+    }
     function funlevel(value) {
         if(value<=0 || value>5){
             alert("Please enter Level between 1-5");
