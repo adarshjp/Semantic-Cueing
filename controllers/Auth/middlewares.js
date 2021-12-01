@@ -5,9 +5,9 @@ exports.isLoggedIn = (req, res, next) => {
     return next();
   } else {
     res.status(401);
-    res.send("You must be logged in to do that!");
+    // res.send("You must be logged in to do that!");
     // req.flash('error','You must be logged in to do that!');
-    // res.redirect('/login');
+    res.redirect('/login');
   }
 };
 exports.isAdmin = (req, res, next) => {

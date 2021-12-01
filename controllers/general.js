@@ -1,4 +1,5 @@
 const fs = require("fs");
+const { dirname } = require("path");
 const path = require("path");
 const Question = require("../models/question");
 exports.addquestions_get = (req, res) => {
@@ -45,7 +46,7 @@ function covert_img(files) {
   files.forEach((file) => {
     var obj = {
       data: fs.readFileSync(
-        path.join("E:/FYP/Semantic-Cueing/uploads/" + file.filename)
+        path.join(__dirname+ "\\..\\uploads\\" + file.filename)
       ),
       contentType: "image/png",
     };
