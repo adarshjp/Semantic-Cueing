@@ -57,9 +57,9 @@ exports.login_post = (req, res) => {
   if(req.user.role==="admin")
     res.redirect("/home/admin")
   else if(req.user.role==="doctor")
-    res.redirect("/home/doctor")
+    res.redirect("/home/doctor/"+req.user._id)
   else
-    res.redirect("/home/patient")
+    res.redirect("/home/patient/"+req.user._id)
 };
 
 exports.change_password = (req, res) => {
