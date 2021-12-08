@@ -24,7 +24,7 @@
         <div class="row justify-content-center">
             <div class="col-6">
                 <label for="patient">Choose Patient</label>
-                <select name="doctorid" id="doctorid" class="form-select form-select-lg my-2 p-2" aria-label=".form-select-lg" required>
+                <select name="patientid" id="doctorid" class="form-select form-select-lg my-2 p-2" aria-label=".form-select-lg" required>
                     <% patient.forEach((patient)=> { %>
                         <option value="<%=patient._id%>"><%=patient.name%></option>
                     <% }) %>

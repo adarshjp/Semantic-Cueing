@@ -22,7 +22,16 @@ exports.get_create_test = (req, res) => {
     });
 };
 exports.get_home_doctor = (req, res) => {
-  res.status(200).send("home doctor");
+  User.findById({_id:req.user._id})
+  .then((user)=>{
+    res.status(200).send(user);
+  })
+  .catch((err)=>{
+    res.status(500).json({
+      error:err
+    })
+  })
+  
 };
 exports.post_create_test = (req, res) => {
   const newTest = Test({
