@@ -26,9 +26,8 @@ const flash = require("connect-flash");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 app.use(cookieParser("keyboard cat"));
-app.use(session({ cookie: { maxAge: 3000000 } }));
+app.use(session());
 app.use(flash());
-
 const User = require("./models/user");
 app.use(
   require("express-session")({
