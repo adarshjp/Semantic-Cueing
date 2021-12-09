@@ -106,3 +106,4 @@ dist
 package-lock.json
 uploads
 .vscode
+prettier.config.js
