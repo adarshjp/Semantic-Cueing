@@ -38,6 +38,7 @@ exports.register_post = (req, res) => {
       passport.authenticate("local")(req, res, () => {
         res.status(200);
         //res.send("User created!");
+        //console.log(req.user.role);
         req.flash("success","User created!!")
         res.redirect("/register");
       });
