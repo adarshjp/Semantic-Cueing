@@ -36,4 +36,6 @@ router.get("/",(req,res)=>{
 router.post("/setpassword",isLoggedIn,set_password);
 router.get("/addquestion",isLoggedIn,isAdmin,addquestions_get)
 router.post("/addquestion",upload.array("image",5),isLoggedIn,isAdmin,addquestions_post)
+router.get("/view/question",isAdmin,isLoggedIn,view_question);
+router.get("/view/question/:id",isAdmin,isLoggedIn,view_Onequestion);
 module.exports = router;
