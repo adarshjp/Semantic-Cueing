@@ -4,9 +4,11 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
+const methodOverride= require("method-override");
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(methodOverride("_method"));
 app.set("view engine","ejs")
 const connectionParams = {
   useNewUrlParser: true,
