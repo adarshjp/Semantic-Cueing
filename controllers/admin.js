@@ -32,64 +32,9 @@ exports.view_doctor = (req, res) => {
         })
 }
 
-exports.view_Onedoctor = (req, res) => {
-    //fetch one doctor given id and send it
-    User.findById({ _id: req.params.id, role: 'doctor' })
-        .then((user) => {
-            res.send(user)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-}
-
-exports.view_Onepatient = (req, res) => {
-    //fetch one patient given id and send it
-    User.findById({ _id: req.params.id, role: 'patient' })
-        .then((user) => {
-            res.send(user)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-}
-
-exports.get_edit_patient = (req, res) => {
-    //fetch one patient given id and send it
-    User.findById({ _id: req.params.id, role: 'patient' })
-        .then((user) => {
-            res.send(user)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-}
-
-exports.edit_patient = (req, res) => {
-    //update patient with id=req.params.id and data=req.body
-    User.findByIdAndUpdate({ _id: req.params.id, role: 'patient' }, req.body)
-        .then((user) => {
-            res.send(user)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-}
-
-exports.get_edit_doctor = (req, res) => {
-    //fetch one doctor given id and send it
-    User.findById({ _id: req.params.id, role: 'doctor' })
-        .then((user) => {
-            res.send(user)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-}
-
-exports.edit_doctor = (req, res) => {
-    //update doctor with id=req.params.id and data=req.body
-    User.findByIdAndUpdate({ _id: req.params.id, role: 'doctor' }, req.body)
+exports.view_Oneuser = (req, res) => {
+    //fetch one user
+    User.findById(req.params.id)
         .then((user) => {
             res.send(user)
         })
@@ -108,4 +53,26 @@ exports.delete_user = (req, res) => {
             console.log(err)
         })
     
+}
+
+exports.get_edit_user = (req, res) => {
+    //fetch one patient given id and send it
+    User.findById({ _id: req.params.id })
+        .then((user) => {
+            res.send(user)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+
+exports.edit_user = (req, res) => {
+    //update patient with id=req.params.id and data=req.body
+    User.findByIdAndUpdate({ _id: req.params.id }, req.body)
+        .then((user) => {
+            res.send(user)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
 }
