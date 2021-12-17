@@ -203,6 +203,13 @@ ol.gradient-list > li + li {
 	margin: 8px 0;
 	width: 100%;
 }
+#username{
+  background-color: #eee;
+	border: 2px solid #6C63FF;
+	padding: 10px 15px;
+	margin: 8px 0;
+	width: 100%;
+}
 .vertical-center {
   min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
 	min-height: 85vh; /* These two lines are counted as one :-)       */
