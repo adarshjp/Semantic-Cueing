@@ -1,75 +1,176 @@
 <%- include("partials/header") %>
 <div class="container my-5">
-    <% if(message.error){ %>
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong><%= message.error%></strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    <% } %>
-    <% if(message.success){ %>
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
-          <strong><%= message.success%></strong>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-	  <% } %> 
-    <div class="row justify-content-center vertical-center shadow-lg rounded">
-        <div class="col-12 col-md-6 text-center my-auto">
-            <div class="row">
-                <div class="col-1"></div>
-                <div class="col-10">
-                  <form action="/register" method="post" class="p-2">
-                    <h1 class="text-center p-2 blue">Register: Patient | Doctor</h1>
-                    <input type="text" name="name" placeholder="Name" id="login-input" class="outline-color" required />
-                    <input type="number" name="age" placeholder="Age" id="login-input" class="outline-color" required />
-                    <input type="email" name="email" placeholder="Email" id="login-input" class="outline-color" required/>
-                    <input type="text" name="username" placeholder="Username" id="login-input" class="outline-color" required/>
-                    <input type="password" name="password" placeholder="Password" id="login-input" class="outline-color" required/>
-                    <div class="row align-items-center">
-                      <div class="col-4">
-                        <label for="role" class="blue h5">Select Role:</label>
-                      </div>
-                      <div class="col-8">
-                        <select class="form-select form-select-lg mb-3 select-color " aria-label=".form-select-lg" id="role" name="role" required>
-                          <option value="doctor">Doctor</option>
-                          <option value="patient">Patient</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="row align-items-center d-none" id="select-doctor">
-                      <div class="col-4">
-                        <label for="doctorid" class="blue h5">Choose doctor:</label>
-                      </div>
-                      <div class="col-8">
-                        <select name="doctorid" id="doctorid" class="form-select form-select-lg mb-3" aria-label=".form-select-lg">
-                          <% doctors.forEach((doctor) => { %>
-                            <option value="<%=doctor.id%>"><%=doctor.name%></option>
-                          <% }) %>
-                        </select>
-                      </div>
-                    </div>
-                    <input type="submit" class="btn btn-primary btn-lg rounded-pill p-2" value="Register" style="width:50%" id="review"/>
-                </form>
+  <% if(message.error){ %>
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong><%= message.error%></strong>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+  <% } %> <% if(message.success){ %>
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong><%= message.success%></strong>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+  <% } %>
+  <div class="row justify-content-center vertical-center shadow-lg rounded">
+    <div class="col-12 col-md-6 text-center my-auto">
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+          <form action="/register" method="post" class="p-2">
+            <h1 class="text-center p-2 blue">Register: Patient | Doctor</h1>
+            <input
+              type="text"
+              name="name"
+              placeholder="Name"
+              id="login-input"
+              class="outline-color"
+              required
+            />
+            <input
+              type="number"
+              name="age"
+              placeholder="Age"
+              id="login-input"
+              class="outline-color"
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              id="login-input"
+              class="outline-color"
+              required
+            />
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              id="username"
+              class="outline-color"
+              aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback"
+              required
+            />
+            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+              Username already exists. Please try another one.
+            </div>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              id="login-input"
+              class="outline-color"
+              required
+            />
+            <div class="row align-items-center">
+              <div class="col-4">
+                <label for="role" class="blue h5">Select Role:</label>
+              </div>
+              <div class="col-8">
+                <select
+                  class="form-select form-select-lg mb-3 select-color"
+                  aria-label=".form-select-lg"
+                  id="role"
+                  name="role"
+                  required
+                >
+                  <option value="doctor">Doctor</option>
+                  <option value="patient">Patient</option>
+                </select>
               </div>
             </div>
+            <div class="row align-items-center d-none" id="select-doctor">
+              <div class="col-4">
+                <label for="doctorid" class="blue h5">Choose doctor:</label>
+              </div>
+              <div class="col-8">
+                <select
+                  name="doctorid"
+                  id="doctorid"
+                  class="form-select form-select-lg mb-3"
+                  aria-label=".form-select-lg"
+                >
+                  <% doctors.forEach((doctor) => { %>
+                  <option value="<%=doctor.id%>"><%=doctor.name%></option>
+                  <% }) %>
+                </select>
+              </div>
+            </div>
+            <input
+              type="submit"
+              class="btn btn-primary btn-lg rounded-pill p-2"
+              value="Register"
+              style="width: 50%"
+              id="review"
+            />
+          </form>
         </div>
-        <div class="col-12 col-md-6 d-none d-sm-block my-auto" id="">
-          <img src="/signup.png" alt="signup" class="img-responsive img-fluid" />
-        </div>
+      </div>
     </div>
+    <div class="col-12 col-md-6 d-none d-sm-block my-auto" id="">
+      <img src="/signup.png" alt="signup" class="img-responsive img-fluid" />
+    </div>
+  </div>
 </div>
 <script type="text/javascript">
-  
-    var role = document.getElementById("role");
-    var doctor = document.getElementById("select-doctor");
-    var doctorid = document.getElementById("doctorid");
-    role.addEventListener("change", function(){
-      if(role.value == "patient"){
-        doctor.classList.remove("d-none");
-        doctorid.required = true;
-      }else{
-        doctor.classList.add("d-none");
-        doctorid.required = false;
+  var role = document.getElementById('role')
+  var doctor = document.getElementById('select-doctor')
+  var doctorid = document.getElementById('doctorid')
+  role.addEventListener('change', function () {
+    if (role.value == 'patient') {
+      doctor.classList.remove('d-none')
+      doctorid.required = true
+    } else {
+      doctor.classList.add('d-none')
+      doctorid.required = false
+    }
+  })
+    let username = document.getElementById('username')
+    //setup before functions
+    var typingTimer //timer identifier
+    var doneTypingInterval = 2000 //time in ms, 5 second for example
+
+    //on keyup, start the countdown
+    username.addEventListener('keyup', () => {
+      clearTimeout(typingTimer)
+      typingTimer = setTimeout(doneTyping, doneTypingInterval)
+    })
+    username.addEventListener('keydown', () => {
+      clearTimeout(typingTimer)
+    })
+    //user is "finished typing," do something
+    function doneTyping() {
+      //do something
+      //console.log(username.value);
+      // var parsed_usernames = '<%- JSON.stringify(usernames) %>';
+      var parsed_usernames = '<%=usernames %>'.split(',')
+      var entered_usernames = username.value
+      //console.log(parsed_usernames);
+      let username_found = parsed_usernames.find(
+        (parsed_username) => parsed_username === entered_usernames
+      )
+      if (username_found !== undefined) {
+        username.classList.add('is-invalid')
+        //disable submit button
+        document.getElementById('review').disabled = true
       }
-    });
+      else{
+        username.classList.remove('is-invalid')
+        //enable submit button
+        document.getElementById('review').disabled = false
+      }
+        
+
+    }
 </script>
 <%- include("partials/footer") %>

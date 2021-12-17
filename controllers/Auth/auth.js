@@ -2,13 +2,25 @@ const passport = require("passport");
 const User = require("../../models/user");
 
 exports.register_get = (req, res) => {
-  User.find({role:'doctor'},{_id:1,name:1},(err,docs)=>{
+  User.find({$or:[{role:'doctor'},{}]},{_id:1,name:1,role:1,username:1},(err,docs)=>{
     if(err){
       res.status(400);
       res.send(err);
     }else{
       res.status(200);
-      res.render('signup',{doctors:docs});
+      let doctors =[]
+      let usernames=[]
+      docs.forEach(doc=>{
+        usernames.push(doc.username)
+        if(doc.role==='doctor'){
+          var id=doc._id
+          var name=doc.name
+          doctors.push({id,name})
+        }
+      })
+      console.log(doctors)
+      console.log(usernames)
+      res.render('signup',{doctors:doctors,usernames:usernames});
     }
   })
   // res.send("register get");
