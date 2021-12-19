@@ -4,7 +4,7 @@ const path = require('path')
 const Question = require('../models/question')
 exports.addquestions_get = (req, res) => {
     res.status(200)
-    res.render('add_questions')
+    res.render('admin',{user:req.user})
 }
 
 exports.addquestions_post = (req, res, next) => {
@@ -32,12 +32,12 @@ exports.addquestions_post = (req, res, next) => {
             //console.log(result);
             req.flash('success', 'Question added successfully')
             res.status(200)
-            res.redirect('/addquestion')
+            res.redirect('/home/admin')
         })
         .catch((err) => {
             res.status(500)
             req.flash('error', err.message)
-            res.redirect('/addquestion')
+            res.redirect('/home/admin')
         })
 }
 exports.view_question = (req, res) => {
