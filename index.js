@@ -61,3 +61,6 @@ app.listen(process.env.PORT || 3000, () => {
 app.get("/test",(req,res)=>{
   res.render("testexecute")
 })
+app.post("/test",(req,res)=>{
+  console.log(req.body)
+})

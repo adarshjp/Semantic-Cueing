@@ -1,4 +1,6 @@
-/* Create test css  start*/
+/*----------------------------
+      Create test Start
+------------------------------*/
 #test-main {
     display: block;
     margin: 0 auto;
@@ -169,14 +171,14 @@ ol.gradient-list > li + li {
   visibility: hidden;
 }
 /*-----------------------------------
-        Create test css end 
+        Create test end 
 -----------------------------------*/
 #main {
   display: flex;
   flex-wrap: wrap;
 }
 /*------------------------------------
-          LOGIN PAGE
+        LOGIN PAGE
 ------------------------------------*/
 #login-a {
 	font-size: 14px;
@@ -244,22 +246,13 @@ ol.gradient-list > li + li {
 .select-color:focus{
   margin: 0;
 }
-.btn-square-md {
-  width: 100px !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
-  height: 100px !important;
-  text-align: center;
-  padding: 0px;
-  font-size:12px;
-  }
 
-  .tab {
+.tab {
     display: none;
   }
 .step {
-    height: 15px;
-    width: 15px;
+    height: 25px;
+    width: 25px;
     margin: 0 2px;
     background-color:  #b3abab;
     border: none;  
@@ -279,9 +272,8 @@ ol.gradient-list > li + li {
   background-color: red;
   opacity: 1;
 }
-
 /*--------------------------------
-
+      Test Execution
 ---------------------------------*/
 #myImg {
   border-radius: 5px;
@@ -296,13 +288,12 @@ ol.gradient-list > li + li {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
+  padding-top: 85px; /* Location of the box */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
+  overflow: none; /* Enable scroll if needed */
   background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
 }
 
@@ -318,9 +309,9 @@ ol.gradient-list > li + li {
 /* Add Animation */
 .modal-content {    
   -webkit-animation-name: zoom;
-  -webkit-animation-duration: 0.6s;
+  -webkit-animation-duration: 0.8s;
   animation-name: zoom;
-  animation-duration: 0.6s;
+  animation-duration: 0.8s;
 }
 
 @-webkit-keyframes zoom {
@@ -338,15 +329,15 @@ ol.gradient-list > li + li {
   position: absolute;
   top: 15px;
   right: 35px;
-  color: #f1f1f1;
+  color: #6C63FF;
   font-size: 40px;
   font-weight: bold;
-  transition: 0.3s;
+  transition: 0.5s;
 }
 
 .close:hover,
 .close:focus {
-  color: #bbb;
+  color: #382efd;
   text-decoration: none;
   cursor: pointer;
 }
@@ -357,5 +348,7 @@ ol.gradient-list > li + li {
       width: 100%;
   }
 }
-
-
+.btn-primary{
+  background-color: #6C63FF;
+  border-color: #6C63FF;
+}
