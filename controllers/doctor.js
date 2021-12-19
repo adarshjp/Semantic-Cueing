@@ -7,7 +7,7 @@ exports.get_create_test = (req, res) => {
       Question.find({}, { hints: 0 })
         .then((question) => {
           res.status(200)
-          res.render('createtest',{question: question, patient: patient})
+          res.render('createtest',{question: question, patient: patient,user:req.user})
         })
         .catch((err) => {
           res.status(500).json({
