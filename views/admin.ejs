@@ -1,0 +1,247 @@
+<%- include("partials/header") %>
+  <div class="sidebar close">
+    <div class="logo-details">
+      <i class='bx bx-menu' ></i>
+      <span class="logo_name">Menu</span>
+    </div>
+    <ul class="nav-links">
+      <li>
+        <div onClick="showHome()">
+          <i class='bx bx-grid-alt' ></i>
+          <span class="link_name" >Home</span>
+        </div>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Home</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="iocn-link" onClick="showDoctors()">
+          <div>
+            <i class='bx bx-collection' ></i>
+            <span class="link_name" >Doctor</span>
+          </div>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#">Doctor</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="iocn-link" onClick="showPatients()">
+          <div>
+            <i class='bx bx-book-alt' ></i>
+            <span class="link_name" >Patients</span>
+          </div>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#">Patients</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="iocn-link" onClick="showAddQuestion()">
+          <div>
+            <i class="fas fa-question"></i>
+            <span class="link_name" >Add Question</span>
+          </div>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#">Add Question</a></li>
+        </ul>
+      </li>
+      <li>
+        <div>
+          <a href="/logout"><i class='bx bx-log-out' ></i></a>
+          <span class="link_name" id="logout" ><a href="/logout" style="color: white">Logout</span></a>
+       </div>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="/logout">Logout</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="profile-details" onClick="showProfile()">
+          <div class="profile-content" >
+            <img src="/profile.jpg" alt="profileImg">
+          </div>
+          <div class="name-job">
+            <div class="profile_name" ><%=user.name%></div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <% if(message.error){ %>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+       <strong class="text-center"><%= message.error%></strong>
+       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+ <% } %>
+ <% if(message.success){ %>
+    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+       <strong class="text-center"><%= message.success%></strong>
+       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+ <% } %>
+  <div class="container1" id="addQuestion">
+    <%- include("partials/add_questions") %>
+  </div>
+  
+  <div class="container1" id="doctors">
+    <h1>Doctors</h1>
+    <div class="row">
+      <div class="col-sm-4 py-3 py-sm-3">
+        <div class="card box-shadow">
+          <img src="/1.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Read more...</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 py-3 py-sm-3">
+        <div class="card box-shadow">
+          <img src="/2.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Read more...</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 py-3 py-sm-3">
+        <div class="card box-shadow">
+          <img src="/3.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Read more...</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 py-3 py-sm-3">
+        <div class="card box-shadow">
+          <img src="/2.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Read more...</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container1" id="patients">
+    <h1>Patients</h1>
+    <div class="row">
+      <div class="col-sm-4 py-3 py-sm-3">
+        <div class="card box-shadow">
+          <img src="/1.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Read more...</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 py-3 py-sm-3">
+        <div class="card box-shadow">
+          <img src="/2.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Read more...</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 py-3 py-sm-3">
+        <div class="card box-shadow">
+          <img src="/3.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Read more...</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 py-3 py-sm-3">
+        <div class="card box-shadow">
+          <img src="/2.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Read more...</a>
+          </div>
+        </div>
+      </div>
+    </div>   
+  </div>
+  
+  
+  <div class="piegraph col-sm-12" id="graphs">
+    
+    <div class="row" style="margin-bottom:2%;" id="piechart1" ></div>
+    <div class="row" style="margin-bottom:2%;" id="piechart2" ></div>
+    <div class="row" style="margin-bottom:2%;" id="piechart3" ></div>
+  </div>
+  <div class="card login" id="profile" style="width: 18rem;">
+      <img class="card-img-top" src="/admin.jpg" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+  </div>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+      var data = google.visualization.arrayToDataTable([
+        ['Task', 'parameter1'],
+        ['Doctors',     100],
+        ['Patients',      250],
+       
+      ]);
+
+      var cata = google.visualization.arrayToDataTable([
+        ['Doctor', 'Number of doctors'],
+        ['Assigned Doctors',     50],
+        ['Unassigned Doctors',      50],
+       
+      ]);
+
+      var ata = google.visualization.arrayToDataTable([
+        ['Patients', 'Number of patients'],
+        ['Active Patients',     200],
+        ['Discharged Patients',      50],
+       
+      ]);
+
+
+
+      var options = {
+        title: 'No of Doctor vs No of Patients'
+      };
+
+      var options1 = {
+        title: 'Assigned Doctors vs Unassigned Doctors'
+      };
+
+      var options2 = {
+        title: 'Active Patients vs Discharged Patients'
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('piechart1'));
+      var chart1 = new google.visualization.PieChart(document.getElementById('piechart2'));
+      var chart2 = new google.visualization.PieChart(document.getElementById('piechart3'));
+
+
+      chart.draw(data, options);
+      chart1.draw(cata, options1);
+      chart2.draw(ata, options2);
+    }
+  </script>
+ 
+<%- include("partials/footer") %>

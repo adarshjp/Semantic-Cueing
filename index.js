@@ -4,9 +4,11 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
+const methodOverride= require("method-override");
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(methodOverride("_method"));
 app.set("view engine","ejs")
 const connectionParams = {
   useNewUrlParser: true,
@@ -58,7 +60,3 @@ app.use(patientRoutes)
 app.listen(process.env.PORT || 3000, () => {
   console.log("server started at port 3000");
 });
-
-app.get("/test",(req,res)=>{
-  res.render("viewOneUser")
-})

@@ -80,3 +80,16 @@ exports.isTestAssigned = (req, res, next) => {
             console.log(err)
         })
 }
+
+exports.isTestCompleted = (req, res, next) => {
+  //Check the status of test given testid
+  //if the test is completed then allow the user to view the report
+  Test.findById({ _id: req.params.id })
+    .then((test) => {
+      if (test.status === 'completed') {
+        res.send("You have already completed the test!")
+      } else {
+        return next()
+      }
+    })
+}
