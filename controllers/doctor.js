@@ -24,7 +24,7 @@ exports.get_create_test = (req, res) => {
 exports.get_home_doctor = (req, res) => {
   User.findById({_id:req.user._id})
   .then((user)=>{
-    res.status(200).send(user);
+    res.render("doctor",{user:user})
   })
   .catch((err)=>{
     res.status(500).json({
@@ -56,3 +56,15 @@ exports.post_create_test = (req, res) => {
       });
     });
 };
+
+exports.get_view_assigned_patient= (req, res) => {
+  User.find({doctorid:req.user._id})
+  .then((user)=>{
+    res.status(200).send(user);
+  })
+  .catch((err)=>{
+    res.status(500).json({
+      error:err
+    })
+  })
+}

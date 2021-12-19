@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 const{change_password,login_get,login_post,set_password}=require('../controllers/Auth/auth');
 const {isLoggedIn, isAdmin}=require('../controllers/Auth/middlewares');
-const { addquestions_get,addquestions_post } = require('../controllers/general');
+const { addquestions_get,addquestions_post,view_question,view_Onequestion } = require('../controllers/general');
 router.post(
   "/login",
   passport.authenticate("local", {
@@ -36,4 +36,6 @@ router.get("/",(req,res)=>{
 router.post("/setpassword",isLoggedIn,set_password);
 router.get("/addquestion",isLoggedIn,isAdmin,addquestions_get)
 router.post("/addquestion",upload.array("image",5),isLoggedIn,isAdmin,addquestions_post)
+router.get("/view/question",isAdmin,isLoggedIn,view_question);
+router.get("/view/question/:id",isAdmin,isLoggedIn,view_Onequestion);
 module.exports = router;

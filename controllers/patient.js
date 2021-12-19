@@ -7,7 +7,7 @@ exports.get_home_patient = (req, res) => {
             Test.find({ patientid: user._id })
                 .then((tests) => {
                     req.app.locals.tests = tests
-                    res.status(200).send(JSON.stringify(tests))
+                    res.render('patient',{ user: user,tests: tests })
                 })
                 .catch((err) => {
                     console.log(err)
@@ -30,4 +30,23 @@ exports.get_start_test = (req, res) => {
         .catch((err) => {
             console.log(err)
         })
+}
+
+exports.post_start_test = (req, res) => {
+    //Update the test score in user model
+    //Update the test status in test model
+    User.findOneAndUpdate({ _id: req.user._id,testdetails:{$eleMatch:{testid:req.params.id}} },{'testdetails.$.testscore':req.body.testscore})
+        .then((user) => {
+            Test.findOneAndUpdate({ _id: req.params.id }, { status: 'completed' })
+                .then((test) => {
+                    res.status(200).send(JSON.stringify(test))
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+        })
+        .catch((err) => {
+            console.log(err)
+        })   
+    
 }
