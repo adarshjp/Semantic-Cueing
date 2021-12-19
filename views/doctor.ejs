@@ -6,55 +6,48 @@
     </div>
     <ul class="nav-links">
       <li>
-        <div>
-          <i class='bx bx-grid-alt' ></i>
-          <span class="link_name" onClick="showDashboard()">Dashboard</span>
+        <div onClick="showDashboard()"">
+          <div>
+            <i class='bx bx-grid-alt' ></i>
+            <span class="link_name" >Dashboard</span>
+          </div>
+          <ul class="sub-menu blank">
+            <li><a class="link_name" href="#">Dashboard</a></li>
+          </ul>
         </div>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Dashboard</a></li>
-        </ul>
       </li>
-      
       <li>
-        <div class="iocn-link">
+        <div class="iocn-link" onClick="showPatientsAssigned()">
           <div>
             <i class='bx bx-book-alt' ></i>
-            <span class="link_name" onClick="showPatientsAssigned()">Patients assigned</span>
+            <span class="link_name" >Patients assigned</span>
           </div>
-          
         </div>
         <ul class="sub-menu">
           <li><a class="link_name" href="#">Patients</a></li>
-          
         </ul>
       </li>
       <li>
         <div>
-          <i class='bx bx-log-out' ></i>
-          <span class="link_name" id="logout" >Logout</span>
+          <a href="/logout"><i class='bx bx-log-out' ></i></a>
+          <span class="link_name" id="logout" ><a href="/logout" style="color: white">Logout</span></a>
        </div>
         <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Logout</a></li>
+          <li><a class="link_name" href="/logout">Logout</a></li>
         </ul>
       </li>
-     
       <li>
-    <div class="profile-details">
-      <div class="profile-content" onClick="showDocProfile()">
-        <img src="/profile.jpg" alt="profileImg">
-      </div>
-      <div class="name-job">
-        <div class="profile_name mx-auto">Blen Joswin</div>
-        
-      </div>
-      
-    </div>
-  </li>
-</ul>
+        <div class="profile-details" onClick="showDocProfile()">
+          <div class="profile-content" >
+            <img src="/profile.jpg" alt="profileImg">
+          </div>
+          <div class="name-job">
+            <div class="profile_name"><%=user.name%></div>
+          </div>
+        </div>
+      </li>
+    </ul>
   </div>
-
-  
-  
   <div class="container1" id="passigned">
     <h1>Patients</h1>
     <div class="row">
@@ -65,7 +58,6 @@
             <h5 class="card-title">Patient1</h5>
             <p class="card-text">Name: ABC</p>
             <p class="card-text">Age: 21</p>
-
             <a href="#" class="btn btn-primary">Read more...</a>
           </div>
         </div>
@@ -108,21 +100,17 @@
   
   <div class="piegraph col-sm-12" id="dgraph">
     
-  <div class="row" style="margin-bottom:2%;" id="piechart1" ></div>
-  <div class="row" style="margin-bottom:2%;" id="piechart2" ></div>
-  <div class="row" style="margin-bottom:2%;" id="piechart3" ></div>
+    <div class="row" style="margin-bottom:2%;" id="piechart1" ></div>
+    <div class="row" style="margin-bottom:2%;" id="piechart2" ></div>
+    <div class="row" style="margin-bottom:2%;" id="piechart3" ></div>
   </div>
-  </div>
-
-  
-    <div class="card login" id="dprofile" style="width: 18rem;">
+  <div class="card login" id="dprofile" style="width: 18rem;">
       <img class="card-img-top" src="/admin.jpg" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title">Card title</h5>
         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
-    
   </div>
     
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

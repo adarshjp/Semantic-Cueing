@@ -6,63 +6,56 @@
     </div>
     <ul class="nav-links">
       <li>
-        <div>
+        <div onClick="showHome()">
           <i class='bx bx-grid-alt' ></i>
-          <span class="link_name" onClick="showHome()">Home</span>
+          <span class="link_name" >Home</span>
         </div>
         <ul class="sub-menu blank">
           <li><a class="link_name" href="#">Home</a></li>
         </ul>
       </li>
       <li>
-        <div class="iocn-link">
+        <div class="iocn-link" onClick="showDoctors()">
           <div>
             <i class='bx bx-collection' ></i>
-            <span class="link_name" onClick="showDoctors()">Doctor</span>
+            <span class="link_name" >Doctor</span>
           </div>
-          
         </div>
         <ul class="sub-menu">
           <li><a class="link_name" href="#">Doctor</a></li>
-          
         </ul>
       </li>
       <li>
-        <div class="iocn-link">
+        <div class="iocn-link" onClick="showPatients()">
           <div>
             <i class='bx bx-book-alt' ></i>
-            <span class="link_name" onClick="showPatients()">Patients</span>
+            <span class="link_name" >Patients</span>
           </div>
-          
         </div>
         <ul class="sub-menu">
           <li><a class="link_name" href="#">Patients</a></li>
-          
         </ul>
       </li>
       <li>
         <div>
-          <i class='bx bx-log-out' ></i>
-          <span class="link_name" id="logout" >Logout</span>
+          <a href="/logout"><i class='bx bx-log-out' ></i></a>
+          <span class="link_name" id="logout" ><a href="/logout" style="color: white">Logout</span></a>
        </div>
         <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Logout</a></li>
+          <li><a class="link_name" href="/logout">Logout</a></li>
         </ul>
       </li>
-     
       <li>
-    <div class="profile-details">
-      <div class="profile-content" onClick="showProfile()">
-        <img src="/profile.jpg" alt="profileImg">
-      </div>
-      <div class="name-job">
-        <div class="profile_name mx-auto">Blen Joswin</div>
-        
-      </div>
-      
-    </div>
-  </li>
-</ul>
+        <div class="profile-details" onClick="showProfile()">
+          <div class="profile-content" >
+            <img src="/profile.jpg" alt="profileImg">
+          </div>
+          <div class="name-job">
+            <div class="profile_name" ><%=user.name%></div>
+          </div>
+        </div>
+      </li>
+    </ul>
   </div>
 
   
@@ -161,21 +154,17 @@
   
   <div class="piegraph col-sm-12" id="graphs">
     
-  <div class="row" style="margin-bottom:2%;" id="piechart1" ></div>
-  <div class="row" style="margin-bottom:2%;" id="piechart2" ></div>
-  <div class="row" style="margin-bottom:2%;" id="piechart3" ></div>
+    <div class="row" style="margin-bottom:2%;" id="piechart1" ></div>
+    <div class="row" style="margin-bottom:2%;" id="piechart2" ></div>
+    <div class="row" style="margin-bottom:2%;" id="piechart3" ></div>
   </div>
-  </div>
-
-  
-    <div class="card login" id="profile" style="width: 18rem;">
+  <div class="card login" id="profile" style="width: 18rem;">
       <img class="card-img-top" src="/admin.jpg" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title">Card title</h5>
         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
-    
   </div>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
@@ -229,6 +218,5 @@
       chart2.draw(ata, options2);
     }
   </script>
-  <script src="script.js"></script>
  
-  <%- include("partials/footer") %>
+<%- include("partials/footer") %>

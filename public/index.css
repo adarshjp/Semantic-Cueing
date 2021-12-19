@@ -265,7 +265,7 @@ ol.gradient-list > li + li {
   left: 0;
   height: 100%;
   width: 260px;
-  background: #11101d;
+  background: #6C63FF;
   z-index: 100;
   transition: all 0.5s ease;
 }
@@ -315,7 +315,7 @@ ol.gradient-list > li + li {
   transition: all 0.4s ease;
 }
 .sidebar .nav-links li:hover{
-  background: #1d1b31;
+  background: #3F3D56;
 }
 .sidebar .nav-links li .iocn-link{
   display: flex;
@@ -363,7 +363,7 @@ ol.gradient-list > li + li {
 .sidebar .nav-links li .sub-menu{
   padding: 6px 6px 14px 80px;
   margin-top: -10px;
-  background: #1d1b31;
+  background: #3F3D56;
   display: none;
 }
 .sidebar .nav-links li.showMenu .sub-menu{
@@ -423,8 +423,8 @@ ol.gradient-list > li + li {
   width: 260px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  background: #1d1b31;
+  /* justify-content: space-between; */
+  background: #3F3D56;
   padding: 12px 0;
   transition: all 0.5s ease;
 }
@@ -444,7 +444,7 @@ ol.gradient-list > li + li {
   object-fit: cover;
   border-radius: 16px;
   margin: 0 14px 0 12px;
-  background: #1d1b31;
+  background: #3F3D56;
   transition: all 0.5s ease;
 }
 .sidebar.close .profile-details img{
