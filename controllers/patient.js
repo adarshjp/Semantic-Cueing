@@ -7,7 +7,7 @@ exports.get_home_patient = (req, res) => {
             Test.find({ patientid: user._id })
                 .then((tests) => {
                     req.app.locals.tests = tests
-                    res.status(200).send(JSON.stringify(tests))
+                    res.render('patient',{ user: user,tests: tests })
                 })
                 .catch((err) => {
                     console.log(err)

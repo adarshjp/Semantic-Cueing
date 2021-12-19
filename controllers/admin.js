@@ -3,7 +3,7 @@ const Question = require('../models/question')
 exports.admin_get = (req, res) => {
     User.findById(req.user._id)
         .then((user) => {
-            res.send(user)
+            res.render('admin', { user: user })
         })
         .catch((err) => {
             console.log(err)
