@@ -1,0 +1,148 @@
+<%- include("partials/header") %>
+  <div class="sidebar close">
+    <div class="logo-details">
+      <i class='bx bx-menu' ></i>
+      <span class="logo_name">Menu</span>
+    </div>
+    <ul class="nav-links">
+      <li>
+        <div>
+          <i class='bx bx-grid-alt' ></i>
+          <span class="link_name" onClick="showTestAssigned()">Tests</span>
+        </div>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Tests</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="iocn-link">
+          <div>
+            <i class='bx bx-collection' ></i>
+            <span class="link_name" onClick="docAssigned()">Doctor</span>
+          </div>
+          
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#">Doctor</a></li>
+          
+        </ul>
+      </li>
+      
+      <li>
+        <div>
+          <i class='bx bx-log-out' ></i>
+          <span class="link_name" id="logout" >Logout</span>
+       </div>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Logout</a></li>
+        </ul>
+      </li>
+     
+      <li>
+    <div class="profile-details">
+      <div class="profile-content" onClick="showPatientProfile()">
+        <img src="/profile.jpg" alt="profileImg">
+      </div>
+      <div class="name-job">
+        <div class="profile_name mx-auto">Blen Joswin</div>
+        
+      </div>
+      
+    </div>
+  </li>
+</ul>
+  </div>
+
+  
+  <div class="container1" id="dassigned"> 
+    <h1>Doctors Assigned</h1>
+    <div class="row">
+      <div class="col-sm-4 py-3 py-sm-3">
+        <div class="card box-shadow">
+          <img src="/1.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Mrs.Abduli Narayani Dsouzi</h5>
+            <p class="card-text">Phone no: 7349492626</p>
+            <p class="card-text">Email: AND@email.com</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 py-3 py-sm-3">
+        <div class="card box-shadow">
+          <img src="/2.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Mr.Abdul Narayan Dsouza</h5>
+            <p class="card-text">Phone no: 7349492622</p>
+            <p class="card-text">Email: AND@gmail.com</p>
+            
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  
+  
+  <div class="patientclass" id="tassigned">
+    
+    <h1>Tests Assigned</h1>
+    <div class="row">
+      <div class="col-sm-4 py-3 py-sm-3">
+        <div class="card box-shadow">
+          <img src="/toronto.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">TESTS-NO-1</h5>
+            <p class="card-text">TESTS-NO-1</p>
+            <a href="#" class="btn btn-primary">START</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 py-3 py-sm-3">
+        <div class="card box-shadow">
+          <img src="/toronto.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">TESTS-NO-2</h5>
+            <p class="card-text">TESTS-NO-2</p>
+            <a href="#" class="btn btn-primary">START</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 py-3 py-sm-3">
+        <div class="card box-shadow">
+          <img src="/toronto.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">TESTS-NO-3</h5>
+            <p class="card-text">TESTS-NO-3</p>
+            <a href="#" class="btn btn-primary">START</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 py-3 py-sm-3">
+        <div class="card box-shadow">
+          <img src="/toronto.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">TESTS-NO-4</h5>
+            <p class="card-text">TESTS-NO-4</p>
+            <a href="#" class="btn btn-primary">START</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  
+    <div class="card login" id="patientprofile" style="width: 18rem;">
+      <img class="card-img-top" src="/admin.jpg" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Patient Details</h5>
+        <p class="card-text">Name:</p>
+        <p class="card-text">value2:</p>
+        <p class="card-text">value3:</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    
+  </div>
+
+  <%- include("partials/footer") %>
