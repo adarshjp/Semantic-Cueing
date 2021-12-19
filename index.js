@@ -60,5 +60,5 @@ app.listen(process.env.PORT || 3000, () => {
 });
 
 app.get("/test",(req,res)=>{
-  res.render("changePassword")
+  res.render("viewOneUser")
 })
