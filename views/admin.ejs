@@ -37,6 +37,17 @@
         </ul>
       </li>
       <li>
+        <div class="iocn-link" onClick="showAddQuestion()">
+          <div>
+            <i class="fas fa-question"></i>
+            <span class="link_name" >Add Question</span>
+          </div>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#">Add Question</a></li>
+        </ul>
+      </li>
+      <li>
         <div>
           <a href="/logout"><i class='bx bx-log-out' ></i></a>
           <span class="link_name" id="logout" ><a href="/logout" style="color: white">Logout</span></a>
@@ -57,7 +68,21 @@
       </li>
     </ul>
   </div>
-
+  <% if(message.error){ %>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+       <strong class="text-center"><%= message.error%></strong>
+       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+ <% } %>
+ <% if(message.success){ %>
+    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+       <strong class="text-center"><%= message.success%></strong>
+       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+ <% } %>
+  <div class="container1" id="addQuestion">
+    <%- include("partials/add_questions") %>
+  </div>
   
   <div class="container1" id="doctors">
     <h1>Doctors</h1>

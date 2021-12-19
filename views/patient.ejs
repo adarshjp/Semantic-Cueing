@@ -77,58 +77,39 @@
   
   
   
-  <div class="patientclass" id="tassigned">
-    <h1>Tests Assigned</h1>
-    <div class="row">
-      <div class="col-sm-4 py-3 py-sm-3">
-        <div class="card box-shadow">
-          <img src="/toronto.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">TESTS-NO-1</h5>
-            <p class="card-text">TESTS-NO-1</p>
-            <a href="#" class="btn btn-primary">START</a>
+  <div class="patientclass p-2 pt-5" id="tassigned">
+    <h1 class="text-center p-2">Take your <span class="blue">tests</span> now <i class="fas fa-calendar-check blue"></i></h1>
+    <div class="row p-2">
+      <% tests.forEach((test) => { %>
+        <div class="col-sm-6 py-3 py-sm-3">
+          <div class="card box-shadow p-3">
+            <div class="row">
+              <div class="col-md-6 my-auto">
+                <img src="/exam.svg" class="card-img-top rounded-circle p-1 box-shadow" alt="..." style="border: 3px solid #6C63FF;">
+              </div>
+              <div class="col-md-6">
+                <div class="card-body">
+                  <h5 class="card-title">Test<i class="fas fa-bell blue"></i></h5>
+                  <p class="card-text"><i class="fas fa-question-circle blue"></i>: <%=test.noofquestion%></p>
+                  <p class="card-text">Level: <%=test.level%></p>
+                  <div class="d-flex justify-content-end">
+                    <a href="/start/test/<%=test._id%>" class="btn white" id="review">Start <i class="fas fa-play"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-sm-4 py-3 py-sm-3">
-        <div class="card box-shadow">
-          <img src="/toronto.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">TESTS-NO-2</h5>
-            <p class="card-text">TESTS-NO-2</p>
-            <a href="#" class="btn btn-primary">START</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-4 py-3 py-sm-3">
-        <div class="card box-shadow">
-          <img src="/toronto.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">TESTS-NO-3</h5>
-            <p class="card-text">TESTS-NO-3</p>
-            <a href="#" class="btn btn-primary">START</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-4 py-3 py-sm-3">
-        <div class="card box-shadow">
-          <img src="/toronto.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">TESTS-NO-4</h5>
-            <p class="card-text">TESTS-NO-4</p>
-            <a href="#" class="btn btn-primary">START</a>
-          </div>
-        </div>
-      </div>
+      <% }) %>
     </div>
   </div>
 
   
-  <div class="card login" id="patientprofile" style="width: 18rem;">
+  <div class="card login" id="patientprofile" style="width:50%">
       <img class="card-img-top" src="/admin.jpg" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title">Patient Details</h5>
-        <p class="card-text">Name:</p>
+        <p class="card-text">Name:<%=user.name%></p>
         <p class="card-text">value2:</p>
         <p class="card-text">value3:</p>
         <a href="#" class="btn btn-primary">Go somewhere</a>
