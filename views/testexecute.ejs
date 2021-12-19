@@ -1,28 +1,30 @@
 <%- include("partials/header") %>
 <div class="container my-5">
     <div class="row justify-content-center card rounded vertical-center shadow">
-      <% var a=['hello','hii'] %>
-      <% var b=["https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg","https://static.vecteezy.com/packs/media/components/global/search-explore-nav/img/vectors/term-bg-1-666de2d941529c25aa511dc18d727160.jpg","https://static.vecteezy.com/packs/media/components/global/search-explore-nav/img/vectors/term-bg-1-666de2d941529c25aa511dc18d727160.jpg","https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg"] %>
-      <% for (var i =1;i<= 2;i++) { %>
+      <% var a=[] %>
+      <% var b=[] %>
+      <% var i=1 %>
+      <% questions.forEach((questions)=> { %>
       <div class="tab">
           <h2 class=""><%= i%>.Question is about</h2>
           <div class="row align-items-center">
               <div class="col-12 col-md-10">
                   <div class="row justify-content-center">
                       <div class="col-12 col-md-6">
-                          <img class="img-fluid" src="https://www.pixsy.com/wp-content/uploads/2021/04/ben-sweet-2LowviVHZ-E-unsplash-1.jpeg" style="border: 2px solid #6C63FF">
+                          <img class="img-fluid" src="data:image/<%=questions.question.contentType%>;base64,<%=questions.question.data.toString('base64')%>" style="border: 2px solid #6C63FF;max-height: 42vh;" >
                       </div>
                   </div>
+                  
                   <div class="row justify-content-center m-3">
                       <div class="col-12 col-md-2">
-                          <button type="button" class="btn btn-warning btn-lg" onclick="hint('<%=i %>','<%=JSON.stringify(b) %>')" id="hint<%=i %>">Take Hint  <i class="far fa-lightbulb"></i></button> 
+                          <button type="button" class="btn btn-warning btn-lg" onclick="hint('<%=i %>','<%=questions.hints %>')" id="hint<%=i %>">Take Hint  <i class="far fa-lightbulb"></i></button> 
                       </div>
                   </div>
               </div>
               <div class="col-12 col-md-1">
                   <div class="row justify-content-center my-2">
                         <div class="col-3 col-md-12 my-2">
-                            <button type="button" class="btn btn-warning" id="butt1<%=i %>" style="display: none;" onclick="dispmodal('<%=b[0] %>')">Hint1</button> 
+                            <button type="button" class="btn btn-warning" id="butt1<%=i %>"  onclick="dispmodal('<%=questions.hints[0] %>')">Hint1</button> 
                         </div>
                         <div class="col-3 col-md-12 my-2">
                             <button type="button" class="btn btn-warning" id="butt2<%=i %>" style="display: none;" onclick="dispmodal('<%=b[1] %>')">Hint2</button>
@@ -43,12 +45,14 @@
             <div class="col-12 col-md-2"></div>
           </div>
         </div>
-        <% } %>
+        <% a.push(questions.answer) %>
+        <% i=i+1%>
+        <% }) %>
         <hr>
         <div class="row justify-content-center p-3">
             <div style="text-align:center;" class="col-8 col-md-10">
-            <% for (var i =1;i<= 2;i++) { %>
-                    <span class="step"><%=i%></span>
+            <% for (var j =1;j<= questions.length;j++) { %>
+                    <span class="step"><%=j%></span>
             <% } %>   
             </div>
             <div class="col-4 col-md-2">
@@ -78,11 +82,11 @@
     var modal = document.getElementById('myModal');
     // To display the modal//
     function dispmodal(srcc){
-      
+      console.log(srcc)
       var modal = document.getElementById('myModal');
       var modalImg = document.getElementById("modal-img");
       modal.style.display = "block";
-      modalImg.src = srcc;
+      modalImg.src = "data:image/srcc.contentType;base64,srcc.data.toString('base64')%>";
       timer=setTimeout(function() {
         modal.style.display = "none";
         }, 10000);
@@ -90,8 +94,7 @@
     // Handle the hint button event //
     function hint(i,srcc) {
       console.log(i)
-      console.log(JSON.parse(srcc)[hint_i]);
-      dispmodal(JSON.parse(srcc)[hint_i]);
+      dispmodal(srcc[hint_i]);
       console.log("butt"+(hint_i+1)+i)
       if(hint_i==0){
         console.log("butt1"+i)
