@@ -1,7 +1,7 @@
 <%- include("partials/header") %>
 <div class="container my-5">
     <div class="row justify-content-center card rounded vertical-center shadow">
-      <% var i=1,x1,x2,a=[];%>
+      <% var i=1,x1,x2,a=[],c=0;%>
       <% questions.forEach((questions)=> { %>
       <div class="tab">
           <h2 class=""><%= i%>.Question is about</h2>
@@ -15,7 +15,7 @@
                   <div class="row justify-content-center m-3">
                       <div class="col-12 col-md-2">
                           <% var base='base64';%>
-                          <button type="button" class="btn btn-warning btn-lg" onclick="'<% x1=questions.hints[0].hint.contentType %>';'<% x2=questions.hints[0].hint.data.toString(base)%>';hint('<%=i%>','data:image/<%=x1%>;base64,<%=x2%>')" id="hint1<%=i %>" style="display: none;">Take Hint  <i class="far fa-lightbulb"></i></button> 
+                          <button type="button" class="btn btn-warning btn-lg" onclick="'<% x1=questions.hints[c].hint.contentType %>';'<% x2=questions.hints[c].hint.data.toString(base)%>';'<% c=c+1 %>';hint('<%=i%>','data:image/<%=x1%>;base64,<%=x2%>')" id="hint1<%=i %>" style="display: none;">Take Hint  <i class="far fa-lightbulb"></i></button> 
                       </div>
                   </div>
               </div>
@@ -62,7 +62,7 @@
             <% } %>   
             </div>
             <div class="col-4 col-md-2">
-                <button type="button" id="nextBtn" class="btn btn-primary btn-lg" onclick="nextPrev(1,'<%=JSON.stringify(a) %>')">Next</button>   
+                <button type="button" id="nextBtn" class="btn btn-primary btn-lg" onclick="'<% c=0 %>';nextPrev(1,'<%=JSON.stringify(a) %>')">Next</button>   
             </div>
         </div>
     </div>  
