@@ -65,21 +65,18 @@ function showProfile() {
 
 }
 //Admin Home Page Functions Ends here
+var dassigned = document.getElementById('dassigned')
+var tassigned = document.getElementById('tassigned')
+var patientprofile = document.getElementById('patientprofile')
 function showTestAssigned() {
   //myfunc4
-  var dassigned = document.getElementById('dassigned')
-  var tassigned = document.getElementById('tassigned')
-  var patientprofile = document.getElementById('patientprofile')
+  
   tassigned.style.display = 'block'
   dassigned.style.display = 'none'
   patientprofile.style.display = 'none'
 }
 
 function docAssigned() {
-  var dassigned = document.getElementById('dassigned')
-  var tassigned = document.getElementById('tassigned')
-
-  var patientprofile = document.getElementById('patientprofile')
 
   dassigned.style.display = 'block'
   patientprofile.style.display = 'none'
@@ -87,22 +84,20 @@ function docAssigned() {
 }
 
 function showPatientProfile() {
-  var dassigned = document.getElementById('dassigned')
-  var tassigned = document.getElementById('tassigned')
-
-  var patientprofile = document.getElementById('patientprofile')
+ 
 
   patientprofile.style.display = 'block'
 
   dassigned.style.display = 'none'
   tassigned.style.display = 'none'
 }
-
-function showDashboard() {
-  //myFunc2
-  var passigned = document.getElementById('passigned')
+//Patinet home Page end here
+var passigned = document.getElementById('passigned')
   var dgraph = document.getElementById('dgraph')
   var dprofile = document.getElementById('dprofile')
+function showDashboard() {
+  //myFunc2
+  
   dgraph.style.display = 'block'
   passigned.style.display = 'none'
   dprofile.style.display = 'none'
@@ -110,18 +105,14 @@ function showDashboard() {
 
 function showPatientsAssigned() {
   //myFunc1
-  var passigned = document.getElementById('passigned')
-  var dgraph = document.getElementById('dgraph')
-  var dprofile = document.getElementById('dprofile')
+  
   dgraph.style.display = 'none'
   passigned.style.display = 'block'
   dprofile.style.display = 'none'
 }
 
 function showDocProfile() {
-  var passigned = document.getElementById('passigned')
-  var dgraph = document.getElementById('dgraph')
-  var dprofile = document.getElementById('dprofile')
+
 
   dprofile.style.display = 'block'
   dgraph.style.display = 'none'

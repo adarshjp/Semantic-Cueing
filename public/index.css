@@ -198,7 +198,7 @@ ol.gradient-list > li + li {
 	text-align: center;
 }
 
-#login-input {
+#login-input,#login-input1 {
 	background-color: #eee;
 	border: 2px solid #6C63FF;
 	padding: 10px 15px;
@@ -253,6 +253,7 @@ ol.gradient-list > li + li {
 .select-color:focus{
   margin: 0;
 }
+<<<<<<< HEAD
 .tab {
     display: none;
   }
@@ -288,6 +289,42 @@ ol.gradient-list > li + li {
 }
 
 #myImg:hover {opacity: 0.7;}
+=======
+/*------------------------------------
+          Change Password
+------------------------------------*/
+.separator {
+  width: 150px;
+  height: 4px;
+  background-color: #843bc7;
+  margin: 24px;
+}
+.field-icon {
+  float: right;
+  margin-left: -25px;
+  margin-top: 25px;
+  position: absolute;
+  z-index: 2;
+}
+/*------------------------------------
+          Set Password
+------------------------------------*/
+.main-body {
+  padding: 15px;
+}
+
+
+.gutters-sm {
+  margin-right: -8px;
+  margin-left: -8px;
+}
+
+.gutters-sm>.col, .gutters-sm>[class*=col-] {
+  padding-right: 8px;
+  padding-left: 8px;
+}
+/* Admin Page */
+>>>>>>> 8affcaf127f7be3397fe065c61998823fc9baa3d
 
 /* The Modal (background) */
 .modal {
@@ -640,6 +677,10 @@ ol.gradient-list > li + li {
 .patientclass {
   margin-left:23%;
   margin-right:10%;
+<<<<<<< HEAD
 
 }
 
+=======
+}
+>>>>>>> 8affcaf127f7be3397fe065c61998823fc9baa3d
