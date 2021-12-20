@@ -283,13 +283,10 @@ ol.gradient-list > li + li {
 .gutters-sm>.col, .gutters-sm>[class*=col-] {
   padding-right: 8px;
   padding-left: 8px;
-=======
-/* Admin Page */
+}
 
 /* Google Fonts Import Link */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-
 
 .sidebar{
   position: fixed;
