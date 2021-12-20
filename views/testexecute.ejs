@@ -15,7 +15,7 @@
                   <div class="row justify-content-center m-3">
                       <div class="col-12 col-md-2">
                           <% var base='base64';%>
-                          <button type="button" class="btn btn-warning btn-lg" onclick="'<% x1=questions.hints[c].hint.contentType %>';'<% x2=questions.hints[c].hint.data.toString(base)%>';'<% c=c+1 %>';hint('<%=i%>','data:image/<%=x1%>;base64,<%=x2%>')" id="hint1<%=i %>" style="display: none;">Take Hint  <i class="far fa-lightbulb"></i></button> 
+                          <button type="button" class="btn btn-warning btn-lg" onclick="'<% x1=questions.hints[0].hint.contentType %>';'<% x2=questions.hints[0].hint.data.toString(base)%>';hint('<%=i%>','data:image/<%=x1%>;base64,<%=x2%>')" id="hint<%=i %>">Take Hint  <i class="far fa-lightbulb"></i></button>
                       </div>
                   </div>
               </div>
