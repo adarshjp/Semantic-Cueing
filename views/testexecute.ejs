@@ -1,45 +1,37 @@
 <%- include("partials/header") %>
 <div class="container my-5">
     <div class="row justify-content-center card rounded vertical-center shadow">
-      <% var i=1,x1,x2,a=[],c=0;%>
-      <% questions.forEach((questions)=> { %>
+      <% var a=[];%>
+      <% for(var i=0;i< questions.length;i++) { %>
       <div class="tab">
-          <h2 class=""><%= i%>.Question is about</h2>
+          <h2 class=""><%= i+1 %>.Question is about</h2>
           <div class="row align-items-center">
               <div class="col-12 col-md-10">
                   <div class="row justify-content-center">
                       <div class="col-12 col-md-6">
-                          <img class="img-fluid" src="data:image/<%=questions.question.contentType%>;base64,<%=questions.question.data.toString('base64')%>" style="border: 2px solid #6C63FF;max-height: 42vh;" >
+                          <img class="img-fluid" src="data:image/<%=questions[i].question.contentType%>;base64,<%=questions[i].question.data.toString('base64')%>" style="border: 2px solid #6C63FF;max-height: 42vh;" >
                       </div>
                   </div>
                   <div class="row justify-content-center m-3">
                       <div class="col-12 col-md-2">
                           <% var base='base64';%>
-                          <button type="button" class="btn btn-warning btn-lg" onclick="'<% x1=questions.hints[c].hint.contentType %>';'<% x2=questions.hints[c].hint.data.toString(base)%>';'<% c=c+1 %>';hint('<%=i%>','data:image/<%=x1%>;base64,<%=x2%>')" id="hint1<%=i %>" style="display: none;">Take Hint  <i class="far fa-lightbulb"></i></button> 
+                          <button type="button" class="btn btn-warning btn-lg" onclick="hint(i)" id="hint1<%=i %>" style="display: none;">Take Hint  <i class="far fa-lightbulb"></i></button> 
                       </div>
                   </div>
               </div>
               <div class="col-12 col-md-1">
                   <div class="row justify-content-center my-2">
                         <div class="col-3 col-md-12 my-2">
-                            <% x1=questions.hints[0].hint.contentType %>
-                            <% x2=questions.hints[0].hint.data.toString('base64')%>
-                            <button type="button" class="btn btn-warning" id="butt1<%=i %>" style="display: none;" onclick="dispmodal('data:image/<%=x1%>;base64,<%=x2%>')">Hint1</button> 
+                            <button type="button" class="btn btn-warning" id="butt1<%=i %>" style="display: none;" onclick="dispmodal(i,0)">Hint1</button> 
                         </div>
                         <div class="col-3 col-md-12 my-2">
-                            <% x1=questions.hints[1].hint.contentType %>
-                            <% x2=questions.hints[1].hint.data.toString('base64')%>
-                            <button type="button" class="btn btn-warning" id="butt2<%=i %>" style="display: none;" onclick="dispmodal('data:image/<%=x1%>;base64,<%=x2%>')">Hint2</button>
+                            <button type="button" class="btn btn-warning" id="butt2<%=i %>" style="display: none;" onclick="dispmodal(i,1)">Hint2</button>
                         </div>
                         <div class="col-3 col-md-12 my-2">
-                            <% x1=questions.hints[2].hint.contentType %>
-                            <% x2=questions.hints[2].hint.data.toString('base64')%>
-                            <button type="button" class="btn btn-warning" id="butt3<%=i %>" style="display: none;" onclick="dispmodal('data:image/<%=x1%>;base64,<%=x2%>')">Hint3</button> 
+                            <button type="button" class="btn btn-warning" id="butt3<%=i %>" style="display: none;" onclick="dispmodal(i,2)">Hint3</button> 
                         </div>
                         <div class="col-3 col-md-12 my-2">
-                            <% x1=questions.hints[2].hint.contentType %>
-                            <% x2=questions.hints[2].hint.data.toString('base64')%>
-                            <button type="button" class="btn btn-warning" id="butt4<%=i %>" style="display: none;" onclick="dispmodal('data:image/<%=x1%>;base64,<%=x2%>')">Hint4</button>
+                            <button type="button" class="btn btn-warning" id="butt4<%=i %>" style="display: none;" onclick="dispmodal(i,3)">Hint4</button>
                         </div>
                   </div>
               </div>
@@ -51,9 +43,8 @@
             <div class="col-12 col-md-2"></div>
           </div>
         </div>
-        <% a.push(questions.answer) %>
-        <% i=i+1%>
-        <% }) %>
+        <% a.push(questions[i].answer) %>
+        <% } %>
         <hr>
         <div class="row justify-content-center p-3">
             <div style="text-align:center;" class="col-8 col-md-10">
@@ -62,7 +53,7 @@
             <% } %>   
             </div>
             <div class="col-4 col-md-2">
-                <button type="button" id="nextBtn" class="btn btn-primary btn-lg" onclick="'<% c=0 %>';nextPrev(1,'<%=JSON.stringify(a) %>')">Next</button>   
+                <button type="button" id="nextBtn" class="btn btn-primary btn-lg" onclick="nextPrev(1,'<%=JSON.stringify(a) %>')">Next</button>   
             </div>
         </div>
     </div>  
@@ -78,6 +69,7 @@
   <input type="text" name="anscrt" id="anscrt" value=""/>
 </form>
 <script>
+  var x,y;
     var score=0;
     var noofhints=[];
     var anscrt=[];
@@ -87,18 +79,19 @@
     showTab(currentTab);
     var modal = document.getElementById('myModal');
     // To display the modal//
-    function dispmodal(srcc){
+    function dispmodal(x,y){
+      console.log(x,y);
       var modal = document.getElementById('myModal');
       var modalImg = document.getElementById("modal-img");
       modal.style.display = "block";
-      modalImg.src = srcc;
+      modalImg.src = "data:image/<%=questions[x].hints[y].hint.contentType%>;base64,<%=questions[x].hints[y].hint.data.toString('base64')%>";
       timer=setTimeout(function() {
         modal.style.display = "none";
         }, 10000);
     }
     // Handle the hint button event //
-    function hint(k,srcc) {
-      dispmodal(srcc);
+    function hint(k) {
+      dispmodal(k,hint_i);
       if(hint_i==0){
         document.getElementById('butt1'+k).style.display="block";
         hint_i++;
@@ -115,8 +108,8 @@
         document.getElementById('butt4'+k).style.display="block";
         hint_i++;
         console.log(hint_i);
-        console.log('hint'+(currentTab+1))
-        document.getElementById('hint'+(currentTab+1)).disabled=true;
+        console.log('hint'+(currentTab))
+        document.getElementById('hint'+(currentTab)).disabled=true;
       }
     }
     // To display the tab on next button click//
