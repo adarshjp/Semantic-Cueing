@@ -253,7 +253,6 @@ ol.gradient-list > li + li {
 .select-color:focus{
   margin: 0;
 }
-<<<<<<< HEAD
 .tab {
     display: none;
   }
@@ -289,7 +288,6 @@ ol.gradient-list > li + li {
 }
 
 #myImg:hover {opacity: 0.7;}
-=======
 /*------------------------------------
           Change Password
 ------------------------------------*/
@@ -324,7 +322,7 @@ ol.gradient-list > li + li {
   padding-left: 8px;
 }
 /* Admin Page */
->>>>>>> 8affcaf127f7be3397fe065c61998823fc9baa3d
+
 
 /* The Modal (background) */
 .modal {
@@ -677,10 +675,4 @@ ol.gradient-list > li + li {
 .patientclass {
   margin-left:23%;
   margin-right:10%;
-<<<<<<< HEAD
-
 }
-
-=======
-}
->>>>>>> 8affcaf127f7be3397fe065c61998823fc9baa3d
