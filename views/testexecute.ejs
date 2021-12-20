@@ -14,7 +14,6 @@
                           <img class="img-fluid" src="data:image/<%=questions.question.contentType%>;base64,<%=questions.question.data.toString('base64')%>" style="border: 2px solid #6C63FF;max-height: 42vh;" >
                       </div>
                   </div>
-                  
                   <div class="row justify-content-center m-3">
                       <div class="col-12 col-md-2">
                           <button type="button" class="btn btn-warning btn-lg" onclick="hint('<%=i %>','<%=questions.hints %>')" id="hint<%=i %>">Take Hint  <i class="far fa-lightbulb"></i></button> 
@@ -24,16 +23,16 @@
               <div class="col-12 col-md-1">
                   <div class="row justify-content-center my-2">
                         <div class="col-3 col-md-12 my-2">
-                            <button type="button" class="btn btn-warning" id="butt1<%=i %>"  onclick="dispmodal('<%=questions.hints[0] %>')">Hint1</button> 
+                            <button type="button" class="btn btn-warning" id="butt1<%=i %>"  onclick="dispmodal('data:image/<%=questions.hints[0].hint.contentType%>;base64,<%=questions.hints[0].hint.data.toString(\'base64\')%>')">Hint1</button> 
                         </div>
                         <div class="col-3 col-md-12 my-2">
-                            <button type="button" class="btn btn-warning" id="butt2<%=i %>" style="display: none;" onclick="dispmodal('<%=b[1] %>')">Hint2</button>
+                            <button type="button" class="btn btn-warning" id="butt2<%=i %>" style="display: none;" onclick="dispmodal('<%=questions.hints[1].hint %>')">Hint2</button>
                         </div>
                         <div class="col-3 col-md-12 my-2">
-                            <button type="button" class="btn btn-warning" id="butt3<%=i %>" style="display: none;" onclick="dispmodal('<%=b[2] %>')">Hint3</button> 
+                            <button type="button" class="btn btn-warning" id="butt3<%=i %>" style="display: none;" onclick="dispmodal('<%=questions.hints[2].hint %>')">Hint3</button> 
                         </div>
                         <div class="col-3 col-md-12 my-2">
-                            <button type="button" class="btn btn-warning" id="butt4<%=i %>" style="display: none;" onclick="dispmodal('<%=b[3] %>')">Hint4</button>
+                            <button type="button" class="btn btn-warning" id="butt4<%=i %>" style="display: none;" onclick="dispmodal('<%=questions.hints[3].hint %>')">Hint4</button>
                         </div>
                   </div>
               </div>
@@ -82,11 +81,10 @@
     var modal = document.getElementById('myModal');
     // To display the modal//
     function dispmodal(srcc){
-      console.log(srcc)
       var modal = document.getElementById('myModal');
       var modalImg = document.getElementById("modal-img");
       modal.style.display = "block";
-      modalImg.src = "data:image/srcc.contentType;base64,srcc.data.toString('base64')%>";
+      modalImg.src = srcc;
       timer=setTimeout(function() {
         modal.style.display = "none";
         }, 10000);
@@ -94,6 +92,7 @@
     // Handle the hint button event //
     function hint(i,srcc) {
       console.log(i)
+      console.log(srcc)
       dispmodal(srcc[hint_i]);
       console.log("butt"+(hint_i+1)+i)
       if(hint_i==0){
