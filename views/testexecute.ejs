@@ -1,34 +1,220 @@
 <%- include("partials/header") %>
-<div class="container my-3">
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-5">
-            <div class="row justify-content-center">
-                <div class="col-12 card p-1">
-                    <img src="https://images.ctfassets.net/hrltx12pl8hq/7yQR5uJhwEkRfjwMFJ7bUK/dc52a0913e8ff8b5c276177890eb0129/offset_comp_772626-opt.jpg?fit=fill&w=800&h=300" alt="image" class="img-fluid" style="height:20rem"/>      
-                </div>
-            </div> 
+<div class="container my-5">
+    <div class="row justify-content-center card rounded vertical-center shadow">
+      <% var i=1,x1,x2,a=[]%>
+      <% questions.forEach((questions)=> { %>
+      <div class="tab">
+          <h2 class=""><%= i%>.Question is about</h2>
+          <div class="row align-items-center">
+              <div class="col-12 col-md-10">
+                  <div class="row justify-content-center">
+                      <div class="col-12 col-md-6">
+                          <img class="img-fluid" src="data:image/<%=questions.question.contentType%>;base64,<%=questions.question.data.toString('base64')%>" style="border: 2px solid #6C63FF;max-height: 42vh;" >
+                      </div>
+                  </div>
+                  <div class="row justify-content-center m-3">
+                    <div class="col-12 col-md-2">
+                      <% for(var j=0;j<=3;j++) { %>
+                            <% x1=questions.hints[j].hint.contentType %>
+                            <% x2=questions.hints[j].hint.data.toString('base64')%>
+                            <button type="button" class="btn btn-warning btn-lg" onclick="hint('data:image/<%=x1%>;base64,<%=x2%>')" id="hint<%=i %><%=j %>" style="display:none;">Take Hint  <i class="far fa-lightbulb"></i></button>  
+                      <% } %>
+                    </div> 
+                  </div>
+              </div>
+              <div class="col-12 col-md-1">
+                  <div class="row justify-content-center my-2">
+                      <% for(var j=0;j<=3;j++) { %>
+                          <div class="col-3 col-md-12 my-2">
+                            <% x1=questions.hints[j].hint.contentType %>
+                            <% x2=questions.hints[j].hint.data.toString('base64')%>
+                            <button type="button" class="btn btn-warning" id="butt<%=j%><%=i%>" style="display: none;" onclick="dispmodal('data:image/<%=x1%>;base64,<%=x2%>')">Hint<%=j+1%></button> 
+                          </div>
+                      <% } %>
+                      </div>
+                  </div>
+              </div>
+          
+          <div class="row justify-content-center p-2">
+            <div class="col-12 col-md-5">
+              <input type="text" name="ans" placeholder="ans" id="login-input" class="outline-color" required />
+            </div>
+            <div class="col-12 col-md-2"></div>
+          </div>
         </div>
-        <div class="col-12 col-md-5">
-            <div class="row justify-content-center">
-                <div class="col-12 card p-1">
-                    <img src="https://images.ctfassets.net/hrltx12pl8hq/7yQR5uJhwEkRfjwMFJ7bUK/dc52a0913e8ff8b5c276177890eb0129/offset_comp_772626-opt.jpg?fit=fill&w=800&h=300" alt="image" class="img-fluid" style="height:20rem"/>      
-                </div>
+        <% a.push(questions.answer) %>
+        <% i=i+1%>
+        <% }) %>
+        <hr>
+        <div class="row justify-content-center p-3">
+            <div style="text-align:center;" class="col-8 col-md-10">
+            <% for (var j =1;j<= questions.length;j++) { %>
+                    <span class="step"><%=j%></span>
+            <% } %>   
+            </div>
+            <div class="col-4 col-md-2">
+                <button type="button" id="nextBtn" class="btn btn-primary btn-lg" onclick="nextPrev(1,'<%=JSON.stringify(a) %>')">Next</button>   
             </div>
         </div>
-    </div>
-    <div class="row p-2 shadow-lg my-2">
-        <div class="offset-1 col-2">
-            <button class="btn btn-primary">1</button>  
-        </div>
-        <div class="offset-1 col-2">
-            <button class="btn btn-primary">2</button>
-        </div>
-        <div class="offset-1 col-2">
-            <button class="btn btn-primary">3</button>   
-        </div>
-        <div class="offset-1 col-2">
-            <button class="btn btn-primary">4</button>
-        </div>
-    </div>
+    </div>  
 </div>
+<div id="myModal" class="modal">
+  <span class="close">×</span>
+  <img class="modal-content" id="modal-img" style="border: 2px solid #6C63FF">
+  <div id="caption"></div>
+</div>
+<form action="/start/test/<%=testid %>" method="post" id="testForm" class="d-none">
+  <input type="number" name="testscore" id="score" value=""/>
+  <input type="text" name="hints" id="hints" value=""/>
+  <input type="text" name="anscrt" id="anscrt" value=""/>
+</form>
+<script>
+    var score=0;
+    var noofhints=[];
+    var anscrt=[];
+    var hint_i=0;
+    var currentTab = 0; 
+    var timer;
+    showHint(1,0)
+    function showHint(qi,hi) {
+      if(hi==0) {
+        document.getElementById('hint'+qi+0).style.display="block";
+        document.getElementById('hint'+qi+1).style.display="none";
+        document.getElementById('hint'+qi+2).style.display="none";
+        document.getElementById('hint'+qi+3).style.display="none";
+      }
+      else if(hi==1) {
+        document.getElementById('hint'+qi+1).style.display="block";
+        document.getElementById('hint'+qi+0).style.display="none";
+        document.getElementById('hint'+qi+2).style.display="none";
+        document.getElementById('hint'+qi+3).style.display="none";
+      }
+      else if(hi==2) {
+        document.getElementById('hint'+qi+2).style.display="block";
+        document.getElementById('hint'+qi+1).style.display="none";
+        document.getElementById('hint'+qi+0).style.display="none";
+        document.getElementById('hint'+qi+3).style.display="none";
+      }
+      else{
+        document.getElementById('hint'+qi+3).style.display="block";
+        document.getElementById('hint'+qi+1).style.display="none";
+        document.getElementById('hint'+qi+2).style.display="none";
+        document.getElementById('hint'+qi+0).style.display="none";
+      }
+    }
+    showTab(currentTab);
+    var modal = document.getElementById('myModal');
+    // To display the modal//
+    function dispmodal(srcc){
+      var modal = document.getElementById('myModal');
+      var modalImg = document.getElementById("modal-img");
+      modal.style.display = "block";
+      modalImg.src = srcc;
+      timer=setTimeout(function() {
+        modal.style.display = "none";
+        }, 10000);
+    }
+    // Handle the hint button event //
+    function hint(srcc) {
+      k=currentTab+1;
+      dispmodal(srcc)
+      if(hint_i==0){
+        document.getElementById('butt0'+k).style.display="block";
+        hint_i++;
+        showHint(k,hint_i);
+      }
+      else if(hint_i==1){
+        document.getElementById('butt1'+k).style.display="block";
+        hint_i++;
+        showHint(k,hint_i);
+      }
+      else if(hint_i==2){
+        document.getElementById('butt2'+k).style.display="block";
+        hint_i++;
+        showHint(k,hint_i);
+      }
+      else if(hint_i==3){
+        document.getElementById('butt3'+k).style.display="block";
+        hint_i++;
+        console.log('hint'+(currentTab+1)+(hint_i-1))
+        document.getElementById('hint'+(currentTab+1)+(hint_i-1)).disabled=true;
+      }
+    }
+    // To display the tab on next button click//
+    function showTab(n) {
+      var x = document.getElementsByClassName("tab");
+      x[n].style.display = "block";
+      if (n == (x.length - 1)) {
+        document.getElementById("nextBtn").innerHTML = "Submit";
+      } else {
+        document.getElementById("nextBtn").innerHTML = "Next";
+      }
+      fixStepIndicator(n)
+    }
+    
+    function nextPrev(n,ans) {
+      var val=validateForm();
+      if(!val){
+        return false;
+      }
+      console.log(JSON.parse(ans)[currentTab]);
+      console.log(document.getElementsByName('ans'));
+      if((JSON.parse(ans)[currentTab])===(document.getElementsByName('ans')[currentTab].value)) {
+        score=score+100-hint_i*10;
+        console.log("Correct")
+        console.log(score);
+        noofhints.push(hint_i);
+        anscrt.push('C')
+        console.log(JSON.stringify(noofhints));
+        console.log(JSON.stringify(anscrt));
+        document.getElementsByClassName("step")[currentTab].className += " finish";
+      }
+      else{
+        console.log("wrong");
+        console.log(score);
+        noofhints.push(hint_i);
+        anscrt.push('W')
+        console.log(JSON.stringify(noofhints));
+        console.log(JSON.stringify(anscrt));
+        document.getElementsByClassName("step")[currentTab].className += " wrong";
+      }
+      var x = document.getElementsByClassName("tab");
+      x[currentTab].style.display = "none";
+      currentTab = currentTab + n;
+      if(document.getElementById("nextBtn").innerHTML ==="Submit"){
+        console.log("Form Submiited")
+        document.getElementById("score").value=score;
+        document.getElementById("hints").value=JSON.stringify(noofhints);
+        document.getElementById("anscrt").value=JSON.stringify(anscrt);
+        document.getElementById("testForm").submit();
+        document.getElementById("nextBtn").innerHTML="Submitting..."
+        document.getElementById("nextBtn").disabled = true;
+      }
+      hint_i=0;
+      showTab(currentTab);
+      showHint(currentTab+1,hint_i);
+    }
+    function fixStepIndicator(n) {
+      var i, x = document.getElementsByClassName("step");
+      for (i = 0; i < x.length; i++) {
+        x[i].className = x[i].className.replace(" active", "");
+      }
+      x[n].className += " active";
+    }
+    function validateForm() {
+      var x, y, i, valid = true;
+      x = document.getElementsByClassName("tab");
+      y = x[currentTab].getElementsByTagName("input");
+      if (y[0].value == "") {
+          y[0].className += " invalid";
+          valid = false;
+      }
+      return valid;
+    }
+    var span = document.getElementsByClassName("close")[0];
+    span.onclick = function() { 
+      modal.style.display = "none";
+      clearTimeout(timer);
+    }
+</script>
 <%- include("partials/footer") %>

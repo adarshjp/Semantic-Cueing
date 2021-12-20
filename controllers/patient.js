@@ -25,7 +25,7 @@ exports.get_start_test = (req, res) => {
     Question.find({ _id: { $in: questionIds } })
         .then((questions) => {
             console.log(questions.length)
-            res.status(200).send(JSON.stringify(questions))
+            res.render('testexecute',{ questions: questions,testid:testId })
         })
         .catch((err) => {
             console.log(err)
