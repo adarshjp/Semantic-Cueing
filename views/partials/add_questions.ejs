@@ -6,7 +6,7 @@
             <h2 class="card-title text-center">Add question</h2>
             <hr>
             <div class="form-group">
-               <input type="file" name="image" class="form-control form-control-lg fi" accept="image/png, image/gif, image/jpeg" placeholder="Enter Image" id="upload_file" onchange="getImagePreview(event,'preview','upload_file')" id="login-input">
+               <input type="file" name="image" class="form-control form-control-lg fi" accept="image/png, image/jpeg" placeholder="Enter Image" id="upload_file" onchange="getImagePreview(event,'preview','upload_file')" id="login-input">
             </div>
             <div class="row justify-content-center my-2">
                <div class="col-12 col-sm-7 col-md-6" id="preview"></div>
@@ -26,12 +26,12 @@
       </div>
       <div class="row justify-content-center mt-3">
          <% for (var i = 0; i < 4; i++) { %>
-         <div class="col-12 col-md-3 card shadow  my-2">
+         <div class="col-12 col-md-5 card shadow m-1">
             <h2 class="card-title text-center">Add hint<%= i+1 %></h2>
             <hr>
             <div class="row justify-content-center">
                <div class="form-group col-12">
-                  <input type="file" name="image" accept="image/png, image/gif, image/jpeg" class="form-control form-control-lg" placeholder="Enter Image" id="upload_hint<%= i %>" onchange="getImagePreview(event,'preview-hint<%= i %>','upload_hint<%= i %>')">
+                  <input type="file" name="image" accept="image/png, image/jpeg" class="form-control form-control-lg" placeholder="Enter Image" id="upload_hint<%= i %>" onchange="getImagePreview(event,'preview-hint<%= i %>','upload_hint<%= i %>')">
                </div>
                <div id="preview-hint<%= i %>" class="my-2 col-12 col-sm-7 col-md-12"></div>
                <div class="col-12">

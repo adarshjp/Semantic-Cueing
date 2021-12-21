@@ -321,9 +321,6 @@ ol.gradient-list > li + li {
   padding-right: 8px;
   padding-left: 8px;
 }
-/* Admin Page */
-
-
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
