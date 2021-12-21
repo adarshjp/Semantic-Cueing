@@ -1,4 +1,6 @@
-/* Create test css  start*/
+/*----------------------------
+      Create test Start
+------------------------------*/
 #test-main {
     display: block;
     margin: 0 auto;
@@ -169,14 +171,14 @@ ol.gradient-list > li + li {
   visibility: hidden;
 }
 /*-----------------------------------
-        Create test css end 
+        Create test end 
 -----------------------------------*/
 #main {
   display: flex;
   flex-wrap: wrap;
 }
 /*------------------------------------
-          LOGIN PAGE
+        LOGIN PAGE
 ------------------------------------*/
 #login-a {
 	font-size: 14px;
@@ -251,6 +253,41 @@ ol.gradient-list > li + li {
 .select-color:focus{
   margin: 0;
 }
+.tab {
+    display: none;
+  }
+.step {
+    height: 25px;
+    width: 25px;
+    margin: 0 2px;
+    background-color:  #b3abab;
+    border: none;  
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 1;
+  }
+.step.active {
+    opacity: 1;
+    background-color: #6C63FF;
+  }
+.step.finish {
+    background-color: green;
+    opacity: 1;
+}
+.step.wrong {
+  background-color: red;
+  opacity: 1;
+}
+/*--------------------------------
+      Test Execution
+---------------------------------*/
+#myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
 /*------------------------------------
           Change Password
 ------------------------------------*/
@@ -284,10 +321,81 @@ ol.gradient-list > li + li {
   padding-right: 8px;
   padding-left: 8px;
 }
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 85px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: none; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 550px;
+}
+
+
+/* Add Animation */
+.modal-content {    
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.8s;
+  animation-name: zoom;
+  animation-duration: 0.8s;
+}
+
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #6C63FF;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.5s;
+}
+
+.close:hover,
+.close:focus {
+  color: #382efd;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+      width: 100%;
+  }
+}
+.btn-primary{
+  background-color: #6C63FF;
+  border-color: #6C63FF;
+}
+/*-----------------------------
+        Admin Page 
+------------------------------*/
 
 /* Google Fonts Import Link */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
 .sidebar{
   position: fixed;
   top: 0;
