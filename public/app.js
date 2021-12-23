@@ -119,3 +119,13 @@ function showDocProfile() {
 
   passigned.style.display = 'none'
 }
+/*********************************************
+Function to check level of test and questions
+**********************************************/
+function checklevel(value) {
+  if(value<=0 || value>5){
+      alert("Please enter Level between 1-5");
+      document.getElementById("login-input").value = "";
+  }
+}
+/***************************************** */

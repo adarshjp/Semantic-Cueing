@@ -1,21 +1,36 @@
 <%- include("partials/header") %>
 <main id="test-main">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-6">
+            <label for="level">Choose Level <i class="fa fa-filter" aria-hidden="true"></i></label>
+            <select  class="form-select form-select-lg my-2 p-2" id="level" aria-label=".form-select-lg" onchange="levelfilter()">
+                <option value="all">All</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <div class="offset-1 offset-sm-0 col-9 col-sm-5" style="margin-top:30px">
+            <button class="btn btn-primary btn-lg rounded-pill" onclick="selRandom('<%=question.length%>');this.disabled=true">Select random  Question</button>
+        </div>
+    </div>
     <form action="/create/test" method="POST" id="testForm" onsubmit="return noofqval();"> 
         <ol class="gradient-list">
             <% var i=1;%>
             <% question.forEach((question)=>{ %>
-                <li class="row shadow-lg mb-5 bg-body rounded-lg">
+                <li class="row shadow-lg mb-5 bg-body rounded-lg <%= question.level%>">
                     <div class="card-image p-2">
                         <div class="inputGroup">
                             <input id="option<%=i%>" class="form-check-input" type="checkbox" id="q-checkbox" value="<%=question._id %>" name="questions">
-                            <label for="option<%=i%>">this is the quetion no. 0</label> 
+                            <label for="option<%=i%>">this is the quetion no. <%=i%></label> 
                         </div>
                         <div class="hover-img">
                             <span class="p-1 rounded-lg my-3" id="qimg">
                                 <img src="data:image/<%=question.question.contentType%>;base64,<%=question.question.data.toString('base64')%>" alt="image" class="img-fluid" style="max-height: 18rem;"/>      
                             </span>
                         </div>
-                        
                     </div>   
                 </li>
                 <%i++;%>
@@ -32,7 +47,7 @@
             </div>
             <div class="col-6">
                 <label for="level">Enter Level</label>
-                <input type="number" name="level" id="login-input" placeholder="1-5" onchange="funlevel(this.value)" required/>
+                <input type="number" name="level" id="login-input" placeholder="1-5" onchange="checklevel(this.value)" required/>
             </div>
         </div>
         <div class="text-center p-3">
@@ -56,10 +71,42 @@
             return true;
         }
     }
-    function funlevel(value) {
-        if(value<=0 || value>5){
-            alert("Please enter Level between 1-5");
-            document.getElementById("login-input").value = "";
+    function selRandom(num){
+        var ran;
+        for(var i=0;i<Math.min(num,5);){
+            ran=Math.floor(Math.random() * num) + 1;
+            if(!(document.getElementById("option"+ran).checked)){
+                document.getElementById("option"+ran).checked = true;
+                i++;
+            }
+        }
+    }
+    function showhidelevel(levclass,disp){
+        for(var i=0;i<levclass.length;i++){
+            levclass[i].style.display=disp;
+        }
+    }
+    function levelfilter(){
+        var level=document.getElementById("level").value;
+        var levclass;
+        console.log(level)
+        if(level!="all"){
+            for(var i=1;i<=5;i++){
+                if(level==i){
+                    levclass=document.getElementsByClassName(level)
+                    showhidelevel(levclass,"block")
+                }
+                else{
+                    levclass=document.getElementsByClassName(i)
+                    showhidelevel(levclass,"none")
+                }
+            }
+        }
+        else{
+            for(var i=1;i<=5;i++){
+                var levclass=document.getElementsByClassName(i)
+                showhidelevel(levclass,"block")
+            }
         }
     }
 </script>
