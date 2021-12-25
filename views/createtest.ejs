@@ -13,7 +13,7 @@
             </select>
         </div>
         <div class="offset-1 offset-sm-0 col-9 col-sm-5" style="margin-top:30px">
-            <button class="btn btn-primary btn-lg rounded-pill" onclick="selRandom('<%=question.length%>');this.disabled=true">Select random  Question</button>
+            <button class="btn btn-primary btn-lg rounded-pill" onclick="selRandom('<%=question.length%>');">Select random  Question</button>
         </div>
     </div>
     <form action="/create/test" method="POST" id="testForm" onsubmit="return noofqval();"> 
@@ -73,6 +73,9 @@
     }
     function selRandom(num){
         var ran;
+        for(var i=1;i<=num;i++){
+            document.getElementById("option"+i).checked = false;
+        }
         for(var i=0;i<Math.min(num,5);){
             ran=Math.floor(Math.random() * num) + 1;
             if(!(document.getElementById("option"+ran).checked)){
