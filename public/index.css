@@ -100,7 +100,6 @@ ol.gradient-list > li + li {
   font-size:1.15rem;
   background-color: #eee;
 }
-/*  */
 .inputGroup {
   display: block;
   position: relative;
@@ -178,7 +177,7 @@ ol.gradient-list > li + li {
   flex-wrap: wrap;
 }
 /*------------------------------------
-        LOGIN PAGE
+        LOGIN PAGE start
 ------------------------------------*/
 #login-a {
 	font-size: 14px;
@@ -233,61 +232,167 @@ ol.gradient-list > li + li {
   font-size:1.15rem;
   background-color: #eee;
 }
-
-.blue{
-  color:#6C63FF;
+blockquote {
+  color: #6C63FF;
+  font-family: Tahoma, sans-serif;
+  font-size: 25px;
+  padding-left: 10px;
 }
-.white{
-  color:white;
+blockquote h1 {
+  font-size: 1rem;
+}
+blockquote p {
+  font-style: italic;
+  margin-bottom: 0;
+}
+
+blockquote p::before,
+blockquote p::after {
+  content: "“";
+  font-family: Georgia;
+  font-size: 4rem;
+  margin: -1rem 0 0 -2rem;
+  position: absolute;
+  opacity: 0.7;
+}
+
+blockquote p::after {
+  content: "”";
+  margin: -1rem -4rem 0 0;
+}
+
+blockquote cite {
+  font-size: 1.3rem;
+  color:black;
 }
 .carousel-indicators{
   bottom: -80px;
 }
 .carousel-indicators .active {
-  background-color:#6C63FF; ;
-  
+  background-color:#6C63FF;
 }
-.outline-color{
-  outline-color: #6C63FF;
-}
-.select-color:focus{
-  margin: 0;
-}
-.tab {
-    display: none;
-  }
-.step {
-    height: 25px;
-    width: 25px;
-    margin: 0 2px;
-    background-color:  #b3abab;
-    border: none;  
-    border-radius: 50%;
-    display: inline-block;
-    opacity: 1;
-  }
-.step.active {
-    opacity: 1;
-    background-color: #6C63FF;
-  }
-.step.finish {
-    background-color: green;
-    opacity: 1;
-}
-.step.wrong {
-  background-color: red;
-  opacity: 1;
-}
-/*--------------------------------
-      Test Execution
----------------------------------*/
+/*********************************
+        LOGIN PAGE end
+**********************************/
+/*----------------------------------
+      Test Execution Start
+----------------------------------*/
 #myImg {
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s;
 }
+#myImg:hover {
+    opacity: 0.7;
+}
+.field-icon {
+  float: right;
+  margin-left: -25px;
+  margin-top: 25px;
+  position: absolute;
+  z-index: 2;
+}
+/*------------------------------------
+          Set Password
+------------------------------------*/
+.main-body {
+  padding: 15px;
+}
+.gutters-sm {
+  margin-right: -8px;
+  margin-left: -8px;
+}
+.gutters-sm>.col, .gutters-sm>[class*=col-] {
+  padding-right: 8px;
+  padding-left: 8px;
+}
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 85px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: none; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+/* Modal Content (image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 550px;
+}
+/* Add Animation */
+.modal-content {    
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.8s;
+  animation-name: zoom;
+  animation-duration: 0.8s;
+}
 
-#myImg:hover {opacity: 0.7;}
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #6C63FF;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.5s;
+}
+.close:hover,
+.close:focus {
+  color: #382efd;
+  text-decoration: none;
+  cursor: pointer;
+}
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+      width: 100%;
+  }
+}
+.tab {
+  display: none;
+}
+.step {
+  height: 25px;
+  width: 25px;
+  margin: 0 2px;
+  background-color:  #b3abab;
+  border: none;  
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 1;
+}
+.step.active {
+  opacity: 1;
+  background-color: #6C63FF;
+}
+.step.finish {
+  background-color: green;
+  opacity: 1;
+}
+.step.wrong {
+background-color: red;
+opacity: 1;
+}
+/*------------------------------------
+      Test Execution End
+------------------------------------*/
 /*------------------------------------
           Change Password
 ------------------------------------*/
@@ -310,85 +415,13 @@ ol.gradient-list > li + li {
 .main-body {
   padding: 15px;
 }
-
-
 .gutters-sm {
   margin-right: -8px;
   margin-left: -8px;
 }
-
 .gutters-sm>.col, .gutters-sm>[class*=col-] {
   padding-right: 8px;
   padding-left: 8px;
-}
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 85px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: none; /* Enable scroll if needed */
-  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
-}
-
-/* Modal Content (image) */
-.modal-content {
-  margin: auto;
-  display: block;
-  width: 80%;
-  max-width: 550px;
-}
-
-
-/* Add Animation */
-.modal-content {    
-  -webkit-animation-name: zoom;
-  -webkit-animation-duration: 0.8s;
-  animation-name: zoom;
-  animation-duration: 0.8s;
-}
-
-@-webkit-keyframes zoom {
-  from {-webkit-transform:scale(0)} 
-  to {-webkit-transform:scale(1)}
-}
-
-@keyframes zoom {
-  from {transform:scale(0)} 
-  to {transform:scale(1)}
-}
-
-/* The Close Button */
-.close {
-  position: absolute;
-  top: 15px;
-  right: 35px;
-  color: #6C63FF;
-  font-size: 40px;
-  font-weight: bold;
-  transition: 0.5s;
-}
-
-.close:hover,
-.close:focus {
-  color: #382efd;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-/* 100% Image Width on Smaller Screens */
-@media only screen and (max-width: 700px){
-  .modal-content {
-      width: 100%;
-  }
-}
-.btn-primary{
-  background-color: #6C63FF;
-  border-color: #6C63FF;
 }
 /*-----------------------------
         Admin Page 
@@ -633,28 +666,19 @@ ol.gradient-list > li + li {
   margin: 0;
   cursor: pointer;
 }
-
-
 .box-shadow{
   box-shadow: 0px 2px 10px rgba(0,0,0,0.2);
 } 
-
-/* .container{
-  margin-left:19%;
-  display:none;
-} */
 .container1 {
   margin-left:23%;
   margin-right:7%;
   display:none;
 }
-
 @media (max-width: 420px) {
   .sidebar.close .nav-links li .sub-menu{
     display: none;
   }
 }
-
 .piegraph { 
    margin-left: 8%;
    margin-top: 3%;
@@ -667,9 +691,25 @@ ol.gradient-list > li + li {
   margin:auto;
   display:none;
 }
-
-
 .patientclass {
   margin-left:23%;
   margin-right:10%;
 }
+.btn-primary{
+  background-color: #6C63FF;
+  border-color: #6C63FF;
+}
+.blue{
+  color:#6C63FF;
+}
+.white{
+  color:white;
+}
+
+.outline-color{
+  outline-color: #6C63FF;
+}
+.select-color:focus{
+  margin: 0;
+}
+
