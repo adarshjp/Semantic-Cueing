@@ -66,7 +66,7 @@ function covert_img(files) {
     files.forEach((file) => {
         var obj = {
             data: fs.readFileSync(
-                path.join(__dirname + '\\..\\uploads\\' + file.filename)
+                path.join(__dirname + '//..//uploads//' + file.filename)
             ),
             contentType: 'image/png',
         }

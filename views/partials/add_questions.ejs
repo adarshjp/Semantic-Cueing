@@ -16,10 +16,10 @@
                      <input type="text" name="answer" id="login-input" placeholder="Enter Answer" required> 
                   </div>
                   <div class="col-12 col-md-6">
-                     <input type="number" name="level" id="login-input"  placeholder="Enter Level(1-5)" onchange="checklevel(this.value)" required>
+                     <input type="number" name="level" id="login-input"  placeholder="Enter Level:1-5" onchange="checklevel(this.value)" required>
                   </div>
                   <div class="col-12 col-md-6">
-                     <input type="number" name="score" id="login-input" placeholder="Enter Score" required>
+                     <input type="number" name="score" id="login-input" placeholder="Enter Score" min="100" required>
                   </div>
             </div>
          </div>
@@ -35,7 +35,7 @@
                </div>
                <div id="preview-hint<%= i %>" class="my-2 col-12 col-sm-7 col-md-12"></div>
                <div class="col-12">
-                  <input type="number" name="nscore[<%= i %>]" id="login-input" placeholder="Enter Score" required>
+                  <input type="number" name="nscore[<%= i %>]" id="login-input" placeholder="Enter Score" min="10" required>
                </div>
             </div>    
          </div>
