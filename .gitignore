@@ -104,6 +104,6 @@ dist
 .tern-port
 
 package-lock.json
-uploads
+
 .vscode
 prettier.config.js
