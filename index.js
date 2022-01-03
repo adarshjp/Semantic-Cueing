@@ -28,16 +28,13 @@ const flash = require("connect-flash");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 app.use(cookieParser("keyboard cat"));
-app.use(session());
 app.use(flash());
 const User = require("./models/user");
-app.use(
-  require("express-session")({
-    secret: process.env.secret,
-    resave: false,
-    saveUninitialized: false,
-  })
-);
+app.use(session({
+  secret: process.env.secret,
+  resave: true,
+  saveUninitialized: true
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
@@ -53,10 +50,12 @@ const adminRoutes = require("./routes/admin");
 const generalRoutes = require("./routes/general");
 const doctorRoutes = require("./routes/doctor");
 const patientRoutes = require("./routes/patient");
+const otpRoutes= require("./routes/otp")
 app.use(adminRoutes)
 app.use(generalRoutes)
 app.use(doctorRoutes)
 app.use(patientRoutes)
+app.use(otpRoutes)
 app.listen(process.env.PORT || 3000, () => {
   console.log("server started at port 3000");
 });
