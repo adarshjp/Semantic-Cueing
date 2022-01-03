@@ -59,6 +59,7 @@
               id="username"
               class="outline-color"
               aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback"
+              pattern="^\S+$"
               required
             />
             <div id="validationServerUsernameFeedback" class="invalid-feedback">
@@ -135,42 +136,45 @@
       doctorid.required = false
     }
   })
-    let username = document.getElementById('username')
-    //setup before functions
-    var typingTimer //timer identifier
-    var doneTypingInterval = 2000 //time in ms, 5 second for example
+  let username = document.getElementById('username')
+  //setup before functions
+  var typingTimer //timer identifier
+  var doneTypingInterval = 2000 //time in ms, 5 second for example
 
-    //on keyup, start the countdown
-    username.addEventListener('keyup', () => {
-      clearTimeout(typingTimer)
-      typingTimer = setTimeout(doneTyping, doneTypingInterval)
+  //on keyup, start the countdown
+  username.addEventListener('keyup', () => {
+    clearTimeout(typingTimer)
+    typingTimer = setTimeout(doneTyping, doneTypingInterval)
+  })
+  username.addEventListener('keydown', () => {
+    clearTimeout(typingTimer)
+  })
+  //user is "finished typing," do something
+  function doneTyping() {
+    fetch('/check-username', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: username.value,
+      }),
     })
-    username.addEventListener('keydown', () => {
-      clearTimeout(typingTimer)
-    })
-    //user is "finished typing," do something
-    function doneTyping() {
-      //do something
-      //console.log(username.value);
-      // var parsed_usernames = '<%- JSON.stringify(usernames) %>';
-      var parsed_usernames = '<%=usernames %>'.split(',')
-      var entered_usernames = username.value
-      //console.log(parsed_usernames);
-      let username_found = parsed_usernames.find(
-        (parsed_username) => parsed_username === entered_usernames
-      )
-      if (username_found !== undefined) {
-        username.classList.add('is-invalid')
-        //disable submit button
-        document.getElementById('review').disabled = true
-      }
-      else{
-        username.classList.remove('is-invalid')
-        //enable submit button
-        document.getElementById('review').disabled = false
-      }
-        
-
-    }
+      .then((url) => {
+        return url.json()
+      })
+      .then((data) => {
+        console.log(data)
+        if (data === true) {
+          username.classList.add('is-invalid')
+          //disable submit button
+          document.getElementById('review').disabled = true
+        } else {
+          username.classList.remove('is-invalid')
+          //enable submit button
+          document.getElementById('review').disabled = false
+        }
+      })
+  }
 </script>
 <%- include("partials/footer") %>
