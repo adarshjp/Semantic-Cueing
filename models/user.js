@@ -48,6 +48,10 @@ const userSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  displaypic: {
+    data: Buffer,
+    contentType: String,
+  },
 });
 userSchema.plugin(passportLocalMongoose);
 module.exports = new mongoose.model("User", userSchema);

@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
 const questionSchema = new mongoose.Schema({
+  name:{
+    type: String,
+  },
   question: {
     data: Buffer,
     contentType: String,

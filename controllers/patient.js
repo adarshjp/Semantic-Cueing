@@ -35,11 +35,11 @@ exports.get_start_test = (req, res) => {
 exports.post_start_test = (req, res) => {
     //Update the test score in user model
     //Update the test status in test model
-    User.findOneAndUpdate({ _id: req.user._id,testdetails:{$eleMatch:{testid:req.params.id}} },{'testdetails.$.testscore':req.body.testscore})
+    User.findOneAndUpdate({ _id: req.user._id,'testdetails.$.testid':req.params.id },{'testdetails.$.testscore':req.body.testscore})
         .then((user) => {
             Test.findOneAndUpdate({ _id: req.params.id }, { status: 'completed' })
                 .then((test) => {
-                    res.status(200).send(JSON.stringify(test))
+                    res.status(200).send('Submitted Test Sucessfully')
                 })
                 .catch((err) => {
                     console.log(err)

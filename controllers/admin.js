@@ -76,3 +76,17 @@ exports.edit_user = (req, res) => {
             console.log(err)
         })
 }
+
+exports.checkusername=(req, res) => {
+    User.findOne({username: req.body.username})
+        .then((user) => {
+            if (user) {
+                res.send(true)
+            } else {
+                res.send(false)
+            }
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
