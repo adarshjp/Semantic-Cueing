@@ -117,3 +117,24 @@ exports.set_password = (req, res) => {
     }
   });
 }
+
+exports.set_post=(req, res) => {
+  //given email and update the password
+  User.findOne({email:req.body.email},(err,user)=>{
+    if(err){
+      res.status(400);
+      res.send(err);
+    }else{
+      user.setPassword(req.body.password, (err, user) => {
+        if (err) {
+          res.status(400);
+          res.send(err);
+        } else {
+          res.status(200);
+          user.save();
+          res.json({message:"Password changed!"});
+        }
+      });
+    }
+  })
+}

@@ -1,6 +1,7 @@
 const otp = require('../models/otp')
 const nodemailer = require('nodemailer')
 const crypto = require('crypto')
+const user = require('../models/user')
 let mailTransporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -24,11 +25,11 @@ let key = crypto
 const accountSid = process.env.TWILIO_ACCOUNT_SID
 const authToken = process.env.TWILIO_AUTH_TOKEN
 exports.sendOtp = (req, res) => {
+  console.log('Sending OTP...')
   const newOtp = new otp({
     otp: Math.floor(100000 + Math.random() * 900000),
     isVerified: false,
     creationTime: Date.now(),
-    userId: req.user._id,
   })
   let via = req.params.via
   if (via === 'email') {
@@ -40,15 +41,16 @@ exports.sendOtp = (req, res) => {
     sendMail(mailDetails, (err, data) => {
       if (err) {
         console.log(err)
+        res.json({ message: 'Error Occured' })
       } else {
-        console.log(data)
+        console.log('Email sent successfully')
       }
     })
-  } else if(via === 'sms'){
-      var phone=req.body.phone
-      var msg="Your OTP is "+newOtp.otp+".This OTP is valid for 10 minutes."
-      sendSms('+91'+phone,msg)
-      console.log(msg)
+  } else if (via === 'sms') {
+    var phone = req.body.phone
+    var msg = 'Your OTP is ' + newOtp.otp + '.This OTP is valid for 10 minutes.'
+    sendSms('+91' + phone, msg)
+    console.log('SMS sent successfully')
   }
   var cipher = crypto.createCipheriv(algorithm, key, ivstring)
   var encrypted = cipher.update(newOtp.otp, 'utf8', 'hex') + cipher.final('hex')
@@ -61,28 +63,25 @@ exports.verifyOtp = (req, res) => {
   var cipher = crypto.createCipheriv(algorithm, key, ivstring)
   var encrypted =
     cipher.update(entered_otp, 'utf8', 'hex') + cipher.final('hex')
-  otp.findOne(
-    { otp: encrypted, userId: req.user._id, isVerified: false },
-    (err, data) => {
-      if (err) {
-        console.log(err)
-      } else {
-        if (data) {
-          var min = Math.floor(Date.now() - data.creationTime) / 60000
-          if (min <= 10) {
-            data.verified = true
-            data.save()
-            res.message = 'OTP verified'
-            res.json({ message: 'Sucesss' })
-          } else {
-            res.json({ message: 'OTP expired' })
-          }
+  otp.findOne({ otp: encrypted, isVerified: false }, (err, data) => {
+    if (err) {
+      console.log(err)
+    } else {
+      if (data) {
+        var min = Math.floor(Date.now() - data.creationTime) / 60000
+        if (min <= 10) {
+          data.verified = true
+          data.save()
+          res.message = 'OTP verified'
+          res.json({ message: 'Sucesss' })
         } else {
-          res.json({ message: 'OTP not found' })
+          res.json({ message: 'OTP expired' })
         }
+      } else {
+        res.json({ message: 'OTP not found' })
       }
     }
-  )
+  })
 }
 function sendMail(mailDetails, callback) {
   mailTransporter.sendMail(mailDetails, function (err, data) {
@@ -90,7 +89,6 @@ function sendMail(mailDetails, callback) {
       console.log('Error Occurs' + err)
       callback(err)
     } else {
-      console.log('Email sent successfully')
       callback(null, data)
     }
   })

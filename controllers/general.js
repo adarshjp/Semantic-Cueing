@@ -61,6 +61,9 @@ exports.view_Onequestion = (req, res) => {
             console.log(err)
         })
 }
+exports.forgotpassword_get= (req, res) => {
+    res.render('forgotpassword')
+}
 function covert_img(files) {
     let img = []
     files.forEach((file) => {
