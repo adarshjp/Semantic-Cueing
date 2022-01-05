@@ -83,6 +83,7 @@ ol.gradient-list > li + li {
  .card-image:hover .hover-img span { 
   top: 20px; 
   left:0;
+  transition-delay:  0.5s;
  }
 #q-checkbox {
   border: 5px solid #6C63FF;
@@ -486,6 +487,7 @@ opacity: 1;
 }
 .sidebar .nav-links li:hover{
   background: #4f47e6;
+  height: 50px;
 }
 .sidebar .nav-links li .iocn-link{
   display: flex;

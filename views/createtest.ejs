@@ -1,7 +1,7 @@
 <%- include("partials/header") %>
 <main id="test-main">
     <div class="row justify-content-center">
-        <div class="col-12 col-sm-6">
+        <div class="col-12 col-sm-5">
             <label for="level">Choose Level <i class="fa fa-filter" aria-hidden="true"></i></label>
             <select  class="form-select form-select-lg my-2 p-2" id="level" aria-label=".form-select-lg" onchange="levelfilter()">
                 <option value="all">All</option>
@@ -12,18 +12,24 @@
                 <option value="5">5</option>
             </select>
         </div>
-        <div class="offset-1 offset-sm-0 col-9 col-sm-5" style="margin-top:30px">
-            <button class="btn btn-primary btn-lg rounded-pill" onclick="selRandom('<%=question.length%>');">Select random  Question</button>
+        <div class="col-9 offset-md-0 col-sm-4" style="margin-top:30px">
+            <button class="btn btn-primary rounded-pill btn-lg" onclick="selRandom('<%=question.length%>');">Select randomly</button>
+        </div>
+        <div class="col-3 col-sm-1">
+            <button type="button" class="btn btn-primary position-relative rounded-pill" onclick="showSelectedQuestion('<%=question.length%>')" style="margin-top:35px">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="count">0</span>
+            </button>
         </div>
     </div>
     <form action="/create/test" method="POST" id="testForm" onsubmit="return noofqval();"> 
         <ol class="gradient-list">
             <% var i=1;%>
             <% question.forEach((question)=>{ %>
-                <li class="row shadow-lg mb-5 bg-body rounded-lg <%= question.level%>">
+                <li class="row shadow-lg mb-5 bg-body rounded-lg <%= question.level%>" id="question<%=i%>">
                     <div class="card-image p-2">
                         <div class="inputGroup">
-                            <input id="option<%=i%>" class="form-check-input" type="checkbox" id="q-checkbox" value="<%=question._id %>" name="questions">
+                            <input id="option<%=i%>" class="form-check-input question<%=i%> op<%=question.level%>" type="checkbox" id="q-checkbox" value="<%=question._id %>" name="questions" onclick="countQuestion()">
                             <label for="option<%=i%>">this is the quetion no. <%=i%></label> 
                         </div>
                         <div class="hover-img">
@@ -55,9 +61,12 @@
         </div>
         </div>
     </form>
-    <a href="/home/doctor/<%=user._id%>" class="btn btn-primary btn-lg rounded-pill">Home</a>
+    <a href="/home/doctor/<%=user._id%>" class="btn btn-primary btn-lg rounded-pill">Home <i class="fas fa-home"></i></a>
 </main>
 <script>
+    function countQuestion(){
+        document.getElementById('count').innerHTML=document.querySelectorAll('input[type="checkbox"]:checked').length;
+    }
     function noofqval() {
         var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
         if(checkboxes.length<5){
@@ -73,16 +82,30 @@
     }
     function selRandom(num){
         var ran;
+        var cur_level=document.getElementById("level").value;
         for(var i=1;i<=num;i++){
             document.getElementById("option"+i).checked = false;
         }
-        for(var i=0;i<Math.min(num,5);){
-            ran=Math.floor(Math.random() * num) + 1;
-            if(!(document.getElementById("option"+ran).checked)){
-                document.getElementById("option"+ran).checked = true;
-                i++;
+        if(cur_level=="all"){
+            for(var i=0;i<Math.min(num,10);){
+                ran=Math.floor(Math.random() * num) + 1;
+                if(!(document.getElementById("option"+ran).checked)){
+                    document.getElementById("option"+ran).checked = true;
+                    i++;
+                }
             }
         }
+        else{
+            var m=Math.min(num,Math.min(document.getElementsByClassName(cur_level).length,10))
+            for(var i=0;i<m;){
+                ran=Math.floor(Math.random() * m);
+                if(!(document.getElementsByClassName("op"+cur_level)[ran].checked)){
+                    document.getElementsByClassName("op"+cur_level)[ran].checked=true;
+                    i++;
+                }
+            }
+        }
+        countQuestion();
     }
     function showhidelevel(levclass,disp){
         for(var i=0;i<levclass.length;i++){
@@ -92,7 +115,6 @@
     function levelfilter(){
         var level=document.getElementById("level").value;
         var levclass;
-        console.log(level)
         if(level!="all"){
             for(var i=1;i<=5;i++){
                 if(level==i){
@@ -109,6 +131,16 @@
             for(var i=1;i<=5;i++){
                 var levclass=document.getElementsByClassName(i)
                 showhidelevel(levclass,"block")
+            }
+        }
+    }
+    function showSelectedQuestion(num){
+        for(var i=1;i<=num;i++){
+            if(document.getElementsByClassName('question'+i)[0].checked){
+                document.getElementById('question'+i).style.display="block";
+            }
+            else{
+                document.getElementById('question'+i).style.display="none";
             }
         }
     }
