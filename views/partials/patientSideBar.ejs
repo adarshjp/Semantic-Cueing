@@ -1,0 +1,49 @@
+<div class="sidebar close">
+    <div class="logo-details">
+        <i class='bx bx-menu'></i>
+        <span class="logo_name">Menu</span>
+    </div>
+    <ul class="nav-links">
+        <li>
+            <div onClick="showTestAssigned()">
+                <i class='bx bx-grid-alt'></i>
+                <span class="link_name">Tests</span>
+            </div>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="#">Tests</a></li>
+            </ul>
+        </li>
+        <li>
+            <div class="iocn-link" onClick="docAssigned()">
+                <div>
+                    <i class='bx bx-collection'></i>
+                    <span class="link_name">Doctor</span>
+                </div>
+            </div>
+            <ul class="sub-menu">
+                <li><a class="link_name" href="#">Doctor</a></li>
+            </ul>
+        </li>
+        <li>
+            <div>
+                <a href="/logout"><i class='bx bx-log-out'></i></a>
+                <span class="link_name" id="logout"><a href="/logout" style="color: white">Logout</span></a>
+            </div>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="/logout">Logout</a></li>
+            </ul>
+        </li>
+        <li>
+            <div class="profile-details" onClick="showPatientProfile()">
+                <div class="profile-content">
+                    <img src="/images/profile.jpg" alt="profileImg">
+                </div>
+                <div class="name-job">
+                    <div class="profile_name mx-auto">
+                        <%=user.name%>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

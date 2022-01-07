@@ -1,0 +1,64 @@
+<div class="sidebar close">
+    <div class="logo-details">
+        <i class='bx bx-menu' ></i>
+        <span class="logo_name">Menu</span>
+    </div>
+    <ul class="nav-links">
+        <li class="">
+            <div onClick="" class="icon-link">
+                <div>
+                    <a href="/home/doctor/<%=user._id%>" class="text-white">
+                        <i class='bx bx-grid-alt' ></i>
+                        <span class="link_name">Dashboard</span>
+                    </a>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="/home/doctor/<%=user._id%>">Dashboard</a></li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            <div class="iocn-link" onClick="showPatientsAssigned()">
+            <div>
+                <i class='bx bx-book-alt' ></i>
+                <span class="link_name" >Patients assigned</span>
+            </div>
+            </div>
+            <ul class="sub-menu">
+            <li><a class="link_name" href="#">Patients</a></li>
+            </ul>
+      </li>
+      <li>
+        <div class="iocn-link" onClick="">
+          <div>
+              <a href="/create/test" class="text-white">
+                <i class="far fa-clipboard"></i>
+                <span class="link_name">Create Test</span>
+              </a>
+          </div>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="/create/test">Create Test</a></li>
+        </ul>
+      </li>
+      <li>
+        <div>
+          <a href="/logout"><i class='bx bx-log-out' ></i></a>
+          <span class="link_name" id="logout" ><a href="/logout" style="color: white">Logout</span></a>
+       </div>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="/logout">Logout</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="profile-details" onClick="showDocProfile()">
+          <div class="profile-content" >
+            <img src="/images/profile.jpg" alt="profileImg">
+          </div>
+          <div class="name-job">
+            <div class="profile_name"><%=user.name%></div>
+          </div>
+        </div>
+      </li>
+    </ul>
+</div>

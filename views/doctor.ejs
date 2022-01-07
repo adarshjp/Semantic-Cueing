@@ -1,72 +1,11 @@
 <%- include("partials/header") %>
-  <div class="sidebar close">
-    <div class="logo-details">
-      <i class='bx bx-menu' ></i>
-      <span class="logo_name">Menu</span>
-    </div>
-    <ul class="nav-links">
-      <li>
-        <div onClick="showDashboard()">
-          <div>
-            <i class='bx bx-grid-alt' ></i>
-            <span class="link_name" >Dashboard</span>
-          </div>
-          <ul class="sub-menu blank">
-            <li><a class="link_name" href="#">Dashboard</a></li>
-          </ul>
-        </div>
-      </li>
-      <li>
-        <div class="iocn-link" onClick="showPatientsAssigned()">
-          <div>
-            <i class='bx bx-book-alt' ></i>
-            <span class="link_name" >Patients assigned</span>
-          </div>
-        </div>
-        <ul class="sub-menu">
-          <li><a class="link_name" href="#">Patients</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="iocn-link" onClick="">
-          <div>
-              <a href="/create/test" class="text-white">
-                <i class="far fa-clipboard"></i>
-                <span class="link_name">Create Test</span>
-              </a>
-          </div>
-        </div>
-        <ul class="sub-menu">
-          <li><a class="link_name" href="/create/test">Create Test</a></li>
-        </ul>
-      </li>
-      <li>
-        <div>
-          <a href="/logout"><i class='bx bx-log-out' ></i></a>
-          <span class="link_name" id="logout" ><a href="/logout" style="color: white">Logout</span></a>
-       </div>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="/logout">Logout</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="profile-details" onClick="showDocProfile()">
-          <div class="profile-content" >
-            <img src="/profile.jpg" alt="profileImg">
-          </div>
-          <div class="name-job">
-            <div class="profile_name"><%=user.name%></div>
-          </div>
-        </div>
-      </li>
-    </ul>
-  </div>
+<%- include("partials/doctorSideBar") %>
   <div class="container1" id="passigned">
     <h1>Patients</h1>
     <div class="row">
       <div class="col-sm-4 py-3 py-sm-3">
         <div class="card box-shadow">
-          <img src="/1.jpg" class="card-img-top" alt="...">
+          <img src="/images/1.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Patient1</h5>
             <p class="card-text">Name: ABC</p>
@@ -77,7 +16,7 @@
       </div>
       <div class="col-sm-4 py-3 py-sm-3">
         <div class="card box-shadow">
-          <img src="/2.jpg" class="card-img-top" alt="...">
+          <img src="/images/2.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Patient2</h5>
             <p class="card-text">Name: DEF</p>
@@ -88,7 +27,7 @@
       </div>
       <div class="col-sm-4 py-3 py-sm-3">
         <div class="card box-shadow">
-          <img src="/3.jpg" class="card-img-top" alt="...">
+          <img src="/images/3.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Patient1</h5>
             <p class="card-text">Name: GHI</p>
@@ -99,7 +38,7 @@
       </div>
       <div class="col-sm-4 py-3 py-sm-3">
         <div class="card box-shadow">
-          <img src="/2.jpg" class="card-img-top" alt="...">
+          <img src="/images/2.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Card title</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
