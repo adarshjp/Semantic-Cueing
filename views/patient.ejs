@@ -1,119 +1,83 @@
-<%- include("partials/header") %>
-  <div class="sidebar close">
-    <div class="logo-details">
-      <i class='bx bx-menu' ></i>
-      <span class="logo_name">Menu</span>
+<%- include("partials/header") %> 
+<%- include("partials/patientSideBar") %>
+<div class="container1" id="dassigned">
+  <h1>Doctors Assigned</h1>
+  <div class="row">
+    <div class="col-sm-4 py-3 py-sm-3">
+      <div class="card box-shadow">
+        <img src="/images/1.jpg" class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">Mrs.Abduli Narayani Dsouzi</h5>
+          <p class="card-text">Phone no: 7349492626</p>
+          <p class="card-text">Email: AND@email.com</p>
+        </div>
+      </div>
     </div>
-    <ul class="nav-links">
-      <li>
-        <div onClick="showTestAssigned()">
-          <i class='bx bx-grid-alt' ></i>
-          <span class="link_name" >Tests</span>
+    <div class="col-sm-4 py-3 py-sm-3">
+      <div class="card box-shadow">
+        <img src="/images/2.jpg" class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">Mr.Abdul Narayan Dsouza</h5>
+          <p class="card-text">Phone no: 7349492622</p>
+          <p class="card-text">Email: AND@gmail.com</p>
         </div>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Tests</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="iocn-link" onClick="docAssigned()">
-          <div>
-            <i class='bx bx-collection' ></i>
-            <span class="link_name" >Doctor</span>
-          </div>
-        </div>
-        <ul class="sub-menu">
-          <li><a class="link_name" href="#">Doctor</a></li>
-        </ul>
-      </li>
-      <li>
-        <div>
-          <a href="/logout"><i class='bx bx-log-out' ></i></a>
-          <span class="link_name" id="logout" ><a href="/logout" style="color: white">Logout</span></a>
-       </div>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="/logout">Logout</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="profile-details" onClick="showPatientProfile()">
-          <div class="profile-content" >
-            <img src="/profile.jpg" alt="profileImg">
-          </div>
-          <div class="name-job">
-            <div class="profile_name mx-auto"><%=user.name%></div>
-          </div>
-        </div>
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
+</div>
 
-  
-  <div class="container1" id="dassigned"> 
-    <h1>Doctors Assigned</h1>
-    <div class="row">
-      <div class="col-sm-4 py-3 py-sm-3">
-        <div class="card box-shadow">
-          <img src="/1.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Mrs.Abduli Narayani Dsouzi</h5>
-            <p class="card-text">Phone no: 7349492626</p>
-            <p class="card-text">Email: AND@email.com</p>
+<div class="patientclass p-2 pt-5" id="tassigned">
+  <h1 class="text-center p-2">
+    Take your <span class="blue">tests</span> now
+    <i class="fas fa-calendar-check blue"></i>
+  </h1>
+  <div class="row p-2">
+    <% tests.forEach((test) => { %>
+    <div class="col-sm-6 py-3 py-sm-3">
+      <div class="card box-shadow p-3">
+        <div class="row">
+          <div class="col-md-6 my-auto">
+            <img
+              src="/images/exam.svg"
+              class="card-img-top rounded-circle p-1 box-shadow"
+              alt="..."
+              style="border: 3px solid #6c63ff"
+            />
           </div>
-        </div>
-      </div>
-      <div class="col-sm-4 py-3 py-sm-3">
-        <div class="card box-shadow">
-          <img src="/2.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Mr.Abdul Narayan Dsouza</h5>
-            <p class="card-text">Phone no: 7349492622</p>
-            <p class="card-text">Email: AND@gmail.com</p>
-            
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  
-  
-  <div class="patientclass p-2 pt-5" id="tassigned">
-    <h1 class="text-center p-2">Take your <span class="blue">tests</span> now <i class="fas fa-calendar-check blue"></i></h1>
-    <div class="row p-2">
-      <% tests.forEach((test) => { %>
-        <div class="col-sm-6 py-3 py-sm-3">
-          <div class="card box-shadow p-3">
-            <div class="row">
-              <div class="col-md-6 my-auto">
-                <img src="/exam.svg" class="card-img-top rounded-circle p-1 box-shadow" alt="..." style="border: 3px solid #6C63FF;">
-              </div>
-              <div class="col-md-6">
-                <div class="card-body">
-                  <h5 class="card-title">Test<i class="fas fa-bell blue"></i></h5>
-                  <p class="card-text"><i class="fas fa-question-circle blue"></i>: <%=test.noofquestion%></p>
-                  <p class="card-text">Level: <%=test.level%></p>
-                  <div class="d-flex justify-content-end">
-                    <a href="/start/test/<%=test._id%>" class="btn white" id="review">Start <i class="fas fa-play"></i></a>
-                  </div>
-                </div>
+          <div class="col-md-6">
+            <div class="card-body">
+              <h5 class="card-title">Test<i class="fas fa-bell blue"></i></h5>
+              <p class="card-text">
+                <i class="fas fa-question-circle blue"></i>:
+                <%=test.noofquestion%>
+              </p>
+              <p class="card-text">Level: <%=test.level%></p>
+              <div class="d-flex justify-content-end">
+                <a
+                  href="/start/test/<%=test._id%>"
+                  class="btn white"
+                  id="review"
+                  >Start <i class="fas fa-play"></i
+                ></a>
               </div>
             </div>
           </div>
         </div>
-      <% }) %>
-    </div>
-  </div>
-
-  
-  <div class="card login" id="patientprofile" style="width:50%">
-      <img class="card-img-top" src="/admin.jpg" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Patient Details</h5>
-        <p class="card-text">Name:<%=user.name%></p>
-        <p class="card-text">value2:</p>
-        <p class="card-text">value3:</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
+    </div>
+    <% }) %>
   </div>
+</div>
 
-  <%- include("partials/footer") %>
+<div class="card login" id="patientprofile" style="width: 50%">
+  <img class="card-img-top" src="/images/admin.jpg" alt="Card image cap" />
+  <div class="card-body">
+    <h5 class="card-title">Patient Details</h5>
+    <p class="card-text">Name:<%=user.name%></p>
+    <p class="card-text">value2:</p>
+    <p class="card-text">value3:</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+
+<%- include("partials/footer") %>

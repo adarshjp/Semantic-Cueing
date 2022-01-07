@@ -1,73 +1,5 @@
 <%- include("partials/header") %>
-  <div class="sidebar close">
-    <div class="logo-details">
-      <i class='bx bx-menu' ></i>
-      <span class="logo_name">Menu</span>
-    </div>
-    <ul class="nav-links">
-      <li>
-        <div onClick="showHome()">
-          <i class='bx bx-grid-alt' ></i>
-          <span class="link_name" >Home</span>
-        </div>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Home</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="iocn-link" onClick="showDoctors()">
-          <div>
-            <i class='bx bx-collection' ></i>
-            <span class="link_name" >Doctor</span>
-          </div>
-        </div>
-        <ul class="sub-menu">
-          <li><a class="link_name" href="#">Doctor</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="iocn-link" onClick="showPatients()">
-          <div>
-            <i class='bx bx-book-alt' ></i>
-            <span class="link_name" >Patients</span>
-          </div>
-        </div>
-        <ul class="sub-menu">
-          <li><a class="link_name" href="#">Patients</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="iocn-link" onClick="showAddQuestion()">
-          <div>
-            <i class="fas fa-question"></i>
-            <span class="link_name" >Add Question</span>
-          </div>
-        </div>
-        <ul class="sub-menu">
-          <li><a class="link_name" href="#">Add Question</a></li>
-        </ul>
-      </li>
-      <li>
-        <div>
-          <a href="/logout"><i class='bx bx-log-out' ></i></a>
-          <span class="link_name" id="logout" ><a href="/logout" style="color: white">Logout</span></a>
-       </div>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="/logout">Logout</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="profile-details" onClick="showProfile()">
-          <div class="profile-content" >
-            <img src="/profile.jpg" alt="profileImg">
-          </div>
-          <div class="name-job">
-            <div class="profile_name" ><%=user.name%></div>
-          </div>
-        </div>
-      </li>
-    </ul>
-  </div>
+<%- include("partials/adminSideBar") %>
   <% if(message.error){ %>
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
        <strong class="text-center"><%= message.error%></strong>
@@ -89,7 +21,7 @@
     <div class="row">
       <div class="col-sm-4 py-3 py-sm-3">
         <div class="card box-shadow">
-          <img src="/1.jpg" class="card-img-top" alt="...">
+          <img src="/images/1.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Card title</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -99,7 +31,7 @@
       </div>
       <div class="col-sm-4 py-3 py-sm-3">
         <div class="card box-shadow">
-          <img src="/2.jpg" class="card-img-top" alt="...">
+          <img src="/images/2.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Card title</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -109,7 +41,7 @@
       </div>
       <div class="col-sm-4 py-3 py-sm-3">
         <div class="card box-shadow">
-          <img src="/3.jpg" class="card-img-top" alt="...">
+          <img src="/images/3.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Card title</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -119,7 +51,7 @@
       </div>
       <div class="col-sm-4 py-3 py-sm-3">
         <div class="card box-shadow">
-          <img src="/2.jpg" class="card-img-top" alt="...">
+          <img src="/images/2.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Card title</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -135,7 +67,7 @@
     <div class="row">
       <div class="col-sm-4 py-3 py-sm-3">
         <div class="card box-shadow">
-          <img src="/1.jpg" class="card-img-top" alt="...">
+          <img src="/images/1.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Card title</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -145,7 +77,7 @@
       </div>
       <div class="col-sm-4 py-3 py-sm-3">
         <div class="card box-shadow">
-          <img src="/2.jpg" class="card-img-top" alt="...">
+          <img src="/images/2.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Card title</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -155,7 +87,7 @@
       </div>
       <div class="col-sm-4 py-3 py-sm-3">
         <div class="card box-shadow">
-          <img src="/3.jpg" class="card-img-top" alt="...">
+          <img src="/images/3.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Card title</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -165,7 +97,7 @@
       </div>
       <div class="col-sm-4 py-3 py-sm-3">
         <div class="card box-shadow">
-          <img src="/2.jpg" class="card-img-top" alt="...">
+          <img src="/images/2.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Card title</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -184,7 +116,7 @@
     <div class="row" style="margin-bottom:2%;" id="piechart3" ></div>
   </div>
   <div class="card login" id="profile" style="width: 18rem;">
-      <img class="card-img-top" src="/admin.jpg" alt="Card image cap">
+      <img class="card-img-top" src="/images/admin.jpg" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title">Card title</h5>
         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
