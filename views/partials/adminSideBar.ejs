@@ -5,12 +5,14 @@
     </div>
     <ul class="nav-links">
       <li>
-        <div onClick="showHome()">
-          <i class='bx bx-grid-alt' ></i>
-          <span class="link_name" >Home</span>
-        </div>
+        <a href="/home/admin">
+          <div onClick="showHome()">
+            <i class='bx bx-grid-alt' ></i>
+            <span class="link_name" >Home</span>
+          </div>
+        </a>
         <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Home</a></li>
+          <li><a class="link_name" href="/home/admin">Home</a></li>
         </ul>
       </li>
       <li>
@@ -36,15 +38,17 @@
         </ul>
       </li>
       <li>
-        <div class="iocn-link" onClick="showAddQuestion()">
-          <div>
-            <i class="fas fa-question"></i>
-            <span class="link_name" >Add Question</span>
+        <a href="/addquestion">
+          <div class="iocn-link" onClick="showAddQuestion()">
+            <div>
+              <i class="fas fa-question"></i>
+              <span class="link_name" >Add Question</span>
+            </div>
           </div>
-        </div>
-        <ul class="sub-menu">
-          <li><a class="link_name" href="#">Add Question</a></li>
-        </ul>
+        </a>
+          <ul class="sub-menu">
+            <li><a class="link_name" href="/addquestion">Add Question</a></li>
+          </ul>
       </li>
       <li>
         <div>

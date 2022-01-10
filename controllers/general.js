@@ -4,7 +4,7 @@ const path = require('path')
 const Question = require('../models/question')
 exports.addquestions_get = (req, res) => {
     res.status(200)
-    res.render('admin',{user:req.user})
+    res.render('add_questions',{user: req.user})
 }
 
 exports.addquestions_post = (req, res, next) => {
