@@ -50,3 +50,14 @@ exports.post_start_test = (req, res) => {
         })   
     
 }
+
+exports.get_mydoctor = (req, res) => {
+
+    User.findById(req.user.doctorid)
+        .then((doctor) => {
+            res.render('mydoctor',{ user: req.user,doctor:doctor })
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}

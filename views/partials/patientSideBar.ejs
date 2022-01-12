@@ -5,23 +5,27 @@
     </div>
     <ul class="nav-links">
         <li>
-            <div onClick="showTestAssigned()">
-                <i class='bx bx-grid-alt'></i>
-                <span class="link_name">Tests</span>
+            <div onClick="">
+                <a href="/home/patient/<%=user._id%>">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="link_name">Tests</span>
+                </a>
             </div>
             <ul class="sub-menu blank">
-                <li><a class="link_name" href="#">Tests</a></li>
+                <li><a class="link_name" href="/home/patient/<%=user._id%>">Tests</a></li>
             </ul>
         </li>
         <li>
-            <div class="iocn-link" onClick="docAssigned()">
+            <div class="iocn-link" onClick="">
                 <div>
-                    <i class='bx bx-collection'></i>
-                    <span class="link_name">Doctor</span>
+                    <a href="/mydoctor">
+                        <i class='bx bx-collection'></i>
+                        <span class="link_name">Doctor</span>
+                    </a>
                 </div>
             </div>
             <ul class="sub-menu">
-                <li><a class="link_name" href="#">Doctor</a></li>
+                <li><a class="link_name" href="/mydoctor">Doctor</a></li>
             </ul>
         </li>
         <li>
