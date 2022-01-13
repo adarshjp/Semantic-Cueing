@@ -1,0 +1,35 @@
+<%- include("partials/header") %>
+<%- include("partials/patientSideBar") %>
+        <div class="container  vh-100 align-items-center" id="">
+            <div>
+                <h1 class="p-3 text-center" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+                    My <span class="blue">Doctor <i class="fas fa-stethoscope"></i></span>
+                </h1>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-sm-10">
+                    <div class="card box-shadow">
+                        <div class="row">
+                            <div class="col-md-6 my-auto">
+                                <img src="/images/undraw_doctors_hwty.svg" class="card-img-top rounded-circle"
+                                    alt="..." width="100%"/>
+                            </div>
+                            <div class="col-md-6 d-flex align-items-center">
+                                <div class="card-body text-center">
+                                    <h3 class="card-title"><%=doctor.name%></h3>
+                                    <p class="card-text h4">
+                                        <span class="blue"><i class="fas fa-phone-alt"></i></span>
+                                        7349492626
+                                    </p>
+                                    <p class="card-text h4">
+                                        <span class="blue"><i class="fas fa-envelope"></i></span>
+                                        <%=doctor.email%>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%- include("partials/footer") %>
