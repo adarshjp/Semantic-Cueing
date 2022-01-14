@@ -1,68 +1,72 @@
 <%- include("partials/header") %>
 <%- include("partials/doctorSideBar") %>
-<main id="test-main">
+<main id="test-main" class="container">
     <div class="row justify-content-center">
-        <div class="col-12 col-sm-5">
-            <label for="level">Choose Level <i class="fa fa-filter" aria-hidden="true"></i></label>
-            <select  class="form-select form-select-lg my-2 p-2" id="level" aria-label=".form-select-lg" onchange="levelfilter()">
-                <option value="all">All</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-        </div>
-        <div class="col-9 offset-md-0 col-sm-4" style="margin-top:30px">
-            <button class="btn btn-primary rounded-pill btn-lg" onclick="selRandom('<%=question.length%>');">Select randomly</button>
-        </div>
-        <div class="col-3 col-sm-1">
-            <button type="button" class="btn btn-primary position-relative rounded-pill" onclick="showSelectedQuestion('<%=question.length%>')" style="margin-top:35px">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="count">0</span>
-            </button>
+        <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-md-0 col-md-12">
+            <div class="row">
+                <div class="col-12 col-sm-5">
+                    <label for="level">Choose Level <i class="fa fa-filter" aria-hidden="true"></i></label>
+                    <select  class="form-select form-select-lg my-2 p-2" id="level" aria-label=".form-select-lg" onchange="levelfilter()">
+                        <option value="all">All</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div class="col-9 offset-md-0 col-sm-4" style="margin-top:30px">
+                    <button class="btn btn-primary rounded-pill btn-lg" onclick="selRandom('<%=question.length%>');">Select randomly</button>
+                </div>
+                <div class="col-3 col-sm-1">
+                    <button type="button" class="btn btn-primary position-relative rounded-pill" onclick="showSelectedQuestion('<%=question.length%>')" style="margin-top:35px">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="count">0</span>
+                    </button>
+                </div>
+            </div>
+            <form action="/create/test" method="POST" id="testForm" onsubmit="return noofqval();"> 
+                <ol class="gradient-list">
+                    <% var i=1;%>
+                    <% question.forEach((question)=>{ %>
+                        <li class="row shadow-lg mb-5 bg-body rounded-lg <%= question.level%>" id="question<%=i%>">
+                            <div class="card-image p-2">
+                                <div class="inputGroup">
+                                    <input id="option<%=i%>" class="form-check-input question<%=i%> op<%=question.level%>" type="checkbox" id="q-checkbox" value="<%=question._id %>" name="questions" onclick="countQuestion()">
+                                    <label for="option<%=i%>">Question : <strong><%=question.answer%></strong></label> 
+                                </div>
+                                <div class="hover-img">
+                                    <span class="p-1 rounded-lg my-3" id="qimg">
+                                        <img src="data:image/<%=question.question.contentType%>;base64,<%=question.question.data.toString('base64')%>" alt="image" class="img-fluid" style="max-height: 18rem;"/>      
+                                    </span>
+                                </div>
+                            </div>   
+                        </li>
+                        <%i++;%>
+                    <% }) %>
+                </ol>
+                <div class="row justify-content-center">
+                    <div class="col-6">
+                        <label for="patient">Choose Patient</label>
+                        <select name="patientid" id="doctorid" class="form-select form-select-lg my-2 p-2" aria-label=".form-select-lg" required>
+                            <% patient.forEach((patient)=> { %>
+                                <option value="<%=patient._id%>"><%=patient.name%></option>
+                            <% }) %>
+                          </select>
+                    </div>
+                    <div class="col-6">
+                        <label for="level">Enter Level</label>
+                        <input type="number" name="level" id="login-input" placeholder="1-5" onchange="checklevel(this.value)" required/>
+                    </div>
+                </div>
+                <div class="text-center p-3">
+                    <input type="submit" class="btn btn-primary btn-lg rounded-pill" value="Create Test" id="formsubmit"/>
+                </div>
+                </div>
+            </form>
         </div>
     </div>
-    <form action="/create/test" method="POST" id="testForm" onsubmit="return noofqval();"> 
-        <ol class="gradient-list">
-            <% var i=1;%>
-            <% question.forEach((question)=>{ %>
-                <li class="row shadow-lg mb-5 bg-body rounded-lg <%= question.level%>" id="question<%=i%>">
-                    <div class="card-image p-2">
-                        <div class="inputGroup">
-                            <input id="option<%=i%>" class="form-check-input question<%=i%> op<%=question.level%>" type="checkbox" id="q-checkbox" value="<%=question._id %>" name="questions" onclick="countQuestion()">
-                            <label for="option<%=i%>">this is the quetion no. <%=i%></label> 
-                        </div>
-                        <div class="hover-img">
-                            <span class="p-1 rounded-lg my-3" id="qimg">
-                                <img src="data:image/<%=question.question.contentType%>;base64,<%=question.question.data.toString('base64')%>" alt="image" class="img-fluid" style="max-height: 18rem;"/>      
-                            </span>
-                        </div>
-                    </div>   
-                </li>
-                <%i++;%>
-            <% }) %>
-        </ol>
-        <div class="row justify-content-center">
-            <div class="col-6">
-                <label for="patient">Choose Patient</label>
-                <select name="patientid" id="doctorid" class="form-select form-select-lg my-2 p-2" aria-label=".form-select-lg" required>
-                    <% patient.forEach((patient)=> { %>
-                        <option value="<%=patient._id%>"><%=patient.name%></option>
-                    <% }) %>
-                  </select>
-            </div>
-            <div class="col-6">
-                <label for="level">Enter Level</label>
-                <input type="number" name="level" id="login-input" placeholder="1-5" onchange="checklevel(this.value)" required/>
-            </div>
-        </div>
-        <div class="text-center p-3">
-            <input type="submit" class="btn btn-primary btn-lg rounded-pill" value="Create Test" id="formsubmit"/>
-        </div>
-        </div>
-    </form>
-    <a href="/home/doctor/<%=user._id%>" class="btn btn-primary btn-lg rounded-pill">Home <i class="fas fa-home"></i></a>
+    
 </main>
 <script>
     function countQuestion(){

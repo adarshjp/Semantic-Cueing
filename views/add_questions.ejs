@@ -1,51 +1,55 @@
 <%- include("partials/header") %>
 <%- include("partials/adminSideBar") %>
-<div class="container my-4">
-   <form action="/addquestion" method="POST" enctype="multipart/form-data">
-      <div class="row justify-content-center">
-         <div class="col-12 col-md-6 card p-3 shadow">
-            <h2 class="card-title text-center">Add question</h2>
-            <hr>
-            <div class="form-group">
-               <input type="file" name="image" class="form-control form-control-lg fi" accept="image/png, image/jpeg" placeholder="Enter Image" id="upload_file" onchange="getImagePreview(event,'preview','upload_file')" id="login-input">
-            </div>
-            <div class="row justify-content-center my-2">
-               <div class="col-12 col-sm-7 col-md-6" id="preview"></div>
-            </div>
+<div class="container mt-3 mb-3">
+   <div class="row justify-content-center">
+      <div class="offset-2 col-8 offset-sm-1 col-sm-10 offset-md-1 col-md-11">
+         <form action="/addquestion" method="POST" enctype="multipart/form-data">
             <div class="row justify-content-center">
-                  <div class="col-12 col-md-6">
-                     <input type="text" name="answer" id="login-input" placeholder="Enter Answer" required> 
+               <div class="col-12 col-md-6 card p-3 shadow">
+                  <h2 class="card-title text-center">Add question</h2>
+                  <hr>
+                  <div class="form-group">
+                     <input type="file" name="image" class="form-control form-control-lg fi" accept="image/png, image/jpeg" placeholder="Enter Image" id="upload_file" onchange="getImagePreview(event,'preview','upload_file')" id="login-input">
                   </div>
-                  <div class="col-12 col-md-6">
-                     <input type="number" name="level" id="login-input"  placeholder="Enter Level:1-5" onchange="checklevel(this.value)" required>
+                  <div class="row justify-content-center my-2">
+                     <div class="col-12 col-sm-7 col-md-6" id="preview"></div>
                   </div>
-                  <div class="col-12 col-md-6">
-                     <input type="number" name="score" id="login-input" placeholder="Enter Score" min="100" required>
+                  <div class="row justify-content-center">
+                        <div class="col-12 col-md-6">
+                           <input type="text" name="answer" id="login-input" placeholder="Enter Answer" required> 
+                        </div>
+                        <div class="col-12 col-md-6">
+                           <input type="number" name="level" id="login-input"  placeholder="Enter Level:1-5" onchange="checklevel(this.value)" required>
+                        </div>
+                        <div class="col-12 col-md-6">
+                           <input type="number" name="score" id="login-input" placeholder="Enter Score" min="100" required>
+                        </div>
                   </div>
+               </div>
             </div>
-         </div>
-      </div>
-      <div class="row justify-content-center mt-3">
-         <% for (var i = 0; i < 4; i++) { %>
-         <div class="col-12 col-md-5 card shadow m-1">
-            <h2 class="card-title text-center">Add hint<%= i+1 %></h2>
-            <hr>
-            <div class="row justify-content-center">
-               <div class="form-group col-12">
-                  <input type="file" name="image" accept="image/png, image/jpeg" class="form-control form-control-lg" placeholder="Enter Image" id="upload_hint<%= i %>" onchange="getImagePreview(event,'preview-hint<%= i %>','upload_hint<%= i %>')">
+            <div class="row justify-content-center mt-3">
+               <% for (var i = 0; i < 4; i++) { %>
+               <div class="col-12 col-md-5 card shadow m-1">
+                  <h2 class="card-title text-center">Add hint<%= i+1 %></h2>
+                  <hr>
+                  <div class="row justify-content-center">
+                     <div class="form-group col-12">
+                        <input type="file" name="image" accept="image/png, image/jpeg" class="form-control form-control-lg" placeholder="Enter Image" id="upload_hint<%= i %>" onchange="getImagePreview(event,'preview-hint<%= i %>','upload_hint<%= i %>')">
+                     </div>
+                     <div id="preview-hint<%= i %>" class="my-2 col-11 col-sm-9 col-md-7"></div>
+                     <div class="col-12">
+                        <input type="number" name="nscore[<%= i %>]" id="login-input" placeholder="Enter Score" min="10" required>
+                     </div>
+                  </div>    
                </div>
-               <div id="preview-hint<%= i %>" class="my-2 col-12 col-sm-7 col-md-12"></div>
-               <div class="col-12">
-                  <input type="number" name="nscore[<%= i %>]" id="login-input" placeholder="Enter Score" min="10" required>
+               <% } %>
+               <div class="form-group text-center mt-3">
+                  <input type="submit" name="submit" value="Submit" class="btn btn-primary btn-lg rounded-pill" onClick="this.form.submit(); this.disabled=true;this.value='Submitting..'">
                </div>
-            </div>    
-         </div>
-         <% } %>
-         <div class="form-group text-center mt-3">
-            <input type="submit" name="submit" value="Submit" class="btn btn-primary btn-lg rounded-pill" onClick="this.form.submit(); this.disabled=true;this.value='Submitting..'">
-         </div>
+            </div>
+         </form>
       </div>
-   </form>
+   </div>
 </div>
 <script>
    function getImagePreview(event,preview_id,upload_id){
