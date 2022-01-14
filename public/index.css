@@ -4,7 +4,7 @@
 #test-main {
     display: block;
     margin: 0 auto;
-    max-width: 43rem;
+    max-width: 38rem;
     padding: 1rem;
 }
 ol.gradient-list {
@@ -103,7 +103,6 @@ ol.gradient-list > li + li {
 }
 .inputGroup {
   display: block;
-  position: relative;
 }
 .inputGroup label {
   padding: 12px 15px;
@@ -112,7 +111,6 @@ ol.gradient-list > li + li {
   text-align: left;
   color: #3C454C;
   cursor: pointer;
-  position: relative;
   z-index: 2;
   transition: color 200ms ease-in;
   overflow: hidden;
