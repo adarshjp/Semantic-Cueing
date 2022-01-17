@@ -2,27 +2,27 @@
     <%- include("partials/adminSideBar") %>
         <div class="container" id="">
             <h1 class="text-center p-2 display-3 fw-bold">
-                Our <span class="blue">Doctors </span>
+                Our <span class="blue">Patients </span>
                 <i class="fas fa-stethoscope blue"></i>
             </h1>
             <div class="row p-2">
-                <% doctors.forEach((doctor)=> { %>
-                    <div class="col-sm-6 py-3 py-sm-3">
+                <% patients.forEach((patient)=> { %>
+                    <div class="col-sm-6 py-3 py-sm-3 d-flex align-items-stretch">
                         <div class="card box-shadow p-3">
-                            <div class="row">
-                                <div class="col-md-6 my-auto">
+                            <div class="row d-flex h-100">
+                                <div class="col-lg-6 my-auto">
                                     <img src="/images/undraw_doctors_hwty.svg" class="card-img-top rounded-circle p-1 box-shadow"
                                         alt="..." style="border: 3px solid #6c63ff" />
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-lg-6 my-auto">
                                     <div class="card-body">
-                                        <h1 class="card-title"><%=doctor.name%></h1>
+                                        <h1 class="card-title"><%=patient.name%></h1>
                                         <hr>
                                         <p class="card-text h3">
-                                            <%=doctor.email%>
+                                            <%=patient.email%>
                                         </p>
                                         <p class="card-text h3">
-                                            <%=doctor.age%>
+                                            <%=patient.age%>
                                         </p>
                                         <div class="d-flex justify-content-end align-items-end">
                                             <a href="#" class="btn white" id="review"
@@ -33,8 +33,7 @@
                             </div>
                         </div>
                     </div>
-                    <% }) %>
+                <% }) %>
             </div>
         </div>
-
-        <%- include("partials/footer") %>
+<%- include("partials/footer") %>
