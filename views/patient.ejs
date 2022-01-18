@@ -1,15 +1,16 @@
-<%- include("partials/header") %> 
-<%- include("partials/patientSideBar") %>
-
-
-<div class="patientclass p-2 pt-5" id="tassigned">
-  <h1 class="text-center p-2">
-    Take your <span class="blue">tests</span> now
-    <i class="fas fa-calendar-check blue"></i>
-  </h1>
-  <div class="row p-2">
+<%- include("partials/header") %> <%- include("partials/patientSideBar") %>
+<div class="container patientclass">
+  <div class="row justify-content-center">
+    <div class="offset-2 col-9 offset-sm-2 col-sm-8 offset-lg-0 col-lg-6 p-1">
+      <h1 class="text-center p-2">
+        Take your <span class="blue">tests</span> now
+        <i class="fas fa-calendar-check blue"></i>
+      </h1>
+    </div>
+  </div>
+  <div class="row p-1 justify-content-center">
     <% tests.forEach((test) => { %>
-    <div class="col-sm-6 py-3 py-sm-3">
+    <div class="offset-2 col-9 offset-sm-1 col-sm-10  offset-lg-0 col-lg-6 p-1">
       <div class="card box-shadow p-3">
         <div class="row">
           <div class="col-md-6 my-auto">
@@ -56,5 +57,7 @@
     <a href="#" class="btn btn-primary">Go somewhere</a>
   </div>
 </div>
+
+<div class="patientclass p-2 pt-5"></div>
 
 <%- include("partials/footer") %>

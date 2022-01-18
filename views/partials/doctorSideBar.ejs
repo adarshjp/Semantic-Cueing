@@ -1,64 +1,63 @@
 <div class="sidebar close">
-    <div class="logo-details">
-        <i class='bx bx-menu' ></i>
-        <span class="logo_name">Menu</span>
-    </div>
-    <ul class="nav-links">
-        <li class="">
-            <div onClick="" class="icon-link">
-                <div>
-                    <a href="/home/doctor/<%=user._id%>" class="text-white">
-                        <i class='fas fa-home' ></i>
-                        <span class="link_name">Dashboard</span>
-                    </a>
-                </div>
-                <ul class="sub-menu">
-                    <li><a class="link_name" href="/home/doctor/<%=user._id%>">Dashboard</a></li>
-                </ul>
-            </div>
-        </li>
+  <div class="logo-details">
+    <i class="bx bx-menu"></i>
+    <span class="logo_name">Menu</span>
+  </div>
+  <ul class="nav-links">
+    <li>
+      <a href="/home/doctor/<%=user._id%>">
+        <i class="bx bx-grid-alt"></i>
+        <span class="link_name">Dashboard</span>
+      </a>
+      <ul class="sub-menu blank">
         <li>
-            <div class="iocn-link" onClick="showPatientsAssigned()">
-            <div>
-                <i class='fas fa-procedures' ></i>
-                <span class="link_name" >Patients assigned</span>
-            </div>
-            </div>
-            <ul class="sub-menu">
-            <li><a class="link_name" href="#">Patients</a></li>
-            </ul>
-      </li>
-      <li>
-        <div class="iocn-link" onClick="">
-          <div>
-              <a href="/create/test" class="text-white">
-                <i class="far fa-clipboard"></i>
-                <span class="link_name">Create Test</span>
-              </a>
-          </div>
+          <a class="link_name" href="/home/doctor/<%=user._id%>">Dashboard</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a onClick="showPatientsAssigned()">
+        <i class="bx bx-book-alt"></i>
+        <span class="link_name">Patients</span>
+      </a>
+      <ul class="sub-menu blank">
+        <li>
+          <a class="link_name" onClick="showPatientsAssigned()">Patients</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="/create/test">
+        <i class="far fa-clipboard"></i>
+        <span class="link_name">Create Test</span>
+      </a>
+      <ul class="sub-menu blank">
+        <li><a class="link_name" href="/create/test">Create Test</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="/logout">
+        <i class="bx bx-log-out"></i>
+        <span class="link_name">Logout</span>
+      </a>
+      <ul class="sub-menu blank">
+        <li><a class="link_name" href="/logout">Logout</a></li>
+      </ul>
+    </li>
+    <li>
+      <div class="profile-details">
+        <div class="profile-content" onClick="showDocProfile()">
+          <img
+            src="https://static.remove.bg/remove-bg-web/a6eefcd21dff1bbc2448264c32f7b48d7380cb17/assets/start_remove-c851bdf8d3127a24e2d137a55b1b427378cd17385b01aec6e59d5d4b5f39d2ec.png"
+            alt="profileImg"
+          />
         </div>
-        <ul class="sub-menu">
-          <li><a class="link_name" href="/create/test">Create Test</a></li>
-        </ul>
-      </li>
-      <li>
-        <div>
-          <a href="/logout"><i class='fas fa-sign-out-alt' ></i></a>
-          <span class="link_name" id="logout" ><a href="/logout" style="color: white">Logout</span></a>
-       </div>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="/logout">Logout</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="profile-details" onClick="showDocProfile()">
-          <div class="profile-content" >
-            <img src="/images/profile.jpg" alt="profileImg">
-          </div>
-          <div class="name-job">
-            <div class="profile_name"><%=user.name%></div>
-          </div>
+        <div class="name-job">
+          <div class="profile_name"><%=user.name%></div>
+          <div class="job"><%=user.role%></div>
         </div>
-      </li>
-    </ul>
+        <i></i>
+      </div>
+    </li>
+  </ul>
 </div>
