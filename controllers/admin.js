@@ -14,7 +14,7 @@ exports.view_patient = (req, res) => {
     //fetch all patients
     User.find({ role: 'patient' })
         .then((users) => {
-            res.send(users)
+            res.render("view_patients", { user: req.user,patients: users })
         })
         .catch((err) => {
             console.log(err)
@@ -25,7 +25,7 @@ exports.view_doctor = (req, res) => {
     //fetch all doctors
     User.find({ role: 'doctor' })
         .then((users) => {
-            res.send(users)
+            res.render('view_doctors',{doctors:users,user:req.user})
         })
         .catch((err) => {
             console.log(err)
