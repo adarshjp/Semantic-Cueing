@@ -1,77 +1,65 @@
 <div class="sidebar close">
-    <div class="logo-details">
-      <i class='bx bx-menu' ></i>
-      <span class="logo_name">Menu</span>
-    </div>
-    <ul class="nav-links">
-      <li>
-        <a href="/home/admin">
-          <div onClick="showHome()">
-            <i class="fas fa-home"></i>
-            <span class="link_name" >Home</span>
-          </div>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="/home/admin">Home</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="/view/doctor">
-          <div class="iocn-link">
-            <div>
-              <i class="fas fa-user-md"></i>
-              <span class="link_name" >Doctor</span>
-            </div>
-          </div>
-        </a>
-        <ul class="sub-menu">
-          <li><a class="link_name" href="/view/doctor">Doctor</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="/view/patient">
-          <div class="iocn-link" onClick="showPatients()">
-            <div>
-              <i class="fas fa-procedures"></i>
-              <span class="link_name" >Patients</span>
-            </div>
-          </div>
-        </a>
-        <ul class="sub-menu">
-          <li><a class="link_name" href="/view/patients">Patients</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="/addquestion">
-          <div class="iocn-link" onClick="showAddQuestion()">
-            <div>
-              <i class="fas fa-question">+</i>
-              <span class="link_name" >Add Question</span>
-            </div>
-          </div>
-        </a>
-          <ul class="sub-menu">
-            <li><a class="link_name" href="/addquestion">Add Question</a></li>
-          </ul>
-      </li>
-      <li>
-        <div>
-          <a href="/logout"><i class="fas fa-sign-out-alt"></i></a>
-          <span class="link_name" id="logout" ><a href="/logout" style="color: white">Logout</span></a>
-       </div>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="/logout">Logout</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="profile-details" onClick="showProfile()">
-          <div class="profile-content" >
-            <img src="/images/profile.jpg" alt="profileImg">
-          </div>
-          <div class="name-job">
-            <div class="profile_name" ><%=user.name%></div>
-          </div>
+  <div class="logo-details">
+    <i class="bx bx-menu"></i>
+    <span class="logo_name">Menu</span>
+  </div>
+  <ul class="nav-links">
+    <li>
+      <a href="/home/admin" onClick="showHome()">
+        <i class="fas fa-home"></i>
+        <span class="link_name">Home</span>
+      </a>
+      <ul class="sub-menu blank">
+        <li><a class="link_name" href="/home/admin">Home</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="/view/doctor">
+        <i class="fas fa-user-md"></i>
+        <span class="link_name">Doctor</span>
+      </a>
+      <ul class="sub-menu blank">
+        <li><a class="link_name" href="/view/doctor">Doctor</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="/view/patient" onClick="showPatients()">
+        <i class="fas fa-procedures"></i>
+        <span class="link_name">Patients</span>
+      </a>
+      <ul class="sub-menu blank">
+        <li><a class="link_name" href="/view/patient">Patients</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="/addquestion" onClick="showAddQuestion()">
+        <i class="fas fa-question">+</i>
+        <span class="link_name">Add Question</span>
+      </a>
+      <ul class="sub-menu blank">
+        <li><a class="link_name" href="/addquestion">Add Question</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="/logout">
+        <i class="fas fa-sign-out-alt"></i>
+        <span class="link_name">Logout</span>
+      </a>
+      <ul class="sub-menu blank">
+        <li><a class="link_name" href="/logout">Logout</a></li>
+      </ul>
+    </li>
+    <li>
+      <div class="profile-details">
+        <div class="profile-content" onClick="showProfile()">
+          <img src="/images/profile.jpg" alt="profileImg" />
         </div>
-      </li>
-    </ul>
+        <div class="name-job">
+          <div class="profile_name"><%=user.name%></div>
+          <div class="job"><%=user.role%></div>
+        </div>
+        <i></i>
+      </div>
+    </li>
+  </ul>
 </div>

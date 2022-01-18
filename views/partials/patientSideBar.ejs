@@ -1,53 +1,49 @@
 <div class="sidebar close">
-    <div class="logo-details">
-        <i class='bx bx-menu'></i>
-        <span class="logo_name">Menu</span>
-    </div>
-    <ul class="nav-links">
+  <div class="logo-details">
+    <i class="bx bx-menu"></i>
+    <span class="logo_name">Menu</span>
+  </div>
+  <ul class="nav-links">
+    <li>
+      <a href="/home/patient/<%=user._id%>">
+        <i class="fas fa-home"></i>
+        <span class="link_name">Tests</span>
+      </a>
+      <ul class="sub-menu blank">
         <li>
-            <div onClick="">
-                <a href="/home/patient/<%=user._id%>">
-                    <i class='fas fa-home'></i>
-                    <span class="link_name">Tests</span>
-                </a>
-            </div>
-            <ul class="sub-menu blank">
-                <li><a class="link_name" href="/home/patient/<%=user._id%>">Tests</a></li>
-            </ul>
+          <a class="link_name" href="/home/patient/<%=user._id%>">Tests</a>
         </li>
-        <li>
-            <div class="iocn-link" onClick="">
-                <div>
-                    <a href="/mydoctor">
-                        <i class='fas fa-user-md'></i>
-                        <span class="link_name">Doctor</span>
-                    </a>
-                </div>
-            </div>
-            <ul class="sub-menu">
-                <li><a class="link_name" href="/mydoctor">Doctor</a></li>
-            </ul>
-        </li>
-        <li>
-            <div>
-                <a href="/logout"><i class='fas fa-sign-out-alt'></i></a>
-                <span class="link_name" id="logout"><a href="/logout" style="color: white">Logout</span></a>
-            </div>
-            <ul class="sub-menu blank">
-                <li><a class="link_name" href="/logout">Logout</a></li>
-            </ul>
-        </li>
-        <li>
-            <div class="profile-details" onClick="showPatientProfile()">
-                <div class="profile-content">
-                    <img src="/images/profile.jpg" alt="profileImg">
-                </div>
-                <div class="name-job">
-                    <div class="profile_name mx-auto">
-                        <%=user.name%>
-                    </div>
-                </div>
-            </div>
-        </li>
-    </ul>
+      </ul>
+    </li>
+    <li>
+      <a href="/mydoctor">
+        <i class="fas fa-user-md"></i>
+        <span class="link_name">Doctor</span>
+      </a>
+      <ul class="sub-menu blank">
+        <li><a class="link_name" href="/mydoctor">Doctor</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="/logout">
+        <i class="fas fa-sign-out-alt"></i>
+        <span class="link_name">Logout</span>
+      </a>
+      <ul class="sub-menu blank">
+        <li><a class="link_name" href="/logout">Logout</a></li>
+      </ul>
+    </li>
+    <li>
+      <div class="profile-details">
+        <div class="profile-content" onClick="showPatientProfile()">
+          <img src="/images/profile.jpg" alt="profileImg" />
+        </div>
+        <div class="name-job">
+          <div class="profile_name"><%=user.name%></div>
+          <div class="job"><%=user.role%></div>
+        </div>
+        <i></i>
+      </div>
+    </li>
+  </ul>
 </div>

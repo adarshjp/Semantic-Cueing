@@ -10,7 +10,9 @@
         <span class="link_name">Dashboard</span>
       </a>
       <ul class="sub-menu blank">
-        <li><a class="link_name" href="/home/doctor/<%=user._id%>">Dashboard</a></li>
+        <li>
+          <a class="link_name" href="/home/doctor/<%=user._id%>">Dashboard</a>
+        </li>
       </ul>
     </li>
     <li>
@@ -19,7 +21,9 @@
         <span class="link_name">Patients</span>
       </a>
       <ul class="sub-menu blank">
-        <li><a class="link_name" onClick="showPatientsAssigned()">Patients</a></li>
+        <li>
+          <a class="link_name" onClick="showPatientsAssigned()">Patients</a>
+        </li>
       </ul>
     </li>
     <li>
@@ -43,7 +47,10 @@
     <li>
       <div class="profile-details">
         <div class="profile-content" onClick="showDocProfile()">
-          <img src="https://static.remove.bg/remove-bg-web/a6eefcd21dff1bbc2448264c32f7b48d7380cb17/assets/start_remove-c851bdf8d3127a24e2d137a55b1b427378cd17385b01aec6e59d5d4b5f39d2ec.png" alt="profileImg">
+          <img
+            src="https://static.remove.bg/remove-bg-web/a6eefcd21dff1bbc2448264c32f7b48d7380cb17/assets/start_remove-c851bdf8d3127a24e2d137a55b1b427378cd17385b01aec6e59d5d4b5f39d2ec.png"
+            alt="profileImg"
+          />
         </div>
         <div class="name-job">
           <div class="profile_name"><%=user.name%></div>
