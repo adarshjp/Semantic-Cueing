@@ -50,16 +50,18 @@
       </ul>
     </li>
     <li>
-      <div class="profile-details">
-        <div class="profile-content" onClick="showProfile()">
-          <img src="/images/profile.jpg" alt="profileImg" />
+      <a href="/view/<%=user._id%>">
+        <div class="profile-details">
+          <div class="profile-content" onClick="">
+            <img src="/images/profile.jpg" alt="profileImg" />
+          </div>
+          <div class="name-job">
+            <div class="profile_name"><%=user.name%></div>
+            <div class="job"><%=user.role%></div>
+          </div>
+          <i></i>
         </div>
-        <div class="name-job">
-          <div class="profile_name"><%=user.name%></div>
-          <div class="job"><%=user.role%></div>
-        </div>
-        <i></i>
-      </div>
+      </a>
     </li>
   </ul>
 </div>

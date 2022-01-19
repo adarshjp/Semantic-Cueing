@@ -36,7 +36,7 @@ exports.view_Oneuser = (req, res) => {
     //fetch one user
     User.findById(req.params.id)
         .then((user) => {
-            res.send(user)
+            res.render("viewOneUser",{user:user})
         })
         .catch((err) => {
             console.log(err)

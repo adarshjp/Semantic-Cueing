@@ -9,7 +9,7 @@ router.post("/register", isLoggedIn,isAdmin,register_post);
 router.get("/home/admin", isLoggedIn,isAdmin,admin_get);
 router.get("/view/patient", isLoggedIn,isAdmin,view_patient);
 router.get("/view/doctor",isLoggedIn,isAdmin,view_doctor);
-router.get("/view/:id",isAdmin,isLoggedIn,view_Oneuser);
+router.get("/view/:id",isLoggedIn,view_Oneuser);
 router.get("/edit/:id",isAdmin,isLoggedIn,get_edit_user)
 router.put("/edit/:id",isAdmin,isLoggedIn,edit_user)
 router.delete("/delete/:id",isAdmin,isLoggedIn,delete_user)
