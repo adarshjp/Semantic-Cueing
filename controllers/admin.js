@@ -59,7 +59,7 @@ exports.get_edit_user = (req, res) => {
     //fetch one patient given id and send it
     User.findById({ _id: req.params.id })
         .then((user) => {
-            res.send(user)
+            res.render("editUser",{user:user})
         })
         .catch((err) => {
             console.log(err)
@@ -70,9 +70,11 @@ exports.edit_user = (req, res) => {
     //update patient with id=req.params.id and data=req.body
     User.findByIdAndUpdate({ _id: req.params.id }, req.body)
         .then((user) => {
-            res.send(user)
+            req.flash("success","User updated!!")
+            res.redirect("/view/"+req.user._id)
         })
         .catch((err) => {
+            req.flash("error","User not updated!!")
             console.log(err)
         })
 }
