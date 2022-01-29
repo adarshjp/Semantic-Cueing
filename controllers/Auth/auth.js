@@ -74,26 +74,27 @@ exports.login_post = (req, res) => {
   else
     res.redirect("/home/patient/"+req.user._id)
 };
-
+exports.get_changepassword = (req, res) => {
+  res.status(200);
+  res.render("changePassword",{user:req.user});
+}
 exports.change_password = (req, res) => {
+
   User.findById(req.user._id, (err, user) => {
     if (err) {
       res.status(400);
       res.send(err);
     } else {
-      user.changePassword(
-        req.body.oldPassword,
-        req.body.newPassword,
-        (err, user) => {
+      user.changePassword(req.body.oldPassword,req.body.newPassword,(err, user) => {
           if (err) {
             res.status(400);
             res.send(err);
           } else {
             res.status(200);
-            res.send("Password changed!");
+            req.flash('success','Password changed!');
+            res.redirect("/changepassword")
           }
-        }
-      );
+      });
     }
   });
 };

@@ -16,6 +16,15 @@
       </ul>
     </li>
     <li>
+      <a href="/view/<%=user._id%>" onClick="showAddQuestion()">
+        <i class="fas fa-user"></i>
+        <span class="link_name">My Profile</span>
+      </a>
+      <ul class="sub-menu blank">
+        <li><a class="link_name" href="/view/<%=user._id%>">My Profile</a></li>
+      </ul>
+    </li>
+    <li>
       <a onClick="showPatientsAssigned()">
         <i class="bx bx-book-alt"></i>
         <span class="link_name">Patients</span>
@@ -33,6 +42,15 @@
       </a>
       <ul class="sub-menu blank">
         <li><a class="link_name" href="/create/test">Create Test</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="/changepassword" onClick="showAddQuestion()">
+        <i class="fas fa-key"></i>
+        <span class="link_name">Change Password</span>
+      </a>
+      <ul class="sub-menu blank">
+        <li><a class="link_name" href="/changepassword">Change Password</a></li>
       </ul>
     </li>
     <li>
