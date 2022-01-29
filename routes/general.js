@@ -11,7 +11,7 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage: storage });
-const{change_password,login_get,login_post,set_password,set_post}=require('../controllers/Auth/auth');
+const{change_password,login_get,login_post,set_password,set_post,get_changepassword}=require('../controllers/Auth/auth');
 const {isLoggedIn, isAdmin}=require('../controllers/Auth/middlewares');
 const { addquestions_get,addquestions_post,view_question,view_Onequestion,forgotpassword_get} = require('../controllers/general');
 router.post(
@@ -28,6 +28,7 @@ router.get("/logout", isLoggedIn, (req, res) => {
   res.status(200);
   res.redirect("/login");
 });
+router.get("/changepassword",isLoggedIn,get_changepassword);
 router.post("/changepassword", isLoggedIn, change_password);
 router.get("/login", login_get);
 router.get("/",(req,res)=>{
