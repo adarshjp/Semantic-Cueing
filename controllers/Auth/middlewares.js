@@ -93,3 +93,20 @@ exports.isTestCompleted = (req, res, next) => {
       }
     })
 }
+
+exports.isQuestionInTest = (req, res, next) => {
+    //req.params.id is the test id
+    //req.params.questionid is the question id
+    //check whether the question exists in the test
+    Test.findById({ _id: req.params.id })
+        .then((test) => {
+            if (test.questions.includes(req.params.questionid)) {
+                return next()
+            } else {
+                res.status(401)
+                res.send('You are not authorized to do that!')
+                // req.flash('error','You are not authorized to do that!');
+                // res.redirect('/');
+            }
+        })
+}
