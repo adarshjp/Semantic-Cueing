@@ -22,14 +22,7 @@ exports.get_start_test = (req, res) => {
     let testId = req.params.id
     let testObject = req.app.locals.tests.find((test) => test._id == testId)
     let questionIds = testObject.questions
-    Question.find({ _id: { $in: questionIds } })
-        .then((questions) => {
-            console.log(questions.length)
-            res.render('testexecute',{ questions: questions,testid:testId })
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+    res.render('testexecute',{testid: testId, questionIds: questionIds})
 }
 
 exports.post_start_test = (req, res) => {
@@ -56,6 +49,15 @@ exports.get_mydoctor = (req, res) => {
     User.findById(req.user.doctorid)
         .then((doctor) => {
             res.render('mydoctor',{ user: req.user,doctor:doctor })
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+exports.get_question = (req, res) => {
+    Question.findById(req.params.questionid)
+        .then((question) => {
+            res.status(200).send(question)
         })
         .catch((err) => {
             console.log(err)
