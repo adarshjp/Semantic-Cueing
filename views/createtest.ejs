@@ -44,6 +44,11 @@
                         </li>
                         <%i++;%>
                     <% }) %>
+                    <div class="d-flex justify-content-center d-none" id="loader">
+                        <div class="spinner-border text-primary" role="status">
+                          <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
                 </ol>
                 <div class="row justify-content-center">
                     <div class="col-6">
@@ -149,5 +154,19 @@
             }
         }
     }
+    window.onscroll = function(ev) {
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+            document.getElementById('loader').classList.remove('d-none');
+            /**   
+            * TODO : Fetch data from server using /create/test/:skip
+            * TODO : Skip value should be multiples of 5 ie 5,10,...
+            * TODO : Add data to the list
+            * TODO : Hide loader
+            * *Use Fetch API to fetch data from server using /create/test/:skip
+            * !When there is no question left to fetch, "No more questions" message would be sent from the server
+            **/
+            
+        }
+    };
 </script>
 <%- include("partials/footer") %>

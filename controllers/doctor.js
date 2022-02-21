@@ -2,12 +2,30 @@ const User = require("../models/user");
 const Question = require("../models/question");
 const Test = require("../models/test");
 exports.get_create_test = (req, res) => {
+  let skip=0;
+  if(req.params.skip===undefined)
+  {
+    skip=0;
+  }
+  else
+  {
+    skip=parseInt(req.params.skip);
+  }
+  console.log(skip);
   User.find({ doctorid: req.user._id }, { _id: 1, name: 1 })
     .then((patient) => {
-      Question.find({}, { hints: 0 })
+      Question.find({}, { hints: 0 }).limit(5).skip(skip)
         .then((question) => {
-          res.status(200)
-          res.render('createtest',{question: question, patient: patient,user:req.user})
+          if(question.length===0)
+          {
+            res.status(200).json({message: 'No more questions'})
+          }else{
+            res.status(200)
+            if(req.params.skip!==undefined)
+              res.json({question: question})
+            else 
+              res.render('createtest',{question: question, patient: patient,user:req.user})
+          }
         })
         .catch((err) => {
           res.status(500).json({
