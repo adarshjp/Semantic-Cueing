@@ -1,36 +1,32 @@
 <%- include("partials/header") %>
 <div class="container my-5">
     <div class="row justify-content-center card rounded vertical-center shadow">
-      <% var i=1,x1,x2,a=[]%>
-      <% questions.forEach((questions)=> { %>
+      <% var i=1,x1,x2,a=[],j=0%>
       <div class="tab">
           <h2 class=""><%= i%>.Question is about</h2>
           <div class="row align-items-center">
               <div class="col-12 col-md-10">
                   <div class="row justify-content-center">
                       <div class="col-12 col-md-6">
-                          <img class="img-fluid" src="data:image/<%=questions.question.contentType%>;base64,<%=questions.question.data.toString('base64')%>" style="border: 2px solid #6C63FF;max-height: 42vh;" >
+                          <img class="img-fluid" src="" style="border: 2px solid #6C63FF;max-height: 42vh;" id="img">
                       </div>
                   </div>
                   <div class="row justify-content-center m-3">
                     <div class="col-12 col-md-2">
-                      <% for(var j=0;j<=3;j++) { %>
-                            <% x1=questions.hints[j].hint.contentType %>
-                            <% x2=questions.hints[j].hint.data.toString('base64')%>
-                            <button type="button" class="btn btn-warning btn-lg" onclick="hint('data:image/<%=x1%>;base64,<%=x2%>')" id="hint<%=i %><%=j %>" style="display:none;">Take Hint  <i class="far fa-lightbulb"></i></button>  
-                      <% } %>
+                      
+                            <button type="button" class="btn btn-warning btn-lg" onclick="hint()" id="hint<%=i %><%=j %>" style="display:none;">Take Hint  <i class="far fa-lightbulb"></i></button>  
+                      
                     </div> 
                   </div>
               </div>
               <div class="col-12 col-md-1">
                   <div class="row justify-content-center my-2">
-                      <% for(var j=0;j<=3;j++) { %>
+                     
                           <div class="col-3 col-md-12 my-2">
-                            <% x1=questions.hints[j].hint.contentType %>
-                            <% x2=questions.hints[j].hint.data.toString('base64')%>
+                            
                             <button type="button" class="btn btn-warning" id="butt<%=j%><%=i%>" style="display: none;" onclick="dispmodal('data:image/<%=x1%>;base64,<%=x2%>')">Hint<%=j+1%></button> 
                           </div>
-                      <% } %>
+                     
                       </div>
                   </div>
               </div>
@@ -42,15 +38,11 @@
             <div class="col-12 col-md-2"></div>
           </div>
         </div>
-        <% a.push(questions.answer) %>
-        <% i=i+1%>
-        <% }) %>
         <hr>
         <div class="row justify-content-center p-3">
             <div style="text-align:center;" class="col-8 col-md-10">
-            <% for (var j =1;j<= questions.length;j++) { %>
-                    <span class="step"><%=j%></span>
-            <% } %>   
+            
+                    <span class="step"><%=j%></span> 
             </div>
             <div class="col-4 col-md-2">
                 <button type="button" id="nextBtn" class="btn btn-primary btn-lg" onclick="nextPrev(1,'<%=JSON.stringify(a) %>')">Next</button>   
@@ -75,7 +67,7 @@
     var hint_i=0;
     var currentTab = 0; 
     var timer;
-    showHint(1,0)
+
     function showHint(qi,hi) {
       if(hi==0) {
         document.getElementById('hint'+qi+0).style.display="block";
@@ -217,4 +209,25 @@
       clearTimeout(timer);
     }
 </script>
+<script type="text/javascript">
+var q='<%=questionIds[0]%>';
+console.log(q);
+disp_question(q)
+function disp_question(){
+  fetch('/question/<%=testid%>/'+q)
+  .then(response => response.json())
+  .then(question => {
+    console.log(question)
+    document.getElementById('img').src = 'data:image/'+question.question.contentType+';base64,'+arrayBufferToBase64(question.question.data.data);
+  });
+}
+
+function arrayBufferToBase64(buffer) {
+    var binary = '';
+    var bytes = [].slice.call(new Uint8Array(buffer));
+    bytes.forEach((b) => binary += String.fromCharCode(b));
+    return window.btoa(binary);
+};
+</script>
+
 <%- include("partials/footer") %>
