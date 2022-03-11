@@ -31,8 +31,7 @@
               <div class="d-flex justify-content-end">
                 <a
                   href="/start/test/<%=test._id%>"
-                  class="btn white btn-lg <% if(test.status == 'pending'){%> btn-primary <%}else if(test.status == 'completed'){%> btn-success <%}else{%> btn-danger <%}%> </a>"
-                  id="review"
+                  class="btn white btn-lg <% if(test.status == 'pending'){%> btn-primary <%}else if(test.status == 'completed'){%> btn-success <%}else{%> btn-secondary <%}%> </a>"
                   target="_blank"
                   ><% if(test.status == "pending") {%>
                     Start test <i class="fas fa-play"></i>
