@@ -5,6 +5,7 @@ require("dotenv").config();
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const methodOverride= require("method-override");
+var clc = require("cli-color");
 app.use(express.static("public"));
 app.use(express.static("public/images"));
 app.use(express.urlencoded({ extended: true }));
@@ -19,7 +20,8 @@ const connectionParams = {
 mongoose
   .connect(process.env.DB_URL, connectionParams)
   .then(() => {
-    console.log("Connected to DB");
+    console.log(clc.blueBright("\n******** Connected to MongoDB *******"));
+    console.log(clc.redBright("\n*************************************"))
   })
   .catch((err) => {
     console.log("NOT CONNECTED to DB!!");
@@ -60,5 +62,7 @@ app.use(doctorRoutes)
 app.use(patientRoutes)
 app.use(otpRoutes)
 app.listen(process.env.PORT || 3000, () => {
-  console.log("server started at port 3000");
+  console.log(clc.redBright("\n*************************************"))
+  console.log(clc.blueBright("\n**** Server started at port 3000 ****"));
+  console.log(clc.cyanBright("\n**** Visit http://localhost:3000 ****"));
 });
