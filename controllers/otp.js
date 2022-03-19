@@ -30,6 +30,7 @@ exports.sendOtp = (req, res) => {
     otp: Math.floor(100000 + Math.random() * 900000),
     isVerified: false,
     creationTime: Date.now(),
+    verificationKey:req.body.verificationKey
   });
   let version = req.params.version;
   let userid;
@@ -49,7 +50,7 @@ exports.sendOtp = (req, res) => {
 };
 exports.verifyOtp = (req, res) => {
   var encrypted =enccodeOtp(req.body.otp)
-  otp.findOne({ otp: encrypted, isVerified: false }, (err, data) => {
+  otp.findOne({ otp: encrypted, isVerified: false,verificationKey:req.body.verificationKey }, (err, data) => {
     if (err) {
       console.log(err);
       res.status(500).json({
