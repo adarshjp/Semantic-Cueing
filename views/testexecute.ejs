@@ -1,233 +1,75 @@
 <%- include("partials/header") %>
-<div class="container my-5">
-    <div class="row justify-content-center card rounded vertical-center shadow">
-      <% var i=1,x1,x2,a=[],j=0%>
-      <div class="tab">
-          <h2 class=""><%= i%>.Question is about</h2>
-          <div class="row align-items-center">
-              <div class="col-12 col-md-10">
-                  <div class="row justify-content-center">
-                      <div class="col-12 col-md-6">
-                          <img class="img-fluid" src="" style="border: 2px solid #6C63FF;max-height: 42vh;" id="img">
-                      </div>
-                  </div>
-                  <div class="row justify-content-center m-3">
-                    <div class="col-12 col-md-2">
-                      
-                            <button type="button" class="btn btn-warning btn-lg" onclick="hint()" id="hint<%=i %><%=j %>" style="display:none;">Take Hint  <i class="far fa-lightbulb"></i></button>  
-                      
-                    </div> 
-                  </div>
-              </div>
-              <div class="col-12 col-md-1">
-                  <div class="row justify-content-center my-2">
-                     
-                          <div class="col-3 col-md-12 my-2">
-                            
-                            <button type="button" class="btn btn-warning" id="butt<%=j%><%=i%>" style="display: none;" onclick="dispmodal('data:image/<%=x1%>;base64,<%=x2%>')">Hint<%=j+1%></button> 
-                          </div>
-                     
-                      </div>
-                  </div>
-              </div>
-          
-          <div class="row justify-content-center p-2">
-            <div class="col-12 col-md-5">
-              <input type="text" name="ans" placeholder="ans" id="login-input" class="outline-color" required />
-            </div>
-            <div class="col-12 col-md-2"></div>
-          </div>
+<div class="container-fluid">
+  <%i=2%>
+  <div class="row justify-content-center py-5" style="height: 100vh;">
+    <div class="col-12 col-lg-9">
+      <div class="row justify-content-center">
+        <div class="col-10 col-sm-10 col-md-10 col-xl-9">
+          <img src="" id="img" class="img-fluid">
         </div>
-        <hr>
-        <div class="row justify-content-center p-3">
-            <div style="text-align:center;" class="col-8 col-md-10">
-            
-                    <span class="step"><%=j%></span> 
-            </div>
-            <div class="col-4 col-md-2">
-                <button type="button" id="nextBtn" class="btn btn-primary btn-lg" onclick="nextPrev(1,'<%=JSON.stringify(a) %>')">Next</button>   
-            </div>
+      </div>
+      <div class="row py-2 justify-content-center text-center">
+        <div class="col-6 col-sm-3 py-2">
+          <button class="btn btn-primary btn-lg">Hint 1</button>
         </div>
-    </div>  
-</div>
-<div id="myModal" class="modal">
-  <span class="close">×</span>
-  <img class="modal-content" id="modal-img" style="border: 2px solid #6C63FF">
-  <div id="caption"></div>
-</div>
-<form action="/start/test/<%=testid %>" method="post" id="testForm" class="d-none">
-  <input type="number" name="testscore" id="score" value=""/>
-  <input type="text" name="hints" id="hints" value=""/>
-  <input type="text" name="anscrt" id="anscrt" value=""/>
-</form>
-<script>
-    var score=0;
-    var noofhints=[];
-    var anscrt=[];
-    var hint_i=0;
-    var currentTab = 0; 
-    var timer;
+        <div class="col-6 col-sm-3 py-2">
+          <button class="btn btn-primary btn-lg">Hint 2</button>
+        </div>
+        <div class="col-6 col-sm-3 py-2">
+          <button class="btn btn-primary btn-lg">Hint 3</button>
+        </div>
+        <div class="col-6 col-sm-3 py-2">
+          <button class="btn btn-primary btn-lg">Hint 4</button>
+        </div>
+      </div>
+      <div class="row justify-content-center py-2 text-center">
+        <div class="col-8">
+          <input type="text" id='login-input' placeholder="Enter your answer here...">
+        </div>
+        <div class="col-3 py-2">
+          <button class="btn btn-primary btn-lg">Retry</button>
+        </div>
+      </div>
+      <div class="row justify-content-end text-center">
+        <div class="col-3">
+          <button class="btn btn-primary btn-lg" onclick="disp_question()">Skip</button>
+        </div>
+        <div class="col-3">
+          <button class="btn btn-primary btn-lg" onclick="disp_question()" id='next'>Next</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-3 d-none d-xl-block">
 
-    function showHint(qi,hi) {
-      if(hi==0) {
-        document.getElementById('hint'+qi+0).style.display="block";
-        document.getElementById('hint'+qi+1).style.display="none";
-        document.getElementById('hint'+qi+2).style.display="none";
-        document.getElementById('hint'+qi+3).style.display="none";
-      }
-      else if(hi==1) {
-        document.getElementById('hint'+qi+1).style.display="block";
-        document.getElementById('hint'+qi+0).style.display="none";
-        document.getElementById('hint'+qi+2).style.display="none";
-        document.getElementById('hint'+qi+3).style.display="none";
-      }
-      else if(hi==2) {
-        document.getElementById('hint'+qi+2).style.display="block";
-        document.getElementById('hint'+qi+1).style.display="none";
-        document.getElementById('hint'+qi+0).style.display="none";
-        document.getElementById('hint'+qi+3).style.display="none";
-      }
-      else{
-        document.getElementById('hint'+qi+3).style.display="block";
-        document.getElementById('hint'+qi+1).style.display="none";
-        document.getElementById('hint'+qi+2).style.display="none";
-        document.getElementById('hint'+qi+0).style.display="none";
-      }
-    }
-    showTab(currentTab);
-    var modal = document.getElementById('myModal');
-    // To display the modal//
-    function dispmodal(srcc){
-      var modal = document.getElementById('myModal');
-      var modalImg = document.getElementById("modal-img");
-      modal.style.display = "block";
-      modalImg.src = srcc;
-      timer=setTimeout(function() {
-        modal.style.display = "none";
-        }, 10000);
-    }
-    // Handle the hint button event //
-    function hint(srcc) {
-      k=currentTab+1;
-      dispmodal(srcc)
-      if(hint_i==0){
-        document.getElementById('butt0'+k).style.display="block";
-        hint_i++;
-        showHint(k,hint_i);
-      }
-      else if(hint_i==1){
-        document.getElementById('butt1'+k).style.display="block";
-        hint_i++;
-        showHint(k,hint_i);
-      }
-      else if(hint_i==2){
-        document.getElementById('butt2'+k).style.display="block";
-        hint_i++;
-        showHint(k,hint_i);
-      }
-      else if(hint_i==3){
-        document.getElementById('butt3'+k).style.display="block";
-        hint_i++;
-        console.log('hint'+(currentTab+1)+(hint_i-1))
-        document.getElementById('hint'+(currentTab+1)+(hint_i-1)).disabled=true;
-      }
-    }
-    // To display the tab on next button click//
-    function showTab(n) {
-      var x = document.getElementsByClassName("tab");
-      x[n].style.display = "block";
-      if (n == (x.length - 1)) {
-        document.getElementById("nextBtn").innerHTML = "Submit";
-      } else {
-        document.getElementById("nextBtn").innerHTML = "Next";
-      }
-      fixStepIndicator(n)
-    }
-    
-    function nextPrev(n,ans) {
-      var val=validateForm();
-      if(!val){
-        return false;
-      }
-      console.log(JSON.parse(ans)[currentTab]);
-      console.log(document.getElementsByName('ans'));
-      if((JSON.parse(ans)[currentTab])===(document.getElementsByName('ans')[currentTab].value)) {
-        score=score+100-hint_i*10;
-        console.log("Correct")
-        console.log(score);
-        noofhints.push(hint_i);
-        anscrt.push('C')
-        console.log(JSON.stringify(noofhints));
-        console.log(JSON.stringify(anscrt));
-        document.getElementsByClassName("step")[currentTab].className += " finish";
-      }
-      else{
-        console.log("wrong");
-        console.log(score);
-        noofhints.push(hint_i);
-        anscrt.push('W')
-        console.log(JSON.stringify(noofhints));
-        console.log(JSON.stringify(anscrt));
-        document.getElementsByClassName("step")[currentTab].className += " wrong";
-      }
-      var x = document.getElementsByClassName("tab");
-      x[currentTab].style.display = "none";
-      currentTab = currentTab + n;
-      if(document.getElementById("nextBtn").innerHTML ==="Submit"){
-        console.log("Form Submiited")
-        document.getElementById("score").value=score;
-        document.getElementById("hints").value=JSON.stringify(noofhints);
-        document.getElementById("anscrt").value=JSON.stringify(anscrt);
-        document.getElementById("testForm").submit();
-        document.getElementById("nextBtn").innerHTML="Submitting..."
-        document.getElementById("nextBtn").disabled = true;
-      }
-      hint_i=0;
-      showTab(currentTab);
-      showHint(currentTab+1,hint_i);
-    }
-    function fixStepIndicator(n) {
-      var i, x = document.getElementsByClassName("step");
-      for (i = 0; i < x.length; i++) {
-        x[i].className = x[i].className.replace(" active", "");
-      }
-      x[n].className += " active";
-    }
-    function validateForm() {
-      var x, y, i, valid = true;
-      x = document.getElementsByClassName("tab");
-      y = x[currentTab].getElementsByTagName("input");
-      if (y[0].value == "") {
-          y[0].className += " invalid";
-          valid = false;
-      }
-      return valid;
-    }
-    var span = document.getElementsByClassName("close")[0];
-    span.onclick = function() { 
-      modal.style.display = "none";
-      clearTimeout(timer);
-    }
-</script>
+    </div>
+  </div>
+</div>
+
+
 <script type="text/javascript">
-var q='<%=questionIds[0]%>';
-console.log(q);
-disp_question(q)
-function disp_question(){
-  fetch('/question/<%=testid%>/'+q)
-  .then(response => response.json())
-  .then(question => {
-    console.log(question)
-    document.getElementById('img').src = 'data:image/'+question.question.contentType+';base64,'+arrayBufferToBase64(question.question.data.data);
-  });
-}
-
-function arrayBufferToBase64(buffer) {
-    var binary = '';
-    var bytes = [].slice.call(new Uint8Array(buffer));
-    bytes.forEach((b) => binary += String.fromCharCode(b));
-    return window.btoa(binary);
-};
+  var q='<%=questionIds%>'.split(',')
+  curq=0
+  disp_question();
+  function disp_question(){
+    if(document.getElementById('next').textContent=="Submit"){
+      alert('End...!')
+    }
+    console.log("disp_question")
+    fetch('/question/<%=testid%>/'+q[curq])
+    .then(response => response.json())
+    .then(question => {
+      document.getElementById('img').src = 'data:image/'+question.question.contentType+';base64,'+arrayBufferToBase64(question.question.data.data);
+    });
+    curq=curq+1;
+    if(curq==q.length){
+      document.getElementById('next').textContent="Submit";
+    }
+  }
+  function arrayBufferToBase64(buffer) {
+      var binary = '';
+      var bytes = [].slice.call(new Uint8Array(buffer));
+      bytes.forEach((b) => binary += String.fromCharCode(b));
+      return window.btoa(binary);
+  };
 </script>
-
 <%- include("partials/footer") %>
