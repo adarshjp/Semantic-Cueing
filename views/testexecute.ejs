@@ -1,70 +1,142 @@
 <%- include("partials/header") %>
 <div class="container-fluid">
-  <%i=2%>
-  <div class="row justify-content-center py-5" style="height: 100vh;">
-    <div class="col-12 col-lg-9">
-      <div class="row justify-content-center">
-        <div class="col-10 col-sm-10 col-md-10 col-xl-9">
-          <img src="" id="img" class="img-fluid">
+  <div class="row justify-content-center p-3" style="height: 100vh;">
+    <div class="col-12 col-lg-8 shadow-lg rounded">
+      <div class="row justify-content-center align-items-center h-50">
+        <div class="col-12 col-sm-10 col-md-10 col-lg-6">
+          <img src="" id="img" class="img-fluid" style="max-width:350px;max-height: 350px;">
         </div>
       </div>
-      <div class="row py-2 justify-content-center text-center">
+      <div class="row pt-4 justify-content-center text-center align-items-center h-20">
         <div class="col-6 col-sm-3 py-2">
-          <button class="btn btn-primary btn-lg">Hint 1</button>
+          <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#hintModal" id="hint_0" data-bs-whatever="0">Hint 1</button>
         </div>
         <div class="col-6 col-sm-3 py-2">
-          <button class="btn btn-primary btn-lg">Hint 2</button>
+          <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#hintModal" id="hint_1" data-bs-whatever="1">Hint 2</button>
+          
         </div>
         <div class="col-6 col-sm-3 py-2">
-          <button class="btn btn-primary btn-lg">Hint 3</button>
+          <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#hintModal" id="hint_2" data-bs-whatever="2">Hint 3</button>
+         
         </div>
         <div class="col-6 col-sm-3 py-2">
-          <button class="btn btn-primary btn-lg">Hint 4</button>
+          <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#hintModal" id="hint_3" data-bs-whatever="3">Hint 4</button>
+          
         </div>
       </div>
       <div class="row justify-content-center py-2 text-center">
-        <div class="col-8">
-          <input type="text" id='login-input' placeholder="Enter your answer here...">
-        </div>
-        <div class="col-3 py-2">
-          <button class="btn btn-primary btn-lg">Retry</button>
+        <div class="col-10">
+          <input type="text" id='login-input' placeholder="Enter your answer here..." onkeyup="check_ans(this)">
         </div>
       </div>
-      <div class="row justify-content-end text-center">
-        <div class="col-3">
+      <div class="row justify-content-center py-2 text-center ">
+        <div class="col-4 col-md-2">
           <button class="btn btn-primary btn-lg" onclick="disp_question()">Skip</button>
         </div>
-        <div class="col-3">
+        <div class="col-4 col-md-2">
           <button class="btn btn-primary btn-lg" onclick="disp_question()" id='next'>Next</button>
         </div>
       </div>
     </div>
-    <div class="col-3 d-none d-xl-block">
-
+    <div class="mx-3 col-3 d-none d-lg-block shadow-lg rounded">
+      <div class="row text-center align-items-center h-25">
+        <div class="col-12">
+          <h6>Test ID : <%= testid %></h6>
+        </div>
+      </div>
+      <div class="row text-center align-items-center">
+        <%var i=1%>
+        <%questionIds.forEach((questionIds)=>{%>
+          <div class="col-3 py-1">
+            <button type="button" class="btn btn-primary btn-square-md" onclick="disp_question('<%=questionIds%>')"><%=i%></button>
+          </div>
+          <%i=i+1;%>
+        <%})%>
+      </div>
+      <div class="row h-25"></div>
     </div>
   </div>
 </div>
-
-
+<%- include("partials/hintModal") %>
 <script type="text/javascript">
   var q='<%=questionIds%>'.split(',')
-  curq=0
+  var q1;
+  var curq=3;
+  var hints_taken=0;
+  var ans={'0':0,'1':0,'2':0,'3':0,'4':0};
+  var unans={0:0,1:0,2:0,3:0,4:0};
+
   disp_question();
+
+  function check_ans(e){
+    var val=e.value.toLowerCase().split(' ')
+    console.log(val)
+    for(var i=0;i<val.length;i++){
+      if(q1.answer.toLowerCase()==val[i]){
+        ans[hints_taken.toString()]++;
+        console.log(ans)
+        alert('Crt ans..!')
+      }
+    }
+  }
+
+  function hint_but_change(){
+    for(var i=0;i<4;i++){
+      document.getElementById('hint_'+i).classList.remove('btn-secondary');
+      document.getElementById('hint_'+i).classList.add('btn-primary');
+      if(i!=0){
+        document.getElementById('hint_'+i).disabled = true;
+      }
+    }
+  }
+  
   function disp_question(){
     if(document.getElementById('next').textContent=="Submit"){
       alert('End...!')
+      return;
     }
-    console.log("disp_question")
     fetch('/question/<%=testid%>/'+q[curq])
     .then(response => response.json())
     .then(question => {
+      q1=question
       document.getElementById('img').src = 'data:image/'+question.question.contentType+';base64,'+arrayBufferToBase64(question.question.data.data);
     });
     curq=curq+1;
     if(curq==q.length){
       document.getElementById('next').textContent="Submit";
     }
+    hint_but_change();
   }
+
+  function hint_but(hint){
+    hint=parseInt(hint);
+    cur_hint=document.getElementById('hint_'+hint)
+    if(hint!=3){
+      next_hint=document.getElementById('hint_'+(hint+1))
+      cur_hint.classList.remove('btn-primary');
+      cur_hint.classList.add('btn-secondary');
+      next_hint.disabled=false;
+    }else{
+      cur_hint.classList.remove('btn-primary');
+      cur_hint.classList.add('btn-secondary');
+    }
+    hints_taken++;
+    console.log(hints_taken)
+  }
+
+  function closeModal(){
+    $('#hintModal').modal('hide');
+  }
+
+  var hintModal = document.getElementById('hintModal')
+  hintModal.addEventListener('show.bs.modal', function (event) {
+    var hint = event.relatedTarget
+    var hint = hint.getAttribute('data-bs-whatever')
+    document.getElementById('hint_img').src = 'data:image/'+q1.hints[hint].hint.contentType+';base64,'+arrayBufferToBase64(q1.hints[hint].hint.data.data);
+    hint_but(hint)
+    setTimeout(closeModal, 2000);
+  })
+
   function arrayBufferToBase64(buffer) {
       var binary = '';
       var bytes = [].slice.call(new Uint8Array(buffer));
@@ -72,4 +144,6 @@
       return window.btoa(binary);
   };
 </script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <%- include("partials/footer") %>
