@@ -63,3 +63,24 @@ exports.get_question = (req, res) => {
             console.log(err)
         })
 }
+
+exports.get_question = (req, res) => {
+    Question.findById(req.params.questionid)
+        .then((question) => {
+            res.status(200).send(question)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+
+exports.update_pauseq_test = (req, res) => {
+    Test.findByIdAndUpdate(req.params.id,{$inc:{pauesdqno:1},status:'paused'},{ new: true })
+        .then((test) => {
+            console.log(test)
+            res.json({ message: "Success"})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}

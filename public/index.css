@@ -645,3 +645,76 @@ opacity: 1;
 /* * {
   outline: 1px solid red;
 } */
+
+#spinner:not([hidden]) {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#spinner::after {
+  content: "";
+  width: 80px;
+  height: 80px;
+  border-top: 5px solid #6C63FF;
+  border-radius: 100%;
+  will-change: transform;
+  animation: spin 1s infinite linear
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.form {
+  position: relative
+}
+
+.form .fa-search {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: #9ca3af;
+}
+
+.form span {
+  position: absolute;
+  right: 17px;
+  top: 13px;
+  padding: 2px;
+  border-left: 1px solid #d1d5db
+}
+
+.left-pan {
+  padding-left: 5px;
+  cursor: pointer;
+}
+
+.left-pan i {
+  padding-left: 10px
+}
+
+.form-input {
+  height: 55px;
+  text-indent: 33px;
+  border-radius: 10px;
+  background-color: #eee;
+	border: 2px solid #6C63FF;
+	padding: 10px 0px;
+}
+
+.form-input:focus {
+  box-shadow: none;
+  background-color: #eee;
+  border: 2px solid #6C63FF;
+}

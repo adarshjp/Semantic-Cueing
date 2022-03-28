@@ -1,44 +1,41 @@
 <%- include("partials/header") %>
-<div class="container-fluid">
-  <div class="row justify-content-center p-3" style="height: 100vh;">
-    <div class="col-12 col-lg-8 shadow-lg rounded">
-      <div class="row justify-content-center align-items-center h-50">
-        <div class="col-12 col-sm-10 col-md-10 col-lg-6">
-          <img src="" id="img" class="img-fluid" style="max-width:350px;max-height: 350px;">
+<div class="container-fluid d-none" id='test'>
+  <div class="row justify-content-center p-3" style="height: 100vh">
+    <div class="col-12 col-xl-9 shadow-lg rounded-lg p-md-5">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-10 col-sm-10 col-md-10 col-lg-6 p-1">
+          <img src="" id="img" class="img-fluid" style="width:80vw;height: 49vh;">
         </div>
       </div>
-      <div class="row pt-4 justify-content-center text-center align-items-center h-20">
-        <div class="col-6 col-sm-3 py-2">
-          <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#hintModal" id="hint_0" data-bs-whatever="0">Hint 1</button>
-        </div>
-        <div class="col-6 col-sm-3 py-2">
-          <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#hintModal" id="hint_1" data-bs-whatever="1">Hint 2</button>
-          
-        </div>
-        <div class="col-6 col-sm-3 py-2">
-          <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#hintModal" id="hint_2" data-bs-whatever="2">Hint 3</button>
-         
-        </div>
-        <div class="col-6 col-sm-3 py-2">
-          <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#hintModal" id="hint_3" data-bs-whatever="3">Hint 4</button>
-          
-        </div>
+      <div class="row pt-4 justify-content-center text-center align-items-center">
+        <%for (var i = 0;i< 4;i++){%>
+          <div class="col-6 col-sm-3 py-2">
+            <button type="button" class="btn btn-warning btn-lg" data-bs-toggle="modal" data-bs-target="#hintModal" id="hint_<%=i%>" data-bs-whatever="<%=i%>">Hint <%=i+1%> <i class="fa fa-light fa-lightbulb"></i></button>
+          </div>
+        <%}%>
       </div>
-      <div class="row justify-content-center py-2 text-center">
-        <div class="col-10">
-          <input type="text" id='login-input' placeholder="Enter your answer here..." onkeyup="check_ans(this)">
+      <div class="row justify-content-center pt-3 text-center">
+        <div class="col-11 col-md-5 py-2">
+          <div class="form"> 
+            <input type="text" class="form-control form-input" placeholder="Enter your answer here..." id="answer"> 
+            <span class="left-pan">
+              <i class="fa fa-microphone" onclick="startDictation()"></i>
+            </span> 
+          </div>
         </div>
-      </div>
-      <div class="row justify-content-center py-2 text-center ">
-        <div class="col-4 col-md-2">
-          <button class="btn btn-primary btn-lg" onclick="disp_question()">Skip</button>
+        <div class="col-4 col-md-2 pt-3">
+          <button class="btn btn-success btn-lg" onclick="disp_question()" id='next'>Next</button>
         </div>
-        <div class="col-4 col-md-2">
-          <button class="btn btn-primary btn-lg" onclick="disp_question()" id='next'>Next</button>
+        <div class="col-3 col-md-2 pt-3">
+          <button class="btn btn-info btn-lg" onclick="disp_question()" id='next'>Skip</button>
+        </div>
+        <div class="col-5 col-md-3 pt-3">
+          <button class="btn btn-primary btn-lg" onclick="pause"><b>Pause</b> <i class="fa fa-pause"></i></button>
         </div>
       </div>
     </div>
-    <div class="mx-3 col-3 d-none d-lg-block shadow-lg rounded">
+
+    <div class="mx-3 col-2 d-none d-xl-block shadow-lg rounded">
       <div class="row text-center align-items-center h-25">
         <div class="col-12">
           <h6>Test ID : <%= testid %></h6>
@@ -48,7 +45,7 @@
         <%var i=1%>
         <%questionIds.forEach((questionIds)=>{%>
           <div class="col-3 py-1">
-            <button type="button" class="btn btn-primary btn-square-md" onclick="disp_question('<%=questionIds%>')"><%=i%></button>
+            <button type="button" class="btn btn-primary btn-square-md" id="'<%=i%>'"><%=i%></button>
           </div>
           <%i=i+1;%>
         <%})%>
@@ -57,33 +54,64 @@
     </div>
   </div>
 </div>
+<div hidden id="spinner"></div>
 <%- include("partials/hintModal") %>
+<%- include("partials/instructionModal") %>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script type="text/javascript">
+
+  $(window).on('load', function() {
+    $('#instModal').modal('show');
+  });
+  var hintModal = document.getElementById('instModal')
+  hintModal.addEventListener('hide.bs.modal', function (event) {
+    disp_question();
+  })
+
+  const spinner = document.getElementById("spinner"); 
+  const test = document.getElementById("test");
+
+  //------------ To Keep Track of Test scores -----------------------//
   var q='<%=questionIds%>'.split(',')
-  var q1;
-  var curq=3;
+  var curq;   //Stores curq question details
+  var curq_no=0;
   var hints_taken=0;
   var ans={'0':0,'1':0,'2':0,'3':0,'4':0};
-  var unans={0:0,1:0,2:0,3:0,4:0};
+  var unans={'0':0,'1':0,'2':0,'3':0,'4':0};
+  var score=0;
+  //------------ End -----------------------//
 
-  disp_question();
+  //------------ Text to speech -----------------------//
+    var msg = new SpeechSynthesisUtterance();
+    var voices = window.speechSynthesis.getVoices();
+    msg.voice = voices[10]; 
+    msg.volume = 1; // From 0 to 1
+    msg.rate = 0.5; // From 0.1 to 10
+    msg.pitch = 1; // From 0 to 2
+    msg.lang = 'en-IN';
+  //------------ End -----------------------//
 
-  function check_ans(e){
-    var val=e.value.toLowerCase().split(' ')
-    console.log(val)
+  function check_ans(){
+    var val=document.getElementById('answer').value.toLowerCase().split(' ')
     for(var i=0;i<val.length;i++){
-      if(q1.answer.toLowerCase()==val[i]){
+      if(curq.answer.toLowerCase()==val[i]){
+        score=score+(100-hints_taken*10)
+        console.log(score)
         ans[hints_taken.toString()]++;
         console.log(ans)
-        alert('Crt ans..!')
+        document.getElementById('answer').value=''
+        return;
       }
     }
+    unans[hints_taken.toString()]++;
+    console.log(unans)
   }
 
   function hint_but_change(){
     for(var i=0;i<4;i++){
       document.getElementById('hint_'+i).classList.remove('btn-secondary');
-      document.getElementById('hint_'+i).classList.add('btn-primary');
+      document.getElementById('hint_'+i).classList.add('btn-warning');
       if(i!=0){
         document.getElementById('hint_'+i).disabled = true;
       }
@@ -91,18 +119,43 @@
   }
   
   function disp_question(){
+    test.classList.add('d-none')
+    spinner.removeAttribute('hidden');
+    if(curq_no!=0){
+      check_ans();
+      hints_taken=0;
+      fetch('/test/<%=testid%>',{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          score: score,
+          ans : json.stringify(ans),
+          unans : json.stringify(unans)
+        })
+      })
+      .then(response => response.json())
+      .then(test => {
+        console.log(test.message)
+      });
+    }
     if(document.getElementById('next').textContent=="Submit"){
       alert('End...!')
       return;
     }
-    fetch('/question/<%=testid%>/'+q[curq])
+    fetch('/question/<%=testid%>/'+q[curq_no])
     .then(response => response.json())
     .then(question => {
-      q1=question
+      spinner.setAttribute('hidden', '');
+      test.classList.remove('d-none')
+      //curq_no=test.pauesdqno create a api to fetch test details
+      curq=question
       document.getElementById('img').src = 'data:image/'+question.question.contentType+';base64,'+arrayBufferToBase64(question.question.data.data);
     });
-    curq=curq+1;
-    if(curq==q.length){
+    curq_no++;
+    if(curq_no==q.length){
       document.getElementById('next').textContent="Submit";
     }
     hint_but_change();
@@ -113,15 +166,14 @@
     cur_hint=document.getElementById('hint_'+hint)
     if(hint!=3){
       next_hint=document.getElementById('hint_'+(hint+1))
-      cur_hint.classList.remove('btn-primary');
+      cur_hint.classList.remove('btn-warning');
       cur_hint.classList.add('btn-secondary');
       next_hint.disabled=false;
     }else{
-      cur_hint.classList.remove('btn-primary');
+      cur_hint.classList.remove('btn-warning');
       cur_hint.classList.add('btn-secondary');
     }
     hints_taken++;
-    console.log(hints_taken)
   }
 
   function closeModal(){
@@ -132,9 +184,12 @@
   hintModal.addEventListener('show.bs.modal', function (event) {
     var hint = event.relatedTarget
     var hint = hint.getAttribute('data-bs-whatever')
-    document.getElementById('hint_img').src = 'data:image/'+q1.hints[hint].hint.contentType+';base64,'+arrayBufferToBase64(q1.hints[hint].hint.data.data);
+    document.getElementById('hint_img').src = 'data:image/'+curq.hints[hint].hint.contentType+';base64,'+arrayBufferToBase64(curq.hints[hint].hint.data.data);
     hint_but(hint)
-    setTimeout(closeModal, 2000);
+    setTimeout(3000);
+    msg.text = curq.hints[hint].score;
+    window.speechSynthesis.speak(msg);
+    setTimeout(closeModal, 10000);
   })
 
   function arrayBufferToBase64(buffer) {
@@ -143,7 +198,24 @@
       bytes.forEach((b) => binary += String.fromCharCode(b));
       return window.btoa(binary);
   };
-</script>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  function startDictation() {
+      if (window.hasOwnProperty('webkitSpeechRecognition')) {
+        var recognition = new webkitSpeechRecognition();
+  
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = 'en-US';
+        recognition.start();
+  
+        recognition.onresult = function (e) {
+          document.getElementById('answer').value = e.results[0][0].transcript;
+          recognition.stop();
+        };
+        recognition.onerror = function (e) {
+          recognition.stop();
+        };
+      }
+    }
+</script>
 <%- include("partials/footer") %>
