@@ -23,14 +23,14 @@
             </span> 
           </div>
         </div>
-        <div class="col-4 col-md-2 pt-3">
-          <button class="btn btn-success btn-lg" onclick="disp_question()" id='next'>Next</button>
+        <div class="col-4 col-md-2 py-2">
+          <button class="btn btn-success btn-lg" onclick="next_q('next')" id='next'>Next</button>
         </div>
-        <div class="col-3 col-md-2 pt-3">
-          <button class="btn btn-info btn-lg" onclick="disp_question()" id='next'>Skip</button>
+        <div class="col-3 col-md-2 py-2">
+          <button class="btn btn-info btn-lg" onclick="next_q('skip')" id='next'>Skip</button>
         </div>
-        <div class="col-5 col-md-3 pt-3">
-          <button class="btn btn-primary btn-lg" onclick="pause"><b>Pause</b> <i class="fa fa-pause"></i></button>
+        <div class="col-5 col-md-3 py-2">
+          <button class="btn btn-primary btn-lg" onclick="close_test()"><b>Pause</b> <i class="fa fa-pause"></i></button>
         </div>
       </div>
     </div>
@@ -64,9 +64,10 @@
   $(window).on('load', function() {
     $('#instModal').modal('show');
   });
+
   var hintModal = document.getElementById('instModal')
   hintModal.addEventListener('hide.bs.modal', function (event) {
-    disp_question();
+    get_initial_test_details();
   })
 
   const spinner = document.getElementById("spinner"); 
@@ -74,9 +75,10 @@
 
   //------------ To Keep Track of Test scores -----------------------//
   var q='<%=questionIds%>'.split(',')
-  var curq;   //Stores curq question details
+  var curq=null;   //Stores curq question details
   var curq_no=0;
   var hints_taken=0;
+  var hint_status={'1':0,'2':0,'3':0,'4':0}
   var ans={'0':0,'1':0,'2':0,'3':0,'4':0};
   var unans={'0':0,'1':0,'2':0,'3':0,'4':0};
   var score=0;
@@ -92,20 +94,29 @@
     msg.lang = 'en-IN';
   //------------ End -----------------------//
 
-  function check_ans(){
+  function get_initial_test_details(){
+    fetch('/test/<%=testid%>')
+    .then(response => response.json())
+    .then(test=>{
+      ans=JSON.parse(test.answered)
+      unans=JSON.parse(test.unanswered)
+      score=parseInt(test.score);
+      curq_no=parseInt(test.pauesdqno);
+      disp_question();
+    });
+  }
+
+  function check_ans(a){
     var val=document.getElementById('answer').value.toLowerCase().split(' ')
+    document.getElementById('answer').value=''
     for(var i=0;i<val.length;i++){
-      if(curq.answer.toLowerCase()==val[i]){
+      if(a.toLowerCase() === val[i]){
         score=score+(100-hints_taken*10)
-        console.log(score)
         ans[hints_taken.toString()]++;
-        console.log(ans)
-        document.getElementById('answer').value=''
         return;
       }
     }
     unans[hints_taken.toString()]++;
-    console.log(unans)
   }
 
   function hint_but_change(){
@@ -121,44 +132,35 @@
   function disp_question(){
     test.classList.add('d-none')
     spinner.removeAttribute('hidden');
-    if(curq_no!=0){
-      check_ans();
-      hints_taken=0;
-      fetch('/test/<%=testid%>',{
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify({
-          score: score,
-          ans : json.stringify(ans),
-          unans : json.stringify(unans)
-        })
-      })
-      .then(response => response.json())
-      .then(test => {
-        console.log(test.message)
-      });
-    }
-    if(document.getElementById('next').textContent=="Submit"){
-      alert('End...!')
-      return;
+    if(curq_no<q.length && curq!=null){
+        check_ans(curq.answer);
+        hints_taken=0;
+        hint_status={'1':0,'2':0,'3':0,'4':0}
+        console.log(curq_no)
+        update_test('pauesd');
+    }else if(curq_no==q.length){
+        check_ans(curq.answer);
+        update_test('completed');
+        alert('End...!')
+        close_test();
+        console.log(curq_no)
+        return;
     }
     fetch('/question/<%=testid%>/'+q[curq_no])
     .then(response => response.json())
     .then(question => {
       spinner.setAttribute('hidden', '');
       test.classList.remove('d-none')
-      //curq_no=test.pauesdqno create a api to fetch test details
       curq=question
       document.getElementById('img').src = 'data:image/'+question.question.contentType+';base64,'+arrayBufferToBase64(question.question.data.data);
+      setTimeout(2000)
+      play_audio(curq.score)
+      curq_no++;
+      if(curq_no==q.length){
+        document.getElementById('next').textContent="Submit";
+      }
+      hint_but_change();
     });
-    curq_no++;
-    if(curq_no==q.length){
-      document.getElementById('next').textContent="Submit";
-    }
-    hint_but_change();
   }
 
   function hint_but(hint){
@@ -173,7 +175,10 @@
       cur_hint.classList.remove('btn-warning');
       cur_hint.classList.add('btn-secondary');
     }
-    hints_taken++;
+    if(hint_status[''+(hint+1)]!=1){
+      hint_status[''+(hint+1)]=1;
+      hints_taken++;
+    }
   }
 
   function closeModal(){
@@ -186,10 +191,8 @@
     var hint = hint.getAttribute('data-bs-whatever')
     document.getElementById('hint_img').src = 'data:image/'+curq.hints[hint].hint.contentType+';base64,'+arrayBufferToBase64(curq.hints[hint].hint.data.data);
     hint_but(hint)
-    setTimeout(3000);
-    msg.text = curq.hints[hint].score;
-    window.speechSynthesis.speak(msg);
-    setTimeout(closeModal, 10000);
+    play_audio(curq.hints[hint].score);
+    setTimeout(closeModal, 2000);
   })
 
   function arrayBufferToBase64(buffer) {
@@ -198,6 +201,44 @@
       bytes.forEach((b) => binary += String.fromCharCode(b));
       return window.btoa(binary);
   };
+
+  function play_audio(txt){
+    setTimeout(2000);
+    msg.text = txt;
+    window.speechSynthesis.speak(msg);
+  }
+
+  function update_test(status){
+    fetch('/test/<%=testid%>',{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          status: status,
+          score: score,
+          ans : JSON.stringify(ans),
+          unans : JSON.stringify(unans)
+        })
+      })
+      .then(response => response.json())
+      .then(test => {
+        console.log(test.message)
+      });
+  }
+
+  function close_test(){
+    window.close();
+  }
+
+  function next_q(val){
+    if(val==='next' && document.getElementById('answer').value===''){
+      alert('Please enter your answer...!');
+      return;
+    }
+    disp_question()
+  }
 
   function startDictation() {
       if (window.hasOwnProperty('webkitSpeechRecognition')) {

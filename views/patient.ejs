@@ -30,13 +30,21 @@
               </p>
               <p class="card-text">Level: <%=test.level%></p>
               <div class="d-flex justify-content-end">
-                <a
-                  href="/start/test/<%=test._id%>"
-                  class="btn white"
-                  id="review"
-                  target="_blank"
-                  >Start <i class="fas fa-play"></i
-                ></a>
+                <% if(test.status != 'completed') { %>
+                  <% if(test.status == "pending") {%>
+                    <button class="btn btn-lg btn-primary white" onclick="test_execute('<%=test._id%>')">
+                      Start test <i class="fas fa-play"></i>
+                    </button>
+                  <%}else{%> 
+                    <button class="btn btn-lg btn-secondary white" onclick="test_execute('<%=test._id%>')">
+                      Resume <i class="fab fa-rev"></i>
+                    </button>
+                  <%}%>
+                <%}else{%>
+                  <button class="btn btn-lg btn-success white">
+                    View Report <i class="fas fa-poll"></i>
+                  </button>
+                <%}%>
               </div>
             </div>
           </div>
@@ -59,5 +67,17 @@
 </div>
 
 <div class="patientclass p-2 pt-5"></div>
+
+<script type="text/javascript">
+  function test_execute(id){
+    var win = window.open("/start/test/"+id);
+    var timer = setInterval(function() {
+        if (win.closed) {
+            clearInterval(timer);
+            window.location.reload();
+        }
+    }, 500);
+  }
+</script>
 
 <%- include("partials/footer") %>
