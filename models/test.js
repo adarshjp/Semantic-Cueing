@@ -31,7 +31,19 @@ const testSchema = new mongoose.Schema({
   },
   pauesdqno: {
     type: Number,
-    default: -1,
+    default: 0,
+  },
+  score: {
+    type: Number,
+    default: 0,
+  },
+  answered: {
+    type: String,
+    default: "{\"0\":0,\"1\":0,\"2\":0,\"3\":0,\"4\":0}"
+  },
+  unanswered: {
+    type: String,
+    default: "{\"0\":0,\"1\":0,\"2\":0,\"3\":0,\"4\":0}"
   },
 });
 module.exports = mongoose.model("Test", testSchema);
