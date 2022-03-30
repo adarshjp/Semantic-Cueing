@@ -74,13 +74,28 @@ exports.get_question = (req, res) => {
         })
 }
 
-exports.update_pauseq_test = (req, res) => {
-    Test.findByIdAndUpdate(req.params.id,{$inc:{pauesdqno:1},status:'paused'},{ new: true })
-        .then((test) => {
-            console.log(test)
+exports.update_test_status = (req, res) => {
+    Test.findOneAndUpdate(
+        { _id: req.params.id},
+        {
+            $inc:{pauesdqno:1},status:req.body.status,score:req.body.score,answered:req.body.ans,unanswered:req.body.unans
+        },
+        { new: true }
+        ).then((test) => {
             res.json({ message: "Success"})
+        })
+        .catch((err) => {
+            console.log(err)
+        });
+}
+
+exports.get_test_details = (req, res) => {
+    Test.findById(req.params.id,{pauesdqno:1,score:1,answered:1,unanswered:1})
+        .then((test) => {
+            res.status(200).send(test)
         })
         .catch((err) => {
             console.log(err)
         })
 }
+
