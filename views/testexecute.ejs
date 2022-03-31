@@ -66,7 +66,7 @@
 <%- include("partials/testSubModal") %>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <script type="text/javascript">
 
   $(window).on('load', function() {
@@ -92,6 +92,29 @@
   var score=0;
   //------------ End -----------------------//
 
+  //------------ Progress Chart -------------//
+  var data = {
+          labels: [
+              "Attemted",
+              "To be attemted",
+          ],
+          datasets: [
+              {
+                  data: [curq_no, q.length-curq_no],
+                  backgroundColor: [
+                      "#10ba00",
+                      "#9ca3af",
+                      
+                  ],
+                  hoverBackgroundColor: [
+                      "#0b8000",
+                      "#9ba5b6",
+                  ]
+              }]
+      };
+      var myDoughnutChart;
+  //------------------ End -----------------------//
+
   //------------ Text to speech -----------------------//
     var msg = new SpeechSynthesisUtterance();
     var voices = window.speechSynthesis.getVoices();
@@ -112,8 +135,21 @@
       curq_no=parseInt(test.pauesdqno);
       document.getElementById('level').textContent='Test Level : '+test.level;
       document.getElementById('score').textContent='Score Obtained : '+test.score;
-      disp_question();
+      create_chart();
     });
+  }
+
+  function create_chart(){
+      var ctx = document.getElementById("myChart");
+      myDoughnutChart = new Chart(ctx, {
+          type: 'doughnut',
+          data: data,
+          options: {
+            rotation:  86* Math.PI,
+            circumference: 57.25 * Math.PI
+          }
+      });
+      disp_question();
   }
 
   function check_ans(a){
@@ -268,41 +304,10 @@
       }
     }
 
-    var data = {
-          labels: [
-              "Attemted",
-              "To be attemted",
-          ],
-          datasets: [
-              {
-                  data: [curq_no, q.length-curq_no],
-                  backgroundColor: [
-                      "#10ba00",
-                      "#9ca3af",
-                      
-                  ],
-                  hoverBackgroundColor: [
-                      "#0b8000",
-                      "#9ba5b6",
-                  ]
-              }]
-      };
-      var ctx = document.getElementById("myChart");
-      var myDoughnutChart = new Chart(ctx, {
-          type: 'doughnut',
-          data: data,
-          options: {
-            rotation:  86* Math.PI,
-            circumference: 57.25 * Math.PI
-          }
-      });
-
     function progress_chart(){
       data.datasets[0].data=[curq_no,q.length-curq_no]
       myDoughnutChart.data.datasets[0].data=[curq_no,q.length-curq_no];
       myDoughnutChart.update();
     }
-</script>
-<script>
 </script>
 <%- include("partials/footer") %>
