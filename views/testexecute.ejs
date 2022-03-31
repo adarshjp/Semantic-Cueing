@@ -36,12 +36,14 @@
     </div>
 
     <div class="mx-3 col-2 d-none d-xl-block shadow-lg rounded">
-      <div class="row text-center align-items-center h-25">
+      <div class="row text-center align-items-center h-25 my-3">
         <div class="col-12">
-          <h6>Test ID : <%= testid %></h6>
+          <h6 class="my-2">Test ID : <%= testid %></h6>
+          <h6 id='level' class="my-2"></h6>
+          <h6 id='score' class="my-2">Score : 1000</h6>
         </div>
       </div>
-      <div class="row text-center align-items-center">
+      <div class="row text-center align-items-center my-5">
         <%var i=1%>
         <%questionIds.forEach((questionIds)=>{%>
           <div class="col-3 py-1">
@@ -50,15 +52,21 @@
           <%i=i+1;%>
         <%})%>
       </div>
-      <div class="row h-25"></div>
+      <div class="row h-25 mt-5">
+        <div class="col-12">
+          <canvas id="myChart"></canvas>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 <div hidden id="spinner"></div>
 <%- include("partials/hintModal") %>
 <%- include("partials/instructionModal") %>
+<%- include("partials/testSubModal") %>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript">
 
   $(window).on('load', function() {
@@ -102,6 +110,8 @@
       unans=JSON.parse(test.unanswered)
       score=parseInt(test.score);
       curq_no=parseInt(test.pauesdqno);
+      document.getElementById('level').textContent='Test Level : '+test.level;
+      document.getElementById('score').textContent='Score Obtained : '+test.score;
       disp_question();
     });
   }
@@ -136,16 +146,15 @@
         check_ans(curq.answer);
         hints_taken=0;
         hint_status={'1':0,'2':0,'3':0,'4':0}
-        console.log(curq_no)
         update_test('pauesd');
     }else if(curq_no==q.length){
         check_ans(curq.answer);
         update_test('completed');
-        alert('End...!')
-        close_test();
-        console.log(curq_no)
+        $('#testSub').modal('show');
+        setTimeout(setTimeout(close_test, 5000))
         return;
     }
+    progress_chart();
     fetch('/question/<%=testid%>/'+q[curq_no])
     .then(response => response.json())
     .then(question => {
@@ -258,5 +267,42 @@
         };
       }
     }
+
+    var data = {
+          labels: [
+              "Attemted",
+              "To be attemted",
+          ],
+          datasets: [
+              {
+                  data: [curq_no, q.length-curq_no],
+                  backgroundColor: [
+                      "#10ba00",
+                      "#9ca3af",
+                      
+                  ],
+                  hoverBackgroundColor: [
+                      "#0b8000",
+                      "#9ba5b6",
+                  ]
+              }]
+      };
+      var ctx = document.getElementById("myChart");
+      var myDoughnutChart = new Chart(ctx, {
+          type: 'doughnut',
+          data: data,
+          options: {
+            rotation:  86* Math.PI,
+            circumference: 57.25 * Math.PI
+          }
+      });
+
+    function progress_chart(){
+      data.datasets[0].data=[curq_no,q.length-curq_no]
+      myDoughnutChart.data.datasets[0].data=[curq_no,q.length-curq_no];
+      myDoughnutChart.update();
+    }
+</script>
+<script>
 </script>
 <%- include("partials/footer") %>
