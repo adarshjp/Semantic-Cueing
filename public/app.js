@@ -1,10 +1,8 @@
 /*--------------------------- Sidebar---------------------------*/
-let sidebar = document.querySelector(".sidebar");
-let sidebarBtn = document.querySelector(".bx-menu");
-console.log(sidebarBtn);
-sidebarBtn.addEventListener("click", () => {
+function sidebar_toggle() {
+  let sidebar = document.querySelector(".sidebar");
   sidebar.classList.toggle("close");
-});
+}
 /*--------------------------- Slider----------------------------*/
 
 /*********************************************
