@@ -90,7 +90,7 @@ exports.update_test_status = (req, res) => {
 }
 
 exports.get_test_details = (req, res) => {
-    Test.findById(req.params.id,{pauesdqno:1,score:1,answered:1,unanswered:1})
+    Test.findById(req.params.id,{questions:0,name:0})
         .then((test) => {
             res.status(200).send(test)
         })
