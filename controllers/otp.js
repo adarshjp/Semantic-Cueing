@@ -2,6 +2,7 @@ const otp = require("../models/otp");
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 const user = require("../models/user");
+const ejs= require("ejs")
 let mailTransporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -11,7 +12,7 @@ let mailTransporter = nodemailer.createTransport({
 });
 let mailDetails = {
   from: process.env.EMAIL_ID,
-  subject: "OTP for verification",
+  subject: "Change your password",
 };
 var algorithm = process.env.algorithm; // or any other algorithm supported by OpenSSL
 var iv = new Buffer.from(crypto.randomBytes(16));
@@ -30,6 +31,7 @@ exports.sendOtp = (req, res) => {
     otp: Math.floor(100000 + Math.random() * 900000),
     isVerified: false,
     creationTime: Date.now(),
+    verificationKey:req.body.verificationKey
   });
   let version = req.params.version;
   let userid;
@@ -49,7 +51,7 @@ exports.sendOtp = (req, res) => {
 };
 exports.verifyOtp = (req, res) => {
   var encrypted =enccodeOtp(req.body.otp)
-  otp.findOne({ otp: encrypted, isVerified: false }, (err, data) => {
+  otp.findOne({ otp: encrypted, isVerified: false,verificationKey:req.body.verificationKey }, (err, data) => {
     if (err) {
       console.log(err);
       res.status(500).json({
@@ -73,19 +75,40 @@ exports.verifyOtp = (req, res) => {
   });
 };
 function initSendMail(email, otp, res) {
-  mailDetails.to = email;
-  mailDetails.html =
-    "<h1>OTP for verification</h1><h2>Your OTP is " +
-    otp +
-    ".This OTP is valid for 10 minutes.</h2><h3>Thank You</h3>";
-  sendMail(mailDetails, (err, data) => {
-    if (err) {
+  ejs.renderFile(__dirname+"\\..\\views\\otpTemplate.ejs",{otp:otp},(err,data)=>{
+    if(err){
       console.log(err);
-      res.json({ message: "Error Occured" });
-    } else {
-      console.log("Email sent successfully");
+      res.status(500).json({
+        message:"Internal server error"
+      })
+    }else{
+      mailDetails.to = email;
+      mailDetails.html = data;
+      sendMail(mailDetails, (err, data) => {
+        if (err) {
+          console.log(err);
+          res.status(500).json({
+            message: "Internal server error",
+          });
+        } else {
+          console.log("Mail sent successfully");
+        }
+      });
     }
-  });
+  })
+  // mailDetails.to = email;
+  // mailDetails.html =
+  //   "<h1>OTP for verification</h1><h2>Your OTP is " +
+  //   otp +
+  //   ".This OTP is valid for 10 minutes.</h2><h3>Thank You</h3>";
+  // sendMail(mailDetails, (err, data) => {
+  //   if (err) {
+  //     console.log(err);
+  //     res.json({ message: "Error Occured" });
+  //   } else {
+  //     console.log("Email sent successfully");
+  //   }
+  // });
 }
 function sendMail(mailDetails, callback) {
   mailTransporter.sendMail(mailDetails, function (err, data) {

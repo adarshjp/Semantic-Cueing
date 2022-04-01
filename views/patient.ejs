@@ -12,7 +12,7 @@
     <% tests.forEach((test) => { %>
     <div class="offset-2 col-9 offset-sm-1 col-sm-10  offset-lg-0 col-lg-6 p-1">
       <div class="card box-shadow p-3">
-        <div class="row">
+        <div class="row align-items-center">
           <div class="col-md-6 my-auto">
             <img
               src="/images/exam.svg"
@@ -23,12 +23,11 @@
           </div>
           <div class="col-md-6">
             <div class="card-body">
-              <h5 class="card-title">Test<i class="fas fa-bell blue"></i></h5>
-              <p class="card-text">
-                <i class="fas fa-question-circle blue"></i>:
-                <%=test.noofquestion%>
+              <h5 class="card-title p-1">Test  <i class="fas fa-bell blue"></i></h5>
+              <p class="card-text p-1">
+                <i class="fas fa-question-circle blue"></i> : <%=test.noofquestion%>
               </p>
-              <p class="card-text">Level: <%=test.level%></p>
+              <p class="card-text p-1">Level : <%=test.level%></p>
               <div class="d-flex justify-content-end">
                 <% if(test.status != 'completed') { %>
                   <% if(test.status == "pending") {%>

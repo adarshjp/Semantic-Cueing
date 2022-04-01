@@ -17,6 +17,10 @@ const otpSchema= new mongoose.Schema({
         type:Date,
         default:Date.now,
         required:true
+    },
+    verificationKey:{
+        type:String,
+        required:true
     }
 })
 module.exports = new mongoose.model("Otp",otpSchema);
