@@ -198,8 +198,7 @@
       test.classList.remove('d-none')
       curq=question
       document.getElementById('img').src = 'data:image/'+question.question.contentType+';base64,'+arrayBufferToBase64(question.question.data.data);
-      setTimeout(2000)
-      play_audio(curq.score)
+      setTimeout(play_audio(curq.score),3000);
       curq_no++;
       if(curq_no==q.length){
         document.getElementById('next').textContent="Submit";
@@ -237,7 +236,7 @@
     document.getElementById('hint_img').src = 'data:image/'+curq.hints[hint].hint.contentType+';base64,'+arrayBufferToBase64(curq.hints[hint].hint.data.data);
     hint_but(hint)
     play_audio(curq.hints[hint].score);
-    setTimeout(closeModal, 2000);
+    setTimeout(closeModal, 10000);
   })
 
   function arrayBufferToBase64(buffer) {
@@ -248,7 +247,6 @@
   };
 
   function play_audio(txt){
-    setTimeout(2000);
     msg.text = txt;
     window.speechSynthesis.speak(msg);
   }
