@@ -65,8 +65,6 @@
 <%- include("partials/instructionModal") %>
 <%- include("partials/testSubModal") %>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
 <script type="text/javascript">
 
   $(window).on('load', function() {
@@ -134,7 +132,6 @@
       score=parseInt(test.score);
       curq_no=parseInt(test.pauesdqno);
       document.getElementById('level').textContent='Test Level : '+test.level;
-      document.getElementById('score').textContent='Score Obtained : '+test.score;
       create_chart();
     });
   }
@@ -159,6 +156,7 @@
       if(a.toLowerCase() === val[i]){
         score=score+(100-hints_taken*10)
         ans[hints_taken.toString()]++;
+        document.getElementById('score').textContent='Score Obtained : '+score;
         return;
       }
     }
@@ -176,6 +174,7 @@
   }
   
   function disp_question(){
+    document.getElementById('score').textContent='Score Obtained : '+score;
     test.classList.add('d-none')
     spinner.removeAttribute('hidden');
     if(curq_no<q.length && curq!=null){
@@ -186,6 +185,7 @@
     }else if(curq_no==q.length){
         check_ans(curq.answer);
         update_test('completed');
+        spinner.setAttribute('hidden', '');
         $('#testSub').modal('show');
         setTimeout(setTimeout(close_test, 5000))
         return;
