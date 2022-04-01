@@ -29,18 +29,21 @@
               </p>
               <p class="card-text p-1">Level : <%=test.level%></p>
               <div class="d-flex justify-content-end">
-                <a
-                  href="/start/test/<%=test._id%>"
-                  class="btn white btn-lg <% if(test.status == 'pending'){%> btn-primary <%}else if(test.status == 'completed'){%> btn-success <%}else{%> btn-secondary <%}%> </a>"
-                  target="_blank"
-                  ><% if(test.status == "pending") {%>
-                    Start test <i class="fas fa-play"></i>
-                    <%}else if(test.status == "completed"){%> 
-                      View Report <i class="fas fa-poll"></i>
-                    <%}else{%> 
+                <% if(test.status != 'completed') { %>
+                  <% if(test.status == "pending") {%>
+                    <button class="btn btn-lg btn-primary white" onclick="test_execute('<%=test._id%>')">
+                      Start test <i class="fas fa-play"></i>
+                    </button>
+                  <%}else{%> 
+                    <button class="btn btn-lg btn-secondary white" onclick="test_execute('<%=test._id%>')">
                       Resume <i class="fab fa-rev"></i>
-                    <%}%>
-                  </a>
+                    </button>
+                  <%}%>
+                <%}else{%>
+                  <button class="btn btn-lg btn-success white"  data-bs-toggle="modal" data-bs-target="#viewReport" data-bs-whatever="<%=test._id%>">
+                    View Report <i class="fas fa-poll"></i>
+                  </button>
+                <%}%>
               </div>
             </div>
           </div>
@@ -51,17 +54,97 @@
   </div>
 </div>
 
-<div class="card login" id="patientprofile" style="width: 50%">
-  <img class="card-img-top" src="/images/admin.jpg" alt="Card image cap" />
-  <div class="card-body">
-    <h5 class="card-title">Patient Details</h5>
-    <p class="card-text">Name:<%=user.name%></p>
-    <p class="card-text">value2:</p>
-    <p class="card-text">value3:</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
+<%- include("partials/viewReportModal") %>
 
-<div class="patientclass p-2 pt-5"></div>
+<script type="text/javascript">
+$(window).on('load', function() {
+  create_chart();
+});
+//------------------RES CHART------------------
+var data = {
+          labels: [
+              "Correct answerd",
+              "Wrong answerd",
+          ],
+          datasets: [
+              {
+                  data: [0, 100],
+                  backgroundColor: [
+                      "#10ba00",
+                      "#ff3300",
+                      
+                  ],
+                  hoverBackgroundColor: [
+                      "#0b8000",
+                      "#e62e00",
+                  ]
+              }]
+      };
+      var myDoughnutChart;
+//------------------END------------------
+
+  function test_execute(id){
+    var win = window.open("/start/test/"+id);
+    var timer = setInterval(function() {
+        if (win.closed) {
+            clearInterval(timer);
+            window.location.reload();
+        }
+    }, 500);
+  }
+
+  var viewReport = document.getElementById('viewReport')
+  viewReport.addEventListener('show.bs.modal', function (event) {
+    var button = event.relatedTarget
+    var testid = button.getAttribute('data-bs-whatever')
+    fetch('/test/'+testid)
+      .then(response => response.json())
+      .then(test=>{
+        test_res(test.score,test.noofquestion)
+      });
+  })
+  function test_res(s,n){
+    let total=n*100;
+    let per=(s/total)*100;
+    let score=document.getElementById('score');
+    let grade=document.getElementById('grade');
+    let msg=document.getElementById('msg');
+    score.textContent=s+'/'+total;
+    if(per<40){
+      grade.textContent='POOR';
+      msg.textContent='Be Patient, Work Hard and you will surely get success'
+    }else if(per>=40 && per<60){
+      grade.textContent='AVERAGE';
+      msg.textContent='Your doing a good job, Keep it up!'
+    }else if(per>=60 && per<80){
+      grade.textContent='GOOD';
+      msg.textContent='Your getting better & better, continue the hard work'
+    }else{
+      grade.textContent='EXCELLENT';
+      msg.textContent='"Congratulations! Your hard work paid off"'
+    }
+    res_in_chart(per)
+  }
+
+  function create_chart(){
+      var ctx = document.getElementById("res_Chart");
+      myDoughnutChart = new Chart(ctx, {
+          type: 'doughnut',
+          data: data,
+          options: {
+            rotation:  86* Math.PI,
+            circumference: 57.25 * Math.PI
+          }
+      });
+  }
+
+  function res_in_chart(per){
+    data.datasets[0].data=[per,100-per]
+    myDoughnutChart.data.datasets[0].data=[per,100-per];
+    myDoughnutChart.update();
+  }
+
+
+</script>
 
 <%- include("partials/footer") %>
