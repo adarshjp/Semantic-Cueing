@@ -273,10 +273,10 @@ blockquote cite {
 /*********************************
         LOGIN PAGE end
 **********************************/
-/*----------------------------------
+/* ----------------------------------
       Test Execution Start
 ----------------------------------*/
-#myImg {
+/* #myImg {
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s;
@@ -293,14 +293,14 @@ blockquote cite {
 }
 /* The Modal (background) */
 
-/* Modal Content (image) */
+/* Modal Content (image) 
 .modal-content {
   margin: auto;
   display: block;
   width: 80%;
   max-width: 550px;
 }
-/* Add Animation */
+/* Add Animation 
 .modal-content {    
   -webkit-animation-name: zoom;
   -webkit-animation-duration: 0.8s;
@@ -317,7 +317,7 @@ blockquote cite {
   from {transform:scale(0)} 
   to {transform:scale(1)}
 }
-/* The Close Button */
+//The Close Button 
 .close {
   position: absolute;
   top: 15px;
@@ -333,7 +333,7 @@ blockquote cite {
   text-decoration: none;
   cursor: pointer;
 }
-/* 100% Image Width on Smaller Screens */
+/* 100% Image Width on Smaller Screens 
 @media only screen and (max-width: 700px){
   .modal-content {
       width: 100%;
@@ -363,10 +363,10 @@ blockquote cite {
 .step.wrong {
 background-color: red;
 opacity: 1;
-}
+} */
 /*------------------------------------
       Test Execution End
-------------------------------------*/
+------------------------------------ */
 /*------------------------------------
           Change Password
 ------------------------------------*/
@@ -445,7 +445,7 @@ opacity: 1;
   overflow: auto;
 }
 .sidebar.close .nav-links {
-  overflow: visible;
+  overflow: auto;
 }
 .sidebar .nav-links::-webkit-scrollbar {
   display: none;
@@ -731,8 +731,8 @@ opacity: 1;
 }
 
 .checkmark{
-  width: 56px;
-  height: 56px;
+  width: 100px;
+  height: 102px;
   border-radius: 50%;
   display: block;
   stroke-width: 2;
@@ -765,6 +765,6 @@ opacity: 1;
 }
 @keyframes fill {
   100% {
-    box-shadow: inset 0px 0px 0px 30px #7ac142;
+    box-shadow: inset 50px 15px 300px 320px #7ac142;
   }
 }
