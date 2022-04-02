@@ -1,5 +1,6 @@
 const User = require('../models/user')
 const Question = require('../models/question')
+const Test = require("../models/test");
 exports.admin_get = (req, res) => {
     User.findById(req.user._id)
         .then((user) => {
@@ -91,4 +92,21 @@ exports.checkusername=(req, res) => {
         .catch((err) => {
             console.log(err)
         })
+}
+
+exports.get_details_for_graph = (req, res) => {
+    //fetch all user with role patients or doctors
+    User.find({ role: { $in: ['patient', 'doctor'] }},{email: 0,name:0,age:0,username:0}).then((users) => {
+        Test.countDocuments().then((test) => {
+            Question.countDocuments().then((question) => {
+                res.send({ users: users, test: test, question: question })
+            }).catch((err) => {
+            console.log(err)
+            })
+        }).catch((err) => {
+            console.log(err)
+        })
+    }).catch((err) => {
+        console.log(err)
+    })
 }
