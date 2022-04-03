@@ -64,7 +64,7 @@ exports.login_get = (req, res) => {
 };
 
 exports.login_post = (req, res) => {
-  //res.status(200);
+  res.status(200);
   //res.send("login successful");
   req.flash("success","Welcome!")
   if(req.user.role==="admin")
