@@ -85,7 +85,12 @@
       <div class="offset-2 col-9 offset-sm-1 col-sm-11 offset-xl-0 col-xl-4 p-1">
          <div class="card">
             <div class="card-body">
-              <canvas id="levelChart" height="226"></canvas>
+               <div class="d-flex justify-content-center align-items-center blue" id='spinner-0' style="height:296px">
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              <canvas id="levelChart" height="226" hidden></canvas>
             </div>
           </div>
       </div>
@@ -95,6 +100,11 @@
          <div class="card">
             <div class="card-body">
                <h5 class="card-title py-2">Doctor vs Patient</h5>
+               <div class="d-flex justify-content-center align-items-center blue" id='spinner-1' style="height:271px">
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
                <canvas id="pieChart-1"></canvas>
             </div>
          </div>
@@ -103,15 +113,25 @@
          <div class="card">
             <div class="card-body">
                <h5 class="card-title py-2">Assigned vs Unassigned Doctors</h5>
+               <div class="d-flex justify-content-center align-items-center blue" id='spinner-2' style="height:271px">
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
                <canvas id="pieChart-2" height="100"></canvas>
             </div>
          </div>
       </div>
       <div class="offset-2 col-9 offset-sm-1 col-sm-11 offset-lg-1 col-lg-5 offset-xl-0 col-xl-4 p-1">
          <div class="card">
-            <div class="card-body">
+            <div class="card-body" >
                <h5 class="card-title py-2">Active vs Discharged Patients</h5>
-               <canvas id="pieChart-3" height="100"></canvas>
+               <div class="d-flex justify-content-center align-items-center blue" id='spinner-3' style="height:271px">
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+               <canvas id="pieChart-3" height="100" hidden></canvas>
             </div>
          </div>
       </div>
@@ -120,7 +140,7 @@
 <script>
     
    $(window).on('load', function() {
-      disp_charts();
+      get_test_and_q_count();
    });
 
    let c_patient=0;
@@ -132,6 +152,20 @@
    let assigned_doctor=[];
    let total_doctor=[];
    let patient_level=[0,0,0,0,0]  //index 0 for level 1 and so on....
+
+   function get_test_and_q_count(){
+      fetch('/data/testcount')
+      .then(response=>response.json())
+      .then(test=>{
+         document.getElementById('test').textContent=test.test;
+      });
+      fetch('/data/questioncount')
+      .then(response=>response.json())
+      .then(question=>{
+         document.getElementById('question').textContent=question.question;
+      });
+      disp_charts();
+   }
 
    function count_assigned_unassigned_doctors(){
       console.log(assigned_doctor);
@@ -201,12 +235,26 @@
          count_patients_and_doctors(user.users);
          document.getElementById('patient').textContent=c_patient;
          document.getElementById('doctor').textContent=c_doctor;
-         document.getElementById('question').textContent=user.question;
-         document.getElementById('test').textContent=user.test;
+
          create_data_for_bar_chart()
+
+         document.getElementById('spinner-0').classList.add('d-none');
+         document.getElementById('levelChart').removeAttribute('hidden');
+
          create_data_for_pie_chart('pieChart-1',doc_pat,c_doctor,c_patient,'Doctor','Patient');
+
+         document.getElementById('spinner-1').classList.add('d-none');
+         document.getElementById('pieChart-1').removeAttribute('hidden');
+
          create_data_for_pie_chart('pieChart-2',un_a_doc,a_doctor,u_doctor,'Assigned','Unassigned');
+
+         document.getElementById('spinner-2').classList.add('d-none');
+         document.getElementById('pieChart-2').removeAttribute('hidden');
+
          create_data_for_pie_chart('pieChart-3',a_d_pat,a_patient,d_patient,'Active','Discharged');
+
+         document.getElementById('spinner-3').classList.add('d-none');
+         document.getElementById('pieChart-3').removeAttribute('hidden');
       });
    }
 
@@ -228,7 +276,6 @@
          }
       });
    }
-   
 </script>
 
 <%- include("partials/footer") %>
