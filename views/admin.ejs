@@ -1,15 +1,281 @@
 <%- include("partials/header") %>
 <%- include("partials/adminSideBar") %>
-  <% if(message.error){ %>
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-       <strong class="text-center"><%= message.error%></strong>
-       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
- <% } %>
- <% if(message.success){ %>
-    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-       <strong class="text-center"><%= message.success%></strong>
-       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
- <% } %>
+<div class="container ">
+   <div class="row justify-content-center pt-1">
+      <div class="offset-2 col-8 offset-sm-1 col-sm-10 offset-md-1 col-md-8">
+         <% if(message.error){ %>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+               <strong class="text-center"><%= message.error%></strong>
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+         <% } %>
+         <% if(message.success){ %>
+            <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+               <strong class="text-center"><%= message.success%></strong>
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+         <% } %>
+      </div>
+   </div>
+   <div class='row justify-content-center pt-1'>
+      <div class="offset-2 col-9 offset-sm-1 col-sm-11 offset-xl-0 col-xl-8">
+         <div class="row">
+            <div class="col-12 col-md-6 m-1 m-md-0 p-1">
+               <div class="card">
+                  <div class="card-body">
+                     <h5 class="card-title py-2">Number of Patients</h5>
+                     <div class="row align-items-center">
+                        <div class="col-8">
+                           <i class="fas fa-procedures fa-5x blue"></i>
+                        </div>
+                        <div class="col-4">
+                           <h1 id='patient'></h1>
+                        </div>
+                     </div>
+                  </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6  m-1 m-md-0 p-1">
+               <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title py-2">Number of Doctors</h5>
+                     <div class="row  align-items-center">
+                        <div class="col-8">
+                           <i class="fas fa-user-md fa-5x blue"></i>
+                        </div>
+                        <div class="col-4">
+                           <h1 id='doctor'></h1>
+                        </div>
+                     </div>
+                  </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6  m-1 m-md-0 p-1">
+               <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title py-2">Number of Questions in DB</h5>
+                     <div class="row  align-items-center">
+                        <div class="col-8">
+                           <i class="fa fa-question-circle fa-5x blue" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-4">
+                           <h1 id='question'></h1>
+                        </div>
+                     </div>
+                  </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6  m-1 m-md-0 p-1">
+               <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title py-2">Number of test created</h5>
+                     <div class="row align-items-center">
+                        <div class="col-8">
+                           <i class="far fa-clipboard fa-5x blue" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-4">
+                           <h1 id='test'></h1>
+                        </div>
+                     </div>
+                  </div>
+                </div>
+            </div>
+         </div>
+      </div>
+      <div class="offset-2 col-9 offset-sm-1 col-sm-11 offset-xl-0 col-xl-4 p-1">
+         <div class="card">
+            <div class="card-body">
+               <div class="d-flex justify-content-center align-items-center blue" id='spinner-0' style="height:296px">
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              <canvas id="levelChart" height="226" hidden></canvas>
+            </div>
+          </div>
+      </div>
+   </div>
+   <div class="row justify-content-center mt-2 pt-1">
+      <div class="offset-2 col-9 offset-sm-1 col-sm-11 offset-lg-1 col-lg-5 offset-xl-0 col-xl-4 p-1">
+         <div class="card">
+            <div class="card-body">
+               <h5 class="card-title py-2">Doctor vs Patient</h5>
+               <div class="d-flex justify-content-center align-items-center blue" id='spinner-1' style="height:271px">
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+               <canvas id="pieChart-1"></canvas>
+            </div>
+         </div>
+      </div>
+      <div class="offset-2 col-9 offset-sm-1 col-sm-11 offset-lg-0 col-lg-5 offset-xl-0 col-xl-4 p-1">
+         <div class="card">
+            <div class="card-body">
+               <h5 class="card-title py-2">Assigned vs Unassigned Doctors</h5>
+               <div class="d-flex justify-content-center align-items-center blue" id='spinner-2' style="height:271px">
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+               <canvas id="pieChart-2" height="100"></canvas>
+            </div>
+         </div>
+      </div>
+      <div class="offset-2 col-9 offset-sm-1 col-sm-11 offset-lg-1 col-lg-5 offset-xl-0 col-xl-4 p-1">
+         <div class="card">
+            <div class="card-body" >
+               <h5 class="card-title py-2">Active vs Discharged Patients</h5>
+               <div class="d-flex justify-content-center align-items-center blue" id='spinner-3' style="height:271px">
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+               <canvas id="pieChart-3" height="100" hidden></canvas>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<script>
+    
+   $(window).on('load', function() {
+      get_test_and_q_count();
+   });
+
+   let c_patient=0;
+   let c_doctor=0;
+   let a_doctor=0;
+   let u_doctor=0;
+   let a_patient=0;
+   let d_patient=0;
+   let assigned_doctor=[];
+   let total_doctor=[];
+   let patient_level=[0,0,0,0,0]  //index 0 for level 1 and so on....
+
+   function get_test_and_q_count(){
+      fetch('/data/testcount')
+      .then(response=>response.json())
+      .then(test=>{
+         document.getElementById('test').textContent=test.test;
+      });
+      fetch('/data/questioncount')
+      .then(response=>response.json())
+      .then(question=>{
+         document.getElementById('question').textContent=question.question;
+      });
+      disp_charts();
+   }
+
+   function count_assigned_unassigned_doctors(){
+      console.log(assigned_doctor);
+      let x=assigned_doctor.filter(function(item, pos) {
+         return assigned_doctor.indexOf(item) == pos;
+      });
+      console.log(x)
+      a_doctor=x.length;
+      x=total_doctor.filter(function(i) {return this.indexOf(i) < 0;},assigned_doctor)
+      u_doctor=x.length;
+   }
+
+   function count_patients_and_doctors(users){
+      for(let i=0;i< users.length;i++){
+         if(users[i].role === 'patient'){
+            c_patient++;
+            if(users[i].status === 'active'){
+               a_patient++;
+            }else{
+               d_patient++;
+            }
+            patient_level[users[i].level-1]++;
+            assigned_doctor.push(users[i].doctorid)
+         }else{
+            c_doctor++;
+            total_doctor.push(users[i]._id)
+         }
+      }
+      count_assigned_unassigned_doctors();
+   }
+   
+   function create_data_for_bar_chart(){ 
+      let data = {
+         labels : ['1','2','3','4','5'],
+         datasets: [{
+            label:'count of patient vs level',
+            data: patient_level,
+            backgroundColor: ['#FF6633','#33FFFC','#9CFF33','#33FF96','#36FF33'],
+            borderColor: ['#FF4E33','#FFB433','#33FFB4','#7EFF33','#33FF4E'],
+            borderWidth: 1
+         }]
+      };
+      create_bar_chart(data)
+   }
+
+   let doc_pat={'0':['#005299','#03e282'],'1':[' #003b6f','#03b065']}
+   let un_a_doc={'0':['#0073e6',' #9999ff'],'1':['#0066cc','#8080ff']}
+   let a_d_pat={'0':['#34ebbd','#bdeb33'],'1':['#17e8b4','#b4e817']}
+
+   function create_data_for_pie_chart(id,color,x,y,u,v){
+      let data = {
+         labels: [u,v],
+         datasets: [{
+            data: [x,y],
+            backgroundColor: color['0'] ,
+            hoverBackgroundColor: color['1'],
+            hoverOffset: 4
+         }]
+      };
+      create_pie_chart(id,data)
+}
+
+   function disp_charts(){
+      fetch('/data/users')
+      .then(response => response.json())
+      .then(user =>{
+         count_patients_and_doctors(user.users);
+         document.getElementById('patient').textContent=c_patient;
+         document.getElementById('doctor').textContent=c_doctor;
+
+         create_data_for_bar_chart()
+
+         document.getElementById('spinner-0').classList.add('d-none');
+         document.getElementById('levelChart').removeAttribute('hidden');
+
+         create_data_for_pie_chart('pieChart-1',doc_pat,c_doctor,c_patient,'Doctor','Patient');
+
+         document.getElementById('spinner-1').classList.add('d-none');
+         document.getElementById('pieChart-1').removeAttribute('hidden');
+
+         create_data_for_pie_chart('pieChart-2',un_a_doc,a_doctor,u_doctor,'Assigned','Unassigned');
+
+         document.getElementById('spinner-2').classList.add('d-none');
+         document.getElementById('pieChart-2').removeAttribute('hidden');
+
+         create_data_for_pie_chart('pieChart-3',a_d_pat,a_patient,d_patient,'Active','Discharged');
+
+         document.getElementById('spinner-3').classList.add('d-none');
+         document.getElementById('pieChart-3').removeAttribute('hidden');
+      });
+   }
+
+   function create_pie_chart(pie_id,data,){
+      var ctx = document.getElementById(pie_id);
+      myDoughnutChart = new Chart(ctx, {
+          type: 'doughnut',
+          data: data,
+      });
+   }
+
+   function create_bar_chart(data){
+      var ctx = document.getElementById("levelChart");
+      var levelChart= new Chart(ctx, {
+         type: 'bar',
+         data: data,
+         options: {
+            responsive: true,
+         }
+      });
+   }
+</script>
+
 <%- include("partials/footer") %>

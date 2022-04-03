@@ -445,7 +445,7 @@ opacity: 1;
   overflow: auto;
 }
 .sidebar.close .nav-links {
-  overflow: auto;
+  overflow: visible;
 }
 .sidebar .nav-links::-webkit-scrollbar {
   display: none;
@@ -767,4 +767,8 @@ opacity: 1;
   100% {
     box-shadow: inset 50px 15px 300px 320px #7ac142;
   }
+}
+
+#pieChart-1,#pieChart-2,#pieChart-3{
+  height: 271px !important;
 }
