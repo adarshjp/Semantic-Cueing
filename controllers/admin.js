@@ -96,16 +96,26 @@ exports.checkusername=(req, res) => {
 
 exports.get_details_for_graph = (req, res) => {
     //fetch all user with role patients or doctors
-    User.find({ role: { $in: ['patient', 'doctor'] }},{email: 0,name:0,age:0,username:0}).then((users) => {
-        Test.countDocuments().then((test) => {
-            Question.countDocuments().then((question) => {
-                res.send({ users: users, test: test, question: question })
-            }).catch((err) => {
-            console.log(err)
-            })
-        }).catch((err) => {
+    User.find({ role: { $in: ['patient', 'doctor'] }},{email: 0,name:0,age:0,username:0})
+        .then((users) => {
+            res.send({users: users})
+        })
+        .catch((err) => {
             console.log(err)
         })
+}
+
+exports.count_no_of_tests= (req, res) => {
+    Test.countDocuments().then((test) => {
+        res.send({ test: test })
+    }).catch((err) => {
+        console.log(err)
+    })
+}
+
+exports.count_no_of_questions= (req, res) => {
+    Question.countDocuments().then((question) => {
+        res.send({ question: question })
     }).catch((err) => {
         console.log(err)
     })
