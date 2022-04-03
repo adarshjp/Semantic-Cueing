@@ -65,5 +65,8 @@ app.listen(process.env.PORT || 3000, () => {
   console.log(clc.redBright("\n*************************************"))
   console.log(clc.blueBright("\n**** Server started at port 3000 ****"));
   console.log(clc.cyanBright("\n**** Visit http://localhost:3000 ****"));
+  app.emit('appStarted');
 });
+
+module.exports = app;
 
