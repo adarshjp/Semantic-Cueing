@@ -1,220 +1,311 @@
 <%- include("partials/header") %>
-<div class="container my-5">
-    <div class="row justify-content-center card rounded vertical-center shadow">
-      <% var i=1,x1,x2,a=[]%>
-      <% questions.forEach((questions)=> { %>
-      <div class="tab">
-          <h2 class=""><%= i%>.Question is about</h2>
-          <div class="row align-items-center">
-              <div class="col-12 col-md-10">
-                  <div class="row justify-content-center">
-                      <div class="col-12 col-md-6">
-                          <img class="img-fluid" src="data:image/<%=questions.question.contentType%>;base64,<%=questions.question.data.toString('base64')%>" style="border: 2px solid #6C63FF;max-height: 42vh;" >
-                      </div>
-                  </div>
-                  <div class="row justify-content-center m-3">
-                    <div class="col-12 col-md-2">
-                      <% for(var j=0;j<=3;j++) { %>
-                            <% x1=questions.hints[j].hint.contentType %>
-                            <% x2=questions.hints[j].hint.data.toString('base64')%>
-                            <button type="button" class="btn btn-warning btn-lg" onclick="hint('data:image/<%=x1%>;base64,<%=x2%>')" id="hint<%=i %><%=j %>" style="display:none;">Take Hint  <i class="far fa-lightbulb"></i></button>  
-                      <% } %>
-                    </div> 
-                  </div>
-              </div>
-              <div class="col-12 col-md-1">
-                  <div class="row justify-content-center my-2">
-                      <% for(var j=0;j<=3;j++) { %>
-                          <div class="col-3 col-md-12 my-2">
-                            <% x1=questions.hints[j].hint.contentType %>
-                            <% x2=questions.hints[j].hint.data.toString('base64')%>
-                            <button type="button" class="btn btn-warning" id="butt<%=j%><%=i%>" style="display: none;" onclick="dispmodal('data:image/<%=x1%>;base64,<%=x2%>')">Hint<%=j+1%></button> 
-                          </div>
-                      <% } %>
-                      </div>
-                  </div>
-              </div>
-          
-          <div class="row justify-content-center p-2">
-            <div class="col-12 col-md-5">
-              <input type="text" name="ans" placeholder="ans" id="login-input" class="outline-color" required />
-            </div>
-            <div class="col-12 col-md-2"></div>
+<div class="container-fluid d-none" id='test'>
+  <div class="row justify-content-center p-3" style="height: 100vh">
+    <div class="col-12 col-xl-9 shadow-lg rounded-lg p-md-5">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-10 col-sm-10 col-md-10 col-lg-6 p-1">
+          <img src="" id="img" class="img-fluid" style="width:80vw;height: 49vh;">
+        </div>
+      </div>
+      <div class="row pt-4 justify-content-center text-center align-items-center">
+        <%for (var i = 0;i< 4;i++){%>
+          <div class="col-6 col-sm-3 py-2">
+            <button type="button" class="btn btn-warning btn-lg" data-bs-toggle="modal" data-bs-target="#hintModal" id="hint_<%=i%>" data-bs-whatever="<%=i%>">Hint <%=i+1%> <i class="fa fa-light fa-lightbulb"></i></button>
+          </div>
+        <%}%>
+      </div>
+      <div class="row justify-content-center pt-3 text-center">
+        <div class="col-11 col-md-5 py-2">
+          <div class="form"> 
+            <input type="text" class="form-control form-input" placeholder="Enter your answer here..." id="answer"> 
+            <span class="left-pan">
+              <i class="fa fa-microphone" onclick="startDictation()"></i>
+            </span> 
           </div>
         </div>
-        <% a.push(questions.answer) %>
-        <% i=i+1%>
-        <% }) %>
-        <hr>
-        <div class="row justify-content-center p-3">
-            <div style="text-align:center;" class="col-8 col-md-10">
-            <% for (var j =1;j<= questions.length;j++) { %>
-                    <span class="step"><%=j%></span>
-            <% } %>   
-            </div>
-            <div class="col-4 col-md-2">
-                <button type="button" id="nextBtn" class="btn btn-primary btn-lg" onclick="nextPrev(1,'<%=JSON.stringify(a) %>')">Next</button>   
-            </div>
+        <div class="col-4 col-md-2 py-2">
+          <button class="btn btn-success btn-lg" onclick="next_q('next')" id='next'>Next</button>
         </div>
-    </div>  
+        <div class="col-3 col-md-2 py-2">
+          <button class="btn btn-info btn-lg" onclick="next_q('skip')" id='next'>Skip</button>
+        </div>
+        <div class="col-5 col-md-3 py-2">
+          <button class="btn btn-primary btn-lg" onclick="close_test()"><b>Pause</b> <i class="fa fa-pause"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="mx-3 col-2 d-none d-xl-block shadow-lg rounded">
+      <div class="row text-center align-items-center h-25 my-3">
+        <div class="col-12">
+          <h6 class="my-2">Test ID : <%= testid %></h6>
+          <h6 id='level' class="my-2"></h6>
+          <h6 id='score' class="my-2">Score : 1000</h6>
+        </div>
+      </div>
+      <div class="row text-center align-items-center my-5">
+        <%var i=1%>
+        <%questionIds.forEach((questionIds)=>{%>
+          <div class="col-3 py-1">
+            <button type="button" class="btn btn-primary btn-square-md" id="'<%=i%>'"><%=i%></button>
+          </div>
+          <%i=i+1;%>
+        <%})%>
+      </div>
+      <div class="row h-25 mt-5">
+        <div class="col-12">
+          <canvas id="myChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<div id="myModal" class="modal">
-  <span class="close">×</span>
-  <img class="modal-content" id="modal-img" style="border: 2px solid #6C63FF">
-  <div id="caption"></div>
-</div>
-<form action="/start/test/<%=testid %>" method="post" id="testForm" class="d-none">
-  <input type="number" name="testscore" id="score" value=""/>
-  <input type="text" name="hints" id="hints" value=""/>
-  <input type="text" name="anscrt" id="anscrt" value=""/>
-</form>
-<script>
-    var score=0;
-    var noofhints=[];
-    var anscrt=[];
-    var hint_i=0;
-    var currentTab = 0; 
-    var timer;
-    showHint(1,0)
-    function showHint(qi,hi) {
-      if(hi==0) {
-        document.getElementById('hint'+qi+0).style.display="block";
-        document.getElementById('hint'+qi+1).style.display="none";
-        document.getElementById('hint'+qi+2).style.display="none";
-        document.getElementById('hint'+qi+3).style.display="none";
-      }
-      else if(hi==1) {
-        document.getElementById('hint'+qi+1).style.display="block";
-        document.getElementById('hint'+qi+0).style.display="none";
-        document.getElementById('hint'+qi+2).style.display="none";
-        document.getElementById('hint'+qi+3).style.display="none";
-      }
-      else if(hi==2) {
-        document.getElementById('hint'+qi+2).style.display="block";
-        document.getElementById('hint'+qi+1).style.display="none";
-        document.getElementById('hint'+qi+0).style.display="none";
-        document.getElementById('hint'+qi+3).style.display="none";
-      }
-      else{
-        document.getElementById('hint'+qi+3).style.display="block";
-        document.getElementById('hint'+qi+1).style.display="none";
-        document.getElementById('hint'+qi+2).style.display="none";
-        document.getElementById('hint'+qi+0).style.display="none";
+<div hidden id="spinner"></div>
+<%- include("partials/hintModal") %>
+<%- include("partials/instructionModal") %>
+<%- include("partials/testSubModal") %>
+
+<script type="text/javascript">
+
+  $(window).on('load', function() {
+    $('#instModal').modal('show');
+  });
+
+  var hintModal = document.getElementById('instModal')
+  hintModal.addEventListener('hide.bs.modal', function (event) {
+    get_initial_test_details();
+  })
+
+  const spinner = document.getElementById("spinner"); 
+  const test = document.getElementById("test");
+
+  //------------ To Keep Track of Test scores -----------------------//
+  var q='<%=questionIds%>'.split(',')
+  var curq=null;   //Stores curq question details
+  var curq_no=0;
+  var hints_taken=0;
+  var hint_status={'1':0,'2':0,'3':0,'4':0}
+  var ans={'0':0,'1':0,'2':0,'3':0,'4':0};
+  var unans={'0':0,'1':0,'2':0,'3':0,'4':0};
+  var score=0;
+  //------------ End -----------------------//
+
+  //------------ Progress Chart -------------//
+  var data = {
+          labels: [
+              "Attemted",
+              "To be attemted",
+          ],
+          datasets: [
+              {
+                  data: [curq_no, q.length-curq_no],
+                  backgroundColor: [
+                      "#10ba00",
+                      "#9ca3af",
+                      
+                  ],
+                  hoverBackgroundColor: [
+                      "#0b8000",
+                      "#9ba5b6",
+                  ]
+              }]
+      };
+      var myDoughnutChart;
+  //------------------ End -----------------------//
+
+  //------------ Text to speech -----------------------//
+    var msg = new SpeechSynthesisUtterance();
+    var voices = window.speechSynthesis.getVoices();
+    msg.voice = voices[10]; 
+    msg.volume = 1; // From 0 to 1
+    msg.rate = 0.5; // From 0.1 to 10
+    msg.pitch = 1; // From 0 to 2
+    msg.lang = 'en-IN';
+  //------------ End -----------------------//
+
+  function get_initial_test_details(){
+    fetch('/test/<%=testid%>')
+    .then(response => response.json())
+    .then(test=>{
+      ans=JSON.parse(test.answered)
+      unans=JSON.parse(test.unanswered)
+      score=parseInt(test.score);
+      curq_no=parseInt(test.pauesdqno);
+      document.getElementById('level').textContent='Test Level : '+test.level;
+      create_chart();
+    });
+  }
+
+  function create_chart(){
+      var ctx = document.getElementById("myChart");
+      myDoughnutChart = new Chart(ctx, {
+          type: 'doughnut',
+          data: data,
+          options: {
+            rotation:  86* Math.PI,
+            circumference: 57.25 * Math.PI
+          }
+      });
+      disp_question();
+  }
+
+  function check_ans(a){
+    var val=document.getElementById('answer').value.toLowerCase().split(' ')
+    document.getElementById('answer').value=''
+    for(var i=0;i<val.length;i++){
+      if(a.toLowerCase() === val[i]){
+        score=score+(100-hints_taken*10)
+        ans[hints_taken.toString()]++;
+        document.getElementById('score').textContent='Score Obtained : '+score;
+        return;
       }
     }
-    showTab(currentTab);
-    var modal = document.getElementById('myModal');
-    // To display the modal//
-    function dispmodal(srcc){
-      var modal = document.getElementById('myModal');
-      var modalImg = document.getElementById("modal-img");
-      modal.style.display = "block";
-      modalImg.src = srcc;
-      timer=setTimeout(function() {
-        modal.style.display = "none";
-        }, 10000);
-    }
-    // Handle the hint button event //
-    function hint(srcc) {
-      k=currentTab+1;
-      dispmodal(srcc)
-      if(hint_i==0){
-        document.getElementById('butt0'+k).style.display="block";
-        hint_i++;
-        showHint(k,hint_i);
-      }
-      else if(hint_i==1){
-        document.getElementById('butt1'+k).style.display="block";
-        hint_i++;
-        showHint(k,hint_i);
-      }
-      else if(hint_i==2){
-        document.getElementById('butt2'+k).style.display="block";
-        hint_i++;
-        showHint(k,hint_i);
-      }
-      else if(hint_i==3){
-        document.getElementById('butt3'+k).style.display="block";
-        hint_i++;
-        console.log('hint'+(currentTab+1)+(hint_i-1))
-        document.getElementById('hint'+(currentTab+1)+(hint_i-1)).disabled=true;
+    unans[hints_taken.toString()]++;
+  }
+
+  function hint_but_change(){
+    for(var i=0;i<4;i++){
+      document.getElementById('hint_'+i).classList.remove('btn-secondary');
+      document.getElementById('hint_'+i).classList.add('btn-warning');
+      if(i!=0){
+        document.getElementById('hint_'+i).disabled = true;
       }
     }
-    // To display the tab on next button click//
-    function showTab(n) {
-      var x = document.getElementsByClassName("tab");
-      x[n].style.display = "block";
-      if (n == (x.length - 1)) {
-        document.getElementById("nextBtn").innerHTML = "Submit";
-      } else {
-        document.getElementById("nextBtn").innerHTML = "Next";
-      }
-      fixStepIndicator(n)
+  }
+  
+  function disp_question(){
+    document.getElementById('score').textContent='Score Obtained : '+score;
+    test.classList.add('d-none')
+    spinner.removeAttribute('hidden');
+    if(curq_no<q.length && curq!=null){
+        check_ans(curq.answer);
+        hints_taken=0;
+        hint_status={'1':0,'2':0,'3':0,'4':0}
+        update_test('pauesd');
+    }else if(curq_no==q.length){
+        check_ans(curq.answer);
+        update_test('completed');
+        spinner.setAttribute('hidden', '');
+        $('#testSub').modal('show');
+        setTimeout(setTimeout(close_test, 5000))
+        return;
     }
-    
-    function nextPrev(n,ans) {
-      var val=validateForm();
-      if(!val){
-        return false;
+    progress_chart();
+    fetch('/question/<%=testid%>/'+q[curq_no])
+    .then(response => response.json())
+    .then(question => {
+      spinner.setAttribute('hidden', '');
+      test.classList.remove('d-none')
+      curq=question
+      document.getElementById('img').src = 'data:image/'+question.question.contentType+';base64,'+arrayBufferToBase64(question.question.data.data);
+      setTimeout(play_audio(curq.score),3000);
+      curq_no++;
+      if(curq_no==q.length){
+        document.getElementById('next').textContent="Submit";
       }
-      console.log(JSON.parse(ans)[currentTab]);
-      console.log(document.getElementsByName('ans'));
-      if((JSON.parse(ans)[currentTab])===(document.getElementsByName('ans')[currentTab].value)) {
-        score=score+100-hint_i*10;
-        console.log("Correct")
-        console.log(score);
-        noofhints.push(hint_i);
-        anscrt.push('C')
-        console.log(JSON.stringify(noofhints));
-        console.log(JSON.stringify(anscrt));
-        document.getElementsByClassName("step")[currentTab].className += " finish";
-      }
-      else{
-        console.log("wrong");
-        console.log(score);
-        noofhints.push(hint_i);
-        anscrt.push('W')
-        console.log(JSON.stringify(noofhints));
-        console.log(JSON.stringify(anscrt));
-        document.getElementsByClassName("step")[currentTab].className += " wrong";
-      }
-      var x = document.getElementsByClassName("tab");
-      x[currentTab].style.display = "none";
-      currentTab = currentTab + n;
-      if(document.getElementById("nextBtn").innerHTML ==="Submit"){
-        console.log("Form Submiited")
-        document.getElementById("score").value=score;
-        document.getElementById("hints").value=JSON.stringify(noofhints);
-        document.getElementById("anscrt").value=JSON.stringify(anscrt);
-        document.getElementById("testForm").submit();
-        document.getElementById("nextBtn").innerHTML="Submitting..."
-        document.getElementById("nextBtn").disabled = true;
-      }
-      hint_i=0;
-      showTab(currentTab);
-      showHint(currentTab+1,hint_i);
+      hint_but_change();
+    });
+  }
+
+  function hint_but(hint){
+    hint=parseInt(hint);
+    cur_hint=document.getElementById('hint_'+hint)
+    if(hint!=3){
+      next_hint=document.getElementById('hint_'+(hint+1))
+      cur_hint.classList.remove('btn-warning');
+      cur_hint.classList.add('btn-secondary');
+      next_hint.disabled=false;
+    }else{
+      cur_hint.classList.remove('btn-warning');
+      cur_hint.classList.add('btn-secondary');
     }
-    function fixStepIndicator(n) {
-      var i, x = document.getElementsByClassName("step");
-      for (i = 0; i < x.length; i++) {
-        x[i].className = x[i].className.replace(" active", "");
-      }
-      x[n].className += " active";
+    if(hint_status[''+(hint+1)]!=1){
+      hint_status[''+(hint+1)]=1;
+      hints_taken++;
     }
-    function validateForm() {
-      var x, y, i, valid = true;
-      x = document.getElementsByClassName("tab");
-      y = x[currentTab].getElementsByTagName("input");
-      if (y[0].value == "") {
-          y[0].className += " invalid";
-          valid = false;
-      }
-      return valid;
+  }
+
+  function closeModal(){
+    $('#hintModal').modal('hide');
+  }
+
+  var hintModal = document.getElementById('hintModal')
+  hintModal.addEventListener('show.bs.modal', function (event) {
+    var hint = event.relatedTarget
+    var hint = hint.getAttribute('data-bs-whatever')
+    document.getElementById('hint_img').src = 'data:image/'+curq.hints[hint].hint.contentType+';base64,'+arrayBufferToBase64(curq.hints[hint].hint.data.data);
+    hint_but(hint)
+    play_audio(curq.hints[hint].score);
+    setTimeout(closeModal, 10000);
+  })
+
+  function arrayBufferToBase64(buffer) {
+      var binary = '';
+      var bytes = [].slice.call(new Uint8Array(buffer));
+      bytes.forEach((b) => binary += String.fromCharCode(b));
+      return window.btoa(binary);
+  };
+
+  function play_audio(txt){
+    msg.text = txt;
+    window.speechSynthesis.speak(msg);
+  }
+
+  function update_test(status){
+    fetch('/test/<%=testid%>',{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          status: status,
+          score: score,
+          ans : JSON.stringify(ans),
+          unans : JSON.stringify(unans)
+        })
+      })
+      .then(response => response.json())
+      .then(test => {
+        console.log(test.message)
+      });
+  }
+
+  function close_test(){
+    window.close();
+  }
+
+  function next_q(val){
+    if(val==='next' && document.getElementById('answer').value===''){
+      alert('Please enter your answer...!');
+      return;
     }
-    var span = document.getElementsByClassName("close")[0];
-    span.onclick = function() { 
-      modal.style.display = "none";
-      clearTimeout(timer);
+    disp_question()
+  }
+
+  function startDictation() {
+      if (window.hasOwnProperty('webkitSpeechRecognition')) {
+        var recognition = new webkitSpeechRecognition();
+  
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = 'en-US';
+        recognition.start();
+  
+        recognition.onresult = function (e) {
+          document.getElementById('answer').value = e.results[0][0].transcript;
+          recognition.stop();
+        };
+        recognition.onerror = function (e) {
+          recognition.stop();
+        };
+      }
+    }
+
+    function progress_chart(){
+      data.datasets[0].data=[curq_no,q.length-curq_no]
+      myDoughnutChart.data.datasets[0].data=[curq_no,q.length-curq_no];
+      myDoughnutChart.update();
     }
 </script>
 <%- include("partials/footer") %>

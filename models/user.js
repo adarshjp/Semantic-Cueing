@@ -30,17 +30,17 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
-  testdetails: [
-    {
-      testid: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Test",
-      },
-      testscore: {
-        type: Number,
-      },
-    },
-  ],
+  // testdetails: [
+  //   {
+  //     testid: {
+  //       type: mongoose.Schema.Types.ObjectId,
+  //       ref: "Test",
+  //     },
+  //     testscore: {
+  //       type: Number,
+  //     },
+  //   },
+  // ],
   name:{
     type: String,
     required: true,
@@ -52,6 +52,14 @@ const userSchema = new mongoose.Schema({
   displaypic: {
     data: Buffer,
     contentType: String,
+  },
+  status: {    // only for patients active/discharged
+    type: String,
+    default: "active",
+  },
+  level: { // only for patients level 1,2,3,4,5
+    type: Number,
+    default: 1,
   },
 });
 userSchema.plugin(passportLocalMongoose);

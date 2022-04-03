@@ -7,47 +7,51 @@
         <%- include("partials/doctorSideBar") %>
     <% } %>
     <div class="container">
-        <div class="text-center p-5">
+        <div class="text-center py-2">
             <p class="display-4 fw-bold">Edit <span class="blue">Profile</span></p>
         </div>
-        <div class="text-center border border-2 p-3">
-            <form action="/edit/<%=user._id%>?_method=PUT" method="post">
-                <div class="text-center">
-                    <img src="/images/profile.jpg" alt=""
-                        class="img-responsive img-fluid rounded-circle shadow-lg" width="300px">
+        <div class="row justify-content-center p-1">
+            <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-md-0 col-lg-6">
+                <div class="text-center border border-2 p-3">
+                    <form action="/edit/<%=user._id%>?_method=PUT" method="post">
+                        <div class="text-center">
+                            <img src="/images/profile.jpg" alt=""
+                                class="img-responsive img-fluid rounded-circle shadow-lg" width="300px">
+                        </div>
+                        <div>
+                            <h1 class="text-center p-2 display-5 fw-bold">
+                                <span class="blue">
+                                    <input type="text" value="<%=user.name%>" class="form-control" id="name" name="name">
+                                </span>
+                                <i class="fas fa-user blue"></i>
+                            </h1>
+                        </div>
+                        <div>
+                            <p class="text-center p-2 display-6 fw-bold">
+                                <span class="blue">
+                                    <%=user.email%>
+                                </span>
+                                <i class="fas fa-envelope blue"></i>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="text-center p-2 display-6 fw-bold">
+                                <span class="blue">
+                                    <input type="text" name="age" value="<%=user.age%>"
+                                        class="form-control" id="age">
+                                </span>
+                                <i class="fas fa-birthday-cake blue"></i>
+                            </p>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">
+                                <i class="fas fa-edit"></i>
+                                Edit Profile
+                            </button>
+                        </div>
+                    </form>
                 </div>
-                <div>
-                    <h1 class="text-center p-2 display-5 fw-bold">
-                        <span class="blue">
-                            <input type="text" value="<%=user.name%>" class="form-control" id="name" name="name">
-                        </span>
-                        <i class="fas fa-user blue"></i>
-                    </h1>
-                </div>
-                <div>
-                    <p class="text-center p-2 display-6 fw-bold">
-                        <span class="blue">
-                            <%=user.email%>
-                        </span>
-                        <i class="fas fa-envelope blue"></i>
-                    </p>
-                </div>
-                <div>
-                    <p class="text-center p-2 display-6 fw-bold">
-                        <span class="blue">
-                            <input type="text" name="age" value="<%=user.age%>"
-                                class="form-control" id="age">
-                        </span>
-                        <i class="fas fa-birthday-cake blue"></i>
-                    </p>
-                </div>
-                <div>
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">
-                        <i class="fas fa-edit"></i>
-                        Edit Profile
-                    </button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 <%- include("partials/footer") %>

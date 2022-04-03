@@ -25,16 +25,12 @@ const questionSchema = new mongoose.Schema({
         contentType: String,
       },
       score:{
-        type:Number,
-        required:true,
-        min:10,
+        type: String,
       }
     }
   ],
   score: {
-    type: Number,
-    required: true,
-    min: 100,
+    type: String,
   },
 });
 module.exports = mongoose.model("Question", questionSchema);

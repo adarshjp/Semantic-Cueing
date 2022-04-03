@@ -1,6 +1,6 @@
 <div class="sidebar close">
   <div class="logo-details">
-    <i class="bx bx-menu"></i>
+    <i class="bx bx-menu" onclick="sidebar_toggle()"></i>
     <span class="logo_name">Menu</span>
   </div>
   <ul class="nav-links">
@@ -16,7 +16,7 @@
       </ul>
     </li>
     <li>
-      <a href="/view/<%=user._id%>" onClick="showAddQuestion()">
+      <a href="/view/<%=user._id%>">
         <i class="fas fa-user"></i>
         <span class="link_name">My Profile</span>
       </a>
@@ -25,13 +25,13 @@
       </ul>
     </li>
     <li>
-      <a onClick="showPatientsAssigned()">
+      <a onClick="">
         <i class="bx bx-book-alt"></i>
         <span class="link_name">Patients</span>
       </a>
       <ul class="sub-menu blank">
         <li>
-          <a class="link_name" onClick="showPatientsAssigned()">Patients</a>
+          <a class="link_name">Patients</a>
         </li>
       </ul>
     </li>
@@ -45,7 +45,7 @@
       </ul>
     </li>
     <li>
-      <a href="/changepassword" onClick="showAddQuestion()">
+      <a href="/changepassword">
         <i class="fas fa-key"></i>
         <span class="link_name">Change Password</span>
       </a>
