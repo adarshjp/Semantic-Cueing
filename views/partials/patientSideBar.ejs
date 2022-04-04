@@ -1,54 +1,63 @@
 <div class="sidebar close">
   <div class="logo-details">
     <i class="bx bx-menu" onclick="sidebar_toggle()"></i>
-    <span class="logo_name">Menu</span>
+    <span class="logo_name"><%=i18n.Menu%></span>
   </div>
   <ul class="nav-links">
     <li>
       <a href="/home/patient/<%=user._id%>">
         <i class="fas fa-home"></i>
-        <span class="link_name">Tests</span>
+        <span class="link_name"><%=i18n.Tests%></span>
       </a>
       <ul class="sub-menu blank">
         <li>
-          <a class="link_name" href="/home/patient/<%=user._id%>">Tests</a>
+          <a class="link_name" href="/home/patient/<%=user._id%>"><%=i18n.Tests%></a>
         </li>
       </ul>
     </li>
     <li>
       <a href="/view/<%=user._id%>" onClick="showAddQuestion()">
         <i class="fas fa-user"></i>
-        <span class="link_name">My Profile</span>
+        <span class="link_name"><%=i18n.MyProfile%></span>
       </a>
       <ul class="sub-menu blank">
-        <li><a class="link_name" href="/view/<%=user._id%>">My Profile</a></li>
+        <li><a class="link_name" href="/view/<%=user._id%>"><%=i18n.MyProfile%></a></li>
       </ul>
     </li>
     <li>
       <a href="/mydoctor">
         <i class="fas fa-user-md"></i>
-        <span class="link_name">Doctor</span>
+        <span class="link_name"><%=i18n.Doctor%></span>
       </a>
       <ul class="sub-menu blank">
-        <li><a class="link_name" href="/mydoctor">Doctor</a></li>
+        <li><a class="link_name" href="/mydoctor"><%=i18n.Doctor%></a></li>
       </ul>
     </li>
     <li>
       <a href="/changepassword" onClick="showAddQuestion()">
         <i class="fas fa-key"></i>
-        <span class="link_name">Change Password</span>
+        <span class="link_name"><%=i18n.ChangePassword%></span>
       </a>
       <ul class="sub-menu blank">
-        <li><a class="link_name" href="/changepassword">Change Password</a></li>
+        <li><a class="link_name" href="/changepassword"><%=i18n.ChangePassword%></a></li>
+      </ul>
+    </li>
+    <li>
+      <a data-bs-toggle="modal" data-bs-target="#langModal">
+        <i class="fa fa-language" aria-hidden="true"></i>
+        <span class="link_name"><%=i18n.ChangeLanguage%></span>
+      </a>
+      <ul class="sub-menu blank">
+        <li><a class="link_name" data-bs-toggle="modal" data-bs-target="#langModal"><%=i18n.ChangeLanguage%></a></li>
       </ul>
     </li>
     <li>
       <a href="/logout">
         <i class="fas fa-sign-out-alt"></i>
-        <span class="link_name">Logout</span>
+        <span class="link_name"><%=i18n.Logout%></span>
       </a>
       <ul class="sub-menu blank">
-        <li><a class="link_name" href="/logout">Logout</a></li>
+        <li><a class="link_name" href="/logout"><%=i18n.Logout%></a></li>
       </ul>
     </li>
     <li>
