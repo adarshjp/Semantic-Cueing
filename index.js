@@ -31,15 +31,14 @@ mongoose
 const flash = require("connect-flash");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
-app.use(cookieParser("keyboard cat"));
+app.use(cookieParser(process.env.secret));
 app.use(flash());
 
 const User = require("./models/user");
 app.use(session({
-  secret: 'keyboard cat',
+  secret: process.env.secret,
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false }
 }));
 app.use(function (req, res, next) {
   res.locals.currentUser = req.user;
