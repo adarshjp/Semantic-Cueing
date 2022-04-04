@@ -7,7 +7,7 @@ exports.get_home_patient = (req, res) => {
             Test.find({ patientid: user._id })
                 .then((tests) => {
                     req.app.locals.tests = tests
-                    res.render('patient',{ user: user,tests: tests })
+                    res.render('patient',{ user: user,tests: tests, i18n:global.i18n })
                 })
                 .catch((err) => {
                     console.log(err)
@@ -22,7 +22,7 @@ exports.get_start_test = (req, res) => {
     let testId = req.params.id
     let testObject = req.app.locals.tests.find((test) => test._id == testId)
     let questionIds = testObject.questions
-    res.render('testexecute',{testid: testId, questionIds: questionIds})
+    res.render('testexecute',{testid: testId, questionIds: questionIds, i18n:global.i18n})
 }
 
 // exports.post_start_test = (req, res) => {
@@ -48,7 +48,7 @@ exports.get_mydoctor = (req, res) => {
 
     User.findById(req.user.doctorid)
         .then((doctor) => {
-            res.render('mydoctor',{ user: req.user,doctor:doctor })
+            res.render('mydoctor',{ user: req.user,doctor:doctor,i18n:global.i18n })
         })
         .catch((err) => {
             console.log(err)

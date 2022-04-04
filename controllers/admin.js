@@ -37,7 +37,7 @@ exports.view_Oneuser = (req, res) => {
     //fetch one user
     User.findById(req.params.id)
         .then((user) => {
-            res.render("viewOneUser",{user:user})
+            res.render("viewOneUser",{user:user,i18n:global.i18n})
         })
         .catch((err) => {
             console.log(err)
@@ -60,7 +60,7 @@ exports.get_edit_user = (req, res) => {
     //fetch one patient given id and send it
     User.findById({ _id: req.params.id })
         .then((user) => {
-            res.render("editUser",{user:user})
+            res.render("editUser",{user:user,i18n:global.i18n})
         })
         .catch((err) => {
             console.log(err)
