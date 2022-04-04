@@ -25,24 +25,24 @@ exports.get_start_test = (req, res) => {
     res.render('testexecute',{testid: testId, questionIds: questionIds})
 }
 
-exports.post_start_test = (req, res) => {
-    //Update the test score in user model
-    //Update the test status in test model
-    User.findOneAndUpdate({ _id: req.user._id,'testdetails.$.testid':req.params.id },{'testdetails.$.testscore':req.body.testscore})
-        .then((user) => {
-            Test.findOneAndUpdate({ _id: req.params.id }, { status: 'completed' })
-                .then((test) => {
-                    res.status(200).send('Submitted Test Sucessfully')
-                })
-                .catch((err) => {
-                    console.log(err)
-                })
-        })
-        .catch((err) => {
-            console.log(err)
-        })   
+// exports.post_start_test = (req, res) => {
+//     //Update the test score in user model
+//     //Update the test status in test model
+//     User.findOneAndUpdate({ _id: req.user._id,'testdetails.$.testid':req.params.id },{'testdetails.$.testscore':req.body.testscore})
+//         .then((user) => {
+//             Test.findOneAndUpdate({ _id: req.params.id }, { status: 'completed' })
+//                 .then((test) => {
+//                     res.status(200).send('Submitted Test Sucessfully')
+//                 })
+//                 .catch((err) => {
+//                     console.log(err)
+//                 })
+//         })
+//         .catch((err) => {
+//             console.log(err)
+//         })   
     
-}
+// }
 
 exports.get_mydoctor = (req, res) => {
 
@@ -63,3 +63,39 @@ exports.get_question = (req, res) => {
             console.log(err)
         })
 }
+
+exports.get_question = (req, res) => {
+    Question.findById(req.params.questionid)
+        .then((question) => {
+            res.status(200).send(question)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+
+exports.update_test_status = (req, res) => {
+    Test.findOneAndUpdate(
+        { _id: req.params.id},
+        {
+            $inc:{pauesdqno:1},status:req.body.status,score:req.body.score,answered:req.body.ans,unanswered:req.body.unans
+        },
+        { new: true }
+        ).then((test) => {
+            res.json({ message: "Success"})
+        })
+        .catch((err) => {
+            console.log(err)
+        });
+}
+
+exports.get_test_details = (req, res) => {
+    Test.findById(req.params.id,{questions:0,name:0})
+        .then((test) => {
+            res.status(200).send(test)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+

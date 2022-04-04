@@ -1,7 +1,7 @@
 const express = require("express");
 const {register_get,register_post,} = require("../controllers/Auth/auth");
 const {isAdmin,isLoggedIn}=require('../controllers/Auth/middlewares')
-const {admin_get,view_patient,view_doctor,view_Oneuser,get_edit_user,edit_user,delete_user,checkusername} = require('../controllers/admin')
+const {admin_get,view_patient,view_doctor,view_Oneuser,get_edit_user,edit_user,delete_user,checkusername,get_details_for_graph,count_no_of_tests,count_no_of_questions} = require('../controllers/admin')
 const router = express.Router();
 
 router.get("/register", isLoggedIn, register_get);
@@ -14,4 +14,9 @@ router.get("/edit/:id",isLoggedIn,get_edit_user)
 router.put("/edit/:id",isLoggedIn,edit_user)
 router.delete("/delete/:id",isAdmin,isLoggedIn,delete_user)
 router.post("/check-username",isAdmin,isLoggedIn,checkusername)
+
+router.get("/data/users",isAdmin,isLoggedIn,get_details_for_graph)
+router.get("/data/testcount",isAdmin,isLoggedIn,count_no_of_tests)
+router.get("/data/questioncount",isAdmin,isLoggedIn,count_no_of_questions)
+
 module.exports = router;

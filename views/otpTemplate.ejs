@@ -1,0 +1,67 @@
+<%- include("partials/header") %>
+<style>
+  .main {
+    /* Make conatiner*/
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* Give padding all sides */
+    padding: 60px;
+    /* Set background color */
+    background-color: #6c63ff;
+  }
+  .s-main {
+    padding: 80px;
+  }
+  .head {
+    /* Make font monospace */
+    font-family: monospace;
+  }
+  .otp {
+    font-family: monospace;
+    /* text center */
+    text-align: center;
+  }
+</style>
+<div
+  style="
+    background-color: #6c63ff;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px;
+  "
+>
+  <div style="background-color: white;justify-content: center;padding: 60px" class="">
+    <div>
+      <h2 class="" style="font-family: monospace;">Semantic Cueing</h2>
+      <hr />
+    </div>
+    <div>
+      <h1 class=" ">Change your password</h1>
+    </div>
+    <div class="" style="padding-top: 20px">
+      <p>Below is your one time passcode:</p>
+      <h2 class="otp" style="font-family: monospace;"><%=otp%></h2>
+      <p>Please enter the passcode in the app to complete the process.</p>
+      <br />
+      <h3 class="">This passcode is valid for 10 minutes.</h3>
+      <br />
+    </div>
+    <p style="color: blue">
+      If you did not request a password reset, please contact us immediately.
+    </p>
+    <div class="">
+      <br />
+      <p>Regards</p>
+      <p>Team Semantic Cueing</p>
+    </div>
+  </div>
+</div>
+<%- include("partials/footer") %>
