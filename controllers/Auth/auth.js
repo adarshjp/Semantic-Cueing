@@ -76,7 +76,7 @@ exports.login_post = (req, res) => {
 };
 exports.get_changepassword = (req, res) => {
   res.status(200);
-  res.render("changePassword",{user:req.user});
+  res.render("changePassword",{user:req.user,i18n:global.i18n});
 }
 exports.change_password = (req, res) => {
 
