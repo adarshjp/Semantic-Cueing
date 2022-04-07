@@ -1,0 +1,26 @@
+<div class="modal fade " id="langModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body ">            
+                <h3 class="text-center blue py-4 m-3"><%=i18n.SelectRequiredLanguage%></h3>  
+                <div class='row justify-content-center'>
+                    <div class="col-12 col-sm-8">
+                        <select class="form-select" id="language" onchange="change_language()">
+                            <option value='en'>English</option>
+                            <option value='kn'>ಕನ್ನಡ</option>
+                            <option value='hi'>हिन्दी</option>
+                        </select>
+                    </div>
+                </div> 
+                <div class="text-center py-4 m-3">
+                    <a type="button" class="btn btn-primary btn-lg" href="?locale=en" id='lang_a'><%=i18n.Proceed%></a>
+                </div>   
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function change_language(){
+        document.getElementById('lang_a').href="?locale="+document.getElementById('language').value;
+    }
+</script>

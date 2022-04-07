@@ -3,7 +3,7 @@
   <div class="row justify-content-center">
     <div class="offset-2 col-9 offset-sm-2 col-sm-8 offset-lg-0 col-lg-6 p-1">
       <h1 class="text-center p-2">
-        Take your <span class="blue">tests</span> now
+        <%=i18n.Takeyour %> <span class="blue"><%=i18n.tests %></span> <%=i18n.now %>
         <i class="fas fa-calendar-check blue"></i>
       </h1>
     </div>
@@ -23,25 +23,25 @@
           </div>
           <div class="col-md-6">
             <div class="card-body">
-              <h5 class="card-title p-1">Test  <i class="fas fa-bell blue"></i></h5>
+              <h5 class="card-title p-1"><%=i18n.Test%>  <i class="fas fa-bell blue"></i></h5>
               <p class="card-text p-1">
                 <i class="fas fa-question-circle blue"></i> : <%=test.noofquestion%>
               </p>
-              <p class="card-text p-1">Level : <%=test.level%></p>
+              <p class="card-text p-1"><%=i18n.Level%> : <%=test.level%></p>
               <div class="d-flex justify-content-end">
                 <% if(test.status != 'completed') { %>
                   <% if(test.status == "pending") {%>
                     <button class="btn btn-lg btn-primary white" onclick="test_execute('<%=test._id%>')">
-                      Start test <i class="fas fa-play"></i>
+                      <%=i18n.Starttest%> <i class="fas fa-play"></i>
                     </button>
                   <%}else{%> 
                     <button class="btn btn-lg btn-secondary white" onclick="test_execute('<%=test._id%>')">
-                      Resume <i class="fab fa-rev"></i>
+                      <%=i18n.Resume%> <i class="fab fa-rev"></i>
                     </button>
                   <%}%>
                 <%}else{%>
                   <button class="btn btn-lg btn-success white"  data-bs-toggle="modal" data-bs-target="#viewReport" data-bs-whatever="<%=test._id%>">
-                    View Report <i class="fas fa-poll"></i>
+                    <%=i18n.ViewReport%> <i class="fas fa-poll"></i>
                   </button>
                 <%}%>
               </div>

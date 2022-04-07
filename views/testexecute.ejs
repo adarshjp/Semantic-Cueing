@@ -10,7 +10,7 @@
       <div class="row pt-4 justify-content-center text-center align-items-center">
         <%for (var i = 0;i< 4;i++){%>
           <div class="col-6 col-sm-3 py-2">
-            <button type="button" class="btn btn-warning btn-lg" data-bs-toggle="modal" data-bs-target="#hintModal" id="hint_<%=i%>" data-bs-whatever="<%=i%>">Hint <%=i+1%> <i class="fa fa-light fa-lightbulb"></i></button>
+            <button type="button" class="btn btn-warning btn-lg" data-bs-toggle="modal" data-bs-target="#hintModal" id="hint_<%=i%>" data-bs-whatever="<%=i%>"><%=i18n.Hint%> <%=i+1%> <i class="fa fa-light fa-lightbulb"></i></button>
           </div>
         <%}%>
       </div>
@@ -24,13 +24,13 @@
           </div>
         </div>
         <div class="col-4 col-md-2 py-2">
-          <button class="btn btn-success btn-lg" onclick="next_q('next')" id='next'>Next</button>
+          <button class="btn btn-success btn-lg" onclick="next_q('next')" id='next'><%=i18n.Next%></button>
         </div>
         <div class="col-3 col-md-2 py-2">
-          <button class="btn btn-info btn-lg" onclick="next_q('skip')" id='next'>Skip</button>
+          <button class="btn btn-info btn-lg" onclick="next_q('skip')" id='next'><%=i18n.Skip%></button>
         </div>
         <div class="col-5 col-md-3 py-2">
-          <button class="btn btn-primary btn-lg" onclick="close_test()"><b>Pause</b> <i class="fa fa-pause"></i></button>
+          <button class="btn btn-primary btn-lg" onclick="close_test()"><b><%=i18n.Pause%></b> <i class="fa fa-pause"></i></button>
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@
         <div class="col-12">
           <h6 class="my-2">Test ID : <%= testid %></h6>
           <h6 id='level' class="my-2"></h6>
-          <h6 id='score' class="my-2">Score : 1000</h6>
+          <h6 id='score' class="my-2"></h6>
         </div>
       </div>
       <div class="row text-center align-items-center my-5">
