@@ -3,10 +3,10 @@
 <main id="test-main" class="container">
     <div class="row justify-content-center">
         <div class="offset-2 col-9 offset-sm-1 col-sm-9  offset-lg-0 col-lg-12">
-            <div class="row">
-                <div class="col-12 col-sm-5">
+            <div class="row justify-content-center">
+                <div class="col-10 col-sm-6">
                     <label for="level">Choose Level <i class="fa fa-filter" aria-hidden="true"></i></label>
-                    <select  class="form-select form-select-lg my-2 p-2" id="level" aria-label=".form-select-lg" onchange="levelfilter()">
+                    <select  class="form-select form-select-lg my-2 p-2" id="level" aria-label=".form-select-lg" onclick="levelfilter()">
                         <option value="all">All</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -15,42 +15,45 @@
                         <option value="5">5</option>
                     </select>
                 </div>
-                <div class="col-9 col-sm-4" style="margin-top:30px">
-                    <button class="btn btn-primary rounded-pill btn-lg" onclick="selRandom('<%=question.length%>');">Select randomly</button>
-                </div>
-                <div class="col-3 col-sm-1">
-                    <button type="button" class="btn btn-primary position-relative rounded-pill" onclick="showSelectedQuestion('<%=question.length%>')" style="margin-top:35px">
+                <div class="col-2 col-sm-2">
+                    <button type="button" class="btn btn-primary position-relative rounded-pill" onclick="showSelectedQuestion()" style="margin-top:35px">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="count">0</span>
                     </button>
                 </div>
+                <div class="col-6 col-sm-4" style="margin-top:30px">
+                    <button class="btn btn-primary rounded-pill btn-lg" onclick="reSet();">Reset <i class="fa fa-refresh" aria-hidden="true"></i></button>
+                </div>
+                <div class="col-10 col-sm-7 col-md-6" style="margin-top:30px">
+                    <button class="btn btn-primary rounded-pill btn-lg" onclick="selRandom();">Select randomly <i class="fa fa-random" aria-hidden="true"></i></button>
+                </div>
             </div>
-            <form action="/create/test" method="POST" id="testForm" onsubmit="return noofqval();"> 
-                <ol class="gradient-list">
-                    <% var i=1;%>
-                    <% question.forEach((question)=>{ %>
-                        <li class="row shadow-lg mb-5 bg-body rounded-lg <%= question.level%>" id="question<%=i%>">
-                            <div class="card-image p-2">
-                                <div class="inputGroup">
-                                    <input id="option<%=i%>" class="form-check-input question<%=i%> op<%=question.level%>" type="checkbox" id="q-checkbox" value="<%=question._id %>" name="questions" onclick="countQuestion()">
-                                    <label for="option<%=i%>">Question : <strong><%=question.answer%></strong></label> 
-                                </div>
-                                <div class="hover-img">
-                                    <span class="p-1 rounded-lg my-3" id="qimg">
-                                        <img src="data:image/<%=question.question.contentType%>;base64,<%=question.question.data.toString('base64')%>" alt="image" class="img-fluid" style="max-height: 18rem;"/>      
-                                    </span>
-                                </div>
-                            </div>   
-                        </li>
-                        <%i++;%>
-                    <% }) %>
-                    <div class="d-flex justify-content-center d-none" id="loader">
-                        <div class="spinner-border text-primary" role="status">
-                          <span class="visually-hidden">Loading...</span>
-                        </div>
+            <form action="/create/test" method="POST" id="testForm" onsubmit="return noofqval();">
+                    <ol class="gradient-list" id='ol_list'>
+                        <% var i=1;%>
+                        <% question.forEach((question)=>{ %>
+                            <li class="row shadow-lg mb-5 bg-body rounded-lg <%= question.level%>" id="question<%=i%>">
+                                <div class="card-image p-2">
+                                    <div class="inputGroup">
+                                        <input id="option<%=i%>" class="form-check-input question<%=i%> op<%=question.level%>" type="checkbox"  value="<%=question._id %>" name="questions" onclick="countQuestion()">
+                                        <label for="option<%=i%>">Question : <strong><%=question.answer%></strong></label> 
+                                    </div>
+                                    <div class="hover-img">
+                                        <span class="p-1 rounded-lg my-3" id="qimg">
+                                            <img src="data:image/<%=question.question.contentType%>;base64,<%=question.question.data.toString('base64')%>" alt="image" class="img-fluid" style="max-height: 18rem;"/>      
+                                        </span>
+                                    </div>
+                                </div>   
+                            </li>
+                            <%i++;%>
+                        <% }) %>
+                    </ol>
+                <div class="d-flex justify-content-center d-none" id="loader">
+                    <div class="spinner-border text-primary" role="status">
+                      <span class="visually-hidden">Loading...</span>
                     </div>
-                </ol>
-                <div class="row justify-content-center">
+                </div>
+                <div class="row justify-content-center mt-4">
                     <div class="col-6">
                         <label for="patient">Choose Patient</label>
                         <select name="patientid" id="doctorid" class="form-select form-select-lg my-2 p-2" aria-label=".form-select-lg" required>
@@ -74,13 +77,25 @@
     
 </main>
 <script>
+
+    let k=1;   //multiplier used to skip questions 5,10,15 so on...
+    let li_id=parseInt('<%=i%>'); //used in input and labels
+    let isCompleted=false; //true is no more questions
+
     function countQuestion(){
-        document.getElementById('count').innerHTML=document.querySelectorAll('input[type="checkbox"]:checked').length;
+        document.getElementById('count').textContent = document.querySelectorAll('input[type="checkbox"]:checked').length;
+    }
+
+    function reSet(){
+        for(var i=1;i<=li_id-1;i++){
+            document.getElementById("option"+i).checked = false;
+        }
+        countQuestion();
     }
     function noofqval() {
         var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
         if(checkboxes.length<5){
-            alert("Please select atleast 10 questions..");
+            alert("Please select atleast 5 questions..");
             return false;
         }
         else{
@@ -90,14 +105,15 @@
             return true;
         }
     }
-    function selRandom(num){
+    function selRandom(){
+        var num=li_id-1;
         var ran;
         var cur_level=document.getElementById("level").value;
         for(var i=1;i<=num;i++){
             document.getElementById("option"+i).checked = false;
         }
         if(cur_level=="all"){
-            for(var i=0;i<Math.min(num,10);){
+            for(var i=0;i<Math.min(num,5);){
                 ran=Math.floor(Math.random() * num) + 1;
                 if(!(document.getElementById("option"+ran).checked)){
                     document.getElementById("option"+ran).checked = true;
@@ -115,6 +131,7 @@
                 }
             }
         }
+        document.getElementById("level").value='all';
         countQuestion();
     }
     function showhidelevel(levclass,disp){
@@ -144,7 +161,8 @@
             }
         }
     }
-    function showSelectedQuestion(num){
+    function showSelectedQuestion(){
+        var num=li_id-1;
         for(var i=1;i<=num;i++){
             if(document.getElementsByClassName('question'+i)[0].checked){
                 document.getElementById('question'+i).style.display="block";
@@ -153,20 +171,90 @@
                 document.getElementById('question'+i).style.display="none";
             }
         }
+        document.getElementById("level").value='all';
     }
+
     window.onscroll = function(ev) {
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-            document.getElementById('loader').classList.remove('d-none');
-            /**   
-            * TODO : Fetch data from server using /create/test/:skip
-            * TODO : Skip value should be multiples of 5 ie 5,10,...
-            * TODO : Add data to the list
-            * TODO : Hide loader
-            * *Use Fetch API to fetch data from server using /create/test/:skip
-            * !When there is no question left to fetch, "No more questions" message would be sent from the server
-            **/
-            
+        if (!isCompleted && ((window.innerHeight + window.scrollY+1) >= document.body.offsetHeight)) {
+            document.getElementById('loader').classList.remove('d-none')
+            fetch('/create/test/'+(k*5))
+            .then(response => response.json())
+            .then(question=>{
+                if(question.message==="No more questions")
+                {
+                    document.getElementById('loader').classList.add('d-none');
+                    isCompleted=true;
+                    alert("No more questions")
+                    return
+                }
+                for(let q=0;q<question.question.length;q++) {
+                    append_li(question.question[q]);
+                }
+                document.getElementById('loader').setAttribute('hidden','');
+            });
+            k=k+1;
         }
+    };
+
+    function append_li(q){
+        let li=document.createElement("li");
+        li.className='row shadow-lg mb-5 bg-body rounded-lg '+q.level;
+        li.id='question'+li_id;
+
+        let card_img=document.createElement('div');
+        card_img.className='card-image p-2';
+
+        let inputGroup=document.createElement('div');
+        inputGroup.className='inputGroup';
+
+        let input=document.createElement('input');
+        input.id="option"+li_id;
+        input.className='form-check-input question'+li_id+' op'+q.level;
+        input.type="checkbox";
+        input.value=q._id;
+        input.name='questions';
+        input.setAttribute('onclick','countQuestion()');
+
+        let label=document.createElement('label');
+        label.setAttribute('for','option'+li_id);
+
+        let strong=document.createElement('strong');
+        strong.textContent=q.answer;
+
+        label.textContent='Question : ';
+        label.appendChild(strong);
+        let hover_img=document.createElement('div');
+        hover_img.className='hover-img';
+
+        let span=document.createElement('span');
+        span.className='p-1 rounded-lg my-3';
+        span.id='qimg';
+
+        let img=document.createElement('img');
+        img.className='img-fluid';
+        img.alt='image';
+        img.style.cssText='max-height: 18rem;'
+        img.src='data:image/'+q.question.contentType+';base64,'+arrayBufferToBase64(q.question.data.data);
+        
+        span.appendChild(img);
+        hover_img.appendChild(span);
+        inputGroup.appendChild(input);
+        inputGroup.appendChild(label);
+
+        card_img.appendChild(inputGroup);
+        card_img.appendChild(hover_img);
+
+        li.appendChild(card_img);
+
+        document.getElementById('ol_list').appendChild(li);
+        li_id++;
+    }
+
+    function arrayBufferToBase64(buffer) {
+      var binary = '';
+      var bytes = [].slice.call(new Uint8Array(buffer));
+      bytes.forEach((b) => binary += String.fromCharCode(b));
+      return window.btoa(binary);
     };
 </script>
 <%- include("partials/footer") %>
