@@ -1,0 +1,75 @@
+<%- include("partials/header") %>
+<div class="container">
+    <div id="messages">
+
+    </div>
+    <div class="container fixed-bottom">
+        <div class="d-inline">
+            <textarea id="message" class="form-control" placeholder="Your Message Here"></textarea>
+        </div>
+        <div class="d-inline ">
+            <button id="send" class="btn btn-success">Send</button>
+        </div>
+    </div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io();
+    let coversationId;
+    socket.on('message', addMessages)
+    function addMessages(data) {
+        console.log("Adding")
+        $('#messages').append(`<div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"></h5>
+                            <p class="card-text">${data.message}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>`)
+    }
+    $(() => {
+        $("#send").click(() => {
+            //disable btn
+            $("#send").prop("disabled", true);
+            sendMessage({message: $("#message").val()});
+            $("#message").val("");
+            $("#send").prop("disabled", false);
+        })
+        getMessages()
+    })
+    function sendMessage(message) {
+            // $.post('http://localhost:3000/messages', message)
+            console.log(message)
+            fetch('/messages', {
+                method: 'POST',
+                body: JSON.stringify({
+                    message: message.message,
+                    conversationId: conversationId
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+    }
+    function getMessages() {
+        // $.get('http://localhost:3000/messages', (data) => {
+        fetch('/messages', {
+            method: 'GET'
+        })
+        .then(res => res.json())
+        .then(data => {
+            conversationId = data.conversationId;
+            console.log('Messages',data.messages.length)
+            data.messages.forEach(message => {
+                addMessages(message)
+            })
+        })
+    }
+
+</script>
+<%- include("partials/footer") %>
