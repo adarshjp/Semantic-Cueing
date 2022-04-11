@@ -13,12 +13,25 @@ exports.get_messages = async (req, res) => {
         Finds all the messages of the conversation
         Sends the messages to the client 
    */
-    let patientId=req.user._id;
-    let doctorId=await findDoctorIdByPatientId(patientId);
+    let patientId,doctorId;
+    let userId=req.user._id
+    let role=await findUserRole(userId)
+    if(role==="patient")
+    {
+        patientId=userId
+        doctorId=await findDoctorIdByPatientId(patientId)
+    }
+    else
+    {
+        doctorId=userId
+        patientId=req.params.patientId
+    }
     let conversationId=await findCoversationId(patientId,doctorId);
     Message.find({conversationId:conversationId},(err,messages)=>{
         if(err)
             res.json({error:err,conversationId:conversationId});
+        else if(!messages)
+            res.json({error:"No messages found",conversationId:conversationId});
         else if(messages.length==0)
             res.json({error:"No messages found",conversationId:conversationId});
         else
@@ -47,7 +60,30 @@ exports.post_messages = (req, res)=> {
     });
 }
 exports.renderChatWindow = (req, res) => {
-    res.render('chatWindow')
+    if(req.user.role==="doctor" && !req.params) {
+        res.json({ error: "No patient id provided" });
+    }
+    else if(req.user.role==="patient") {
+        res.render('chatWindow',{role: req.user.role,patientId:req.user._id});
+    }else{
+        res.render('chatWindow',{role: req.user.role,patientId:req.params.patientId})
+    }
+}
+function findUserRole(userId) {
+    /* Function should return the  role of a user id that is passed as an argument
+        Input: userId
+        Output: role
+    */
+    return new Promise((resolve, reject) => {
+        User.findById(userId, (err, user) => {
+            if (err) {
+                reject(err);
+            }
+            else {
+                resolve(user.role);
+            }
+        })
+    })
 }
 function findDoctorIdByPatientId(patientId) {
     /* Function should return the  doctor id for a patient id that is passed as an argument

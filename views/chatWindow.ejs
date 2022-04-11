@@ -3,7 +3,7 @@
     <div id="messages">
 
     </div>
-    <div class="container fixed-bottom">
+    <div class="container">
         <div class="d-inline">
             <textarea id="message" class="form-control" placeholder="Your Message Here"></textarea>
         </div>
@@ -58,7 +58,13 @@
     }
     function getMessages() {
         // $.get('http://localhost:3000/messages', (data) => {
-        fetch('/messages', {
+        let role= '<%= role %>'
+        let getUrl
+        if(role==='patient')
+            getUrl = '/messages'
+        else
+            getUrl = '/messages/'+'<%= patientId %>'
+        fetch(getUrl, {
             method: 'GET'
         })
         .then(res => res.json())
