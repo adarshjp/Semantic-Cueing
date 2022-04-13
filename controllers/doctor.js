@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const Question = require("../models/question");
 const Test = require("../models/test");
+
 exports.get_create_test = (req, res) => {
   let skip=0;
   if(req.params.skip===undefined)
@@ -39,10 +40,17 @@ exports.get_create_test = (req, res) => {
       });
     });
 };
+
 exports.get_home_doctor = (req, res) => {
   User.findById({_id:req.user._id})
   .then((user)=>{
-    res.render("doctor",{user:user})
+    User.find({role:'patient',doctorid:req.user._id},{_id:1, name: 1})
+    .then((patients) =>{
+      res.render("doctor",{user:user,patient:patients})
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
   })
   .catch((err)=>{
     res.status(500).json({
@@ -51,6 +59,7 @@ exports.get_home_doctor = (req, res) => {
   })
   
 };
+
 exports.post_create_test = (req, res) => {
   const newTest = Test({
     doctorid: req.user._id,
@@ -63,10 +72,9 @@ exports.post_create_test = (req, res) => {
   newTest
     .save()
     .then((result) => {
-      res.status(201).json({
-        message: "Test created successfully",
-        result,
-      });
+      req.flash('success', 'Test created successfully')
+      res.status(200)
+      res.redirect('/home/doctor/'+req.user._id)
     })
     .catch((err) => {
       res.status(500).json({
@@ -79,6 +87,32 @@ exports.get_view_assigned_patient= (req, res) => {
   User.find({doctorid:req.user._id})
   .then((user)=>{
     res.status(200).send(user);
+  })
+  .catch((err)=>{
+    res.status(500).json({
+      error:err
+    })
+  })
+}
+
+exports.get_patient_details = (req, res) => {
+  //get patient details _id is patientid and doctorid is req.user._id
+  User.find({_id:req.params.patientid,doctorid:req.user._id})
+  .then((patient)=>{
+    res.status(200).send(patient);
+  })
+  .catch((err)=>{
+    res.status(500).json({
+      error:err
+    })
+  })
+}
+
+exports.get_patient_test_details = (req, res) => {
+  //get patient test details _id is patientid and doctorid is req.user._id
+  Test.find({patientid:req.params.patientid,doctorid:req.user._id},{_id:0,questions:0})
+  .then((test)=>{
+    res.status(200).send(test);
   })
   .catch((err)=>{
     res.status(500).json({
