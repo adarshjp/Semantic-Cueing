@@ -1,107 +1,308 @@
 <%- include("partials/header") %>
 <%- include("partials/doctorSideBar") %>
-  <div class="container1" id="passigned">
-    <h1>Patients</h1>
-    <div class="row">
-      <div class="col-sm-4 py-3 py-sm-3">
-        <div class="card box-shadow">
-          <img src="/images/1.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Patient1</h5>
-            <p class="card-text">Name: ABC</p>
-            <p class="card-text">Age: 21</p>
-            <a href="#" class="btn btn-primary">Read more...</a>
+<div class="container-fluid">
+  <div class="row justify-content-center pt-1">
+    <div class="offset-2 col-8 offset-sm-1 col-sm-10 offset-md-1 col-md-8">
+       <% if(message.error){ %>
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+             <strong class="text-center"><%= message.error%></strong>
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>
-        </div>
-      </div>
-      <div class="col-sm-4 py-3 py-sm-3">
-        <div class="card box-shadow">
-          <img src="/images/2.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Patient2</h5>
-            <p class="card-text">Name: DEF</p>
-            <p class="card-text">Age: 21</p>
-            <a href="#" class="btn btn-primary">Read more...</a>
+       <% } %>
+       <% if(message.success){ %>
+          <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+             <strong class="text-center"><%= message.success%></strong>
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>
-        </div>
-      </div>
-      <div class="col-sm-4 py-3 py-sm-3">
-        <div class="card box-shadow">
-          <img src="/images/3.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Patient1</h5>
-            <p class="card-text">Name: GHI</p>
-            <p class="card-text">Age: 22</p>
-            <a href="#" class="btn btn-primary">Read more...</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-4 py-3 py-sm-3">
-        <div class="card box-shadow">
-          <img src="/images/2.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Read more...</a>
-          </div>
-        </div>
-      </div>
-    </div>   
+       <% } %>
+    </div>
+ </div>
+
+  <div class="row justify-content-center mt-2">
+    <div class="offset-2 col-9 offset-sm-1 col-sm-9 offset-md-0 col-md-6 col-lg-5 col-xl-4">
+      <label for="patient">Choose Patient</label>
+      <select class="form-select form-select-lg my-2 p-2" aria-label=".form-select-lg" onchange="disp_patient_details(this.value)">
+        <% patient.forEach((patient)=> { %>
+          <option value="<%=patient._id%>"><%=patient.name%></option>
+        <% }) %>
+      </select>
+    </div>
   </div>
-  
-  
-  <div class="piegraph col-sm-12" id="dgraph">
-    
-    <div class="row" style="margin-bottom:2%;" id="piechart1" ></div>
-    <div class="row" style="margin-bottom:2%;" id="piechart2" ></div>
-    <div class="row" style="margin-bottom:2%;" id="piechart3" ></div>
-  </div>
-  <div class="card login" id="dprofile" style="width: 18rem;">
-      <img class="card-img-top" src="/admin.jpg" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+
+  <div class="row justify-content-center">
+    <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-10 p-1">
+      <div class="card">
+        <div class="d-flex justify-content-center align-items-center blue" id='spinner-0' style="height:220px">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        <div class="row mx-3 mx-sm-0 text-center justify-content-center card-body" id='patient-details' hidden>
+          <div class="col-sm-8 col-md-4 my-auto">
+              <img src="/images/profile.jpg" class="img-fluid rounded-lg" alt="..."/ id='disp-pic'>
+          </div>
+          <div class="col-sm-6 col-md-4 my-auto">
+            <p id='name'>Name : </p>
+            <p id='email'>Email : </p>
+            <p id='age'>Age : </p>
+            <p id='level'>Level : </p>
+          </div>
+          <div class="col-sm-6 col-md-4 my-auto">
+            <p id="p_id">Patient ID : </p>
+            <p id='stroke'>Stroke date : stroke</p>
+            <p id='p_stroke'>Post stroke duration : date</p>
+            <p id='test'>Number of Test Assigned : xy</p>
+          </div>
+        </div>
       </div>
+    </div>
   </div>
-    
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <script type="text/javascript">
-    google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
+  <div class="row justify-content-center mt-2 text-center">
 
-    function drawChart() {
+    <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-10 col-xl-5 p-1">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title py-2">Patients test result</h5>
+          <div class="d-flex justify-content-center align-items-center blue" id='spinner-1' style="height:250px">
+             <div class="spinner-border" role="status">
+               <span class="visually-hidden">Loading...</span>
+             </div>
+           </div>
+          <canvas id="line-chart" height="127" hidden></canvas>
+       </div>
+      </div>
+    </div>
 
-      var data = google.visualization.arrayToDataTable([
-        ['Task', 'parameter1'],
-        ['Active',     100],
-        ['Discharged',      250],
-       
-      ]);
+    <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-5 p-1">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title py-2">Answered a Question vs Hints Taken</h5>
+          <div class="d-flex justify-content-center align-items-center blue" id='spinner-2' style="height:250px">
+             <div class="spinner-border" role="status">
+               <span class="visually-hidden">Loading...</span>
+             </div>
+           </div>
+          <canvas id="bar-chart-1" height="127" hidden></canvas>
+       </div>
+      </div>
+    </div>
 
-      var cata = google.visualization.arrayToDataTable([
-        ['level', 'Number of patients'],
-        ['lv1',      50],
-        ['lv2',      50],
-        ['lv3',      50],
-        ['lv4',      50],
-       
-      ]);
+    <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-5 p-1">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title py-2">Unanswered a Question vs Hints Taken</h5>
+          <div class="d-flex justify-content-center align-items-center blue" id='spinner-3' style="height:250px">
+             <div class="spinner-border" role="status">
+               <span class="visually-hidden">Loading...</span>
+             </div>
+           </div>
+          <canvas id="bar-chart-2" height="127" hidden></canvas>
+       </div>
+      </div>
+    </div>
 
-      var options = {
-        title: 'No of Active vs Discharged Patients'
-      };
+    <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-5 p-1">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title py-2">Assigned test details</h5>
+          <div class="d-flex justify-content-center align-items-center blue" id='spinner-4' style="height:250px">
+             <div class="spinner-border" role="status">
+               <span class="visually-hidden">Loading...</span>
+             </div>
+           </div>
+          <canvas id="bar-chart-3" height="127" hidden></canvas>
+       </div>
+      </div>
+    </div>
 
-      var options1 = {
-        title: 'No of patients in each level'
-      };
+  </div>
+</div>
+<script type="text/javascript">
+  let temp=true; // this is used to keep track whether chart is created or not
+  disp_patient_details('<%=patient[0]._id%>')
+  let line_chart; // For line chart
+  let bar_chart_1; // For bar chart
+  let bar_chart_2; // For bar chart
+  let bar_chart_3; // For bar chart
 
-      var chart = new google.visualization.PieChart(document.getElementById('piechart1'));
-      var chart1 = new google.visualization.PieChart(document.getElementById('piechart2'));
-      
-      chart.draw(data, options);
-      chart1.draw(cata, options1);
-     
+  function disp_patient_details(patientid) {    
+    document.getElementById('spinner-0').classList.remove('d-none')
+    document.getElementById('patient-details').setAttribute('hidden', '')
+
+    fetch('/get/patient/'+patientid)
+    .then(response => response.json())
+    .then(patient =>{
+      document.getElementById('name').textContent = 'Name : '+patient[0].name;
+      document.getElementById('email').textContent = 'Email : '+patient[0].email;
+      document.getElementById('age').textContent = 'Age : '+patient[0].age;
+      document.getElementById('p_id').textContent = 'Patient ID : '+patient[0]._id;
+      document.getElementById('level').textContent = 'Level : '+patient[0].level;
+      // document.getElementById('disp-pic').src='';
+      // document.getElementById('stroke').textContent = '';
+      // document.getElementById('p_storke').textContent = '';
+      document.getElementById('spinner-0').classList.add('d-none')
+      document.getElementById('patient-details').removeAttribute('hidden')
+      if(temp){
+        create_line_chart();
+        create_bar_charts('bar-chart-1');
+        create_bar_charts('bar-chart-2');
+        create_bar_charts('bar-chart-3');
+        temp=false;
+      }
+      disp_performance_charts(patientid);
+    });
+  }
+
+  function create_line_chart(){
+    let data={
+      labels: [1,2],
+      datasets: [
+        {
+            label: 'Percentage',
+            data: [10,20],
+            borderColor: ['#6C63FF'],
+            backgroundColor: ['#4941eb'],
+        }
+      ]
     }
-  </script>
-    <%- include("partials/footer") %>
+    var ctx = document.getElementById("line-chart");
+    line_chart = new Chart(ctx, {
+      type: 'line',
+      data : data,
+      options: {
+        responsive: true,
+      }
+    });
+  }
+
+  function create_bar_charts(b_id) {
+    let bar_chart_no=b_id.split('-')[2];
+    let data = {
+         labels : ['0','1','2','3','4'],
+         datasets: [{
+            label:'Hints Taken',
+            data: [],
+            backgroundColor: ['#FF6633','#33FFFC','#9CFF33','#33FF96','#36FF33'],
+            borderColor: ['#FF4E33','#FFB433','#33FFB4','#7EFF33','#33FF4E'],
+            borderWidth: 1
+         }]
+      };
+      var ctx = document.getElementById(b_id);
+    if(bar_chart_no==='1'){
+      bar_chart_1 = new Chart(ctx, {
+        type: 'bar',
+        data : data,
+        options: {
+          responsive: true,
+        //   scales: {
+        //     x: {
+        //       grid: {
+        //         display: false
+        //       }
+        //     },
+        //     y: {
+        //       grid: {
+        //         display: false
+        //       }
+        //     }
+        // }
+      }
+      });
+    }else if(bar_chart_no==='2'){
+      bar_chart_2 = new Chart(ctx, {
+        type: 'bar',
+        data : data,
+        options: {
+        responsive: true,
+      }
+      });
+    }else{
+      bar_chart_3 = new Chart(ctx, {
+        type: 'bar',
+        data : data,
+        options: {
+        responsive: true,
+      }
+      });
+    }
+  }
+
+  function disp_performance_charts(patientid){
+    document.getElementById('spinner-1').classList.remove('d-none')
+    document.getElementById('line-chart').setAttribute('hidden', '')
+
+    document.getElementById('spinner-2').classList.remove('d-none')
+    document.getElementById('bar-chart-1').setAttribute('hidden', '')
+
+    document.getElementById('spinner-3').classList.remove('d-none')
+    document.getElementById('bar-chart-2').setAttribute('hidden', '')
+
+    document.getElementById('spinner-4').classList.remove('d-none')
+    document.getElementById('bar-chart-3').setAttribute('hidden', '')
+
+    fetch('/test/patinet/'+patientid)
+    .then(response => response.json())
+    .then(test => {
+      console.log(test)
+      create_data_for_charts(test);
+    });
+  }
+
+  function create_data_for_charts(test){
+    let score=[];   //this store the details of 'completed' test score 
+    let percent=[];
+    let status={'pending':0,'pauesd':0,'completed':0}  //to count test statuses
+    let answered={'0':0,'1':0,'2':0,'3':0,'4':0};
+    let unanswered={'0':0,'1':0,'2':0,'3':0,'4':0};
+    for(let i=0;i< test.length;i++){
+      if(test[i].status==='completed'){
+        score.push(test[i].score);
+        percent.push(test[i].score/test[i].noofquestion)
+        status['completed']++;
+        let t1=JSON.parse(test[i].answered);
+        let t2=JSON.parse(test[i].unanswered)
+        for(let j=0;j< 5;j++){
+          answered[j+'']=answered[j+'']+t1[j+''];
+          unanswered[j+'']=unanswered[j+'']+t2[j+''];
+        }
+      }else if(test[i].status==='pauesd'){
+        status['pauesd']++;
+      }else{
+        status['pending']++;
+      }
+    }
+    update_line_chart(percent);
+    update_bar_chart(answered,'bar-chart-1');
+    update_bar_chart(unanswered,'bar-chart-2');
+    update_bar_chart(status,'bar-chart-3');
+  }
+
+  function update_line_chart(percent) {
+    line_chart.data.datasets[0].data = percent;
+    //line_chart.data..labels = [];  labels are yet to decided it will date of test completion.
+    line_chart.update();
+    document.getElementById('spinner-1').classList.add('d-none')
+    document.getElementById('line-chart').removeAttribute('hidden')
+  }
+
+  function update_bar_chart(dict,b_id) {
+    let bar_chart_no=b_id.split('-')[2];
+    if(bar_chart_no==='1'){
+      bar_chart_1.data.labels=Object.keys(dict);
+      bar_chart_1.data.datasets[0].data=Object.values(dict);
+      bar_chart_1.update();
+    }else if(bar_chart_no==='2'){
+      bar_chart_2.data.labels=Object.keys(dict);
+      bar_chart_2.data.datasets[0].data=Object.values(dict);
+      bar_chart_2.update();
+    }else{
+      bar_chart_3.data.labels=Object.keys(dict);
+      bar_chart_3.data.datasets[0].data=Object.values(dict);
+      bar_chart_3.data.datasets[0].label='Status';
+      bar_chart_3.update();
+    }
+    document.getElementById('spinner-'+(parseInt(bar_chart_no)+1)).classList.add('d-none')
+    document.getElementById(b_id).removeAttribute('hidden')
+  }
+</script>
+<%- include("partials/footer") %>
