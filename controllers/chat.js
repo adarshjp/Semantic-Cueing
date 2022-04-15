@@ -1,47 +1,42 @@
 const User = require("../models/user");
 const Message = require("../models/message");
 const Conversation = require("../models/conversation");
-
-exports.get_messages = async (req, res) => {
+exports.get_messages_patient=async (req,res)=>{
     /*  Function  to GEt all the messages of a conversation (Patient Side)
-        Input: patientId 
+        Input: patientId (req.user._id)
         Output: all the messages of the conversation
+        Steps:  1 - Finds the doctorId of the patient
+                2 - Finds the conversationId involving the patient and doctor
+                3 - If there is no conversation involving the patient and the doctor then a new conversation is created
+                4 - Finds all the messages of the conversation
+                5 - Sends the messages to the client
     */
-   /*   Finds the doctorId of the patient
-        Finds the conversation involving the patient and doctor
-        If there is no conversation involving the patient and the doctor then a new conversation is created
-        Finds all the messages of the conversation
-        Sends the messages to the client 
-   */
-    let patientId,doctorId;
-    let userId=req.user._id
-    let role=await findUserRole(userId)
-    if(role==="patient")
-    {
-        patientId=userId
-        doctorId=await findDoctorIdByPatientId(patientId)
-    }
-    else
-    {
-        doctorId=userId
-        patientId=req.params.patientId
-    }
+    let patientId=req.user._id
+    let doctorId=await findDoctorIdByPatientId(patientId)
     let conversationId=await findCoversationId(patientId,doctorId);
-    Message.find({conversationId:conversationId},(err,messages)=>{
-        if(err)
-            res.json({error:err,conversationId:conversationId});
-        else if(!messages)
-            res.json({error:"No messages found",conversationId:conversationId});
-        else if(messages.length==0)
-            res.json({error:"No messages found",conversationId:conversationId});
-        else
-            res.json({messages,conversationId});
-    }); 
+    findAndSendMessages(conversationId,res);
+}
+exports.get_messages_doctor = async (req, res) => {
+    /*  Function  to GEt all the messages of a conversation (Doctor Side)
+        Input: doctorId (req.user._id) and patientId (req.params.patientId)
+        Output: all the messages of the conversation
+        Steps:  1 - Finds the conversationId involving the patient and doctor
+                2 - If there is no conversation involving the patient and the doctor then a new conversation is created
+                3 - Finds all the messages of the conversation
+                4 - Sends the messages to the client
+    */
+    let doctorId=req.user._id
+    let patientId=req.params.patientId
+    let conversationId=await findCoversationId(patientId,doctorId);
+    findAndSendMessages(conversationId,res);
 }
 exports.post_messages = (req, res)=> {
-    /*  Function  to Post a message to a conversation (Patient Side)
+    /*  Function  to Post a message to a conversation for both the patient and doctor
         Input: conversationId,message,senderId
         Output: message posted
+        Steps:  1 - Creates a new message object
+                2 - Saves the message
+                3 - Sends the message to the client
     */
     const io = require('../index').io
     const newMessage = new Message({
@@ -59,31 +54,25 @@ exports.post_messages = (req, res)=> {
             res.json({success:"Message posted"});
     });
 }
-exports.renderChatWindow = (req, res) => {
-    if(req.user.role==="doctor" && !req.params) {
-        res.json({ error: "No patient id provided" });
-    }
-    else if(req.user.role==="patient") {
-        res.render('chatWindow',{role: req.user.role,patientId:req.user._id});
-    }else{
-        res.render('chatWindow',{role: req.user.role,patientId:req.params.patientId})
-    }
+exports.renderChatWindow_patient = (req, res) => {
+    /*  Function  to Render the chat window for a patient*/
+    res.render("chatWindow", {role: "patient",patientId:req.user._id});
 }
-function findUserRole(userId) {
-    /* Function should return the  role of a user id that is passed as an argument
-        Input: userId
-        Output: role
-    */
-    return new Promise((resolve, reject) => {
-        User.findById(userId, (err, user) => {
-            if (err) {
-                reject(err);
-            }
-            else {
-                resolve(user.role);
-            }
-        })
-    })
+exports.renderChatWindow_doctor = (req, res) => {
+    /*  Function  to Render the chat window for a doctor*/
+    res.render("chatWindow", {role: "doctor",patientId:req.params.patientId});
+}
+function findAndSendMessages(conversationId,res) {
+    Message.find({conversationId:conversationId},(err,messages)=>{
+        if(err)
+            res.json({error:err,conversationId:conversationId});
+        else if(!messages)
+            res.json({error:"No messages found",conversationId:conversationId});
+        else if(messages.length==0)
+            res.json({error:"No messages found",conversationId:conversationId});
+        else
+            res.json({messages,conversationId});
+    });
 }
 function findDoctorIdByPatientId(patientId) {
     /* Function should return the  doctor id for a patient id that is passed as an argument
