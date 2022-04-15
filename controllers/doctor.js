@@ -111,3 +111,15 @@ exports.get_patient_test_details = (req, res) => {
     })
   })
 }
+
+exports.get_view_test_created = (req, res) => {
+  Test.find({doctorid:req.user._id})
+  .then((tests)=>{
+    res.render("view_tests",{ user: req.user,tests: tests });
+  })
+  .catch((err)=>{
+    res.status(500).json({
+      error:err
+    })
+  })
+}
