@@ -129,7 +129,7 @@
     document.getElementById('spinner-0').classList.remove('d-none')
     document.getElementById('patient-details').setAttribute('hidden', '')
 
-    fetch('/get/patient/'+patientid)
+    fetch('/data/patientdetails/'+patientid)
     .then(response => response.json())
     .then(patient =>{
       document.getElementById('name').textContent = 'Name : '+patient[0].name;
@@ -240,7 +240,7 @@
     document.getElementById('spinner-4').classList.remove('d-none')
     document.getElementById('bar-chart-3').setAttribute('hidden', '')
 
-    fetch('/test/patinet/'+patientid)
+    fetch('/data/testdetails/'+patientid)
     .then(response => response.json())
     .then(test => {
       console.log(test)
@@ -299,6 +299,8 @@
       bar_chart_3.data.labels=Object.keys(dict);
       bar_chart_3.data.datasets[0].data=Object.values(dict);
       bar_chart_3.data.datasets[0].label='Status';
+      bar_chart_3.data.datasets[0].backgroundColor=['#534bf7','#8c92ac','#39ff14'];
+      bar_chart_3.data.datasets[0].borderColor=['#6C63FF','#8c92ac','#32cd32'];
       bar_chart_3.update();
     }
     document.getElementById('spinner-'+(parseInt(bar_chart_no)+1)).classList.add('d-none')
