@@ -7,6 +7,6 @@ router.get("/home/doctor/:id", isLoggedIn, isDoctor, get_home_doctor);
 router.post("/create/test", isLoggedIn, isDoctor, post_create_test);
 router.get("/view/patient/:doctorid", isLoggedIn, isDoctor, get_view_assigned_patient); // gets the details of all patients assigned to the doctor
 
-router.get("/get/patient/:patientid", isLoggedIn, isDoctor, get_patient_details); // gets the details of particular patient
-router.get("/test/patinet/:patientid", isLoggedIn, isDoctor, get_patient_test_details); // gets the details of particular patient
+router.get("/data/patientdetails/:patientid", isLoggedIn, isDoctor, get_patient_details); // gets the details of particular patient
+router.get("/data/testdetails/:patientid", isLoggedIn, isDoctor, get_patient_test_details); // gets the details of particular patient
 module.exports = router;
