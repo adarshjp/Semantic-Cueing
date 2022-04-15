@@ -42,22 +42,13 @@ exports.get_create_test = (req, res) => {
 };
 
 exports.get_home_doctor = (req, res) => {
-  User.findById({_id:req.user._id})
-  .then((user)=>{
     User.find({role:'patient',doctorid:req.user._id},{_id:1, name: 1})
     .then((patients) =>{
-      res.render("doctor",{user:user,patient:patients})
+      res.render("doctor",{user:req.user,patient:patients})
     })
     .catch((err)=>{
       console.log(err)
     })
-  })
-  .catch((err)=>{
-    res.status(500).json({
-      error:err
-    })
-  })
-  
 };
 
 exports.post_create_test = (req, res) => {
