@@ -8,8 +8,11 @@
                <div class="col-12 col-md-6 card p-3 shadow">
                   <h2 class="card-title text-center">Add question</h2>
                   <hr>
-                  <div class="form-group">
-                     <input type="file" name="image" class="form-control form-control-lg fi" accept="image/png, image/jpeg" placeholder="Enter Image" id="upload_file" onchange="getImagePreview(event,'preview','upload_file')" id="login-input" required>
+                  <div class="form-group text-center">
+                     <label for="upload_file">
+                        <i class="fa-solid fa-cloud-arrow-up fa-4x blue"></i>
+                     </label>
+                     <input type="file" name="image" class="form-control form-control-lg fi" accept="image/png, image/jpeg" placeholder="Enter Image" id="upload_file" onchange="getImagePreview(event,'preview','upload_file')" id="login-input" style="display:none;" required>
                   </div>
                   <div class="row justify-content-center my-2">
                      <div class="col-12 col-sm-7 col-md-6" id="preview"></div>
@@ -33,8 +36,11 @@
                   <h2 class="card-title text-center">Add hint<%= i+1 %></h2>
                   <hr>
                   <div class="row justify-content-center">
-                     <div class="form-group col-12">
-                        <input type="file" name="image" accept="image/png, image/jpeg" class="form-control form-control-lg" placeholder="Enter Image" id="upload_hint<%= i %>" onchange="getImagePreview(event,'preview-hint<%= i %>','upload_hint<%= i %>')" required>
+                     <div class="form-group col-12 text-center">
+                        <label for="upload_hint<%= i %>">
+                           <i class="fa-solid fa-cloud-arrow-up fa-4x blue" data-bs-toggle="tooltip" data-bs-placement="top" title="Upload an Image"></i>
+                        </label>
+                        <input type="file" name="image" accept="image/png, image/jpeg" class="form-control form-control-lg" placeholder="Enter Image" id="upload_hint<%= i %>" onchange="getImagePreview(event,'preview-hint<%= i %>','upload_hint<%= i %>')" style="display: none" required>
                      </div>
                      <div id="preview-hint<%= i %>" class="my-2 col-11 col-sm-9 col-md-7"></div>
                      <div class="col-12">
