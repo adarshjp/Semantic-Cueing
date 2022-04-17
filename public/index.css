@@ -772,6 +772,22 @@ opacity: 1;
 /* #pieChart-1,#pieChart-2,#pieChart-3{
   height: 271px !important;
 } */
+
+
+/* Chat CSS Starts Here */
+#messages{
+  height:78vh;
+  overflow-y: scroll;
+}
+
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+
 .fa-cloud-arrow-up:hover{
   color:#FF6584;
 }

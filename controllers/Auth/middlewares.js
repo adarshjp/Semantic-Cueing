@@ -1,4 +1,4 @@
-const user = require('../../models/user')
+const User = require('../../models/user')
 const Test = require('../../models/test')
 exports.isLoggedIn = (req, res, next) => {
     if (req.isAuthenticated()) {
@@ -43,23 +43,46 @@ exports.isPatient = (req, res, next) => {
     }
 }
 
-exports.isMappedDoctor = (req, res, next) => {
-    User.findbyId({ _id: req.params.id }, { doctorid: 1 })
-        .then((user) => {
-            if (user.doctorid === req.user._id) {
-                return next()
-            } else {
-                res.status(401)
-                res.send('You are not authorized to do that!')
-                // req.flash('error','You are not authorized to do that!');
-                // res.redirect('/');
+exports.isMappedDoctor = async (req, res, next) => {
+    let doctorId, patinetId=req.params.patientId
+    /*Check whether the req.user._id is same as doctorid of patient */
+    try{
+        doctorId=await findDoctorIdByPatientId(patinetId)
+        if(req.user._id.toString()===doctorId.toString()){
+            return next()
+        }
+        else{
+            res.status(401)
+            res.send('You are not mapped to this patient!')
+            // req.flash('error','You are not mapped to this patient!');
+            // res.redirect('/');
+        }
+    }
+    catch(err){
+        res.status(500).send(err)
+    }
+
+}
+function findDoctorIdByPatientId(patientId){
+    /* Function should return the  doctor id for a patient id that is passed as an argument
+        Input: patientId
+        Output: doctorId
+    */
+    return new Promise((resolve, reject) => {
+        User.findById(patientId, (err, user) => {
+            if (err) {
+                reject(err);
+            }
+            else {
+                if(!user) {
+                    reject("No user found!")
+                }else{
+                    resolve(user.doctorid)
+                }
             }
         })
-        .catch((err) => {
-            console.log(err)
-        })
+    })
 }
-
 exports.isTestAssigned = (req, res, next) => {
     //req.params.id is the test id
     //here we check if the test is assigned to the patient
