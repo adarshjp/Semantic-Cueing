@@ -25,8 +25,9 @@
                 <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
                       alt="avatar 3" style="width: 40px; height: 100%;">
-                      <textarea id="message" class="form-control mx-2 mx-md-3" placeholder="Your Message Here" rows="1"></textarea>
-                    <button class="btn btn-primary" id='send'><i class="fas fa-paper-plane"></i></button>
+                    
+                    <input id="message" class="form-control mx-2 mx-md-3" placeholder="Your Message Here"/>
+                    <button class="btn btn-primary" id='send' disabled><i class="fas fa-paper-plane"></i></button>
                 </div>
             </div>
         </div>
@@ -34,6 +35,7 @@
 </div>
 <script src="/socket.io/socket.io.js"></script>
 <script>
+
     var socket = io();
     let coversationId;
     let creation_date;
@@ -90,6 +92,22 @@
         $("#messages").scrollTop($("#messages").prop('scrollHeight'));
     }
     $(() => {
+        $("#message").keyup((e)=>{
+            if(e.which == 13 && $("#message").val()!=""){
+                $("#send").prop("disabled", true);
+                sendMessage({message: $("#message").val()});
+                $("#message").val("");
+                $("#send").prop("disabled", false);
+            }else if($("#message").val()!=""){
+                if (!($("#message").val().replace(/\s/g, '').length)) {
+                    $("#send").prop("disabled", true);
+                }else{
+                    $("#send").prop("disabled", false);
+                }
+            }else{
+                $("#send").prop("disabled", true);
+            }
+        })
         $("#send").click(() => {
             //disable btn
             $("#send").prop("disabled", true);
@@ -150,7 +168,6 @@
             fetch('/chat/receiver/'+receivers_id)
             .then(response => response.json())
             .then(user => {
-                console.log(user)
                 document.getElementById('receiver_name').textContent = user.name;
             })
         });
