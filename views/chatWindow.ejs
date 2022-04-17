@@ -1,14 +1,20 @@
 <%- include("partials/header") %>
-<div class="container">
-    <div id="messages">
+<% if(role==="patient" ) { %>
+    <%- include("partials/patientSideBar") %>
+<%} else{%>
+    <%- include("partials/doctorSideBar") %>
+<%}%>
+<div class="container-fluid">
+    <div class="row justify-content-center justify-content-md-end justify-content-lg-center py-2" id='chat'>
+        <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-md-0 col-md-11 col-lg-8" id="messages"></div>
 
-    </div>
-    <div class="container">
-        <div class="d-inline">
-            <textarea id="message" class="form-control" placeholder="Your Message Here"></textarea>
-        </div>
-        <div class="d-inline ">
-            <button id="send" class="btn btn-success">Send</button>
+        <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-md-0 col-md-8 col-lg-8">
+            <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
+                  alt="avatar 3" style="width: 40px; height: 100%;">
+                  <textarea id="message" class="form-control" placeholder="Your Message Here"></textarea>
+                <button class="btn btn-primary" id='send'><i class="fas fa-paper-plane"></i></button>
+            </div>
         </div>
     </div>
 </div>
@@ -16,21 +22,58 @@
 <script>
     var socket = io();
     let coversationId;
+    let creation_date;
+
+    function calculate_time(t1,t2){
+        let m=parseInt(t2)+30;
+        let h=parseInt(t1)+5;
+        if(m>=60){
+            m=m-60;
+            h++;
+        }
+        if(m<10){
+            m='0'+m;
+        }
+        return [h,m];
+    }
+
     socket.on('message', addMessages)
     function addMessages(data) {
-        console.log("Adding")
-        $('#messages').append(`<div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title"></h5>
-                            <p class="card-text">${data.message}</p>
-                        </div>
+        let temp1=data.creationTime.toString().split('T')[0];
+        let temp2=data.creationTime.toString().split('T')[1].split(':')
+        let temp3=calculate_time(temp2[0], temp2[1]);
+        if(creation_date!=temp1){
+            creation_date=temp1;
+            $('#messages').append(`
+                <div class="divider d-flex align-items-center mb-4">
+                    <p class="text-center mx-3 mb-0" style="color: #a2aab7;">${creation_date}</p>
+                </div>
+            `)
+        }
+        if(data.senderId === '<%=user._id%>'){
+            $('#messages').append(`
+                <div class="d-flex flex-row justify-content-start">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
+                    alt="avatar 1" style="width: 45px; height: 100%;">
+                    <div>
+                        <p class="small p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7;">${data.message}</p>
+                        <p class="small ms-3 mb-3 rounded-3 text-muted">${temp3[0]}:${temp3[1]}</p>
                     </div>
                 </div>
-            </div>
-        </div>`)
+            `)
+        }else{
+            $('#messages').append(`
+                <div class="d-flex flex-row justify-content-end mb-4 pt-1">
+                    <div>
+                        <p class="small p-2 me-3 mb-1 text-white rounded-3" style="background-color: #6C63FF;">${data.message}</p>
+                        <p class="small me-3 mb-3 rounded-3 text-muted d-flex justify-content-end">${temp3[0]}:${temp3[1]}</p>
+                    </div>
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4-bg.webp"
+                        alt="avatar 1" style="width: 45px; height: 100%;">
+                </div>
+            `)
+        }
+        $("#messages").scrollTop($("#messages").prop('scrollHeight'));
     }
     $(() => {
         $("#send").click(() => {
@@ -76,6 +119,6 @@
             })
         })
     }
-
+    $("#chat").scrollTop($("#chat").prop('scrollHeight'));
 </script>
 <%- include("partials/footer") %>
