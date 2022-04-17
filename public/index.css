@@ -771,9 +771,9 @@ opacity: 1;
 
 /* #pieChart-1,#pieChart-2,#pieChart-3{
   height: 271px !important;
+} */
 
-}
-*/
+
 /* Chat CSS Starts Here */
 #messages{
   height:78vh;
@@ -786,4 +786,23 @@ content: "";
 flex: 1;
 height: 1px;
 background: #eee;
+}
+
+.fa-cloud-arrow-up:hover{
+  color:#FF6584;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #6C63FF;
+  border-radius: 10px;
 }
