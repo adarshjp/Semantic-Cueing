@@ -6,13 +6,18 @@
 <%}%>
 <div class="container-fluid">
     <div class="row justify-content-center justify-content-md-end justify-content-lg-center py-2" id='chat'>
-        <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-md-0 col-md-11 col-lg-8" id="messages"></div>
-
+        <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-md-0 col-md-11 col-lg-8" id="messages">
+            <div class="d-flex justify-content-center align-items-center blue" id='spinner-1'>
+                <div class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
         <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-md-0 col-md-8 col-lg-8">
             <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
                 <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
                   alt="avatar 3" style="width: 40px; height: 100%;">
-                  <textarea id="message" class="form-control" placeholder="Your Message Here"></textarea>
+                  <textarea id="message" class="form-control mx-2 mx-md-3" placeholder="Your Message Here" rows="1"></textarea>
                 <button class="btn btn-primary" id='send'><i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
@@ -50,13 +55,13 @@
                 </div>
             `)
         }
-        if(data.senderId === '<%=user._id%>'){
+        if(data.senderId != '<%=user._id%>'){
             $('#messages').append(`
                 <div class="d-flex flex-row justify-content-start">
                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
                     alt="avatar 1" style="width: 45px; height: 100%;">
                     <div>
-                        <p class="small p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7;">${data.message}</p>
+                        <p class="h6 p-3 ms-3 mb-1 rounded-pill" style="background-color: #cdd0d3;">${data.message}</p>
                         <p class="small ms-3 mb-3 rounded-3 text-muted">${temp3[0]}:${temp3[1]}</p>
                     </div>
                 </div>
@@ -65,7 +70,7 @@
             $('#messages').append(`
                 <div class="d-flex flex-row justify-content-end mb-4 pt-1">
                     <div>
-                        <p class="small p-2 me-3 mb-1 text-white rounded-3" style="background-color: #6C63FF;">${data.message}</p>
+                        <p class="h6 p-3 me-3 mb-1 text-white rounded-pill" style="background-color: #6C63FF;">${data.message}</p>
                         <p class="small me-3 mb-3 rounded-3 text-muted d-flex justify-content-end">${temp3[0]}:${temp3[1]}</p>
                     </div>
                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4-bg.webp"
@@ -117,6 +122,7 @@
             data.messages.forEach(message => {
                 addMessages(message)
             })
+            document.getElementById('spinner-1').classList.add('d-none')
         })
     }
     $("#chat").scrollTop($("#chat").prop('scrollHeight'));
