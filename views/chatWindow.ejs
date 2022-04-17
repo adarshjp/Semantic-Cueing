@@ -5,20 +5,29 @@
     <%- include("partials/doctorSideBar") %>
 <%}%>
 <div class="container-fluid">
-    <div class="row justify-content-center justify-content-md-end justify-content-lg-center py-2" id='chat'>
-        <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-md-0 col-md-11 col-lg-8" id="messages">
-            <div class="d-flex justify-content-center align-items-center blue" id='spinner-1'>
-                <div class="spinner-border" role="status">
-                  <span class="visually-hidden">Loading...</span>
+    <div class="row justify-content-center justify-content-md-end justify-content-lg-center py-sm-1" id='chat'>
+        <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-md-0 col-md-11 col-lg-8">
+            <div class="card shadow">
+                <div class="card-header d-flex justify-content-start align-items-center">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
+                        alt="avatar 1" style="width: 45px; height: 100%;">
+                    <div class="">
+                        <p class="h5 ms-3 mb-2" id='sender_name'></p>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-md-0 col-md-8 col-lg-8">
-            <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
-                  alt="avatar 3" style="width: 40px; height: 100%;">
-                  <textarea id="message" class="form-control mx-2 mx-md-3" placeholder="Your Message Here" rows="1"></textarea>
-                <button class="btn btn-primary" id='send'><i class="fas fa-paper-plane"></i></button>
+                <div id="messages" class="card-body">
+                    <div class="d-flex justify-content-center align-items-center blue m-auto" id='spinner-1'>
+                        <div class="spinner-border" role="status">
+                          <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
+                      alt="avatar 3" style="width: 40px; height: 100%;">
+                      <textarea id="message" class="form-control mx-2 mx-md-3" placeholder="Your Message Here" rows="1"></textarea>
+                    <button class="btn btn-primary" id='send'><i class="fas fa-paper-plane"></i></button>
+                </div>
             </div>
         </div>
     </div>
@@ -126,5 +135,6 @@
         })
     }
     $("#chat").scrollTop($("#chat").prop('scrollHeight'));
+    document.getElementById('sender_name').textContent = '<%=user.name %>'
 </script>
 <%- include("partials/footer") %>

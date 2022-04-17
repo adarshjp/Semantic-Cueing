@@ -776,7 +776,7 @@ opacity: 1;
 */
 /* Chat CSS Starts Here */
 #messages{
-  height:83vh;
+  height:78vh;
   overflow-y: scroll;
 }
 

@@ -141,3 +141,21 @@ function findCoversationId(patientId,doctorId)
         })
     })
 }
+
+exports.get_participants_ids = (req, res) => {
+    Conversation.findById(req.params.conversationId, (err, conversation) => {
+        if (err)
+            res.json({ error: err });
+        else
+            res.json({ participants: conversation.participants });
+    });
+}
+
+exports.get_receivers_name= (req, res) => {
+    User.findById(req.params.receiverId, (err, user) => {
+        if (err)
+            res.json({ error: err });
+        else
+            res.json({ name: user.name });
+    });
+}
