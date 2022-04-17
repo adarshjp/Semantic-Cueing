@@ -775,3 +775,18 @@ opacity: 1;
 .fa-cloud-arrow-up:hover{
   color:#FF6584;
 }
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #6C63FF;
+  border-radius: 10px;
+}
