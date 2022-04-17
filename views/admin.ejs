@@ -20,10 +20,12 @@
    <div class='row justify-content-center pt-1'>
       <div class="offset-2 col-9 offset-sm-1 col-sm-11 offset-xl-0 col-xl-8">
          <div class="row">
-            <div class="col-12 col-md-6 m-1 m-md-0 p-1">
-               <div class="card">
+            <div class="col-12 col-md-6 m-1 m-md-0 p-2">
+               <div class="card shadow">
+                  <div class="card-header bg-primary text-center">
+                     <h5 class="pt-2 white">Number of Patients</h5>
+                   </div>
                   <div class="card-body">
-                     <h5 class="card-title py-2">Number of Patients</h5>
                      <div class="row align-items-center">
                         <div class="col-8">
                            <i class="fas fa-procedures fa-5x blue"></i>
@@ -35,10 +37,12 @@
                   </div>
                 </div>
             </div>
-            <div class="col-12 col-md-6  m-1 m-md-0 p-1">
-               <div class="card">
+            <div class="col-12 col-md-6  m-1 m-md-0 p-2">
+               <div class="card shadow">
+                  <div class="card-header bg-primary text-center">
+                     <h5 class="pt-2 white">Number of Doctors</h5>
+                   </div>
                   <div class="card-body">
-                    <h5 class="card-title py-2">Number of Doctors</h5>
                      <div class="row  align-items-center">
                         <div class="col-8">
                            <i class="fas fa-user-md fa-5x blue"></i>
@@ -50,10 +54,12 @@
                   </div>
                 </div>
             </div>
-            <div class="col-12 col-md-6  m-1 m-md-0 p-1">
-               <div class="card">
+            <div class="col-12 col-md-6  m-1 m-md-0 p-2">
+               <div class="card shadow">
+                  <div class="card-header bg-primary text-center">
+                     <h5 class="pt-2 white">Number of Questions created</h5>
+                   </div>
                   <div class="card-body">
-                    <h5 class="card-title py-2">Number of Questions in DB</h5>
                      <div class="row  align-items-center">
                         <div class="col-8">
                            <i class="fa fa-question-circle fa-5x blue" aria-hidden="true"></i>
@@ -65,10 +71,12 @@
                   </div>
                 </div>
             </div>
-            <div class="col-12 col-md-6  m-1 m-md-0 p-1">
-               <div class="card">
+            <div class="col-12 col-md-6  m-1 m-md-0 p-2">
+               <div class="card shadow">
+                  <div class="card-header bg-primary text-center">
+                     <h5 class="pt-2 white">Number of test created</h5>
+                   </div>
                   <div class="card-body">
-                    <h5 class="card-title py-2">Number of test created</h5>
                      <div class="row align-items-center">
                         <div class="col-8">
                            <i class="far fa-clipboard fa-5x blue" aria-hidden="true"></i>
@@ -82,24 +90,26 @@
             </div>
          </div>
       </div>
-      <div class="offset-2 col-9 offset-sm-1 col-sm-11 offset-xl-0 col-xl-4 p-1">
-         <div class="card">
+      <div class="offset-2 col-9 offset-sm-1 col-sm-11 offset-xl-0 col-xl-4 p-2">
+         <div class="card shadow">
             <div class="card-body">
                <div class="d-flex justify-content-center align-items-center blue" id='spinner-0' style="height:296px">
                   <div class="spinner-border" role="status">
                     <span class="visually-hidden">Loading...</span>
                   </div>
                 </div>
-              <canvas id="levelChart" height="226" hidden></canvas>
+              <canvas id="levelChart" height="250" hidden></canvas>
             </div>
           </div>
       </div>
    </div>
    <div class="row justify-content-center mt-2 pt-1">
-      <div class="offset-2 col-9 offset-sm-1 col-sm-11 offset-lg-1 col-lg-5 offset-xl-0 col-xl-4 p-1">
-         <div class="card">
+      <div class="offset-2 col-9 offset-sm-1 col-sm-11 offset-lg-1 col-lg-5 offset-xl-0 col-xl-4 p-2">
+         <div class="card shadow">
+            <div class="card-header bg-primary text-center">
+               <h5 class="pt-2 white">Doctor vs Patient</h5>
+             </div>
             <div class="card-body">
-               <h5 class="card-title py-2">Doctor vs Patient</h5>
                <div class="d-flex justify-content-center align-items-center blue" id='spinner-1' style="height:271px">
                   <div class="spinner-border" role="status">
                     <span class="visually-hidden">Loading...</span>
@@ -109,10 +119,12 @@
             </div>
          </div>
       </div>
-      <div class="offset-2 col-9 offset-sm-1 col-sm-11 offset-lg-0 col-lg-5 offset-xl-0 col-xl-4 p-1">
-         <div class="card">
+      <div class="offset-2 col-9 offset-sm-1 col-sm-11 offset-lg-0 col-lg-5 offset-xl-0 col-xl-4 p-2">
+         <div class="card shadow">
+            <div class="card-header bg-primary text-center">
+               <h5 class="pt-2 white">Assigned vs Unassigned Doctors</h5>
+             </div>
             <div class="card-body">
-               <h5 class="card-title py-2">Assigned vs Unassigned Doctors</h5>
                <div class="d-flex justify-content-center align-items-center blue" id='spinner-2' style="height:271px">
                   <div class="spinner-border" role="status">
                     <span class="visually-hidden">Loading...</span>
@@ -122,10 +134,12 @@
             </div>
          </div>
       </div>
-      <div class="offset-2 col-9 offset-sm-1 col-sm-11 offset-lg-1 col-lg-5 offset-xl-0 col-xl-4 p-1">
-         <div class="card">
-            <div class="card-body" >
-               <h5 class="card-title py-2">Active vs Discharged Patients</h5>
+      <div class="offset-2 col-9 offset-sm-1 col-sm-11 offset-lg-1 col-lg-5 offset-xl-0 col-xl-4 p-2">
+         <div class="card shadow">
+            <div class="card-header bg-primary text-center">
+               <h5 class="pt-2 white">Active vs Discharged Patients</h5>
+             </div>
+            <div class="card-body">
                <div class="d-flex justify-content-center align-items-center blue" id='spinner-3' style="height:271px">
                   <div class="spinner-border" role="status">
                     <span class="visually-hidden">Loading...</span>
