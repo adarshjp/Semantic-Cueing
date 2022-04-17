@@ -56,11 +56,11 @@ exports.post_messages = (req, res)=> {
 }
 exports.renderChatWindow_patient = (req, res) => {
     /*  Function  to Render the chat window for a patient*/
-    res.render("chatWindow", {role: "patient",patientId:req.user._id});
+    res.render("chatWindow", {role: "patient",patientId:req.user._id,user:req.user});
 }
 exports.renderChatWindow_doctor = (req, res) => {
     /*  Function  to Render the chat window for a doctor*/
-    res.render("chatWindow", {role: "doctor",patientId:req.params.patientId});
+    res.render("chatWindow", {role: "doctor",patientId:req.params.patientId,user:req.user});
 }
 function findAndSendMessages(conversationId,res) {
     Message.find({conversationId:conversationId},(err,messages)=>{
