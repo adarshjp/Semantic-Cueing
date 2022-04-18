@@ -2,7 +2,7 @@
 <%- include("partials/doctorSideBar") %>
 <div class="container">
   <div class="row justify-content-center">
-    <div class="offset-2 col-9 offset-sm-2 col-sm-8 offset-lg-0 col-lg-6 p-1">
+    <div class="offset-2 col-9 offset-sm-1 col-sm-9 offset-lg-0 col-lg-6 p-1">
       <h1 class="text-center p-2">
         List of<span class="blue"> Tests</span> 
         Created <i class="fas fa-calendar-check blue"></i>
@@ -10,8 +10,9 @@
     </div>
   </div>
   <div class="row p-1 justify-content-center">
+    <% let k=1%>
     <% tests.forEach((test) => { %>
-    <div class="offset-2 col-9 offset-sm-1 col-sm-10  offset-lg-0 col-lg-6 p-1">
+    <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-md-1 <%if(k%2!=0){%>mx-lg-5<%}else{%>mx-lg-0<%}%> mx-xl-0 col-lg-5 offset-xl-0 col-xl-6 p-2">
       <div class="card box-shadow p-3">
         <div class="row align-items-center">
           <div class="col-md-6 my-auto">
@@ -28,18 +29,112 @@
               <p class="card-text p-1">
                 <i class="fas fa-question-circle blue"></i> : <%=test.noofquestion%>
               </p>
-              <p class="card-text p-1">Level : <%=test.level%></p>
+              <p class="card-text p-1">Level : 
+                <%for(let i=1;i<=5;i++){%>
+                  <%if(i<=test.level){%>
+                    <span class = "fa fa-star checked"></span>
+                  <%} else{%>
+                    <span class = "fa fa-star unchecked"></span>
+                  <%}%>
+                <%}%>
+                </p>
+              <p class="card-text p-1">Status : <%=test.status%></p>
               <div class="d-flex justify-content-end">
-                    <button class="btn btn-lg btn-primary white">
-                      Edit <i class="fas fa-edit"></i>
-                    </button>
+                <%if(test.status==='completed'){%>
+                  <button class="btn btn-lg btn-success white m-2"  data-bs-toggle="modal" data-bs-target="#viewReport" data-bs-whatever="<%=test._id%>">
+                    <i class="fas fa-poll"></i>
+                  </button>
+                  <a class="btn btn-lg btn-primary white m-2" href="/chat/<%=test.patientid%>"><i class="fa-solid fa-message"></i></a>
+                <%} else{%>
+                  <button class="btn btn-lg btn-primary white"
+                      <%if(test.status==='pauesd'){%>
+                        disabled
+                      <%}%>
+                    ><i class="fas fa-edit"></i></button>
+                <%}%>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <%k=k+1%>
     <% }) %>
   </div>
 </div>
+<%- include("partials/viewReportModal") %>
+<script>
+$(window).on('load', function() {
+  create_chart();
+});
+//------------------RES CHART------------------
+var data = {
+          labels: [
+              "Correct answerd",
+              "Wrong answerd",
+          ],
+          datasets: [
+              {
+                  data: [0, 100],
+                  backgroundColor: [
+                      "#10ba00",
+                      "#ff3300",
+                      
+                  ],
+                  hoverBackgroundColor: [
+                      "#0b8000",
+                      "#e62e00",
+                  ]
+              }]
+      };
+      var myDoughnutChart;
+//------------------END------------------
+
+  function test_execute(id){
+    var win = window.open("/start/test/"+id);
+    var timer = setInterval(function() {
+        if (win.closed) {
+            clearInterval(timer);
+            window.location.reload();
+        }
+    }, 500);
+  }
+
+  var viewReport = document.getElementById('viewReport')
+  viewReport.addEventListener('show.bs.modal', function (event) {
+    var button = event.relatedTarget
+    var testid = button.getAttribute('data-bs-whatever')
+    // fetch('/test/'+testid)
+    //   .then(response => response.json())
+    //   .then(test=>{
+    //     test_res(test.score,test.noofquestion)
+    //   });
+  })
+
+  function test_res(s,n){
+    let total=n*100;
+    let per=(s/total)*100;
+    let score=document.getElementById('score');
+    score.textContent=s+'/'+total;
+    res_in_chart(per)
+  }
+
+  function create_chart(){
+      var ctx = document.getElementById("res_Chart");
+      myDoughnutChart = new Chart(ctx, {
+          type: 'doughnut',
+          data: data,
+          options: {
+            rotation:  86* Math.PI,
+            circumference: 57.25 * Math.PI
+          }
+      });
+  }
+
+  function res_in_chart(per){
+    data.datasets[0].data=[per,100-per]
+    myDoughnutChart.data.datasets[0].data=[per,100-per];
+    myDoughnutChart.update();
+  }
+</script>
 <%- include("partials/footer") %>
