@@ -785,3 +785,36 @@ opacity: 1;
   color : #b6b5c5;
   font-size : 17px;
 }
+
+/* Chat CSS Starts Here */
+#messages{
+  height:78vh;
+  overflow-y: scroll;
+}
+
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+
+.fa-cloud-arrow-up:hover{
+  color:#FF6584;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #6C63FF;
+  border-radius: 10px;
+}
