@@ -1,10 +1,19 @@
 <%- include("partials/header") %>
+<% if(user.role==="admin" ) {%>
     <%- include("partials/adminSideBar") %>
+<% } else { %>
+    <%- include("partials/doctorSideBar") %>
+<% } %>
         <div class="container" id="">
             <div class="row justify-content-center">
                 <div class="offset-2 col-9 offset-sm-2 col-sm-8 offset-lg-0 col-lg-6 p-1">
                     <h1 class="text-center p-2 display-3 fw-bold">
-                        Our <span class="blue">Patients </span>
+                        <% if(user.role==="admin" ) {%>
+                            Our
+                        <% } else { %>
+                            List of
+                        <% } %>
+                        <span class="blue">Patients </span>
                         <i class="fas fa-stethoscope blue"></i>
                     </h1>
                 </div>
@@ -31,6 +40,9 @@
                                         <div class="d-flex justify-content-end align-items-end">
                                             <a href="#" class="btn white" id="review"
                                                 target="_blank"><i class="fas fa-trash-alt"></i></a>
+
+                                            <a href="/chat/<%=patient._id%>" class="btn white mx-1" id="review"
+                                                ><i class="fa-solid fa-comment-sms"></i></a>
                                         </div>
                                     </div>
                                 </div>

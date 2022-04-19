@@ -1,0 +1,176 @@
+<%- include("partials/header") %>
+<% if(role==="patient" ) { %>
+    <%- include("partials/patientSideBar") %>
+<%} else{%>
+    <%- include("partials/doctorSideBar") %>
+<%}%>
+<div class="container-fluid">
+    <div class="row justify-content-center justify-content-md-end justify-content-lg-center py-sm-1" id='chat'>
+        <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-md-0 col-md-11 col-lg-8">
+            <div class="card"> 
+                <div class="card-header d-flex justify-content-start align-items-center bg-light">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
+                        alt="avatar 1" style="width: 45px; height: 100%;" id='receiver_img'>
+                    <div class="">
+                        <p class="h5 ms-3 mb-2" id='receiver_name'></p>
+                    </div>
+                </div>
+                <div id="messages" class="card-body">
+                    <div class="d-flex justify-content-center align-items-center blue m-auto" id='spinner-1'>
+                        <div class="spinner-border" role="status">
+                          <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
+                      alt="avatar 3" style="width: 40px; height: 100%;">
+                    
+                    <input id="message" class="form-control mx-2 mx-md-3" placeholder="Your Message Here"/>
+                    <button class="btn btn-primary" id='send' disabled><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+
+    var socket = io();
+    let coversationId;
+    let creation_date;
+
+    function calculate_time(t1,t2){
+        let m=parseInt(t2)+30;
+        let h=parseInt(t1)+5;
+        if(m>=60){
+            m=m-60;
+            h++;
+        }
+        if(m<10){
+            m='0'+m;
+        }
+        return [h,m];
+    }
+
+    socket.on('message', addMessages)
+    function addMessages(data) {
+        let temp1=data.creationTime.toString().split('T')[0];
+        let temp2=data.creationTime.toString().split('T')[1].split(':')
+        let temp3=calculate_time(temp2[0], temp2[1]);
+        if(creation_date!=temp1){
+            creation_date=temp1;
+            $('#messages').append(`
+                <div class="divider d-flex align-items-center mb-4">
+                    <p class="text-center mx-3 mb-0" style="color: #a2aab7;">${creation_date}</p>
+                </div>
+            `)
+        }
+        if(data.senderId != '<%=user._id%>'){
+            $('#messages').append(`
+                <div class="d-flex flex-row justify-content-start">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
+                    alt="avatar 1" style="width: 45px; height: 100%;">
+                    <div>
+                        <p class="h6 p-2 p-md-3 ms-3 mb-1 rounded-pill" style="background-color: #cdd0d3;">${data.message}</p>
+                        <p class="small ms-3 mb-3 rounded-3 text-muted">${temp3[0]}:${temp3[1]}</p>
+                    </div>
+                </div>
+            `)
+        }else{
+            $('#messages').append(`
+                <div class="d-flex flex-row justify-content-end mb-4 pt-1">
+                    <div>
+                        <p class="h6  p-2 p-md-3 me-3 mb-1 text-white  rounded-pill" style="background-color: #6C63FF;">${data.message}</p>
+                        <p class="small me-3 mb-3 rounded-3 text-muted d-flex justify-content-end">${temp3[0]}:${temp3[1]}</p>
+                    </div>
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4-bg.webp"
+                        alt="avatar 1" style="width: 45px; height: 100%;">
+                </div>
+            `)
+        }
+        $("#messages").scrollTop($("#messages").prop('scrollHeight'));
+    }
+    $(() => {
+        $("#message").keyup((e)=>{
+            if(e.which == 13 && $("#message").val()!=""){
+                $("#send").prop("disabled", true);
+                sendMessage({message: $("#message").val()});
+                $("#message").val("");
+                $("#send").prop("disabled", false);
+            }else if($("#message").val()!=""){
+                if (!($("#message").val().replace(/\s/g, '').length)) {
+                    $("#send").prop("disabled", true);
+                }else{
+                    $("#send").prop("disabled", false);
+                }
+            }else{
+                $("#send").prop("disabled", true);
+            }
+        })
+        $("#send").click(() => {
+            //disable btn
+            $("#send").prop("disabled", true);
+            sendMessage({message: $("#message").val()});
+            $("#message").val("");
+            $("#send").prop("disabled", false);
+        })
+        getMessages()
+    })
+    function sendMessage(message) {
+            // $.post('http://localhost:3000/messages', message)
+            console.log(message)
+            fetch('/messages', {
+                method: 'POST',
+                body: JSON.stringify({
+                    message: message.message,
+                    conversationId: conversationId
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+    }
+    function getMessages() {
+        // $.get('http://localhost:3000/messages', (data) => {
+        let role= '<%= role %>'
+        let getUrl
+        if(role==='patient')
+            getUrl = '/messages'
+        else
+            getUrl = '/messages/'+'<%= patientId %>'
+        fetch(getUrl, {
+            method: 'GET'
+        })
+        .then(res => res.json())
+        .then(data => {
+            conversationId = data.conversationId;
+            //console.log('Messages',data.messages.length)
+            data.messages.forEach(message => {
+                addMessages(message)
+            })
+            document.getElementById('spinner-1').classList.add('d-none')
+            receivers_name();
+        })
+    }
+    $("#chat").scrollTop($("#chat").prop('scrollHeight'));
+
+    function receivers_name() {
+        let receivers_id;
+        fetch('/chat/participants/'+conversationId)
+        .then(response => response.json())
+        .then(participants => {
+            if('<%=user._id%>'!= participants.participants[0]){
+                receivers_id=participants.participants[0]
+            }else{
+                receivers_id=participants.participants[1]
+            }
+            fetch('/chat/receiver/'+receivers_id)
+            .then(response => response.json())
+            .then(user => {
+                document.getElementById('receiver_name').textContent = user.name;
+            })
+        });
+    }
+</script>
+<%- include("partials/footer") %>
