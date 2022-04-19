@@ -1,18 +1,18 @@
 <%- include("partials/header") %>
 <%- include("partials/doctorSideBar") %>
-  <div class="tab-content" id="nav-tabContent">
-    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"></div>
-    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"></div>
-  </div>
-<div class="container-fluid">
+<div class="container">
     <div class="row justify-content-center">
-        <nav class="offset-2 col-9 offset-sm-1 col-sm-10 offset-md-0 col-md-10">
-            <div class="nav nav-tabs nav-justified flex-column flex-sm-row" id="nav-tab" role="tablist">
-              <button class="nav-link active py-3 h6" id="sel-q-tab" data-bs-toggle="tab" data-bs-target="#div_list" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Select Questions</button>
-              <button class="nav-link py-3 h6" id="selected-q-tab" data-bs-toggle="tab" data-bs-target="#div_list" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Selected Questions</button>
-            </div>
-        </nav>
-        <div class="offset-2 col-9 offset-sm-1 col-sm-5 offset-md-1 col-md-4 mt-sm-2" id='ch_level'>
+        <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-md-0 col-md-10">
+            <ul class="nav nav-pills mb-3 nav-justified flex-column flex-sm-row" role="tablist">
+                <li class="nav-item p-2" role="presentation">
+                  <button class="nav-link active border py-2" id="sel-q-tab" data-bs-toggle="pill" data-bs-target="#div_list" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Select Questions</button>
+                </li>
+                <li class="nav-item p-2" role="presentation">
+                  <button class="nav-link border py-2" id="selected-q-tab" data-bs-toggle="pill" data-bs-target="#div_list" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Selected Questions</button>
+                </li>
+            </ul>
+        </div>
+        <div class="offset-2 col-9 offset-sm-1 col-sm-8 offset-md-1 col-md-4 mt-sm-2" id='ch_level'>
             <label for="level">Choose Level <i class="fa fa-filter" aria-hidden="true"></i></label>
             <select  class="form-select form-select-lg my-2 p-2" id="level" aria-label=".form-select-lg" onclick="levelfilter()">
                 <option value="all">All</option>
@@ -23,18 +23,24 @@
                 <option value="5">5</option>
             </select>
         </div>
-        <div class="offset-2 offset-sm-0 col-9 col-sm-5 col-md-4 text-center" style="margin-top:30px" id='sel_ran'>
+        <div class="offset-2 offset-sm-0 col-8 col-sm-7 col-md-4 text-center" style="margin-top:30px" id='sel_ran'>
             <button class="btn btn-primary rounded-pill btn-lg" onclick="selRandom();">Select randomly <i class="fa fa-random" aria-hidden="true"></i></button>
+        </div>
+        <div class="col-2 col-sm-2" id="cart-but">
+            <button type="button" class="btn btn-primary position-relative rounded-pill" onclick="cart()" style="margin-top:35px">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="count">0</span>
+            </button>
         </div>
     </div>
     <form action="/create/test" method="POST" id="testForm" onsubmit="return noofqval();">
-        <div class="row justify-content-center gradient-list mb-2" id='div_list'>
+        <div class="row justify-content-center gradient-list mb-2 p-3" id='div_list'>
             <% var i=1;%>
             <% question.forEach((question)=>{ %>
-                <div class="offset-2 col-8 offset-sm-1 col-sm-9 offset-md-1 col-md-5 offset-xl-0 col-xl-5 <%if(i%2==0){%>offset-md-0 mx-md-3<%}%> shadow-lg bg-body rounded-lg <%= question.level%>" id="question<%=i%>">
+                <div class="offset-2 col-8 offset-sm-1 col-sm-9 offset-md-1 col-md-5 offset-xl-0 mx-xl-3 col-xl-5 shadow-lg bg-body rounded-lg <%= question.level%>" id="question<%=i%>">
                     <div class="card-image mx-0 p-2">
                         <div class="inputGroup">
-                            <input id="option<%=i%>" class="form-check-input question<%=i%> op<%=question.level%>" type="checkbox"  value="<%=question._id %>" name="questions">
+                            <input id="option<%=i%>" class="form-check-input question<%=i%> op<%=question.level%>" type="checkbox"  value="<%=question._id %>" name="questions" onclick="countQuestion()">
                             <label for="option<%=i%>">Question : <strong><%=question.answer%></strong></label> 
                         </div>
                         <div class="hover-img">
@@ -79,6 +85,16 @@
     let isCompleted=false; //true is no more questions
     let temp=isCompleted;
 
+    function countQuestion(){
+        document.getElementById('count').textContent = document.querySelectorAll('input[type="checkbox"]:checked').length;
+    }
+    
+    function cart(){
+        document.getElementById("selected-q-tab").classList.add("active");
+        document.getElementById("sel-q-tab").classList.remove("active");
+        document.getElementById("selected-q-tab").click();
+    }
+
     document.getElementById('sel-q-tab').addEventListener('click', function(){
         for(var i=1;i<li_id;i++){
             document.getElementById('question'+i).style.display="block";
@@ -86,6 +102,7 @@
         isCompleted=temp;
         document.getElementById('sel_ran').classList.remove('d-none');
         document.getElementById('ch_level').classList.remove('d-none');
+        document.getElementById('cart-but').classList.remove('d-none');
         document.getElementById('pat_lev').classList.add('d-none');
         document.getElementById('res_but').classList.add('d-none');
     });
@@ -96,6 +113,7 @@
         isCompleted=true;
         document.getElementById('sel_ran').classList.add('d-none');
         document.getElementById('ch_level').classList.add('d-none');
+        document.getElementById('cart-but').classList.add('d-none');
         document.getElementById('pat_lev').classList.remove('d-none');
         document.getElementById('res_but').classList.remove('d-none');
     });
@@ -108,8 +126,8 @@
         for(var i=1;i<=li_id-1;i++){
             document.getElementById("option"+i).checked = false;
         }
-        showSelectedQuestion()
-    
+        showSelectedQuestion();
+        countQuestion();
     }
 
     function noofqval() {
@@ -153,6 +171,7 @@
             }
         }
         document.getElementById("level").value='all';
+        countQuestion();
     }
     function showhidelevel(levclass,disp){
         for(var i=0;i<levclass.length;i++){
@@ -204,11 +223,13 @@
                 {
                     document.getElementById('loader').classList.add('d-none');
                     isCompleted=true;
-                    alert("No more questions")
+                    swal("Error!", "No more questions...!", "error");
+                    document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+                    document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg');
                     return
                 }
                 for(let q=0;q<question.question.length;q++) {
-                    append_li(question.question[q]);
+                    append_div(question.question[q]);
                 }
                 document.getElementById('loader').setAttribute('hidden','');
             });
@@ -216,14 +237,10 @@
         }
     };
 
-    function append_li(q){
+    function append_div(q){
         let div=document.createElement("div");
         
-        div.className='offset-2 col-8 offset-sm-1 col-sm-9 offset-md-1 col-md-5 offset-xl-0 col-xl-5 shadow-lg bg-body rounded-lg '+q.level;
-        if(li_id%2==0){
-            div.classList.add('offset-md-0')
-            div.classList.add('mx-md-3')
-        }
+        div.className='"offset-2 col-8 offset-sm-1 col-sm-9 offset-md-1 col-md-5 offset-xl-0 mx-xl-3 col-xl-5 shadow-lg bg-body rounded-lg '+q.level;
         div.id='question'+li_id;
 
         let card_img=document.createElement('div');
