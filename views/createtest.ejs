@@ -2,7 +2,7 @@
 <%- include("partials/doctorSideBar") %>
 <div class="container">
     <div class="row justify-content-center">
-        <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-md-0 col-md-10">
+        <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-xl-0 col-xl-10">
             <ul class="nav nav-pills mb-3 nav-justified flex-column flex-sm-row" role="tablist">
                 <li class="nav-item p-2" role="presentation">
                   <button class="nav-link active border py-2" id="sel-q-tab" data-bs-toggle="pill" data-bs-target="#div_list" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Select Questions</button>
@@ -23,7 +23,7 @@
                 <option value="5">5</option>
             </select>
         </div>
-        <div class="offset-2 offset-sm-0 col-8 col-sm-7 col-md-4 text-center" style="margin-top:30px" id='sel_ran'>
+        <div class="offset-1 offset-sm-0 col-6 col-sm-7 col-md-4 text-center" style="margin-top:30px" id='sel_ran'>
             <button class="btn btn-primary rounded-pill btn-lg" onclick="selRandom();">Select randomly <i class="fa fa-random" aria-hidden="true"></i></button>
         </div>
         <div class="col-2 col-sm-2" id="cart-but">
@@ -34,7 +34,7 @@
         </div>
     </div>
     <form action="/create/test" method="POST" id="testForm" onsubmit="return noofqval();">
-        <div class="row justify-content-center gradient-list mb-2 p-3" id='div_list'>
+        <div class="row justify-content-center gradient-list mb-2 p-1" id='div_list'>
             <% var i=1;%>
             <% question.forEach((question)=>{ %>
                 <div class="offset-2 col-8 offset-sm-1 col-sm-9 offset-md-1 col-md-5 offset-xl-0 mx-xl-3 col-xl-5 shadow-lg bg-body rounded-lg <%= question.level%>" id="question<%=i%>">
@@ -60,8 +60,8 @@
     </div>
     <div class="row justify-content-center mt-4 d-none" id="pat_lev">
         <div class="offset-2 col-9 offset-sm-1 col-sm-5 offset-md-1 col-md-4 offset-lg-0">
-            <label for="patient">Choose Patient</label>
-            <select name="patientid" id="doctorid" class="form-select form-select-lg my-2 p-2" aria-label=".form-select-lg" required>
+            <label for="patient" class="mb-2">Choose Patient</label>
+            <select name="patientid"  id="patient-list" placeholder="Select patients" class="form-select form-select-lg p-2" aria-label=".form-select-lg" onchange="chnage_patinet_list()" multiple>
                 <% patient.forEach((patient)=> { %>
                     <option value="<%=patient._id%>"><%=patient.name%></option>
                 <% }) %>
@@ -71,6 +71,7 @@
             <label for="level">Enter Level</label>
             <input type="number" name="level" id="login-input1" placeholder="1-5" onchange="checklevel(this.value)" required/>
         </div>
+        <input type="text" name="patientIDs" class="d-none" value="[]" id='patientIDs'/>
     </div>
     <div class="text-end text-sm-center p-2 d-none" id="res_but">
         <button class="btn btn-primary rounded-pill btn-lg" onclick="reSet();">Reset <i class="fa fa-refresh" aria-hidden="true"></i></button>
@@ -80,6 +81,19 @@
 </div>
 
 <script>
+    function chnage_patinet_list(){
+        var selected = $("#patient-list :selected").map((_, e) => e.value).get();
+        document.getElementById('patientIDs').value=JSON.stringify(selected);
+        console.log(document.getElementById('patientIDs').value)
+    }
+    $(document).ready(function(){
+        var multipleCancelButton = new Choices('#patient-list', {
+            removeItemButton: true,
+            maxItemCount:100,
+            searchResultLimit:10,
+            renderChoiceLimit:5
+        });
+    });
     let k=1;   //multiplier used to skip questions 5,10,15 so on...
     let li_id=parseInt('<%=i%>'); //used in input and labels
     let isCompleted=false; //true is no more questions
@@ -118,10 +132,6 @@
         document.getElementById('res_but').classList.remove('d-none');
     });
 
-    // function countQuestion(){
-    //     document.getElementById('count').textContent = document.querySelectorAll('input[type="checkbox"]:checked').length;
-    // }
-
     function reSet(){
         for(var i=1;i<=li_id-1;i++){
             document.getElementById("option"+i).checked = false;
@@ -132,6 +142,10 @@
 
     function noofqval() {
         var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+        if(document.getElementById("patientIDs").value ==="[]"){
+            alert("Please select at least 1 patinet");
+            return false;
+        }
         if(checkboxes.length<5){
             alert("Please select atleast 5 questions..");
             return false;
@@ -223,9 +237,9 @@
                 {
                     document.getElementById('loader').classList.add('d-none');
                     isCompleted=true;
-                    swal("Error!", "No more questions...!", "error");
+                    swal("Completed!", "Sorry..,No more questions...!", "info");
                     document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
-                    document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg');
+                    document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
                     return
                 }
                 for(let q=0;q<question.question.length;q++) {
@@ -240,7 +254,7 @@
     function append_div(q){
         let div=document.createElement("div");
         
-        div.className='"offset-2 col-8 offset-sm-1 col-sm-9 offset-md-1 col-md-5 offset-xl-0 mx-xl-3 col-xl-5 shadow-lg bg-body rounded-lg '+q.level;
+        div.className='offset-2 col-8 offset-sm-1 col-sm-9 offset-md-1 col-md-5 offset-xl-0 mx-xl-3 col-xl-5 shadow-lg bg-body rounded-lg '+q.level;
         div.id='question'+li_id;
 
         let card_img=document.createElement('div');
