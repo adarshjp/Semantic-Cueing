@@ -65,7 +65,7 @@ exports.post_create_test = (req, res) => {
   let test=[]
   for(let i=0;i<patientids.length;i++)
   {
-    let temp = Test({
+    let newTest = Test({
       doctorid: req.user._id,
       patientid: patientids[i],
       questions: req.body.questions,
@@ -73,7 +73,7 @@ exports.post_create_test = (req, res) => {
       noofquestion: req.body.questions.length,
 
     });
-    test.push(temp);
+    test.push(newTest);
   }
   Test.insertMany(test)
   .then((test)=>{
