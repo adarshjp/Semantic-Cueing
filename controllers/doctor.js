@@ -123,3 +123,45 @@ exports.get_view_test_created = (req, res) => {
     })
   })
 }
+
+exports.get_edit_test= (req, res) => {
+  Test.findOne({_id:req.params.testid})
+  .then((test)=>{
+    res.render("editTest",{ user: req.user,test: test });
+  })
+  .catch((err)=>{
+    res.status(500).json({
+      error:err
+    })
+  })
+}
+
+exports.post_edit_test = (req, res) => {
+  Test.findOneandUpdate({_id:req.params.testid},{$set:{level:req.body.level,questions:req.body.questions,noofquestion:req.body.questions.length}},{new: true})
+  .then((test)=>{
+    console.log(test)
+  })
+  .catch((err)=>{
+    res.status(500).json({
+      error:err
+    })
+  })
+}
+
+exports.get_questions = (req, res) => {
+  Question.find({}, { hints: 0 }).limit(5).skip(skip)
+  .then((question) => {
+    if(question.length===0)
+    {
+      res.status(200).json({message: 'No more questions'})
+    }else{
+      res.status(200)
+      res.json({question: question})
+    }
+  })
+  .catch((error) => {
+    res.status(500).json({
+      error: error,
+    });
+  })
+};
