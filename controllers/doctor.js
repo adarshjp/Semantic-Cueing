@@ -61,7 +61,6 @@ exports.get_home_doctor = (req, res) => {
 };
 
 exports.post_create_test = (req, res) => {
-<<<<<<< HEAD
   let patientids=JSON.parse(req.body.patientIDs);
   let test=[]
   for(let i=0;i<patientids.length;i++)
@@ -72,27 +71,7 @@ exports.post_create_test = (req, res) => {
       questions: req.body.questions,
       level: req.body.level,
       noofquestion: req.body.questions.length,
-=======
-  const newTest = Test({
-    doctorid: req.user._id,
-    patientid: req.body.patientid,
-    questions: req.body.questions,
-    level: req.body.level,
-    noofquestion: req.body.questions.length,
-  });
-  //console.log(newTest)
-  newTest
-    .save()
-    .then((result) => {
-      req.flash('success', 'Test created successfully')
-      res.status(200)
-      res.redirect('/home/doctor/'+req.user._id)
-    })
-    .catch((err) => {
-      res.status(500).json({
-        error: err,
-      });
->>>>>>> 636032bfd741e75c3e4dee320056b337f6061aa1
+
     });
     test.push(temp);
   }
