@@ -15,7 +15,7 @@ exports.get_create_test = (req, res) => {
   console.log(skip);
   User.find({ doctorid: req.user._id }, { _id: 1, name: 1 })
     .then((patient) => {
-      Question.find({}, { hints: 0 }).limit(5).skip(skip)
+      Question.find({}, { hints: 0 }).limit(10).skip(skip)
         .then((question) => {
           if(question.length===0)
           {

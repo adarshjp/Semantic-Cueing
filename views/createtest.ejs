@@ -230,7 +230,7 @@
     window.onscroll = function(ev) {
         if (!isCompleted && ((window.innerHeight + window.scrollY+1) >= document.body.offsetHeight)) {
             document.getElementById('loader').classList.remove('d-none')
-            fetch('/create/test/'+(k*5))
+            fetch('/create/test/'+(k*10))
             .then(response => response.json())
             .then(question=>{
                 if(question.message==="No more questions")
