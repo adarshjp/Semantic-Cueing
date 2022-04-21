@@ -52,27 +52,30 @@ exports.get_home_doctor = (req, res) => {
   
 };
 exports.post_create_test = (req, res) => {
-  const newTest = Test({
-    doctorid: req.user._id,
-    patientid: req.body.patientid,
-    questions: req.body.questions,
-    level: req.body.level,
-    noofquestion: req.body.questions.length,
-  });
-  //console.log(newTest)
-  newTest
-    .save()
-    .then((result) => {
-      res.status(201).json({
-        message: "Test created successfully",
-        result,
-      });
-    })
-    .catch((err) => {
-      res.status(500).json({
-        error: err,
-      });
+  let patientids=JSON.parse(req.body.patientIDs);
+  let test=[]
+  for(let i=0;i<patientids.length;i++)
+  {
+    let temp = Test({
+      doctorid: req.user._id,
+      patientid: patientids[i],
+      questions: req.body.questions,
+      level: req.body.level,
+      noofquestion: req.body.questions.length,
     });
+    test.push(temp);
+  }
+  Test.insertMany(test)
+  .then((test)=>{
+    req.flash('success', 'Test created successfully')
+    res.status(200)
+    res.redirect('/home/doctor/'+req.user._id)
+  })
+  .catch((err)=>{
+    res.status(500).json({
+      error:err
+    })
+  })
 };
 
 exports.get_view_assigned_patient= (req, res) => {
