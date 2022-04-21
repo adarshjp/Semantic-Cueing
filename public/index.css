@@ -718,7 +718,6 @@ opacity: 1;
   height: 271px !important;
 } */
 
-<<<<<<< HEAD
 .bg-primary{
   background-color: #6C63FF !important;
 }
@@ -731,15 +730,12 @@ opacity: 1;
   color : #b6b5c5;
   font-size : 17px;
 }
-=======
 .nav-pills .nav-link.active{
   background-color: #6C63FF;
   color: white;
 }
 
 /* Drop down patients */
->>>>>>> eeaf3c5570f7552d708632f0ee3fc32ee87e76b5
-
 .choices__inner {
   border: 2px solid #6C63FF !important;
   border-radius: 0px !important;
