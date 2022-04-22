@@ -79,7 +79,7 @@
         document.getElementById('patient-name').textContent =patient[0].name;
     })
     
-    let k=1;   //multiplier used to skip questions 5,10,15 so on...
+    let k=parseInt(selected_q.length/5)+1;   //multiplier used to skip questions 5,10,15 so on...
     let li_id=1; //used in input and labels
     let isCompleted=false; //true is no more questions
     let temp=isCompleted;
