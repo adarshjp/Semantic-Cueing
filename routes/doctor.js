@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {get_home_doctor,get_create_test,post_create_test,get_view_assigned_patient,get_patient_details,get_patient_test_details,get_view_test_created,get_edit_test,post_edit_test,get_question,delete_test} = require("../controllers/doctor");
+const {get_home_doctor,get_create_test,post_create_test,get_view_assigned_patient,get_patient_details,get_patient_test_details,get_view_test_created,get_edit_test,put_edit_test,get_question,delete_test} = require("../controllers/doctor");
 const { isLoggedIn, isDoctor } = require("../controllers/Auth/middlewares");
 router.get("/create/test/:skip?", isLoggedIn, isDoctor, get_create_test);
 router.get("/home/doctor/:id", isLoggedIn, isDoctor, get_home_doctor);
@@ -13,7 +13,7 @@ router.get("/data/testdetails/:patientid", isLoggedIn, isDoctor, get_patient_tes
 router.get("/view/tests/:doctorid", isLoggedIn, isDoctor, get_view_test_created); // gets the details of tests created by the docotr
 
 router.get("/edit/test/:testid", isLoggedIn, isDoctor, get_edit_test);
-router.post("/edit/test/:testid", isLoggedIn, isDoctor, post_edit_test);
+router.put("/edit/test/:testid", isLoggedIn, isDoctor, put_edit_test);
 router.get("/question/:questionid", isLoggedIn, isDoctor, get_question);
 
 router.get("/delete/test/:testid", isLoggedIn, isDoctor, delete_test);

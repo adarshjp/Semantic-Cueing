@@ -33,7 +33,7 @@
             </button>
         </div>
     </div>
-    <form action="/edit/test/<%= test.id %>" method="POST" id="testForm" onsubmit="return noofqval();">
+    <form action="/edit/test/<%= test.id %>?_method=PUT" method="POST" id="testForm" onsubmit="return noofqval();">
         <div class="row justify-content-center gradient-list mb-2 p-1" id='div_list'>
     
         </div>
@@ -127,10 +127,7 @@
 
     function noofqval() {
         var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-        if(document.getElementById("patientIDs").value ==="[]"){
-            alert("Please select at least 1 patinet");
-            return false;
-        }
+        console.log(checkboxes.length)
         if(checkboxes.length<5){
             alert("Please select atleast 5 questions..");
             return false;

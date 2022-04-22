@@ -141,7 +141,7 @@ exports.get_edit_test= (req, res) => {
   })
 }
 
-exports.post_edit_test = (req, res) => {
+exports.put_edit_test = (req, res) => {
   Test.findOneAndUpdate({_id:req.params.testid},{$set:{level:req.body.level,questions:req.body.questions,noofquestion:req.body.questions.length}},{new: true})
   .then((test)=>{
     req.flash('success', 'Test updated successfully')
@@ -161,9 +161,7 @@ exports.get_question = (req, res) => {
     res.status(200).send(question);
   })
   .catch((err)=>{
-    res.status(500).json({
-      error:err
-    })
+    res.status(500).json({message:'error',error:err})
   })
 };
 
