@@ -142,9 +142,11 @@ exports.get_edit_test= (req, res) => {
 }
 
 exports.post_edit_test = (req, res) => {
-  Test.findOneandUpdate({_id:req.params.testid},{$set:{level:req.body.level,questions:req.body.questions,noofquestion:req.body.questions.length}},{new: true})
+  Test.findOneAndUpdate({_id:req.params.testid},{$set:{level:req.body.level,questions:req.body.questions,noofquestion:req.body.questions.length}},{new: true})
   .then((test)=>{
-    console.log(test)
+    req.flash('success', 'Test updated successfully')
+    res.status(200)
+    res.redirect('/view/tests/'+req.user._id)
   })
   .catch((err)=>{
     res.status(500).json({
@@ -153,20 +155,28 @@ exports.post_edit_test = (req, res) => {
   })
 }
 
-exports.get_questions = (req, res) => {
-  Question.find({}, { hints: 0 }).limit(5).skip(skip)
-  .then((question) => {
-    if(question.length===0)
-    {
-      res.status(200).json({message: 'No more questions'})
-    }else{
-      res.status(200)
-      res.json({question: question})
-    }
+exports.get_question = (req, res) => {
+  Question.findById(req.params.questionid,{hints:0})
+  .then((question)=>{
+    res.status(200).send(question);
   })
-  .catch((error) => {
+  .catch((err)=>{
     res.status(500).json({
-      error: error,
-    });
+      error:err
+    })
   })
 };
+
+exports.delete_test = (req, res) => {
+  Test.findOneAndDelete({_id:req.params.testid})
+  .then((test)=>{
+    req.flash('success', 'Test deleted successfully')
+    res.status(200)
+    res.redirect('/view/tests/'+req.user._id)
+  })
+  .catch((err)=>{
+    res.status(500).json({
+      error:err
+    })
+  })
+}
