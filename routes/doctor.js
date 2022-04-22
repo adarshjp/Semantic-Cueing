@@ -16,5 +16,5 @@ router.get("/edit/test/:testid", isLoggedIn, isDoctor, get_edit_test);
 router.put("/edit/test/:testid", isLoggedIn, isDoctor, put_edit_test);
 router.get("/question/:questionid", isLoggedIn, isDoctor, get_question);
 
-router.get("/delete/test/:testid", isLoggedIn, isDoctor, delete_test);
+router.delete("/delete/test/:testid", isLoggedIn, isDoctor, delete_test);
 module.exports = router;
