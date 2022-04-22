@@ -9,6 +9,9 @@ router.post("/register", isLoggedIn,isAdmin,register_post);
 router.get("/home/admin", isLoggedIn,isAdmin,admin_get);
 router.get("/view/patient", isLoggedIn,isAdmin,view_patient);
 router.get("/view/doctor",isLoggedIn,isAdmin,view_doctor);
+
+router.get("/view/question/:skip?",isLoggedIn,isAdmin,get_view_questions);
+
 router.get("/view/:id",isLoggedIn,view_Oneuser);
 router.get("/edit/:id",isLoggedIn,get_edit_user)
 router.put("/edit/:id",isLoggedIn,edit_user)
@@ -19,10 +22,8 @@ router.get("/data/users",isAdmin,isLoggedIn,get_details_for_graph)
 router.get("/data/testcount",isAdmin,isLoggedIn,count_no_of_tests)
 router.get("/data/questioncount",isAdmin,isLoggedIn,count_no_of_questions)
 
-router.get('/view/questions',isAdmin,isLoggedIn,get_view_questions)
+router.get("/edit/question/:questionid",isAdmin,isLoggedIn,get_edit_question)
+router.post("/edit/question/:questionid",isAdmin,isLoggedIn,post_edit_question)
 
-router.get('/edit/question/:questionid',isAdmin,isLoggedIn,get_edit_question)
-router.post('/edit/question/:questionid',isAdmin,isLoggedIn,post_edit_question)
-
-router.get('/delete/question/:questionid',isAdmin,isLoggedIn,delete_question)
+router.get("/delete/question/:questionid",isAdmin,isLoggedIn,delete_question)
 module.exports = router;

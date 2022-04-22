@@ -132,13 +132,30 @@ exports.get_edit_question= (req, res) => {
 }
 
 exports.get_view_questions= (req, res) => {
-    Question.find({},{hints:0})
-        .then((questions) => {
-            res.render("view_questions",{questions:questions,user:req.user})
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+    let skip=0;
+    if(req.params.skip===undefined){
+        skip=0;
+    }else{
+        skip=parseInt(req.params.skip);
+    }
+    console.log(skip);
+    Question.find({}, { hints: 0 }).limit(10).skip(skip)
+    .then((question) => {
+        if(question.length===0){
+            res.status(200).json({message: 'No more questions'})
+        }else{
+            res.status(200)
+            if(req.params.skip!==undefined)
+              res.json({question: question})
+            else 
+              res.render('view_questions',{question: question,user:req.user})
+          }
+    })
+    .catch((err) => {
+        res.status(500).json({
+            error: err,
+        });
+    });
 }
 
 exports.post_edit_question= (req, res) => {
