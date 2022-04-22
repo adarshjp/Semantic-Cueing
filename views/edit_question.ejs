@@ -1,0 +1,119 @@
+<%- include("partials/header") %>
+<%- include("partials/adminSideBar") %>
+<div class="container mt-3 mb-3">
+   <div class="row justify-content-center">
+      <div class="offset-2 col-8 offset-sm-1 col-sm-10 offset-md-1 col-md-11">
+         <div class="text-center p-3 m-3 font-monospace">
+            <h1 class="display-4">Update the <span class="blue">Object</span> to identify</h1>
+         </div>
+         <form action="/edit/question/<%=question._id%>?_method=PUT" method="post" enctype="multipart/form-data" id='add_q_form'>
+            <div class="row justify-content-center">
+               <div class="col-12 col-md-6 card p-4 shadow">
+                  <!-- <h2 class="card-title text-center">Choose the <span class="blue">Image</span> of Object</h2> -->
+                  <div class="form-group text-center">
+                     <label for="upload_file">
+                        <i class="fa-solid fa-cloud-arrow-up fa-4x blue"></i>
+                     </label>
+                     <input type="file" name="name" class="form-control form-control-lg fi" accept="image/png, image/jpeg" placeholder="Enter Image" id="upload_file" onchange="getImagePreview(event,'preview','upload_file')" id="login-input" style="display:none;">
+                  </div>
+                  <div class="row justify-content-center my-2 text-center">
+                     <div class="col-12 col-sm-7 col-md-6" id="preview">
+                        <img src="data:image/<%=question.question.contentType%>;base64,<%=question.question.data.toString('base64')%>" class="img-fluid" width="300" style="max-height:300px;border:2px solid #6C63FF;padding:2px">
+                        <button class="btn btn-sm blue text-center" onclick="removeImg('upload_file','preview')"><i class="fa-solid fa-xmark"></i></button>
+                     </div>
+                  </div>
+                  <div class="row justify-content-center">
+                        <div class="col-12 col-md-6">
+                           <input type="text" name="answer" id="login-input" placeholder="Name of Object..." value="<%=question.answer%>" required> 
+                        </div>
+                        <div class="col-12 col-md-6">
+                           <input type="number" name="level" id="login-input1"  placeholder="Enter Level(1-5)..." onchange="checklevel(this.value)" value="<%=question.level%>" required>
+                        </div>
+                        <div class="col-12 col-md-6">
+                           <input type="text" name="score" id="login-input" placeholder="Description..." value="<%=question.score%>" required>
+                        </div>
+                  </div>
+               </div>
+            </div>
+            <div class="text-center p-3 m-3 font-monospace">
+               <h1 class="display-5">Update <span class="blue">hints</span> to identify</h1>
+            </div>
+            <div class="row justify-content-center mt-3">
+               <% for (var i = 0; i < 4; i++) { %>
+               <div class="col-12 col-md-5 card shadow m-1 p-4">
+                  <!-- <h2 class="card-title text-center">Add hint<%= i+1 %></h2> -->
+                  <div class="row justify-content-center">
+                     <div class="form-group col-12 text-center">
+                        <label for="upload_hint<%= i %>">
+                           <i class="fa-solid fa-cloud-arrow-up fa-4x blue" data-bs-toggle="tooltip" data-bs-placement="top" title="Upload an Image"></i>
+                        </label>
+                        <input type="file" name="image" accept="image/png, image/jpeg" class="form-control form-control-lg" placeholder="Enter Image" id="upload_hint<%= i %>" onchange="getImagePreview(event,'preview-hint<%= i %>','upload_hint<%= i %>')" style="display: none">
+                     </div>
+
+                     <div id="preview-hint<%= i %>" class="my-2 col-11 col-sm-9 col-md-7 text-center">
+                        <img src="data:image/<%=question.hints[i].hint.contentType%>;base64,<%=question.hints[i].hint.data.toString('base64')%>" class="img-fluid" width="300" style="max-height:300px;border:2px solid #6C63FF;padding:2px">
+                        <button class="btn btn-sm blue text-center" onclick="removeImg('upload_hint<%= i %>','preview-hint<%= i %>')"><i class="fa-solid fa-xmark"></i></button>
+                     </div>
+
+                     <div class="col-12">
+                        <input type="text" name="nscore[<%= i %>]" id="login-input" placeholder="Description..." value="<%=question.hints[i].score%>" required>
+                     </div>
+                  </div>    
+               </div>
+               <% } %>
+               <div class="form-group text-center mt-3">
+                  <input type="submit" name="submit" value="Submit" class="btn btn-primary btn-lg rounded-pill" id='add_q_submit'>
+               </div>
+            </div>
+         </form>
+      </div>
+   </div>
+</div>
+<script>
+   function getImagePreview(event,preview_id,upload_id){
+      const fi = document.getElementById(upload_id);
+      const fsize = fi.files.item(0).size;
+      const file = Math.round((fsize / 1024));
+      if (file >= 1024) {
+         alert("File too Big, please select a file less than 1mb");
+         document.getElementById(upload_id).value = '';
+         var imagediv= document.getElementById(preview_id);
+         var newimg=document.createElement('img');
+         imagediv.innerHTML='';
+         newimg.src='';
+      }
+      else{
+         var image=URL.createObjectURL(event.target.files[0]);
+         var imagediv= document.getElementById(preview_id);
+         var newimg=document.createElement('img');
+         imagediv.innerHTML='';
+         newimg.src=image;
+         newimg.className="img-fluid";
+         newimg.width="300";
+         newimg.style="max-height:300px;border:2px solid #6C63FF;padding:2px";
+         imagediv.appendChild(newimg);
+         var removebtn=document.createElement('button');
+         removebtn.className="btn btn-sm blue text-center";
+         removebtn.innerHTML='<i class="fa-solid fa-xmark"></i>'
+         removebtn.onclick='reremoveImg('+upload_id+','+preview_id+')';
+         imagediv.appendChild(removebtn);
+      }
+  }
+
+  function removeImg(upload_id,preview_id){
+    document.getElementById(upload_id).value = '';
+    var imagediv= document.getElementById(preview_id);
+    var newimg=document.createElement('img');
+    imagediv.innerHTML='';
+    newimg.src='';
+  }
+
+   document.getElementById('add_q_form').addEventListener("submit", function(e){ 
+      document.getElementById('add_q_submit').disabled=true;
+      document.getElementById('add_q_submit').value='Submitting';
+   });
+ </script>
+<%- include("partials/footer") %>
+
+
+

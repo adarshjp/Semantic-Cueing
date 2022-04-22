@@ -1,15 +1,44 @@
 <%- include("partials/header") %>
 <%- include("partials/adminSideBar") %>
 <div class="container">
+    <div class="row justify-content-center pt-1">
+        <div class="offset-2 col-8 offset-sm-1 col-sm-10 offset-md-1 col-md-8">
+           <% if(message.error){ %>
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                 <strong class="text-center"><%= message.error%></strong>
+                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+           <% } %>
+           <% if(message.success){ %>
+              <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                 <strong class="text-center"><%= message.success%></strong>
+                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+           <% } %>
+        </div>
+     </div>
+     <div class="row justify-content-center">
+        <div class="offset-2 col-9 offset-sm-1 col-sm-9 offset-lg-0 col-lg-6 p-1">
+          <h1 class="text-center p-2">
+            List of<span class="blue"> Questions</span> 
+            Created <i class="fas fa-calendar-check blue"></i>
+          </h1>
+        </div>
+      </div>
     <div class="row justify-content-center gradient-list mb-2 p-1" id='div_list'>
         <% question.forEach((question)=>{ %>
             <div class="offset-2 col-8 offset-sm-1 col-sm-9 offset-md-1 col-md-5 offset-xl-0 mx-xl-3 col-xl-5 shadow-lg bg-body rounded-lg">
                 <div class="card-image mx-0 p-2">
-                    <div class="inputGroup">
-                        <a class="btn btn-primary white m-2" href=''
-                            ><i class="fas fa-edit"></i></a>
-                          <a class="btn btn-danger white m-2" href=''
-                            ><i class="fas fa-trash-alt"></i></a>       
+                    <div class="row d-flex align-items-center p-1">
+                        <div class="col-5 col-sm-8 col-md-6 col-lg-8 col-xl-9">
+                            <p class="h6"><%=question.answer%></p>
+                        </div>
+                        <div class="col-7 col-sm-4 col-md-6 col-lg-4 col-xl-3">
+                            <a class="btn btn-primary white" href='/edit/question/<%=question._id%>'
+                                    ><i class="fas fa-edit"></i></a>
+                            <a class="btn btn-danger white" href='/delete/question/<%=question._id%>'
+                                    ><i class="fas fa-trash-alt"></i></a>   
+                        </div>
                     </div>
                     <div class="hover-img">
                         <span class="p-1 rounded-lg my-3" id="qimg">
@@ -26,3 +55,110 @@
         </div>
     </div>
 </div>
+<script>
+    let k=1;
+    let isCompleted=false;
+    window.onscroll = function(ev) {
+        if (!isCompleted && ((window.innerHeight + window.scrollY+1) >= document.body.offsetHeight)) {
+            document.getElementById('loader').classList.remove('d-none')
+            fetch('/view/question/'+(k*10))
+            .then(response => response.json())
+            .then(question=>{
+                if(question.message==="No more questions")
+                {
+                    document.getElementById('loader').classList.add('d-none');
+                    isCompleted=true;
+                    alert('No more questions...!')
+                    // swal("Completed!", "Sorry..,No more questions...!", "info");
+                    // document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+                    // document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
+                    return
+                }
+                for(let q=0;q<question.question.length;q++) {
+                    append_div(question.question[q]);
+                }
+                document.getElementById('loader').setAttribute('hidden','');
+            });
+            k=k+1;
+        }
+    };
+
+    function append_div(q){
+        let div=document.createElement("div");
+        
+        div.className='offset-2 col-8 offset-sm-1 col-sm-9 offset-md-1 col-md-5 offset-xl-0 mx-xl-3 col-xl-5 shadow-lg bg-body rounded-lg';
+
+        let card_img=document.createElement('div');
+        card_img.className='card-image mx-0 p-2';
+
+        let div_row=document.createElement('div');
+        div_row.className='row d-flex align-items-center p-1';
+
+        let div_p=document.createElement('div')
+        div_p.className='col-5 col-sm-8 col-md-6 col-lg-8  col-xl-9';
+
+        let p=document.createElement('p')
+        p.className='h6';
+        p.textContent=q.answer;
+
+        div_p.appendChild(p);
+
+        let div_a=document.createElement('div')
+        div_a.className='col-7 col-sm-4 col-md-6 col-lg-4 col-xl-3';
+
+        let a1=document.createElement('a');
+        a1.className='btn btn-primary white';
+        a1.href='/edit/question/'+q._id;
+
+        let i1=document.createElement('i');
+        i1.className='fas fa-edit';
+        a1.appendChild(i1);
+
+        div_a.appendChild(a1);
+
+        div_row.appendChild(div_p);
+        div_row.appendChild(div_a);
+
+        card_img.appendChild(div_row)
+
+        let a2=document.createElement('a');
+        a2.className='btn btn-danger white mx-1';
+        a1.href='/delete/question/'+q._id;
+
+        let i2=document.createElement('i');
+        i2.className='fas fa-trash-alt';
+        a2.appendChild(i2);
+
+        div_a.appendChild(a2);
+
+        let hover_img=document.createElement('div');
+        hover_img.className='hover-img';
+
+        let span=document.createElement('span');
+        span.className='p-1 rounded-lg my-3';
+        span.id='qimg';
+
+        let img=document.createElement('img');
+        img.className='img-fluid';
+        img.alt='image';
+        img.style.cssText='max-height: 18rem;'
+        img.src='data:image/'+q.question.contentType+';base64,'+arrayBufferToBase64(q.question.data.data);
+        
+        span.appendChild(img);
+        hover_img.appendChild(span);
+
+        card_img.appendChild(hover_img);
+
+        div.appendChild(card_img);
+
+        document.getElementById('div_list').append(div);
+    }
+
+    function arrayBufferToBase64(buffer) {
+      var binary = '';
+      var bytes = [].slice.call(new Uint8Array(buffer));
+      bytes.forEach((b) => binary += String.fromCharCode(b));
+      return window.btoa(binary);
+    };
+</script>
+<%- include("partials/footer") %>
