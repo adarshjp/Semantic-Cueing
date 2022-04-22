@@ -1,6 +1,10 @@
+const fs = require('fs')
+const { dirname } = require('path')
+const path = require('path')
 const User = require('../models/user')
 const Question = require('../models/question')
 const Test = require("../models/test");
+
 exports.admin_get = (req, res) => {
     User.findById(req.user._id)
         .then((user) => {
@@ -122,9 +126,9 @@ exports.count_no_of_questions= (req, res) => {
 }
 
 exports.get_edit_question= (req, res) => {
-    Question.findById({ _id: req.params.id })
+    Question.findById({ _id: req.params.questionid })
         .then((question) => {
-            res.render("edit_questions",{question:question,user:req.user})
+            res.render("edit_question",{question:question,user:req.user})
         })
         .catch((err) => {
             console.log(err)
@@ -158,7 +162,7 @@ exports.get_view_questions= (req, res) => {
     });
 }
 
-exports.post_edit_question= (req, res) => {
+exports.put_edit_question= (req, res) => {
     let img = covert_img(req.files)
     Updatedhints = []
     for (let i = 0; i < req.body.nscore.length; i++) {
@@ -185,11 +189,11 @@ exports.post_edit_question= (req, res) => {
 }
 
 exports.delete_question= (req, res) => {
-    Question.findByIdAndDelete({ _id: req.params.id })
+    Question.findByIdAndDelete({ _id: req.params.questionid })
         .then((question) => {
             req.flash('success', 'Question deleted successfully')
             res.status(200)
-            res.redirect('/view/questions')
+            res.redirect('/view/question')
         })
         .catch((err) => {
             console.log(err)
