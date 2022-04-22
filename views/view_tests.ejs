@@ -1,6 +1,22 @@
 <%- include("partials/header") %> 
 <%- include("partials/doctorSideBar") %>
 <div class="container">
+  <div class="row justify-content-center pt-1">
+    <div class="offset-2 col-8 offset-sm-1 col-sm-10 offset-md-1 col-md-8">
+       <% if(message.error){ %>
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+             <strong class="text-center"><%= message.error%></strong>
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+       <% } %>
+       <% if(message.success){ %>
+          <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+             <strong class="text-center"><%= message.success%></strong>
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+       <% } %>
+    </div>
+ </div>
   <div class="row justify-content-center">
     <div class="offset-2 col-9 offset-sm-1 col-sm-9 offset-lg-0 col-lg-6 p-1">
       <h1 class="text-center p-2">
@@ -38,19 +54,21 @@
                   <%}%>
                 <%}%>
                 </p>
-              <p class="card-text p-1">Status : <%=test.status%></p>
+              <p class="card-text p-1">Status : <strong style="text-transform: capitalize;"><%=test.status%></strong></p>
               <div class="d-flex justify-content-end">
                 <%if(test.status==='completed'){%>
                   <button class="btn btn-lg btn-success white m-2"  data-bs-toggle="modal" data-bs-target="#viewReport" data-bs-whatever="<%=test._id%>">
                     <i class="fas fa-poll"></i>
                   </button>
                   <a class="btn btn-lg btn-primary white m-2" href="/chat/<%=test.patientid%>"><i class="fa-solid fa-message"></i></a>
-                <%} else{%>
-                  <button class="btn btn-lg btn-primary white"
-                      <%if(test.status==='pauesd'){%>
-                        disabled
-                      <%}%>
-                    ><i class="fas fa-edit"></i></button>
+                <%} else if(test.status==='pending'){%>
+                  <a class="btn btn-lg btn-primary white m-2" href='/edit/test/<%=test._id%>'
+                    ><i class="fas fa-edit"></i></a>
+                  <a class="btn btn-lg btn-danger white m-2" href='/delete/test/<%=test._id%>'
+                    ><i class="fas fa-trash-alt"></i></a>
+                <%}else{%>
+                  <button class="btn btn-lg btn-primary white m-2" disabled><i class="fas fa-edit"></i></button>
+                  <button class="btn btn-lg btn-danger white m-2"disabled><i class="fas fa-trash-alt"></i></button>
                 <%}%>
               </div>
             </div>
