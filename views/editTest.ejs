@@ -79,7 +79,7 @@
         document.getElementById('patient-name').textContent =patient[0].name;
     })
     
-    let k=parseInt(selected_q.length/5)+1;   //multiplier used to skip questions 5,10,15 so on...
+    let k=0;   //multiplier used to skip questions 5,10,15 so on...
     let li_id=1; //used in input and labels
     let isCompleted=false; //true is no more questions
     let temp=isCompleted;
@@ -213,6 +213,7 @@
     }
 
     window.onscroll = function(ev) {
+        console.log(k)
         if (!isCompleted && ((window.innerHeight + window.scrollY+1) >= document.body.offsetHeight)) {
             document.getElementById('loader').classList.remove('d-none')
             fetch('/create/test/'+(k*5))
@@ -228,9 +229,13 @@
                     return
                 }
                 for(let q=0;q<question.question.length;q++) {
-                    if(question.question[q]._id in selected_q){
-                        continue;
-                    }else{
+                    let s;
+                    for(s=0;s<selected_q.length;s++){
+                        if(question.question[q]._id===selected_q[s]){
+                            break;
+                        }
+                    }if(s==selected_q.length){
+                        selected_q.push(question.question[q]._id);
                         append_div(question.question[q],'');
                     }
                 }
