@@ -189,15 +189,28 @@ exports.put_edit_question= (req, res) => {
 }
 
 exports.delete_question= (req, res) => {
-    Question.findByIdAndDelete({ _id: req.params.questionid })
-        .then((question) => {
-            req.flash('success', 'Question deleted successfully')
+    Test.find({questions:req.params.questionid},{_id:1})
+    .then(test => {
+        if(test.length===0){
+            Question.findByIdAndDelete({ _id: req.params.questionid })
+            .then((question) => {
+                req.flash('success', 'Question deleted successfully')
+                res.status(200)
+                res.redirect('/view/question')
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }else{
+            req.flash('error', 'Question is Used in a test')
             res.status(200)
             res.redirect('/view/question')
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+        }
+    })
+    .catch(err => {
+        console.log(err)
+    })
+    
 }
 
 function covert_img(files) {

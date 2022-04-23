@@ -16,7 +16,7 @@ router.get("/view/:id",isLoggedIn,view_Oneuser);
 router.get("/edit/:id",isLoggedIn,get_edit_user)
 router.put("/edit/:id",isLoggedIn,edit_user)
 
-router.get("/delete/question/:questionid",isAdmin,isLoggedIn,delete_question); // to delete a question
+router.delete("/delete/question/:questionid",isAdmin,isLoggedIn,delete_question); // to delete a question
 
 router.delete("/delete/:id",isAdmin,isLoggedIn,delete_user)
 router.post("/check-username",isAdmin,isLoggedIn,checkusername)
@@ -26,6 +26,6 @@ router.get("/data/testcount",isAdmin,isLoggedIn,count_no_of_tests)
 router.get("/data/questioncount",isAdmin,isLoggedIn,count_no_of_questions)
 
 router.get("/edit/question/:questionid",isLoggedIn,isAdmin,get_edit_question)
-router.put("/edit/question/:questionid",isLoggedIn,isAdmin,upload.array("image",5),put_edit_question)
+router.put("/edit/question/:questionid",isLoggedIn,isAdmin,put_edit_question)
 
 module.exports = router;
