@@ -1,22 +1,7 @@
 <%- include("partials/header") %>
 <%- include("partials/adminSideBar") %>
 <div class="container">
-    <div class="row justify-content-center pt-1">
-        <div class="offset-2 col-8 offset-sm-1 col-sm-10 offset-md-1 col-md-8">
-           <% if(message.error){ %>
-              <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                 <strong class="text-center"><%= message.error%></strong>
-                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-              </div>
-           <% } %>
-           <% if(message.success){ %>
-              <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-                 <strong class="text-center"><%= message.success%></strong>
-                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-              </div>
-           <% } %>
-        </div>
-     </div>
+    <%- include("partials/flashMsg") %>
      <div class="row justify-content-center">
         <div class="offset-2 col-9 offset-sm-1 col-sm-9 offset-lg-0 col-lg-6 p-1">
           <h1 class="text-center p-2">
@@ -32,12 +17,24 @@
                     <div class="row d-flex align-items-center p-1">
                         <div class="col-5 col-sm-8 col-md-6 col-lg-8 col-xl-9">
                             <p class="h6"><%=question.answer%></p>
+                            <p class="h6">Level : 
+                                <%for(let i=1;i<=5;i++){%>
+                                  <%if(i<=question.level){%>
+                                    <span class = "fa fa-star checked"></span>
+                                  <%} else{%>
+                                    <span class = "fa fa-star unchecked"></span>
+                                  <%}%>
+                                <%}%>
+                                </p>
                         </div>
                         <div class="col-7 col-sm-4 col-md-6 col-lg-4 col-xl-3">
                             <a class="btn btn-primary white" href='/edit/question/<%=question._id%>'
                                     ><i class="fas fa-edit"></i></a>
-                            <a class="btn btn-danger white" href='/delete/question/<%=question._id%>'
-                                    ><i class="fas fa-trash-alt"></i></a>   
+                            <form action="/delete/question/<%=question._id%>?_method=DELETE" class="d-inline-block" method="POST">
+                                <button class="btn btn-danger white m-1" type="submit">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
                         </div>
                     </div>
                     <div class="hover-img">
@@ -68,10 +65,9 @@
                 {
                     document.getElementById('loader').classList.add('d-none');
                     isCompleted=true;
-                    alert('No more questions...!')
-                    // swal("Completed!", "Sorry..,No more questions...!", "info");
-                    // document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
-                    // document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
+                    swal("Completed!", "Sorry..,No more questions...!", "info");
+                    document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+                    document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
                     return
                 }
                 for(let q=0;q<question.question.length;q++) {
@@ -106,30 +102,36 @@
         let div_a=document.createElement('div')
         div_a.className='col-7 col-sm-4 col-md-6 col-lg-4 col-xl-3';
 
-        let a1=document.createElement('a');
-        a1.className='btn btn-primary white';
-        a1.href='/edit/question/'+q._id;
+        let a=document.createElement('a');
+        a.className='btn btn-primary white';
+        a.href='/edit/question/'+q._id;
 
         let i1=document.createElement('i');
         i1.className='fas fa-edit';
-        a1.appendChild(i1);
+        a.appendChild(i1);
 
-        div_a.appendChild(a1);
+        div_a.appendChild(a);
 
         div_row.appendChild(div_p);
         div_row.appendChild(div_a);
 
         card_img.appendChild(div_row)
 
-        let a2=document.createElement('a');
-        a2.className='btn btn-danger white mx-1';
-        a1.href='/delete/question/'+q._id;
+        let form=document.createElement('form');
+        form.action='/delete/question/<%=question._id%>?_method=DELETE';
+        form.method='POST'
+        form.className='d-inline-block';
+
+        let button = document.createElement('button');
+        button.className='btn btn-danger white m-1'
+        button.type='submit';
 
         let i2=document.createElement('i');
         i2.className='fas fa-trash-alt';
-        a2.appendChild(i2);
+        button.appendChild(i2);
 
-        div_a.appendChild(a2);
+        form.appendChild(button);
+        div_a.appendChild(form);
 
         let hover_img=document.createElement('div');
         hover_img.className='hover-img';
