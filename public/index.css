@@ -718,13 +718,24 @@ opacity: 1;
   height: 271px !important;
 } */
 
+.bg-primary{
+  background-color: #6C63FF !important;
+}
+
+.checked {
+  color : #6C63FF;
+  font-size : 17px;
+}
+.unchecked {
+  color : #b6b5c5;
+  font-size : 17px;
+}
 .nav-pills .nav-link.active{
   background-color: #6C63FF;
   color: white;
 }
 
 /* Drop down patients */
-
 .choices__inner {
   border: 2px solid #6C63FF !important;
   border-radius: 0px !important;

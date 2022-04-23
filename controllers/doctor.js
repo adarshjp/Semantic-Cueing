@@ -42,22 +42,13 @@ exports.get_create_test = (req, res) => {
 };
 
 exports.get_home_doctor = (req, res) => {
-  User.findById({_id:req.user._id})
-  .then((user)=>{
     User.find({role:'patient',doctorid:req.user._id},{_id:1, name: 1})
     .then((patients) =>{
-      res.render("doctor",{user:user,patient:patients})
+      res.render("doctor",{user:req.user,patient:patients})
     })
     .catch((err)=>{
       console.log(err)
     })
-  })
-  .catch((err)=>{
-    res.status(500).json({
-      error:err
-    })
-  })
-  
 };
 
 exports.post_create_test = (req, res) => {
@@ -118,6 +109,68 @@ exports.get_patient_test_details = (req, res) => {
   Test.find({patientid:req.params.patientid,doctorid:req.user._id},{_id:0,questions:0})
   .then((test)=>{
     res.status(200).send(test);
+  })
+  .catch((err)=>{
+    res.status(500).json({
+      error:err
+    })
+  })
+}
+
+exports.get_view_test_created = (req, res) => {
+  Test.find({doctorid:req.user._id})
+  .then((tests)=>{
+    res.render("view_tests",{ user: req.user,tests: tests });
+  })
+  .catch((err)=>{
+    res.status(500).json({
+      error:err
+    })
+  })
+}
+
+exports.get_edit_test= (req, res) => {
+  Test.findOne({_id:req.params.testid})
+  .then((test)=>{
+    res.render("editTest",{ user: req.user,test: test });
+  })
+  .catch((err)=>{
+    res.status(500).json({
+      error:err
+    })
+  })
+}
+
+exports.put_edit_test = (req, res) => {
+  Test.findOneAndUpdate({_id:req.params.testid},{$set:{level:req.body.level,questions:req.body.questions,noofquestion:req.body.questions.length}},{new: true})
+  .then((test)=>{
+    req.flash('success', 'Test updated successfully')
+    res.status(200)
+    res.redirect('/view/tests/'+req.user._id)
+  })
+  .catch((err)=>{
+    res.status(500).json({
+      error:err
+    })
+  })
+}
+
+exports.get_question = (req, res) => {
+  Question.findById(req.params.questionid,{hints:0})
+  .then((question)=>{
+    res.status(200).send(question);
+  })
+  .catch((err)=>{
+    res.status(500).json({message:'error',error:err})
+  })
+};
+
+exports.delete_test = (req, res) => {
+  Test.findOneAndDelete({_id:req.params.testid})
+  .then((test)=>{
+    req.flash('success', 'Test deleted successfully')
+    res.status(200)
+    res.redirect('/view/tests/'+req.user._id)
   })
   .catch((err)=>{
     res.status(500).json({
