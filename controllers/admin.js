@@ -125,15 +125,7 @@ exports.count_no_of_questions= (req, res) => {
     })
 }
 
-exports.get_edit_question= (req, res) => {
-    Question.findById({ _id: req.params.questionid })
-        .then((question) => {
-            res.render("edit_question",{question:question,user:req.user})
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-}
+
 
 exports.get_view_questions= (req, res) => {
     let skip=0;

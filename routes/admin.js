@@ -24,8 +24,4 @@ router.post("/check-username",isAdmin,isLoggedIn,checkusername)
 router.get("/data/users",isAdmin,isLoggedIn,get_details_for_graph)
 router.get("/data/testcount",isAdmin,isLoggedIn,count_no_of_tests)
 router.get("/data/questioncount",isAdmin,isLoggedIn,count_no_of_questions)
-
-router.get("/edit/question/:questionid",isLoggedIn,isAdmin,get_edit_question)
-router.put("/edit/question/:questionid",isLoggedIn,isAdmin,put_edit_question)
-
 module.exports = router;

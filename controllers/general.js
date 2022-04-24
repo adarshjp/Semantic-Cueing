@@ -77,3 +77,85 @@ function covert_img(files) {
     })
     return img
 }
+exports.get_edit_question= (req, res) => {
+    Question.findById({ _id: req.params.questionid })
+        .then((question) => {
+            res.render("edit_question",{question:question,user:req.user})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+exports.put_edit_question= async (req, res) => {
+    /* Function which edits the question expect hints */
+    /* 
+        Parameters:questionid
+        Body:name,answer,level,score
+        Files:0 or 1 
+        Steps:  1.Check whether req.files is empty or not
+                2.If not empty then convert the files to buffer
+                3.If empty then do nothing
+                4.Update the question
+                5.Send the updated question
+    */
+    let img
+    let newQuestion={
+        name:req.body.name,
+        answer:req.body.answer,
+        level:req.body.level,
+        score:req.body.score,
+    }
+    if(req.files.length!=0){
+        img = covert_img(req.files)
+        newQuestion.question = img[0]
+    }
+    let updatedQuestion=await updateQuestion(req.params.questionid,newQuestion)
+    res.json(updatedQuestion)
+}
+exports.put_edit_hint= async(req, res) => {
+    /* Function which edits the hints of the question */
+    /*
+        Parameters:questionid,hintid
+        Body:score
+        Files:0 or 1
+        Steps:  1.Check whether req.files is empty or not
+                2.If not empty then convert the files to buffer
+                3.If empty then do nothing
+                4.Update the hint
+                5.Send the updated hint
+    */
+    let img
+    let newHint={
+        score:req.body.score,
+    }
+    if(req.files.length!=0){
+        img = covert_img(req.files)
+        newHint.hint = img[0]
+    }
+    let updatedHint=await updateHint(req.params.questionid,req.params.hintid,newHint)
+    res.json(updatedHint)
+}
+function updateQuestion(questionid,newQuestion)
+{
+    return new Promise((resolve,reject)=>{
+        Question.findByIdAndUpdate({_id:questionid},newQuestion)
+        .then((question)=>{
+            resolve(question)
+        })
+        .catch((err)=>{
+            reject(err)
+        })
+    })
+}
+function updateHint(questionid,hintid,newHint)
+{
+    return new Promise((resolve,reject)=>{
+        Question.findOneAndUpdate({_id:questionid},{$set:{'hints.$[el]':newHint}},{arrayFilters: [{ "el._id": hintid }],new:true})
+        .then((question)=>{
+            resolve(question)
+        })
+        .catch((err)=>{
+            reject(err)
+        })
+    })
+}
