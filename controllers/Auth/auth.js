@@ -1,6 +1,6 @@
 const passport = require("passport");
 const User = require("../../models/user");
-const {covert_img}= require('../convert_img')
+const {convert_img}= require('../convert_img')
 exports.register_get = (req, res) => {
   User.find({ $or: [{ role: 'doctor' }, {}] }, { _id: 1, name: 1, role: 1, username: 1 }, (err, docs) => {
     if (err) {
@@ -27,7 +27,8 @@ exports.register_get = (req, res) => {
 };
 
 exports.register_post = (req, res) => {
-  let img= covert_img(req.files)
+  console.log(req.files)
+  let img= convert_img(req.files)
   const user = new User({
     username: req.body.username,
     email: req.body.email,

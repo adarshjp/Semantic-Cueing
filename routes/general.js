@@ -1,16 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-const multer = require("multer");
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads");
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
-});
-const upload = multer({ storage: storage });
+const upload = require('../setup/multer');
 const{change_password,login_get,login_post,set_password,set_post,get_changepassword}=require('../controllers/Auth/auth');
 const {isLoggedIn, isAdmin}=require('../controllers/Auth/middlewares');
 const { addquestions_get,addquestions_post,view_question,view_Onequestion,forgotpassword_get} = require('../controllers/general');

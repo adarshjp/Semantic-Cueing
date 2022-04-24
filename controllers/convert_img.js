@@ -1,3 +1,5 @@
+const fs = require('fs')
+const path = require('path')
 exports.convert_img = (files) => {
     let img = []
     files.forEach((file) => {

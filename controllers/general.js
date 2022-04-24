@@ -1,6 +1,3 @@
-const fs = require('fs')
-const { dirname } = require('path')
-const path = require('path')
 const Question = require('../models/question')
 const {convert_img}= require('./convert_img')
 exports.addquestions_get = (req, res) => {
