@@ -110,7 +110,9 @@ exports.put_edit_question= async (req, res) => {
         newQuestion.question = img[0]
     }
     let updatedQuestion=await updateQuestion(req.params.questionid,newQuestion)
-    res.json(updatedQuestion)
+    req.flash('success', 'Question updated successfully')
+    res.status(200)
+    res.redirect('/edit/question/'+req.params.questionid)
 }
 exports.put_edit_hint= async(req, res) => {
     /* Function which edits the hints of the question */
@@ -133,7 +135,9 @@ exports.put_edit_hint= async(req, res) => {
         newHint.hint = img[0]
     }
     let updatedHint=await updateHint(req.params.questionid,req.params.hintid,newHint)
-    res.json(updatedHint)
+    req.flash('success', 'Hint updated successfully')
+    res.status(200)
+    res.redirect('/edit/question/'+req.params.questionid)
 }
 function updateQuestion(questionid,newQuestion)
 {
@@ -158,4 +162,29 @@ function updateHint(questionid,hintid,newHint)
             reject(err)
         })
     })
+}
+
+exports.delete_question= (req, res) => {
+    Test.find({questions:req.params.questionid},{_id:1})
+    .then(test => {
+        if(test.length===0){
+            Question.findByIdAndDelete({ _id: req.params.questionid })
+            .then((question) => {
+                req.flash('success', 'Question deleted successfully')
+                res.status(200)
+                res.redirect('/view/question')
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }else{
+            req.flash('error', 'Question is Used in a test')
+            res.status(200)
+            res.redirect('/view/question')
+        }
+    })
+    .catch(err => {
+        console.log(err)
+    })
+    
 }

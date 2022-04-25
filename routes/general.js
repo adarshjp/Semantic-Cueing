@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 const{change_password,login_get,login_post,set_password,set_post,get_changepassword}=require('../controllers/Auth/auth');
 const {isLoggedIn, isAdmin}=require('../controllers/Auth/middlewares');
-const { addquestions_get,addquestions_post,view_question,view_Onequestion,forgotpassword_get,get_edit_question,put_edit_question,put_edit_hint} = require('../controllers/general');
+const { addquestions_get,addquestions_post,view_question,view_Onequestion,forgotpassword_get,get_edit_question,put_edit_question,put_edit_hint,delete_question} = require('../controllers/general');
 router.post(
   "/login",
   passport.authenticate("local", {
@@ -44,4 +44,6 @@ router.get("/forgotpassword",forgotpassword_get);
 router.get("/edit/question/:questionid",isLoggedIn,isAdmin,get_edit_question)
 router.put("/edit/question/:questionid",upload.array("question",1),isLoggedIn,isAdmin,put_edit_question)
 router.put("/edit/hint/:questionid/:hintid",upload.array("hint",1),isLoggedIn,isAdmin,put_edit_hint)
+router.delete("/delete/question/:questionid",isAdmin,isLoggedIn,delete_question); // to delete a question
+
 module.exports = router;

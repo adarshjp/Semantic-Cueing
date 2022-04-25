@@ -1,7 +1,7 @@
 const express = require("express");
 const {register_get,register_post,} = require("../controllers/Auth/auth");
 const {isAdmin,isLoggedIn}=require('../controllers/Auth/middlewares')
-const {admin_get,view_patient,view_doctor,view_Oneuser,get_edit_user,edit_user,delete_user,checkusername,get_details_for_graph,count_no_of_tests,count_no_of_questions,get_view_questions,get_edit_question,delete_question,put_edit_question} = require('../controllers/admin')
+const {admin_get,view_patient,view_doctor,view_Oneuser,get_edit_user,edit_user,delete_user,checkusername,get_details_for_graph,count_no_of_tests,count_no_of_questions,get_view_questions} = require('../controllers/admin')
 const router = express.Router();
 
 router.get("/register", isLoggedIn, register_get);
@@ -15,8 +15,6 @@ router.get("/view/question/:skip?",isLoggedIn,isAdmin,get_view_questions);  // t
 router.get("/view/:id",isLoggedIn,view_Oneuser);
 router.get("/edit/:id",isLoggedIn,get_edit_user)
 router.put("/edit/:id",isLoggedIn,edit_user)
-
-router.delete("/delete/question/:questionid",isAdmin,isLoggedIn,delete_question); // to delete a question
 
 router.delete("/delete/:id",isAdmin,isLoggedIn,delete_user)
 router.post("/check-username",isAdmin,isLoggedIn,checkusername)
