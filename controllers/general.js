@@ -2,6 +2,7 @@ const fs = require('fs')
 const { dirname } = require('path')
 const path = require('path')
 const Question = require('../models/question')
+const Test = require('../models/question')
 exports.addquestions_get = (req, res) => {
     res.status(200)
     res.render('add_questions',{user: req.user})
@@ -141,7 +142,6 @@ exports.put_edit_hint= async(req, res) => {
                 newHint.hint=hint.hint
             }
         })
-        console.log(newHint)
     }
     // res.send(newHint)
     let updatedHint=await updateHint(req.params.questionid,req.params.hintid,newHint)
