@@ -778,3 +778,11 @@ background: #eee;
   background: #6C63FF;
   border-radius: 10px;
 }
+
+.login-input,.login-input1 {
+	background-color: #eee;
+	border: 2px solid #6C63FF;
+	padding: 10px 15px;
+	margin: 8px 0;
+	width: 100%;
+}

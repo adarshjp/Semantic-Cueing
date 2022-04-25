@@ -1,0 +1,23 @@
+<div class="modal fade" id="editHintModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body py-1 px-0">
+            <div class="row justify-content-center p-3">
+                <div class="form-group col-12 text-center">
+                   <label for="upload_hint">
+                      <i class="fa-solid fa-cloud-arrow-up fa-4x blue" data-bs-toggle="tooltip" data-bs-placement="top" title="Upload an Image"></i>
+                   </label>
+                   <input type="file" name="image" accept="image/png, image/jpeg" class="form-control form-control-lg" placeholder="Enter Image" id="upload_hint" onchange="getImagePreview(event,'preview-hint','upload_hint')" style="display: none">
+                </div>
+                <div id="preview-hint" class="my-2 col-11 col-sm-9 col-md-7 text-center">
+                    <img src="" class="img-fluid" width="300" style="max-height:300px;border:2px solid #6C63FF;padding:2px" id="img-preview">
+                    <button class="btn btn-sm blue text-center" onclick="removeImg('upload_hint','preview-hint')"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="col-12">
+                   <input type="text" class="login-input" name="score" value="<%=question.hints[0].score%>" required>
+                </div>
+             </div>    
+        </div>
+      </div>
+    </div>
+</div>
