@@ -132,7 +132,18 @@ exports.put_edit_hint= async(req, res) => {
         img = covert_img(req.files)
         newHint.hint = img[0]
     }
+    if(newHint.hint==undefined){
+        let hints=await fetchImg(req.params.questionid,req.params.hintid)
+        hints.forEach((hint)=>{
+            if(hint._id==req.params.hintid){
+                newHint.hint=hint.hint
+            }
+        })
+        console.log(newHint)
+    }
+    // res.send(newHint)
     let updatedHint=await updateHint(req.params.questionid,req.params.hintid,newHint)
+    console.log(updatedHint)
     res.json(updatedHint)
 }
 function updateQuestion(questionid,newQuestion)
@@ -149,10 +160,24 @@ function updateQuestion(questionid,newQuestion)
 }
 function updateHint(questionid,hintid,newHint)
 {
+    //console.log(newHint)
     return new Promise((resolve,reject)=>{
-        Question.findOneAndUpdate({_id:questionid},{$set:{'hints.$[el]':newHint}},{arrayFilters: [{ "el._id": hintid }],new:true})
+        Question.findOneAndUpdate({_id:questionid,'hints._id':hintid},{$set:{'hints.$':newHint}},{new:true})
         .then((question)=>{
             resolve(question)
+        })
+        .catch((err)=>{
+            reject(err)
+        })
+    })
+}
+function fetchImg(questionid,hintid)
+{
+    return new Promise((resolve,reject)=>{
+        Question.findOne({_id:questionid,'hints.$._id':hintid})
+        .then((question)=>{
+            //console.log(question.hints)
+            resolve(question.hints)
         })
         .catch((err)=>{
             reject(err)
