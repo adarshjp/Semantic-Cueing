@@ -174,6 +174,7 @@ function updateHint(questionid,hintid,newHint)
         })
     })
 }
+
 function fetchImg(questionid,hintid)
 {
     return new Promise((resolve,reject)=>{
@@ -187,6 +188,7 @@ function fetchImg(questionid,hintid)
         })
     })
 }
+
 exports.delete_question= (req, res) => {
     Test.find({questions:req.params.questionid},{_id:1})
     .then(test => {
@@ -209,4 +211,6 @@ exports.delete_question= (req, res) => {
     .catch(err => {
         console.log(err)
     })
+
 }           
+
