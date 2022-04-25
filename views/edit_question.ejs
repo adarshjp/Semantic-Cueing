@@ -54,7 +54,7 @@
                   <div class="text-center">
                      <% let img1=question.hints[i].hint.contentType%>
                      <% let img2=question.hints[i].hint.data.toString('base64')%>
-                     <%let arr=[i,'data:image/'+img1+';base64,'+img2,question.hints[i].score,question._id];
+                     <%let arr=[question.hints[i]._id,'data:image/'+img1+';base64,'+img2,question.hints[i].score,question._id];
                         arr=JSON.stringify(arr);
                      %>
                      <button class="btn btn-lg btn-primary white m-1" data-bs-toggle="modal" data-bs-target="#editHintModal" data-bs-whatever="<%=arr%>">
