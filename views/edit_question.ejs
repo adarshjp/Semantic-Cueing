@@ -1,6 +1,7 @@
 <%- include("partials/header") %>
 <%- include("partials/adminSideBar") %>
 <div class="container mt-3 mb-3">
+   <%- include("partials/flashMsg") %>
    <div class="row justify-content-center">
       <div class="offset-2 col-8 offset-sm-1 col-sm-10 offset-md-1 col-md-11">
          <div class="text-center p-3 m-3 font-monospace">
@@ -16,17 +17,20 @@
                   </div>
                   <div class="row justify-content-center">
                         <div class="col-12 col-md-6">
-                           <input type="text" name="answer" id="login-input" placeholder="Name of Object..." value="<%=question.answer%>" readonly> 
+                           <input type="text" name="" id="login-input" placeholder="Name of Object..." value="<%=question.answer%>" disabled> 
                         </div>
                         <div class="col-12 col-md-6">
-                           <input type="number" name="level" id="login-input1"  placeholder="Enter Level(1-5)..." onchange="checklevel(this.value)" value="<%=question.level%>" readonly>
+                           <input type="number" name="" id="login-input1"  placeholder="Enter Level(1-5)..." onchange="checklevel(this.value)" value="<%=question.level%>" disabled>
                         </div>
                         <div class="col-12 col-md-6">
-                           <input type="text" name="score" id="login-input" placeholder="Description..." value="<%=question.score%>" readonly>
+                           <input type="text" name="" id="login-input" placeholder="Description..." value="<%=question.score%>" disabled>
                         </div>
                   </div>
                   <div class="text-center">
-                     <button class="btn btn-lg btn-primary white m-1" type="submit">
+                     <% let q1=question.question.contentType;
+                        let q2=question.question.data.toString('base64')
+                     %>
+                     <button class="btn btn-lg btn-primary white m-1" data-bs-toggle="modal" data-bs-target="#editQuestionModal" data-bs-whatever="data:image/<%=q1%>;base64,<%=q2%>">
                         <i class="fas fa-edit"></i>
                      </button>
                   </div>
@@ -44,13 +48,16 @@
                         <img src="data:image/<%=question.hints[i].hint.contentType%>;base64,<%=question.hints[i].hint.data.toString('base64')%>" class="img-fluid" width="300" style="height:40vh;border:2px solid #6C63FF;padding:2px">
                      </div>
                      <div class="col-12">
-                        <input type="text" name="nscore[<%= i %>]" id="login-input" placeholder="Description..." value="<%=question.hints[i].score%>" readonly>
+                        <input type="text" name="" id="login-input" placeholder="Description..." value="<%=question.hints[i].score%>" disabled>
                      </div>
                   </div>  
                   <div class="text-center">
-                     <% let img1=question.hints[i].hint.contentType %>
-                     <% let img2=question.hints[i].hint.data.toString('base64') %>
-                     <button class="btn btn-lg btn-primary white m-1" data-bs-toggle="modal" data-bs-target="#editHintModal" data-bs-whatever="[<%=i%>,<%=img1%>,<%=img2%>">
+                     <% let img1=question.hints[i].hint.contentType%>
+                     <% let img2=question.hints[i].hint.data.toString('base64')%>
+                     <%let arr=[i,'data:image/'+img1+';base64,'+img2,question.hints[i].score,question._id];
+                        arr=JSON.stringify(arr);
+                     %>
+                     <button class="btn btn-lg btn-primary white m-1" data-bs-toggle="modal" data-bs-target="#editHintModal" data-bs-whatever="<%=arr%>">
                         <i class="fas fa-edit"></i>
                      </button>
                   </div>  
@@ -60,6 +67,7 @@
       </div>
    </div>
 </div>
+<%- include("partials/editQuestionModal") %>
 <%- include("partials/editHintModal") %>
 <script>
    function getImagePreview(event,preview_id,upload_id){
@@ -76,37 +84,47 @@
       }
       else{
          var image=URL.createObjectURL(event.target.files[0]);
-         var imagediv= document.getElementById(preview_id);
-         var newimg=document.createElement('img');
-         imagediv.innerHTML='';
-         newimg.src=image;
-         newimg.className="img-fluid";
-         newimg.width="300";
-         newimg.style="max-height:300px;border:2px solid #6C63FF;padding:2px";
-         imagediv.appendChild(newimg);
-         var removebtn=document.createElement('button');
-         removebtn.className="btn btn-sm blue text-center";
-         removebtn.innerHTML='<i class="fa-solid fa-xmark"></i>'
-         removebtn.setAttribute('onclick','removeImg('+upload_id+','+preview_id+')')
-         imagediv.appendChild(removebtn);
+         disp_image(upload_id,preview_id,image);
       }
   }
 
-  function removeImg(upload_id,preview_id){
-    document.getElementById(upload_id).value = '';
-    var imagediv= document.getElementById(preview_id);
-    var newimg=document.createElement('img');
-    imagediv.innerHTML='';
-    newimg.src='';
-  }
+  var editQuestionModal= document.getElementById('editQuestionModal')
+   editQuestionModal.addEventListener('show.bs.modal', function (event) {
+      var button = event.relatedTarget
+      var image = button.getAttribute('data-bs-whatever');
+      disp_image('upload_q','preview-q',image);
+   });
 
   var editHintModal = document.getElementById('editHintModal')
   editHintModal.addEventListener('show.bs.modal', function (event) {
-   var button = event.relatedTarget
-   var hint_details = button.getAttribute('data-bs-whatever').slice(1,-1).split(',');
-   console.log(hint_details);
-   document.getElementById('img-preview').src='"data:image/'+hint_details[1]+';base64,'+hint_details[2];
-})
+      var button = event.relatedTarget
+      var hint_details = JSON.parse(button.getAttribute('data-bs-whatever'));
+      document.getElementById('text').value = hint_details[2];
+      document.getElementById('edit-form').action='/edit/hint/'+hint_details[3]+'/'+hint_details[0]+'?_method=PUT';
+      disp_image('upload_hint','preview-hint',hint_details[1])
+   });
+
+function disp_image(upload_id,preview_id,image){
+   var imagediv= document.getElementById(preview_id);
+   var newimg=document.createElement('img');
+   imagediv.innerHTML='';
+   newimg.src=image;
+   newimg.className="img-fluid";
+   newimg.width="300";
+   newimg.style="max-height:300px;border:2px solid #6C63FF;padding:2px";
+   imagediv.appendChild(newimg);
+   var removebtn=document.createElement('button');
+   removebtn.className="btn btn-sm blue text-center";
+   removebtn.innerHTML='<i class="fa-solid fa-xmark"></i>'
+   removebtn.onclick=function(){
+      document.getElementById(upload_id).value = '';
+      var imagediv= document.getElementById(preview_id);
+      var newimg=document.createElement('img');
+      imagediv.innerHTML='';
+      newimg.src='';
+   }
+   imagediv.appendChild(removebtn);
+}
  </script>
 <%- include("partials/footer") %>
 
