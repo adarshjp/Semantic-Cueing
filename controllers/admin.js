@@ -125,8 +125,6 @@ exports.count_no_of_questions= (req, res) => {
     })
 }
 
-
-
 exports.get_view_questions= (req, res) => {
     let skip=0;
     if(req.params.skip===undefined){
@@ -152,69 +150,4 @@ exports.get_view_questions= (req, res) => {
             error: err,
         });
     });
-}
-
-exports.put_edit_question= (req, res) => {
-    let img = covert_img(req.files)
-    Updatedhints = []
-    for (let i = 0; i < req.body.nscore.length; i++) {
-        Updatedhints.push({
-            hint: img[i + 1],
-            score: req.body.nscore[i],
-        })
-    }
-    Question.findByIdAndUpdate({ _id: req.params.id }, {
-        question: img[0],
-        answer: req.body.answer,
-        level: req.body.level,
-        score: req.body.score,
-        hints: Updatedhints
-    })
-    .then((question) => {
-        req.flash('success', 'Question updated successfully')
-        res.status(200)
-        res.redirect('/view/questions')
-    })
-    .catch((err) => {
-        console.log(err)
-    })
-}
-
-exports.delete_question= (req, res) => {
-    Test.find({questions:req.params.questionid},{_id:1})
-    .then(test => {
-        if(test.length===0){
-            Question.findByIdAndDelete({ _id: req.params.questionid })
-            .then((question) => {
-                req.flash('success', 'Question deleted successfully')
-                res.status(200)
-                res.redirect('/view/question')
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-        }else{
-            req.flash('error', 'Question is Used in a test')
-            res.status(200)
-            res.redirect('/view/question')
-        }
-    })
-    .catch(err => {
-        console.log(err)
-    })
-    
-}
-
-function covert_img(files) {
-    let img = []
-    files.forEach((file) => {
-        var obj = {
-            data: fs.readFileSync(
-                path.join(__dirname + '//..//uploads//' + file.filename)
-            ),
-            contentType: 'image/png',
-        }
-        img.push(obj)
-    })
-    return img
 }
