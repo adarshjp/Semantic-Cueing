@@ -1,5 +1,5 @@
 <%- include("partials/header") %>
-<div class="container my-5">
+<div class="container my-1">
   <% if(message.error){ %>
   <div class="alert alert-warning alert-dismissible fade show" role="alert">
     <strong><%= message.error%></strong>
@@ -22,12 +22,12 @@
   </div>
   <% } %>
   <div class="row justify-content-center vertical-center shadow-lg rounded">
+    <h1 class="text-center p-2 blue order-sm-first mt-4">Register: Patient | Doctor</h1>
     <div class="col-12 col-md-6 text-center my-auto">
-      <div class="row">
-        <div class="col-1"></div>
-        <div class="col-10">
+      <div class="row"> 
+        <div class="col-1"></div>    
+        <div class="col-10 order-sm-last">
           <form action="/register" method="post" class="p-2">
-            <h1 class="text-center p-2 blue">Register: Patient | Doctor</h1>
             <input
               type="text"
               name="name"
@@ -44,14 +44,26 @@
               class="outline-color"
               required
             />
+            <div class="input-group ">
+              <input type="text" class="form-control " id="verifyEmail" placeholder="Email" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <input class="btn btn-primary outline-color" id="verify" value="Verify" onclick="showOtpBox()" type="button"/>
+              </div>
+            </div>
+            <div class="input-group">
             <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              id="login-input"
-              class="outline-color"
+              type="text"
+              name="otp"
+              placeholder="Enter the otp"
+              id="verifyOtp"
+              class="form-control d-none"
+              aria-describedby="basic-addon2"              
               required
             />
+            <div class="input-group-append">
+              <button class="btn btn-primary outline-color d-none" id="verifyOtpbtn" onclick="hideOtpBox()" type="button">Verify</button>
+            </div>
+          </div>
             <input
               type="text"
               name="username"
@@ -107,6 +119,14 @@
                 </select>
               </div>
             </div>
+            <div class="row align-items-center d-none" id="strokeDate">
+              <div class="col-4 ">
+                <label for="strokedate" class="blue h5">Stroke Date:</label>
+              </div>
+              <div class="col-8">
+                <input type="date" id="login-input" name="strokedate">
+              </div>
+            </div>
             <input
               type="submit"
               class="btn btn-primary btn-lg rounded-pill p-2"
@@ -114,26 +134,56 @@
               style="width: 50%"
               id="review"
             />
-          </form>
         </div>
       </div>
     </div>
-    <div class="col-12 col-md-6 d-none d-sm-block my-auto" id="">
-      <img src="/images/signup.png" alt="signup" class="img-responsive img-fluid" />
+    <div class="col-12 col-md-6 d-sm-block my-auto order-sm-first order-md-last" id="p-img">
+      <div class="form-group text-center">
+        <label class="" for="upload_file" id="chooseImgIcon">
+           <i class="fa-solid fa-cloud-arrow-up fa-4x blue"></i>
+           <p class="blue h5">Choose Image</p>
+        </label>
+        <input type="file" name="image" class="form-control form-control-lg fi" accept="image/png, image/jpeg" placeholder="Enter Image" id="upload_file" onchange="getImagePreview(event,'preview','upload_file')" id="login-input" style="display:none;" required>
+     </div>
+     <div class="row justify-content-center my-2 text-center">
+        <div class="col-12 col-sm-7 col-md-9" id="preview"></div>
+     </div>
+    </form>
     </div>
   </div>
 </div>
 <script type="text/javascript">
   var role = document.getElementById('role')
   var doctor = document.getElementById('select-doctor')
+  var strokeDate = document.getElementById('strokeDate')
   var doctorid = document.getElementById('doctorid')
+  var chooseImgIcon = document.getElementById('chooseImgIcon')
+  var ranImg = document.getElementById('ranImg')
+
   role.addEventListener('change', function () {
     if (role.value == 'patient') {
       doctor.classList.remove('d-none')
       doctorid.required = true
-    } else {
+      strokeDate.classList.remove('d-none')
+      strokeDate.required = true
+      //chooseImgIcon.classList.remove('d-none')
+      //chooseImgIcon.required = true
+      ranImg.classList.add('d-none')
+      ranImg.required = true
+    } 
+      else {
       doctor.classList.add('d-none')
       doctorid.required = false
+      strokeDate.classList.add('d-none')
+      strokeDate.required = false
+      //chooseImgIcon.classList.add('d-none')
+      //chooseImgIcon.required = false
+      ranImg.classList.remove('d-none')
+      ranImg.required = false
+      preview.classList.add('d-none')
+      preview.required = false
+      //var div = document.getElementById('p-img');
+      //div.remove();
     }
   })
   let username = document.getElementById('username')
@@ -176,5 +226,93 @@
         }
       })
   }
+
+   function getImagePreview(event,preview_id,upload_id){
+      const fi = document.getElementById(upload_id);
+      const fsize = fi.files.item(0).size;
+      const file = Math.round((fsize / 1024));
+      if (file >= 1024) {
+         alert("File too Big, please select a file less than 1mb");
+         document.getElementById(upload_id).value = '';
+         var imagediv= document.getElementById(preview_id);
+         var newimg=document.createElement('img');
+         imagediv.innerHTML='';
+         newimg.src='';
+      }
+      else{
+         var image=URL.createObjectURL(event.target.files[0]);
+         var imagediv= document.getElementById(preview_id);
+         var newimg=document.createElement('img');
+         imagediv.innerHTML='';
+         newimg.src=image;
+         newimg.className="img-fluid";
+         newimg.width="600";
+         newimg.style="max-height:1000px;border:2px solid #6C63FF;padding:2px";
+         imagediv.appendChild(newimg);
+         chooseImgIcon.classList.add('d-none')
+         chooseImgIcon.required = false
+         var removebtn=document.createElement('button');
+         removebtn.className="btn btn-sm blue text-center";
+         removebtn.innerHTML='<i class="fa-solid fa-xmark"></i>'
+         removebtn.onclick=function(){
+            chooseImgIcon.classList.remove('d-none')
+            chooseImgIcon.required = false
+            document.getElementById(upload_id).value = '';
+            var imagediv= document.getElementById(preview_id);
+            var newimg=document.createElement('img');
+            imagediv.innerHTML='';
+            newimg.src='';
+            //chooseImgIcon.classList.remove('d-none')
+           // chooseImgIcon.required = true
+           
+         }
+         imagediv.appendChild(removebtn);
+      }
+  }
+  document.getElementById('verify').disabled = true; //Disable at first
+  document.getElementById('verifyEmail').addEventListener('keyup', e => {
+  //Check for the input's value
+  if (e.target.value == "") {
+    document.getElementById('verify').disabled = true;
+  }
+  else {
+    document.getElementById('verify').disabled = false;
+  }
+});
+
+//otp disabled 
+document.getElementById('verifyOtpbtn').disabled = true; //Disable at first
+document.getElementById('verifyOtp').addEventListener('keyup', e => {
+  //Check for the input's value
+  if (e.target.value.length == 6) {
+    document.getElementById('verifyOtpbtn').disabled = false;
+  }
+  else {
+    document.getElementById('verifyOtpbtn').disabled = true;
+  }
+});
+
+function showOtpBox(){
+  var verifyOtp = document.getElementById('verifyOtp')
+  var verifyOtpbtn = document.getElementById('verifyOtpbtn')
+  verifyOtp.classList.remove('d-none')
+  verifyOtpbtn.classList.remove('d-none')
+}
+function hideOtpBox() {
+  var verify = document.getElementById('verify')
+  var verifyOtpbtn = document.getElementById('verifyOtpbtn')
+  var verifyOtp = document.getElementById('verifyOtp')
+  if(verifyOtp.value == 123456){
+  verifyOtpbtn.classList.add('d-none')
+  verifyOtp.classList.add('d-none')
+  
+  document.getElementById("verify").value="Verified";
+  document.getElementById('verify').disabled = true;
+  }
+  else {
+    alert('Otp Invalid')
+  }
+
+}
 </script>
 <%- include("partials/footer") %>

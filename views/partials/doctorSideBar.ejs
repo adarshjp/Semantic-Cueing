@@ -16,22 +16,13 @@
       </ul>
     </li>
     <li>
-      <a href="/view/<%=user._id%>">
-        <i class="fas fa-user"></i>
-        <span class="link_name">My Profile</span>
-      </a>
-      <ul class="sub-menu blank">
-        <li><a class="link_name" href="/view/<%=user._id%>">My Profile</a></li>
-      </ul>
-    </li>
-    <li>
-      <a onClick="">
-        <i class="bx bx-book-alt"></i>
+      <a href="/view/patient/<%=user._id%>">
+        <i class="fas fa-procedures"></i>
         <span class="link_name">Patients</span>
       </a>
       <ul class="sub-menu blank">
         <li>
-          <a class="link_name">Patients</a>
+          <a class="link_name" href="/view/patient/<%=user._id%>">Patients</a>
         </li>
       </ul>
     </li>
@@ -42,6 +33,24 @@
       </a>
       <ul class="sub-menu blank">
         <li><a class="link_name" href="/create/test">Create Test</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="/view/tests/<%=user._id%>">
+        <i class='bx bx-edit-alt'></i>
+        <span class="link_name">Tests</span>
+      </a>
+      <ul class="sub-menu blank">
+        <li><a class="link_name" href="/view/tests/<%=user._id%>">Tests</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="/view/<%=user._id%>">
+        <i class="fas fa-user"></i>
+        <span class="link_name">My Profile</span>
+      </a>
+      <ul class="sub-menu blank">
+        <li><a class="link_name" href="/view/<%=user._id%>">My Profile</a></li>
       </ul>
     </li>
     <li>
