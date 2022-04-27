@@ -1,0 +1,40 @@
+<div class="modal fade" id="editQuestionModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body p-2">
+            <div class="text-end">  
+               <button type="button" class="btn-close text-end" data-bs-dismiss="modal" aria-label="Close"></button>      
+            </div>
+            <form action="/edit/question/<%=question._id%>?_method=PUT" method="post" enctype="multipart/form-data">
+               <div class="row justify-content-center p-3">
+                     <div class="form-group col-12 text-center">
+                        <label for="upload_q">
+                           <i class="fa-solid fa-cloud-arrow-up fa-4x blue" data-bs-toggle="tooltip" data-bs-placement="top" title="Upload an Image"></i>
+                        </label>
+                        <input type="file" name="question" accept="image/png, image/jpeg" class="form-control form-control-lg" placeholder="Enter Image" id="upload_q" onchange="getImagePreview(event,'preview-q','upload_q')" style="display: none">
+                     </div>
+                     <div id="preview-q" class="my-2 col-11 col-sm-9 col-md-7 text-center">
+                        
+                     </div>
+                     <div class="col-12">
+                        <div class="row justify-content-center">
+                           <div class="col-12 col-md-6">
+                              <input type="text" name="answer" class="login-input" value="<%=question.answer%>"  placeholder="Name of Object..." required> 
+                           </div>
+                           <div class="col-12 col-md-6">
+                              <input type="number" name="level" class="login-input" id="login-input1" value="<%=question.level%>"  placeholder="Enter Level(1-5)..." onchange="checklevel(this.value)" required>
+                           </div>
+                           <div class="col-12 col-md-6">
+                              <input type="text" name="score" class="login-input" value="<%=question.score%>" placeholder="Description..." required>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-lg rounded-pill">Update</button>
+                     </div>
+               </div>    
+             </form>
+        </div>
+      </div>
+    </div>
+</div>

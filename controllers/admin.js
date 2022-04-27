@@ -1,6 +1,10 @@
+const fs = require('fs')
+const { dirname } = require('path')
+const path = require('path')
 const User = require('../models/user')
 const Question = require('../models/question')
 const Test = require("../models/test");
+
 exports.admin_get = (req, res) => {
     User.findById(req.user._id)
         .then((user) => {
@@ -119,4 +123,31 @@ exports.count_no_of_questions= (req, res) => {
     }).catch((err) => {
         console.log(err)
     })
+}
+
+exports.get_view_questions= (req, res) => {
+    let skip=0;
+    if(req.params.skip===undefined){
+        skip=0;
+    }else{
+        skip=parseInt(req.params.skip);
+    }
+    console.log(skip);
+    Question.find({}, { hints: 0 }).limit(10).skip(skip)
+    .then((question) => {
+        if(question.length===0){
+            res.status(200).json({message: 'No more questions'})
+        }else{
+            res.status(200)
+            if(req.params.skip!==undefined)
+              res.json({question: question})
+            else 
+              res.render('view_questions',{question: question,user:req.user})
+          }
+    })
+    .catch((err) => {
+        res.status(500).json({
+            error: err,
+        });
+    });
 }

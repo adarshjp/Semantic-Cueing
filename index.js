@@ -5,6 +5,8 @@ require("dotenv").config();
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const methodOverride= require("method-override");
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 var clc = require("cli-color");
 app.use(express.static("public"));
 app.use(express.static("public/images"));
@@ -56,7 +58,7 @@ const generalRoutes = require("./routes/general");
 const doctorRoutes = require("./routes/doctor");
 const patientRoutes = require("./routes/patient");
 const otpRoutes= require("./routes/otp")
-
+const chatRoutes = require("./routes/chat")
 //---------------Multi-language------------------
 
 const fs= require("fs")
@@ -88,13 +90,14 @@ app.use(generalRoutes)
 app.use(doctorRoutes)
 app.use(patientRoutes)
 app.use(otpRoutes)
+app.use(chatRoutes)
 
-app.listen(process.env.PORT || 3000, () => {
+const server = http.listen(process.env.PORT || 3000, () => {
   console.log(clc.redBright("\n*************************************"))
   console.log(clc.blueBright("\n**** Server started at port 3000 ****"));
   console.log(clc.cyanBright("\n**** Visit http://localhost:3000 ****"));
   app.emit('appStarted');
 });
+module.exports = {app,io};
 
-module.exports = app;
 

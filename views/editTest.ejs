@@ -5,7 +5,7 @@
         <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-xl-0 col-xl-10">
             <ul class="nav nav-pills mb-3 nav-justified flex-column flex-sm-row" role="tablist">
                 <li class="nav-item p-2" role="presentation">
-                  <button class="nav-link active border py-2" id="sel-q-tab" data-bs-toggle="pill" data-bs-target="#div_list" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Select Questions</button>
+                  <button class="nav-link  border py-2 active" id="sel-q-tab" data-bs-toggle="pill" data-bs-target="#div_list" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Select Questions</button>
                 </li>
                 <li class="nav-item p-2" role="presentation">
                   <button class="nav-link border py-2" id="selected-q-tab" data-bs-toggle="pill" data-bs-target="#div_list" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Selected Questions</button>
@@ -33,69 +33,58 @@
             </button>
         </div>
     </div>
-    <form action="/create/test" method="POST" id="testForm" onsubmit="return noofqval();">
-        <div class="row justify-content-center gradient-list mb-2 p-1" id='div_list'>
-            <% var i=1;%>
-            <% question.forEach((question)=>{ %>
-                <div class="offset-2 col-8 offset-sm-1 col-sm-9 offset-md-1 col-md-5 offset-xl-0 mx-xl-3 col-xl-5 shadow-lg bg-body rounded-lg <%= question.level%>" id="question<%=i%>">
-                    <div class="card-image mx-0 p-2">
-                        <div class="inputGroup">
-                            <input id="option<%=i%>" class="form-check-input question<%=i%> op<%=question.level%>" type="checkbox"  value="<%=question._id %>" name="questions" onclick="countQuestion()">
-                            <label for="option<%=i%>">Question : <strong><%=question.answer%></strong></label> 
-                        </div>
-                        <div class="hover-img">
-                            <span class="p-1 rounded-lg my-3" id="qimg">
-                                <img src="data:image/<%=question.question.contentType%>;base64,<%=question.question.data.toString('base64')%>" alt="image" class="img-fluid" style="max-height: 12rem;"/>      
-                            </span>
-                        </div>
-                    </div>   
+    <form action="/edit/test/<%= test.id %>?_method=PUT" method="POST" id="testForm" onsubmit="return noofqval();"></form>
+        <div class="row justify-content-center">
+            <div class="offset-1 col-11 offset-sm-1 col-sm-9 offset-lg-0 col-lg-8 col-xl-6">
+                <div class="row justify-content-center gradient-list mb-2 p-1" id='div_list'>
+                
                 </div>
-                <%i++;%>
-            <% }) %>
+            </div>
         </div>
-    <div class="d-flex justify-content-center d-none blue my-4" id="loader">
-        <div class="spinner-border text-primary" role="status">
-          <span class="visually-hidden">Loading...</span>
+        <div class="d-flex justify-content-center d-none blue my-4" id="loader">
+            <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+            </div>
         </div>
-    </div>
-    <div class="row justify-content-center mt-4 d-none" id="pat_lev">
-        <div class="offset-2 col-9 offset-sm-1 col-sm-5 offset-md-1 col-md-4 offset-lg-0">
-            <label for="patient" class="mb-2">Choose Patient</label>
-            <select name="patientid"  id="patient-list" placeholder="Select patients" class="form-select form-select-lg p-2" aria-label=".form-select-lg" onchange="chnage_patinet_list()" multiple>
-                <% patient.forEach((patient)=> { %>
-                    <option value="<%=patient._id%>"><%=patient.name%></option>
-                <% }) %>
-              </select>
+        <div class="row justify-content-center mt-4 d-none" id="pat_lev">
+            <div class="offset-2 col-9 offset-sm-1 col-sm-5 offset-md-1 col-md-4 offset-lg-0">
+                <label for="patient" class="mb-2">Patient</label>
+                <select name="patientid"  id="patient-list" placeholder="Select patients" class="form-select form-select-lg p-2" aria-label=".form-select-lg">
+                        <option value="<%=test.patientid%>" selected readonly id="patient-name">h</option>
+                </select>
+            </div>
+            <div class="offset-2 col-9 offset-sm-0 col-sm-5 offset-md-0 col-md-4">
+                <label for="level">Enter Level</label>
+                <input type="number" name="level" id="login-input1" placeholder="1-5" onchange="checklevel(this.value)" value="<%=test.level%>" required/>
+            </div>
         </div>
-        <div class="offset-2 col-9 offset-sm-0 col-sm-5 offset-md-0 col-md-4">
-            <label for="level">Enter Level</label>
-            <input type="number" name="level" id="login-input1" placeholder="1-5" onchange="checklevel(this.value)" required/>
+        <div class="text-end text-sm-center p-2 d-none" id="res_but">
+            <button class="btn btn-primary rounded-pill btn-lg" onclick="reSet();">Reset <i class="fa fa-refresh" aria-hidden="true"></i></button>
+            <input type="submit" class="btn btn-primary btn-lg rounded-pill" value="Update Test" id="formsubmit"/>
         </div>
-        <input type="text" name="patientIDs" class="d-none" value="[]" id='patientIDs'/>
-    </div>
-    <div class="text-end text-sm-center p-2 d-none" id="res_but">
-        <button class="btn btn-primary rounded-pill btn-lg" onclick="reSet();">Reset <i class="fa fa-refresh" aria-hidden="true"></i></button>
-        <input type="submit" class="btn btn-primary btn-lg rounded-pill" value="Create Test" id="formsubmit"/>
-    </div>
     </form>
 </div>
 
 <script>
-    function chnage_patinet_list(){
-        var selected = $("#patient-list :selected").map((_, e) => e.value).get();
-        document.getElementById('patientIDs').value=JSON.stringify(selected);
-        console.log(document.getElementById('patientIDs').value)
+    let selected_q='<%=test.questions%>'.split(',');
+
+    for(let j=0;j<selected_q.length;j++){
+        fetch('/question/'+selected_q[j])
+        .then(response => response.json())
+        .then(question => {
+            append_div(question,'checked')
+            countQuestion();
+        })
     }
-    $(document).ready(function(){
-        var multipleCancelButton = new Choices('#patient-list', {
-            removeItemButton: true,
-            maxItemCount:100,
-            searchResultLimit:10,
-            renderChoiceLimit:5
-        });
-    });
-    let k=1;   //multiplier used to skip questions 5,10,15 so on...
-    let li_id=parseInt('<%=i%>'); //used in input and labels
+
+    fetch('/data/patientdetails/<%=test.patientid%>')    // to get the name of the patient
+    .then(response => response.json())
+    .then(patient=>{
+        document.getElementById('patient-name').textContent =patient[0].name;
+    })
+    
+    let k=0;   //multiplier used to skip questions 5,10,15 so on...
+    let li_id=1; //used in input and labels
     let isCompleted=false; //true is no more questions
     let temp=isCompleted;
 
@@ -142,10 +131,7 @@
 
     function noofqval() {
         var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-        if(document.getElementById("patientIDs").value ==="[]"){
-            alert("Please select at least 1 patinet");
-            return false;
-        }
+        console.log(checkboxes.length)
         if(checkboxes.length<5){
             alert("Please select atleast 5 questions..");
             return false;
@@ -228,6 +214,7 @@
     }
 
     window.onscroll = function(ev) {
+        console.log(k)
         if (!isCompleted && ((window.innerHeight + window.scrollY+1) >= document.body.offsetHeight)) {
             document.getElementById('loader').classList.remove('d-none')
             fetch('/create/test/'+(k*10))
@@ -243,7 +230,15 @@
                     return
                 }
                 for(let q=0;q<question.question.length;q++) {
-                    append_div(question.question[q]);
+                    let s;
+                    for(s=0;s<selected_q.length;s++){
+                        if(question.question[q]._id===selected_q[s]){
+                            break;
+                        }
+                    }if(s==selected_q.length){
+                        selected_q.push(question.question[q]._id);
+                        append_div(question.question[q],'');
+                    }
                 }
                 document.getElementById('loader').setAttribute('hidden','');
             });
@@ -251,10 +246,10 @@
         }
     };
 
-    function append_div(q){
+    function append_div(q,ischecked){
         let div=document.createElement("div");
         
-        div.className='offset-2 col-8 offset-sm-1 col-sm-9 offset-md-1 col-md-5 offset-xl-0 mx-xl-3 col-xl-5 shadow-lg bg-body rounded-lg '+q.level;
+        div.className='offset-1 offset-sm-0 col-9 col-sm-10 col-lg-11 shadow-lg bg-body rounded-lg '+q.level;
         div.id='question'+li_id;
 
         let card_img=document.createElement('div');
@@ -269,6 +264,9 @@
         input.type="checkbox";
         input.value=q._id;
         input.name='questions';
+        if(ischecked!=''){
+            input.setAttribute('checked','')
+        }
         input.setAttribute('onclick','countQuestion()');
 
         let label=document.createElement('label');
