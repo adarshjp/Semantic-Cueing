@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const Question = require("../models/question");
 const Test = require("../models/test");
+
 exports.get_create_test = (req, res) => {
   let skip=0;
   if(req.params.skip===undefined)
@@ -14,7 +15,7 @@ exports.get_create_test = (req, res) => {
   console.log(skip);
   User.find({ doctorid: req.user._id }, { _id: 1, name: 1 })
     .then((patient) => {
-      Question.find({}, { hints: 0 }).limit(5).skip(skip)
+      Question.find({}, { hints: 0 }).limit(10).skip(skip)
         .then((question) => {
           if(question.length===0)
           {
@@ -39,46 +40,137 @@ exports.get_create_test = (req, res) => {
       });
     });
 };
+
 exports.get_home_doctor = (req, res) => {
-  User.findById({_id:req.user._id})
-  .then((user)=>{
-    res.render("doctor",{user:user})
+    User.find({role:'patient',doctorid:req.user._id},{_id:1, name: 1})
+    .then((patients) =>{
+      res.render("doctor",{user:req.user,patient:patients})
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+};
+
+exports.post_create_test = (req, res) => {
+  let patientids=JSON.parse(req.body.patientIDs);
+  let test=[]
+  for(let i=0;i<patientids.length;i++)
+  {
+    let newTest = Test({
+      doctorid: req.user._id,
+      patientid: patientids[i],
+      questions: req.body.questions,
+      level: req.body.level,
+      noofquestion: req.body.questions.length,
+
+    });
+    test.push(newTest);
+  }
+  Test.insertMany(test)
+  .then((test)=>{
+    req.flash('success', 'Test created successfully')
+    res.status(200)
+    res.redirect('/home/doctor/'+req.user._id)
   })
   .catch((err)=>{
     res.status(500).json({
       error:err
     })
   })
-  
-};
-exports.post_create_test = (req, res) => {
-  const newTest = Test({
-    doctorid: req.user._id,
-    patientid: req.body.patientid,
-    questions: req.body.questions,
-    level: req.body.level,
-    noofquestion: req.body.questions.length,
-  });
-  //console.log(newTest)
-  newTest
-    .save()
-    .then((result) => {
-      res.status(201).json({
-        message: "Test created successfully",
-        result,
-      });
-    })
-    .catch((err) => {
-      res.status(500).json({
-        error: err,
-      });
-    });
 };
 
 exports.get_view_assigned_patient= (req, res) => {
   User.find({doctorid:req.user._id})
-  .then((user)=>{
-    res.status(200).send(user);
+  .then((users)=>{
+    res.render("view_patients",{ user: req.user,patients: users });
+  })
+  .catch((err)=>{
+    res.status(500).json({
+      error:err
+    })
+  })
+}
+
+exports.get_patient_details = (req, res) => {
+  //get patient details _id is patientid and doctorid is req.user._id
+  User.find({_id:req.params.patientid,doctorid:req.user._id})
+  .then((patient)=>{
+    res.status(200).send(patient);
+  })
+  .catch((err)=>{
+    res.status(500).json({
+      error:err
+    })
+  })
+}
+
+exports.get_patient_test_details = (req, res) => {
+  //get patient test details _id is patientid and doctorid is req.user._id
+  Test.find({patientid:req.params.patientid,doctorid:req.user._id},{_id:0,questions:0})
+  .then((test)=>{
+    res.status(200).send(test);
+  })
+  .catch((err)=>{
+    res.status(500).json({
+      error:err
+    })
+  })
+}
+
+exports.get_view_test_created = (req, res) => {
+  Test.find({doctorid:req.user._id})
+  .then((tests)=>{
+    res.render("view_tests",{ user: req.user,tests: tests });
+  })
+  .catch((err)=>{
+    res.status(500).json({
+      error:err
+    })
+  })
+}
+
+exports.get_edit_test= (req, res) => {
+  Test.findOne({_id:req.params.testid})
+  .then((test)=>{
+    res.render("editTest",{ user: req.user,test: test });
+  })
+  .catch((err)=>{
+    res.status(500).json({
+      error:err
+    })
+  })
+}
+
+exports.put_edit_test = (req, res) => {
+  Test.findOneAndUpdate({_id:req.params.testid},{$set:{level:req.body.level,questions:req.body.questions,noofquestion:req.body.questions.length}},{new: true})
+  .then((test)=>{
+    req.flash('success', 'Test updated successfully')
+    res.status(200)
+    res.redirect('/view/tests/'+req.user._id)
+  })
+  .catch((err)=>{
+    res.status(500).json({
+      error:err
+    })
+  })
+}
+
+exports.get_question = (req, res) => {
+  Question.findById(req.params.questionid,{hints:0})
+  .then((question)=>{
+    res.status(200).send(question);
+  })
+  .catch((err)=>{
+    res.status(500).json({message:'error',error:err})
+  })
+};
+
+exports.delete_test = (req, res) => {
+  Test.findOneAndDelete({_id:req.params.testid})
+  .then((test)=>{
+    req.flash('success', 'Test deleted successfully')
+    res.status(200)
+    res.redirect('/view/tests/'+req.user._id)
   })
   .catch((err)=>{
     res.status(500).json({
