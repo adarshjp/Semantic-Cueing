@@ -60,11 +60,9 @@ const userSchema = new mongoose.Schema({
   },
   strokeDate: {
     type: Date,
-    required: true,
   },
   diagnosis: {
     type: String,
-    required: true,
   }
 });
 userSchema.plugin(passportLocalMongoose);
