@@ -42,11 +42,11 @@ exports.sendOtp = (req, res) => {
         console.log("User not found");
         res.json({ message: "User not found" });
       } else {
-        sendotp(req.params.via, req.body.email, newOtp, req.body.phone, res);
+        sendotp(req.params.via, req.body.email, newOtp, version, req.body.phone, res);
       }
     });
   } else {
-    sendotp(req.params.via, req.body.email, newOtp, req.body.phone, res);
+    sendotp(req.params.via, req.body.email, newOtp, version, req.body.phone, res);
   }
 };
 exports.verifyOtp = (req, res) => {
@@ -74,8 +74,8 @@ exports.verifyOtp = (req, res) => {
     }
   });
 };
-function initSendMail(email, otp, res) {
-  ejs.renderFile(__dirname+"\\..\\views\\otpTemplate.ejs",{otp:otp},(err,data)=>{
+function initSendMail(email, otp, version, res) {
+  ejs.renderFile(__dirname+"\\..\\views\\otpTemplate.ejs",{otp:otp,version:version},(err,data)=>{
     if(err){
       console.log(err);
       res.status(500).json({
@@ -161,9 +161,9 @@ function findUserId(email, res, callbackFindUserId) {
     }
   });
 }
-function sendotp(via, email, newOtp, phone, res) {
+function sendotp(via, email, newOtp, version, phone, res) {
   if (via === "email") {
-    initSendMail(email, newOtp.otp, res);
+    initSendMail(email, newOtp.otp, version, res);
   } else if (via === "sms") {
     initSendSms(phone, newOtp.otp, res);
   }
