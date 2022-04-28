@@ -44,7 +44,11 @@
       <hr />
     </div>
     <div>
-      <h1 class=" ">Change your password</h1>
+      <% if(version == 'v1'){%>
+        <h1 class=" ">Change your password</h1>
+      <%}else{%>
+        <h1 class=" ">Your Verification Code</h1>
+      <%}%>
     </div>
     <div class="" style="padding-top: 20px">
       <p>Below is your one time passcode:</p>
