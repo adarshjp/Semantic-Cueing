@@ -9,8 +9,8 @@
       </div>
       <div class="row pt-4 justify-content-center text-center align-items-center">
         <%for (var i = 0;i< 4;i++){%>
-          <div class="col-6 col-sm-3 py-2">
-            <button type="button" class="btn btn-warning btn-lg" data-bs-toggle="modal" data-bs-target="#hintModal" id="hint_<%=i%>" data-bs-whatever="<%=i%>"><%=i18n.Hint%> <%=i+1%> <i class="fa fa-light fa-lightbulb"></i></button>
+          <div class="col-6 col-sm-2 py-2">
+            <button type="button" class="btn btn-warning btn-lg" data-bs-toggle="modal" data-bs-target="#hintModal" id="hint_<%=i%>" data-bs-whatever="<%=i%>"><i class="fa fa-light fa-lightbulb"></i></button>
           </div>
         <%}%>
       </div>
@@ -21,6 +21,20 @@
             <span class="left-pan">
               <i class="fa fa-microphone" onclick="startDictation()"></i>
             </span> 
+          </div>
+          
+          <div class="pids-wrapper d-none">
+            <div class="pid"></div>
+            <div class="pid"></div>
+            <div class="pid"></div>
+            <div class="pid"></div>
+            <div class="pid"></div>
+            <div class="pid"></div>
+            <div class="pid"></div>
+            <div class="pid"></div>
+            <div class="pid"></div>
+
+            
           </div>
         </div>
         <div class="col-4 col-md-2 py-2">
@@ -286,18 +300,29 @@
   function startDictation() {
       if (window.hasOwnProperty('webkitSpeechRecognition')) {
         var recognition = new webkitSpeechRecognition();
-  
         recognition.continuous = false;
         recognition.interimResults = false;
         recognition.lang = 'en-US';
+
+        recognition.onstart = function(e){
+          startAudioRecording();
+          document.getElementsByClassName('pids-wrapper')[0].classList.remove('d-none')
+        }
         recognition.start();
-  
+        setTimeout(5000)
         recognition.onresult = function (e) {
           document.getElementById('answer').value = e.results[0][0].transcript;
           recognition.stop();
+          StopAudioRecording();
+          document.getElementsByClassName('pids-wrapper')[0].classList.add('d-none');
+          clearTimeout()
         };
+
         recognition.onerror = function (e) {
           recognition.stop();
+          StopAudioRecording();
+          document.getElementsByClassName('pids-wrapper')[0].classList.add('d-none');
+          clearTimeout()
         };
       }
     }
@@ -307,5 +332,102 @@
       myDoughnutChart.data.datasets[0].data=[curq_no,q.length-curq_no];
       myDoughnutChart.update();
     }
+
+    var audioRecorder = {
+      mediaRecorder: null,
+      streamBeingCaptured: null,
+    start: function () {
+        if (!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) {
+            return Promise.reject(new Error('mediaDevices API or getUserMedia method is not supported in this browser.'));
+        }
+
+        else {
+            return navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(stream=> {
+                    audioRecorder.streamBeingCaptured = stream;
+                    audioRecorder.mediaRecorder = new MediaRecorder(stream); 
+                    audioRecorder.mediaRecorder.start();
+                });
+        }
+    },
+    stop: function () {
+        return new Promise(resolve => {
+            audioRecorder.cancel();
+        });
+    },
+    cancel: function () {
+        audioRecorder.mediaRecorder.stop();
+        audioRecorder.stopStream();
+        audioRecorder.resetRecordingProperties();
+    },
+    stopStream: function () {
+        audioRecorder.streamBeingCaptured.getTracks()
+            .forEach(track => track.stop()); 
+    },
+    resetRecordingProperties: function () {
+        audioRecorder.mediaRecorder = null;
+        audioRecorder.streamBeingCaptured = null;
+    }
+}
+
+    function startAudioRecording() {
+        audioRecorder.start()
+            .then(() => { //on success 
+              calculate_volume();
+            })    
+            .catch(error => { //on error
+                if (error.message.includes("mediaDevices API or getUserMedia method is not supported in this browser.")) {       
+                    console.log("To record audio, use browsers like Chrome and Firefox.");
+                    alert("Sorry...!, we are unable to aceess your microphone")
+                }
+        });
+    }
+
+    function StopAudioRecording() {
+    //stop the recording using the audio recording API
+    audioRecorder.stop()
+        .then(() => { //stopping makes promise resolves to the blob file of the recorded audio
+           
+        })
+        .catch(error => {
+            swal("Error!", "We are unable to aceess your microphone...!", "error");
+            document.getElementsByClassName('swal-footer')[0].classList.add('text-center')
+            document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-danger','btn-lg')
+        });
+    }
+
+    function calculate_volume() {
+      let audioContext = new AudioContext();
+      let analyser = audioContext.createAnalyser();
+      let microphone = audioContext.createMediaStreamSource(audioRecorder.streamBeingCaptured);
+      let scriptProcessor = audioContext.createScriptProcessor(2048, 1, 1);
+
+      analyser.smoothingTimeConstant = 0.8;
+      analyser.fftSize = 1024;
+
+      microphone.connect(analyser);
+      analyser.connect(scriptProcessor);
+      scriptProcessor.connect(audioContext.destination);
+      scriptProcessor.onaudioprocess = function() {
+        let array = new Uint8Array(analyser.frequencyBinCount);
+        analyser.getByteFrequencyData(array);
+        let arraySum = array.reduce((a, value) => a + value, 0);
+        let average = arraySum / array.length;
+        colorPids(average);
+      }
+    }
+  
+  function colorPids(vol) {
+  const allPids = [...document.querySelectorAll('.pid')];
+  const numberOfPidsToColor = Math.round(vol / 10);
+  const pidsToColor = allPids.slice(0, numberOfPidsToColor);
+  for (const pid of allPids) {
+    pid.style.backgroundColor = "#e6e7e8";
+  }
+  for (const pid of pidsToColor) {
+    pid.style.backgroundColor = "#69ce2b";
+  }
+}
+
 </script>
 <%- include("partials/footer") %>

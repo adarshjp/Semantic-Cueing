@@ -716,7 +716,7 @@ opacity: 1;
 
 /* #pieChart-1,#pieChart-2,#pieChart-3{
   height: 271px !important;
-} */
+}*/
 
 .bg-primary{
   background-color: #6C63FF !important;
@@ -787,7 +787,18 @@ background: #eee;
 	width: 100%;
 }
 
+
+.pids-wrapper{
+  width: 100%;
+}
+.pid{
+  width: calc(10% - 10px);
+  height: 10px;
+  display: inline-block;
+  margin: 5px;
+} 
 .verify{
   padding: 10px 15px;
   margin: 8px 0;
 }
+
