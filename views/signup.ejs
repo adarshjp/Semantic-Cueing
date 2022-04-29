@@ -67,6 +67,10 @@
                 />
                 <button class="btn btn-primary verify" type="button" id="verifyOtp" onclick="checkOtp()" disabled>Verify</button>
               </div>
+              <div class='text-end d-none' id='timer-sec'>
+                <span id="timer"></span>
+                <button class="btn btn-primary btn-sm" id='resend' onclick="sendOTP()" disabled>Resend</button>
+              </div>
               <input
                 type="text"
                 name="username"
@@ -163,6 +167,7 @@
   var doctorid = document.getElementById('doctorid')
   var stroke_div=document.getElementById('stroke-div')
   var strokedate=document.getElementById('strokedate')
+  let container=document.getElementsByClassName('container')[0];
 
   var email = document.getElementById('email')
   var otp_sec = document.getElementById('otp-sec')
@@ -171,7 +176,6 @@
   let verificationKey;
 
   role.addEventListener('change', function () {
-    let container=document.getElementsByClassName('container')[0];
     if (role.value == 'patient') {
       doctor.classList.remove('d-none');
       stroke_div.classList.remove('d-none');
@@ -251,7 +255,10 @@
   function checkEmail(){
     var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if (email.value.match(validRegex)) {
-      sendOTP()
+      sendOTP();
+      email.setAttribute('disabled','')
+      container.classList.remove('my-4', 'p-3');
+      container.classList.add('my-2','p-2');
     } else {
       swal('Invalid!', 'Please enter a valid email address','info')
     }
@@ -259,7 +266,10 @@
 
   function checkOtp(){
     if(otp.value.length==6){
-      verifyOTP()
+      verifyOTP();
+      container.classList.add('my-4', 'p-3');
+      container.classList.remove('my-2','p-2');
+      email.removeAttribute('disabled')
     }else{
       swal('Invalid OTP!', 'Please enter proper OTP','info')
     }
@@ -284,6 +294,10 @@
         swal('OTP Sent','Check your email...!','success')
         otp_sec.classList.remove('d-none')
         otp.value='';
+        document.getElementById('timer-sec').classList.remove('d-none');
+        document.getElementById('resend').setAttribute('disabled','');
+        timerOn=true;
+        timer(120);
       }
     })
       .catch(err => {
@@ -319,6 +333,8 @@
         swal('Error..!', 'Entered OTP is invalid...','error');
       }
       document.getElementById('otp-sec').classList.add('d-none');
+      document.getElementById('timer-sec').classList.add('d-none');
+      timerOn=false;
       })
       .catch(err => {
         console.log(err);
@@ -379,5 +395,30 @@
     }
     return true;
   }
+
+  let timerOn=true;
+
+  function timer(remaining) {
+  var m = Math.floor(remaining / 60);
+  var s = remaining % 60;
+  
+  m = m < 10 ? '0' + m : m;
+  s = s < 10 ? '0' + s : s;
+  document.getElementById('timer').innerHTML = m + ':' + s;
+  remaining -= 1;
+  
+  if(remaining >= 0 && timerOn) {
+    setTimeout(function() {
+        timer(remaining);
+    }, 1000);
+    return;
+  }
+
+  if(!timerOn) {
+    // Do validate stuff here
+    return;
+  }
+  document.getElementById('resend').removeAttribute('disabled');
+}
 </script>
 <%- include("partials/footer") %>
