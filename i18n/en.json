@@ -56,7 +56,7 @@
     "SelectQuestions":"Select Questions",
     "ChooseLevel":"Choose Level",
     "Selectrandomly":"Select randomly",
-    "Question":"Question :",
+    "Question":"Question",
     "Selectpatients":"Select patients",
     "EnterLevel":"Enter Level",
     "Reset":"Reset",
@@ -101,5 +101,13 @@
     "CarnegieQuote":"Most of the important thingsin the world have been accomplished by people who have kept on tryingwhen there seemed to be no hope at all",
     "CarnegieName":"Dale Carnegie",
     "PoindexterQuote":"One small crack does not mean that you are broken,it means that you were put to the test and  you didn’t fall apart.",
-    "PoindexterName":"Linda Poindexter"
+    "PoindexterName":"Linda Poindexter",
+    "VerifyOTP":"Verify OTP",
+    "YourVerificationCode":"Your Verification Code",
+    "Choosedoctor":"Choose doctor",
+    "ChooseProfilePicture":"Choose Profile Picture",
+    "ChoosetheImageoftheObject":"Choose the Image of the Object",
+    "All":"All",
+    "UpdatetheObjecttoidentify":"Update the Object to identify",
+    "Updatehintstoidentify":"Update hints to identify"
 }  
