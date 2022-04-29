@@ -168,6 +168,7 @@
   var stroke_div=document.getElementById('stroke-div')
   var strokedate=document.getElementById('strokedate')
   let container=document.getElementsByClassName('container')[0];
+  let verifyemail=document.getElementById('verifyEmail');
 
   var email = document.getElementById('email')
   var otp_sec = document.getElementById('otp-sec')
@@ -233,7 +234,6 @@
 
   email.addEventListener('keyup', function(){
     isVerified=false;
-    let verifyemail=document.getElementById('verifyEmail');
     verifyemail.textContent='verify';
     verifyemail.classList.remove('btn-success')
     verifyemail.classList.add('btn-primary')
@@ -256,6 +256,7 @@
     var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if (email.value.match(validRegex)) {
       sendOTP();
+      verifyemail.setAttribute('disabled','')
       email.setAttribute('disabled','')
       container.classList.remove('my-4', 'p-3');
       container.classList.add('my-2','p-2');
