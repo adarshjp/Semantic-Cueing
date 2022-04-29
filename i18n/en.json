@@ -109,5 +109,32 @@
     "ChoosetheImageoftheObject":"Choose the Image of the Object",
     "All":"All",
     "UpdatetheObjecttoidentify":"Update the Object to identify",
-    "Updatehintstoidentify":"Update hints to identify"
+    "Updatehintstoidentify":"Update hints to identify",
+
+    "Instructions":"Instructions For The Test",
+"ScoresRecieved":"Scores Recieved Per Question",
+"answeringeachquestion":"For answering each question maximum of 100 points will be awarded",
+"skipaquestion":"If you skip a question you will recieve 0 points" ,
+"skippedcannotrevisited":"Once skipped questions can not be revisited",
+"HintsTaken":" Hints Taken",
+"4hints":"For each question, There will be 4 hints available and for taking a hint -10 points will bededucted",
+"Whenahintistaken":"When a hint is taken, it will last for 10sec and then will be closed",
+"Hintscanberevisited":"Hints can be revisited if you want to see them again.",
+"PauseTest":"Pause Test Or Closing of the tab",
+"pauseandtakeitlater":"If you want to pause the test you can pause and take it later.",
+"pointyouhadstopped":"If for some reason you meet with some issues and your tab gets closed you can login again and Resume your test from the point where you had stopped.",
+"SpeechToText":"Speech To Text Option",
+"Apartfromtyping": " Apart from typing the answer you can also use the speech to text feature and Say the answer.",
+"TaketheMicrophoneCheck":"Please Take the Microphone Check inorder to start your test.",
+"FinalScore":"Final Score!",
+"numberofcorrectanswers":"Your final score will be determined based on the number of correct answers given and the number of hints you have taken.",
+"testreportgenerated":"Based on this score a seperate test report will be generated.",
+"Reportreflecteddashboard":"Test Report will be reflected in your dashboard once you are finished taking the test.",
+
+"MicrophoneCheck":"Microphone Check",
+"MicrophoneWorking":"Your Microphone is Working! 😇",
+
+"SelectSpeaker":"Select Speaker:",
+"StartMicTest":"Start Mic Test"
+
 }  
