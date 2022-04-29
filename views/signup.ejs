@@ -67,10 +67,9 @@
                 />
                 <button class="btn btn-primary verify" type="button" id="verifyOtp" onclick="checkOtp()" disabled>Verify</button>
               </div>
-              <div class='text-end d-none' id='timer-sec'>
+              <!-- <div class='text-end d-none' id='timer-sec'>
                 <span id="timer"></span>
-                <button type="button" class="btn btn-primary btn-sm" id='resend' onclick="sendOTP()" disabled>Resend</button>
-              </div>
+              </div> -->
               <input
                 type="text"
                 name="username"
@@ -139,7 +138,7 @@
       </div>
       <div class="col-12 col-md-5 my-auto order-first order-md-last">
         <div class="form-group text-center">
-            <label for="upload_file">
+            <label for="upload_file" id='input-cloud' class=''>
               <i class="fa-solid fa-cloud-arrow-up fa-5x blue"></i>
               <p class="blue h5">Choose Profile Picture</p> 
             </label>
@@ -255,26 +254,35 @@
   function checkEmail(){
     var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if (email.value.match(validRegex)) {
-      sendOTP();
       verifyemail.setAttribute('disabled','')
       email.setAttribute('disabled','')
-      container.classList.remove('my-4', 'p-3');
-      container.classList.add('my-2','p-2');
+      container.classList.remove('my-4');
+      container.classList.add('my-3');
+      sendOTP();
     } else {
-      swal('Invalid!', 'Please enter a valid email address','info')
+      swal('Invalid!', 'Please enter a valid email address','info');
     }
   }
 
   function checkOtp(){
     if(otp.value.length==6){
       verifyOTP();
-      timerOn=false;
-      container.classList.remove('my-2','p-2');
-      container.classList.add('my-4', 'p-3');
       email.removeAttribute('disabled')
     }else{
       swal('Invalid OTP!', 'Please enter proper OTP','info')
     }
+  }
+
+  function activities_post_verifyEmail(){
+    swal('OTP Sent','Check your email...!','success')
+    otp_sec.classList.remove('d-none')
+    otp.value='';
+    let span=document.createElement('span');
+    span.id='timer';
+    verifyemail.textContent='';
+    verifyemail.appendChild(span);
+    timerOn=true;
+    timer(120);
   }
 
   function sendOTP(){
@@ -293,18 +301,35 @@
     .then(res => res.json())
     .then(data => {
       if(data.message==="Sucesss") {
-        swal('OTP Sent','Check your email...!','success')
-        otp_sec.classList.remove('d-none')
-        otp.value='';
-        document.getElementById('timer-sec').classList.remove('d-none');
-        document.getElementById('resend').setAttribute('disabled','');
-        timerOn=true;
-        timer(120);
+        activities_post_verifyEmail();
       }
     })
       .catch(err => {
         console.log(err);
       });
+  }
+
+  function activities_post_verifyOTP(msg){
+    if(msg==="Sucesss") {
+      swal('Email Verified','Your email verified successfully...!','success');
+        isVerified=true;
+        timerOn=false;
+        verifyemail.textContent='verified';
+        verifyemail.setAttribute('disabled','')
+        verifyemail.classList.remove('btn-primary')
+        verifyemail.classList.add('btn-success');
+        document.getElementById('otp-sec').classList.add('d-none');
+        container.classList.remove('my-3');
+        container.classList.add('my-4');
+      }else if(msg==="OTP expired"){
+        timerOn=false;
+        swal('Expired','OTP is expired try again..!','warning');
+        verifyemail.textContent = 'Resend';
+        verifyemail.removeAttribute('disabled');
+        document.getElementById('otp-sec').classList.add('d-none');
+      }else{
+        swal('Invalid OTP!', 'Please enter proper OTP','info')
+      }
   }
 
   function verifyOTP(){
@@ -321,26 +346,11 @@
     })
     .then(res => res.json())
     .then(data => {
-      if(data.message==="Sucesss") {
-        let verifyemail= document.getElementById('verifyEmail');
-        swal('Email Verified','Your email verified successfully...!','success');
-        isVerified=true;
-        verifyemail.textContent='verified';
-        verifyemail.setAttribute('disabled','')
-        verifyemail.classList.remove('btn-primary')
-        verifyemail.classList.add('btn-success')
-      }else if(data.message==="OTP expired"){
-        swal('Expired','OTP is expired try again..!','warning');
-      }else{
-        swal('Error..!', 'Entered OTP is invalid...','error');
-      }
-      document.getElementById('otp-sec').classList.add('d-none');
-      document.getElementById('timer-sec').classList.add('d-none');
-      timerOn=false;
-      })
-      .catch(err => {
-        console.log(err);
-      });
+      activities_post_verifyOTP(data.message);
+    })
+    .catch(err => {
+      console.log(err);
+    });
   }
 
   function generateRandomString(){
@@ -364,6 +374,7 @@
          newimg.src='';
       }
       else{
+        document.getElementById('input-cloud').classList.add('d-none')
          var image=URL.createObjectURL(event.target.files[0]);
          var imagediv= document.getElementById(preview_id);
          var newimg=document.createElement('img');
@@ -375,14 +386,17 @@
          imagediv.appendChild(newimg);
          var removebtn=document.createElement('button');
          removebtn.className="btn btn-sm blue text-center";
-         removebtn.innerHTML='<i class="fa-solid fa-xmark"></i>'
+         removebtn.innerHTML='<i class="fa-solid fa-xmark fa-2x"></i>'
          removebtn.onclick=function(){
             document.getElementById(upload_id).value = '';
             var imagediv= document.getElementById(preview_id);
             var newimg=document.createElement('img');
             imagediv.innerHTML='';
             newimg.src='';
+            document.getElementById('input-cloud').classList.remove('d-none')
          }
+         let br= document.createElement('br')
+         imagediv.appendChild(br)
          imagediv.appendChild(removebtn);
       }
   }
@@ -406,7 +420,12 @@
   
   m = m < 10 ? '0' + m : m;
   s = s < 10 ? '0' + s : s;
-  document.getElementById('timer').innerHTML = m + ':' + s;
+
+  if(!timerOn) {
+    return;
+  }
+
+  document.getElementById('timer').textContent = m + ':' + s;
   remaining -= 1;
   
   if(remaining >= 0 && timerOn) {
@@ -415,12 +434,8 @@
     }, 1000);
     return;
   }
-
-  if(!timerOn) {
-    // Do validate stuff here
-    return;
-  }
-  document.getElementById('resend').removeAttribute('disabled');
+  verifyEmail.textContent = 'Resend';
+  verifyEmail.removeAttribute('disabled');
 }
 </script>
 <%- include("partials/footer") %>
