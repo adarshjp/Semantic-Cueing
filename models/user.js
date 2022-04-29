@@ -30,17 +30,6 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
-  // testdetails: [
-  //   {
-  //     testid: {
-  //       type: mongoose.Schema.Types.ObjectId,
-  //       ref: "Test",
-  //     },
-  //     testscore: {
-  //       type: Number,
-  //     },
-  //   },
-  // ],
   name:{
     type: String,
     required: true,
@@ -61,6 +50,20 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 1,
   },
+  creationTime: {
+    type: Date,
+    default: Date.now,
+  },
+  lastUpdateTime: {
+    type: Date,
+    default: Date.now,
+  },
+  strokeDate: {
+    type: Date,
+  },
+  diagnosis: {
+    type: String,
+  }
 });
 userSchema.plugin(passportLocalMongoose);
 module.exports = new mongoose.model("User", userSchema);
