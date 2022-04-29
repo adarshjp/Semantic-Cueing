@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const Message = require("../models/message");
 const Conversation = require("../models/conversation");
+const {encodeMsg,decodeMsg} = require("./en_decode")
 exports.get_messages_patient=async (req,res)=>{
     /*  Function  to GEt all the messages of a conversation (Patient Side)
         Input: patientId (req.user._id)
@@ -47,6 +48,7 @@ exports.post_messages = (req, res)=> {
         isRead: false,
     });
     io.emit('message', newMessage)
+    encodeMsg(newMessage.message)
     newMessage.save((err, message) => {
         if (err)
             res.json({ error: err });
@@ -70,8 +72,12 @@ function findAndSendMessages(conversationId,res) {
             res.json({error:"No messages found",conversationId:conversationId});
         else if(messages.length==0)
             res.json({error:"No messages found",conversationId:conversationId});
-        else
+        else{
+            messages.forEach(message=>{
+                message.message=decodeMsg(message.message)
+            })
             res.json({messages,conversationId});
+        }
     });
 }
 function findDoctorIdByPatientId(patientId) {
