@@ -787,6 +787,7 @@ background: #eee;
 	width: 100%;
 }
 
+
 .pids-wrapper{
   width: 100%;
 }
@@ -796,3 +797,8 @@ background: #eee;
   display: inline-block;
   margin: 5px;
 } 
+.verify{
+  padding: 10px 15px;
+  margin: 8px 0;
+}
+
