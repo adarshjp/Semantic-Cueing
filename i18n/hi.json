@@ -102,5 +102,12 @@
     "CarnegieName":"डेल कार्नेगी",
     "PoindexterQuote":"एक छोटी सी दरार का मतलब विफलता नहीं है,आपकी परीक्षा हो चुकी है और आप असफल नहीं हुए हैं",
     "PoindexterName":"लिंडा पॉइन्डेक्सटर",
-    "Verify OTP":"वेरीफाई OTP"
+    "VerifyOTP":"वेरीफाई OTP",
+    "YourVerificationCode":"आपका वेरिफिकेशन कोड",
+    "Choosedoctor":"डॉक्टर चुने",
+    "ChooseProfilePicture":"प्रोफाइल चित्र चुने",
+    "ChoosetheImageoftheObject":"वस्तु के चित्र चुने",
+    "All":"सभी",
+    "UpdatetheObjecttoidentify":"वस्तु को अपडेट कीजिए",
+    "Updatehintstoidentify":"हिंट्स अपडेट कीजिए"
 }

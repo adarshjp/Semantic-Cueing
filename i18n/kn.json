@@ -102,6 +102,13 @@
     "CarnegieName":"ಡೇಲ್ ಕಾರ್ನೆಗೀ",
     "PoindexterQuote":"ಒಂದು ಸಣ್ಣ ಬಿರುಕು ವಿಫಲ ಎಂದು ಅರ್ಥವಲ್ಲ,ಬದಲಿಗೆ ನಿಮ್ಮನ್ನು ಪರೀಕ್ಷೆಗೆ ಒಳಪಡಿಸಲಾಗಿದೆ ಮತ್ತು ನೀವು ವಿಫಲವಾಗಿಲ್ಲ",
     "PoindexterName":"ಲಿಂಡಾ ಪಾಯಿಂಡೆಕ್ಸ್ಟರ್",
-    "Verify OTP":"ವೆರಿಫ್ಯ್ OTP"
+    "VerifyOTP":"ವೆರಿಫ್ಯ್ OTP",
+    "YourVerificationCode":"ನಿಮ್ಮ ವೆರಿಫಿಕೇಷನ್ ಕೋಡ್",
+    "Choosedoctor":"ವೈದ್ಯರ ಆಯ್ಕೆ",
+    "ChooseProfilePicture":"ಪ್ರೊಫೈಲ್ ಚಿತ್ರ ಆಯ್ಕೆ",
+    "ChoosetheImageoftheObject":"ವಸ್ತುವಿನ ಚಿತ್ರ ಆಯ್ಕೆಮಾಡಿ",
+    "All":"ಎಲ್ಲಾ",
+    "UpdatetheObjecttoidentify":"ವಸ್ತುವನ್ನು ಅಪ್ಡೇಟ್ ಮಾಡಿ",
+    "Updatehintstoidentify":"ಹಿಂಟ್ಸ್ ಅಪ್ಡೇಟ್ ಮಾಡಿ"
     
 }
