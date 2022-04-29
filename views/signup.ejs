@@ -69,7 +69,7 @@
               </div>
               <div class='text-end d-none' id='timer-sec'>
                 <span id="timer"></span>
-                <button class="btn btn-primary btn-sm" id='resend' onclick="sendOTP()" disabled>Resend</button>
+                <button type="button" class="btn btn-primary btn-sm" id='resend' onclick="sendOTP()" disabled>Resend</button>
               </div>
               <input
                 type="text"
@@ -267,8 +267,9 @@
   function checkOtp(){
     if(otp.value.length==6){
       verifyOTP();
-      container.classList.add('my-4', 'p-3');
+      timerOn=false;
       container.classList.remove('my-2','p-2');
+      container.classList.add('my-4', 'p-3');
       email.removeAttribute('disabled')
     }else{
       swal('Invalid OTP!', 'Please enter proper OTP','info')
