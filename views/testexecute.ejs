@@ -308,20 +308,21 @@
           startAudioRecording();
           document.getElementsByClassName('pids-wrapper')[0].classList.remove('d-none')
         }
-  
         recognition.start();
-
+        setTimeout(5000)
         recognition.onresult = function (e) {
           document.getElementById('answer').value = e.results[0][0].transcript;
           recognition.stop();
           StopAudioRecording();
-          document.getElementsByClassName('pids-wrapper')[0].classList.add('d-none')
+          document.getElementsByClassName('pids-wrapper')[0].classList.add('d-none');
+          clearTimeout()
         };
 
         recognition.onerror = function (e) {
           recognition.stop();
           StopAudioRecording();
-          document.getElementsByClassName('pids-wrapper')[0].classList.add('d-none')
+          document.getElementsByClassName('pids-wrapper')[0].classList.add('d-none');
+          clearTimeout()
         };
       }
     }
