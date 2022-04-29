@@ -1,161 +1,150 @@
 <%- include("partials/header") %>
+<%- include("partials/adminSideBar") %>
 <div class="container my-4 p-3">
-  <% if(message.error){ %>
-  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong><%= message.error%></strong>
-    <button
-      type="button"
-      class="btn-close"
-      data-bs-dismiss="alert"
-      aria-label="Close"
-    ></button>
-  </div>
-  <% } %> <% if(message.success){ %>
-  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong><%= message.success%></strong>
-    <button
-      type="button"
-      class="btn-close"
-      data-bs-dismiss="alert"
-      aria-label="Close"
-    ></button>
-  </div>
-  <% } %>
-  <form action="/register" method="post" class="p-2" enctype="multipart/form-data" onsubmit="return register()">
-    <div class="row justify-content-center vertical-center shadow-lg rounded-3">
-      <h1 class="text-center p-3 blue order-first">Register: Patient | Doctor</h1>
-      <div class="col-12 col-md-6 text-center my-auto order-last">
-        <div class="row">
-          <div class="col-1"></div>
-          <div class="col-10 ">
-              <input
-                type="text"
-                name="name"
-                placeholder="Name"
-                class="outline-color login-input"
-                required
-              />
-              <input
-                type="number"
-                name="age"
-                placeholder="Age"
-                class="outline-color login-input"
-                required
-              />
-              <div class="input-group">
-                <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                id='email'
-                class="outline-color login-input form-control"
-                aria-describedby="verifyEmail"
-                required
-                />
-                <button class="btn btn-primary verify" type="button" id="verifyEmail" onclick="checkEmail()" disabled>Verify</button>
-              </div>
-              <div class="input-group d-none" id='otp-sec'>
-                <input
-                type="number"
-                name="otp"
-                placeholder="Otp"
-                id='otp'
-                class="outline-color login-input form-control"
-                aria-describedby="verifyOtp"
-                min='100000'
-                max='999999'
-                />
-                <button class="btn btn-primary verify" type="button" id="verifyOtp" onclick="checkOtp()" disabled>Verify</button>
-              </div>
-              <input
-                type="text"
-                name="username"
-                placeholder="Username"
-                id="username"
-                class="outline-color"
-                aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback"
-                pattern="^\S+$"
-                required
-              />
-              <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                Username already exists. Please try another one.
-              </div>
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                id="login-input"
-                class="outline-color"
-                required
-              />
-              <div class="row align-items-center">
-                <div class="col-4">
-                  <label for="role" class="blue h5">Select Role:</label>
-                </div>
-                <div class="col-8">
-                  <select
-                    class="form-select form-select-lg mb-3 select-color"
-                    aria-label=".form-select-lg"
-                    id="role"
-                    name="role"
+  <%- include("partials/flashMsg") %>
+  <div class="row justify-content-center">
+    <div class="offset-2 col-10 offset-sm-1 col-sm-11 offset-xl-0 col-xl-11">
+      <div class="row justify-content-center vertical-center shadow-lg rounded-3">
+        <form action="/register" method="post" class="p-2" enctype="multipart/form-data" onsubmit="return register()"></form>
+          <h1 class="text-center p-3 blue order-first">Register: Patient | Doctor</h1>
+          <div class="col-12 col-md-6 text-center my-auto order-last">
+            <div class="row">
+              <div class="col-1"></div>
+              <div class="col-10 ">
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Name"
+                    class="outline-color login-input"
                     required
-                  >
-                    <option value="doctor">Doctor</option>
-                    <option value="patient">Patient</option>
-                  </select>
-                </div>
+                  />
+                  <input
+                    type="number"
+                    name="age"
+                    placeholder="Age"
+                    class="outline-color login-input"
+                    required
+                  />
+                  <div class="input-group">
+                    <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    id='email'
+                    class="outline-color login-input form-control"
+                    aria-describedby="verifyEmail"
+                    required
+                    />
+                    <button class="btn btn-primary verify" type="button" id="verifyEmail" onclick="checkEmail()" disabled>Verify</button>
+                  </div>
+                  <div class="input-group d-none" id='otp-sec'>
+                    <input
+                    type="number"
+                    name="otp"
+                    placeholder="Otp"
+                    id='otp'
+                    class="outline-color login-input form-control"
+                    aria-describedby="verifyOtp"
+                    min='100000'
+                    max='999999'
+                    />
+                    <button class="btn btn-primary verify" type="button" id="verifyOtp" onclick="checkOtp()" disabled>Verify</button>
+                  </div>
+                  <!-- <div class='text-end d-none' id='timer-sec'>
+                    <span id="timer"></span>
+                  </div> -->
+                  <input
+                    type="text"
+                    name="username"
+                    placeholder="Username"
+                    id="username"
+                    class="outline-color"
+                    aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback"
+                    pattern="^\S+$"
+                    required
+                  />
+                  <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                    Username already exists. Please try another one.
+                  </div>
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    id="login-input"
+                    class="outline-color"
+                    required
+                  />
+                  <div class="row align-items-center">
+                    <div class="col-4">
+                      <label for="role" class="blue h5">Select Role:</label>
+                    </div>
+                    <div class="col-8">
+                      <select
+                        class="form-select form-select-lg mb-3 select-color"
+                        aria-label=".form-select-lg"
+                        id="role"
+                        name="role"
+                        required
+                      >
+                        <option value="doctor">Doctor</option>
+                        <option value="patient">Patient</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row align-items-center d-none" id="select-doctor">
+                    <div class="col-4">
+                      <label for="doctorid" class="blue h5">Choose doctor:</label>
+                    </div>
+                    <div class="col-8">
+                      <select
+                        name="doctorid"
+                        id="doctorid"
+                        class="form-select form-select-lg mb-3"
+                        aria-label=".form-select-lg"
+                      >
+                        <% doctors.forEach((doctor) => { %>
+                        <option value="<%=doctor.id%>"><%=doctor.name%></option>
+                        <% }) %>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row align-items-center d-none" id="stroke-div">
+                    <div class="col-4 ">
+                      <label for="strokedate" class="blue h5">Stroke Date:</label>
+                    </div>
+                    <div class="col-8">
+                      <input type="date" class='login-input' id='strokedate' placeholder='Stroke date' name="strokeDate">
+                    </div>
+                  </div>
               </div>
-              <div class="row align-items-center d-none" id="select-doctor">
-                <div class="col-4">
-                  <label for="doctorid" class="blue h5">Choose doctor:</label>
-                </div>
-                <div class="col-8">
-                  <select
-                    name="doctorid"
-                    id="doctorid"
-                    class="form-select form-select-lg mb-3"
-                    aria-label=".form-select-lg"
-                  >
-                    <% doctors.forEach((doctor) => { %>
-                    <option value="<%=doctor.id%>"><%=doctor.name%></option>
-                    <% }) %>
-                  </select>
-                </div>
-              </div>
-              <div class="row align-items-center d-none" id="stroke-div">
-                <div class="col-4 ">
-                  <label for="strokedate" class="blue h5">Stroke Date:</label>
-                </div>
-                <div class="col-8">
-                  <input type="date" class='login-input' id='strokedate' placeholder='Stroke date' name="strokeDate">
-                </div>
-              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="col-12 col-md-5 my-auto order-first order-md-last">
-        <div class="form-group text-center">
-            <label for="upload_file">
-              <i class="fa-solid fa-cloud-arrow-up fa-5x blue"></i>
-              <p class="blue h5">Choose Profile Picture</p> 
-            </label>
-            <input type="file" name="displaypic" class="form-control form-control-lg" accept="image/png, image/jpeg" placeholder="Enter Image" id="upload_file" onchange="getImagePreview(event,'preview','upload_file')" style="display:none;">
-        </div>
-        <div class="row justify-content-center my-2 text-center">
-            <div class="col-12 col-sm-7 col-md-9" id="preview"></div>
-        </div>
-      </div>
-      <div class='text-center my-4 order-last col-8 col-md-4'>
-            <input
-                type="submit"
-                class="btn btn-primary btn-lg rounded-pill p-2"
-                value="Register"
-                style="width: 50%"
-                id="review"
-              />
+          <div class="col-12 col-md-5 my-auto order-first order-md-last">
+            <div class="form-group text-center">
+                <label for="upload_file" id='input-cloud' class=''>
+                  <i class="fa-solid fa-cloud-arrow-up fa-5x blue"></i>
+                  <p class="blue h5">Choose Profile Picture</p> 
+                </label>
+                <input type="file" name="displaypic" class="form-control form-control-lg" accept="image/png, image/jpeg" placeholder="Enter Image" id="upload_file" onchange="getImagePreview(event,'preview','upload_file')" style="display:none;">
+            </div>
+            <div class="row justify-content-center my-2 text-center">
+                <div class="col-12 col-sm-7 col-md-9" id="preview"></div>
+            </div>
+          </div>
+          <div class='text-center my-4 order-last col-8 col-md-4'>
+                <input
+                    type="submit"
+                    class="btn btn-primary btn-lg rounded-pill p-2"
+                    value="Register"
+                    style="width: 50%"
+                    id="review"
+                  />
+          </div>
+        </form>
       </div>
     </div>
-  </form>
+   
+  </div>
 </div>
 <script type="text/javascript">
   var role = document.getElementById('role')
@@ -163,6 +152,8 @@
   var doctorid = document.getElementById('doctorid')
   var stroke_div=document.getElementById('stroke-div')
   var strokedate=document.getElementById('strokedate')
+  let container=document.getElementsByClassName('container')[0];
+  let verifyemail=document.getElementById('verifyEmail');
 
   var email = document.getElementById('email')
   var otp_sec = document.getElementById('otp-sec')
@@ -171,7 +162,6 @@
   let verificationKey;
 
   role.addEventListener('change', function () {
-    let container=document.getElementsByClassName('container')[0];
     if (role.value == 'patient') {
       doctor.classList.remove('d-none');
       stroke_div.classList.remove('d-none');
@@ -229,7 +219,6 @@
 
   email.addEventListener('keyup', function(){
     isVerified=false;
-    let verifyemail=document.getElementById('verifyEmail');
     verifyemail.textContent='verify';
     verifyemail.classList.remove('btn-success')
     verifyemail.classList.add('btn-primary')
@@ -251,18 +240,35 @@
   function checkEmail(){
     var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if (email.value.match(validRegex)) {
-      sendOTP()
+      verifyemail.setAttribute('disabled','')
+      email.setAttribute('disabled','')
+      container.classList.remove('my-4');
+      container.classList.add('my-3');
+      sendOTP();
     } else {
-      swal('Invalid!', 'Please enter a valid email address','info')
+      swal('Invalid!', 'Please enter a valid email address','info');
     }
   }
 
   function checkOtp(){
     if(otp.value.length==6){
-      verifyOTP()
+      verifyOTP();
+      email.removeAttribute('disabled')
     }else{
       swal('Invalid OTP!', 'Please enter proper OTP','info')
     }
+  }
+
+  function activities_post_verifyEmail(){
+    swal('OTP Sent','Check your email...!','success')
+    otp_sec.classList.remove('d-none')
+    otp.value='';
+    let span=document.createElement('span');
+    span.id='timer';
+    verifyemail.textContent='';
+    verifyemail.appendChild(span);
+    timerOn=true;
+    timer(120);
   }
 
   function sendOTP(){
@@ -281,14 +287,35 @@
     .then(res => res.json())
     .then(data => {
       if(data.message==="Sucesss") {
-        swal('OTP Sent','Check your email...!','success')
-        otp_sec.classList.remove('d-none')
-        otp.value='';
+        activities_post_verifyEmail();
       }
     })
       .catch(err => {
         console.log(err);
       });
+  }
+
+  function activities_post_verifyOTP(msg){
+    if(msg==="Sucesss") {
+      swal('Email Verified','Your email verified successfully...!','success');
+        isVerified=true;
+        timerOn=false;
+        verifyemail.textContent='verified';
+        verifyemail.setAttribute('disabled','')
+        verifyemail.classList.remove('btn-primary')
+        verifyemail.classList.add('btn-success');
+        document.getElementById('otp-sec').classList.add('d-none');
+        container.classList.remove('my-3');
+        container.classList.add('my-4');
+      }else if(msg==="OTP expired"){
+        timerOn=false;
+        swal('Expired','OTP is expired try again..!','warning');
+        verifyemail.textContent = 'Resend';
+        verifyemail.removeAttribute('disabled');
+        document.getElementById('otp-sec').classList.add('d-none');
+      }else{
+        swal('Invalid OTP!', 'Please enter proper OTP','info')
+      }
   }
 
   function verifyOTP(){
@@ -305,24 +332,11 @@
     })
     .then(res => res.json())
     .then(data => {
-      if(data.message==="Sucesss") {
-        let verifyemail= document.getElementById('verifyEmail');
-        swal('Email Verified','Your email verified successfully...!','success');
-        isVerified=true;
-        verifyemail.textContent='verified';
-        verifyemail.setAttribute('disabled','')
-        verifyemail.classList.remove('btn-primary')
-        verifyemail.classList.add('btn-success')
-      }else if(data.message==="OTP expired"){
-        swal('Expired','OTP is expired try again..!','warning');
-      }else{
-        swal('Error..!', 'Entered OTP is invalid...','error');
-      }
-      document.getElementById('otp-sec').classList.add('d-none');
-      })
-      .catch(err => {
-        console.log(err);
-      });
+      activities_post_verifyOTP(data.message);
+    })
+    .catch(err => {
+      console.log(err);
+    });
   }
 
   function generateRandomString(){
@@ -346,6 +360,7 @@
          newimg.src='';
       }
       else{
+        document.getElementById('input-cloud').classList.add('d-none')
          var image=URL.createObjectURL(event.target.files[0]);
          var imagediv= document.getElementById(preview_id);
          var newimg=document.createElement('img');
@@ -357,14 +372,17 @@
          imagediv.appendChild(newimg);
          var removebtn=document.createElement('button');
          removebtn.className="btn btn-sm blue text-center";
-         removebtn.innerHTML='<i class="fa-solid fa-xmark"></i>'
+         removebtn.innerHTML='<i class="fa-solid fa-xmark fa-2x"></i>'
          removebtn.onclick=function(){
             document.getElementById(upload_id).value = '';
             var imagediv= document.getElementById(preview_id);
             var newimg=document.createElement('img');
             imagediv.innerHTML='';
             newimg.src='';
+            document.getElementById('input-cloud').classList.remove('d-none')
          }
+         let br= document.createElement('br')
+         imagediv.appendChild(br)
          imagediv.appendChild(removebtn);
       }
   }
@@ -379,5 +397,31 @@
     }
     return true;
   }
+
+  let timerOn=true;
+
+  function timer(remaining) {
+  var m = Math.floor(remaining / 60);
+  var s = remaining % 60;
+  
+  m = m < 10 ? '0' + m : m;
+  s = s < 10 ? '0' + s : s;
+
+  if(!timerOn) {
+    return;
+  }
+
+  document.getElementById('timer').textContent = m + ':' + s;
+  remaining -= 1;
+  
+  if(remaining >= 0 && timerOn) {
+    setTimeout(function() {
+        timer(remaining);
+    }, 1000);
+    return;
+  }
+  verifyEmail.textContent = 'Resend';
+  verifyEmail.removeAttribute('disabled');
+}
 </script>
 <%- include("partials/footer") %>

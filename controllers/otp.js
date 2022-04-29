@@ -12,7 +12,6 @@ let mailTransporter = nodemailer.createTransport({
 });
 let mailDetails = {
   from: process.env.EMAIL_ID,
-  subject: "Change your password",
 };
 var algorithm = process.env.algorithm; // or any other algorithm supported by OpenSSL
 var iv = new Buffer.from(crypto.randomBytes(16));
@@ -84,6 +83,11 @@ function initSendMail(email, otp, version, res) {
     }else{
       mailDetails.to = email;
       mailDetails.html = data;
+      if(version==='v1'){
+        mailDetails.subject = "Change your password";
+      }else{
+        mailDetails.subject = "Email verification";
+      }
       sendMail(mailDetails, (err, data) => {
         if (err) {
           console.log(err);
