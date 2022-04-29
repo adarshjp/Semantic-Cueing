@@ -1,164 +1,150 @@
 <%- include("partials/header") %>
+<%- include("partials/adminSideBar") %>
 <div class="container my-4 p-3">
-  <% if(message.error){ %>
-  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong><%= message.error%></strong>
-    <button
-      type="button"
-      class="btn-close"
-      data-bs-dismiss="alert"
-      aria-label="Close"
-    ></button>
-  </div>
-  <% } %> <% if(message.success){ %>
-  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong><%= message.success%></strong>
-    <button
-      type="button"
-      class="btn-close"
-      data-bs-dismiss="alert"
-      aria-label="Close"
-    ></button>
-  </div>
-  <% } %>
-  <form action="/register" method="post" class="p-2" enctype="multipart/form-data" onsubmit="return register()">
-    <div class="row justify-content-center vertical-center shadow-lg rounded-3">
-      <h1 class="text-center p-3 blue order-first">Register: Patient | Doctor</h1>
-      <div class="col-12 col-md-6 text-center my-auto order-last">
-        <div class="row">
-          <div class="col-1"></div>
-          <div class="col-10 ">
-              <input
-                type="text"
-                name="name"
-                placeholder="Name"
-                class="outline-color login-input"
-                required
-              />
-              <input
-                type="number"
-                name="age"
-                placeholder="Age"
-                class="outline-color login-input"
-                required
-              />
-              <div class="input-group">
-                <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                id='email'
-                class="outline-color login-input form-control"
-                aria-describedby="verifyEmail"
-                required
-                />
-                <button class="btn btn-primary verify" type="button" id="verifyEmail" onclick="checkEmail()" disabled>Verify</button>
-              </div>
-              <div class="input-group d-none" id='otp-sec'>
-                <input
-                type="number"
-                name="otp"
-                placeholder="Otp"
-                id='otp'
-                class="outline-color login-input form-control"
-                aria-describedby="verifyOtp"
-                min='100000'
-                max='999999'
-                />
-                <button class="btn btn-primary verify" type="button" id="verifyOtp" onclick="checkOtp()" disabled>Verify</button>
-              </div>
-              <!-- <div class='text-end d-none' id='timer-sec'>
-                <span id="timer"></span>
-              </div> -->
-              <input
-                type="text"
-                name="username"
-                placeholder="Username"
-                id="username"
-                class="outline-color"
-                aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback"
-                pattern="^\S+$"
-                required
-              />
-              <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                Username already exists. Please try another one.
-              </div>
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                id="login-input"
-                class="outline-color"
-                required
-              />
-              <div class="row align-items-center">
-                <div class="col-4">
-                  <label for="role" class="blue h5">Select Role:</label>
-                </div>
-                <div class="col-8">
-                  <select
-                    class="form-select form-select-lg mb-3 select-color"
-                    aria-label=".form-select-lg"
-                    id="role"
-                    name="role"
+  <%- include("partials/flashMsg") %>
+  <div class="row justify-content-center">
+    <div class="offset-2 col-10 offset-sm-1 col-sm-11 offset-xl-0 col-xl-11">
+      <div class="row justify-content-center vertical-center shadow-lg rounded-3">
+        <form action="/register" method="post" class="p-2" enctype="multipart/form-data" onsubmit="return register()"></form>
+          <h1 class="text-center p-3 blue order-first">Register: Patient | Doctor</h1>
+          <div class="col-12 col-md-6 text-center my-auto order-last">
+            <div class="row">
+              <div class="col-1"></div>
+              <div class="col-10 ">
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Name"
+                    class="outline-color login-input"
                     required
-                  >
-                    <option value="doctor">Doctor</option>
-                    <option value="patient">Patient</option>
-                  </select>
-                </div>
+                  />
+                  <input
+                    type="number"
+                    name="age"
+                    placeholder="Age"
+                    class="outline-color login-input"
+                    required
+                  />
+                  <div class="input-group">
+                    <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    id='email'
+                    class="outline-color login-input form-control"
+                    aria-describedby="verifyEmail"
+                    required
+                    />
+                    <button class="btn btn-primary verify" type="button" id="verifyEmail" onclick="checkEmail()" disabled>Verify</button>
+                  </div>
+                  <div class="input-group d-none" id='otp-sec'>
+                    <input
+                    type="number"
+                    name="otp"
+                    placeholder="Otp"
+                    id='otp'
+                    class="outline-color login-input form-control"
+                    aria-describedby="verifyOtp"
+                    min='100000'
+                    max='999999'
+                    />
+                    <button class="btn btn-primary verify" type="button" id="verifyOtp" onclick="checkOtp()" disabled>Verify</button>
+                  </div>
+                  <!-- <div class='text-end d-none' id='timer-sec'>
+                    <span id="timer"></span>
+                  </div> -->
+                  <input
+                    type="text"
+                    name="username"
+                    placeholder="Username"
+                    id="username"
+                    class="outline-color"
+                    aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback"
+                    pattern="^\S+$"
+                    required
+                  />
+                  <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                    Username already exists. Please try another one.
+                  </div>
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    id="login-input"
+                    class="outline-color"
+                    required
+                  />
+                  <div class="row align-items-center">
+                    <div class="col-4">
+                      <label for="role" class="blue h5">Select Role:</label>
+                    </div>
+                    <div class="col-8">
+                      <select
+                        class="form-select form-select-lg mb-3 select-color"
+                        aria-label=".form-select-lg"
+                        id="role"
+                        name="role"
+                        required
+                      >
+                        <option value="doctor">Doctor</option>
+                        <option value="patient">Patient</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row align-items-center d-none" id="select-doctor">
+                    <div class="col-4">
+                      <label for="doctorid" class="blue h5">Choose doctor:</label>
+                    </div>
+                    <div class="col-8">
+                      <select
+                        name="doctorid"
+                        id="doctorid"
+                        class="form-select form-select-lg mb-3"
+                        aria-label=".form-select-lg"
+                      >
+                        <% doctors.forEach((doctor) => { %>
+                        <option value="<%=doctor.id%>"><%=doctor.name%></option>
+                        <% }) %>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row align-items-center d-none" id="stroke-div">
+                    <div class="col-4 ">
+                      <label for="strokedate" class="blue h5">Stroke Date:</label>
+                    </div>
+                    <div class="col-8">
+                      <input type="date" class='login-input' id='strokedate' placeholder='Stroke date' name="strokeDate">
+                    </div>
+                  </div>
               </div>
-              <div class="row align-items-center d-none" id="select-doctor">
-                <div class="col-4">
-                  <label for="doctorid" class="blue h5">Choose doctor:</label>
-                </div>
-                <div class="col-8">
-                  <select
-                    name="doctorid"
-                    id="doctorid"
-                    class="form-select form-select-lg mb-3"
-                    aria-label=".form-select-lg"
-                  >
-                    <% doctors.forEach((doctor) => { %>
-                    <option value="<%=doctor.id%>"><%=doctor.name%></option>
-                    <% }) %>
-                  </select>
-                </div>
-              </div>
-              <div class="row align-items-center d-none" id="stroke-div">
-                <div class="col-4 ">
-                  <label for="strokedate" class="blue h5">Stroke Date:</label>
-                </div>
-                <div class="col-8">
-                  <input type="date" class='login-input' id='strokedate' placeholder='Stroke date' name="strokeDate">
-                </div>
-              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="col-12 col-md-5 my-auto order-first order-md-last">
-        <div class="form-group text-center">
-            <label for="upload_file" id='input-cloud' class=''>
-              <i class="fa-solid fa-cloud-arrow-up fa-5x blue"></i>
-              <p class="blue h5">Choose Profile Picture</p> 
-            </label>
-            <input type="file" name="displaypic" class="form-control form-control-lg" accept="image/png, image/jpeg" placeholder="Enter Image" id="upload_file" onchange="getImagePreview(event,'preview','upload_file')" style="display:none;">
-        </div>
-        <div class="row justify-content-center my-2 text-center">
-            <div class="col-12 col-sm-7 col-md-9" id="preview"></div>
-        </div>
-      </div>
-      <div class='text-center my-4 order-last col-8 col-md-4'>
-            <input
-                type="submit"
-                class="btn btn-primary btn-lg rounded-pill p-2"
-                value="Register"
-                style="width: 50%"
-                id="review"
-              />
+          <div class="col-12 col-md-5 my-auto order-first order-md-last">
+            <div class="form-group text-center">
+                <label for="upload_file" id='input-cloud' class=''>
+                  <i class="fa-solid fa-cloud-arrow-up fa-5x blue"></i>
+                  <p class="blue h5">Choose Profile Picture</p> 
+                </label>
+                <input type="file" name="displaypic" class="form-control form-control-lg" accept="image/png, image/jpeg" placeholder="Enter Image" id="upload_file" onchange="getImagePreview(event,'preview','upload_file')" style="display:none;">
+            </div>
+            <div class="row justify-content-center my-2 text-center">
+                <div class="col-12 col-sm-7 col-md-9" id="preview"></div>
+            </div>
+          </div>
+          <div class='text-center my-4 order-last col-8 col-md-4'>
+                <input
+                    type="submit"
+                    class="btn btn-primary btn-lg rounded-pill p-2"
+                    value="Register"
+                    style="width: 50%"
+                    id="review"
+                  />
+          </div>
+        </form>
       </div>
     </div>
-  </form>
+   
+  </div>
 </div>
 <script type="text/javascript">
   var role = document.getElementById('role')

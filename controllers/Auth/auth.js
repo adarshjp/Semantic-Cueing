@@ -20,7 +20,7 @@ exports.register_get = (req, res) => {
       })
       console.log(doctors)
       console.log(usernames)
-      res.render('signup', { doctors: doctors });
+      res.render('signup', { doctors: doctors,user:req.user });
     }
   })
   // res.send("register get");
