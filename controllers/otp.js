@@ -1,8 +1,8 @@
 const otp = require("../models/otp");
 const nodemailer = require("nodemailer");
-const crypto = require("crypto");
 const user = require("../models/user");
 const ejs= require("ejs")
+const {encodeMsg}= require('./en_decode')
 let mailTransporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -12,17 +12,7 @@ let mailTransporter = nodemailer.createTransport({
 });
 let mailDetails = {
   from: process.env.EMAIL_ID,
-  subject: "Change your password",
 };
-var algorithm = process.env.algorithm; // or any other algorithm supported by OpenSSL
-var iv = new Buffer.from(crypto.randomBytes(16));
-var ivstring = iv.toString("hex").slice(0, 16);
-const secret = process.env.secret;
-let key = crypto
-  .createHash("sha256")
-  .update(String(secret))
-  .digest("base64")
-  .substr(0, 32);
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 
@@ -42,15 +32,15 @@ exports.sendOtp = (req, res) => {
         console.log("User not found");
         res.json({ message: "User not found" });
       } else {
-        sendotp(req.params.via, req.body.email, newOtp, req.body.phone, res);
+        sendotp(req.params.via, req.body.email, newOtp, version, req.body.phone, res);
       }
     });
   } else {
-    sendotp(req.params.via, req.body.email, newOtp, req.body.phone, res);
+    sendotp(req.params.via, req.body.email, newOtp, version, req.body.phone, res);
   }
 };
 exports.verifyOtp = (req, res) => {
-  var encrypted =enccodeOtp(req.body.otp)
+  var encrypted =encodeMSg(req.body.otp)
   otp.findOne({ otp: encrypted, isVerified: false,verificationKey:req.body.verificationKey }, (err, data) => {
     if (err) {
       console.log(err);
@@ -74,8 +64,8 @@ exports.verifyOtp = (req, res) => {
     }
   });
 };
-function initSendMail(email, otp, res) {
-  ejs.renderFile(__dirname+"\\..\\views\\otpTemplate.ejs",{otp:otp},(err,data)=>{
+function initSendMail(email, otp, version, res) {
+  ejs.renderFile(__dirname+"\\..\\views\\otpTemplate.ejs",{otp:otp,version:version},(err,data)=>{
     if(err){
       console.log(err);
       res.status(500).json({
@@ -84,6 +74,11 @@ function initSendMail(email, otp, res) {
     }else{
       mailDetails.to = email;
       mailDetails.html = data;
+      if(version==='v1'){
+        mailDetails.subject = "Change your password";
+      }else{
+        mailDetails.subject = "Email verification";
+      }
       sendMail(mailDetails, (err, data) => {
         if (err) {
           console.log(err);
@@ -137,11 +132,6 @@ function sendSms(phone, message) {
     .then((message) => console.log(message.sid))
     .catch((error) => console.log(error));
 }
-function enccodeOtp(otp) {
-  var cipher = crypto.createCipheriv(algorithm, key, ivstring);
-  var encrypted = cipher.update(otp, "utf8", "hex") + cipher.final("hex");
-  return encrypted;
-}
 function findUserId(email, res, callbackFindUserId) {
   let userId = -1;
   user.findOne({ email: email }, (err, data) => {
@@ -161,13 +151,13 @@ function findUserId(email, res, callbackFindUserId) {
     }
   });
 }
-function sendotp(via, email, newOtp, phone, res) {
+function sendotp(via, email, newOtp, version, phone, res) {
   if (via === "email") {
-    initSendMail(email, newOtp.otp, res);
+    initSendMail(email, newOtp.otp, version, res);
   } else if (via === "sms") {
     initSendSms(phone, newOtp.otp, res);
   }
-  newOtp.otp = enccodeOtp(newOtp.otp);
+  newOtp.otp = encodeMsg(newOtp.otp);
   newOtp.save();
   res.json({ message: "Sucesss" });
 }

@@ -1,8 +1,6 @@
-const fs = require('fs')
-const { dirname } = require('path')
-const path = require('path')
 const Question = require('../models/question')
 const Test = require('../models/question')
+const {convert_img}= require('./convert_img')
 exports.addquestions_get = (req, res) => {
     res.status(200)
     res.render('add_questions',{user: req.user})
@@ -10,7 +8,7 @@ exports.addquestions_get = (req, res) => {
 
 exports.addquestions_post = (req, res, next) => {
     //console.log(req.body);
-    let img = covert_img(req.files)
+    let img = convert_img(req.files)
     //console.log(img);
     var newQuestion = new Question({
         question: img[0],
@@ -65,6 +63,7 @@ exports.view_Onequestion = (req, res) => {
 exports.forgotpassword_get= (req, res) => {
     res.render('forgotpassword')
 }
+
 function covert_img(files) {
     let img = []
     files.forEach((file) => {
@@ -213,4 +212,3 @@ exports.delete_question= (req, res) => {
     })
 
 }           
-
