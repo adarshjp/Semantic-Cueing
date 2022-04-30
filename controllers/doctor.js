@@ -205,3 +205,18 @@ exports.discharge_patient = (req, res) => {
       })
     })
 }
+exports.active_patient = (req, res) => {
+  /* Set the status of the patient to active */
+  User.findOneAndUpdate({ _id: req.params.patientid,role:'patient' }, { $set: { status: 'active' } }, { new: true })
+    .then((patient) => {
+      console.log(patient)
+      req.flash('success', 'Patient activated successfully')
+      res.status(200)
+      res.redirect('/home/doctor/' + req.user._id)
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err
+      })
+    })
+}
