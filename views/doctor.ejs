@@ -145,7 +145,7 @@
   function disp_patient_details(patientid) {    
     document.getElementById('spinner-0').classList.remove('d-none')
     document.getElementById('patient-details').setAttribute('hidden', '')
-    document.getElementById('upgrade').action='/level/'+patientid+'?_method=PUT';
+    document.getElementById('upgrade').action='/inclevel/'+patientid+'?_method=PUT';
 
     fetch('/data/patientdetails/'+patientid)
     .then(response => response.json())
