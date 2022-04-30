@@ -68,6 +68,15 @@
       </ul>
     </li>
     <li>
+      <a data-bs-toggle="modal" data-bs-target="#langModal" style="cursor: pointer;">
+        <i class="fa fa-language" aria-hidden="true"></i>
+        <span class="link_name"><%=i18n.ChangeLanguage%></span>
+      </a>
+      <ul class="sub-menu blank">
+        <li><a class="link_name" data-bs-toggle="modal" data-bs-target="#langModal"><%=i18n.ChangeLanguage%></a></li>
+      </ul>
+    </li>
+    <li>
       <a href="/changepassword">
         <i class="fas fa-key"></i>
         <span class="link_name">Change Password</span>
@@ -101,3 +110,4 @@
     </li>
   </ul>
 </div>
+<%- include("langModal") %>
