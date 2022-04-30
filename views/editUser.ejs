@@ -59,7 +59,7 @@
     <% if(user.role != "patient") {%>
         <div class="container">
             <div class="text-center py-2">
-                <p class="display-4 fw-bold">Edit <span class="blue">Profile</span></p>
+                <p class="display-4 fw-bold"><%=i18n.Edit%> <span class="blue"><%=i18n.Profile%></span></p>
             </div>
             <div class="row justify-content-center p-1">
                 <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-md-0 col-lg-6">
@@ -97,7 +97,7 @@
                             <div>
                                 <button type="submit" class="btn btn-primary btn-lg btn-block">
                                     <i class="fas fa-edit"></i>
-                                    Edit Profile
+                                    <%=i18n.EditProfile%>
                                 </button>
                             </div>
                         </form>

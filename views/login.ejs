@@ -12,7 +12,7 @@
                             class="p-3"
                             id="login-form"
                         >
-                            <h1 class="p-3 white"><b>Login</b></h1>
+                            <h1 class="p-3 white"><b><%=i18n.Login%></b></h1>
                             <% if(message.error){ %>
                             <div
                                 class="
@@ -34,7 +34,7 @@
                             <input
                                 type="text"
                                 name="username"
-                                placeholder="Username"
+                                placeholder="<%=i18n.Username%>"
                                 id="login-input"
                                 class="outline-color"
                                 required
@@ -42,13 +42,13 @@
                             <input
                                 type="password"
                                 name="password"
-                                placeholder="Password"
+                                placeholder="<%=i18n.Password%>"
                                 id="login-input"
                                 class="outline-color"
                                 required
                             />
                             <a href="/forgotpassword" id="login-a" class="p-2"
-                                >Forgot Your Password ?</a
+                                ><%=i18n.ForgotYourPassword%> </a
                             >
                             <input
                                 type="submit"
@@ -60,8 +60,8 @@
                                     shadow
                                     blue
                                 "
-                                value="Login"
-                                onClick="this.form.submit(); this.disabled=true; this.value='Logging in…';this.style='color:black;background-color:white;margin-top:2px;padding:2px'"
+                                value="<%=i18n.Login%>"
+                                onClick="this.form.submit(); this.disabled=true; this.value='<%=i18n.Loggingin%>…';this.style='color:black;background-color:white;margin-top:2px;padding:2px'"
                                 style="width: 50%; background-color: white"
                             />
                         </form>
@@ -118,8 +118,9 @@
                             <div class="col-5 text-center my-auto">
                                 <div class="shadow rounded p-2 text-center" style="background-color: rgb(241, 241, 241)">
                                     <blockquote>  
-                                        <p><strong>Many of life’s failures</strong><br>are people who did <strong>not realize how close they were to success</strong> when they gave up.</p>
-                                        <cite>— Thomas Edison</cite>
+                                        <p><strong><%=i18n.EdisonQuote%></strong><br> <strong></strong> </p>
+                                        <br>
+                                        <cite><%=i18n.EdisonName%></cite>
                                     </blockquote>
                                 </div>
                             </div>
@@ -139,8 +140,8 @@
                             <div class="col-5 text-center my-auto">
                                 <div class="shadow rounded p-2 text-center" style="background-color: rgb(241, 241, 241)">
                                     <blockquote>  
-                                        <p><strong>Promise me you’ll always remember:</strong> You’re <strong>braver </strong>than you believe, and <strong>stronger </strong>than you seem, and <strong>smarter</strong> than you think.</p>
-                                        <cite>— A.A. Milne</cite>
+                                        <p><strong><%=i18n.MilneQuote%></strong> <strong> </strong><strong> </strong> <strong></strong> .</p>
+                                        <cite><%=i18n.MilneName%></cite>
                                     </blockquote>
                                 </div>
                             </div>
@@ -160,8 +161,8 @@
                             <div class="col-5 text-center my-auto">
                                 <div class="shadow p-2 text-center rounded" style="background-color:rgb(241, 241, 241);">
                                     <blockquote>  
-                                        <p><strong>Most of the important things</strong> in the world have been accomplished by <strong>people who have kept on trying</strong>  when there seemed to be no hope at all.</p>
-                                        <cite>— Dale Carnegie</cite>
+                                        <p><strong><%=i18n.CarnegieQuote%></strong>  <strong></strong> .</p>
+                                        <cite><%=i18n.CarnegieName%></cite>
                                      </blockquote>
                                 </div>
                             </div>
@@ -181,8 +182,8 @@
                             <div class="col-5 text-center my-auto">
                                 <div class="shadow p-2 text-center rounded" style="background-color:rgb(241, 241, 241);">
                                     <blockquote>  
-                                        <p>One small crack does <strong>not mean that you are broken,</strong> it means that you were put to the test and <strong> you didn’t fall apart.</strong></p>
-                                        <cite>— Linda Poindexter</cite>
+                                        <p><%=i18n.PoindexterQuote%> <strong></strong> <strong> .</strong></p>
+                                        <cite><%=i18n.PoindexterName%></cite>
                                      </blockquote>
                                 </div>
                             </div>

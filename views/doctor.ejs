@@ -20,7 +20,7 @@
 
   <div class="row justify-content-center mt-2">
     <div class="offset-2 col-9 offset-sm-1 col-sm-9 offset-md-0 col-md-6 col-lg-5 col-xl-4">
-      <label for="patient">Choose Patient</label>
+      <label for="patient"><%=i18n.ChoosePatient%></label>
       <select class="form-select form-select-lg my-2 p-2" aria-label=".form-select-lg" onchange="disp_patient_details(this.value)">
         <% patient.forEach((patient)=> { %>
           <option value="<%=patient._id%>"><%=patient.name%></option>
@@ -34,7 +34,7 @@
       <div class="card shadow">
         <div class="d-flex justify-content-center align-items-center blue" id='spinner-0' style="height:220px">
           <div class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
+            <span class="visually-hidden"><%=i18n.Loading%>...</span>
           </div>
         </div>
         <div class="row mx-3 mx-sm-0 text-center justify-content-center card-body" id='patient-details' hidden>
@@ -42,16 +42,16 @@
               <img src="/images/profile.jpg" class="img-fluid rounded-lg" alt="..."/ id='disp-pic'>
           </div>
           <div class="col-sm-6 col-md-4 my-auto">
-            <p id='name'>Name : </p>
-            <p id='email'>Email : </p>
-            <p id='age'>Age : </p>
-            <p id='level'>Level : </p>
+            <p id='name'><%=i18n.Name%> : </p>
+            <p id='email'><%=i18n.Email%> : </p>
+            <p id='age'><%=i18n.Age%> : </p>
+            <p id='level'><%=i18n.Level%> : </p>
           </div>
           <div class="col-sm-6 col-md-4 my-auto">
-            <p id="p_id">Patient ID : </p>
-            <p id='stroke'>Stroke date : stroke</p>
-            <p id='p_stroke'>Post stroke duration : date</p>
-            <p id='test'>Number of Test Assigned : xy</p>
+            <p id="p_id"><%=i18n.PatientID%> : </p>
+            <p id='stroke'><%=i18n.Strokedate%> : <%=i18n.stroke%></p>
+            <p id='p_stroke'><%=i18n.Poststrokeduration%> : <%=i18n.date%></p>
+            <p id='test'><%=i18n.NumberofTestAssigned%> : <%=i18n.xy%></p>
           </div>
         </div>
       </div>
@@ -62,12 +62,12 @@
     <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-10 col-xl-5 p-3">
       <div class="card shadow">
         <div class="card-header bg-primary">
-          <h5 class="pt-2 white">Patients test result</h5>
+          <h5 class="pt-2 white"><%=i18n.Patientstestresult%></h5>
         </div>
         <div class="card-body">
           <div class="d-flex justify-content-center align-items-center blue" id='spinner-1' style="height:250px">
              <div class="spinner-border" role="status">
-               <span class="visually-hidden">Loading...</span>
+               <span class="visually-hidden"><%=i18n.Loading%>...</span>
              </div>
            </div>
           <canvas id="line-chart" height="127" hidden></canvas>
@@ -78,12 +78,12 @@
     <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-5 p-3">
       <div class="card shadow">
         <div class="card-header bg-primary">
-          <h5 class="pt-2 white">Answered a Question vs Hints Taken</h5>
+          <h5 class="pt-2 white"><%=i18n.AnsweredaQuestionvsHintsTaken%></h5>
         </div>
         <div class="card-body">
           <div class="d-flex justify-content-center align-items-center blue" id='spinner-2' style="height:250px">
              <div class="spinner-border" role="status">
-               <span class="visually-hidden">Loading...</span>
+               <span class="visually-hidden"><%=i18n.Loading%>...</span>
              </div>
            </div>
           <canvas id="bar-chart-1" height="127" hidden></canvas>
@@ -94,12 +94,12 @@
     <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-5 p-3">
       <div class="card shadow">
         <div class="card-header bg-primary">
-          <h5 class="pt-2 white">Unanswered a Question vs Hints Taken</h5>
+          <h5 class="pt-2 white"><%=i18n.UnansweredaQuestionvsHintsTaken%></h5>
         </div>
         <div class="card-body">
           <div class="d-flex justify-content-center align-items-center blue" id='spinner-3' style="height:250px">
              <div class="spinner-border" role="status">
-               <span class="visually-hidden">Loading...</span>
+               <span class="visually-hidden"><%=i18n.Loading%>...</span>
              </div>
            </div>
           <canvas id="bar-chart-2" height="127" hidden></canvas>
@@ -110,12 +110,12 @@
     <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-5 p-3">
       <div class="card shadow">
         <div class="card-header bg-primary">
-          <h5 class="pt-2 white">Assigned test details</h5>
+          <h5 class="pt-2 white"><%=i18n.Assignedtestdetails%></h5>
         </div>
         <div class="card-body">
           <div class="d-flex justify-content-center align-items-center blue" id='spinner-4' style="height:250px">
              <div class="spinner-border" role="status">
-               <span class="visually-hidden">Loading...</span>
+               <span class="visually-hidden"><%=i18n.Loading%>...</span>
              </div>
            </div>
           <canvas id="bar-chart-3" height="127" hidden></canvas>
