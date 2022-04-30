@@ -25,7 +25,7 @@ exports.get_create_test = (req, res) => {
             if(req.params.skip!==undefined)
               res.json({question: question})
             else 
-              res.render('createtest',{question: question, patient: patient,user:req.user})
+              res.render('createtest',{question: question, patient: patient,user:req.user,i18n: global.i18n})
           }
         })
         .catch((err) => {
@@ -44,7 +44,7 @@ exports.get_create_test = (req, res) => {
 exports.get_home_doctor = (req, res) => {
     User.find({role:'patient',doctorid:req.user._id},{_id:1, name: 1})
     .then((patients) =>{
-      res.render("doctor",{user:req.user,patient:patients})
+      res.render("doctor",{user:req.user,patient:patients, i18n:global.i18n})
     })
     .catch((err)=>{
       console.log(err)
@@ -82,7 +82,7 @@ exports.post_create_test = (req, res) => {
 exports.get_view_assigned_patient= (req, res) => {
   User.find({doctorid:req.user._id})
   .then((users)=>{
-    res.render("view_patients",{ user: req.user,patients: users });
+    res.render("view_patients",{ user: req.user,patients: users, i18n: global.i18n});
   })
   .catch((err)=>{
     res.status(500).json({
@@ -120,7 +120,7 @@ exports.get_patient_test_details = (req, res) => {
 exports.get_view_test_created = (req, res) => {
   Test.find({doctorid:req.user._id})
   .then((tests)=>{
-    res.render("view_tests",{ user: req.user,tests: tests });
+    res.render("view_tests",{ user: req.user,tests: tests, i18n: global.i18n});
   })
   .catch((err)=>{
     res.status(500).json({
@@ -132,7 +132,7 @@ exports.get_view_test_created = (req, res) => {
 exports.get_edit_test= (req, res) => {
   Test.findOne({_id:req.params.testid})
   .then((test)=>{
-    res.render("editTest",{ user: req.user,test: test });
+    res.render("editTest",{ user: req.user,test: test,i18n: global.i18n });
   })
   .catch((err)=>{
     res.status(500).json({
