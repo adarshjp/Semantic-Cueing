@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {get_home_doctor,get_create_test,post_create_test,get_view_assigned_patient,get_patient_details,get_patient_test_details,get_view_test_created,get_edit_test,put_edit_test,get_question,delete_test,update_level,discharge_patient} = require("../controllers/doctor");
+const {get_home_doctor,get_create_test,post_create_test,get_view_assigned_patient,get_patient_details,get_patient_test_details,get_view_test_created,get_edit_test,put_edit_test,get_question,delete_test,upgrade_level,discharge_patient,downgrade_level} = require("../controllers/doctor");
 const { isLoggedIn, isDoctor,isMappedDoctor } = require("../controllers/Auth/middlewares");
 router.get("/create/test/:skip?", isLoggedIn, isDoctor, get_create_test);
 router.get("/home/doctor/:id", isLoggedIn, isDoctor, get_home_doctor);
@@ -13,6 +13,7 @@ router.get("/edit/test/:testid", isLoggedIn, isDoctor, get_edit_test);
 router.put("/edit/test/:testid", isLoggedIn, isDoctor, put_edit_test);
 router.get("/question/:questionid", isLoggedIn, isDoctor, get_question);
 router.delete("/delete/test/:testid", isLoggedIn, isDoctor, delete_test);
-router.put("/level/:patientid", isLoggedIn, isDoctor, update_level);
+router.put("/inclevel/:patientid", isLoggedIn, isDoctor, upgrade_level);
+router.put("/drelevel/:patientid", isLoggedIn, isDoctor,downgrade_level);
 router.put("/discharge/:patientid", isLoggedIn, isDoctor, discharge_patient);
 module.exports = router;

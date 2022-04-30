@@ -174,9 +174,24 @@ exports.delete_test = (req, res) => {
       })
     })
 }
-exports.update_level = (req, res) => {
+exports.upgrade_level = (req, res) => {
   /* Updates the level of patient by one */
   User.findOneAndUpdate({ _id: req.params.patientid,role:'patient' }, { $inc: { level: 1 } }, { new: true })
+    .then((patient) => {
+      console.log(patient)
+      req.flash('success', 'Level updated successfully')
+      res.status(200)
+      res.redirect('/home/doctor/' + req.user._id)
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err
+      })
+    })
+}
+exports.downgrade_level =  (req, res) => {
+  /* Updates the level of patient by one */
+  User.findOneAndUpdate({ _id: req.params.patientid,role:'patient' }, { $inc: { level: -1 } }, { new: true })
     .then((patient) => {
       console.log(patient)
       req.flash('success', 'Level updated successfully')
