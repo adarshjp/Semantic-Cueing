@@ -48,8 +48,8 @@
         </div>
         <div class="row justify-content-center mt-4 d-none" id="pat_lev">
             <div class="offset-2 col-9 offset-sm-1 col-sm-5 offset-md-1 col-md-4 offset-lg-0">
-                <label for="patient" class="mb-2">Patient</label>
-                <select name="patientid"  id="patient-list" placeholder="Select patients" class="form-select form-select-lg p-2" aria-label=".form-select-lg">
+                <label for="patient" class="mb-2"><%=i18n.Patient%></label>
+                <select name="patientid"  id="patient-list" placeholder="<%=i18n.Selectpatients%>" class="form-select form-select-lg p-2" aria-label=".form-select-lg">
                         <option value="<%=test.patientid%>" selected readonly id="patient-name">h</option>
                 </select>
             </div>
@@ -59,7 +59,7 @@
             </div>
         </div>
         <div class="text-end text-sm-center p-2 d-none" id="res_but">
-            <button class="btn btn-primary rounded-pill btn-lg" onclick="reSet();">Reset <i class="fa fa-refresh" aria-hidden="true"></i></button>
+            <button class="btn btn-primary rounded-pill btn-lg" onclick="reSet();"><%=i18n.Reset%> <i class="fa fa-refresh" aria-hidden="true"></i></button>
             <input type="submit" class="btn btn-primary btn-lg rounded-pill" value="Update Test" id="formsubmit"/>
         </div>
     </form>

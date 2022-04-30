@@ -113,7 +113,7 @@
                       <label for="strokedate" class="blue h5"><%=i18n.StrokeDate%>:</label>
                     </div>
                     <div class="col-8">
-                      <input type="date" class='login-input' id='strokedate' placeholder='Stroke date' name="strokeDate">
+                      <input type="date" class='login-input' id='strokedate' placeholder='<%=i18n.StrokeDate%>' name="strokeDate">
                     </div>
                   </div>
               </div>
@@ -125,7 +125,7 @@
                   <i class="fa-solid fa-cloud-arrow-up fa-5x blue"></i>
                   <p class="blue h5"><%=i18n.ChooseProfilePicture%></p> 
                 </label>
-                <input type="file" name="displaypic" class="form-control form-control-lg" accept="image/png, image/jpeg" placeholder="Enter Image" id="upload_file" onchange="getImagePreview(event,'preview','upload_file')" style="display:none;">
+                <input type="file" name="displaypic" class="form-control form-control-lg" accept="image/png, image/jpeg" placeholder="<%=i18n.EnterImage%>" id="upload_file" onchange="getImagePreview(event,'preview','upload_file')" style="display:none;">
             </div>
             <div class="row justify-content-center my-2 text-center">
                 <div class="col-12 col-sm-7 col-md-9" id="preview"></div>
