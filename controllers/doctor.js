@@ -39,7 +39,7 @@ exports.get_create_test = (req, res) => {
 };
 
 exports.get_home_doctor = (req, res) => {
-  User.find({ role: 'patient', doctorid: req.user._id }, { _id: 1, name: 1 })
+  User.find({ role: 'patient', doctorid: req.user._id , status:'active'}, { _id: 1, name: 1 })
     .then((patients) => {
       res.render("doctor", { user: req.user, patient: patients })
     })
@@ -76,7 +76,7 @@ exports.post_create_test = (req, res) => {
 };
 
 exports.get_view_assigned_patient = (req, res) => {
-  User.find({ doctorid: req.user._id })
+  User.find({ role: 'patient', doctorid: req.user._id , status:'active' })
     .then((users) => {
       res.render("view_patients", { user: req.user, patients: users });
     })
@@ -196,21 +196,6 @@ exports.discharge_patient = (req, res) => {
     .then((patient) => {
       console.log(patient)
       req.flash('success', 'Patient discharged successfully')
-      res.status(200)
-      res.redirect('/home/doctor/' + req.user._id)
-    })
-    .catch((err) => {
-      res.status(500).json({
-        error: err
-      })
-    })
-}
-exports.active_patient = (req, res) => {
-  /* Set the status of the patient to active */
-  User.findOneAndUpdate({ _id: req.params.patientid,role:'patient' }, { $set: { status: 'active' } }, { new: true })
-    .then((patient) => {
-      console.log(patient)
-      req.flash('success', 'Patient activated successfully')
       res.status(200)
       res.redirect('/home/doctor/' + req.user._id)
     })
