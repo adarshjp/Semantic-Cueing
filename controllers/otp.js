@@ -65,7 +65,7 @@ exports.verifyOtp = (req, res) => {
   });
 };
 function initSendMail(email, otp, version, res) {
-  ejs.renderFile(__dirname+"\\..\\views\\otpTemplate.ejs",{otp:otp,version:version},(err,data)=>{
+  ejs.renderFile(__dirname+"\\..\\views\\otpTemplate.ejs",{otp:otp,version:version,i18n: global.i18n},(err,data)=>{
     if(err){
       console.log(err);
       res.status(500).json({
