@@ -48,7 +48,7 @@ exports.post_messages = (req, res)=> {
         isRead: false,
     });
     io.emit('message', newMessage)
-    encodeMsg(newMessage.message)
+    newMessage.message=encodeMsg(newMessage.message)
     newMessage.save((err, message) => {
         if (err)
             res.json({ error: err });
@@ -74,6 +74,7 @@ function findAndSendMessages(conversationId,res) {
             res.json({error:"No messages found",conversationId:conversationId});
         else{
             messages.forEach(message=>{
+                console.log(message)
                 message.message=decodeMsg(message.message)
             })
             res.json({messages,conversationId});
