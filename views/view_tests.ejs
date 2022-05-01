@@ -1,6 +1,6 @@
 <%- include("partials/header") %> 
 <%- include("partials/doctorSideBar") %>
-<div class="container">
+<div class="container-fluid">
   <div class="row justify-content-center pt-1">
     <div class="offset-2 col-8 offset-sm-1 col-sm-10 offset-md-1 col-md-8">
        <% if(message.error){ %>
@@ -25,10 +25,11 @@
       </h1>
     </div>
   </div>
+  <%- include("partials/testTabs") %>
   <div class="row p-1 justify-content-center">
     <% let k=1%>
     <% tests.forEach((test) => { %>
-    <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-md-1 <%if(k%2!=0){%>mx-lg-5<%}else{%>mx-lg-0<%}%> mx-xl-0 col-lg-5 offset-xl-0 col-xl-6 p-2">
+    <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-5 p-2 <%=test.status%> test<%=k-1%>" id='test_list'>
       <div class="card box-shadow p-3">
         <div class="row align-items-center">
           <div class="col-md-6 my-auto">
@@ -90,6 +91,40 @@
 $(window).on('load', function() {
   create_chart();
 });
+
+document.getElementById('all').addEventListener('click',function(){
+  for(var i=0;i<parseInt('<%=tests.length %>');i++){
+      document.getElementsByClassName('test'+i)[0].classList.remove('d-none');
+  }
+});
+document.getElementById('paused').addEventListener('click',function(){
+  for(var i=0;i<parseInt('<%=tests.length %>');i++){
+      document.getElementsByClassName('test'+i)[0].classList.add('d-none');
+  }
+  let paused=document.getElementsByClassName('paused');
+  for(let i=0;i<paused.length;i++){
+    paused[i].classList.remove('d-none');
+  }
+});
+document.getElementById('pending').addEventListener('click',function(){
+  for(var i=0;i<parseInt('<%=tests.length %>');i++){
+      document.getElementsByClassName('test'+i)[0].classList.add('d-none');
+  }
+  let pending=document.getElementsByClassName('pending');
+  for(let i=0;i<pending.length;i++){
+    pending[i].classList.remove('d-none');
+  }
+});
+document.getElementById('completed').addEventListener('click',function(){
+  for(var i=0;i<parseInt('<%=tests.length %>');i++){
+      document.getElementsByClassName('test'+i)[0].classList.add('d-none');
+  }
+  let completed=document.getElementsByClassName('completed');
+  for(let i=0;i<completed.length;i++){
+    completed[i].classList.remove('d-none');
+  }
+});
+
 //------------------RES CHART------------------
 var data = {
           labels: [
