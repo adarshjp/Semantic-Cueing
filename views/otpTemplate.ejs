@@ -40,31 +40,31 @@
 >
   <div style="background-color: white;justify-content: center;padding: 60px" class="">
     <div>
-      <h2 class="" style="font-family: monospace;">Semantic Cueing</h2>
+      <h2 class="" style="font-family: monospace;"><%=i18n.SemanticCueing%></h2>
       <hr />
     </div>
     <div>
       <% if(version == 'v1'){%>
-        <h1 class=" ">Change your password</h1>
+        <h1 class=" "><%=i18n.Changeyourpassword%></h1>
       <%}else{%>
-        <h1 class=" ">Your Verification Code</h1>
+        <h1 class=" "><%=i18n.YourVerificationCode%></h1>
       <%}%>
     </div>
     <div class="" style="padding-top: 20px">
-      <p>Below is your one time passcode:</p>
+      <p><%=i18n.Belowisyouronetimepasscode%>:</p>
       <h2 class="otp" style="font-family: monospace;"><%=otp%></h2>
-      <p>Please enter the passcode in the app to complete the process.</p>
+      <p><%=i18n.Pleaseenterthepasscodeintheapptocompletetheprocess%>.</p>
       <br />
-      <h3 class="">This passcode is valid for 10 minutes.</h3>
+      <h3 class=""><%=i18n.Thispasscodeisvalidfor10minutes%>.</h3>
       <br />
     </div>
     <p style="color: blue">
-      If you did not request a password reset, please contact us immediately.
+      <%=i18n.Ifyoudidnotrequestapasswordresetpleasecontactusimmediately%>.
     </p>
     <div class="">
       <br />
-      <p>Regards</p>
-      <p>Team Semantic Cueing</p>
+      <p><%=i18n.Regards%></p>
+      <p><%=i18n.TeamSemanticCueing%></p>
     </div>
   </div>
 </div>

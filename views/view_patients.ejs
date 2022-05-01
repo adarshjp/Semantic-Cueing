@@ -10,11 +10,11 @@
                 <div class="offset-2 col-9 offset-sm-2 col-sm-8 offset-lg-0 col-lg-6 p-1">
                     <h1 class="text-center p-2 display-3 fw-bold">
                         <% if(user.role==="admin" ) {%>
-                            Our
+                            <%=i18n.Our%>
                         <% } else { %>
-                            List of
+                            <%=i18n.view_Listof1%>
                         <% } %>
-                        <span class="blue">Patients </span>
+                        <span class="blue"><%=i18n.view_Patients1%> </span>
                         <i class="fas fa-stethoscope blue"></i>
                     </h1>
                 </div>

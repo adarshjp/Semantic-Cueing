@@ -1,74 +1,83 @@
 <div class="sidebar close">
   <div class="logo-details">
     <i class="bx bx-menu" onclick="sidebar_toggle()"></i>
-    <span class="logo_name">Menu</span>
+    <span class="logo_name"><%=i18n.Menu%></span>
   </div>
   <ul class="nav-links">
     <li>
       <a href="/home/doctor/<%=user._id%>">
         <i class="bx bx-grid-alt"></i>
-        <span class="link_name">Dashboard</span>
+        <span class="link_name"><%=i18n.Dashboard%></span>
       </a>
       <ul class="sub-menu blank">
         <li>
-          <a class="link_name" href="/home/doctor/<%=user._id%>">Dashboard</a>
+          <a class="link_name" href="/home/doctor/<%=user._id%>"><%=i18n.Dashboard%></a>
         </li>
       </ul>
     </li>
     <li>
       <a href="/view/patient/<%=user._id%>">
         <i class="fas fa-procedures"></i>
-        <span class="link_name">Patients</span>
+        <span class="link_name"><%=i18n.Patients%></span>
       </a>
       <ul class="sub-menu blank">
         <li>
-          <a class="link_name" href="/view/patient/<%=user._id%>">Patients</a>
+          <a class="link_name" href="/view/patient/<%=user._id%>"><%=i18n.Patients%></a>
         </li>
       </ul>
     </li>
     <li>
       <a href="/create/test">
         <i class="far fa-clipboard"></i>
-        <span class="link_name">Create Test</span>
+        <span class="link_name"><%=i18n.CreateTest%></span>
       </a>
       <ul class="sub-menu blank">
-        <li><a class="link_name" href="/create/test">Create Test</a></li>
+        <li><a class="link_name" href="/create/test"><%=i18n.CreateTest%></a></li>
       </ul>
     </li>
     <li>
       <a href="/view/tests/<%=user._id%>">
         <i class='bx bx-edit-alt'></i>
-        <span class="link_name">Tests</span>
+        <span class="link_name"><%=i18n.Tests%></span>
       </a>
       <ul class="sub-menu blank">
-        <li><a class="link_name" href="/view/tests/<%=user._id%>">Tests</a></li>
+        <li><a class="link_name" href="/view/tests/<%=user._id%>"><%=i18n.Tests%></a></li>
       </ul>
     </li>
     <li>
       <a href="/view/<%=user._id%>">
         <i class="fas fa-user"></i>
-        <span class="link_name">My Profile</span>
+        <span class="link_name"><%=i18n.MyProfile%></span>
       </a>
       <ul class="sub-menu blank">
-        <li><a class="link_name" href="/view/<%=user._id%>">My Profile</a></li>
+        <li><a class="link_name" href="/view/<%=user._id%>"><%=i18n.MyProfile%></a></li>
+      </ul>
+    </li>
+    <li>
+      <a data-bs-toggle="modal" data-bs-target="#langModal" style="cursor: pointer;">
+        <i class="fa fa-language" aria-hidden="true"></i>
+        <span class="link_name"><%=i18n.ChangeLanguage%></span>
+      </a>
+      <ul class="sub-menu blank">
+        <li><a class="link_name" data-bs-toggle="modal" data-bs-target="#langModal"><%=i18n.ChangeLanguage%></a></li>
       </ul>
     </li>
     <li>
       <a href="/changepassword">
         <i class="fas fa-key"></i>
-        <span class="link_name">Change Password</span>
+        <span class="link_name"><%=i18n.ChangePassword%></span>
       </a>
       <ul class="sub-menu blank">
-        <li><a class="link_name" href="/changepassword">Change Password</a></li>
+        <li><a class="link_name" href="/changepassword"><%=i18n.ChangePassword%></a></li>
       </ul>
     </li>
     <li>
       <a href="/logout">
         <i class="bx bx-log-out"></i>
-        <span class="link_name">Logout</span>
+        <span class="link_name"><%=i18n.Logout%></span>
       </a>
       <ul class="sub-menu blank">
-        <li><a class="link_name" href="/logout">Logout</a></li>
+        <li><a class="link_name" href="/logout"><%=i18n.Logout%></a></li>
       </ul>
     </li>
     <li>
@@ -90,3 +99,4 @@
     </li>
   </ul>
 </div>
+<%- include("langModal") %>

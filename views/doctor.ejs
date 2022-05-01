@@ -5,7 +5,7 @@
 
   <div class="row justify-content-center mt-2">
     <div class="offset-2 col-9 offset-sm-1 col-sm-9 offset-md-0 col-md-6 col-lg-5 col-xl-4">
-      <label for="patient">Choose Patient</label>
+      <label for="patient"><%=i18n.ChoosePatient%></label>
       <select class="form-select form-select-lg my-2 p-2" aria-label=".form-select-lg" onchange="disp_patient_details(this.value)">
         <% patient.forEach((patient)=> { %>
           <option value="<%=patient._id%>"><%=patient.name%></option>
@@ -19,7 +19,7 @@
       <div class="card shadow">
         <div class="d-flex justify-content-center align-items-center blue" id='spinner-0' style="height:220px">
           <div class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
+            <span class="visually-hidden"><%=i18n.Loading%>...</span>
           </div>
         </div>
         <div class="row mx-3 mx-sm-0 text-center justify-content-center card-body" id='patient-details' hidden>
@@ -60,12 +60,12 @@
     <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-10 col-xl-5 p-3">
       <div class="card shadow">
         <div class="card-header bg-primary">
-          <h5 class="pt-2 white">Patients test result</h5>
+          <h5 class="pt-2 white"><%=i18n.Patientstestresult%></h5>
         </div>
         <div class="card-body">
           <div class="d-flex justify-content-center align-items-center blue" id='spinner-1' style="height:250px">
              <div class="spinner-border" role="status">
-               <span class="visually-hidden">Loading...</span>
+               <span class="visually-hidden"><%=i18n.Loading%>...</span>
              </div>
            </div>
           <canvas id="line-chart" height="127" hidden></canvas>
@@ -76,12 +76,12 @@
     <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-5 p-3">
       <div class="card shadow">
         <div class="card-header bg-primary">
-          <h5 class="pt-2 white">Answered a Question vs Hints Taken</h5>
+          <h5 class="pt-2 white"><%=i18n.AnsweredaQuestionvsHintsTaken%></h5>
         </div>
         <div class="card-body">
           <div class="d-flex justify-content-center align-items-center blue" id='spinner-2' style="height:250px">
              <div class="spinner-border" role="status">
-               <span class="visually-hidden">Loading...</span>
+               <span class="visually-hidden"><%=i18n.Loading%>...</span>
              </div>
            </div>
           <canvas id="bar-chart-1" height="127" hidden></canvas>
@@ -92,12 +92,12 @@
     <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-5 p-3">
       <div class="card shadow">
         <div class="card-header bg-primary">
-          <h5 class="pt-2 white">Unanswered a Question vs Hints Taken</h5>
+          <h5 class="pt-2 white"><%=i18n.UnansweredaQuestionvsHintsTaken%></h5>
         </div>
         <div class="card-body">
           <div class="d-flex justify-content-center align-items-center blue" id='spinner-3' style="height:250px">
              <div class="spinner-border" role="status">
-               <span class="visually-hidden">Loading...</span>
+               <span class="visually-hidden"><%=i18n.Loading%>...</span>
              </div>
            </div>
           <canvas id="bar-chart-2" height="127" hidden></canvas>
@@ -108,12 +108,12 @@
     <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-5 p-3">
       <div class="card shadow">
         <div class="card-header bg-primary">
-          <h5 class="pt-2 white">Assigned test details</h5>
+          <h5 class="pt-2 white"><%=i18n.Assignedtestdetails%></h5>
         </div>
         <div class="card-body">
           <div class="d-flex justify-content-center align-items-center blue" id='spinner-4' style="height:250px">
              <div class="spinner-border" role="status">
-               <span class="visually-hidden">Loading...</span>
+               <span class="visually-hidden"><%=i18n.Loading%>...</span>
              </div>
            </div>
           <canvas id="bar-chart-3" height="127" hidden></canvas>

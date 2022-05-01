@@ -4,7 +4,7 @@
    <div class="row justify-content-center">
       <div class="offset-2 col-8 offset-sm-1 col-sm-10 offset-md-1 col-md-11">
          <div class="text-center p-3 m-3 font-monospace">
-            <h1 class="display-4">Add an <span class="blue">Object</span> to identify</h1>
+            <h1 class="display-4"><%=i18n.Addan%> <span class="blue"><%=i18n.Object%></span> <%=i18n.toidentify1%></h1>
          </div>
          <form action="/addquestion" method="POST" enctype="multipart/form-data" id='add_q_form'>
             <div class="row justify-content-center">
@@ -14,26 +14,26 @@
                      <label for="upload_file">
                         <i class="fa-solid fa-cloud-arrow-up fa-4x blue"></i>
                      </label>
-                     <input type="file" name="image" class="form-control form-control-lg fi" accept="image/png, image/jpeg" placeholder="Enter Image" id="upload_file" onchange="getImagePreview(event,'preview','upload_file')" id="login-input" style="display:none;" required>
+                     <input type="file" name="image" class="form-control form-control-lg fi" accept="image/png, image/jpeg" placeholder="<%=i18n.EnterImage%>" id="upload_file" onchange="getImagePreview(event,'preview','upload_file')" id="login-input" style="display:none;" required>
                   </div>
                   <div class="row justify-content-center my-2 text-center">
                      <div class="col-12 col-sm-7 col-md-6" id="preview"></div>
                   </div>
                   <div class="row justify-content-center">
                         <div class="col-12 col-md-6">
-                           <input type="text" name="answer" id="login-input" placeholder="Name of Object..." required> 
+                           <input type="text" name="answer" id="login-input" placeholder="<%=i18n.NameofObject%>" required> 
                         </div>
                         <div class="col-12 col-md-6">
-                           <input type="number" name="level" id="login-input1"  placeholder="Enter Level(1-5)..." onchange="checklevel(this.value)" required>
+                           <input type="number" name="level" id="login-input1"  placeholder="<%=i18n.EnterLevel%>" onchange="checklevel(this.value)" required>
                         </div>
                         <div class="col-12 col-md-6">
-                           <input type="text" name="score" id="login-input" placeholder="Description..." required>
+                           <input type="text" name="score" id="login-input" placeholder="<%=i18n.Description%>" required>
                         </div>
                   </div>
                </div>
             </div>
             <div class="text-center p-3 m-3 font-monospace">
-               <h1 class="display-5">Give <span class="blue">hints</span> to identify</h1>
+               <h1 class="display-5"><%=i18n.Give%> <span class="blue"><%=i18n.hints%></span> <%=i18n.toidentify2%></h1>
             </div>
             <div class="row justify-content-center mt-3">
                <% for (var i = 0; i < 4; i++) { %>
@@ -44,17 +44,17 @@
                         <label for="upload_hint<%= i %>">
                            <i class="fa-solid fa-cloud-arrow-up fa-4x blue" data-bs-toggle="tooltip" data-bs-placement="top" title="Upload an Image"></i>
                         </label>
-                        <input type="file" name="image" accept="image/png, image/jpeg" class="form-control form-control-lg" placeholder="Enter Image" id="upload_hint<%= i %>" onchange="getImagePreview(event,'preview-hint<%= i %>','upload_hint<%= i %>')" style="display: none" required>
+                        <input type="file" name="image" accept="image/png, image/jpeg" class="form-control form-control-lg" placeholder="<%=i18n.EnterImage%>" id="upload_hint<%= i %>" onchange="getImagePreview(event,'preview-hint<%= i %>','upload_hint<%= i %>')" style="display: none" required>
                      </div>
                      <div id="preview-hint<%= i %>" class="my-2 col-11 col-sm-9 col-md-7 text-center"></div>
                      <div class="col-12">
-                        <input type="text" name="nscore[<%= i %>]" id="login-input" placeholder="Description..." required>
+                        <input type="text" name="nscore[<%= i %>]" id="login-input" placeholder="<%=i18n.Description%>" required>
                      </div>
                   </div>    
                </div>
                <% } %>
                <div class="form-group text-center mt-3">
-                  <input type="submit" name="submit" value="Submit" class="btn btn-primary btn-lg rounded-pill" id='add_q_submit'>
+                  <input type="submit" name="submit" value="<%=i18n.Submit%>" class="btn btn-primary btn-lg rounded-pill" id='add_q_submit'>
                </div>
             </div>
          </form>

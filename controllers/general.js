@@ -3,7 +3,7 @@ const Test = require('../models/question')
 const {convert_img}= require('./convert_img')
 exports.addquestions_get = (req, res) => {
     res.status(200)
-    res.render('add_questions',{user: req.user})
+    res.render('add_questions',{user: req.user,i18n: global.i18n})
 }
 
 exports.addquestions_post = (req, res, next) => {
@@ -61,26 +61,12 @@ exports.view_Onequestion = (req, res) => {
         })
 }
 exports.forgotpassword_get= (req, res) => {
-    res.render('forgotpassword')
-}
-
-function covert_img(files) {
-    let img = []
-    files.forEach((file) => {
-        var obj = {
-            data: fs.readFileSync(
-                path.join(__dirname + '//..//uploads//' + file.filename)
-            ),
-            contentType: 'image/png',
-        }
-        img.push(obj)
-    })
-    return img
+    res.render('forgotpassword',{i18n: global.i18n})
 }
 exports.get_edit_question= (req, res) => {
     Question.findById({ _id: req.params.questionid })
         .then((question) => {
-            res.render("edit_question",{question:question,user:req.user})
+            res.render("edit_question",{question:question,user:req.user,i18n: global.i18n})
         })
         .catch((err) => {
             console.log(err)

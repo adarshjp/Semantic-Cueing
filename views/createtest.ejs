@@ -5,15 +5,15 @@
         <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-xl-0 col-xl-10">
             <ul class="nav nav-pills mb-3 nav-justified flex-column flex-sm-row" role="tablist">
                 <li class="nav-item p-2" role="presentation">
-                  <button class="nav-link active border py-2" id="sel-q-tab" data-bs-toggle="pill" data-bs-target="#div_list" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Select Questions</button>
+                  <button class="nav-link active border py-2" id="sel-q-tab" data-bs-toggle="pill" data-bs-target="#div_list" type="button" role="tab" aria-controls="pills-home" aria-selected="true"><%=i18n.SelectQuestions%></button>
                 </li>
                 <li class="nav-item p-2" role="presentation">
-                  <button class="nav-link border py-2" id="selected-q-tab" data-bs-toggle="pill" data-bs-target="#div_list" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Selected Questions</button>
+                  <button class="nav-link border py-2" id="selected-q-tab" data-bs-toggle="pill" data-bs-target="#div_list" type="button" role="tab" aria-controls="pills-profile" aria-selected="false"><%=i18n.SelectedQuestions%> </button>
                 </li>
             </ul>
         </div>
         <div class="offset-2 col-9 offset-sm-1 col-sm-8 offset-md-1 col-md-4 mt-sm-2" id='ch_level'>
-            <label for="level">Choose Level <i class="fa fa-filter" aria-hidden="true"></i></label>
+            <label for="level"><%=i18n.ChooseLevel%> <i class="fa fa-filter" aria-hidden="true"></i></label>
             <select  class="form-select form-select-lg my-2 p-2" id="level" aria-label=".form-select-lg" onclick="levelfilter()">
                 <option value="all">All</option>
                 <option value="1">1</option>
@@ -24,7 +24,7 @@
             </select>
         </div>
         <div class="offset-1 offset-sm-0 col-6 col-sm-7 col-md-4 text-center" style="margin-top:30px" id='sel_ran'>
-            <button class="btn btn-primary rounded-pill btn-lg" onclick="selRandom();">Select randomly <i class="fa fa-random" aria-hidden="true"></i></button>
+            <button class="btn btn-primary rounded-pill btn-lg" onclick="selRandom();"><%=i18n.Selectrandomly%> <i class="fa fa-random" aria-hidden="true"></i></button>
         </div>
         <div class="col-2 col-sm-2" id="cart-but">
             <button type="button" class="btn btn-primary position-relative rounded-pill" onclick="cart()" style="margin-top:35px">
@@ -41,7 +41,7 @@
                     <div class="card-image mx-0 p-2">
                         <div class="inputGroup">
                             <input id="option<%=i%>" class="form-check-input question<%=i%> op<%=question.level%>" type="checkbox"  value="<%=question._id %>" name="questions" onclick="countQuestion()">
-                            <label for="option<%=i%>">Question : <strong><%=question.answer%></strong></label> 
+                            <label for="option<%=i%>"><%=i18n.Question%> : <strong><%=question.answer%></strong></label> 
                         </div>
                         <div class="hover-img">
                             <span class="p-1 rounded-lg my-3" id="qimg">
@@ -55,12 +55,12 @@
         </div>
     <div class="d-flex justify-content-center d-none blue my-4" id="loader">
         <div class="spinner-border text-primary" role="status">
-          <span class="visually-hidden">Loading...</span>
+          <span class="visually-hidden"><%=i18n.Loading%>...</span>
         </div>
     </div>
     <div class="row justify-content-center mt-4 d-none" id="pat_lev">
         <div class="offset-2 col-9 offset-sm-1 col-sm-5 offset-md-1 col-md-4 offset-lg-0">
-            <label for="patient" class="mb-2">Choose Patient</label>
+            <label for="patient" class="mb-2"><%=i18n.ChoosePatient%></label>
             <select name="patientid"  id="patient-list" placeholder="Select patients" class="form-select form-select-lg p-2" aria-label=".form-select-lg" onchange="chnage_patinet_list()" multiple>
                 <% patient.forEach((patient)=> { %>
                     <option value="<%=patient._id%>"><%=patient.name%></option>
@@ -68,7 +68,7 @@
               </select>
         </div>
         <div class="offset-2 col-9 offset-sm-0 col-sm-5 offset-md-0 col-md-4">
-            <label for="level">Enter Level</label>
+            <label for="level"><%=i18n.EnterLevel%></label>
             <input type="number" name="level" id="login-input1" placeholder="1-5" onchange="checklevel(this.value)" required/>
         </div>
         <input type="text" name="patientIDs" class="d-none" value="[]" id='patientIDs'/>

@@ -20,7 +20,7 @@ exports.register_get = (req, res) => {
       })
       console.log(doctors)
       console.log(usernames)
-      res.render('signup', { doctors: doctors,user:req.user });
+      res.render('signup', { doctors: doctors,user:req.user,i18n:global.i18n});
     }
   })
   // res.send("register get");
@@ -68,7 +68,7 @@ exports.register_post = (req, res) => {
 
 exports.login_get = (req, res) => {
   res.status(200);
-  res.render("login");
+  res.render("login",{i18n:global.i18n});
 };
 
 exports.login_post = (req, res) => {

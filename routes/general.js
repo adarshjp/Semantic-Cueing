@@ -17,6 +17,7 @@ router.get("/logout", isLoggedIn, (req, res) => {
   req.logout();
   req.flash("success", "Logged out successfully");
   res.status(200);
+  res.cookie('lang', 'en');
   res.redirect("/login");
 });
 router.get("/changepassword",isLoggedIn,get_changepassword);

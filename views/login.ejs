@@ -1,7 +1,7 @@
 <%- include("partials/header") %>
 <div class="container my-5 p-md-1">
     <div class="row justify-content-center vertical-center shadow-lg rounded p-2 p-md-0">
-        <div class="col-11 col-md-4" style="background-color: #6c63ff">
+        <div class="col-11 col-md-5 col-lg-4" style="background-color: #6c63ff">
             <div class="my-5 p-3">
                 <div class="row my-3 align-items-center">
                     <div class="col-1"></div>
@@ -12,7 +12,7 @@
                             class="p-3"
                             id="login-form"
                         >
-                            <h1 class="p-3 white"><b>Login</b></h1>
+                            <h1 class="p-3 white"><b><%=i18n.Login%></b></h1>
                             <% if(message.error){ %>
                             <div
                                 class="
@@ -34,7 +34,7 @@
                             <input
                                 type="text"
                                 name="username"
-                                placeholder="Username"
+                                placeholder="<%=i18n.Username%>"
                                 id="login-input"
                                 class="outline-color"
                                 required
@@ -42,34 +42,36 @@
                             <input
                                 type="password"
                                 name="password"
-                                placeholder="Password"
+                                placeholder="<%=i18n.Password%>"
                                 id="login-input"
                                 class="outline-color"
                                 required
                             />
                             <a href="/forgotpassword" id="login-a" class="p-2"
-                                >Forgot Your Password ?</a
+                                ><%=i18n.ForgotYourPassword%> </a
                             >
-                            <input
+                            <div class='text-center'>
+                                <input
                                 type="submit"
                                 class="
                                     btn btn-lg
                                     rounded-pill
-                                    p-2
-                                    mt-2
+                                    mt-1
                                     shadow
                                     blue
                                 "
-                                value="Login"
-                                onClick="this.form.submit(); this.disabled=true; this.value='Logging in…';this.style='color:black;background-color:white;margin-top:2px;padding:2px'"
+                                value="<%=i18n.Login%>     "
+                                onClick="this.form.submit(); this.disabled=true; this.value='<%=i18n.Loggingin%>…';this.style='color:black;background-color:white;margin-top:2px;padding:2px'"
                                 style="width: 50%; background-color: white"
-                            />
+                                />
+                                <button type="button" class="btn btn-lg btn-light rounded-pill blue ms-1 mt-1" data-bs-toggle="modal" data-bs-target="#langModal"> <i class="fa fa-language" aria-hidden="true"></i> </button>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-10 col-md-8 d-none d-md-block my-auto">
+        <div class="col-10 col-md-7 col-lg-8 d-none d-md-block my-auto">
             <div
                 id="carouselExampleIndicators"
                 class="carousel slide"
@@ -105,8 +107,8 @@
                 </div>
                 <div class="carousel-inner my-auto">
                     <div class="carousel-item active" data-bs-interval="10000">
-                        <div class="row">
-                            <div class="col-6 text-center my-auto">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-5 text-center my-auto d-md-none d-lg-block">
                                 <img
                                     src="http://img.timeinc.net/time/daily/2010/1007/edison_electric_0705.jpg"
                                     alt=""
@@ -115,19 +117,20 @@
                                     height="325px"
                                 />
                             </div>
-                            <div class="col-5 text-center my-auto">
+                            <div class="col-md-10 col-lg-6 text-center my-auto">
                                 <div class="shadow rounded p-2 text-center" style="background-color: rgb(241, 241, 241)">
                                     <blockquote>  
-                                        <p><strong>Many of life’s failures</strong><br>are people who did <strong>not realize how close they were to success</strong> when they gave up.</p>
-                                        <cite>— Thomas Edison</cite>
+                                        <p><strong><%=i18n.EdisonQuote%></strong></p>
+                                        <br>
+                                        <cite><%=i18n.EdisonName%></cite>
                                     </blockquote>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="carousel-item" data-bs-interval="10000">
-                        <div class="row">
-                            <div class="col-6 text-center my-auto">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-5 text-center my-auto d-md-none d-lg-block">
                                 <img
                                     src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/a-a-milne-literary-legend-john-springfield.jpg"
                                     alt=""
@@ -136,19 +139,19 @@
                                     height="325px"
                                 />
                             </div>
-                            <div class="col-5 text-center my-auto">
+                            <div class="col-md-10 col-lg-6 text-center my-auto">
                                 <div class="shadow rounded p-2 text-center" style="background-color: rgb(241, 241, 241)">
                                     <blockquote>  
-                                        <p><strong>Promise me you’ll always remember:</strong> You’re <strong>braver </strong>than you believe, and <strong>stronger </strong>than you seem, and <strong>smarter</strong> than you think.</p>
-                                        <cite>— A.A. Milne</cite>
+                                        <p><strong><%=i18n.MilneQuote%></strong></p>
+                                        <cite><%=i18n.MilneName%></cite>
                                     </blockquote>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="carousel-item" data-bs-interval="10000">
-                        <div class="row">
-                            <div class="col-6 text-center my-auto">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-5 text-center my-auto d-md-none d-lg-block">
                                 <img
                                     src="https://img1.wsimg.com/isteam/ip/3dc8fe23-d247-4bed-82ec-106e5f9d9831/5a4726bd-f1bf-4b78-9448-a8a55ec1ef00.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:400,cg:true"
                                     alt=""
@@ -157,19 +160,19 @@
                                     height="325px"
                                 />
                             </div>
-                            <div class="col-5 text-center my-auto">
+                            <div class="col-md-10 col-lg-6 text-center my-auto">
                                 <div class="shadow p-2 text-center rounded" style="background-color:rgb(241, 241, 241);">
                                     <blockquote>  
-                                        <p><strong>Most of the important things</strong> in the world have been accomplished by <strong>people who have kept on trying</strong>  when there seemed to be no hope at all.</p>
-                                        <cite>— Dale Carnegie</cite>
+                                        <p><strong><%=i18n.CarnegieQuote%></strong></p>
+                                        <cite><%=i18n.CarnegieName%></cite>
                                      </blockquote>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="carousel-item" data-bs-interval="10000">
-                        <div class="row">
-                            <div class="col-6 text-center my-auto">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-5 text-center my-auto d-md-none d-lg-block">
                                 <img
                                     src="https://moralyluces.files.wordpress.com/2013/04/linda-poindexter-2000.jpg?w=584"
                                     alt=""
@@ -178,11 +181,11 @@
                                     height="325px"
                                 />
                             </div>
-                            <div class="col-5 text-center my-auto">
+                            <div class="col-md-10 col-lg-6 text-center my-auto">
                                 <div class="shadow p-2 text-center rounded" style="background-color:rgb(241, 241, 241);">
                                     <blockquote>  
-                                        <p>One small crack does <strong>not mean that you are broken,</strong> it means that you were put to the test and <strong> you didn’t fall apart.</strong></p>
-                                        <cite>— Linda Poindexter</cite>
+                                        <p><strong><%=i18n.PoindexterQuote%></strong></p>
+                                        <cite><%=i18n.PoindexterName%></cite>
                                      </blockquote>
                                 </div>
                             </div>
@@ -193,5 +196,5 @@
         </div>
     </div>
 </div>
-
+<%- include("partials/langModal") %>
 <%- include("partials/footer") %>
