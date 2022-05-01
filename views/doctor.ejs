@@ -1,22 +1,7 @@
 <%- include("partials/header") %>
 <%- include("partials/doctorSideBar") %>
 <div class="container-fluid">
-  <div class="row justify-content-center pt-1">
-    <div class="offset-2 col-8 offset-sm-1 col-sm-10 offset-md-1 col-md-8">
-       <% if(message.error){ %>
-          <div class="alert alert-warning alert-dismissible fade show" role="alert">
-             <strong class="text-center"><%= message.error%></strong>
-             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-       <% } %>
-       <% if(message.success){ %>
-          <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-             <strong class="text-center"><%= message.success%></strong>
-             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-       <% } %>
-    </div>
- </div>
+  <%- include("partials/flashMsg") %>
 
   <div class="row justify-content-center mt-2">
     <div class="offset-2 col-9 offset-sm-1 col-sm-9 offset-md-0 col-md-6 col-lg-5 col-xl-4">
@@ -41,18 +26,31 @@
           <div class="col-sm-8 col-md-4 my-auto">
               <img src="/images/profile.jpg" class="img-fluid rounded-lg" alt="..."/ id='disp-pic'>
           </div>
-          <div class="col-sm-6 col-md-4 my-auto">
-            <p id='name'><%=i18n.Name%> : </p>
-            <p id='email'><%=i18n.Email%> : </p>
-            <p id='age'><%=i18n.Age%> : </p>
-            <p id='level'><%=i18n.Level%> : </p>
-          </div>
-          <div class="col-sm-6 col-md-4 my-auto">
-            <p id="p_id"><%=i18n.PatientID%> : </p>
-            <p id='stroke'><%=i18n.Strokedate%> : </p>
-            <p id='p_stroke'><%=i18n.Poststrokeduration%> : </p>
-            <p id='test'><%=i18n.NumberofTestAssigned%> : </p>
-          </div>
+          <div class="col-sm-8 col-md-8 my-auto">
+            <div class="row">
+              <div class="col-md-6 my-auto">
+                <p id='name'>Name : </p>
+                <p id='email'>Email : </p>
+                <p id='age'>Age : </p>
+                <p id='level'>Level : </p>
+              </div>
+              <div class="col-md-6 my-auto">
+                <p id="p_id">Patient ID : </p>
+                <p id='stroke'>Stroke date : stroke</p>
+                <p id='p_stroke'>Post stroke duration : date</p>
+                <p id='test'>Number of Test Assigned : xy</p>
+              </div>
+              <div class="text-center my-2">
+                <form action="" method="POST" class="d-inline-block" id='upgrade'>
+                  <button class="btn btn-primary rounded-pill btn-lg white m-1" id='upgrade-but' type="submit">
+                    Upgrade</button>
+                </form>
+                <form action="" method="POST" class="d-inline-block" id='downgrade'>
+                  <button class="btn btn-primary rounded-pill btn-lg white m-1" id='downgrade-but' type="submit" >
+                    Degrade</button>
+                </form>
+              </div>
+            </div>
         </div>
       </div>
     </div>
@@ -136,6 +134,8 @@
   function disp_patient_details(patientid) {    
     document.getElementById('spinner-0').classList.remove('d-none')
     document.getElementById('patient-details').setAttribute('hidden', '')
+    document.getElementById('upgrade').action='/inclevel/'+patientid+'?_method=PUT';
+    document.getElementById('downgrade').action='/drelevel/'+patientid+'?_method=PUT';
 
     fetch('/data/patientdetails/'+patientid)
     .then(response => response.json())
@@ -145,6 +145,12 @@
       document.getElementById('age').textContent = 'Age : '+patient[0].age;
       document.getElementById('p_id').textContent = 'Patient ID : '+patient[0]._id;
       document.getElementById('level').textContent = 'Level : '+patient[0].level;
+      if(patient[0].level==1){
+        document.getElementById('downgrade-but').setAttribute('disabled','')
+      }
+      if(patient[0].level==3){
+        document.getElementById('upgrade-but').setAttribute('disabled','')
+      }
       // document.getElementById('disp-pic').src='';
       // document.getElementById('stroke').textContent = '';
       // document.getElementById('p_storke').textContent = '';
@@ -188,7 +194,7 @@
     let data = {
          labels : ['0','1','2','3','4'],
          datasets: [{
-            label:'Hints Taken',
+            label:'',
             data: [],
             backgroundColor: ['#FF6633','#33FFFC','#9CFF33','#33FF96','#36FF33'],
             borderColor: ['#FF4E33','#FFB433','#33FFB4','#7EFF33','#33FF4E'],
@@ -251,7 +257,6 @@
     fetch('/data/testdetails/'+patientid)
     .then(response => response.json())
     .then(test => {
-      console.log(test)
       create_data_for_charts(test);
     });
   }
@@ -298,10 +303,12 @@
     if(bar_chart_no==='1'){
       bar_chart_1.data.labels=Object.keys(dict);
       bar_chart_1.data.datasets[0].data=Object.values(dict);
+      bar_chart_1.data.datasets[0].label='Number of Questions Answered';
       bar_chart_1.update();
     }else if(bar_chart_no==='2'){
       bar_chart_2.data.labels=Object.keys(dict);
       bar_chart_2.data.datasets[0].data=Object.values(dict);
+      bar_chart_2.data.datasets[0].label='Number of Questions Unanswered';
       bar_chart_2.update();
     }else{
       bar_chart_3.data.labels=Object.keys(dict);

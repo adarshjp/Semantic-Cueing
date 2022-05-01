@@ -29,8 +29,11 @@
                                             <%=doctor.age%>
                                         </p>
                                         <div class="d-flex justify-content-end align-items-end">
-                                            <a href="#" class="btn white" id="review"
-                                                target="_blank"><i class="fas fa-trash-alt"></i></a>
+                                            <form action="/delete/<%=doctor._id%>?_method=DELETE" method="POST">
+                                                <button class="btn btn-primary white m-1" type="submit">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

@@ -5,6 +5,7 @@
     <%- include("partials/doctorSideBar") %>
 <% } %>
         <div class="container" id="">
+            <%- include("partials/flashMsg") %>
             <div class="row justify-content-center">
                 <div class="offset-2 col-9 offset-sm-2 col-sm-8 offset-lg-0 col-lg-6 p-1">
                     <h1 class="text-center p-2 display-3 fw-bold">
@@ -38,12 +39,26 @@
                                             <%=patient.age%>
                                         </p>
                                         <div class="d-flex justify-content-end align-items-end">
-                                            <a href="#" class="btn white" id="review"
-                                                target="_blank"><i class="fas fa-trash-alt"></i></a>
-                                            <% if(user.role==="doctor") {%>
-                                                <a href="/chat/<%=patient._id%>" class="btn white mx-1" id="review"
-                                                    ><i class="fa-solid fa-message"></i></a>
-                                            <%}%>
+                                        <% if(user.role==="doctor") {%>
+                                            <form action="/discharge/<%=patient._id%>?_method=PUT" method="POST">
+                                                <button class="btn btn-primary white m-1" type="submit">
+                                                Discharge</button>
+                                            </form>
+                                            <a href="/chat/<%=patient._id%>" class="btn white m-1" id="review"
+                                                ><i class="fa-solid fa-message"></i></a>
+                                        <%}else{%>
+                                            <form action="/active/<%=patient._id%>?_method=PUT" method="POST">
+                                                <button class="btn btn-primary white m-1" type="submit"
+                                                    <%if(patient.status === 'active'){%>disabled<%}%>
+                                                >
+                                                Activate</button>
+                                            </form>
+                                            <form action="/delete/<%=patient._id%>?_method=DELETE" method="POST">
+                                                <button class="btn btn-primary white m-1" type="submit">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </form>
+                                        <%}%>
                                         </div>
                                     </div>
                                 </div>

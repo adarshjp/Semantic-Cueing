@@ -49,6 +49,8 @@ const userSchema = new mongoose.Schema({
   level: { // only for patients level 1,2,3,4,5
     type: Number,
     default: 1,
+    min: 1,
+    max: 3,
   },
   creationTime: {
     type: Date,

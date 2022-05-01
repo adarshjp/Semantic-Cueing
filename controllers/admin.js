@@ -52,7 +52,9 @@ exports.delete_user = (req, res) => {
     //delete the user with id=req.params.id 
     User.findByIdAndDelete({ _id: req.params.id })
         .then((user) => {
-            res.send(user)
+            req.flash('success', 'User deleted successfully')
+            res.status(200)
+            res.redirect('/home/admin/')
         })
         .catch((err) => {
             console.log(err)
@@ -151,3 +153,19 @@ exports.get_view_questions= (req, res) => {
         });
     });
 }
+
+exports.active_patient = (req, res) => {
+    /* Set the status of the patient to active */
+    User.findOneAndUpdate({ _id: req.params.patientid,role:'patient' }, { $set: { status: 'active' } }, { new: true })
+      .then((patient) => {
+        console.log(patient)
+        req.flash('success', 'Patient activated successfully')
+        res.status(200)
+        res.redirect('/view/patient/')
+      })
+      .catch((err) => {
+        res.status(500).json({
+          error: err
+        })
+      })
+  }
