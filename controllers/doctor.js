@@ -137,17 +137,6 @@ exports.get_edit_test= (req, res) => {
   })
 }
 
-exports.get_edit_test = (req, res) => {
-  Test.findOne({ _id: req.params.testid })
-    .then((test) => {
-      res.render("editTest", { user: req.user, test: test });
-    })
-    .catch((err) => {
-      res.status(500).json({
-        error: err
-      })
-    })
-}
 
 exports.put_edit_test = (req, res) => {
   Test.findOneAndUpdate({ _id: req.params.testid }, { $set: { level: req.body.level, questions: req.body.questions, noofquestion: req.body.questions.length } }, { new: true })

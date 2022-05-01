@@ -63,20 +63,6 @@ exports.view_Onequestion = (req, res) => {
 exports.forgotpassword_get= (req, res) => {
     res.render('forgotpassword',{i18n: global.i18n})
 }
-
-function covert_img(files) {
-    let img = []
-    files.forEach((file) => {
-        var obj = {
-            data: fs.readFileSync(
-                path.join(__dirname + '//..//uploads//' + file.filename)
-            ),
-            contentType: 'image/png',
-        }
-        img.push(obj)
-    })
-    return img
-}
 exports.get_edit_question= (req, res) => {
     Question.findById({ _id: req.params.questionid })
         .then((question) => {
