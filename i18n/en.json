@@ -22,11 +22,7 @@
     "EnterNewPassword":"Enter new password",
     "ConfirmNewPassword":"Confirm new password",
     "Confirm":"Confirm",
-    "instructions1":"For answering each question maximum of 100 points will be awarded.",
-    "instructions2":"For each question, There will be 4 hints available and for taking a hint -10 points will be deducted.",
-    "instructions3":"You can skip the question and once skipped questions can not be revisited.",
-    "instructions4":"Hints can be revisited if you want to see them again and make so will not deduct points.",
-    "instructions5":"If you want to pause the test you can pause and take it later.",
+    
     "Hint":"Hint",
     "Next":"Next",
     "Skip":"Skip",
@@ -79,8 +75,8 @@
     "Age":"Age",
     "PatientID":"Patient ID : ",
     "Strokedatestroke":"Stroke date : stroke",
-    "Poststrokedurationdate":"Post stroke duration : date",
-    "NumberofTestAssignedxy":"Number of Test Assigned : xy",
+    "Poststrokeduration":"Post stroke duration ",
+    "NumberofTestAssigned":"Number of Test Assigned",
     "Patientstestresult":"Patients test result",
     "AnsweredaQuestionvsHintsTaken":"Answered a Question vs Hints Taken",
     "UnansweredaQuestionvsHintsTaken":"Unanswered a Question vs Hints Taken",
@@ -139,10 +135,12 @@
     "DoctorName":"Doctor Name",
     "DoctorAge":"Doctor Age",
     "DoctorEmail":"Doctor Email",
+    "Doctors":"Doctors",
 
     "PatientName":"Patient Name",
     "PatientAge":"Patient Age",
     "PatientEmail":"Patient Email",
+    "Patients":"Patients",
 
     "Listof":"List of",
     "Questions":"Questions",
@@ -162,5 +160,11 @@
     "TestID":"Test ID",
     "Home":"Home",
 
-    "Welcome":"Welcome"
+    "Welcome":"Welcome",
+
+    "instructions1":"For answering each question maximum of 100 points will be awarded.",
+    "instructions2":"For each question, There will be 4 hints available and for taking a hint -10 points will be deducted.",
+    "instructions3":"You can skip the question and once skipped questions can not be revisited.",
+    "instructions4":"Hints can be revisited if you want to see them again and make so will not deduct points.",
+    "instructions5":"If you want to pause the test you can pause and take it later."
 }
