@@ -50,20 +50,22 @@
                             <a href="/forgotpassword" id="login-a" class="p-2"
                                 ><%=i18n.ForgotYourPassword%> </a
                             >
-                            <input
+                            <div class='text-center'>
+                                <input
                                 type="submit"
                                 class="
                                     btn btn-lg
                                     rounded-pill
-                                    p-2
-                                    mt-2
+                                    mt-1
                                     shadow
                                     blue
                                 "
-                                value=" <%=i18n.Login%> "
+                                value="<%=i18n.Login%>     "
                                 onClick="this.form.submit(); this.disabled=true; this.value='<%=i18n.Loggingin%>…';this.style='color:black;background-color:white;margin-top:2px;padding:2px'"
                                 style="width: 50%; background-color: white"
-                            />
+                                />
+                                <button type="button" class="btn btn-lg btn-light rounded-pill blue ms-1 mt-1" data-bs-toggle="modal" data-bs-target="#langModal"> <i class="fa fa-language" aria-hidden="true"></i> </button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -194,5 +196,5 @@
         </div>
     </div>
 </div>
-
+<%- include("partials/langModal") %>
 <%- include("partials/footer") %>
