@@ -145,10 +145,12 @@
         .then(res => res.json())
         .then(data => {
             conversationId = data.conversationId;
+            if('messages' in data){
+                data.messages.forEach(message => {
+                    addMessages(message)
+                });
+            }
             //console.log('Messages',data.messages.length)
-            data.messages.forEach(message => {
-                addMessages(message)
-            })
             document.getElementById('spinner-1').classList.add('d-none')
             receivers_name();
         })
