@@ -1,8 +1,6 @@
 const crypto = require("crypto");
 let algorithm = process.env.algorithm; // or any other algorithm supported by OpenSSL
-let iv = new Buffer.from(crypto.randomBytes(16));
 let ivstring = process.env.ivstring;
-const secret = process.env.secret;
 let key=process.env.key;
 exports.encodeMsg = (msg) => {
   var cipher = crypto.createCipheriv(algorithm, key, ivstring);
