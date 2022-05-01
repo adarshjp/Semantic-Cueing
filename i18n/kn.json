@@ -117,7 +117,7 @@
     "Belowisyouronetimepasscode":"ಕೆಳಗೆ ನಿಮ್ಮ ಓಟಿಪಿ  ಇದೆ",
     "Pleaseenterthepasscodeintheapptocompletetheprocess":"ಪ್ರಕ್ರಿಯೆ ಪೂರ್ಣಗೊಳಿಸಲು  ಪಾಸ್‌ಕೋಡ್ ಅನ್ನು ಬರೆಯಿರಿ",
     "Thispasscodeisvalidfor10minutes":"ಈ ಪಾಸ್ವರ್ಡ್ 10 ನಿಮಿಷ ಮಾನ್ಯ",
-    "Ifyoudidnotrequestapasswordresetpleasecontactusimmediately":"ನೀವು ಪಾಸ್ವರ್ಡ್ ರೀಸೆಟ್ ಮನವಿ ಮಾಡದಿದ್ದರೆ,,ದಯವಿಟ್ಟು ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ",
+    "Ifyoudidnotrequestapasswordresetpleasecontactusimmediately":"ನೀವು ಪಾಸ್ವರ್ಡ್ ರೀಸೆಟ್ ಮನವಿ ಮಾಡದಿದ್ದರೆ,ದಯವಿಟ್ಟು ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ",
     "Regards":"ವಂದನೆ",
     "TeamSemanticCueing":"ಟೀಮ್ ಸೆಮಾಂಟಿಕ್ ಕ್ಯೂಯಿಂಗ್",
 
@@ -141,6 +141,9 @@
     "PatientAge":"ಪೇಷಂಟ್ ವಯಸ್ಸು",
     "PatientEmail":"ಪೇಷಂಟ್ ಇಮೇಲ್",
     "Patients":"ಪೇಷಂಟ್",
+    
+    "view_Listof1":"ಪೇಷಂಟ್ಗಳ",
+    "view_Patients1":"ಪಟ್ಟಿ",
 
     "Listof":"ರಚಿಸಲಾದ",
     "Questions":"ಪ್ರಶ್ನೆಗಳ",
