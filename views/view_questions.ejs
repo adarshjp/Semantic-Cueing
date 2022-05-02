@@ -84,6 +84,7 @@
     };
 
     function append_div(q){
+        console.log(q.answer)
         let div=document.createElement("div");
         
         div.className='offset-1 offset-sm-0 col-9 col-sm-10 col-lg-11 shadow-lg bg-body rounded-lg';
@@ -92,19 +93,35 @@
         card_img.className='card-image mx-0 p-2';
 
         let div_row=document.createElement('div');
-        div_row.className='row d-flex align-items-center p-1';
+        div_row.className='row d-flex align-items-center p-1 justify-content-center';
 
         let div_p=document.createElement('div')
-        div_p.className='col-5 col-sm-8 col-md-6 col-lg-8  col-xl-9';
+        div_p.className='col-12 col-sm-8 col-md-6 col-lg-8 col-xl-9';
 
         let p=document.createElement('p')
-        p.className='h6';
+        p.className='h6 text-center text-sm-start';
         p.textContent=q.answer;
 
         div_p.appendChild(p);
 
+        p=document.createElement('p')
+        p.className='h6 text-center text-sm-start';
+        p.textContent='Level : '
+        for(let x=1;x<=5;x++){
+            let span=document.createElement('span');
+            span.className='fa fa-star'
+            if(x<=q.level){
+                span.classList.add('checked')
+            }else{
+                span.classList.add('unchecked')
+            }
+            p.appendChild(span);
+            p.innerHTML +=' '
+        }
+        div_p.appendChild(p);
+
         let div_a=document.createElement('div')
-        div_a.className='col-7 col-sm-4 col-md-6 col-lg-4 col-xl-3';
+        div_a.className='col-7 col-sm-4 col-md-6 col-lg-4 col-xl-3 text-center';
 
         let a=document.createElement('a');
         a.className='btn btn-primary white';
