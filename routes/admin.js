@@ -11,7 +11,7 @@ router.get("/home/admin", isLoggedIn,isAdmin,admin_get);
 router.get("/view/patient", isLoggedIn,isAdmin,view_patient);
 router.get("/view/doctor",isLoggedIn,isAdmin,view_doctor);
 
-router.get("/view/question/:skip?",isLoggedIn,isAdmin,get_view_questions);  // to view the list of questions
+router.get("/view/questions/:skip?",isLoggedIn,isAdmin,get_view_questions);  // to view the list of questions
 
 router.get("/view/:id",isLoggedIn,view_Oneuser);
 router.get("/edit/:id",isLoggedIn,get_edit_user)
