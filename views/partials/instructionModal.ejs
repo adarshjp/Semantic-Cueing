@@ -1,153 +1,31 @@
-<div class="container tab p-2">
-  <div class="row justify-content-center shadow-lg p-3" style="height: 100vh">
-    <h4 class="text-center m-1">Instructions</h4>
-    <div class="col-11 col-lg-6">
-      <ol class="list-group list-group-numbered p-1">
-        <li class="list-group-item">
-          <span><b>Scores Recieved Per Question</b></span>
-          <ul>
-            <li>For answering each question maximum of 100 points will be awarded.</li>
-            <li>If you skip a question you will recieve 0 points</li>
-            <li>Once skipped questions can not be revisited</li>
-          </ul>
-        </li>
-        <li class="list-group-item">
-          <span>Hints Taken</span>
-          <ul>
-            <li>For each question, There will be 4 hints available and for taking a hint -10 points will bededucted</li>
-            <li>When a hint is taken, it will last for 10sec and then will be closed</li>
-            <li>Hints can be revisited if you want to see them again.</li>
-          </ul>
-        </li>
-        <li class="list-group-item">
-          <span>Pause Test Or Closing of the tab</span>
-          <ul>
-            <li>If you want to pause the test you can pause and take it later.</li>
-            <li>If for some reason you meet with some issues and your tab gets closed you can login again and Resume your test from the point where you had stopped.</li>
-          </ul>
-        </li>
-        <li class="list-group-item">
-          <span>Speech To Text Option</span>
-          <ul>
-            <li>Apart from typing the answer you can also use the speech to text feature and Say the answer.</li>
-          </ul>
-        </li>
-      </ol>
-      <span class='h6 blue text-center'>
-        <i>Please Take the Microphone Check inorder to start your test.</i>
-      </span>
-    </div>
-    <div class="col-11 col-lg-6">
-      <ol class="">
-        <span>Final Score Card!</span>
-        <li class="">
-          <ul>
-            <li>Your final score will be determined based on the number of correct answers given and the number of hints you have taken.</li>
-            <li>Based on this score a seperate test report will be generated.</li>
-            <li>Test Report will be reflected in your dashboard once you are finished taking the test.</li>
-          </ul>
-        </li>
-      </ol>
-      <div >
-        <h5>Check Your <span class="blue"> Microphone</span></h5>
-        <div class="d-flex justify-content-center align-items-center d-none">
-          <svg class="mic-tick-animated-check" viewBox="0 0 24 24">
-            <path d="M4.1 12.7L9 17.6 20.3 6.3" fill="none" />
-          </svg>
-          <h5>Your Microphone is Working..!</h5>
-          <div class='text-center'>
-            <button class="btn btn-primary btn-lg" id="proceed-btn" type="button">Take your test</button>
+<div class="container-fluid">
+  <div class="row justify-content-center tab p-2">
+    <div class="col-12 col-sm-8 col-xl-6 shadow-lg rounded-lg p-md-5">
+      <h2 class="text-center blue my-2">Test Your Microphone</h2>
+      <div class="row justify-content-center my-3">
+        <div class="col-12">
+          <label class="form-select-label h6" for="microphone_list">Select Microphone</label>
+          <select class="form-select form-select-lg" id='microphone_list'></select>
+          <div class="pids-wrapper text-center">
+            <div class="pid"></div>
+            <div class="pid"></div>
+            <div class="pid"></div>
+            <div class="pid"></div>
+            <div class="pid"></div>
+            <div class="pid"></div>
+            <div class="pid"></div>
+            <div class="pid"></div>
           </div>
         </div>
-        <div class="d-flex text-center">
-            <strong><label for="audioSource" class="text-start">Select Microphone</label></strong>
-            <select class="form-select" id="audioSource">
-
-            </select>
-          <br>
-          <div class="pids-wrapper">
-            <div class="pid"></div>
-            <div class="pid"></div>
-            <div class="pid"></div>
-            <div class="pid"></div>
-            <div class="pid"></div>
-            <div class="pid"></div>
-            <div class="pid"></div>
-            <div class="pid"></div>
-            <div class="pid"></div>
-            <div class="pid"></div>
-          </div>
-          <div class="text-center">
-            <button class="btn btn-primary btn-lg blue m-1" type="button" id="start-rec"><i class="fa-solid fa-play"></i></button>
-            <button class="btn btn-primary btn-lg blue m-1" type="button" id="stop-rec"><i class="fa-solid fa-stop"></i></button>
-          </div>
+        <div class="text-center d-inline-block">
+          <button type="button" class="btn btn-primary rounded-circle me-2" onclick="startAudioRecording()">
+            <i class="fa fa-microphone fa-2x white p-1"></i>
+          </button>
+          <button type="button" class="btn btn-danger rounded-circle ms-2" onclick="StopAudioRecording()">
+            <i class="fa fa-stop fa-2x white p-1"></i>
+          </button>
         </div>
       </div>
     </div>
-    <div class="text-center">
-      <button class="btn btn-primary btn-lg blue m-1" type="button" id='next'>next</button>
-    </div>
   </div>
 </div>
-<script>
-
-  document.getElementById("next").addEventListener("click",function(){
-    document.getElementsByClassName('tab')[0].classList.add('d-none');
-    document.getElementsByClassName('tab')[1].classList.remove('d-none');
-  })
-
-  const audioSource = document.getElementById('audioSource');
-  const selectors = [audioSource];
-
-  audioSource.onchange=start;
-
-  document.getElementById('start-rec').addEventListener('click',startAudioRecording(),true);
-  document.getElementById('stop-rec').addEventListener('click',startAudioRecording(),true);
-
-  // function to select the audio input source
-  function gotDevices(deviceInfos) {
-    // Handles being called several times to update labels. Preserve values.
-    const values = selectors.map(select => select.value);
-    selectors.forEach(select => {
-      while (select.firstChild) {
-        select.removeChild(select.firstChild);
-      }
-    });
-    for (let i = 0; i !== deviceInfos.length; ++i) {
-      const deviceInfo = deviceInfos[i];
-      const option = document.createElement('option');
-      option.value = deviceInfo.deviceId;
-      if (deviceInfo.kind === 'audioinput') {
-        option.text = deviceInfo.label || `microphone ${audioSource.length + 1}`;
-        audioSource.appendChild(option);
-      }
-      }
-      selectors.forEach((select, selectorIndex) => {
-        if (Array.prototype.slice.call(select.childNodes).some(n => n.value === values[selectorIndex])) {
-          select.value = values[selectorIndex];
-        }
-      });
-    }
-
-    function start() {
-      // Second call to getUserMedia() with changed device may cause error, so we need to release stream before changing device
-      if (window.stream) {
-        stream.getAudioTracks()[0].stop();
-      }
-      const sel_audioSource = audioSource.value;
-      const constraints = {
-        audio: { deviceId: sel_audioSource ? { exact: sel_audioSource } : undefined }
-      };
-    }
-
-    function handleError(error) {
-      console.log('navigator.MediaDevices.getUserMedia error: ', error.message, error.name);
-      location.reload();
-    }
-
-    navigator.mediaDevices.enumerateDevices()
-      .then(gotDevices)
-      .then(start)
-      .catch(handleError);
-</script>
-
