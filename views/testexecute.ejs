@@ -165,15 +165,26 @@
 
   function check_ans(a){
     var val=document.getElementById('answer').value.toLowerCase().split(' ')
-    document.getElementById('answer').value=''
-    for(var i=0;i<val.length;i++){
-      if(a.toLowerCase() === val[i]){
+    a=a.map(element => {
+      return element.toLowerCase();
+    });
+    document.getElementById('answer').value='';
+    for(var i in val){
+      if(a.indexOf(val[i]) >=0){
         score=score+(100-hints_taken*10)
         ans[hints_taken.toString()]++;
         document.getElementById('score').textContent='Score Obtained : '+score;
         return;
       }
     }
+    // for(var i=0;i<val.length;i++){
+    //   if(a.toLowerCase() === val[i]){
+    //     score=score+(100-hints_taken*10)
+    //     ans[hints_taken.toString()]++;
+    //     document.getElementById('score').textContent='Score Obtained : '+score;
+    //     return;
+    //   }
+    // }
     unans[hints_taken.toString()]++;
   }
 

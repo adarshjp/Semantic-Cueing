@@ -6,28 +6,33 @@
          <div class="text-center p-3 m-3 font-monospace">
             <h1 class="display-4"><%=i18n.Addan%> <span class="blue"><%=i18n.Object%></span> <%=i18n.toidentify1%></h1>
          </div>
-         <form action="/addquestion" method="POST" enctype="multipart/form-data" id='add_q_form'>
+         <form action="/addquestion" method="POST" enctype="multipart/form-data" id='add_q_form' onsubmit="return validate()">
             <div class="row justify-content-center">
                <div class="col-12 col-md-6 card p-4 shadow">
                   <!-- <h2 class="card-title text-center">Choose the <span class="blue">Image</span> of Object</h2> -->
                   <div class="form-group text-center">
-                     <label for="upload_file">
+                     <label for="upload_file" id='upload_cloud'>
                         <i class="fa-solid fa-cloud-arrow-up fa-4x blue"></i>
                      </label>
-                     <input type="file" name="image" class="form-control form-control-lg fi" accept="image/png, image/jpeg" placeholder="<%=i18n.EnterImage%>" id="upload_file" onchange="getImagePreview(event,'preview','upload_file')" id="login-input" style="display:none;" required>
+                     <input type="file" name="image" class="form-control form-control-lg fi" accept="image/png, image/jpeg" placeholder="<%=i18n.EnterImage%>" id="upload_file" onchange="getImagePreview(event,'preview','upload_file','upload_cloud')" id="login-input" style="display:none;">
                   </div>
                   <div class="row justify-content-center my-2 text-center">
                      <div class="col-12 col-sm-7 col-md-6" id="preview"></div>
                   </div>
-                  <div class="row justify-content-center">
-                        <div class="col-12 col-md-6">
-                           <input type="text" name="answer" id="login-input" placeholder="<%=i18n.NameofObject%>" required> 
+                  <div class="row justify-content-center align-items-center">
+                        <div class="col-12 col-sm-10 col-md-8">
+                           <input type="text" class='login-input' id='ans' placeholder="<%=i18n.NameofObject%>" onkeydown="return event.key != 'Enter';"> 
+
+                           <input type="text" name="answer" class='login-input d-none' id='form_ans'> 
                         </div>
-                        <div class="col-12 col-md-6">
-                           <input type="number" name="level" id="login-input1"  placeholder="<%=i18n.EnterLevel%>" onchange="checklevel(this.value)" required>
+                        <ul id='ans_list' class="col-12 col-md-10 col-lg-8 text-center" style="overflow: auto;flex-wrap: nowrap;white-space: nowrap;">
+
+                        </ul>
+                        <div class="col-12 col-md-10 col-lg-8 text-center my-2">
+                           <%- include("partials/starLevel") %>
                         </div>
-                        <div class="col-12 col-md-6">
-                           <input type="text" name="score" id="login-input" placeholder="<%=i18n.Description%>" required>
+                        <div class="col-12 col-md-10 col-lg-8">
+                           <input type="text" name="score" id='desc' class='login-input' placeholder="<%=i18n.Description%>" required>
                         </div>
                   </div>
                </div>
@@ -37,18 +42,18 @@
             </div>
             <div class="row justify-content-center mt-3">
                <% for (var i = 0; i < 4; i++) { %>
-               <div class="col-12 col-md-5 card shadow m-1 p-4">
+               <div class="col-12 col-md-5 card shadow m-2 p-4">
                   <!-- <h2 class="card-title text-center">Add hint<%= i+1 %></h2> -->
                   <div class="row justify-content-center">
                      <div class="form-group col-12 text-center">
-                        <label for="upload_hint<%= i %>">
+                        <label for="upload_hint<%= i %>" id='hint_cloud<%= i %>'>
                            <i class="fa-solid fa-cloud-arrow-up fa-4x blue" data-bs-toggle="tooltip" data-bs-placement="top" title="Upload an Image"></i>
                         </label>
-                        <input type="file" name="image" accept="image/png, image/jpeg" class="form-control form-control-lg" placeholder="<%=i18n.EnterImage%>" id="upload_hint<%= i %>" onchange="getImagePreview(event,'preview-hint<%= i %>','upload_hint<%= i %>')" style="display: none" required>
+                        <input type="file" name="image"  accept="image/png, image/jpeg" class="form-control form-control-lg" placeholder="<%=i18n.EnterImage%>" id="upload_hint<%= i %>" onchange="getImagePreview(event,'preview-hint<%= i %>','upload_hint<%= i %>','hint_cloud<%= i %>')" style="display: none">
                      </div>
                      <div id="preview-hint<%= i %>" class="my-2 col-11 col-sm-9 col-md-7 text-center"></div>
                      <div class="col-12">
-                        <input type="text" name="nscore[<%= i %>]" id="login-input" placeholder="<%=i18n.Description%>" required>
+                        <input type="text" name="nscore[<%= i %>]" id='hint_desc<%= i %>' class="login-input" placeholder="<%=i18n.Description%>" required>
                      </div>
                   </div>    
                </div>
@@ -62,7 +67,7 @@
    </div>
 </div>
 <script>
-   function getImagePreview(event,preview_id,upload_id){
+   function getImagePreview(event,preview_id,upload_id,cloud){
       const fi = document.getElementById(upload_id);
       const fsize = fi.files.item(0).size;
       const file = Math.round((fsize / 1024));
@@ -75,6 +80,7 @@
          newimg.src='';
       }
       else{
+         document.getElementById(cloud).classList.add('d-none')
          var image=URL.createObjectURL(event.target.files[0]);
          var imagediv= document.getElementById(preview_id);
          var newimg=document.createElement('img');
@@ -84,6 +90,8 @@
          newimg.width="300";
          newimg.style="max-height:300px;border:2px solid #6C63FF;padding:2px";
          imagediv.appendChild(newimg);
+         let br= document.createElement('br')
+         imagediv.appendChild(br);
          var removebtn=document.createElement('button');
          removebtn.className="btn btn-sm blue text-center";
          removebtn.innerHTML='<i class="fa-solid fa-xmark"></i>'
@@ -93,15 +101,71 @@
             var newimg=document.createElement('img');
             imagediv.innerHTML='';
             newimg.src='';
+            document.getElementById(cloud).classList.remove('d-none')
          }
          imagediv.appendChild(removebtn);
       }
   }
 
-   document.getElementById('add_q_form').addEventListener("submit", function(e){ 
-      document.getElementById('add_q_submit').disabled=true;
-      document.getElementById('add_q_submit').value='Submitting';
+   let entered_ans=[];
+   let ans_list=document.getElementById('ans_list');
+   let ans=document.getElementById('ans');
+
+   ans.addEventListener('keydown',function(e){
+      if(e.key==='Enter'){
+         let val=ans.value.charAt(0).toUpperCase() + ans.value.toLowerCase().slice(1);
+         if(val!==''){
+            if(entered_ans.indexOf(val)>=0){
+               alert('Entered answer is duplicate');
+            }else{
+               entered_ans.push(val);
+               disp_pill();
+               ans.value='';
+               ans.focus();
+            }
+         }else{
+            alert('Please type answer');
+            ans.value='';
+            ans.focus();
+         }
+      }
    });
+
+   function disp_pill(){
+      ans_list.innerHTML='';
+      entered_ans.map((item, index) => {
+         ans_list.innerHTML += `<li class='rounded-pill m-1 p-2 bg-primary white d-inline-block'><span class='ms-2'>${item}</span><a class='mx-2 h6' href="javascript: remove(${index})"><i class="fa-solid fa-xmark"></i></a></li>`;
+      });
+      if(entered_ans.length==0){
+         document.getElementById('form_ans').value='';
+      }else{
+         document.getElementById('form_ans').value=JSON.stringify(entered_ans);
+      }
+   }
+
+   function remove(i){
+      entered_ans=entered_ans.filter(item => entered_ans.indexOf(item) != i);
+      disp_pill();
+   }
+
+   function validate(){
+      if(document.getElementById('form_ans').value===''){
+         alert('Please enter names of the object');
+         return false;
+      }
+      if(document.getElementById('upload_file').files.length==0){
+         alert('Please upload object image')
+         return false;
+      }
+      for(let i=0;i<4;i++){
+         if(document.getElementById('upload_hint'+i).files.length===0){
+            alert('Please upload hint'+ i);
+            return false;
+         }
+      }
+      document.getElementById('add_q_submit').setAttribute('disabled','')
+      return true;
+   }
  </script>
 <%- include("partials/footer") %>
 

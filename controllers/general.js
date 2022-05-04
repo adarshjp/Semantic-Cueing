@@ -12,7 +12,7 @@ exports.addquestions_post = (req, res, next) => {
     //console.log(img);
     var newQuestion = new Question({
         question: img[0],
-        answer: req.body.answer,
+        answer: JSON.parse(req.body.answer),
         level: req.body.level,
         score: req.body.score,
     })
@@ -87,7 +87,7 @@ exports.put_edit_question= async (req, res) => {
     let img
     let newQuestion={
         name:req.body.name,
-        answer:req.body.answer,
+        answer:JSON.parse(req.body.answer),
         level:req.body.level,
         score:req.body.score,
     }

@@ -803,9 +803,6 @@ background: #eee;
 
 }
 
-
-
-
 .pids-wrapper{
   width: 100%;
 }
@@ -820,3 +817,33 @@ background: #eee;
   margin: 8px 0;
 }
 
+#ans_list li a,#ans_list_modal li a{
+  text-decoration: none;
+  color: #FF6584;
+}
+
+.rating-wrapper {
+  display: inline-flex;
+  direction: rtl !important;
+}
+.rating-wrapper label {
+  color: #e1e6f6;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 1.5rem;
+  padding: 0.2rem 0.2rem;
+  transition: color 0.5s;
+}
+.rating-wrapper input {
+  height: 100%;
+  width: 100%;
+}
+.rating-wrapper input {
+  display: none;
+}
+.rating-wrapper label:hover, .rating-wrapper label:hover ~ label, .rating-wrapper input:checked ~ label {
+  color: #6C63FF;
+}
+.rating-wrapper label:hover, .rating-wrapper label:hover ~ label, .rating-wrapper input:checked ~ label {
+  color: #6C63FF;
+}
