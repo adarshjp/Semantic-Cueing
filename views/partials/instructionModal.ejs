@@ -1,31 +1,149 @@
-<div class="container-fluid">
-  <div class="row justify-content-center tab p-2">
-    <div class="col-12 col-sm-8 col-xl-6 shadow-lg rounded-lg p-md-5">
-      <h2 class="text-center blue my-2">Test Your Microphone</h2>
-      <div class="row justify-content-center my-3">
-        <div class="col-12">
-          <label class="form-select-label h6" for="microphone_list">Select Microphone</label>
-          <select class="form-select form-select-lg" id='microphone_list'></select>
-          <div class="pids-wrapper text-center">
-            <div class="pid"></div>
-            <div class="pid"></div>
-            <div class="pid"></div>
-            <div class="pid"></div>
-            <div class="pid"></div>
-            <div class="pid"></div>
-            <div class="pid"></div>
-            <div class="pid"></div>
-          </div>
+<div class="container">
+  <div class="row justify-content-center align-items-center p-2" style="height: 100vh">
+    <div class="col-12 col-md-10 col-lg-8 col-xl-6">
+      <div class="card shadow-lg rounded-lg">
+        <div class="card-header p-3">
+          <h4 class="card-title blue text-center">Instructions for the Test</h4>
         </div>
-        <div class="text-center d-inline-block">
-          <button type="button" class="btn btn-primary rounded-circle me-2" onclick="startAudioRecording()">
-            <i class="fa fa-microphone fa-2x white p-1"></i>
-          </button>
-          <button type="button" class="btn btn-danger rounded-circle ms-2" onclick="StopAudioRecording()">
-            <i class="fa fa-stop fa-2x white p-1"></i>
-          </button>
+        <div class="card-body tab">
+          <select class="form-select form-select-lg mb-3" id='list_of_mic'>
+
+          </select>
+        </div>
+        <div class="card-body tab d-none">
+          <ul class="list-group p-1">
+            <li class="list-group-item">
+              <p class="h5 blue text-start">Speech To Text Option</p>
+              <ul>
+                <li>For answering each question maximum of 100 points will be awarded</li>
+                <li>If you skip a question you will recieve 0 points</li>
+                <li>Once skipped questions can not be revisited</li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="list-group p-1">
+            <li class="list-group-item">
+              <p class="h5 blue text-start">Hints Taken</p>
+              <ul>
+                <li>For each question, There will be 4 hints available and for taking a hint -10 points will be deducted</li>
+                <li>When a hint is taken, it will last for 10sec and then will be closed</li>
+                <li>Hints can be revisited if you want to see them again.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body tab d-none">
+          <ul class="list-group p-1">
+            <li class="list-group-item">
+              <p class="h5 blue text-start">Pause Test or Closing of the tab</p>
+              <ul>
+                <li>If you want to pause the test you can pause and take it later.</li>
+                <li>If for some reason you meet with some issues and your tab gets closed you can login again and Resume your test from the point where you had stopped.</li>
+                <li>In either case your test will be continued from the point where you had paused.</li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="list-group p-1">
+            <li class="list-group-item">
+              <p class="h5 blue text-start">Speech To Text Option</p>
+              <ul>
+                <li>Apart from typing the answer you can also use the speech to text feature and Say the answer.</li>
+                <li>Please Take the Microphone Check inorder to start your test.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body tab d-none">
+          <ul class="list-group p-1">
+            <li class="list-group-item">
+              <p class="h5 blue text-start">Final Score Card.!</p>
+              <ul>
+                <li>Your final score will be determined based on the number of correct answers given and the number of hints you have taken.</li>
+                <li>Based on this score a seperate test report will be generated.</li>
+                <li>Test Report will be reflected in your dashboard once you are finished taking the test.</li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="list-group p-1 h6 text-center">
+            <li class="list-group-item">
+              <input class="form-check-input me-1" type="checkbox" value="" aria-label="..."> I have read and understood the all the instructions.
+            </li>
+            <li class="list-group-item">
+              <input class="form-check-input me-1" type="checkbox" value="" aria-label="..."> I have completed the microphone test.
+            </li>
+          </ul>
+        </div>
+        <div class="card-footer">
+          <div class="p-1 text-center">
+            <button type="button" id="prevBtn" class="btn btn-secondary btn-lg" onclick="nextPrev(-1)"><i class="fa-solid fa-angles-left"></i></button>
+            <button type="button" id="nextBtn" class="btn btn-primary btn-lg" onclick="nextPrev(1)"><i class="fa-solid fa-angles-right"></i></button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  let curTab=0;
+  showTab(curTab);
+  get_list_of_mic();
+
+  function showTab(n) {
+    var x = document.getElementsByClassName("tab");
+    x[n].classList.remove('d-none')
+    x[n].classList.add('d-block');
+    if (n == 0) {
+      document.getElementById("prevBtn").classList.add('d-none');
+      document.getElementById("prevBtn").classList.remove('d-inline');
+    } else {
+      document.getElementById("prevBtn").classList.remove('d-none');
+      document.getElementById("prevBtn").classList.add('d-inline');
+    }
+  }
+    
+  function nextPrev(n) {
+    var x = document.getElementsByClassName("tab");
+    x[curTab].classList.add('d-none');
+    x[curTab].classList.remove('d-block')
+    curTab = curTab + n;
+    if(curTab===(x.length-1)){
+      document.getElementById("nextBtn").classList.add('d-none');
+      document.getElementById("nextBtn").classList.remove('d-inline');
+    } else {
+      document.getElementById("nextBtn").classList.remove('d-none');
+      document.getElementById("nextBtn").classList.add('d-inline');
+    }
+    showTab(curTab);
+  }
+
+  function start() {
+    if (window.stream) {
+      stream.getAudioTracks()[0].stop();
+    }
+  }
+
+  function get_list_of_mic(){
+    if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
+      alert("enumerateDevices() not supported.");
+      return;
+    }
+
+    navigator.mediaDevices.enumerateDevices()
+    .then(function(devices) {
+      let list_of_mic=document.getElementById("list_of_mic")
+      devices.forEach(function(device) {
+        if(device.kind==='audioinput'){
+          let option=document.createElement("option");
+          option.value=device.deviceId;
+          option.text= device.label || `microphone ${list_of_mic.length + 1}`;
+          list_of_mic.appendChild(option);
+        }
+      });
+    })
+    .then(start)
+    .catch(function(err) {
+      console.log(err.name + ": " + err.message);
+    });
+  }
+</script>
