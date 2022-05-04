@@ -817,7 +817,7 @@ background: #eee;
   margin: 8px 0;
 }
 
-#ans_list li a{
+#ans_list li a,#ans_list_modal li a{
   text-decoration: none;
   color: #FF6584;
 }

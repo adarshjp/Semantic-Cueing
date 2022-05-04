@@ -8,10 +8,10 @@
             <form method="post" action="" id='edit-form' enctype="multipart/form-data">
                <div class="row justify-content-center p-3">
                      <div class="form-group col-12 text-center">
-                        <label for="upload_hint">
+                        <label for="upload_hint" id='cloud-hint' class='d-none'>
                            <i class="fa-solid fa-cloud-arrow-up fa-4x blue" data-bs-toggle="tooltip" data-bs-placement="top" title="Upload an Image"></i>
                         </label>
-                        <input type="file" name="hint" accept="image/png, image/jpeg" class="form-control form-control-lg" placeholder="Enter Image" id="upload_hint" onchange="getImagePreview(event,'preview-hint','upload_hint')" style="display: none">
+                        <input type="file" name="hint" accept="image/png, image/jpeg" class="form-control form-control-lg" placeholder="Enter Image" id="upload_hint" onchange="getImagePreview(event,'preview-hint','upload_hint','cloud-hint')" style="display: none">
                      </div>
                      <div id="preview-hint" class="my-2 col-11 col-sm-9 col-md-7 text-center">
                         

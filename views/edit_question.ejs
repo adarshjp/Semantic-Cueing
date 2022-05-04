@@ -1,6 +1,6 @@
 <%- include("partials/header") %>
 <%- include("partials/adminSideBar") %>
-<div class="container mt-3 mb-3">
+<div class="container-fluid mt-3 mb-3">
    <%- include("partials/flashMsg") %>
    <div class="row justify-content-center">
       <div class="offset-2 col-8 offset-sm-1 col-sm-10 offset-md-1 col-md-11">
@@ -15,12 +15,20 @@
                         <img src="data:image/<%=question.question.contentType%>;base64,<%=question.question.data.toString('base64')%>" class="img-fluid" width="300" style="max-height:300px;border:2px solid #6C63FF;padding:2px">
                      </div>
                   </div>
-                  <div class="row justify-content-center">
+                  <div class="row justify-content-center align-items-center">
+                        <ul id='ans_list' class="col-12 col-md-6 text-center" style="overflow: auto;flex-wrap: nowrap;white-space: nowrap;">
+
+                        </ul>
                         <div class="col-12 col-md-6">
-                           <input type="text" name="" id="login-input" placeholder="Name of Object..." value="<%=question.answer%>" disabled> 
-                        </div>
-                        <div class="col-12 col-md-6">
-                           <input type="number" name="" id="login-input1"  placeholder="Enter Level(1-5)..." onchange="checklevel(this.value)" value="<%=question.level%>" disabled>
+                           <p class="h6 text-center"><%=i18n.Level%> : 
+                              <%for(let i=1;i<=5;i++){%>
+                                <%if(i<=question.level){%>
+                                  <span class = "fa fa-star checked"></span>
+                                <%} else{%>
+                                  <span class = "fa fa-star unchecked"></span>
+                                <%}%>
+                              <%}%>
+                          </p>
                         </div>
                         <div class="col-12 col-md-6">
                            <input type="text" name="" id="login-input" placeholder="Description..." value="<%=question.score%>" disabled>
@@ -37,11 +45,11 @@
                </div>
             </div>
             <div class="text-center p-3 m-3 font-monospace">
-               <h1 class="display-5"><%=i18n.Update%> <span class="blue"><%=i18n.hints%></span><%=i18n.toidentify%></h1>
+               <h1 class="display-5"><%=i18n.Updatethe%> <span class="blue"><%=i18n.hints%></span> <%=i18n.toidentify3%></h1>
             </div>
-            <div class="row justify-content-center mt-3">
+            <div class="row justify-content-center align-items-center mt-3">
                <% for (var i = 0; i < 4; i++) { %>
-               <div class="col-12 col-md-5 card shadow m-1 p-4">
+               <div class="col-12 col-md-6 card shadow m-1 p-4">
                   <!-- <h2 class="card-title text-center">Add hint<%= i+1 %></h2> -->
                   <div class="row justify-content-center">
                      <div id="preview-hint<%= i %>" class="my-2 col-11 col-sm-9 col-md-7 text-center">
@@ -70,7 +78,18 @@
 <%- include("partials/editQuestionModal") %>
 <%- include("partials/editHintModal") %>
 <script>
-   function getImagePreview(event,preview_id,upload_id){
+   let entered_ans='<%=question.answer%>'.split(',');
+   let ans_list=document.getElementById('ans_list');
+   let ans_list_modal=document.getElementById('ans_list_modal');
+
+   disp_init_pills();
+   function disp_init_pills(){
+      entered_ans.map((item, index) => {
+         ans_list.innerHTML += `<li class='rounded-pill m-1 p-2 bg-primary white d-inline-block'><span>${item}</span></li>`;
+      });
+   }
+
+   function getImagePreview(event,preview_id,upload_id,cloud){
       const fi = document.getElementById(upload_id);
       const fsize = fi.files.item(0).size;
       const file = Math.round((fsize / 1024));
@@ -83,8 +102,9 @@
          newimg.src='';
       }
       else{
+         document.getElementById(cloud).classList.add('d-none')
          var image=URL.createObjectURL(event.target.files[0]);
-         disp_image(upload_id,preview_id,image);
+         disp_image(upload_id,preview_id,image,cloud);
       }
   }
 
@@ -92,7 +112,9 @@
    editQuestionModal.addEventListener('show.bs.modal', function (event) {
       var button = event.relatedTarget
       var image = button.getAttribute('data-bs-whatever');
-      disp_image('upload_q','preview-q',image);
+      disp_image('upload_q','preview-q',image,'cloud-q');
+      disp_pill();
+      document.getElementById('<%=question.level%>'+'-star-rating').checked=true;
    });
 
   var editHintModal = document.getElementById('editHintModal')
@@ -101,10 +123,10 @@
       var hint_details = JSON.parse(button.getAttribute('data-bs-whatever'));
       document.getElementById('text').value = hint_details[2];
       document.getElementById('edit-form').action='/edit/hint/'+hint_details[3]+'/'+hint_details[0]+'?_method=PUT';
-      disp_image('upload_hint','preview-hint',hint_details[1])
+      disp_image('upload_hint','preview-hint',hint_details[1],'cloud-hint')
    });
 
-function disp_image(upload_id,preview_id,image){
+function disp_image(upload_id,preview_id,image,cloud){
    var imagediv= document.getElementById(preview_id);
    var newimg=document.createElement('img');
    imagediv.innerHTML='';
@@ -122,9 +144,55 @@ function disp_image(upload_id,preview_id,image){
       var newimg=document.createElement('img');
       imagediv.innerHTML='';
       newimg.src='';
+      document.getElementById(cloud).classList.remove('d-none')
    }
    imagediv.appendChild(removebtn);
-}
+} 
+
+   ans.addEventListener('keydown',function(e){
+      if(e.key==='Enter'){
+         let val=ans.value.charAt(0).toUpperCase() + ans.value.toLowerCase().slice(1);
+         if(val!==''){
+            if(entered_ans.indexOf(val)>=0){
+               alert('Entered answer is duplicate');
+            }else{
+               entered_ans.push(val);
+               disp_pill();
+               ans.value='';
+               ans.focus();
+            }
+         }else{
+            alert('Please type answer');
+            ans.value='';
+            ans.focus();
+         }
+      }
+   });
+
+   function disp_pill(){
+      ans_list_modal.innerHTML='';
+      entered_ans.map((item, index) => {
+         ans_list_modal.innerHTML += `<li class='rounded-pill m-1 p-2 bg-primary white d-inline-block'><span class='ms-2'>${item}</span><a class='mx-2 h6' href="javascript: remove(${index})"><i class="fa-solid fa-xmark"></i></a></li>`;
+      });
+      if(entered_ans.length==0){
+         document.getElementById('form_ans').value='';
+      }else{
+         document.getElementById('form_ans').value=JSON.stringify(entered_ans);
+      }
+   }
+
+   function remove(i){
+      entered_ans=entered_ans.filter(item => entered_ans.indexOf(item) != i);
+      disp_pill();
+   }
+
+   function validate(){
+      if(document.getElementById('form_ans').value===''){
+         alert('Please atleast one name of the object');
+         return false;
+      }
+      return true;
+   }
  </script>
 <%- include("partials/footer") %>
 
