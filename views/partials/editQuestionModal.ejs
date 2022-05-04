@@ -18,17 +18,17 @@
                      </div>
                      <div class="col-12">
                         <div class="row justify-content-center">
-                           <div class="col-12 col-md-6">
+                           <ul id='ans_list_modal' class="col-12 col-sm-10 col- text-center" style="overflow: auto;flex-wrap: nowrap;white-space: nowrap;">
+
+                           </ul>
+                           <div class="col-12 col-sm-10">
                               <input type="text" class="login-input" value="" id='ans'  placeholder="Name of Object..." onkeydown="return event.key != 'Enter';"> 
                               <input type="text" name="answer" class='login-input d-none' id='form_ans'>
                            </div>
-                           <ul id='ans_list_modal' class="col-12 col-md-6 text-center" style="overflow: auto;flex-wrap: nowrap;white-space: nowrap;">
-
-                           </ul>
-                           <div class="col-12 col-md-6 text-center">
+                           <div class="col-12 col-sm-10 text-center my-2">
                               <%- include("starLevel") %>
                            </div>
-                           <div class="col-12 col-md-6">
+                           <div class="col-12 col-sm-10">
                               <input type="text" name="score" class="login-input" value="<%=question.score%>" placeholder="Description..." required>
                            </div>
                         </div>
