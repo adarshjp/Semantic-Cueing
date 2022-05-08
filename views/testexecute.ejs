@@ -80,6 +80,10 @@
 <%- include("partials/testSubModal") %>
 
 <script type="text/javascript">
+  window.onload = function() {
+    checkBrowser();
+  };
+
   function startTest() {
     if(document.getElementById("instruRead").checked && document.getElementById("micTested").checked) {
       document.getElementById("instructions").classList.add('d-none');
@@ -457,7 +461,6 @@
   //------------ Instructions Page ------------------------//
 
   let curTab=0;
-  checkBrowser();
   showTab(curTab);
   get_list_of_mic();
   let recMic;
@@ -542,15 +545,16 @@
   }
 
   function checkBrowser(){
-    console.log(/*@cc_on!@*/false || !!document.documentMode)
     if(typeof InstallTrigger !== 'undefined' || 
       (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0 ||
       /*@cc_on!@*/false || !!document.documentMode
     ){
-      alert('Please Use Chrome or Edge Browsers to proceed')
-      close_test();
+      swal('Error...!','Please Use Chrome or Edge Browsers to proceed...!','error')
+      .then(function(){
+        close_test();
+      })
     }else{
-      document.getElementById('instructions').classList.remove('d-none')
+      document.getElementById('instructions').classList.remove('d-none');
     }
   }
 
