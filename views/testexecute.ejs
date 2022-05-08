@@ -1,5 +1,5 @@
 <%- include("partials/header") %>
-<%- include("partials/instruction") %>
+<%- include("partials/instructionModal") %>
 <div class="container-fluid d-none" id='test'>
   <div class="row justify-content-center p-3" style="height: 100vh">
     <div class="col-12 col-xl-9 shadow-lg rounded-lg p-md-5">
@@ -87,8 +87,12 @@
       .then(function(){
         get_initial_test_details()
       })
+      document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+      document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
     }else{
       swal("Warning!", "Please read the instructions to proceed...!", "warning");
+      document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+      document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
     }
   }
 
@@ -396,7 +400,9 @@
                 break;
                 default:
                   console.log("An error occured with the error name " + error.name);
-                  swal('Error..!',"Sorry...!, we are unable to aceess your microphone",'error')
+                  swal('Error..!',"Sorry...!, we are unable to aceess your microphone",'error');
+                  document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+                  document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
               }
               recError();
         });
@@ -410,6 +416,8 @@
         })
         .catch(error => {
             swal("Error!", "We are unable to aceess your microphone...!", "error");
+            document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+            document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
         });
     }
 
@@ -514,6 +522,8 @@
 
   function micTested(){
     swal('Success..!','Microphone tested successfully...!','success');
+    document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+    document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
     isMicTested=true;
     StopAudioRecording();
     document.getElementsByClassName('pids-wrapper1')[0].classList.add('d-none')
@@ -521,14 +531,15 @@
   }
 
   function startRec(){
+    document.getElementsByClassName('pids-wrapper1')[0].classList.remove('d-none')
     document.getElementById('rec').setAttribute('disabled','')
     startAudioRecording('pid1');
     recMic=setTimeout(micTested,5000);
-    document.getElementById('rec').removeAttribute('disabled')
   }
 
   function recError(){
     clearTimeout(recMic);
+    document.getElementById('rec').removeAttribute('disabled')
   }
 
 </script>

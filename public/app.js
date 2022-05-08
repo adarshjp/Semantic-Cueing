@@ -1,10 +1,3 @@
-let swal_footer=document.getElementsByClassName('swal-footer');
-
-for(let i=0; i<swal_footer.length; i++) {
-  document.getElementsByClassName('swal-footer')[i].classList.add('text-center');
-  document.getElementsByClassName('swal-button')[i].classList.add('btn','btn-lg','btn-info');
-}
-
 /*--------------------------- Sidebar---------------------------*/
 function sidebar_toggle() {
   let sidebar = document.querySelector(".sidebar");
