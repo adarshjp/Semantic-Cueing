@@ -457,9 +457,9 @@
   //------------ Instructions Page ------------------------//
 
   let curTab=0;
+  checkBrowser();
   showTab(curTab);
   get_list_of_mic();
-  let isMicTested=false; 
   let recMic;
 
   function showTab(n) {
@@ -524,7 +524,6 @@
     swal('Success..!','Microphone tested successfully...!','success');
     document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
     document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
-    isMicTested=true;
     StopAudioRecording();
     document.getElementsByClassName('pids-wrapper1')[0].classList.add('d-none')
     document.getElementById('nextBtn').removeAttribute('disabled')
@@ -540,6 +539,19 @@
   function recError(){
     clearTimeout(recMic);
     document.getElementById('rec').removeAttribute('disabled')
+  }
+
+  function checkBrowser(){
+    console.log(/*@cc_on!@*/false || !!document.documentMode)
+    if(typeof InstallTrigger !== 'undefined' || 
+      (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0 ||
+      /*@cc_on!@*/false || !!document.documentMode
+    ){
+      alert('Please Use Chrome or Edge Browsers to proceed')
+      close_test();
+    }else{
+      document.getElementById('instructions').classList.remove('d-none')
+    }
   }
 
 </script>
