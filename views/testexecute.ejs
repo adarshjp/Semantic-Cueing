@@ -80,13 +80,15 @@
 <%- include("partials/testSubModal") %>
 
 <script type="text/javascript">
-
   function startTest() {
     if(document.getElementById("instruRead").checked && document.getElementById("micTested").checked) {
       document.getElementById("instructions").classList.add('d-none');
-      get_initial_test_details();
+      swal('Take test now...!','Take your test now. All the best..!','success')
+      .then(function(){
+        get_initial_test_details()
+      })
     }else{
-      alert("Please read the instructions to proceed")
+      swal("Warning!", "Please read the instructions to proceed...!", "warning");
     }
   }
 
@@ -379,11 +381,11 @@
             .catch(error => { //on error
               switch (error.name) {
                 case 'NotAllowedError':
-                  alert('Please allow to access your microphone...!')
+                  swal('Warning',"Please allow to access your microphone..!",'warning')
                 break;
                 default:
                   console.log("An error occured with the error name " + error.name);
-                  alert("Sorry...!, we are unable to aceess your microphone")
+                  swal('Error..!',"Sorry...!, we are unable to aceess your microphone",'error')
               }
               recError();
         });
@@ -397,8 +399,6 @@
         })
         .catch(error => {
             swal("Error!", "We are unable to aceess your microphone...!", "error");
-            document.getElementsByClassName('swal-footer')[0].classList.add('text-center')
-            document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-danger','btn-lg')
         });
     }
 
@@ -502,7 +502,7 @@
   }
 
   function micTested(){
-    alert('Microphone tested successfully...!');
+    swal('Success..!','Microphone tested successfully...!','success');
     isMicTested=true;
     StopAudioRecording();
     document.getElementsByClassName('pids-wrapper1')[0].classList.add('d-none')
