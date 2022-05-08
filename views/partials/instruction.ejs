@@ -1,14 +1,29 @@
-<div class="container">
-  <div class="row justify-content-center align-items-center p-2" style="height: 100vh">
+<div class="container" id='instructions'>
+  <div class="row justify-content-center align-items-center p-1 p-sm-2" style="height: 100vh">
     <div class="col-12 col-md-10 col-lg-8 col-xl-6">
       <div class="card shadow-lg rounded-lg">
         <div class="card-header p-3">
           <h4 class="card-title blue text-center">Instructions for the Test</h4>
         </div>
-        <div class="card-body tab">
-          <select class="form-select form-select-lg mb-3" id='list_of_mic'>
+        <div class="card-body tab d-none pt-1">
+          <div class='text-center'>
+            <select class="form-select form-select-lg" id='list_of_mic'>
 
-          </select>
+            </select>
+          </div>
+          <div class="pids-wrapper1 text-center">
+            <div class="pid1"></div>
+            <div class="pid1"></div>
+            <div class="pid1"></div>
+            <div class="pid1"></div>
+            <div class="pid1"></div>
+            <div class="pid1"></div>
+            <div class="pid1"></div>
+            <div class="pid1"></div>
+          </div>
+          <div class='text-center p-2'>
+            <button class="btn btn-success btn-lg rounded-circle" onclick="startRec()" id='rec'><i class="fa fa-microphone" aria-hidden="true"></i></button>
+          </div>
         </div>
         <div class="card-body tab d-none">
           <ul class="list-group p-1">
@@ -66,84 +81,20 @@
           </ul>
           <ul class="list-group p-1 h6 text-center">
             <li class="list-group-item">
-              <input class="form-check-input me-1" type="checkbox" value="" aria-label="..."> I have read and understood the all the instructions.
+              <input class="form-check-input me-1" type="checkbox" id='instruRead'><label for="instruRead"> I have read and understood the all the instructions.</label>
             </li>
             <li class="list-group-item">
-              <input class="form-check-input me-1" type="checkbox" value="" aria-label="..."> I have completed the microphone test.
+              <input class="form-check-input me-1" type="checkbox" id='micTested'><label for="micTested"> I have completed the microphone test.</label>
             </li>
           </ul>
         </div>
         <div class="card-footer">
           <div class="p-1 text-center">
             <button type="button" id="prevBtn" class="btn btn-secondary btn-lg" onclick="nextPrev(-1)"><i class="fa-solid fa-angles-left"></i></button>
-            <button type="button" id="nextBtn" class="btn btn-primary btn-lg" onclick="nextPrev(1)"><i class="fa-solid fa-angles-right"></i></button>
+            <button type="button" id="nextBtn" class="btn btn-primary btn-lg" onclick="nextPrev(1)" disabled><i class="fa-solid fa-angles-right"></i></button>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<script>
-  let curTab=0;
-  showTab(curTab);
-  get_list_of_mic();
-
-  function showTab(n) {
-    var x = document.getElementsByClassName("tab");
-    x[n].classList.remove('d-none')
-    x[n].classList.add('d-block');
-    if (n == 0) {
-      document.getElementById("prevBtn").classList.add('d-none');
-      document.getElementById("prevBtn").classList.remove('d-inline');
-    } else {
-      document.getElementById("prevBtn").classList.remove('d-none');
-      document.getElementById("prevBtn").classList.add('d-inline');
-    }
-  }
-    
-  function nextPrev(n) {
-    var x = document.getElementsByClassName("tab");
-    x[curTab].classList.add('d-none');
-    x[curTab].classList.remove('d-block')
-    curTab = curTab + n;
-    if(curTab===(x.length-1)){
-      document.getElementById("nextBtn").classList.add('d-none');
-      document.getElementById("nextBtn").classList.remove('d-inline');
-    } else {
-      document.getElementById("nextBtn").classList.remove('d-none');
-      document.getElementById("nextBtn").classList.add('d-inline');
-    }
-    showTab(curTab);
-  }
-
-  function start() {
-    if (window.stream) {
-      stream.getAudioTracks()[0].stop();
-    }
-  }
-
-  function get_list_of_mic(){
-    if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
-      alert("enumerateDevices() not supported.");
-      return;
-    }
-
-    navigator.mediaDevices.enumerateDevices()
-    .then(function(devices) {
-      let list_of_mic=document.getElementById("list_of_mic")
-      devices.forEach(function(device) {
-        if(device.kind==='audioinput'){
-          let option=document.createElement("option");
-          option.value=device.deviceId;
-          option.text= device.label || `microphone ${list_of_mic.length + 1}`;
-          list_of_mic.appendChild(option);
-        }
-      });
-    })
-    .then(start)
-    .catch(function(err) {
-      console.log(err.name + ": " + err.message);
-    });
-  }
-</script>

@@ -788,10 +788,10 @@ background: #eee;
 }
 
 
-.pids-wrapper{
+.pids-wrapper,.pids-wrapper1 {
   width: 100%;
 }
-.pid{
+.pid,.pid1{
   width: calc(10% - 10px);
   height: 10px;
   display: inline-block;
