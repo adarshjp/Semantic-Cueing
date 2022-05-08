@@ -1,28 +1,100 @@
-<div class="modal fade" id="instModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-body">
-          <ol><b>
-                <li>
-                    <p><%=i18n.instructions1%></p>
-                </li>
-                <li>
-                    <p><%=i18n.instructions2%></p>
-                </li>
-                <li>
-                    <p><%=i18n.instructions3%></p>
-                </li>
-                <li>
-                    <p><%=i18n.instructions4%></p>
-                </li>
-                <li>
-                    <p><%=i18n.instructions5%></p>
-                </li></b>
-          </ol>
-          <div class="text-center">
-            <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal"><%=i18n.Proceed%></button>
+<div class="container" id='instructions'>
+  <div class="row justify-content-center align-items-center p-1 p-sm-2" style="height: 100vh">
+    <div class="col-12 col-md-10 col-lg-8 col-xl-6">
+      <div class="card shadow-lg rounded-lg">
+        <div class="card-header p-3">
+          <h4 class="card-title blue text-center">Instructions for the Test</h4>
+        </div>
+        <div class="card-body tab d-none mt-4">
+          <div class='text-center'>
+            <select class="form-select form-select-lg" id='list_of_mic'>
+
+            </select>
+          </div>
+          <div class="pids-wrapper1 text-center d-none">
+            <div class="pid1"></div>
+            <div class="pid1"></div>
+            <div class="pid1"></div>
+            <div class="pid1"></div>
+            <div class="pid1"></div>
+            <div class="pid1"></div>
+            <div class="pid1"></div>
+            <div class="pid1"></div>
+          </div>
+          <div class='text-center pt-3'>
+            <button class="btn btn-success btn-lg rounded-circle" onclick="startRec()" id='rec'><i class="fa fa-microphone" aria-hidden="true"></i></button>
+          </div>
+        </div>
+        <div class="card-body tab d-none">
+          <ul class="list-group p-1">
+            <li class="list-group-item">
+              <p class="h5 blue text-start">Speech To Text Option</p>
+              <ul>
+                <li>For answering each question maximum of 100 points will be awarded</li>
+                <li>If you skip a question you will recieve 0 points</li>
+                <li>Once skipped questions can not be revisited</li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="list-group p-1">
+            <li class="list-group-item">
+              <p class="h5 blue text-start">Hints Taken</p>
+              <ul>
+                <li>For each question, There will be 4 hints available and for taking a hint -10 points will be deducted</li>
+                <li>When a hint is taken, it will last for 10sec and then will be closed</li>
+                <li>Hints can be revisited if you want to see them again.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body tab d-none">
+          <ul class="list-group p-1">
+            <li class="list-group-item">
+              <p class="h5 blue text-start">Pause Test or Closing of the tab</p>
+              <ul>
+                <li>If you want to pause the test you can pause and take it later.</li>
+                <li>If for some reason you meet with some issues and your tab gets closed you can login again and Resume your test from the point where you had stopped.</li>
+                <li>In either case your test will be continued from the point where you had paused.</li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="list-group p-1">
+            <li class="list-group-item">
+              <p class="h5 blue text-start">Speech To Text Option</p>
+              <ul>
+                <li>Apart from typing the answer you can also use the speech to text feature and Say the answer.</li>
+                <li>Please Take the Microphone Check inorder to start your test.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body tab d-none">
+          <ul class="list-group p-1">
+            <li class="list-group-item">
+              <p class="h5 blue text-start">Final Score Card.!</p>
+              <ul>
+                <li>Your final score will be determined based on the number of correct answers given and the number of hints you have taken.</li>
+                <li>Based on this score a seperate test report will be generated.</li>
+                <li>Test Report will be reflected in your dashboard once you are finished taking the test.</li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="list-group p-1 h6 text-center">
+            <li class="list-group-item">
+              <input class="form-check-input me-1" type="checkbox" id='instruRead'><label for="instruRead"> I have read and understood the all the instructions.</label>
+            </li>
+            <li class="list-group-item">
+              <input class="form-check-input me-1" type="checkbox" id='micTested'><label for="micTested"> I have completed the microphone test.</label>
+            </li>
+          </ul>
+        </div>
+        <div class="card-footer">
+          <div class="p-1 text-center">
+            <button type="button" id="prevBtn" class="btn btn-secondary btn-lg" onclick="nextPrev(-1)"><i class="fa-solid fa-angles-left"></i></button>
+            <button type="button" id="nextBtn" class="btn btn-primary btn-lg" onclick="nextPrev(1)" disabled><i class="fa-solid fa-angles-right"></i></button>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </div>

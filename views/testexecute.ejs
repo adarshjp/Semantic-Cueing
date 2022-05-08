@@ -1,4 +1,5 @@
 <%- include("partials/header") %>
+<%- include("partials/instructionModal") %>
 <div class="container-fluid d-none" id='test'>
   <div class="row justify-content-center p-3" style="height: 100vh">
     <div class="col-12 col-xl-9 shadow-lg rounded-lg p-md-5">
@@ -76,19 +77,24 @@
 </div>
 <div hidden id="spinner"></div>
 <%- include("partials/hintModal") %>
-<%- include("partials/instructionModal") %>
 <%- include("partials/testSubModal") %>
 
 <script type="text/javascript">
-
-  $(window).on('load', function() {
-    $('#instModal').modal('show');
-  });
-
-  var hintModal = document.getElementById('instModal')
-  hintModal.addEventListener('hide.bs.modal', function (event) {
-    get_initial_test_details();
-  })
+  function startTest() {
+    if(document.getElementById("instruRead").checked && document.getElementById("micTested").checked) {
+      document.getElementById("instructions").classList.add('d-none');
+      swal('Take test now...!','Take your test now. All the best..!','success')
+      .then(function(){
+        get_initial_test_details()
+      })
+      document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+      document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
+    }else{
+      swal("Warning!", "Please read the instructions to proceed...!", "warning");
+      document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+      document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
+    }
+  }
 
   const spinner = document.getElementById("spinner"); 
   const test = document.getElementById("test");
@@ -223,7 +229,9 @@
       test.classList.remove('d-none')
       curq=question
       document.getElementById('img').src = 'data:image/'+question.question.contentType+';base64,'+arrayBufferToBase64(question.question.data.data);
-      setTimeout(play_audio(curq.score),3000);
+      setTimeout(function() {
+        play_audio(curq.score);
+      },2000);
       curq_no++;
       if(curq_no==q.length){
         document.getElementById('next').textContent="Submit";
@@ -316,11 +324,10 @@
         recognition.lang = 'en-US';
 
         recognition.onstart = function(e){
-          startAudioRecording();
+          startAudioRecording('pid');
           document.getElementsByClassName('pids-wrapper')[0].classList.remove('d-none')
         }
         recognition.start();
-        setTimeout(5000)
         recognition.onresult = function (e) {
           document.getElementById('answer').value = e.results[0][0].transcript;
           recognition.stop();
@@ -381,16 +388,23 @@
     }
 }
 
-    function startAudioRecording() {
+    function startAudioRecording(pid) {
         audioRecorder.start()
             .then(() => { //on success 
-              calculate_volume();
+              calculate_volume(pid);
             })    
             .catch(error => { //on error
-                if (error.message.includes("mediaDevices API or getUserMedia method is not supported in this browser.")) {       
-                    console.log("To record audio, use browsers like Chrome and Firefox.");
-                    alert("Sorry...!, we are unable to aceess your microphone")
-                }
+              switch (error.name) {
+                case 'NotAllowedError':
+                  swal('Warning',"Please allow to access your microphone..!",'warning')
+                break;
+                default:
+                  console.log("An error occured with the error name " + error.name);
+                  swal('Error..!',"Sorry...!, we are unable to aceess your microphone",'error');
+                  document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+                  document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
+              }
+              recError();
         });
     }
 
@@ -402,12 +416,12 @@
         })
         .catch(error => {
             swal("Error!", "We are unable to aceess your microphone...!", "error");
-            document.getElementsByClassName('swal-footer')[0].classList.add('text-center')
-            document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-danger','btn-lg')
+            document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+            document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
         });
     }
 
-    function calculate_volume() {
+    function calculate_volume(pid) {
       let audioContext = new AudioContext();
       let analyser = audioContext.createAnalyser();
       let microphone = audioContext.createMediaStreamSource(audioRecorder.streamBeingCaptured);
@@ -424,12 +438,12 @@
         analyser.getByteFrequencyData(array);
         let arraySum = array.reduce((a, value) => a + value, 0);
         let average = arraySum / array.length;
-        colorPids(average);
+        colorPids(average,pid);
       }
     }
   
-  function colorPids(vol) {
-  const allPids = [...document.querySelectorAll('.pid')];
+  function colorPids(vol,pid) {
+  const allPids = [...document.querySelectorAll('.'+pid)];
   const numberOfPidsToColor = Math.round(vol / 10);
   const pidsToColor = allPids.slice(0, numberOfPidsToColor);
   for (const pid of allPids) {
@@ -439,6 +453,94 @@
     pid.style.backgroundColor = "#69ce2b";
   }
 }
+
+  //------------ Instructions Page ------------------------//
+
+  let curTab=0;
+  showTab(curTab);
+  get_list_of_mic();
+  let isMicTested=false; 
+  let recMic;
+
+  function showTab(n) {
+    var x = document.getElementsByClassName("tab");
+    x[n].classList.remove('d-none')
+    x[n].classList.add('d-block');
+    if (n == 0) {
+      document.getElementById("prevBtn").classList.add('d-none');
+    } else {
+      document.getElementById("prevBtn").classList.remove('d-none');
+    }
+  }
+    
+  function nextPrev(n) {
+    var x = document.getElementsByClassName("tab");
+    x[curTab].classList.add('d-none');
+    x[curTab].classList.remove('d-block')
+    curTab = curTab + n;
+    if(curTab===(x.length-1)){
+      document.getElementById("nextBtn").innerHTML=`<i class="fas fa-play"></i>`;
+      document.getElementById("nextBtn").onclick=function() {startTest();}
+      //document.getElementById("nextBtn").classList.add('d-none');
+    } else {
+      document.getElementById("nextBtn").innerHTML=`<i class="fa-solid fa-angles-right"></i>`;
+      document.getElementById("nextBtn").onclick=function() {nextPrev(1)}
+      //document.getElementById("nextBtn").classList.remove('d-none');
+    }
+    showTab(curTab);
+  }
+
+  function start() {
+    if (window.stream) {
+      stream.getAudioTracks()[0].stop();
+    }
+  }
+
+  function get_list_of_mic(){
+    if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
+      alert("enumerateDevices() not supported.");
+      return;
+    }
+
+    navigator.mediaDevices.enumerateDevices()
+    .then(function(devices) {
+      let list_of_mic=document.getElementById("list_of_mic")
+      devices.forEach(function(device) {
+        if(device.kind==='audioinput'){
+          let option=document.createElement("option");
+          option.value=device.deviceId;
+          option.text= device.label || `microphone ${list_of_mic.length + 1}`;
+          list_of_mic.appendChild(option);
+        }
+      });
+    })
+    .then(start)
+    .catch(function(err) {
+      console.log(err.name + ": " + err.message);
+    });
+  }
+
+  function micTested(){
+    swal('Success..!','Microphone tested successfully...!','success');
+    document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+    document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
+    isMicTested=true;
+    StopAudioRecording();
+    document.getElementsByClassName('pids-wrapper1')[0].classList.add('d-none')
+    document.getElementById('nextBtn').removeAttribute('disabled')
+  }
+
+  function startRec(){
+    document.getElementsByClassName('pids-wrapper1')[0].classList.remove('d-none')
+    document.getElementById('rec').setAttribute('disabled','')
+    startAudioRecording('pid1');
+    recMic=setTimeout(micTested,5000);
+  }
+
+  function recError(){
+    clearTimeout(recMic);
+    document.getElementById('rec').removeAttribute('disabled')
+  }
 
 </script>
 <%- include("partials/footer") %>
