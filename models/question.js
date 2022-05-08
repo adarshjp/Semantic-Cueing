@@ -7,10 +7,11 @@ const questionSchema = new mongoose.Schema({
     data: Buffer,
     contentType: String,
   },
-  answer: {
+  answer: [
+    {
     type: String,
-    required: true,
-  },
+  },{ required: true}
+  ],
   level: {
     type: Number,
     required: true,

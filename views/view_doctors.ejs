@@ -4,7 +4,7 @@
             <div class="row justify-content-center">
                 <div class="offset-2 col-9 offset-sm-2 col-sm-8 offset-lg-0 col-lg-6 p-1">
                     <h1 class="p-2 display-3 fw-bold">
-                        Our <span class="blue">Doctors </span>
+                        <%=i18n.Our%> <span class="blue"><%=i18n.Doctors%> </span>
                         <i class="fas fa-stethoscope blue"></i>
                     </h1>
                 </div>
@@ -29,8 +29,11 @@
                                             <%=doctor.age%>
                                         </p>
                                         <div class="d-flex justify-content-end align-items-end">
-                                            <a href="#" class="btn white" id="review"
-                                                target="_blank"><i class="fas fa-trash-alt"></i></a>
+                                            <form action="/delete/<%=doctor._id%>?_method=DELETE" method="POST">
+                                                <button class="btn btn-primary white m-1" type="submit">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

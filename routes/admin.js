@@ -2,7 +2,7 @@ const express = require("express");
 const upload = require("../setup/multer");
 const {register_get,register_post,} = require("../controllers/Auth/auth");
 const {isAdmin,isLoggedIn}=require('../controllers/Auth/middlewares')
-const {admin_get,view_patient,view_doctor,view_Oneuser,get_edit_user,edit_user,delete_user,checkusername,get_details_for_graph,count_no_of_tests,count_no_of_questions,get_view_questions} = require('../controllers/admin')
+const {admin_get,view_patient,view_doctor,view_Oneuser,get_edit_user,edit_user,delete_user,checkusername,get_details_for_graph,count_no_of_tests,count_no_of_questions,get_view_questions,active_patient} = require('../controllers/admin')
 const router = express.Router();
 
 router.get("/register", isLoggedIn, register_get);
@@ -11,16 +11,17 @@ router.get("/home/admin", isLoggedIn,isAdmin,admin_get);
 router.get("/view/patient", isLoggedIn,isAdmin,view_patient);
 router.get("/view/doctor",isLoggedIn,isAdmin,view_doctor);
 
-router.get("/view/question/:skip?",isLoggedIn,isAdmin,get_view_questions);  // to view the list of questions
+router.get("/view/questions/:skip?",isLoggedIn,isAdmin,get_view_questions);  // to view the list of questions
 
 router.get("/view/:id",isLoggedIn,view_Oneuser);
 router.get("/edit/:id",isLoggedIn,get_edit_user)
 router.put("/edit/:id",isLoggedIn,edit_user)
 
-router.delete("/delete/:id",isAdmin,isLoggedIn,delete_user)
+router.delete("/delete/:id",isLoggedIn,isAdmin,delete_user)
 router.post("/check-username",isAdmin,isLoggedIn,checkusername)
 
 router.get("/data/users",isAdmin,isLoggedIn,get_details_for_graph)
 router.get("/data/testcount",isAdmin,isLoggedIn,count_no_of_tests)
 router.get("/data/questioncount",isAdmin,isLoggedIn,count_no_of_questions)
+router.put("/active/:patientid", isLoggedIn, isAdmin,active_patient);
 module.exports = router;

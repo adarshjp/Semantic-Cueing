@@ -145,10 +145,18 @@
         .then(res => res.json())
         .then(data => {
             conversationId = data.conversationId;
+            if('messages' in data){
+                data.messages.forEach(message => {
+                    addMessages(message)
+                });
+            }else{
+                $('#messages').append(`
+                    <div class="d-flex align-items-center mb-4 justify-content-center">
+                        <p class="text-center rounded-pill mx-3 mb-0 white p-2" style="background-color: #a2aab7">Start your conversation...</p>
+                    </div>
+                `)
+            }
             //console.log('Messages',data.messages.length)
-            data.messages.forEach(message => {
-                addMessages(message)
-            })
             document.getElementById('spinner-1').classList.add('d-none')
             receivers_name();
         })

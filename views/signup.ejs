@@ -6,7 +6,7 @@
     <div class="offset-2 col-10 offset-sm-1 col-sm-11 offset-xl-0 col-xl-11">
       <div class="row justify-content-center vertical-center shadow-lg rounded-3">
         <form action="/register" method="post" class="p-2" enctype="multipart/form-data" onsubmit="return register()"></form>
-          <h1 class="text-center p-3 blue order-first">Register: Patient | Doctor</h1>
+          <h1 class="text-center p-3 blue order-first"><%=i18n.Register%>: <%=i18n.Patient%> | <%=i18n.Doctor%></h1>
           <div class="col-12 col-md-6 text-center my-auto order-last">
             <div class="row">
               <div class="col-1"></div>
@@ -14,14 +14,14 @@
                   <input
                     type="text"
                     name="name"
-                    placeholder="Name"
+                    placeholder="<%=i18n.Name%>"
                     class="outline-color login-input"
                     required
                   />
                   <input
                     type="number"
                     name="age"
-                    placeholder="Age"
+                    placeholder="<%=i18n.Age%>"
                     class="outline-color login-input"
                     required
                   />
@@ -29,26 +29,26 @@
                     <input
                     type="email"
                     name="email"
-                    placeholder="Email"
+                    placeholder="<%=i18n.Email%>"
                     id='email'
                     class="outline-color login-input form-control"
                     aria-describedby="verifyEmail"
                     required
                     />
-                    <button class="btn btn-primary verify" type="button" id="verifyEmail" onclick="checkEmail()" disabled>Verify</button>
+                    <button class="btn btn-primary verify" type="button" id="verifyEmail" onclick="checkEmail()" disabled><%=i18n.Verify%></button>
                   </div>
                   <div class="input-group d-none" id='otp-sec'>
                     <input
                     type="number"
                     name="otp"
-                    placeholder="Otp"
+                    placeholder="<%=i18n.Otp%>"
                     id='otp'
                     class="outline-color login-input form-control"
                     aria-describedby="verifyOtp"
                     min='100000'
                     max='999999'
                     />
-                    <button class="btn btn-primary verify" type="button" id="verifyOtp" onclick="checkOtp()" disabled>Verify</button>
+                    <button class="btn btn-primary verify" type="button" id="verifyOtp" onclick="checkOtp()" disabled><%=i18n.Verify%></button>
                   </div>
                   <!-- <div class='text-end d-none' id='timer-sec'>
                     <span id="timer"></span>
@@ -56,7 +56,7 @@
                   <input
                     type="text"
                     name="username"
-                    placeholder="Username"
+                    placeholder="<%=i18n.Username%>"
                     id="username"
                     class="outline-color"
                     aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback"
@@ -64,19 +64,19 @@
                     required
                   />
                   <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                    Username already exists. Please try another one.
+                    <%=i18n.UsernamealreadyexistsPleasetryanotherone%>.
                   </div>
                   <input
                     type="password"
                     name="password"
-                    placeholder="Password"
+                    placeholder="<%=i18n.Password%>"
                     id="login-input"
                     class="outline-color"
                     required
                   />
                   <div class="row align-items-center">
                     <div class="col-4">
-                      <label for="role" class="blue h5">Select Role:</label>
+                      <label for="role" class="blue h5"><%=i18n.SelectRole%>:</label>
                     </div>
                     <div class="col-8">
                       <select
@@ -86,14 +86,14 @@
                         name="role"
                         required
                       >
-                        <option value="doctor">Doctor</option>
-                        <option value="patient">Patient</option>
+                        <option value="doctor"><%=i18n.Doctor%></option>
+                        <option value="patient"><%=i18n.Patient%></option>
                       </select>
                     </div>
                   </div>
                   <div class="row align-items-center d-none" id="select-doctor">
                     <div class="col-4">
-                      <label for="doctorid" class="blue h5">Choose doctor:</label>
+                      <label for="doctorid" class="blue h5"><%=i18n.Choosedoctor%>:</label>
                     </div>
                     <div class="col-8">
                       <select
@@ -110,10 +110,10 @@
                   </div>
                   <div class="row align-items-center d-none" id="stroke-div">
                     <div class="col-4 ">
-                      <label for="strokedate" class="blue h5">Stroke Date:</label>
+                      <label for="strokedate" class="blue h5"><%=i18n.StrokeDate%>:</label>
                     </div>
                     <div class="col-8">
-                      <input type="date" class='login-input' id='strokedate' placeholder='Stroke date' name="strokeDate">
+                      <input type="date" class='login-input' id='strokedate' placeholder='<%=i18n.StrokeDate%>' name="strokeDate">
                     </div>
                   </div>
               </div>
@@ -123,9 +123,9 @@
             <div class="form-group text-center">
                 <label for="upload_file" id='input-cloud' class=''>
                   <i class="fa-solid fa-cloud-arrow-up fa-5x blue"></i>
-                  <p class="blue h5">Choose Profile Picture</p> 
+                  <p class="blue h5"><%=i18n.ChooseProfilePicture%></p> 
                 </label>
-                <input type="file" name="displaypic" class="form-control form-control-lg" accept="image/png, image/jpeg" placeholder="Enter Image" id="upload_file" onchange="getImagePreview(event,'preview','upload_file')" style="display:none;">
+                <input type="file" name="displaypic" class="form-control form-control-lg" accept="image/png, image/jpeg" placeholder="<%=i18n.EnterImage%>" id="upload_file" onchange="getImagePreview(event,'preview','upload_file')" style="display:none;">
             </div>
             <div class="row justify-content-center my-2 text-center">
                 <div class="col-12 col-sm-7 col-md-9" id="preview"></div>
@@ -135,7 +135,7 @@
                 <input
                     type="submit"
                     class="btn btn-primary btn-lg rounded-pill p-2"
-                    value="Register"
+                    value="<%=i18n.Register%>"
                     style="width: 50%"
                     id="review"
                   />

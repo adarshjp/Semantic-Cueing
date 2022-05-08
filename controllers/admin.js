@@ -8,7 +8,7 @@ const Test = require("../models/test");
 exports.admin_get = (req, res) => {
     User.findById(req.user._id)
         .then((user) => {
-            res.render('admin', { user: user })
+            res.render('admin', { user: user, i18n: global.i18n })
         })
         .catch((err) => {
             console.log(err)
@@ -19,7 +19,7 @@ exports.view_patient = (req, res) => {
     //fetch all patients
     User.find({ role: 'patient' })
         .then((users) => {
-            res.render("view_patients", { user: req.user,patients: users })
+            res.render("view_patients", { user: req.user,patients: users, i18n: global.i18n })
         })
         .catch((err) => {
             console.log(err)
@@ -30,7 +30,7 @@ exports.view_doctor = (req, res) => {
     //fetch all doctors
     User.find({ role: 'doctor' })
         .then((users) => {
-            res.render('view_doctors',{doctors:users,user:req.user})
+            res.render('view_doctors',{doctors:users,user:req.user,i18n: global.i18n})
         })
         .catch((err) => {
             console.log(err)
@@ -52,7 +52,9 @@ exports.delete_user = (req, res) => {
     //delete the user with id=req.params.id 
     User.findByIdAndDelete({ _id: req.params.id })
         .then((user) => {
-            res.send(user)
+            req.flash('success', 'User deleted successfully')
+            res.status(200)
+            res.redirect('/home/admin/')
         })
         .catch((err) => {
             console.log(err)
@@ -142,7 +144,7 @@ exports.get_view_questions= (req, res) => {
             if(req.params.skip!==undefined)
               res.json({question: question})
             else 
-              res.render('view_questions',{question: question,user:req.user})
+              res.render('view_questions',{question: question,user:req.user,i18n: global.i18n})
           }
     })
     .catch((err) => {
@@ -151,3 +153,19 @@ exports.get_view_questions= (req, res) => {
         });
     });
 }
+
+exports.active_patient = (req, res) => {
+    /* Set the status of the patient to active */
+    User.findOneAndUpdate({ _id: req.params.patientid,role:'patient' }, { $set: { status: 'active' } }, { new: true })
+      .then((patient) => {
+        console.log(patient)
+        req.flash('success', 'Patient activated successfully')
+        res.status(200)
+        res.redirect('/view/patient/')
+      })
+      .catch((err) => {
+        res.status(500).json({
+          error: err
+        })
+      })
+  }

@@ -5,8 +5,8 @@
     <div class="row justify-content-center">
         <div class="offset-2 col-9 offset-sm-1 col-sm-9 offset-lg-0 col-lg-6 p-1">
           <h1 class="text-center p-2">
-            List of<span class="blue"> Questions</span> 
-            Created <i class="fas fa-calendar-check blue"></i>
+            <%=i18n.Listof%><span class="blue"> <%=i18n.Questions%></span> 
+            <%=i18n.Created%> <i class="fas fa-calendar-check blue"></i>
           </h1>
         </div>
     </div>
@@ -19,7 +19,7 @@
                             <div class="row d-flex align-items-center p-1 justify-content-center">
                                 <div class="col-12 col-sm-8 col-md-6 col-lg-8 col-xl-9">
                                     <p class="h6 text-center text-sm-start"><%=question.answer%></p>
-                                    <p class="h6 text-center text-sm-start">Level : 
+                                    <p class="h6 text-center text-sm-start"><%=i18n.Level%> : 
                                         <%for(let i=1;i<=5;i++){%>
                                           <%if(i<=question.level){%>
                                             <span class = "fa fa-star checked"></span>
@@ -52,7 +52,7 @@
     </div>
     <div class="d-flex justify-content-center d-none blue my-4" id="loader">
         <div class="spinner-border text-primary" role="status">
-          <span class="visually-hidden">Loading...</span>
+          <span class="visually-hidden"><%=i18n.Loading%>...</span>
         </div>
     </div>
 </div>
@@ -62,7 +62,7 @@
     window.onscroll = function(ev) {
         if (!isCompleted && ((window.innerHeight + window.scrollY+1) >= document.body.offsetHeight)) {
             document.getElementById('loader').classList.remove('d-none')
-            fetch('/view/question/'+(k*10))
+            fetch('/view/questions/'+(k*10))
             .then(response => response.json())
             .then(question=>{
                 if(question.message==="No more questions")
@@ -84,6 +84,7 @@
     };
 
     function append_div(q){
+        console.log(q.answer)
         let div=document.createElement("div");
         
         div.className='offset-1 offset-sm-0 col-9 col-sm-10 col-lg-11 shadow-lg bg-body rounded-lg';
@@ -92,19 +93,35 @@
         card_img.className='card-image mx-0 p-2';
 
         let div_row=document.createElement('div');
-        div_row.className='row d-flex align-items-center p-1';
+        div_row.className='row d-flex align-items-center p-1 justify-content-center';
 
         let div_p=document.createElement('div')
-        div_p.className='col-5 col-sm-8 col-md-6 col-lg-8  col-xl-9';
+        div_p.className='col-12 col-sm-8 col-md-6 col-lg-8 col-xl-9';
 
         let p=document.createElement('p')
-        p.className='h6';
+        p.className='h6 text-center text-sm-start';
         p.textContent=q.answer;
 
         div_p.appendChild(p);
 
+        p=document.createElement('p')
+        p.className='h6 text-center text-sm-start';
+        p.textContent='Level : '
+        for(let x=1;x<=5;x++){
+            let span=document.createElement('span');
+            span.className='fa fa-star'
+            if(x<=q.level){
+                span.classList.add('checked')
+            }else{
+                span.classList.add('unchecked')
+            }
+            p.appendChild(span);
+            p.innerHTML +=' '
+        }
+        div_p.appendChild(p);
+
         let div_a=document.createElement('div')
-        div_a.className='col-7 col-sm-4 col-md-6 col-lg-4 col-xl-3';
+        div_a.className='col-7 col-sm-4 col-md-6 col-lg-4 col-xl-3 text-center';
 
         let a=document.createElement('a');
         a.className='btn btn-primary white';
