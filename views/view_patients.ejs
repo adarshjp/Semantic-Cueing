@@ -1,13 +1,14 @@
 <%- include("partials/header") %>
 <% if(user.role==="admin" ) {%>
     <%- include("partials/adminSideBar") %>
+    <%- include("partials/doctorChange") %>
 <% } else { %>
     <%- include("partials/doctorSideBar") %>
 <% } %>
-        <div class="container" id="">
+        <div class="container-fluid" id="">
             <%- include("partials/flashMsg") %>
             <div class="row justify-content-center">
-                <div class="offset-2 col-9 offset-sm-2 col-sm-8 offset-lg-0 col-lg-6 p-1">
+                <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-6 p-1">
                     <h1 class="text-center p-2 display-3 fw-bold">
                         <% if(user.role==="admin" ) {%>
                             <%=i18n.Our%>
@@ -21,14 +22,14 @@
             </div>
             <div class="row justify-content-center mx-0 mx-lg-5 p-0 p-lg-3">
                 <% patients.forEach((patient)=> { %>
-                    <div class="offset-2 col-9 offset-sm-2 col-sm-8 offset-md-0 col-md-10 offset-lg-0 col-lg-6 p-1">
+                    <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-xl-5 p-1">
                         <div class="card box-shadow p-3">
                             <div class="row d-flex h-100">
-                                <div class="col-lg-6 my-auto">
+                                <div class="col-sm-6 my-auto">
                                     <img src="/images/undraw_doctors_hwty.svg" class="card-img-top rounded-circle p-1 box-shadow"
                                         alt="..." style="border: 3px solid #6c63ff" />
                                 </div>
-                                <div class="col-lg-6 my-auto">
+                                <div class="col-sm-6 my-auto">
                                     <div class="card-body">
                                         <h1 class="card-title"><%=patient.name%></h1>
                                         <hr>
@@ -53,13 +54,20 @@
                                                 >
                                                 Activate</button>
                                             </form>
+
+                                            <button class="btn btn-primary white m-1 d-none d-md-block" type="button" data-bs-toggle="modal" data-bs-target="#doctorChange" data-bs-whatever='<%=patient._id%>'>Edit <i class="fas fa-user-md"></i></button>
+                                            
                                             <form action="/delete/<%=patient._id%>?_method=DELETE" method="POST">
-                                                <button class="btn btn-primary white m-1" type="submit">
+                                                <button class="btn btn-primary  white m-1" type="submit">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </button>
                                             </form>
-                                        <%}%>
+                                        
                                         </div>
+                                        <div class="d-flex justify-content-end align-items-end d-block d-md-none">
+                                            <button class="btn btn-primary white m-1" type="button" data-bs-toggle="modal" data-bs-target="#doctorChange" data-bs-whatever='<%=patient._id%>'>Edit <i class="fas fa-user-md"></i></button>
+                                        </div>
+                                        <%}%>
                                     </div>
                                 </div>
                             </div>
@@ -68,4 +76,57 @@
                 <% }) %>
             </div>
         </div>
+<script type="text/javascript">
+    window.onload = function(){
+        getDocotrs();
+    }
+    function getDocotrs(){
+        fetch('/data/users')
+        .then(response => response.json())
+        .then(user =>{
+            get_doctors_list(user.users);
+        });
+    }
+
+    function get_doctors_list(users){
+        doctor={};
+        for(let i=0;i< users.length;i++){
+            if(users[i].role === 'patient'){
+                if(users[i].doctorid in doctor){
+                    doctor[users[i].doctorid][1]++;
+                }else{
+                    doctor[users[i].doctorid]=['',1];
+                }
+            }else{
+                if(users[i].doctorid in doctor){
+                    doctor[users[i].doctorid][0]=users[i].name;
+                }else{
+                    doctor[users[i]._id]=[users[i].name,0];
+                }
+            }
+        }
+        setDoctorSelecr(doctor);
+    }
+
+    function setDoctorSelecr(doctor){
+        for([key, val] of Object.entries(doctor)) {
+            let option=document.createElement("option");
+            option.value=key;
+            if(val[1]===0){
+                option.textContent=val[0]+' (yet to be assigned)';
+            }else{
+                option.textContent=val[0]+' (assigned for '+val[1]+' patients)';
+            }
+            document.getElementById('doctor').appendChild(option);
+        }
+    }
+
+    let doctorChange=document.getElementById('doctorChange');
+    doctorChange.addEventListener('show.bs.modal', function (event) {
+      var button = event.relatedTarget
+      var patientId = button.getAttribute('data-bs-whatever');
+      console.log(patientId)
+      document.getElementById('changeDocForm').action='/change/doctor/'+patientId+'?_method=PATCH';
+   });
+</script>
 <%- include("partials/footer") %>
