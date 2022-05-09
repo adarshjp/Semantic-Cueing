@@ -102,7 +102,7 @@ exports.checkusername=(req, res) => {
 
 exports.get_details_for_graph = (req, res) => {
     //fetch all user with role patients or doctors
-    User.find({ role: { $in: ['patient', 'doctor'] }},{email: 0,name:0,age:0,username:0})
+    User.find({ role: { $in: ['patient', 'doctor'] }},{email: 0,age:0,username:0,displaypic:0})
         .then((users) => {
             res.send({users: users})
         })
@@ -158,7 +158,6 @@ exports.active_patient = (req, res) => {
     /* Set the status of the patient to active */
     User.findOneAndUpdate({ _id: req.params.patientid,role:'patient' }, { $set: { status: 'active' } }, { new: true })
       .then((patient) => {
-        console.log(patient)
         req.flash('success', 'Patient activated successfully')
         res.status(200)
         res.redirect('/view/patient/')
@@ -169,3 +168,18 @@ exports.active_patient = (req, res) => {
         })
       })
   }
+
+exports.change_doctor= (req, res) => {
+    // chnage docotr id of the patient
+    User.findOneAndUpdate({ _id: req.params.patientid,role:'patient' }, { $set: { doctorid: req.body.doctorId } }, { new: true })
+    .then((patient) => {
+        req.flash('success', 'Doctor changed successfully')
+        res.status(200)
+        res.redirect('/view/patient/')
+      })
+      .catch((err) => {
+        res.status(500).json({
+          error: err
+        })
+      })
+}
