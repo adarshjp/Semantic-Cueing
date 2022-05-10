@@ -49,17 +49,37 @@ exports.view_Oneuser = (req, res) => {
 }
 
 exports.delete_user = (req, res) => {
-    //delete the user with id=req.params.id 
-    User.findByIdAndDelete({ _id: req.params.id })
-        .then((user) => {
-            req.flash('success', 'User deleted successfully')
+    //find and delete user with id=req.params.id and role=patient
+    User.findOne({ _id: req.params.id, role: 'patient' })
+    .then((user) => {
+        if(user===null){
+            User.find({doctorid:req.params.id,role:'patient'})
+            .then((user) => {
+                if(user.length===0){
+                    User.findOne({ _id: req.params.id, role: 'doctor' })
+                    .then((user) => {
+                        req.flash('success', 'Doctor is deleted successfully')
+                        res.status(200)
+                        res.redirect('/view/doctor')
+                    }).catch((err) => {
+                        console.log(err)
+                    });
+                }else{
+                    req.flash('error', 'Doctor has patients. Please delete them first')
+                    res.status(200)
+                    res.redirect('/view/doctor')
+                }
+            }).catch((err) => {
+                console.log(err)
+            });
+        }else{
+            req.flash('success', 'Patient is deleted successfully')
             res.status(200)
-            res.redirect('/home/admin/')
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-    
+            res.redirect('/view/patient')
+        }
+    }).catch((err) => {
+        console.log(err)
+    });
 }
 
 exports.get_edit_user = (req, res) => {
