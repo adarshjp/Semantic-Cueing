@@ -1,11 +1,12 @@
 <%- include("partials/header") %>
 <% if(user.role==="admin" ) {%>
     <%- include("partials/adminSideBar") %>
-    <%- include("partials/doctorChange") %>
+    <%- include("partials/no_patient",{msg:['No Patients','Created yet']})%>
 <% } else { %>
     <%- include("partials/doctorSideBar") %>
+    <%- include("partials/no_patient",{msg:['No Patients','assigned for you..!']})%>
 <% } %>
-        <div class="container-fluid" id="">
+        <div class="container-fluid" id="view-patients">
             <%- include("partials/flashMsg") %>
             <div class="row justify-content-center">
                 <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-6 p-1">
@@ -21,6 +22,7 @@
                 </div>
             </div>
             <div class="row justify-content-center mx-0 mx-lg-5 p-0 p-lg-3">
+                <% let len=patients.length %>
                 <% patients.forEach((patient)=> { %>
                     <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-xl-5 p-1">
                         <div class="card box-shadow p-3">
@@ -39,15 +41,17 @@
                                         <p class="card-text h3">
                                             <%=patient.age%>
                                         </p>
-                                        <div class="d-flex justify-content-end align-items-end">
                                         <% if(user.role==="doctor") {%>
+                                        <div class="d-flex justify-content-end align-items-end">
                                             <form action="/discharge/<%=patient._id%>?_method=PUT" method="POST">
                                                 <button class="btn btn-primary white m-1" type="submit">
                                                 Discharge</button>
                                             </form>
                                             <a href="/chat/<%=patient._id%>" class="btn white m-1" id="review"
                                                 ><i class="fa-solid fa-message"></i></a>
+                                        </div>
                                         <%}else{%>
+                                        <div class="d-flex justify-content-end align-items-end">
                                             <form action="/active/<%=patient._id%>?_method=PUT" method="POST">
                                                 <button class="btn btn-primary white m-1" type="submit"
                                                     <%if(patient.status === 'active'){%>disabled<%}%>
@@ -76,8 +80,13 @@
                 <% }) %>
             </div>
         </div>
+    <%- include("partials/doctorChange") %>
 <script type="text/javascript">
-    window.onload = function(){
+    if(parseInt('<%=len%>')===0){
+        document.getElementById('view-patients').classList.add('d-none');
+        document.getElementById('no-data').classList.remove('d-none');
+    }
+    if('<%=user.role%>'==='admin'){
         getDocotrs();
     }
     function getDocotrs(){

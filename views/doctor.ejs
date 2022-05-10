@@ -1,6 +1,7 @@
 <%- include("partials/header") %>
 <%- include("partials/doctorSideBar") %>
-<div class="container-fluid d-none">
+<%- include("partials/no_patient",{msg:['No Patients','assigned for you..!']})%>
+<div class="container-fluid d-none" id='home'>
   <%- include("partials/flashMsg") %>
 
   <div class="row justify-content-center mt-2">
@@ -128,16 +129,12 @@
 </div>
 <script type="text/javascript">
   let temp=true; // this is used to keep track whether chart is created or not
-  window.onload=function(){
-    if('<%=patient%>'.length===0){
-      swal('Error..!','No patient is assigned to you..!','error')
-      .then(function(){
-        window.location.href='/logout';
-      })
-    }else{
-      document.getElementsByClassName('container-fluid')[0].classList.remove('d-none')
-      disp_patient_details('<%=patinetId%>')
-    }
+    
+  if('<%=patient%>'.length===0){
+    document.getElementById('no-data').classList.remove('d-none');
+  }else{
+    document.getElementById('home').classList.remove('d-none')
+    disp_patient_details('<%=patinetId%>')
   }
   
   let line_chart; // For line chart
