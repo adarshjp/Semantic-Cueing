@@ -41,6 +41,11 @@ document.getElementById('completed').addEventListener('click',function(){
 
 function count_number_of_tests(status,count) {
     document.getElementById(status).innerHTML='<strong style="text-transform: capitalize;">'+status+'</strong><span class="badge bg-danger ms-2">'+count+'</span>';
+    if(status === 'all' && count === 0){
+      document.getElementById('test_status').classList.add('d-none');
+      document.getElementById('no_test').classList.remove('d-none');
+      document.getElementById('msg').innerHTML="<span class='blue'>No test</span> is assigned.";
+    }
 }
 
 function disp_test_or_no_test(status,count){
