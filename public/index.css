@@ -847,3 +847,7 @@ background: #eee;
 .rating-wrapper label:hover, .rating-wrapper label:hover ~ label, .rating-wrapper input:checked ~ label {
   color: #6C63FF;
 }
+
+.green{
+  color: #63ff6c;
+}
