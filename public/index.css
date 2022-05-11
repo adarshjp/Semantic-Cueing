@@ -716,7 +716,6 @@ opacity: 1;
 
 /* #pieChart-1,#pieChart-2,#pieChart-3{
   height: 271px !important;
-<<<<<<< HEAD
 }
 
 .pids-wrapper{
@@ -851,4 +850,7 @@ background: #eee;
 .choices__list--multiple .choices__item {
   background-color: #6C63FF;
   border: 1px solid #564dfc;
+}
+.green{
+  color: #63ff6c;
 }
