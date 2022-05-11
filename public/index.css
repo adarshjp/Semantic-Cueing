@@ -89,7 +89,7 @@ div.gradient-list > div {
   
 }
 .inputGroup input:checked ~ label:after {
-  background-color: #54E0C7;
+  background-color: #6C63FF;
   border-color: #6C63FF;
 }
 .inputGroup input {
@@ -846,4 +846,9 @@ background: #eee;
 }
 .rating-wrapper label:hover, .rating-wrapper label:hover ~ label, .rating-wrapper input:checked ~ label {
   color: #6C63FF;
+}
+
+.choices__list--multiple .choices__item {
+  background-color: #6C63FF;
+  border: 1px solid #564dfc;
 }
