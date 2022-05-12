@@ -39,7 +39,7 @@ exports.get_create_test = (req, res) => {
 };
 
 exports.get_home_doctor = (req, res) => {
-    User.find({role:'patient',doctorid:req.user._id},{_id:1, name: 1})
+    User.find({role:'patient',doctorid:req.user._id,status:'active'},{_id:1, name: 1})
     .then((patients) =>{
       res.render("doctor",{user:req.user,patient:patients, i18n:global.i18n})
     })
@@ -213,7 +213,7 @@ exports.discharge_patient = (req, res) => {
       console.log(patient)
       req.flash('success', 'Patient discharged successfully')
       res.status(200)
-      res.redirect('/home/doctor/' + req.user._id)
+      res.redirect('/view/patient/' + req.user._id)
     })
     .catch((err) => {
       res.status(500).json({

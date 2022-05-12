@@ -24,59 +24,63 @@
             <div class="row justify-content-center mx-0 mx-lg-5 p-0 p-lg-3">
                 <% let len=patients.length %>
                 <% patients.forEach((patient)=> { %>
-                    <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-xl-5 p-1">
-                        <div class="card box-shadow p-3">
-                            <div class="row d-flex h-100">
-                                <div class="col-sm-6 my-auto">
-                                    <img src="/images/undraw_doctors_hwty.svg" class="card-img-top rounded-circle p-1 box-shadow"
-                                        alt="..." style="border: 3px solid #6c63ff" />
-                                </div>
-                                <div class="col-sm-6 my-auto">
-                                    <div class="card-body">
-                                        <h1 class="card-title"><%=patient.name%></h1>
-                                        <hr>
-                                        <p class="card-text h3">
-                                            <%=patient.email%>
-                                        </p>
-                                        <p class="card-text h3">
-                                            <%=patient.age%>
-                                        </p>
-                                        <% if(user.role==="doctor") {%>
-                                        <div class="d-flex justify-content-end align-items-end">
-                                            <form action="/discharge/<%=patient._id%>?_method=PUT" method="POST">
-                                                <button class="btn btn-primary white m-1" type="submit">
-                                                Discharge</button>
-                                            </form>
-                                            <a href="/chat/<%=patient._id%>" class="btn white m-1" id="review"
-                                                ><i class="fa-solid fa-message"></i></a>
-                                        </div>
-                                        <%}else{%>
-                                        <div class="d-flex justify-content-end align-items-end">
-                                            <form action="/active/<%=patient._id%>?_method=PUT" method="POST">
-                                                <button class="btn btn-primary white m-1" type="submit"
-                                                    <%if(patient.status === 'active'){%>disabled<%}%>
-                                                >
-                                                Activate</button>
-                                            </form>
+                    <% if (patient.status !== 'active' && user.role === 'doctor') { %>
+                        <!-- Do nothing -->
+                    <% } else { %>
+                        <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-xl-5 p-1">
+                            <div class="card box-shadow p-3">
+                                <div class="row d-flex h-100">
+                                    <div class="col-sm-6 my-auto">
+                                        <img src="/images/undraw_doctors_hwty.svg" class="card-img-top rounded-circle p-1 box-shadow"
+                                            alt="..." style="border: 3px solid #6c63ff" />
+                                    </div>
+                                    <div class="col-sm-6 my-auto">
+                                        <div class="card-body">
+                                            <h1 class="card-title"><%=patient.name%></h1>
+                                            <hr>
+                                            <p class="card-text h3">
+                                                <%=patient.email%>
+                                            </p>
+                                            <p class="card-text h3">
+                                                <%=patient.age%>
+                                            </p>
+                                            <% if(user.role==="doctor") {%>
+                                            <div class="d-flex justify-content-end align-items-end">
+                                                <form action="/discharge/<%=patient._id%>?_method=PUT" method="POST">
+                                                    <button class="btn btn-primary white m-1" type="submit">
+                                                    Discharge</button>
+                                                </form>
+                                                <a href="/chat/<%=patient._id%>" class="btn white m-1" id="review"
+                                                    ><i class="fa-solid fa-message"></i></a>
+                                            </div>
+                                            <%}else{%>
+                                            <div class="d-flex justify-content-end align-items-end">
+                                                <form action="/active/<%=patient._id%>?_method=PUT" method="POST">
+                                                    <button class="btn btn-primary white m-1" type="submit"
+                                                        <%if(patient.status === 'active'){%>disabled<%}%>
+                                                    >
+                                                    Activate</button>
+                                                </form>
 
-                                            <button class="btn btn-primary white m-1 d-none d-md-block" type="button" data-bs-toggle="modal" data-bs-target="#doctorChange" data-bs-whatever='<%=patient._id%>,<%=patient.doctorid%>'>Edit <i class="fas fa-user-md"></i></button>
+                                                <button class="btn btn-primary white m-1 d-none d-md-block" type="button" data-bs-toggle="modal" data-bs-target="#doctorChange" data-bs-whatever='<%=patient._id%>,<%=patient.doctorid%>'>Edit <i class="fas fa-user-md"></i></button>
+                                                
+                                                <form action="/delete/<%=patient._id%>?_method=DELETE" method="POST">
+                                                    <button class="btn btn-primary  white m-1" type="submit">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </button>
+                                                </form>
                                             
-                                            <form action="/delete/<%=patient._id%>?_method=DELETE" method="POST">
-                                                <button class="btn btn-primary  white m-1" type="submit">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                </button>
-                                            </form>
-                                        
+                                            </div>
+                                            <div class="d-flex justify-content-end align-items-end d-block d-md-none">
+                                                <button class="btn btn-primary white m-1" type="button" data-bs-toggle="modal" data-bs-target="#doctorChange" data-bs-whatever='<%=patient._id%>,<%=patient.doctorid%>'>Edit <i class="fas fa-user-md"></i></button>
+                                            </div>
+                                            <%}%>
                                         </div>
-                                        <div class="d-flex justify-content-end align-items-end d-block d-md-none">
-                                            <button class="btn btn-primary white m-1" type="button" data-bs-toggle="modal" data-bs-target="#doctorChange" data-bs-whatever='<%=patient._id%>,<%=patient.doctorid%>'>Edit <i class="fas fa-user-md"></i></button>
-                                        </div>
-                                        <%}%>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    <% } %>
                 <% }) %>
             </div>
         </div>
