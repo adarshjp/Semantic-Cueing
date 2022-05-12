@@ -59,7 +59,7 @@
                                                 Activate</button>
                                             </form>
 
-                                            <button class="btn btn-primary white m-1 d-none d-md-block" type="button" data-bs-toggle="modal" data-bs-target="#doctorChange" data-bs-whatever='<%=patient._id%>'>Edit <i class="fas fa-user-md"></i></button>
+                                            <button class="btn btn-primary white m-1 d-none d-md-block" type="button" data-bs-toggle="modal" data-bs-target="#doctorChange" data-bs-whatever='<%=patient._id%>,<%=patient.doctorid%>'>Edit <i class="fas fa-user-md"></i></button>
                                             
                                             <form action="/delete/<%=patient._id%>?_method=DELETE" method="POST">
                                                 <button class="btn btn-primary  white m-1" type="submit">
@@ -69,7 +69,7 @@
                                         
                                         </div>
                                         <div class="d-flex justify-content-end align-items-end d-block d-md-none">
-                                            <button class="btn btn-primary white m-1" type="button" data-bs-toggle="modal" data-bs-target="#doctorChange" data-bs-whatever='<%=patient._id%>'>Edit <i class="fas fa-user-md"></i></button>
+                                            <button class="btn btn-primary white m-1" type="button" data-bs-toggle="modal" data-bs-target="#doctorChange" data-bs-whatever='<%=patient._id%>,<%=patient.doctorid%>'>Edit <i class="fas fa-user-md"></i></button>
                                         </div>
                                         <%}%>
                                     </div>
@@ -82,6 +82,7 @@
         </div>
     <%- include("partials/doctorChange") %>
 <script type="text/javascript">
+    let doctor={};
     if(parseInt('<%=len%>')===0){
         document.getElementById('view-patients').classList.add('d-none');
         document.getElementById('no-data').classList.remove('d-none');
@@ -98,17 +99,16 @@
     }
 
     function get_doctors_list(users){
-        doctor={};
         for(let i=0;i< users.length;i++){
-            if(users[i].role === 'patient'){
+            if(users[i].role === 'patient' && users[i].status === 'active'){
                 if(users[i].doctorid in doctor){
                     doctor[users[i].doctorid][1]++;
                 }else{
                     doctor[users[i].doctorid]=['',1];
                 }
             }else{
-                if(users[i].doctorid in doctor){
-                    doctor[users[i].doctorid][0]=users[i].name;
+                if(users[i]._id in doctor){
+                    doctor[users[i]._id][0]=users[i].name;
                 }else{
                     doctor[users[i]._id]=[users[i].name,0];
                 }
@@ -133,9 +133,9 @@
     let doctorChange=document.getElementById('doctorChange');
     doctorChange.addEventListener('show.bs.modal', function (event) {
       var button = event.relatedTarget
-      var patientId = button.getAttribute('data-bs-whatever');
-      console.log(patientId)
-      document.getElementById('changeDocForm').action='/change/doctor/'+patientId+'?_method=PATCH';
+      var Ids = button.getAttribute('data-bs-whatever').split(',');
+      document.getElementById('current-doc').innerHTML = 'Current Assigned Doctor : <strong>'+doctor[Ids[1]][0]+'</strong>';
+      document.getElementById('changeDocForm').action='/change/doctor/'+Ids[0]+'?_method=PATCH';
    });
 </script>
 <%- include("partials/footer") %>
