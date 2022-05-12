@@ -50,13 +50,13 @@ exports.view_Oneuser = (req, res) => {
 
 exports.delete_user = (req, res) => {
     //find and delete user with id=req.params.id and role=patient
-    User.findOne({ _id: req.params.id, role: 'patient' })
+    User.findOneAndDelete({ _id: req.params.id, role: 'patient' })
     .then((user) => {
         if(user===null){
             User.find({doctorid:req.params.id,role:'patient'})
             .then((user) => {
                 if(user.length===0){
-                    User.findOne({ _id: req.params.id, role: 'doctor' })
+                    User.findOneAndDelete({ _id: req.params.id, role: 'doctor' })
                     .then((user) => {
                         req.flash('success', 'Doctor is deleted successfully')
                         res.status(200)
