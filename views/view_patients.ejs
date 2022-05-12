@@ -25,6 +25,7 @@
                 <% let len=patients.length %>
                 <% patients.forEach((patient)=> { %>
                     <% if (patient.status !== 'active' && user.role === 'doctor') { %>
+                        <% len=len-1 %>
                         <!-- Do nothing -->
                     <% } else { %>
                         <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-xl-5 p-1">
@@ -38,11 +39,11 @@
                                         <div class="card-body">
                                             <h1 class="card-title"><%=patient.name%></h1>
                                             <hr>
-                                            <p class="card-text h3">
-                                                <%=patient.email%>
+                                            <p class="card-text h5">
+                                                Email : <%=patient.email%>
                                             </p>
-                                            <p class="card-text h3">
-                                                <%=patient.age%>
+                                            <p class="card-text h5">
+                                                Age : <%=patient.age%>
                                             </p>
                                             <% if(user.role==="doctor") {%>
                                             <div class="d-flex justify-content-end align-items-end">
@@ -54,6 +55,9 @@
                                                     ><i class="fa-solid fa-message"></i></a>
                                             </div>
                                             <%}else{%>
+                                            <p class="card-text h5 <%=patient.doctorid%>">
+                                                
+                                            </p>
                                             <div class="d-flex justify-content-end align-items-end">
                                                 <form action="/active/<%=patient._id%>?_method=PUT" method="POST">
                                                     <button class="btn btn-primary white m-1" type="submit"
@@ -104,7 +108,7 @@
 
     function get_doctors_list(users){
         for(let i=0;i< users.length;i++){
-            if(users[i].role === 'patient' && users[i].status === 'active'){
+            if(users[i].role === 'patient'){
                 if(users[i].doctorid in doctor){
                     doctor[users[i].doctorid][1]++;
                 }else{
@@ -129,6 +133,11 @@
                 option.textContent=val[0]+' (yet to be assigned)';
             }else{
                 option.textContent=val[0]+' (assigned for '+val[1]+' patients)';
+            }
+            let patient_card=document.getElementsByClassName(key);
+            console.log(patient_card)
+            for(let xy=0;xy<patient_card.length;xy++){
+                patient_card[xy].textContent='Assigned Doctor : '+val[0];
             }
             document.getElementById('doctor').appendChild(option);
         }
