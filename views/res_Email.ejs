@@ -25,18 +25,29 @@
             <tr>
               <td style="padding:20px;background-color:#ffffff;border-bottom:1px solid #e6e6e6;">
                 <h3 style="margin-top:0;margin-bottom:0;line-height:32px;font-weight:bold;letter-spacing:0.05em;text-align:center">Your Result is</h3>
-                <h2 style="margin-top:10px;margin-bottom:0;line-height:32px;font-weight:bold;letter-spacing:0.05em;text-align:center;font-family:Franklin Gothic Medium"><%=test.score%>/(<%=test.noofquestion%>*100)</h2>
-                <p style='text-align:center;font-family:Lucida Sans'>"Your getting better & better, continue the hard work"</p>
+                <h2 style="margin-top:10px;margin-bottom:0;line-height:32px;font-weight:bold;letter-spacing:0.05em;text-align:center;font-family:Franklin Gothic Medium"><%=test.score%>/<%=test.noofquestion*100%></h2>
+                <% let percent = test.score/test.noofquestion;
+                   let data_pie =[percent, 100-percent];
+                   let msg;
+                   percent = 80;
+                   if(percent<40){
+                    msg='Be Patient, Work Hard and you will surely get success'
+                  }else if(percent>=40 && percent<60){
+                    msg='Your doing a good job, Keep it up!'
+                  }else if(percent>=60 && percent<80){
+                    msg='Your getting better & better, continue the hard work'
+                  }else{
+                    msg='Congratulations! Your hard work paid off'
+                  }
+                %>
+                <p style='text-align:center;font-family:Lucida Sans;font-size:25px;'>"<%=msg%>"</p>
               </td>
             </tr>
             <tr>
               <td style="padding:15px 30px 15px 30px;background-color:#ffffff;border-bottom:1px solid #e6e6e6;border-color:rgba(201,201,207,.35);">
                 <div style='display: flex;justify-content: center;padding:15px 0px;'>
-                  <% let percent = test.score/test.noofquestion*100;
-                     let data_pie =[percent, percent-100];
-                  %>
                   <img src="https://quickchart.io/chart?c={type:'doughnut',data:{labels:['Correct','Wrong'],datasets:[{
-    data: <%= data_pie %>,
+    data: [<%= data_pie %>],
     backgroundColor: ['rgb(99, 255, 108)','	rgb(255, 101, 132)']}]},options:{responsive: true}}"  style="width:100% !important"/>
                 </div>
                </td>
@@ -48,7 +59,7 @@
                      let data_bar_1=[ans['0'],ans['1'],ans['2'],ans['3'],ans['4']];
                   %>
                   <img src="https://quickchart.io/chart?c={type:'bar',data:{labels:['0','1','2','3','4'],datasets:[{label: 'Answered',
-    data: <%=data_bar_1%>,
+    data: [<%=data_bar_1%>],
     backgroundColor: ['rgb(51, 255, 66)','rgb(138, 255, 51)','rgb(240, 255, 51)','rgb(255, 168, 51)','rgb(255, 66, 51)']}]},options:{responsive: true}}"  style="width:100% !important"/></div>
                </td>
               </tr>
@@ -59,7 +70,7 @@
                      let data_bar_2=[unans['0'],unans['1'],unans['2'],unans['3'],unans['4']];
                   %>
                   <img src="https://quickchart.io/chart?c={type:'bar',data:{labels:['0','1','2','3','4'],datasets:[{label: 'Unanswered',
-    data: <%= data_bar_2%>,
+    data: [<%= data_bar_2%>],
      backgroundColor: ['rgb(51, 255, 66)','rgb(138, 255, 51)','rgb(240, 255, 51)','rgb(255, 168, 51)','rgb(255, 66, 51)']}]},options:{responsive: true}}" style="width:100% !important"/>
                 </div>
                </td>
