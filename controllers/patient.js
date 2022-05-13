@@ -1,6 +1,22 @@
 const User = require('../models/user')
 const Test = require('../models/test')
 const Question = require('../models/question')
+
+const ejs= require("ejs")
+const nodemailer = require("nodemailer");
+
+let mailTransporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL_ID,
+      pass: process.env.PASS,
+    },
+});
+
+let mailDetails = {
+    from: process.env.EMAIL_ID,
+};
+
 exports.get_home_patient = (req, res) => {
     User.findById(req.user._id)
         .then((user) => {
@@ -82,6 +98,9 @@ exports.update_test_status = (req, res) => {
         },
         { new: true }
         ).then((test) => {
+            if(req.body.status == 'completed'){
+                send_Test_Result(test,req.user.email,res)
+            }
             res.json({ message: "Success"})
         })
         .catch((err) => {
@@ -99,3 +118,37 @@ exports.get_test_details = (req, res) => {
         })
 }
 
+function send_Test_Result(test,to_emailId,res){
+    ejs.renderFile(__dirname+"\\..\\views\\res_Email.ejs",{test:test},(err,data)=>{
+        if(err){
+            console.log(err);
+            res.status(500).json({
+                message:"Internal server error"
+            })
+        }else{
+            mailDetails.to = to_emailId;
+            mailDetails.html = data;
+            sendMail(mailDetails, (err, data) => {
+                if (err) {
+                console.log(err);
+                res.status(500).json({
+                    message: "Internal server error",
+                });
+                } else {
+                console.log("Mail sent successfully");
+                }
+            });
+        }
+    })
+}
+
+function sendMail(mailDetails, callback) {
+    mailTransporter.sendMail(mailDetails, function (err, data) {
+      if (err) {
+        console.log("Error Occurs" + err);
+        callback(err);
+      } else {
+        callback(null, data);
+      }
+    });
+  }
