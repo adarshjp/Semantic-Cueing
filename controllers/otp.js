@@ -40,7 +40,7 @@ exports.sendOtp = (req, res) => {
   }
 };
 exports.verifyOtp = (req, res) => {
-  var encrypted =encodeMSg(req.body.otp)
+  var encrypted =encodeMsg(req.body.otp)
   otp.findOne({ otp: encrypted, isVerified: false,verificationKey:req.body.verificationKey }, (err, data) => {
     if (err) {
       console.log(err);

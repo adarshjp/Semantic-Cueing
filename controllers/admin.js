@@ -49,17 +49,37 @@ exports.view_Oneuser = (req, res) => {
 }
 
 exports.delete_user = (req, res) => {
-    //delete the user with id=req.params.id 
-    User.findByIdAndDelete({ _id: req.params.id })
-        .then((user) => {
-            req.flash('success', 'User deleted successfully')
+    //find and delete user with id=req.params.id and role=patient
+    User.findOneAndDelete({ _id: req.params.id, role: 'patient' })
+    .then((user) => {
+        if(user===null){
+            User.find({doctorid:req.params.id,role:'patient'})
+            .then((user) => {
+                if(user.length===0){
+                    User.findOneAndDelete({ _id: req.params.id, role: 'doctor' })
+                    .then((user) => {
+                        req.flash('success', 'Doctor is deleted successfully')
+                        res.status(200)
+                        res.redirect('/view/doctor')
+                    }).catch((err) => {
+                        console.log(err)
+                    });
+                }else{
+                    req.flash('error', 'Doctor has patients. Please delete them first')
+                    res.status(200)
+                    res.redirect('/view/doctor')
+                }
+            }).catch((err) => {
+                console.log(err)
+            });
+        }else{
+            req.flash('success', 'Patient is deleted successfully')
             res.status(200)
-            res.redirect('/home/admin/')
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-    
+            res.redirect('/view/patient')
+        }
+    }).catch((err) => {
+        console.log(err)
+    });
 }
 
 exports.get_edit_user = (req, res) => {
@@ -102,7 +122,7 @@ exports.checkusername=(req, res) => {
 
 exports.get_details_for_graph = (req, res) => {
     //fetch all user with role patients or doctors
-    User.find({ role: { $in: ['patient', 'doctor'] }},{email: 0,name:0,age:0,username:0})
+    User.find({ role: { $in: ['patient', 'doctor'] }},{email: 0,age:0,username:0,displaypic:0})
         .then((users) => {
             res.send({users: users})
         })
@@ -138,7 +158,11 @@ exports.get_view_questions= (req, res) => {
     Question.find({}, { hints: 0 }).limit(10).skip(skip)
     .then((question) => {
         if(question.length===0){
-            res.status(200).json({message: 'No more questions'})
+            if(req.params.skip===undefined){
+                res.render('view_questions',{question: question,user:req.user,i18n: global.i18n})
+            }else{
+                res.status(200).json({message: 'No more questions'})
+            }
         }else{
             res.status(200)
             if(req.params.skip!==undefined)
@@ -158,7 +182,6 @@ exports.active_patient = (req, res) => {
     /* Set the status of the patient to active */
     User.findOneAndUpdate({ _id: req.params.patientid,role:'patient' }, { $set: { status: 'active' } }, { new: true })
       .then((patient) => {
-        console.log(patient)
         req.flash('success', 'Patient activated successfully')
         res.status(200)
         res.redirect('/view/patient/')
@@ -169,3 +192,18 @@ exports.active_patient = (req, res) => {
         })
       })
   }
+
+exports.change_doctor= (req, res) => {
+    // chnage docotr id of the patient
+    User.findOneAndUpdate({ _id: req.params.patientid,role:'patient' }, { $set: { doctorid: req.body.doctorId } }, { new: true })
+    .then((patient) => {
+        req.flash('success', 'Doctor changed successfully')
+        res.status(200)
+        res.redirect('/view/patient/')
+      })
+      .catch((err) => {
+        res.status(500).json({
+          error: err
+        })
+      })
+}

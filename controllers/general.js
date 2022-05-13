@@ -182,7 +182,7 @@ exports.delete_question= (req, res) => {
             .then((question) => {
                 req.flash('success', 'Question deleted successfully')
                 res.status(200)
-                res.redirect('/view/question')
+                res.redirect('/view/questions')
             })
             .catch((err) => {
                 console.log(err)
@@ -190,7 +190,7 @@ exports.delete_question= (req, res) => {
         }else{
             req.flash('error', 'Question is Used in a test')
             res.status(200)
-            res.redirect('/view/question')
+            res.redirect('/view/questions')
         }
     })
     .catch(err => {

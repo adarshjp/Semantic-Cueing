@@ -847,8 +847,10 @@ background: #eee;
 .rating-wrapper label:hover, .rating-wrapper label:hover ~ label, .rating-wrapper input:checked ~ label {
   color: #6C63FF;
 }
-
 .choices__list--multiple .choices__item {
   background-color: #6C63FF;
   border: 1px solid #564dfc;
+}
+.green{
+  color: #63ff6c;
 }
