@@ -29,7 +29,6 @@
                 <% let percent = test.score/test.noofquestion;
                    let data_pie =[percent, 100-percent];
                    let msg;
-                   percent = 80;
                    if(percent<40){
                     msg='Be Patient, Work Hard and you will surely get success'
                   }else if(percent>=40 && percent<60){
@@ -40,7 +39,7 @@
                     msg='Congratulations! Your hard work paid off'
                   }
                 %>
-                <p style='text-align:center;font-family:Lucida Sans;font-size:25px;'>"<%=msg%>"</p>
+                <p style='text-align:center;font-family:Lucida Sans;font-size:25px;color: blueviolet;'>"<%=msg%>"</p>
               </td>
             </tr>
             <tr>
