@@ -4,8 +4,8 @@
   <%- include("partials/flashMsg") %>
   <div class="row justify-content-center">
     <div class="offset-2 col-10 offset-sm-1 col-sm-11 offset-xl-0 col-xl-11">
-      <div class="row justify-content-center vertical-center shadow-lg rounded-3">
-        <form action="/register" method="post" class="p-2" enctype="multipart/form-data" onsubmit="return register()"></form>
+      <form action="/register" method="post" class="p-2" enctype="multipart/form-data" onsubmit="return register()">
+          <div class="row justify-content-center vertical-center shadow-lg rounded-3">
           <h1 class="text-center p-3 blue order-first"><%=i18n.Register%>: <%=i18n.Patient%> | <%=i18n.Doctor%></h1>
           <div class="col-12 col-md-6 text-center my-auto order-last">
             <div class="row">
@@ -140,7 +140,8 @@
                     id="review"
                   />
           </div>
-        </form>
+        </div>
+      </form>
       </div>
     </div>
    
