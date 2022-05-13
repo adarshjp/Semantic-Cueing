@@ -51,21 +51,6 @@ function reSet(){
     countQuestion();
 }
 
-function noofqval() {
-    var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-    console.log(checkboxes.length)
-    if(checkboxes.length<5){
-        alert("Please select atleast 5 questions..");
-        return false;
-    }
-    else{
-        var ele=document.getElementById("formsubmit");
-        ele.disabled=true;
-        ele.value="Creating..."
-        return true;
-    }
-}
-
 function selRandom(){
     var num=li_id-1;
     var ran;

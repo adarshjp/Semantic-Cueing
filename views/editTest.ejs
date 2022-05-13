@@ -43,6 +43,7 @@
     let isCompleted=false; //true is no more questions
     let temp=isCompleted;
     let selected_q='<%=test.questions%>'.split(',');
+    document.getElementById('<%=test.level%>-star-rating').checked=true;
 
     for(let j=0;j<selected_q.length;j++){
         fetch('/question/'+selected_q[j])
@@ -69,7 +70,7 @@
         else{
             var ele=document.getElementById("formsubmit");
             ele.disabled=true;
-            ele.value="Creating..."
+            ele.value="Updating..."
             return true;
         }
     }

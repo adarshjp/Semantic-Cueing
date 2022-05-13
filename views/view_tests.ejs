@@ -1,22 +1,7 @@
 <%- include("partials/header") %> 
 <%- include("partials/doctorSideBar") %>
 <div class="container-fluid">
-  <div class="row justify-content-center pt-1">
-    <div class="offset-2 col-8 offset-sm-1 col-sm-10 offset-md-1 col-md-8">
-       <% if(message.error){ %>
-          <div class="alert alert-warning alert-dismissible fade show" role="alert">
-             <strong class="text-center"><%= message.error%></strong>
-             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-       <% } %>
-       <% if(message.success){ %>
-          <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-             <strong class="text-center"><%= message.success%></strong>
-             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-       <% } %>
-    </div>
- </div>
+  <%- include("partials/flashMsg") %>
   <div class="row justify-content-center">
     <div class="offset-2 col-9 offset-sm-1 col-sm-9 offset-lg-0 col-lg-6 p-1">
       <h1 class="text-center p-2">
