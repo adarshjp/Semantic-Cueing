@@ -17,6 +17,10 @@ document.getElementById('sel-q-tab').addEventListener('click', function(){
     document.getElementById('sel-pat').classList.add('d-none');
     document.getElementById('sel-lev').classList.add('d-none');
     document.getElementById('res_but').classList.add('d-none');
+    
+    document.getElementById('no_question').classList.add('d-none');
+    document.getElementById('question-row').classList.remove('d-none');
+    
 });
 
 document.getElementById('selected-q-tab').addEventListener('click', function(){
@@ -27,11 +31,21 @@ document.getElementById('selected-q-tab').addEventListener('click', function(){
     document.getElementById('sel-pat').classList.remove('d-none');
     document.getElementById('sel-lev').classList.remove('d-none');
     document.getElementById('res_but').classList.remove('d-none');
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+    if (checkboxes.length===0){
+        document.getElementById('no_question').classList.remove('d-none');
+        document.getElementById('question-row').classList.add('d-none');
+    }
 });
 
 function reSet(){
     for(var i=1;i<=li_id-1;i++){
         document.getElementById("option"+i).checked = false;
+    }
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+    if (checkboxes.length===0){
+        document.getElementById('no_question').classList.remove('d-none');
+        document.getElementById('question-row').classList.add('d-none');
     }
     showSelectedQuestion();
     countQuestion();

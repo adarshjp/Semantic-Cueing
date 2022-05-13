@@ -2,8 +2,9 @@
 <%- include("partials/doctorSideBar") %>
 <div class="container-fluid">
     <%- include("partials/edit_Create_Test_Tab") %>
+    <%- include("partials/no_Question",{msg:["No Questions","Selected yet..!"]})%>
     <form action="/create/test" method="POST" id="testForm" onsubmit="return noofqval();">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" id='question-row'>
             <div class="offset-1 col-11 offset-sm-1 col-sm-9 offset-lg-0 col-lg-8 col-xl-6">
                 <div class="row justify-content-center gradient-list mb-2 p-1" id='div_list'>
                     <% var i=1;%>
