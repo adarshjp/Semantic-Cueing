@@ -31,12 +31,12 @@ exports.addquestions_post = (req, res, next) => {
             //console.log(result);
             req.flash('success', 'Question added successfully')
             res.status(200)
-            res.redirect('/home/admin')
+            res.redirect('/view/questions')
         })
         .catch((err) => {
             res.status(500)
             req.flash('error', err.message)
-            res.redirect('/home/admin')
+            res.redirect('/view/questions')
         })
 }
 exports.view_question = (req, res) => {

@@ -1,6 +1,6 @@
 <%- include("partials/header") %>
 <%- include("partials/adminSideBar") %>
-<%- include("partials/no_patient",{msg:['No questions','Created yet']})%>
+<%- include("partials/no_patient",{msg:['No questions','Created yet..!']})%>
 <div class="container" id='view-question'>
     <%- include("partials/flashMsg") %>
     <div class="row justify-content-center">
@@ -11,17 +11,22 @@
           </h1>
         </div>
     </div>
+    <div class="offset-2 col-10 offset-sm-1 col-sm-11 offset-lg-0 col-lg-12 text-center my-2">
+        <a href="/addquestion" class="btn btn-primary btn-lg rounded-pill">Create Question <i class="fa-solid fa-plus"></i></a>
+      </div>
     <div class="row justify-content-center">
         <div class="offset-1 col-11 offset-sm-1 col-sm-9 offset-lg-0 col-lg-8 col-xl-6">
             <div class="row justify-content-center gradient-list mb-2 p-1" id='div_list'>
                 <% let len=question.length %>
                 <% question.forEach((question)=>{ %>
-                    <div class="offset-1 offset-sm-0 col-9 col-sm-10 col-lg-11 shadow-lg bg-body rounded-lg">
+                    <div class="offset-1 offset-sm-0 col-9 col-sm-12 shadow-lg bg-body rounded-lg">
                         <div class="card-image mx-0 p-2">
-                            <div class="row d-flex align-items-center p-1 justify-content-center">
-                                <div class="col-12 col-sm-8 col-md-6 col-lg-8 col-xl-9">
-                                    <p class="h6 text-center text-sm-start"><%=question.answer%></p>
-                                    <p class="h6 text-center text-sm-start"><%=i18n.Level%> : 
+                            <div class="row align-items-center p-1 justify-content-center">
+                                <div class="col-12 col-sm-5 col-md-3 col-lg-4">
+                                    <p class="h6 text-center"><%=question.answer%></p>
+                                </div>
+                                <div class="col-12 col-sm-7 col-md-5">
+                                    <p class="h6 text-center"><%=i18n.Level%> : 
                                         <%for(let i=1;i<=5;i++){%>
                                           <%if(i<=question.level){%>
                                             <span class = "fa fa-star checked"></span>
@@ -31,7 +36,7 @@
                                         <%}%>
                                         </p>
                                 </div>
-                                <div class="col-7 col-sm-4 col-md-6 col-lg-4 col-xl-3 text-center">
+                                <div class="col-7 col-sm-4 col-md-4 col-lg-3 text-center">
                                     <a class="btn btn-primary white" href='/edit/question/<%=question._id%>'
                                             ><i class="fas fa-edit"></i></a>
                                     <form action="/delete/question/<%=question._id%>?_method=DELETE" class="d-inline-block" method="POST">
