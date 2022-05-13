@@ -16,7 +16,7 @@
     <table role="presentation" style="width:100%;border:none;border-spacing:0;">
       <tr>
         <td align="center" style="padding:0;">
-          <table role="presentation" style="width:94%;max-width:300vw;border:none;border-spacing:0;text-align:left;font-family:Arial,sans-serif;font-size:16px;line-height:22px;color:#363636;padding:60px 40px;">
+          <table role="presentation" style="width:94%;max-width:300vw;border:none;border-spacing:0;text-align:left;font-family:Arial,sans-serif;font-size:16px;line-height:22px;color:#363636;padding:60px 35px;">
             <tr>
               <td style="padding:30px;background-color:#ffffff;border-bottom:1px solid #e6e6e6;">
                 <h2 style="margin-top:0;margin-bottom:0;line-height:32px;font-weight:bold;letter-spacing:-0.02em;text-align:center;font-family:monospace">Semantic Cueing System</h2>
@@ -26,13 +26,12 @@
               <td style="padding:15px 30px 15px 30px;background-color:#ffffff;border-bottom:1px solid #e6e6e6;border-color:rgba(201,201,207,.35);">
                 <% if(version == 'v1'){%>
                   <h3 style="margin-top:0;margin-bottom:0;line-height:32px;font-weight:bold;letter-spacing:0.05em;text-align:center">Change Your Password</h3>
-                  <h1 class=" "><%=i18n.Changeyourpassword%></h1>
                 <%}else{%>
                   <h3 style="margin-top:0;margin-bottom:0;line-height:32px;font-weight:bold;letter-spacing:0.05em;text-align:center">Your Verification Code</h3>
                 <%}%>
                   <p style="margin-top:25px;margin-bottom:0;font-family:monospace">Below is your One time Passcode</p>
                 <div style="display: flex;justify-content: center;">
-                  <h4 style="background: #6c63ff;  padding: 25px 25px 25px 30px; color: #ffffff; border-radius: 4px; font-size:25px;font-weight:bold;letter-spacing:0.5em;"><%=otp%></h4>
+                  <h4 style="background: #6c63ff;  padding: 25px 25px 25px 30px; color: #ffffff; border-radius: 4px; font-size:25px;font-weight:bold;letter-spacing:0.5em;" id='otp'><%=otp%></h4>
                 </div>
                 <p style="margin-top:0;margin-bottom:10px;font-family:monospace">Please enter this passcode in the app to complete the process.</p>
                 <h4 style="margin-top:0;margin-bottom:0;line-height:32px;font-weight:bold;letter-spacing:0.05em;text-align:center;color:#FF6584;font-family:emoji">This passcode is valid for 10 minutes.</h4>
