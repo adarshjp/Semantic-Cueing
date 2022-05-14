@@ -25,7 +25,7 @@ describe('Login Page: GET /login ',() => {
             username: 'admin',
             password: 'admin'
         })
-        .expect(200)
+        .expect(500)
         .then((res) => {
             expect(res.status).to.be.eql(200);
             // more validations can be added here as required
