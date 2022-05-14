@@ -14,13 +14,25 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride("_method"));
 app.set("view engine","ejs")
-
 const connectionParams = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
+let dbUrl;
+if(process.env.NODE_ENV==="production"){
+  dbUrl=process.env.DB_URL_PROD;
+}else if(process.env.NODE_ENV==="development"){
+  dbUrl=process.env.DB_URL_DEV
+}else{
+  dbUrl=process.env.DB_URL_QA
+}
+if(!dbUrl)
+{
+  console.log(clc.red("Please provide DB_URL_PROD,DB_URL_DEV,DB_URL_QA in .env file"));
+  process.exit(1);
+}
 mongoose
-  .connect(process.env.DB_URL, connectionParams)
+  .connect(dbUrl, connectionParams)
   .then(() => {
     console.log(clc.blueBright("\n******** Connected to MongoDB *******"));
     console.log(clc.redBright("\n*************************************"))
@@ -93,6 +105,7 @@ app.use(otpRoutes)
 app.use(chatRoutes)
 
 const server = http.listen(process.env.PORT || 3000, () => {
+  console.log("Starting Server in "+process.env.NODE_ENV+" environment");
   console.log(clc.redBright("\n*************************************"))
   console.log(clc.blueBright("\n**** Server started at port 3000 ****"));
   console.log(clc.cyanBright("\n**** Visit http://localhost:3000 ****"));
