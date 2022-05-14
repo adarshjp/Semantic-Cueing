@@ -20,7 +20,7 @@ describe('Login Page: GET /login ',() => {
     });
     it('post correct password and username', () => {
         request(app)
-        .post('/login')
+        .post('/logi')
         .send({
             username: 'admin',
             password: 'admin'
