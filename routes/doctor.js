@@ -6,14 +6,14 @@ router.get("/create/test/:skip?", isLoggedIn, isDoctor, get_create_test);
 router.get("/home/doctor/:id", isLoggedIn, isDoctor, get_home_doctor);
 router.post("/create/test", isLoggedIn, isDoctor, post_create_test);
 router.get("/view/patient/:doctorid", isLoggedIn, isDoctor, get_view_assigned_patient); // gets the details of all patients assigned to the doctor
-router.get("/data/patientdetails/:patientid", isLoggedIn, isDoctor, get_patient_details); // gets the details of particular patient
-router.get("/data/testdetails/:patientid", isLoggedIn, isDoctor, get_patient_test_details); // gets the details of particular patient
+router.get("/data/patientdetails/:patientid", isLoggedIn, isDoctor, isMappedDoctor,get_patient_details); // gets the details of particular patient
+router.get("/data/testdetails/:patientid", isLoggedIn, isDoctor,isMappedDoctor, get_patient_test_details); // gets the details of particular patient
 router.get("/view/tests/:doctorid", isLoggedIn, isDoctor, get_view_test_created); // gets the details of tests created by the docotr
 router.get("/edit/test/:testid", isLoggedIn, isDoctor, get_edit_test);
 router.patch("/edit/test/:testid", isLoggedIn, isDoctor, patch_edit_test);
 router.get("/question/:questionid", isLoggedIn, isDoctor, get_question);
 router.delete("/delete/test/:testid", isLoggedIn, isDoctor, delete_test);
-router.put("/inclevel/:patientid", isLoggedIn, isDoctor, upgrade_level);
-router.put("/drelevel/:patientid", isLoggedIn, isDoctor,downgrade_level);
-router.put("/discharge/:patientid", isLoggedIn, isDoctor, discharge_patient);
+router.put("/inclevel/:patientid", isLoggedIn, isDoctor, isMappedDoctor,upgrade_level);
+router.put("/drelevel/:patientid", isLoggedIn, isDoctor,isMappedDoctor,downgrade_level);
+router.put("/discharge/:patientid", isLoggedIn, isDoctor,isMappedDoctor, discharge_patient);
 module.exports = router;

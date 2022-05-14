@@ -44,7 +44,7 @@ exports.isPatient = (req, res, next) => {
 }
 
 exports.isMappedDoctor = async (req, res, next) => {
-    let doctorId, patinetId=req.params.patientId
+    let doctorId, patinetId=req.params.patientid
     /*Check whether the req.user._id is same as doctorid of patient */
     try{
         doctorId=await findDoctorIdByPatientId(patinetId)
