@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "set NODE_ENV=testing&& mocha",
+    "test": "set NODE_ENV=testing&& mocha --exit",
     "start": "set NODE_ENV=production&& node index.js",
     "dev": "set NODE_ENV=development&& npx nodemon",
     "format": "prettier"
   },
+  "pre-commit": "test",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/adarshjp/Semantic-Cueing.git"
@@ -40,5 +41,8 @@
     "socket.io": "^4.4.1",
     "supertest": "^6.2.2",
     "twilio": "^3.72.0"
+  },
+  "devDependencies": {
+    "pre-commit": "^1.2.2"
   }
 }
