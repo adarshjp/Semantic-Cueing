@@ -1,7 +1,7 @@
 const express = require("express");
 const upload = require("../setup/multer");
-const {register_get,register_post,} = require("../controllers/Auth/auth");
-const {isAdmin,isLoggedIn}=require('../controllers/Auth/middlewares')
+const {register_get,register_post,} = require("../controllers/auth");
+const {isAdmin,isLoggedIn}=require('../middlewares/middlewares')
 const {admin_get,view_patient,view_doctor,view_Oneuser,get_edit_user,edit_user,delete_user,checkusername,get_details_for_graph,count_no_of_tests,count_no_of_questions,get_view_questions,active_patient,change_doctor} = require('../controllers/admin')
 const router = express.Router();
 

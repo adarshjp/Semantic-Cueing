@@ -8,6 +8,7 @@ const Test = require("../models/test");
 exports.admin_get = (req, res) => {
     User.findById(req.user._id)
         .then((user) => {
+            res.status(200)
             res.render('admin', { user: user, i18n: global.i18n })
         })
         .catch((err) => {

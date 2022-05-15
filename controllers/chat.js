@@ -1,7 +1,7 @@
 const User = require("../models/user");
 const Message = require("../models/message");
 const Conversation = require("../models/conversation");
-const {encodeMsg,decodeMsg} = require("./en_decode")
+const {encodeMsg,decodeMsg} = require("../helpers/en_decode")
 exports.get_messages_patient=async (req,res)=>{
     /*  Function  to GEt all the messages of a conversation (Patient Side)
         Input: patientId (req.user._id)

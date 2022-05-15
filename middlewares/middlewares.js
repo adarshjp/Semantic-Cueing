@@ -1,5 +1,5 @@
-const User = require('../../models/user')
-const Test = require('../../models/test')
+const User = require('../models/user')
+const Test = require('../models/test')
 exports.isLoggedIn = (req, res, next) => {
     if (req.isAuthenticated()) {
         return next()
@@ -44,7 +44,7 @@ exports.isPatient = (req, res, next) => {
 }
 
 exports.isMappedDoctor = async (req, res, next) => {
-    let doctorId, patinetId=req.params.patientid
+    let doctorId, patinetId=req.params.patientId
     /*Check whether the req.user._id is same as doctorid of patient */
     try{
         doctorId=await findDoctorIdByPatientId(patinetId)
