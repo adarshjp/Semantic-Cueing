@@ -56,4 +56,20 @@ describe('POST /login ',() => {
         });
         
     }).timeout(100000)
+    it('no password and username', (done) => {
+        request(app)
+        .post('/login')
+        .send({
+            username: '',
+            password: ''
+        })
+        .set('Accept', 'application/json')
+        .set('Content-Type', 'application/json')
+        .end(function(err, res) {
+            expect(res.status).to.equal(422)
+            if (err) return done(err);
+            return done();
+        });
+        
+    }).timeout(100000)
 });
