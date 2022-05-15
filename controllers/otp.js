@@ -2,7 +2,7 @@ const otp = require("../models/otp");
 const nodemailer = require("nodemailer");
 const user = require("../models/user");
 const ejs= require("ejs")
-const {encodeMsg}= require('./en_decode')
+const {encodeMsg}= require('../helpers/en_decode')
 let mailTransporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
