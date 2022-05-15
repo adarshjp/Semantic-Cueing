@@ -1,55 +1,29 @@
 {
-    "Takeyour":"Take your",
-    "tests":"tests",
-    "now":"now",
-    "Test":"Test",
-    "Level":"Level",
-    "Starttest":"Start test",
-    "Resume":"Resume",
-    "ViewReport":"View Report",
-    "Menu":"Menu",
-    "Tests":"Tests",
-    "MyProfile":"My Profile",
-    "Doctor":"Doctor",
-    "ChangePassword":"Change Password",
-    "Logout":"Logout",
-    "Close":"Close",
-    "Edit":"Edit",
-    "Profile":"Profile",
-    "EditProfile":"Edit Profile",
-    "My":"My",
-    "EnterOldPassword":"Enter old password",
-    "EnterNewPassword":"Enter new password",
-    "ConfirmNewPassword":"Confirm new password",
-    "Confirm":"Confirm",
-    
-    "Hint":"Hint",
-    "Next":"Next",
-    "Skip":"Skip",
-    "Pause":"Pause",
-    "SelectRequiredLanguage":"Select required language",
-    "Proceed":"Proceed",
-    "ChangeLanguage":"Change Language",
-    "Testissubmittedsucessfully":"Test is submitted successfully",
-    "Continue":"Continue",
+    "1":"addquestion.ejs",
 
     "Addan":"Add an",
     "Object":"Object",
     "toidentify1":"to identify",
-    "Choosethe":"Choose the",
-    "Image":"Image",
-    "ofObject":"of Object",
     "EnterImage":"Enter Image",
     "NameofObject":"Name of Object...",
-    "EnterLevel":"Enter Level(1-5)...",
     "Description":"Description...",
     "Give":"Give",
     "hints":"hints",
     "toidentify2":"to identify",
     "Submit":"Submit",
 
-    "Addhint":"Add hint",
-    "UploadanImage":"Upload an Image",
+            "Filetoobig":"File too Big, please select a file less than 1mb",
+            "Duplicate":"Duplicate",
+            "Enteredanswerduplicate":"Entered answer is duplicate",
+            "typetheanswer":"Please type the answer",
+            "enternamesoobject":"Please enter names of the object",
+            "uploadobjectimg":"Please upload object image",
+            "uploadhint":"Please upload hint",
+    
+
+    "2":"admin.ejs",
+
+
     "NumberofPatients":"Number of Patients",
     "NumberofDoctors":"Number of Doctors",
     "NumberofQuestionscreated":"Number of Questions created",
@@ -59,33 +33,99 @@
     "AssignedvsUnassignedDoctors":"Assigned vs Unassigned Doctors",
     "ActivevsDischargedPatients":"Active vs Discharged Patients",
 
-    "YourMessageHere":"Your Message Here",
+
+        "cntofpatientvslvl" :"Count of Patient VS Level",
+        "Doctorchart":"Doctor",
+        "Patientchart":"Patient",
+        "Assigned":"Assigned",
+        "Unassigned":"Unassigned",
+        "Active":"Active",
+        "Discharged":"Discharged",
+
+
+
+    "3":"changepassword.ejs",
+
+    "ChangePassword":"Change Password",
+    "EnterOldPassword":"Enter old password",
+    "EnterNewPassword":"Enter new password",
+    "ConfirmNewPassword":"Confirm new password",
+    "Confirm":"Confirm",
+
+            "Success":"Success..",
+            "PasswordMatch":"Password Match",
+            "PassworddidnotMatch":"Password did not match: Please try again...",
+            "Failed":"Failed..!",
+
+
+    "4":"createtest.ejs",
 
     "SelectQuestions":"Select Questions",
     "SelectedQuestions":"Selected Questions",
     "ChooseLevel":"Choose Level",
-    "All":"All",
     "Selectrandomly":"Select randomly",
     "Question":"Question :",
     "ChoosePatient":"Choose Patient",
-    "Reset":"Reset",
+    "EnterLevel":"Enter Level(1-5)...",
+    
 
-    "Name":"Name",
-    "Email":"Email",
-    "Age":"Age",
-    "PatientID":"Patient ID : ",
-    "Strokedatestroke":"Stroke date : stroke",
-    "Poststrokeduration":"Post stroke duration ",
-    "NumberofTestAssigned":"Number of Test Assigned",
+            "Alert":"Alert",
+            "selecatleast1patient":"Please select at least 1 patient",
+            "Note":"Note",
+            "selectatleast5que":"Please select atleast 5 questions..",
+            "Completed":"Completed!",
+            "SorryNomorequestions":"Sorry..,No more questions...!",
+
+
+
+    "5":"doctor.ejs",
+
     "Patientstestresult":"Patients test result",
     "AnsweredaQuestionvsHintsTaken":"Answered a Question vs Hints Taken",
     "UnansweredaQuestionvsHintsTaken":"Unanswered a Question vs Hints Taken",
     "Assignedtestdetails":"Assignedtestdetails",
-    "Verify":"Verify",
+    "PatientID":"Patient ID : ",
+    "Strokedatestroke":"Stroke date : stroke",
+    "Poststrokeduration":"Post stroke duration ",
+    "NumberofTestAssigned":"Number of Test Assigned",
+    "Upgrade":"Upgrade",
+    "Degrade":"Degrade",
+    "Percentage":"Percentage",
+    "NumberofQuestionAnswered":"Number of Question Answered",
+    "NumberofQuestionsUnanswered":"Number of Questions Unanswered",
+    "Status":"Status :",
+    "Pending":"Pending",
+    "Paused":"Paused",
+
+
+    "6":"edit_question.ejs",
+
 
     "Updatethe":"Update the",
+    "Objct":"Object",
     "Objejct":"Object",
     "toidentify3":"to identify",
+    "Level":"Level",
+
+
+
+    "7":"editTest.ejs",
+
+    "Patient":"Patient",
+    "Selectpatients":"Select patients..",
+    "Reset":"Reset",
+
+
+
+    "8":"editUser.ejs",
+
+    "Edit":"Edit",
+    "Profile":"Profile",
+    "EditProfile":"Edit Profile",
+
+
+
+    "9":"forgotpassword.ejs",
 
     "Forgot":"Forgot",
     "Password1":"Password",
@@ -94,10 +134,31 @@
     "EntertheOTP":"Enter the OTP",
     "Enteryournewpassword":"Enter your new password",
     "SetPassword":"Set Password",
+    "VerifyOTP":"Verify OTP",
 
+
+            "enteremailaddress":"Please enter your email address",
+            "OTPsenttoemail":"OTP sent to your email",
+            "Errors":"Error..",
+            "Emailnotfound":"Email not found",
+            "PleaseenterOTP":"Please enter the OTP",
+            "OTPverified":"OTP verified",
+            "OTPnotverified":"OTP not verified",
+            "enteryournewpassword":"Please enter your new password",
+            "Congratulations":"Congratulations..!",
+            "passwordchangedsuccessfully":"Your password has been changed successfully",
+            "Passwordnotset":"Password not set",
+            "verifyEmailentered":"Please verify Email entered...!",
+            
+
+    
+    "10":"login.ejs",
+
+    "Login":"Login",
     "Username":"Username",
     "Password":"Password",
     "ForgotYourPassword":"Forgot Your Password ?",
+    "Loggingin":"Logging in",
     "EdisonQuote":"Many Of Life's Failures Are People Who Did Not Realize How Close They Were to Success When They Gave Up",
     "EdisonName":"— Thomas Edison",
     "MilneQuote":"Promise me you’ll always remember:You’re braver than you believe, and stronger",
@@ -106,14 +167,22 @@
     "CarnegieName":"— Dale Carnegie",
     "PoindexterQuote":"One small crack does not mean that you are broken,it means that you were put to the test and  you didn’t fall apart.",
     "PoindexterName":"-Linda Poindexter",
-    "Login":"Login",
-    "Loggingin":"Logging in",
 
-    "Changeyourpassword":"Change your password",
+
+
+    "11":"mydoctor.ejs",
+
+    "My":"My",
+    "Doctor":"Doctor",
+
+
+
+    "12":"otpTemplate.ejs",
+
+
     "SemanticCueing":"Semantic Cueing",
-    "VerifyOTP":"Verify OTP",
+    "Changeyourpassword":"Change your password",
     "YourVerificationCode":"Your Verification Code",
-    
     "Belowisyouronetimepasscode":"Below is your one time passcode",
     "Pleaseenterthepasscodeintheapptocompletetheprocess":"Please enter the passcode in the app to complete the process",
     "Thispasscodeisvalidfor10minutes":"This passcode is valid for 10 minutes",
@@ -121,53 +190,230 @@
     "Regards":"Regards",
     "TeamSemanticCueing":"Team Semantic Cueing",
 
-    "RegisterPatientDoctor":"Register: Patient | Doctor",
+
+
+    "13":"patient.ejs",
+
+
+    "Takeyour":"Take your",
+    "tests":"tests",
+    "now":"now",
+    "Test":"Test",
+    "Starttest":"Start test",
+    "Resume":"Resume",
+    "ViewReport":"View Report",
+
+
+
+    "BePatientWorkHardandgetsuccess":"Be Patient, Work Hard and you will surely get success",
+    "YourdoinggoodjobKeepitup":"Your doing a good job, Keep it up!",
+    "gettingbettercontinuehardwork":"Your getting better & better, continue the hard work",
+    "hardworkpaidoff":"Congratulations! Your hard work paid off",
+    "POOR":"POOR",
+    "AVERAGE":"AVERAGE",
+    "GOOD":"GOOD",
+    "EXCELLENT":"EXCELLENT",
+
+
+
+    "14":"setPassword.ejs",
+
+
+    "CreatePassword":"Create Password",
+    "ConfirmPassword":"Repeat Your New Password",
+    "NewPassword":"Enter your new Password",
+
+
+
+    "15":"signup.ejs",
+
+    "Register":"Register",
+    "Name":"Name",
+    "Email":"Email",
+    "Age":"Age",
+    "Verify":"Verify",
+    "Otp":"OTP",
     "UsernamealreadyexistsPleasetryanotherone":"Username already exists. Please try another one",
     "SelectRole":"Select Role:",
-    "Patient":"Patient",
     "Choosedoctor":"Choose doctor:",
     "StrokeDate":"Stroke Date:",
     "ChooseProfilePicture":"Choose Profile Picture",
 
-    "Enteryouranswerhere":"Enter your answer here...",
+
+            "Invalid":"Invalid!",
+            "entervalidemailaddress":"Please enter a valid email address",
+            "InvalidOTP":"Invalid OTP!",
+            "enterproperOTP":"Please enter proper OTP",
+            "OTPSent":"OTP Sent!",
+            "Checkyouremail":"Check your email...!",
+            "EmailVerified":"Email Verified",
+            "emailverifiedsuccessfully":"Your email verified successfully...!",
+            "Expired":"Expired",
+            "OTPexpiredtryagain":"OTP is expired try again..!",
+            "Upload":"Upload",
+            "UploadProfilePicture":"Upload Profile Picture..!",
+
+
+    "16":"testexecute.ejs",
+
+    "Next":"Next",
+    "Skip":"Skip",
+    "Pause":"Pause",
+    "TestID":"Test ID",
+    "Audio":"Audio",
+
+        "Attempted":"Attempted",
+        "Tobeattemted":"To be attempted",
+        "TestLevel":"Test Level",
+        "ScoreObtained":"Score Obtained",
+
+
+            "Taketestnow":"Take test now...!",
+            "Takeyourtestnow":"Take your test now. All the best..!",
+            "Warning":"Warning!",
+            "readinstructionstoproceed":"Please read the instructions to proceed...!",
+            "enteryouranswer":"Please enter your answer...!",
+            "allowaccessyourmicrophone":"Please allow to access your microphone..!",
+            "unableaceessyourmicrophone":"Sorry...!, we are unable to aceess your microphone",
+            "enumerateDevicesnotsupported.":"enumerateDevices() not supported.",
+            "Microphonetestedsuccessfully":"Microphone tested successfully...!",
+            "UseChromeorEdgeBrowserstoproceed":"Please Use Chrome or Edge Browsers to proceed...!",
+
+
+    "17":"view_doctors.ejs",
+
 
     "Our":"Our",
-    "DoctorName":"Doctor Name",
-    "DoctorAge":"Doctor Age",
-    "DoctorEmail":"Doctor Email",
     "Doctors":"Doctors",
 
-    "PatientName":"Patient Name",
-    "PatientAge":"Patient Age",
-    "PatientEmail":"Patient Email",
-    "Patients":"Patients",
+
+    "18":"view_patients.ejs",
+
 
     "view_Listof1":"List of",
     "view_Patients1":"Patients",
+
+
+    
+    "19":"view_questions.ejs",
+
 
     "Listof":"List of",
     "Questions":"Questions",
     "Created":"Created",
 
-    "Status":"Status :",
 
-    "Register":"Register",
-    "Chat":"Chat",
+    "20":"view_tests.ejs",
+
+    "Tests":"Tests",
+
+        "Correctanswerd":"Correct answered",
+        "Wronganswerd":"Incorrectly answered",
+
+
+     
+    "p1":"adminSidebar.ejs",
+
+    "Menu":"Menu",
+    "Home":"Home",
     "AddQuestion":"Add Question",
+    "MyProfile":"My Profile",
+    "ChangeLanguage":"Change Language",
+    "Logout":"Logout",
+
+
+
+    "p2":"doctorSidebar.ejs",
 
     "Dashboard":"Dashboard",
+    "Patients":"Patients",
     "CreateTest":"Create Test",
-    
+
+
+
+
+    "p3":"editQuestionModal.ejs",
+
     "Update":"Update",
 
-    "TestID":"Test ID",
-    "Home":"Home",
 
-    "Welcome":"Welcome",
 
-    "instructions1":"For answering each question maximum of 100 points will be awarded.",
-    "instructions2":"For each question, There will be 4 hints available and for taking a hint -10 points will be deducted.",
-    "instructions3":"You can skip the question and once skipped questions can not be revisited.",
-    "instructions4":"Hints can be revisited if you want to see them again and make so will not deduct points.",
-    "instructions5":"If you want to pause the test you can pause and take it later."
+    "p4":"languageModal.ejs",
+
+   
+    "SelectRequiredLanguage":"Select required language",
+    "Proceed":"Proceed",
+
+
+
+    "p5":"patientSidebar.ejs",
+
+    "Chat":"Chat",
+
+
+
+
+
+    "p6":"testSubModal.ejs",
+
+    "Testissubmittedsucessfully":"Test is submitted successfully",
+    "Continue":"Continue",
+
+
+    "p7":"viewReportModal.ejs",
+    "Close":"Close",
+
+
+
+    "p8":"InstructionModal.ejs",
+
+
+    "Instructions":"Instructions For The Test",
+    "ScoresRecieved":"Scores Recieved Per Question",
+    "answeringeachquestion":"For answering each question maximum of 100 points will be awarded",
+    "skipaquestion":"If you skip a question you will recieve 0 points" ,
+    "skippedcannotrevisited":"Once skipped questions can not be revisited",
+    "HintsTaken":" Hints Taken",
+    "hints4":"For each question, There will be 4 hints available and for taking a hint -10 points will bededucted",
+    "Whenahintistaken":"When a hint is taken, it will last for 10sec and then will be closed",
+    "Hintscanberevisited":"Hints can be revisited if you want to see them again.",
+    "PauseTest":"Pause Test Or Closing of the tab",
+    "pauseandtakeitlater":"If you want to pause the test you can pause and take it later.",
+    "pointyouhadstopped":"If for some reason you meet with some issues and your tab gets closed you can login again and Resume your test from the point where you had stopped.",
+    "SpeechToText":"Speech To Text Option",
+    "Apartfromtyping": " Apart from typing the answer you can also use the speech to text feature and Say the answer.",
+    "TaketheMicrophoneCheck":"Please Take the Microphone Check inorder to start your test.",
+    "FinalScore":"Final Score Card.!",
+    "numberofcorrectanswers":"Your final score will be determined based on the number of correct answers given and the number of hints you have taken.",
+    "testreportgenerated":"Based on this score a seperate test report will be generated.",
+    "Reportreflecteddashboard":"Test Report will be reflected in your dashboard once you are finished taking the test.",
+
+    "eithercaseyourtestwillbecontinued":"In either case your test will be continued from the point where you had paused.",
+    "readandunderstoodallinstructions":"I have read and understood the all the instructions.",
+    "havecompletedthemicrophonetest":"I have completed the microphone test.",
+
+    
+   
+
+    "EXTRAS":"EXTRAS",
+
+        
+    "Hint":"Hint",
+    "Choosethe":"Choose the",
+    "Image":"Image",
+    "ofObject":"of Object",
+    "Addhint":"Add hint",
+    "UploadanImage":"Upload an Image", 
+    "YourMessageHere":"Your Message Here",
+    "All":"All",
+
+    "RegisterPatientDoctor":"Register: Patient | Doctor",
+    "Enteryouranswerhere":"Enter your answer here...",
+    "DoctorName":"Doctor Name",
+    "DoctorAge":"Doctor Age",
+    "DoctorEmail":"Doctor Email",
+    "PatientName":"Patient Name",
+    "PatientAge":"Patient Age",
+    "PatientEmail":"Patient Email",
+    "Welcome":"Welcome"
 }

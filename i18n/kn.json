@@ -1,55 +1,30 @@
 {
-    "Takeyour":"ಈಗ ನಿಮ್ಮ",
-    "tests":"ಪರೀಕ್ಷೆಯನ್ನು",
-    "now":"ತೆಗೆದುಕೊಳ್ಳಿ",
-    "Test":"ಪರೀಕ್ಷೆ",
-    "Level":"ಲೇವಲ್",
-    "Starttest":"ಪರೀಕ್ಷೆ ಪ್ರಾರಂಭಿಸಿ",
-    "Resume":"ರೆಸೂಮ್",
-    "ViewReport":"ವರದಿ ವೀಕ್ಷಿಸಿ",
-    "Menu":"ಮೆನು",
-    "Tests":"ಪರೀಕ್ಷೆ",
-    "MyProfile":"ಮೈ ಪ್ರೊಫೈಲ್",
-    "Doctor":"ಡಾಕ್ಟರ್",
-    "ChangePassword":"ಪಾಸ್ವರ್ಡ್ ಬದಲಿಸಿ",
-    "Logout":"ಲಾಗ್ಔಟ್",
-    "Close":"ಕ್ಲೋಸ್",
-    "Edit":"ಎಡಿಟ್",
-    "Profile":"ಪ್ರೊಫೈಲ್",
-    "EditProfile":"ಎಡಿಟ್ ಪ್ರೊಫೈಲ್",
-    "My":"ಮೈ",
-    "EnterOldPassword":"ಹಳೆಯ ಪಾಸ್ವರ್ಡ್ ನಮೂದಿಸಿ",
-    "EnterNewPassword":"ಹೊಸ ಪಾಸ್ವರ್ಡ್ ನಮೂದಿಸಿ",
-    "ConfirmNewPassword":"ಹೊಸ ಪಾಸ್ವರ್ಡ್ ಖಚಿತಪಡಿಸಿ",
-    "Confirm":"ದೃಢೀಕರಿಸಿ",
-    
-    "Hint":"ಸುಳಿವು",
-    "Next":"ಮುಂದೆ",
-    "Skip":"ಸ್ಕಿಪ್",
-    "Pause":"ಪೌಜ್",
-    "SelectRequiredLanguage":"ಅಗತ್ಯವಿರುವ ಭಾಷೆ ಆಯ್ಕೆಮಾಡಿ",
-    "Proceed":"ಮುಂದುವರಿಸಿ",
-    "ChangeLanguage":"ಭಾಷೆ ಬದಲಿಸಿ",
-    "Testissubmittedsucessfully":"ಪರೀಕ್ಷೆಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಸಲ್ಲಿಸಲಾಗಿದೆ",
-    "Continue":"ಮುಂದುವರಿಸಿ",
+
+    "1":"addquestion.ejs",
 
     "Addan":"ಗುರುತಿಸಲು ವಸ್ತುವಿನ",
     "Object":"ಚಿತ್ರವನ್ನು",
     "toidentify1":"ಸೇರಿಸಿ",
-    "Choosethe":"ವಸ್ತುವಿನ",
-    "Image":"ಚಿತ್ರವನ್ನು",
-    "ofObject":"ಮುಚ್ಚಿ",
     "EnterImage":"ಚಿತ್ರವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
     "NameofObject":"ವಸ್ತುವಿನ ಹೆಸರು...",
-    "EnterLevel":"ಲೇವಲ್ ನಮೂದಿಸಿ(1-5)...",
     "Description":"ವಿವರಣೆ...",
     "Give":"ಗುರುತಿಸಲು",
     "hints":"ಹಿಂಟ್ಸ್",
     "toidentify2":"ನೀಡಿ",
     "Submit":"ಸಲ್ಲಿಸಿ",
 
-    "Addhint":"ಹಿಂಟ್ಸ್ ಸೇರಿಸಿ",
-    "UploadanImage":"ಚಿತ್ರವನ್ನು ಅಪ್ಲೋಡ್ ಮಾಡಿ",
+            "Filetoobig":"ಫೈಲ್ ತುಂಬಾ ದೊಡ್ಡದಾಗಿದೆ, ದಯವಿಟ್ಟು 1mb ಗಿಂತ ಕಡಿಮೆ ಫೈಲ್ ಅನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+            "Duplicate":"ನಕಲಿ",
+            "Enteredanswerduplicate":"ನಮೂದಿಸಿದ ಉತ್ತರವು ನಕಲು ಆಗಿದೆ",
+            "typetheanswer":"ದಯವಿಟ್ಟು ಉತ್ತರವನ್ನು ಟೈಪ್ ಮಾಡಿ",
+            "enternamesoobject":"ದಯವಿಟ್ಟು ವಸ್ತುವಿನ ಹೆಸರುಗಳನ್ನು ನಮೂದಿಸಿ",
+            "uploadobjectimg":"ದಯವಿಟ್ಟು ವಸ್ತುವಿನ ಚಿತ್ರವನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
+            "uploadhint":"ದಯವಿಟ್ಟು ಹಿಂಟ್ಸ್ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
+
+
+
+    "2":"admin.ejs",
+    
     "NumberofPatients":"ಪೇಷಂಟ್ಗಳ ಸಂಖ್ಯೆ",
     "NumberofDoctors":"ಡಾಕ್ಟರ್ಗಳ ಸಂಖ್ಯೆ",
     "NumberofQuestionscreated":"ರಚಿಸಲಾದ ಪ್ರಶ್ನೆಗಳ ಸಂಖ್ಯೆ",
@@ -59,33 +34,100 @@
     "AssignedvsUnassignedDoctors":"ನಿಯೋಜಿತ ಮತ್ತು ನಿಯೋಜಿಸದ ವೈದ್ಯರು",
     "ActivevsDischargedPatients":"ಸಕ್ರಿಯ ಮತ್ತು ಬಿಡುಗಡೆಗೊಂಡ ಪೇಷಂಟ್ಗಳು ",
 
-    "YourMessageHere":"ನಿಮ್ಮ ಸಂದೇಶವನ್ನು ಇಲ್ಲಿ ನಮೂದಿಸಿ",
+
+        "cntofpatientvslvl" :"ರೋಗಿಗಳ ಸಂಖ್ಯೆ ಮತ್ತು ಲೇವಲ್",
+        "Assigned":"ನಿಯೋಜಿತ",
+        "Unassigned":"ನಿಯೋಜಿಸಲಾಗಿಲ್ಲ",
+        "Active":"ಸಕ್ರಿಯ",
+        "Discharged":"ಬಿಡುಗಡೆಗೊಂಡ",
+
+
+    "3":"changepassword.ejs",
+    
+    "ChangePassword":"ಪಾಸ್ವರ್ಡ್ ಬದಲಿಸಿ",
+    "EnterOldPassword":"ಹಳೆಯ ಪಾಸ್ವರ್ಡ್ ನಮೂದಿಸಿ",
+    "EnterNewPassword":"ಹೊಸ ಪಾಸ್ವರ್ಡ್ ನಮೂದಿಸಿ",
+    "ConfirmNewPassword":"ಹೊಸ ಪಾಸ್ವರ್ಡ್ ಖಚಿತಪಡಿಸಿ",
+    "Confirm":"ದೃಢೀಕರಿಸಿ",
+
+
+            "Success":"ಯಶಸ್ಸು..",
+            "PasswordMatch":"ಪಾಸ್ವರ್ಡ್ ಹೊಂದಾಣಿಕೆ",
+            "PassworddidnotMatch":"ಪಾಸ್‌ವರ್ಡ್ ಹೊಂದಿಕೆಯಾಗುತ್ತಿಲ್ಲ: ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ...",
+            "Failed":"ವಿಫಲವಾಗಿದೆ..!",
+
+
+    "4":"createtest.ejs",
 
     "SelectQuestions":"ಪ್ರಶ್ನೆಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ",
     "SelectedQuestions":"ಆಯ್ದ ಪ್ರಶ್ನೆಗಳು",
     "ChooseLevel":"ಲೆವೆಲ್ ಆರಿಸಿ",
-    "All":"ಎಲ್ಲಾ",
     "Selectrandomly":"ರಾಂಡಮ್ಲೀ ಆಯ್ಕೆಮಾಡಿ",
     "Question":"ಪ್ರಶ್ನೆ :",
     "ChoosePatient":"ಪೇಷಂಟ್ಗಳನ್ನು ಆರಿಸಿ",
-    "Reset":"ಮರುಹೊಂದಿಸಿ",
+    "EnterLevel":"ಲೇವಲ್ ನಮೂದಿಸಿ(1-5)...",
 
-    "Name":"ಹೆಸರು",
-    "Email":"ಇಮೇಲ್",
-    "Age":"ವಯಸ್ಸು",
-    "PatientID":"ಪೇಷಂಟ್ ಐಡಿ",
-    "Strokedate":"ಸ್ಟ್ರೋಕ್ ಆದ ದಿನಾಂಕ",
-    "Poststrokeduration":"ಸ್ಟ್ರೋಕ್ ನಂತರದ ಅವಧಿ",
-    "NumberofTestAssigned":"ನಿಯೋಜಿಸಿದ ಪರೀಕ್ಷೆಗಳ ಸಂಖ್ಯೆ",
+
+            "Alert":"ಎಚ್ಚರಿಕೆ",
+            "selecatleast1patient":"ದಯವಿಟ್ಟು ಕನಿಷ್ಠ 1 ರೋಗಿಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+            "Note":"ಸೂಚನೆ",
+            "selectatleast5que":"ದಯವಿಟ್ಟು ಕನಿಷ್ಠ 5 ಪ್ರಶ್ನೆಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ..",
+            "Completed":"ಪೂರ್ಣಗೊಂಡಿದೆ!",
+            "SorryNomorequestions":"ಕ್ಷಮಿಸಿ.., ಇನ್ನು ಪ್ರಶ್ನೆಗಳಿಲ್ಲ...!",
+
+
+
+
+    "5":"doctor.ejs",
+
     "Patientstestresult":"ಪೇಷಂಟ್ಟಿನ ಟೆಸ್ಟ್ ರಿಸಲ್ಟ್",
     "AnsweredaQuestionvsHintsTaken":"ಉತ್ತರಿಸಿದ ಪ್ರಶ್ನೆ ಮತ್ತು ತೆಗೆದುಕೊಂಡ ಸುಳಿವುಗಳು ",
     "UnansweredaQuestionvsHintsTaken":"ಉತ್ತರಿಸಲಿಲ್ಲದ ಪ್ರಶ್ನೆ ಮತ್ತು ತೆಗೆದುಕೊಂಡ ಸುಳಿವುಗಳು",
     "Assignedtestdetails":"ನಿಯೋಜಿಸಿದ ಪರೀಕ್ಷೆಗಳ ವಿವರ",
-    "Verify":"ಪರಿಶೀಲಿಸಿ",
+    "PatientID":"ಪೇಷಂಟ್ ಐಡಿ",
+    "Strokedate":"ಸ್ಟ್ರೋಕ್ ಆದ ದಿನಾಂಕ",
+    "Poststrokeduration":"ಸ್ಟ್ರೋಕ್ ನಂತರದ ಅವಧಿ",
+    "NumberofTestAssigned":"ನಿಯೋಜಿಸಿದ ಪರೀಕ್ಷೆಗಳ ಸಂಖ್ಯೆ",
+    "Upgrade":"ಅಪ್ಗ್ರೇಡ್",
+    "Degrade":"ಕೀಳಾಗಿಸು",
+    "Percentage":"ಶೇ",
+    "NumberofQuestionAnswered":"ಉತ್ತರಿಸಿದ ಪ್ರಶ್ನೆಗಳ ಸಂಖ್ಯೆ",
+    "NumberofQuestionsUnanswered":"ಉತ್ತರಿಸದ ಪ್ರಶ್ನೆಗಳ ಸಂಖ್ಯೆ",
+    "Status":"ಸ್ಟೇಟಸ್ : ",
+    "Pending":"ಬಾಕಿಯಿದೆ",
+    "Paused":"ವಿರಾಮಗೊಳಿಸಲಾಗಿದೆ",
+
+
+    "6":"edit_question.ejs",
+
 
     "Updatethe":"ಗುರುತಿಸಲು",
+    "Objct":"ಆಬ್ಜೆಕ್ಟ್",
     "Objejct":"ಆಬ್ಜೆಕ್ಟ್",
     "toidentify3":"ಅಪ್ಡೇಟ್ ಮಾಡಿ",
+    "Level":"ಲೇವಲ್",
+
+
+
+    "7":"editTest.ejs",
+
+    "Patient":"ಪೇಷಂಟ್",
+    "Selectpatients":"ರೋಗಿಗಳನ್ನು ಆಯ್ಕೆ ಮಾಡಿ",
+    "Reset":"ಮರುಹೊಂದಿಸಿ",
+
+
+
+
+    "8":"editUser.ejs",
+
+    "Edit":"ಎಡಿಟ್",
+    "Profile":"ಪ್ರೊಫೈಲ್",
+    "EditProfile":"ಎಡಿಟ್ ಪ್ರೊಫೈಲ್",
+
+
+
+    "9":"forgotpassword.ejs",
+
 
     "Forgot":"ಪಾಸ್ವರ್ಡ್",
     "Password1":"ಮರೆತಿರಾ?",
@@ -95,9 +137,31 @@
     "Enteryournewpassword":"ನಿಮ್ಮ ಹೊಸ ಪಾಸ್ವರ್ಡ ನಮೂದಿಸಿ",
     "SetPassword":"ಸೆಟ್ ಪಾಸ್ವರ್ಡ",
 
+
+
+            "enteremailaddress":"ದಯವಿಟ್ಟು ನಿಮ್ಮ ಇಮೇಲ್ ವಿಳಾಸ ನಮೂದಿಸಿ",
+            "OTPsenttoemail":"ನಿಮ್ಮ ಇಮೇಲ್‌ಗೆ ಒಟಿಪಿ ಕಳುಹಿಸಲಾಗಿದೆ",
+            "Errors":"ತಪ್ಪು....",
+            "Emailnotfound":"ಇಮೇಲ್ ಕಂಡುಬಂದಿಲ್ಲ",
+            "PleaseenterOTP":"ದಯವಿಟ್ಟು ಒಟಿಪಿ ನಮೂದಿಸಿ",
+            "OTPverified":"ಒಟಿಪಿ ಪರಿಶೀಲಿಸಲಾಗಿದೆ",
+            "OTPnotverified":"ಒಟಿಪಿ ಪರಿಶೀಲಿಸಲಾಗಿಲ್ಲ",
+            "enteryournewpassword":"ದಯವಿಟ್ಟು ನಿಮ್ಮ ಹೊಸ ಪಾಸ್‌ವರ್ಡ್ ನಮೂದಿಸಿ",
+            "Congratulations":"ಅಭಿನಂದನೆಗಳು..!",
+            "passwordchangedsuccessfully":"ನಿಮ್ಮ ಗುಪ್ತಪದವನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಬದಲಾಯಿಸಲಾಗಿದೆ",
+            "Passwordnotset":"ಪಾಸ್ವರ್ಡ್ ಹೊಂದಿಸಲಾಗಿಲ್ಲ",
+            "verifyEmailentered":"ನಮೂದಿಸಿದ ಇಮೇಲ್ ಅನ್ನು ಪರಿಶೀಲಿಸಿ...!",
+
+
+
+
+    "10":"login.ejs",
+
+    "Login":"ಲಾಗಿನ್",
     "Username":"ಯೂಸರ್ನೇಮ್",
     "Password":"ಪಾಸ್ವರ್ಡ್",
     "ForgotYourPassword":"ನಿಮ್ಮ ಪಾಸ್ವರ್ಡ್ ಮರೆತಿರಾ?",
+    "Loggingin":"ಲಾಗಿಂಗ್ ಇನ್",
     "EdisonQuote":"ಜೀವನದಲ್ಲಿ ವೈಫಲ್ಯ ಗೊಂಡ ಜನರು ಅರಿತು ಕೊಳ್ಳುವುದಿಲ್ಲ ಏನೆಂದರೆ ಅವರು ಸೋಲುವ ಮುನ್ನ,ಯಶಸ್ವಿಗೆ ಎಷ್ಟು ಸಮೀಪವಿದ್ದರು ಎಂದು", 
     "EdisonName":"— ಥಾಮಸ್ ಎಡಿಸನ್",
     "MilneQuote":"ಯಾವಾಗಲೂ ನೆನಪಿಟ್ಟುಕೊಳ್ಳಿ:ನೀವು ನಿಮ್ಮ ನಂಬಿಕೆಗಿಂತ ಹೆಚ್ಚು ಶಕ್ತಿಶಾಲಿ ಮತ್ತು ಧೈರ್ಯವಂತರೂ",
@@ -106,14 +170,24 @@
     "CarnegieName":"- ಡೇಲ್ ಕಾರ್ನೆಗೀ",
     "PoindexterQuote":"ಒಂದು ಸಣ್ಣ ಬಿರುಕು ವಿಫಲ ಎಂದು ಅರ್ಥವಲ್ಲ,ಬದಲಿಗೆ ನಿಮ್ಮನ್ನು ಪರೀಕ್ಷೆಗೆ ಒಳಪಡಿಸಲಾಗಿದೆ ಮತ್ತು ನೀವು ವಿಫಲವಾಗಿಲ್ಲ",
     "PoindexterName":"- ಲಿಂಡಾ ಪಾಯಿಂಡೆಕ್ಸ್ಟರ್",
-    "Login":"ಲಾಗಿನ್",
-    "Loggingin":"ಲಾಗಿಂಗ್ ಇನ್",
 
-    "Changeyourpassword":"ನಿಮ್ಮ ಪಾಸ್ವರ್ಡ್ ಬದಲಿಸಿ",
+
+
+
+    "11":"mydoctor.ejs",
+
+    "My":"ಮೈ",
+    "Doctor":"ಡಾಕ್ಟರ್",
+
+
+
+
+    "12":"otpTemplate.ejs",
+
+
     "SemanticCueing":"ಸೆಮಾಂಟಿಕ್ ಕ್ಯೂಯಿಂಗ್",
-    "VerifyOTP":"ವೆರಿಫ್ಯ್ ಒಟಿಪಿ",
+    "Changeyourpassword":"ನಿಮ್ಮ ಪಾಸ್ವರ್ಡ್ ಬದಲಿಸಿ",
     "YourVerificationCode":"ನಿಮ್ಮ ವೆರಿಫಿಕೇಷನ್ ಕೋಡ್",
-
     "Belowisyouronetimepasscode":"ಕೆಳಗೆ ನಿಮ್ಮ ಓಟಿಪಿ  ಇದೆ",
     "Pleaseenterthepasscodeintheapptocompletetheprocess":"ಪ್ರಕ್ರಿಯೆ ಪೂರ್ಣಗೊಳಿಸಲು  ಪಾಸ್‌ಕೋಡ್ ಅನ್ನು ಬರೆಯಿರಿ",
     "Thispasscodeisvalidfor10minutes":"ಈ ಪಾಸ್ವರ್ಡ್ 10 ನಿಮಿಷ ಮಾನ್ಯ",
@@ -121,53 +195,244 @@
     "Regards":"ವಂದನೆ",
     "TeamSemanticCueing":"ಟೀಮ್ ಸೆಮಾಂಟಿಕ್ ಕ್ಯೂಯಿಂಗ್",
 
-    "RegisterPatientDoctor":"ರಿಜಿಸ್ಟರ್: ಪೇಷಂಟ್ | ಡಾಕ್ಟರ್",
+
+
+
+    "13":"patient.ejs",
+
+    "Takeyour":"ಈಗ ನಿಮ್ಮ",
+    "tests":"ಪರೀಕ್ಷೆಯನ್ನು",
+    "now":"ತೆಗೆದುಕೊಳ್ಳಿ",
+    "Test":"ಪರೀಕ್ಷೆ",
+    "Starttest":"ಪರೀಕ್ಷೆ ಪ್ರಾರಂಭಿಸಿ",
+    "Resume":"ರೆಸೂಮ್",
+    "ViewReport":"ವರದಿ ವೀಕ್ಷಿಸಿ",
+
+
+
+    "BePatientWorkHardandgetsuccess":"ತಾಳ್ಮೆಯಿಂದಿರಿ, ಕಷ್ಟಪಟ್ಟು ಕೆಲಸ ಮಾಡಿ ಮತ್ತು ನೀವು ಖಂಡಿತವಾಗಿಯೂ ಯಶಸ್ಸನ್ನು ಪಡೆಯುತ್ತೀರಿ",
+    "YourdoinggoodjobKeepitup":"ನೀವು ಉತ್ತಮ ಕೆಲಸ ಮಾಡುತ್ತಿದ್ದೀರಿ, ಅದನ್ನು ಮುಂದುವರಿಸಿ!",
+    "gettingbettercontinuehardwork":"ನೀವು ಉತ್ತಮ ಮತ್ತು ಉತ್ತಮವಾಗುತ್ತಿದ್ದೀರಿ, ಕಠಿಣ ಕೆಲಸವನ್ನು ಮುಂದುವರಿಸಿ",
+    "hardworkpaidoff":"ಅಭಿನಂದನೆಗಳು! ನಿಮ್ಮ ಶ್ರಮಕ್ಕೆ ತಕ್ಕ ಫಲ ಸಿಕ್ಕಿದೆ",
+    "POOR":"ಕಳಪೆ ಪ್ರದರ್ಶನ",
+    "AVERAGE":"ಸರಾಸರಿ ಪ್ರದರ್ಶನ",
+    "GOOD":"ಒಳ್ಳೆಯ ಪ್ರದರ್ಶನ",
+    "EXCELLENT":"ಅತ್ಯುತ್ತಮ ಪ್ರದರ್ಶನ",
+
+
+
+    "14":"setPassword.ejs",
+
+    "CreatePassword":"ನಿಮ್ಮ ಪಾಸ್ವರ್ಡ್ ರಚಿಸಿ",
+    "ConfirmPassword":"ನಿಮ್ಮ ಹೊಸ ಪಾಸ್‌ವರ್ಡ್ ಅನ್ನು ಪುನರಾವರ್ತಿಸಿ",
+    "NewPassword":"ನಿಮ್ಮ ಹೊಸ ಪಾಸ್‌ವರ್ಡ್ ನಮೂದಿಸಿ",
+
+
+
+    "15":"signup.ejs",
+
+
+    "Register":"ರಿಜಿಸ್ಟರ್",
+    "Name":"ಹೆಸರು",
+    "Email":"ಇಮೇಲ್",
+    "Age":"ವಯಸ್ಸು",
+    "Verify":"ಪರಿಶೀಲಿಸಿ",
+    "Otp":"ಒಟಿಪಿ",
     "UsernamealreadyexistsPleasetryanotherone":"ಉಸೆರ್ನೇಮ್ ಈಗಾಗಲೇ ಇದೆ.ಮತ್ತೆ ಪ್ರಯತ್ನಿಸು",
     "SelectRole":"ರೋಲ್ ಆಯ್ಕೆ ಮಾಡಿ",
-    "Patient":"ಪೇಷಂಟ್",
     "Choosedoctor":"ಡಾಕ್ಟರ್ ಆಯ್ಕೆ ಮಾಡಿ:",
     "StrokeDate":"ಸ್ಟ್ರೋಕ್ ಆದ ದಿನಾಂಕ ",
     "ChooseProfilePicture":"ಪ್ರೊಫೈಲ್ ಚಿತ್ರ ಆಯ್ಕೆಮಾಡಿ",
 
-    "Enteryouranswerhere":"ನಿಮ್ಮ ಉತ್ತರವನ್ನು ಇಲ್ಲಿ ನಮೂದಿಸಿ...",
+
+
+
+
+            "Invalid":"ಅಮಾನ್ಯವಾಗಿದೆ!",
+            "entervalidemailaddress":"ದಯವಿಟ್ಟು ಸರಿಯಾದ ಇಮೇಲ್ ವಿಳಾಸವನ್ನು ನಮೂದಿಸಿ",
+            "InvalidOTP":"ಅಮಾನ್ಯ ಒಟಿಪಿ!",
+            "enterproperOTP":"ದಯವಿಟ್ಟು ಸರಿಯಾದ ಒಟಿಪಿ ಅನ್ನು ನಮೂದಿಸಿ",
+            "OTPSent":"OTP ಕಳುಹಿಸಲಾಗಿದೆ!",
+            "Checkyouremail":"ನಿಮ್ಮ ಇಮೇಲ್ ಪರಿಶೀಲಿಸಿ...!",
+            "EmailVerified":"ಇಮೇಲ್ ಪರಿಶೀಲಿಸಲಾಗಿದೆ",
+            "emailverifiedsuccessfully":"ನಿಮ್ಮ ಇಮೇಲ್ ಅನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಪರಿಶೀಲಿಸಲಾಗಿದೆ...!",
+            "Expired":"ಅವಧಿ ಮುಗಿದಿದೆ",
+            "OTPexpiredtryagain":"ಒಟಿಪಿ ಅವಧಿ ಮುಗಿದಿದೆ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ..!",
+            "Upload":"ಅಪ್ಲೋಡ್ ಮಾಡಿ",
+            "UploadProfilePicture":"ಪ್ರೊಫೈಲ್ ಚಿತ್ರ ಅಪ್ಲೋಡ್ ಮಾಡಿ..!",
+
+
+    "16":"testexecute.ejs",
+
+    "Next":"ಮುಂದೆ",
+    "Skip":"ಸ್ಕಿಪ್",
+    "Pause":"ಪೌಜ್",
+    "TestID":"ಟೆಸ್ಟ್ ಐಡಿ",
+    "Audio":"ಆಡಿಯೋ",
+
+
+        "Attempted":"ಪ್ರಯತ್ನಿಸಿದೆ",
+        "Tobeattemted":"ಪ್ರಯತ್ನಿಸಬೇಕಾದ",
+        "TestLevel":"ಪರೀಕ್ಷಾ ಮಟ್ಟ",
+        "ScoreObtained":"ಪಡೆದ ಅಂಕಗಳು",
+
+
+            "Taketestnow":"ಈಗ ಪರೀಕ್ಷೆ ಮಾಡಿ...!",
+            "Takeyourtestnow":"ಈಗ ನಿಮ್ಮ ಪರೀಕ್ಷೆಯನ್ನು ತೆಗೆದುಕೊಳ್ಳಿ. ಒಳ್ಳೆಯದಾಗಲಿ..!",
+            "Warning":"ಎಚ್ಚರಿಕೆ!",
+            "readinstructionstoproceed":"ಮುಂದುವರೆಯಲು ದಯವಿಟ್ಟು ಸೂಚನೆಗಳನ್ನು ಓದಿ...!",
+            "enteryouranswer":"ದಯಮಾಡಿ ನಿಮ್ಮ ಉತ್ತರ ದಾಖಲಿಸಿ...!",
+            "allowaccessyourmicrophone":"ದಯವಿಟ್ಟು ನಿಮ್ಮ ಮೈಕ್ರೊಫೋನ್ ಅನ್ನು ಪ್ರವೇಶಿಸಲು ಅನುಮತಿಸಿ..!",
+            "unableaceessyourmicrophone":"ಕ್ಷಮಿಸಿ...!, ನಿಮ್ಮ ಮೈಕ್ರೊಫೋನ್ ಅನ್ನು ಪಡೆಯಲು ನಮಗೆ ಸಾಧ್ಯವಾಗುತ್ತಿಲ್ಲ",
+            "enumerateDevicesnotsupported.":"ಎಣಿಕೆ ಸಾಧನಗಳು() ಬೆಂಬಲಿತವಾಗಿಲ್ಲ.",
+            "Microphonetestedsuccessfully":"ಮೈಕ್ರೋಫೋನ್ ಪರೀಕ್ಷೆ ಯಶಸ್ವಿಯಾಗಿ...!",
+            "UseChromeorEdgeBrowserstoproceed":"ಮುಂದುವರಿಯಲು ದಯವಿಟ್ಟು ಕ್ರೋಮ್ ಅಥವಾ ಎಡ್ಜ್ ಬ್ರೌಸರ್‌ಗಳನ್ನು ಬಳಸಿ...!",
+
+
+
+    "17":"view_doctors.ejs",
 
     "Our":"ನಮ್ಮ",
-    "DoctorName":"ಡಾಕ್ಟರ್ ಹೆಸರು",
-    "DoctorAge":"ಡಾಕ್ಟರ್ ವಯಸ್ಸು",
-    "DoctorEmail":"ಡಾಕ್ಟರ್ ಇಮೇಲ್",
     "Doctors":"ವೈದ್ಯರು",
 
-    "PatientName":"ಪೇಷಂಟ್ ಹೆಸರು",
-    "PatientAge":"ಪೇಷಂಟ್ ವಯಸ್ಸು",
-    "PatientEmail":"ಪೇಷಂಟ್ ಇಮೇಲ್",
-    "Patients":"ಪೇಷಂಟ್",
-    
+
+    "18":"view_patients.ejs",
+
+
     "view_Listof1":"ಪೇಷಂಟ್ಗಳ",
     "view_Patients1":"ಪಟ್ಟಿ",
+
+
+
+    "19":"view_questions.ejs",
 
     "Listof":"ರಚಿಸಲಾದ",
     "Questions":"ಪ್ರಶ್ನೆಗಳ",
     "Created":"ಪಟ್ಟಿ",
 
-    "Status":"ಸ್ಟೇಟಸ್ : ",
 
-    "Register":"ರಿಜಿಸ್ಟರ್",
-    "Chat":"ಚಾಟ್ ಮಾಡಿ",
+    "20":"view_tests.ejs",
+
+    "Tests":"ಪರೀಕ್ಷೆ",
+
+        "Correctanswerd":"ಸರಿಯಾಗಿ ಉತ್ತರಿಸಿದೆ",
+        "Wronganswerd":"ತಪ್ಪಾಗಿ ಉತ್ತರಿಸಿದೆ",
+
+
+
+    "p1":"adminSidebar.ejs",
+
+    "Menu":"ಮೆನು",
+    "Home":"ಹೋಮ್",
     "AddQuestion":"ಪ್ರಶ್ನೆಯನ್ನು ಸೇರಿಸಿ",
+    "MyProfile":"ಮೈ ಪ್ರೊಫೈಲ್",
+    "ChangeLanguage":"ಭಾಷೆ ಬದಲಿಸಿ",
+    "Logout":"ಲಾಗ್ಔಟ್",
+
+
+
+    "p2":"doctorSidebar.ejs",
+
 
     "Dashboard":"ಡ್ಯಾಶ್ಬೋರ್ಡ್",
+    "Patients":"ಪೇಷಂಟ್",
     "CreateTest":"ಟೆಸ್ಟ್ ರಚಿಸಿ",
+
+
+
+
+    "p3":"editQuestionModal.ejs",
 
     "Update":"ಅಪ್ಡೇಟ್",
 
-    "TestID":"ಟೆಸ್ಟ್ ಐಡಿ",
-    "Home":"ಹೋಮ್",
 
-    "Welcome":"ವೆಲ್ಕಮ್",
 
-    "instructions1":"ಪ್ರತಿ ಪ್ರಶ್ನೆಗೆ ಉತ್ತರಿಸಿದರೆ ಗರಿಷ್ಠ 100 ಅಂಕಗಳನ್ನು ನೀಡಲಾಗುತ್ತದೆ.",
-    "instructions2":"ಪ್ರತಿ ಪ್ರಶ್ನೆಗೆ 4 ಸುಳಿವು ಲಭ್ಯವಿರುತ್ತವೆ ಮತ್ತು ಸುಳಿವು ತೆಗೆದುಕೊಳ್ಳಲು -10 ಅಂಕ ಕಡಿತವಾಗುತದ್ದೆ.",
-    "instructions3":"ನೀವು ಪ್ರಶ್ನೆಯನ್ನು ಬಿಡಬಹುದು ಮತ್ತು ಒಮ್ಮೆ ಬಿಟ್ಟು ಹೋದ ಪ್ರಶ್ನೆಗಳನ್ನು ನೋಡಲಾಗುವುದಿಲ್ಲ.",
-    "instructions4":"ನೀವು ಸುಳಿವು ಮತ್ತೆ ನೋಡಲು ಬಯಸಿದರೆ, ಅದನ್ನು ನೋಡ ಬಹುದು ಮತ್ತು ಅಂಕ ಕಡಿತವಾಗುದಿಲ್ಲ.",
-    "instructions5":"ನೀವು ಪೌಜ್ ಮಾಡಲು ಬಯಸಿದರೆ ನೀವು  ಪೌಜ್ ಮಾಡಿ  ನಂತರ ಅದನ್ನು ಮುಂದುವರಿಸಿ."
+    "p4":"languageModal.ejs",
+
+    "SelectRequiredLanguage":"ಅಗತ್ಯವಿರುವ ಭಾಷೆ ಆಯ್ಕೆಮಾಡಿ",
+    "Proceed":"ಮುಂದುವರಿಸಿ",
+
+
+
+
+    "p5":"patientSidebar.ejs",
+
+
+    "Chat":"ಚಾಟ್ ಮಾಡಿ",
+
+
+
+
+
+    "p6":"testSubModal.ejs",
+
+    "Testissubmittedsucessfully":"ಪರೀಕ್ಷೆಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಸಲ್ಲಿಸಲಾಗಿದೆ",
+    "Continue":"ಮುಂದುವರಿಸಿ",
+
+
+    "p7":"viewReportModal.ejs",
+
+    "Close":"ಕ್ಲೋಸ್",
+
+
+    "p8":"InstructionModal.ejs",
+
+
+    "Instructions":"ಪರೀಕ್ಷೆಗೆ ಸೂಚನೆಗಳು",
+    "ScoresRecieved":"ಪ್ರತಿ ಪ್ರಶ್ನೆಗೆ ಸ್ವೀಕರಿಸಲಾಗುವ ಅಂಕಗಳು",
+    "answeringeachquestion":"ಪ್ರತಿ ಪ್ರಶ್ನೆಗೆ ಉತ್ತರಿಸಲು ಗರಿಷ್ಠ 100 ಅಂಕಗಳನ್ನು ನೀಡಲಾಗುತ್ತದೆ",
+    "skipaquestion":"ನೀವು ಪ್ರಶ್ನೆಯನ್ನು ಬಿಟ್ಟುಬಿಟ್ಟರೆ ನೀವು 0 ಅಂಕಗಳನ್ನು ಪಡೆಯುತ್ತೀರಿ" ,
+    "skippedcannotrevisited":"ಒಮ್ಮೆ ಬಿಟ್ಟುಹೋದ ಪ್ರಶ್ನೆಗಳನ್ನು ಮರುಪರಿಶೀಲಿಸಲಾಗುವುದಿಲ್ಲ",
+    "HintsTaken":"ತೇಗೆದುಕೊಂಡ ಹಿಂಟ್ಸ್",
+    "hints4":"ಪ್ರತಿ ಪ್ರಶ್ನೆಗೆ, 4 ಹಿಂಟ್ಗಳು ಲಭ್ಯವಿರುತ್ತವೆ ಮತ್ತು ಹಿಂಟ್ ತೆಗೆದುಕೊಳ್ಳಲು -10 ಅಂಕಗಳನ್ನು ಕಡಿತಗೊಳಿಸಲಾಗುತ್ತದೆ",
+    "Whenahintistaken":"ಹಿಂಟ್ ತೆಗೆದುಕೊಂಡಾಗ, ಅದು 10 ಸೆಕೆಂಡುಗಳವರೆಗೆ ಇರುತ್ತದೆ ಮತ್ತು ನಂತರ ಮುಚ್ಚಲಾಗುತ್ತದೆ",
+    "Hintscanberevisited":"ನೀವು ಅವುಗಳನ್ನು ಮತ್ತೆ ನೋಡಲು ಬಯಸಿದರೆ ಹಿಂಟ್ಗಳನ್ನು ಮರುಪರಿಶೀಲಿಸಬಹುದು.",
+    "PauseTest":"ಪರೀಕ್ಷೆಯನ್ನು ವಿರಾಮಗೊಳಿಸಿ ಅಥವಾ ಟ್ಯಾಬ್ ಅನ್ನು ಮುಚ್ಚುವುದು",
+    "pauseandtakeitlater":"ನೀವು ಪರೀಕ್ಷೆಯನ್ನು ವಿರಾಮಗೊಳಿಸಲು ಬಯಸಿದರೆ ನೀವು ವಿರಾಮಗೊಳಿಸಬಹುದು ಮತ್ತು ನಂತರ ತೆಗೆದುಕೊಳ್ಳಬಹುದು.",
+    "pointyouhadstopped":"ಕೆಲವು ಕಾರಣಗಳಿಂದಾಗಿ ನೀವು ಕೆಲವು ಸಮಸ್ಯೆಗಳನ್ನು ಎದುರಿಸಿದರೆ ಮತ್ತು ನಿಮ್ಮ ಟ್ಯಾಬ್ ಮುಚ್ಚಿದರೆ ನೀವು ಮತ್ತೆ ಲಾಗಿನ್ ಮಾಡಬಹುದು ಮತ್ತು ನೀವು ನಿಲ್ಲಿಸಿದ ಸ್ಥಳದಿಂದ ನಿಮ್ಮ ಪರೀಕ್ಷೆಯನ್ನು ಪುನರಾರಂಭಿಸಬಹುದು.",
+    "SpeechToText":"ಸ್ಪೀಚ್ ಟು ಟೆಕ್ಸ್ಟ್ ಆಯ್ಕೆ",
+    "Apartfromtyping": " ಉತ್ತರವನ್ನು ಟೈಪ್ ಮಾಡುವುದರ ಹೊರತಾಗಿ ನೀವು ಸ್ಪೀಚ್ ಟು ಟೆಕ್ಸ್ಟ್ ವೈಶಿಷ್ಟ್ಯವನ್ನು ಬಳಸಬಹುದು ಮತ್ತು ಉತ್ತರವನ್ನು ಹೇಳಬಹುದು.",
+    "TaketheMicrophoneCheck":"ನಿಮ್ಮ ಪರೀಕ್ಷೆಯನ್ನು ಪ್ರಾರಂಭಿಸಲು ದಯವಿಟ್ಟು ಮೈಕ್ರೊಫೋನ್ ಚೆಕ್ ಅನ್ನು ತೆಗೆದುಕೊಳ್ಳಿ.",
+    "FinalScore":"ಅಂತಿಮ ಅಂಕ!",
+    "numberofcorrectanswers":"ನೀಡಿದ ಸರಿಯಾದ ಉತ್ತರಗಳ ಸಂಖ್ಯೆ ಮತ್ತು ನೀವು ತೆಗೆದುಕೊಂಡ ಹಿಂಟ್ಗಳ ಸಂಖ್ಯೆಯನ್ನು ಆಧರಿಸಿ ನಿಮ್ಮ ಅಂತಿಮ ಸ್ಕೋರ್ ಅನ್ನು ನಿರ್ಧರಿಸಲಾಗುತ್ತದೆ.",
+    "testreportgenerated":"ಈ ಅಂಕಗಳ ಆಧಾರದ ಮೇಲೆ ಪ್ರತ್ಯೇಕ ಪರೀಕ್ಷಾ ವರದಿಯನ್ನು ರಚಿಸಲಾಗುತ್ತದೆ.",
+    "Reportreflecteddashboard":"ನೀವು ಪರೀಕ್ಷೆಯನ್ನು ತೆಗೆದುಕೊಂಡ ನಂತರ ಪರೀಕ್ಷಾ ವರದಿಯು ನಿಮ್ಮ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್‌ನಲ್ಲಿ ಪ್ರತಿಫಲಿಸುತ್ತದೆ.",
+    
+    "eithercaseyourtestwillbecontinued":"ಎರಡೂ ಸಂದರ್ಭಗಳಲ್ಲಿ ನೀವು ವಿರಾಮಗೊಳಿಸಿದ ಸ್ಥಳದಿಂದ ನಿಮ್ಮ ಪರೀಕ್ಷೆಯನ್ನು ಮುಂದುವರಿಸಲಾಗುತ್ತದೆ.",
+    "readandunderstoodallinstructions":"ನಾನು ಎಲ್ಲಾ ಸೂಚನೆಗಳನ್ನು ಓದಿದ್ದೇನೆ ಮತ್ತು ಅರ್ಥಮಾಡಿಕೊಂಡಿದ್ದೇನೆ.",
+    "havecompletedthemicrophonetest":"ನಾನು ಮೈಕ್ರೊಫೋನ್ ಪರೀಕ್ಷೆಯನ್ನು ಪೂರ್ಣಗೊಳಿಸಿದ್ದೇನೆ.",
+
+   
+
+
+    
+
+
+    "EXTRAS":"EXTRAS",
+
+    
+    "Hint":"ಸುಳಿವು",
+    "Choosethe":"ವಸ್ತುವಿನ",
+    "Image":"ಚಿತ್ರವನ್ನು",
+    "ofObject":"ಮುಚ್ಚಿ",
+    "Addhint":"ಹಿಂಟ್ಸ್ ಸೇರಿಸಿ",
+    "UploadanImage":"ಚಿತ್ರವನ್ನು ಅಪ್ಲೋಡ್ ಮಾಡಿ",
+    
+    "YourMessageHere":"ನಿಮ್ಮ ಸಂದೇಶವನ್ನು ಇಲ್ಲಿ ನಮೂದಿಸಿ",
+
+    "All":"ಎಲ್ಲಾ",
+ 
+    "RegisterPatientDoctor":"ರಿಜಿಸ್ಟರ್: ಪೇಷಂಟ್ | ಡಾಕ್ಟರ್",
+    "Enteryouranswerhere":"ನಿಮ್ಮ ಉತ್ತರವನ್ನು ಇಲ್ಲಿ ನಮೂದಿಸಿ...",
+
+    "DoctorName":"ಡಾಕ್ಟರ್ ಹೆಸರು",
+    "DoctorAge":"ಡಾಕ್ಟರ್ ವಯಸ್ಸು",
+    "DoctorEmail":"ಡಾಕ್ಟರ್ ಇಮೇಲ್",
+
+    "PatientName":"ಪೇಷಂಟ್ ಹೆಸರು",
+    "PatientAge":"ಪೇಷಂಟ್ ವಯಸ್ಸು",
+    "PatientEmail":"ಪೇಷಂಟ್ ಇಮೇಲ್",
+    "Welcome":"ವೆಲ್ಕಮ್"
+
+    
 }

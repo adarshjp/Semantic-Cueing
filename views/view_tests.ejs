@@ -42,11 +42,11 @@
           </div>
           <div class="col-md-6">
             <div class="card-body">
-              <h5 class="card-title p-1">Test <i class="fas fa-bell blue"></i></h5>
+              <h5 class="card-title p-1"><%=i18n.Test%> <i class="fas fa-bell blue"></i></h5>
               <p class="card-text p-1">
                 <i class="fas fa-question-circle blue"></i> : <%=test.noofquestion%>
               </p>
-              <p class="card-text p-1">Level : 
+              <p class="card-text p-1"><%=i18n.Level%> : 
                 <%for(let i=1;i<=5;i++){%>
                   <%if(i<=test.level){%>
                     <span class = "fa fa-star checked"></span>
@@ -55,7 +55,7 @@
                   <%}%>
                 <%}%>
                 </p>
-              <p class="card-text p-1">Status : <strong style="text-transform: capitalize;"><%=test.status%></strong></p>
+              <p class="card-text p-1"><%=i18n.Status%> : <strong style="text-transform: capitalize;"><%=test.status%></strong></p>
               <div class="d-flex justify-content-end">
                 <%if(test.status==='completed'){%>
                   <button class="btn btn-lg btn-success white m-2"  data-bs-toggle="modal" data-bs-target="#viewReport" data-bs-whatever="<%=test._id%>">
@@ -133,14 +133,26 @@ document.getElementById('completed').addEventListener('click',function(){
 });
 
 function count_number_of_tests(status,count) {
-  document.getElementById(status).innerHTML='<strong style="text-transform: capitalize;">'+status+'</strong><span class="badge bg-danger ms-2">'+count+'</span>';
+  document.getElementById(status).innerHTML='<strong style="text-transform: capitalize;">'+returnStatus(status)+'</strong><span class="badge bg-danger ms-2">'+count+'</span>';
+}
+
+function returnStatus(status){
+  if(status === "all"){
+    return '<%=i18n.All%>';
+  }else if(status === "pending"){
+    return '<%=i18n.Pending%>'
+  }else if(status === "completed"){
+    return '<%=i18n.Completed%>'
+  }else {
+    return '<%=i18n.Paused%>'
+  }
 }
 
 //------------------RES CHART------------------
 var data = {
           labels: [
-              "Correct answerd",
-              "Wrong answerd",
+              "<%=i18n.Correctanswerd%>",
+              "<%=i18n.Wronganswerd%>",
           ],
           datasets: [
               {

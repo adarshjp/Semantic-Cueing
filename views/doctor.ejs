@@ -24,30 +24,30 @@
         </div>
         <div class="row mx-3 mx-sm-0 text-center justify-content-center card-body" id='patient-details' hidden>
           <div class="col-sm-8 col-md-4 my-auto">
-              <img src="/images/profile.jpg" class="img-fluid rounded-lg" alt="..."/ id='disp-pic'>
+              <img src="/images/profile.jpg" class="img-fluid rounded-lg" alt="..." id='disp-pic'/>
           </div>
           <div class="col-sm-8 col-md-8 my-auto">
             <div class="row">
               <div class="col-md-6 my-auto">
-                <p id='name'>Name : </p>
-                <p id='email'>Email : </p>
-                <p id='age'>Age : </p>
-                <p id='level'>Level : </p>
+                <p id='name'><%=i18n.Name%> : </p>
+                <p id='email'><%=i18n.Email%> : </p>
+                <p id='age'><%=i18n.Age%> : </p>
+                <p id='level'><%=i18n.Level%> : </p>
               </div>
               <div class="col-md-6 my-auto">
-                <p id="p_id">Patient ID : </p>
-                <p id='stroke'>Stroke date : stroke</p>
-                <p id='p_stroke'>Post stroke duration : date</p>
-                <p id='test'>Number of Test Assigned : xy</p>
+                <p id="p_id"><%=i18n.PatientID%>   : </p>
+                <p id='stroke'><%=i18n.Strokedatestroke%>:</p>
+                <p id='p_stroke'><%=i18n.Poststrokeduration%> : date</p>
+                <p id='test'><%=i18n.NumberofTestAssigned%> : xy</p>
               </div>
               <div class="text-center my-2">
                 <form action="" method="POST" class="d-inline-block" id='upgrade'>
                   <button class="btn btn-primary rounded-pill btn-lg white m-1" id='upgrade-but' type="submit">
-                    Upgrade</button>
+                    <%=i18n.Upgrade%></button>
                 </form>
                 <form action="" method="POST" class="d-inline-block" id='downgrade'>
                   <button class="btn btn-primary rounded-pill btn-lg white m-1" id='downgrade-but' type="submit" >
-                    Degrade</button>
+                    <%=i18n.Degrade%></button>
                 </form>
               </div>
             </div>
@@ -140,11 +140,11 @@
     fetch('/data/patientdetails/'+patientid)
     .then(response => response.json())
     .then(patient =>{
-      document.getElementById('name').textContent = 'Name : '+patient[0].name;
-      document.getElementById('email').textContent = 'Email : '+patient[0].email;
-      document.getElementById('age').textContent = 'Age : '+patient[0].age;
-      document.getElementById('p_id').textContent = 'Patient ID : '+patient[0]._id;
-      document.getElementById('level').textContent = 'Level : '+patient[0].level;
+      document.getElementById('name').textContent = '<%=i18n.Name%> : '+patient[0].name;
+      document.getElementById('email').textContent = '<%=i18n.Email%> : '+patient[0].email;
+      document.getElementById('age').textContent = '<%=i18n.Age%> : '+patient[0].age;
+      document.getElementById('p_id').textContent = '<%=i18n.PatientID%> : '+patient[0]._id;
+      document.getElementById('level').textContent = '<%=i18n.Level%> : '+patient[0].level;
       if(patient[0].level==1){
         document.getElementById('downgrade-but').setAttribute('disabled','')
       }
@@ -172,7 +172,7 @@
       labels: [1,2],
       datasets: [
         {
-            label: 'Percentage',
+            label: '<%=i18n.Percentage%>',
             data: [10,20],
             borderColor: ['#6C63FF'],
             backgroundColor: ['#4941eb'],
@@ -303,17 +303,17 @@
     if(bar_chart_no==='1'){
       bar_chart_1.data.labels=Object.keys(dict);
       bar_chart_1.data.datasets[0].data=Object.values(dict);
-      bar_chart_1.data.datasets[0].label='Number of Questions Answered';
+      bar_chart_1.data.datasets[0].label='<%=i18n.NumberofQuestionAnswered%>';
       bar_chart_1.update();
     }else if(bar_chart_no==='2'){
       bar_chart_2.data.labels=Object.keys(dict);
       bar_chart_2.data.datasets[0].data=Object.values(dict);
-      bar_chart_2.data.datasets[0].label='Number of Questions Unanswered';
+      bar_chart_2.data.datasets[0].label='<%=i18n.NumberofQuestionsUnanswered%>';
       bar_chart_2.update();
     }else{
       bar_chart_3.data.labels=Object.keys(dict);
       bar_chart_3.data.datasets[0].data=Object.values(dict);
-      bar_chart_3.data.datasets[0].label='Status';
+      bar_chart_3.data.datasets[0].label='<%=i18n.Status%>';
       bar_chart_3.data.datasets[0].backgroundColor=['#534bf7','#8c92ac','#39ff14'];
       bar_chart_3.data.datasets[0].borderColor=['#6C63FF','#8c92ac','#32cd32'];
       bar_chart_3.update();

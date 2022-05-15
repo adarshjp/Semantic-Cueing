@@ -72,7 +72,9 @@
       const fsize = fi.files.item(0).size;
       const file = Math.round((fsize / 1024));
       if (file >= 1024) {
-         alert("File too Big, please select a file less than 1mb");
+         swal("<%=i18n.Filetoobig%>","","warning");
+         document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+         document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
          document.getElementById(upload_id).value = '';
          var imagediv= document.getElementById(preview_id);
          var newimg=document.createElement('img');
@@ -116,7 +118,10 @@
          let val=ans.value.charAt(0).toUpperCase() + ans.value.toLowerCase().slice(1);
          if(val!==''){
             if(entered_ans.indexOf(val)>=0){
-               alert('Entered answer is duplicate');
+               
+               swal('<%=i18n.Duplicate%>','<%=i18n.Enteredanswerduplicate%>','error');
+               document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+               document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
             }else{
                entered_ans.push(val);
                disp_pill();
@@ -124,7 +129,10 @@
                ans.focus();
             }
          }else{
-            alert('Please type answer');
+            swal("<%=i18n.typetheanswer%>","", "info");
+            document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+            document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
+
             ans.value='';
             ans.focus();
          }
@@ -150,16 +158,22 @@
 
    function validate(){
       if(document.getElementById('form_ans').value===''){
-         alert('Please enter names of the object');
+         swal("<%=i18n.enternamesoobject%>","", "info");
+         document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+         document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
          return false;
       }
       if(document.getElementById('upload_file').files.length==0){
-         alert('Please upload object image')
+         swal("<%=i18n.uploadobjectimg%>","", "info");
+         document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+            document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
          return false;
       }
       for(let i=0;i<4;i++){
          if(document.getElementById('upload_hint'+i).files.length===0){
-            alert('Please upload hint'+ i);
+            swal('<%=i18n.uploadhint%>'+ i,"", "info");
+            document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+            document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
             return false;
          }
       }

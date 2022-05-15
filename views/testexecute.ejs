@@ -36,7 +36,7 @@
           </div>
         </div>
         <div class="col-6 col-sm-4 col-lg-2 pt-2">
-          <button type='button' class="btn btn-dark btn-lg" onclick="repeatAudio('q')"><b>Audio </b><i class="fa-solid fa-repeat"></i></button>
+          <button type='button' class="btn btn-dark btn-lg" onclick="repeatAudio('q')"><b><%=i18n.Audio%> </b><i class="fa-solid fa-repeat"></i></button>
         </div>
         <div class="col-6 col-sm-4 col-lg-2 pt-2">
           <button class="btn btn-success btn-lg" onclick="next_q('next')" id='next'><%=i18n.Next%> <i class="fa-solid fa-angles-right"></i></button>
@@ -87,14 +87,14 @@
   function startTest() {
     if(document.getElementById("instruRead").checked && document.getElementById("micTested").checked) {
       document.getElementById("instructions").classList.add('d-none');
-      swal('Take test now...!','Take your test now. All the best..!','success')
+      swal('<%=i18n.Taketestnow%>','<%=i18n.Takeyourtestnow%>','success')
       .then(function(){
         get_initial_test_details()
       })
       document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
       document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
     }else{
-      swal("Warning!", "Please read the instructions to proceed...!", "warning");
+      swal("<%=i18n.Warning%>", "<%=i18n.readinstructionstoproceed%>", "warning");
       document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
       document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
     }
@@ -118,8 +118,8 @@
   //------------ Progress Chart -------------//
   var data = {
           labels: [
-              "Attemted",
-              "To be attemted",
+              "<%=i18n.Attempted%>",
+              "<%=i18n.Tobeattemted%>",
           ],
           datasets: [
               {
@@ -161,7 +161,7 @@
       unans=JSON.parse(test.unanswered)
       score=parseInt(test.score);
       curq_no=parseInt(test.pauesdqno);
-      document.getElementById('level').textContent='Test Level : '+test.level;
+      document.getElementById('level').textContent='<%=i18n.TestLevel%> : '+test.level;
       create_chart();
     });
   }
@@ -189,7 +189,7 @@
       if(a.indexOf(val[i]) >=0){
         score=score+(100-hints_taken*10)
         ans[hints_taken.toString()]++;
-        document.getElementById('score').textContent='Score Obtained : '+score;
+        document.getElementById('score').textContent='<%=i18n.ScoreObtained%> : '+score;
         return;
       }
     }
@@ -215,7 +215,7 @@
   }
   
   function disp_question(){
-    document.getElementById('score').textContent='Score Obtained : '+score;
+    document.getElementById('score').textContent='<%=i18n.ScoreObtained%> : '+score;
     test.classList.add('d-none')
     spinner.removeAttribute('hidden');
     if(curq_no<q.length && curq!=null){
@@ -327,7 +327,9 @@
 
   function next_q(val){
     if(val==='next' && document.getElementById('answer').value===''){
-      alert('Please enter your answer...!');
+      swal("<%=i18n.Note%>","<%=i18n.enteryouranswer%>", "info");
+      document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+      document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
       return;
     }
     disp_question()
@@ -420,11 +422,11 @@
             .catch(error => { //on error
               switch (error.name) {
                 case 'NotAllowedError':
-                  swal('Warning',"Please allow to access your microphone..!",'warning')
+                  swal('<%=i18n.Warning%>',"<%=i18n.allowaccessyourmicrophone%>",'warning')
                 break;
                 default:
                   console.log("An error occured with the error name " + error.name);
-                  swal('Error..!',"Sorry...!, we are unable to aceess your microphone",'error');
+                  swal('<%=i18n.Errors%>',"<%=i18n.unableaceessyourmicrophone%>",'error');
                   document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
                   document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
               }
@@ -439,7 +441,7 @@
            
         })
         .catch(error => {
-            swal("Error!", "We are unable to aceess your microphone...!", "error");
+            swal("<%=i18n.Errors%>", "<%=i18n.unableaceessyourmicrophone%>", "error");
             document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
             document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
         });
@@ -521,7 +523,9 @@
 
   function get_list_of_mic(){
     if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
-      alert("enumerateDevices() not supported.");
+      swal("<%=i18n.Errors%>","<%=i18n.enumerateDevicesnotsupported%>", "error");
+ document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+ document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
       return;
     }
 
@@ -544,7 +548,7 @@
   }
 
   function micTested(){
-    swal('Success..!','Microphone tested successfully...!','success');
+    swal('<%=i18n.Success%>','<%=i18n.Microphonetestedsuccessfully%>','success');
     document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
     document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
     StopAudioRecording();
@@ -569,7 +573,7 @@
       (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0 ||
       /*@cc_on!@*/false || !!document.documentMode
     ){
-      swal('Error...!','Please Use Chrome or Edge Browsers to proceed...!','error')
+      swal('<%=i18n.Errors%>','<%=i18n.UseChromeorEdgeBrowserstoproceed%>','error')
       .then(function(){
         close_test();
       })

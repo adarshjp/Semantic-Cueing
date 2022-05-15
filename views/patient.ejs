@@ -31,7 +31,7 @@
               <p class="card-text p-1">
                 <i class="fas fa-question-circle blue"></i> : <%=test.noofquestion%>
               </p>
-              <p class="card-text p-1">Level : 
+              <p class="card-text p-1"><%=i18n.Level%> : 
                 <%for(let i=1;i<=5;i++){%>
                   <%if(i<=test.level){%>
                     <span class = "fa fa-star checked"></span>
@@ -115,15 +115,27 @@ document.getElementById('completed').addEventListener('click',function(){
 });
 
 function count_number_of_tests(status,count) {
-  document.getElementById(status).innerHTML='<strong style="text-transform: capitalize;">'+status+'</strong><span class="badge bg-danger ms-2">'+count+'</span>';
+  document.getElementById(status).innerHTML='<strong style="text-transform: capitalize;">'+returnStatus(status)+'</strong><span class="badge bg-danger ms-2">'+count+'</span>';
+}
+
+function returnStatus(status){
+  if(status === "all"){
+    return '<%=i18n.All%>';
+  }else if(status === "pending"){
+    return '<%=i18n.Pending%>'
+  }else if(status === "completed"){
+    return '<%=i18n.Completed%>'
+  }else {
+    return '<%=i18n.Paused%>'
+  }
 }
 
 
 //------------------RES CHART------------------
 var data = {
           labels: [
-              "Correct answerd",
-              "Wrong answerd",
+          "<%=i18n.Correctanswerd%>",
+              "<%=i18n.Wronganswerd%>",
           ],
           datasets: [
               {
@@ -170,17 +182,17 @@ var data = {
     let msg=document.getElementById('msg');
     score.textContent=s+'/'+total;
     if(per<40){
-      grade.textContent='POOR';
-      msg.textContent='Be Patient, Work Hard and you will surely get success'
+      grade.textContent='<%=i18n.POOR%>';
+      msg.textContent='<%=i18n.BePatientWorkHardandgetsuccess%>'
     }else if(per>=40 && per<60){
-      grade.textContent='AVERAGE';
-      msg.textContent='Your doing a good job, Keep it up!'
+      grade.textContent='<%=i18n.AVERAGE%>';
+      msg.textContent='<%=i18n.YourdoinggoodjobKeepitup%>'
     }else if(per>=60 && per<80){
-      grade.textContent='GOOD';
-      msg.textContent='Your getting better & better, continue the hard work'
+      grade.textContent='<%=i18n.GOOD%>';
+      msg.textContent='<%=i18n.gettingbettercontinuehardwork%>'
     }else{
-      grade.textContent='EXCELLENT';
-      msg.textContent='"Congratulations! Your hard work paid off"'
+      grade.textContent='<%=i18n.EXCELLENT%>';
+      msg.textContent='<%=i18n.hardworkpaidoff%>'
     }
     res_in_chart(per)
   }
