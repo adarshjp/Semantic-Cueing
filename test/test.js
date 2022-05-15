@@ -29,11 +29,8 @@ describe('POST /login ',() => {
         })
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
-        .expect('Location','/home/admin')
         .end(function(err, res) {
             expect(res.status).to.equal(302)
-            // res.header['Location'].should.include('/home')
-            // res.text.to.equal('Login successful')
             if (err) return done(err);
             return done();
         });
@@ -48,7 +45,6 @@ describe('POST /login ',() => {
         })
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
-        .expect('Location','/login')
         .end(function(err, res) {
             expect(res.status).to.equal(302)
             if (err) return done(err);
