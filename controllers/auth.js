@@ -1,6 +1,6 @@
 const passport = require("passport");
-const User = require("../../models/user");
-const {convert_img}= require('../../helpers/convert_img')
+const User = require("../models/user");
+const {convert_img}= require('../helpers/convert_img')
 exports.register_get = (req, res) => {
   User.find({ $or: [{ role: 'doctor' }, {}] }, { _id: 1, name: 1, role: 1, username: 1 }, (err, docs) => {
     if (err) {

@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const upload = require('../setup/multer');
-const{change_password,login_get,login_post,set_password,set_post,get_changepassword}=require('../controllers/Auth/auth');
+const{change_password,login_get,login_post,set_password,set_post,get_changepassword}=require('../controllers/auth');
 const {isLoggedIn, isAdmin}=require('../controllers/Auth/middlewares');
 const { addquestions_get,addquestions_post,view_question,view_Onequestion,forgotpassword_get,get_edit_question,put_edit_question,put_edit_hint,delete_question} = require('../controllers/general');
-router.post(
-  "/login",
+const {loginValidator}=require('../validators/loginValidators');
+router.post("/login",loginValidator,
   passport.authenticate("local", {
     failureRedirect: "/login",
     failureFlash: true
