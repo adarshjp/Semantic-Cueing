@@ -1,5 +1,5 @@
-const User = require('../../models/user')
-const Test = require('../../models/test')
+const User = require('../models/user')
+const Test = require('../models/test')
 exports.isLoggedIn = (req, res, next) => {
     if (req.isAuthenticated()) {
         return next()
