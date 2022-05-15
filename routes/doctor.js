@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {get_home_doctor,get_create_test,post_create_test,get_view_assigned_patient,get_patient_details,get_patient_test_details,get_view_test_created,get_edit_test,patch_edit_test,get_question,delete_test,upgrade_level,discharge_patient,downgrade_level} = require("../controllers/doctor");
-const { isLoggedIn, isDoctor,isMappedDoctor } = require("../controllers/Auth/middlewares");
+const { isLoggedIn, isDoctor,isMappedDoctor } = require("../middlewares/middlewares");
 router.get("/create/test/:skip?", isLoggedIn, isDoctor, get_create_test);
 router.get("/home/doctor/:id", isLoggedIn, isDoctor, get_home_doctor);
 router.post("/create/test", isLoggedIn, isDoctor, post_create_test);
