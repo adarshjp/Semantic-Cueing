@@ -8,10 +8,13 @@ const Test = require("../models/test");
 exports.admin_get = (req, res) => {
     User.findById(req.user._id)
         .then((user) => {
+            res.status(200)
             res.render('admin', { user: user, i18n: global.i18n })
         })
         .catch((err) => {
             console.log(err)
+            res.status(500)
+            res.send(err)
         })
 }
 
@@ -23,6 +26,8 @@ exports.view_patient = (req, res) => {
         })
         .catch((err) => {
             console.log(err)
+            res.status(500)
+            res.send(err)
         })
 }
 
@@ -34,6 +39,8 @@ exports.view_doctor = (req, res) => {
         })
         .catch((err) => {
             console.log(err)
+            res.status(500)
+            res.send(err)
         })
 }
 
@@ -45,6 +52,8 @@ exports.view_Oneuser = (req, res) => {
         })
         .catch((err) => {
             console.log(err)
+            res.status(500)
+            res.send(err)
         })
 }
 
@@ -71,6 +80,8 @@ exports.delete_user = (req, res) => {
                 }
             }).catch((err) => {
                 console.log(err)
+                res.status(500)
+                res.send(err)
             });
         }else{
             req.flash('success', 'Patient is deleted successfully')
@@ -79,6 +90,8 @@ exports.delete_user = (req, res) => {
         }
     }).catch((err) => {
         console.log(err)
+        res.status(500)
+        res.send(err)
     });
 }
 
@@ -90,6 +103,8 @@ exports.get_edit_user = (req, res) => {
         })
         .catch((err) => {
             console.log(err)
+            res.status(500)
+            res.send(err)
         })
 }
 
@@ -102,6 +117,8 @@ exports.edit_user = (req, res) => {
         })
         .catch((err) => {
             req.flash("error","User not updated!!")
+            res.status(500)
+            res.send(err)
             console.log(err)
         })
 }
@@ -116,6 +133,8 @@ exports.checkusername=(req, res) => {
             }
         })
         .catch((err) => {
+            res.status(500)
+            res.send(err)
             console.log(err)
         })
 }
@@ -127,6 +146,8 @@ exports.get_details_for_graph = (req, res) => {
             res.send({users: users})
         })
         .catch((err) => {
+            res.status(500)
+            res.send(err)
             console.log(err)
         })
 }
@@ -135,6 +156,8 @@ exports.count_no_of_tests= (req, res) => {
     Test.countDocuments().then((test) => {
         res.send({ test: test })
     }).catch((err) => {
+        res.status(500)
+        res.send(err)
         console.log(err)
     })
 }
@@ -143,6 +166,8 @@ exports.count_no_of_questions= (req, res) => {
     Question.countDocuments().then((question) => {
         res.send({ question: question })
     }).catch((err) => {
+        res.status(500)
+        res.send(err)
         console.log(err)
     })
 }

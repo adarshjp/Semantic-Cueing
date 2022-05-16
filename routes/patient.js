@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { isLoggedIn,isPatient,isTestAssigned,isTestCompleted,isQuestionInTest}=require("../controllers/Auth/middlewares")
+const { isLoggedIn,isPatient,isTestAssigned,isTestCompleted,isQuestionInTest}=require("../middlewares/middlewares")
 const {get_home_patient,get_start_test,post_start_test,get_mydoctor,get_question,update_test_status,get_test_details}=require("../controllers/patient")
 router.get("/home/patient/:id",isLoggedIn, isPatient, get_home_patient);
 router.get("/start/test/:id",isLoggedIn, isPatient,isTestAssigned,get_start_test)
