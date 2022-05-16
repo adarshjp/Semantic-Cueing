@@ -46,6 +46,8 @@ exports.view_question = (req, res) => {
             res.send(questions)
         })
         .catch((err) => {
+            res.status(500)
+            res.send(err)
             console.log(err)
         })
 }
@@ -57,6 +59,8 @@ exports.view_Onequestion = (req, res) => {
             res.send(question)
         })
         .catch((err) => {
+            res.status(500)
+            res.send(err)
             console.log(err)
         })
 }
@@ -69,6 +73,8 @@ exports.get_edit_question= (req, res) => {
             res.render("edit_question",{question:question,user:req.user,i18n: global.i18n})
         })
         .catch((err) => {
+            res.status(500)
+            res.send(err)
             console.log(err)
         })
 }
@@ -185,6 +191,8 @@ exports.delete_question= (req, res) => {
                 res.redirect('/view/questions')
             })
             .catch((err) => {
+                res.status(500)
+                res.send(err)
                 console.log(err)
             })
         }else{
@@ -194,6 +202,8 @@ exports.delete_question= (req, res) => {
         }
     })
     .catch(err => {
+        res.status(500)
+        res.send(err)
         console.log(err)
     })
 
