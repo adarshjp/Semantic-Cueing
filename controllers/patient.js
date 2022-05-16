@@ -1,21 +1,9 @@
 const User = require('../models/user')
 const Test = require('../models/test')
 const Question = require('../models/question')
-
+let { mailDetails } = require('../setup/nodemailer')
+const { sendMail } = require('../helpers/sendMail')
 const ejs= require("ejs")
-const nodemailer = require("nodemailer");
-
-let mailTransporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.EMAIL_ID,
-      pass: process.env.PASS,
-    },
-});
-
-let mailDetails = {
-    from: process.env.EMAIL_ID,
-};
 
 exports.get_home_patient = (req, res) => {
     User.findById(req.user._id)
@@ -70,6 +58,7 @@ exports.get_mydoctor = (req, res) => {
             console.log(err)
         })
 }
+
 exports.get_question = (req, res) => {
     Question.findById(req.params.questionid)
         .then((question) => {
@@ -128,27 +117,8 @@ function send_Test_Result(test,to_emailId,res){
         }else{
             mailDetails.to = to_emailId;
             mailDetails.html = data;
-            sendMail(mailDetails, (err, data) => {
-                if (err) {
-                console.log(err);
-                res.status(500).json({
-                    message: "Internal server error",
-                });
-                } else {
-                console.log("Mail sent successfully");
-                }
-            });
+            mailDetails.subject = "Test Result";
+            sendMail(mailDetails);
         }
     })
 }
-
-function sendMail(mailDetails, callback) {
-    mailTransporter.sendMail(mailDetails, function (err, data) {
-      if (err) {
-        console.log("Error Occurs" + err);
-        callback(err);
-      } else {
-        callback(null, data);
-      }
-    });
-  }
