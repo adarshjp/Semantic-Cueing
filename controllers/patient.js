@@ -14,10 +14,14 @@ exports.get_home_patient = (req, res) => {
                     res.render('patient',{ user: user,tests: tests, i18n:global.i18n })
                 })
                 .catch((err) => {
+                    res.status(500)
+                    res.send(err)
                     console.log(err)
                 })
         })
         .catch((err) => {
+            res.status(500)
+            res.send(err)
             console.log(err)
         })
 }
@@ -55,6 +59,8 @@ exports.get_mydoctor = (req, res) => {
             res.render('mydoctor',{ user: req.user,doctor:doctor,i18n:global.i18n })
         })
         .catch((err) => {
+            res.status(500)
+            res.send(err)
             console.log(err)
         })
 }
@@ -65,6 +71,8 @@ exports.get_question = (req, res) => {
             res.status(200).send(question)
         })
         .catch((err) => {
+            res.status(500)
+            res.send(err)
             console.log(err)
         })
 }
@@ -75,6 +83,8 @@ exports.get_question = (req, res) => {
             res.status(200).send(question)
         })
         .catch((err) => {
+            res.status(500)
+            res.send(err)
             console.log(err)
         })
 }
@@ -93,6 +103,8 @@ exports.update_test_status = (req, res) => {
             res.json({ message: "Success"})
         })
         .catch((err) => {
+            res.status(500)
+            res.send(err)
             console.log(err)
         });
 }
@@ -103,6 +115,8 @@ exports.get_test_details = (req, res) => {
             res.status(200).send(test)
         })
         .catch((err) => {
+            res.status(500)
+            res.send(err)
             console.log(err)
         })
 }

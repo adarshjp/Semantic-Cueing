@@ -1,6 +1,7 @@
 <%- include("partials/header") %>
 <%- include("partials/adminSideBar") %>
-<div class="container">
+<%- include("partials/no_patient",{msg:['No questions','Created yet..!']})%>
+<div class="container" id='view-question'>
     <%- include("partials/flashMsg") %>
     <div class="row justify-content-center">
         <div class="offset-2 col-9 offset-sm-1 col-sm-9 offset-lg-0 col-lg-6 p-1">
@@ -10,16 +11,22 @@
           </h1>
         </div>
     </div>
+    <div class="offset-2 col-10 offset-sm-1 col-sm-11 offset-lg-0 col-lg-12 text-center my-2">
+        <a href="/addquestion" class="btn btn-primary btn-lg rounded-pill">Create Question <i class="fa-solid fa-plus"></i></a>
+      </div>
     <div class="row justify-content-center">
         <div class="offset-1 col-11 offset-sm-1 col-sm-9 offset-lg-0 col-lg-8 col-xl-6">
             <div class="row justify-content-center gradient-list mb-2 p-1" id='div_list'>
+                <% let len=question.length %>
                 <% question.forEach((question)=>{ %>
-                    <div class="offset-1 offset-sm-0 col-9 col-sm-10 col-lg-11 shadow-lg bg-body rounded-lg">
+                    <div class="offset-1 offset-sm-0 col-9 col-sm-12 shadow-lg bg-body rounded-lg">
                         <div class="card-image mx-0 p-2">
-                            <div class="row d-flex align-items-center p-1 justify-content-center">
-                                <div class="col-12 col-sm-8 col-md-6 col-lg-8 col-xl-9">
-                                    <p class="h6 text-center text-sm-start"><%=question.answer%></p>
-                                    <p class="h6 text-center text-sm-start"><%=i18n.Level%> : 
+                            <div class="row align-items-center p-1 justify-content-center">
+                                <div class="col-12 col-sm-5 col-md-3 col-lg-4">
+                                    <p class="h6 text-center"><%=question.answer%></p>
+                                </div>
+                                <div class="col-12 col-sm-7 col-md-5">
+                                    <p class="h6 text-center"><%=i18n.Level%> : 
                                         <%for(let i=1;i<=5;i++){%>
                                           <%if(i<=question.level){%>
                                             <span class = "fa fa-star checked"></span>
@@ -27,9 +34,9 @@
                                             <span class = "fa fa-star unchecked"></span>
                                           <%}%>
                                         <%}%>
-                                        </p>
+                                    </p>
                                 </div>
-                                <div class="col-7 col-sm-4 col-md-6 col-lg-4 col-xl-3 text-center">
+                                <div class="col-7 col-sm-4 col-md-4 col-lg-3 text-center">
                                     <a class="btn btn-primary white" href='/edit/question/<%=question._id%>'
                                             ><i class="fas fa-edit"></i></a>
                                     <form action="/delete/question/<%=question._id%>?_method=DELETE" class="d-inline-block" method="POST">
@@ -56,6 +63,12 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    if(parseInt('<%=len%>')===0){
+        document.getElementById('view-question').classList.add('d-none');
+        document.getElementById('no-data').classList.remove('d-none');
+    }
+</script>
 <script>
     let k=1;
     let isCompleted=false;
@@ -84,28 +97,30 @@
     };
 
     function append_div(q){
-        console.log(q.answer)
         let div=document.createElement("div");
         
-        div.className='offset-1 offset-sm-0 col-9 col-sm-10 col-lg-11 shadow-lg bg-body rounded-lg';
+        div.className='offset-1 offset-sm-0 col-9 col-sm-12 shadow-lg bg-body rounded-lg';
 
         let card_img=document.createElement('div');
         card_img.className='card-image mx-0 p-2';
 
         let div_row=document.createElement('div');
-        div_row.className='row d-flex align-items-center p-1 justify-content-center';
+        div_row.className='row align-items-center p-1 justify-content-center';
 
-        let div_p=document.createElement('div')
-        div_p.className='col-12 col-sm-8 col-md-6 col-lg-8 col-xl-9';
+        let div_p_1=document.createElement('div')
+        div_p_1.className='col-12 col-sm-5 col-md-3 col-lg-4';
 
         let p=document.createElement('p')
-        p.className='h6 text-center text-sm-start';
+        p.className='h6 text-center';
         p.textContent=q.answer;
 
-        div_p.appendChild(p);
+        div_p_1.appendChild(p);
+
+        let div_p_2=document.createElement('div')
+        div_p_2.className='col-12 col-sm-7 col-md-5';
 
         p=document.createElement('p')
-        p.className='h6 text-center text-sm-start';
+        p.className='h6 text-center';
         p.textContent='Level : '
         for(let x=1;x<=5;x++){
             let span=document.createElement('span');
@@ -118,10 +133,10 @@
             p.appendChild(span);
             p.innerHTML +=' '
         }
-        div_p.appendChild(p);
+        div_p_2.appendChild(p);
 
         let div_a=document.createElement('div')
-        div_a.className='col-7 col-sm-4 col-md-6 col-lg-4 col-xl-3 text-center';
+        div_a.className='col-7 col-sm-4 col-md-4 col-lg-3 text-center';
 
         let a=document.createElement('a');
         a.className='btn btn-primary white';
@@ -133,7 +148,8 @@
 
         div_a.appendChild(a);
 
-        div_row.appendChild(div_p);
+        div_row.appendChild(div_p_1);
+        div_row.appendChild(div_p_2);
         div_row.appendChild(div_a);
 
         card_img.appendChild(div_row)

@@ -1,12 +1,17 @@
 <%- include("partials/header") %>
 <%- include("partials/doctorSideBar") %>
-<div class="container-fluid">
+<%- include("partials/no_patient",{msg:['No Patients','assigned for you..!']})%>
+<div class="container-fluid d-none" id='home'>
   <%- include("partials/flashMsg") %>
 
   <div class="row justify-content-center mt-2">
     <div class="offset-2 col-9 offset-sm-1 col-sm-9 offset-md-0 col-md-6 col-lg-5 col-xl-4">
       <label for="patient"><%=i18n.ChoosePatient%></label>
       <select class="form-select form-select-lg my-2 p-2" aria-label=".form-select-lg" onchange="disp_patient_details(this.value)">
+        <% let patinetId%>
+        <% if(patient.length > 0) {%>
+          <% patinetId=patient[0]._id%>
+        <%}%>
         <% patient.forEach((patient)=> { %>
           <option value="<%=patient._id%>"><%=patient.name%></option>
         <% }) %>
@@ -120,12 +125,18 @@
        </div>
       </div>
     </div>
-
   </div>
 </div>
 <script type="text/javascript">
   let temp=true; // this is used to keep track whether chart is created or not
-  disp_patient_details('<%=patient[0]._id%>')
+    
+  if('<%=patient%>'.length===0){
+    document.getElementById('no-data').classList.remove('d-none');
+  }else{
+    document.getElementById('home').classList.remove('d-none')
+    disp_patient_details('<%=patinetId%>')
+  }
+  
   let line_chart; // For line chart
   let bar_chart_1; // For bar chart
   let bar_chart_2; // For bar chart
@@ -264,7 +275,7 @@
   function create_data_for_charts(test){
     let score=[];   //this store the details of 'completed' test score 
     let percent=[];
-    let status={'pending':0,'pauesd':0,'completed':0}  //to count test statuses
+    let status={'pending':0,'paused':0,'completed':0}  //to count test statuses
     let answered={'0':0,'1':0,'2':0,'3':0,'4':0};
     let unanswered={'0':0,'1':0,'2':0,'3':0,'4':0};
     for(let i=0;i< test.length;i++){
@@ -278,8 +289,8 @@
           answered[j+'']=answered[j+'']+t1[j+''];
           unanswered[j+'']=unanswered[j+'']+t2[j+''];
         }
-      }else if(test[i].status==='pauesd'){
-        status['pauesd']++;
+      }else if(test[i].status==='paused'){
+        status['paused']++;
       }else{
         status['pending']++;
       }

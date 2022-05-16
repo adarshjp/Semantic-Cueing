@@ -10,8 +10,8 @@
   </div>
 
   <%- include("partials/testTabs") %>
-
-  <div class="row p-1 justify-content-center">
+  <%- include("partials/no_Test") %>
+  <div class="row p-1 justify-content-center" id='test_status'>
     <% let i=0,c_pending=0,c_paused=0,c_completed=0%>
     <% tests.forEach((test) => { %>
     <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-5 p-2 <%=test.status%> test<%=i%>" id='test_list'>
@@ -70,54 +70,16 @@
 </div>
 
 <%- include("partials/viewReportModal") %>
-
+<script src='/view_tests.js'></script>
 <script type="text/javascript">
-$(window).on('load', function() {
-  create_chart();
-  count_number_of_tests('all',parseInt('<%=tests.length %>'));
-  count_number_of_tests('pending',parseInt('<%=c_pending %>'));
-  count_number_of_tests('paused',parseInt('<%=c_paused %>'));
-  count_number_of_tests('completed',parseInt('<%=c_completed %>'));
-});
-
-document.getElementById('all').addEventListener('click',function(){
-  for(var i=0;i<parseInt('<%=tests.length %>');i++){
-      document.getElementsByClassName('test'+i)[0].classList.remove('d-none');
-  }
-  count_number_of_tests('all',parseInt('<%=tests.length %>'))
-});
-document.getElementById('paused').addEventListener('click',function(){
-  for(var i=0;i<parseInt('<%=tests.length %>');i++){
-      document.getElementsByClassName('test'+i)[0].classList.add('d-none');
-  }
-  let paused=document.getElementsByClassName('paused');
-  for(let i=0;i<paused.length;i++){
-    paused[i].classList.remove('d-none');
-  }
-});
-document.getElementById('pending').addEventListener('click',function(){
-  for(var i=0;i<parseInt('<%=tests.length %>');i++){
-      document.getElementsByClassName('test'+i)[0].classList.add('d-none');
-  }
-  let pending=document.getElementsByClassName('pending');
-  for(let i=0;i<pending.length;i++){
-    pending[i].classList.remove('d-none');
-  }
-});
-document.getElementById('completed').addEventListener('click',function(){
-  for(var i=0;i<parseInt('<%=tests.length %>');i++){
-      document.getElementsByClassName('test'+i)[0].classList.add('d-none');
-  }
-  let completed=document.getElementsByClassName('completed');
-  for(let i=0;i<completed.length;i++){
-    completed[i].classList.remove('d-none');
-  }
-});
-
-function count_number_of_tests(status,count) {
-  document.getElementById(status).innerHTML='<strong style="text-transform: capitalize;">'+status+'</strong><span class="badge bg-danger ms-2">'+count+'</span>';
-}
-
+  let total_test=parseInt('<%=tests.length %>')
+  $(window).on('load', function() {
+    create_chart();
+    count_number_of_tests('all',parseInt('<%=tests.length %>'));
+    count_number_of_tests('pending',parseInt('<%=c_pending %>'));
+    count_number_of_tests('paused',parseInt('<%=c_paused %>'));
+    count_number_of_tests('completed',parseInt('<%=c_completed %>'));
+  });
 
 //------------------RES CHART------------------
 var data = {

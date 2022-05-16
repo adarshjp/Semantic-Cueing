@@ -1,47 +1,56 @@
 <%- include("partials/header") %>
     <%- include("partials/adminSideBar") %>
-        <div class="container" id="">
-            <div class="row justify-content-center">
-                <div class="offset-2 col-9 offset-sm-2 col-sm-8 offset-lg-0 col-lg-6 p-1">
-                    <h1 class="p-2 display-3 fw-bold">
-                        <%=i18n.Our%> <span class="blue"><%=i18n.Doctors%> </span>
-                        <i class="fas fa-stethoscope blue"></i>
-                    </h1>
-                </div>
+    <%- include("partials/no_patient",{msg:['No Doctors','Created yet']})%>
+    <div class="container-fluid" id='view-doctor'>
+        <%- include("partials/flashMsg") %>
+        <div class="row justify-content-center text-center">
+            <div class="offset-2 col-9 offset-sm-0 col-sm-11 offset-lg-0 col-lg-12 p-1">
+                <h1 class="p-2 display-3 fw-bold">
+                    <%=i18n.Our%> <span class="blue"><%=i18n.Doctors%> </span>
+                <i class="fas fa-stethoscope blue"></i>
+                </h1>
             </div>
-            <div class="row justify-content-center mx-0 mx-lg-5 p-0 p-lg-3">
-                <% doctors.forEach((doctor)=> { %>
-                    <div class="offset-2 col-9 offset-sm-2 col-sm-8 offset-md-0 col-md-10 offset-lg-0 col-lg-6 p-1">
-                        <div class="card box-shadow p-3">
-                            <div class="row">
-                                <div class="col-md-5 my-auto">
-                                    <img src="/images/undraw_doctors_hwty.svg" class="card-img-top rounded-circle p-1 box-shadow"
+        </div>
+        <div class="row justify-content-center mx-0 mx-lg-5 p-0 p-lg-3">
+            <% let len=doctors.length %>
+            <% doctors.forEach((doctor)=> { %>
+                <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-xl-5 p-1">
+                    <div class="card box-shadow p-3">
+                        <div class="row">
+                            <div class="col-sm-6 my-auto">
+                                <img src="/images/undraw_doctors_hwty.svg" class="card-img-top rounded-circle p-1 box-shadow"
                                         alt="..." style="border: 3px solid #6c63ff" />
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="card-body">
-                                        <h1 class="card-title"><%=doctor.name%></h1>
-                                        <hr>
-                                        <p class="card-text h3">
-                                            <%=doctor.email%>
-                                        </p>
-                                        <p class="card-text h3">
-                                            <%=doctor.age%>
-                                        </p>
-                                        <div class="d-flex justify-content-end align-items-end">
-                                            <form action="/delete/<%=doctor._id%>?_method=DELETE" method="POST">
-                                                <button class="btn btn-primary white m-1" type="submit">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                </button>
-                                            </form>
-                                        </div>
+                            </div>
+                            <div class="col-sm-6 my-auto">
+                                <div class="card-body">
+                                    <h1 class="card-title"><%=doctor.name%></h1>
+                                    <hr>
+                                    <p class="card-text h3">
+                                        <%=doctor.email%>
+                                    </p>
+                                    <p class="card-text h3">
+                                        <%=doctor.age%>
+                                    </p>
+                                    <div class="d-flex justify-content-end align-items-end">
+                                        <form action="/delete/<%=doctor._id%>?_method=DELETE" method="POST">
+                                            <button class="btn btn-primary white m-1" type="submit">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <% }) %>
-            </div>
+                </div>
+            <% }) %>
         </div>
+    </div>
+    <script type="text/javascript">
+    if(parseInt('<%=len%>')===0){
+        document.getElementById('view-doctor').classList.add('d-none');
+        document.getElementById('no-data').classList.remove('d-none');
+    }
+    </script>
 
-        <%- include("partials/footer") %>
+<%- include("partials/footer") %>
