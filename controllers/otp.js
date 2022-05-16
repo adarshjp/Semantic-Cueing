@@ -1,18 +1,9 @@
 const otp = require("../models/otp");
-const nodemailer = require("nodemailer");
 const user = require("../models/user");
-const ejs= require("ejs")
-const {encodeMsg}= require('./en_decode')
-let mailTransporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_ID,
-    pass: process.env.PASS,
-  },
-});
-let mailDetails = {
-  from: process.env.EMAIL_ID,
-};
+const ejs = require("ejs")
+const { encodeMsg } = require('../helpers/en_decode')
+let { mailDetails } = require('../setup/nodemailer')
+const { sendMail } = require('../helpers/sendMail')
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 
@@ -21,7 +12,7 @@ exports.sendOtp = (req, res) => {
     otp: Math.floor(100000 + Math.random() * 900000),
     isVerified: false,
     creationTime: Date.now(),
-    verificationKey:req.body.verificationKey
+    verificationKey: req.body.verificationKey
   });
   let version = req.params.version;
   let userid;
@@ -40,8 +31,8 @@ exports.sendOtp = (req, res) => {
   }
 };
 exports.verifyOtp = (req, res) => {
-  var encrypted =encodeMSg(req.body.otp)
-  otp.findOne({ otp: encrypted, isVerified: false,verificationKey:req.body.verificationKey }, (err, data) => {
+  var encrypted = encodeMsg(req.body.otp)
+  otp.findOne({ otp: encrypted, isVerified: false, verificationKey: req.body.verificationKey }, (err, data) => {
     if (err) {
       console.log(err);
       res.status(500).json({
@@ -65,55 +56,23 @@ exports.verifyOtp = (req, res) => {
   });
 };
 function initSendMail(email, otp, version, res) {
-  ejs.renderFile(__dirname+"\\..\\views\\otpTemplate.ejs",{otp:otp,version:version},(err,data)=>{
-    if(err){
+  ejs.renderFile(__dirname + "\\..\\views\\otpTemplate.ejs", { otp: otp, version: version, i18n: global.i18n }, (err, data) => {
+    if (err) {
       console.log(err);
       res.status(500).json({
-        message:"Internal server error"
+        message: "Internal server error"
       })
-    }else{
+    } else {
       mailDetails.to = email;
       mailDetails.html = data;
-      if(version==='v1'){
+      if (version === 'v1') {
         mailDetails.subject = "Change your password";
-      }else{
+      } else {
         mailDetails.subject = "Email verification";
       }
-      sendMail(mailDetails, (err, data) => {
-        if (err) {
-          console.log(err);
-          res.status(500).json({
-            message: "Internal server error",
-          });
-        } else {
-          console.log("Mail sent successfully");
-        }
-      });
+      sendMail(mailDetails);
     }
   })
-  // mailDetails.to = email;
-  // mailDetails.html =
-  //   "<h1>OTP for verification</h1><h2>Your OTP is " +
-  //   otp +
-  //   ".This OTP is valid for 10 minutes.</h2><h3>Thank You</h3>";
-  // sendMail(mailDetails, (err, data) => {
-  //   if (err) {
-  //     console.log(err);
-  //     res.json({ message: "Error Occured" });
-  //   } else {
-  //     console.log("Email sent successfully");
-  //   }
-  // });
-}
-function sendMail(mailDetails, callback) {
-  mailTransporter.sendMail(mailDetails, function (err, data) {
-    if (err) {
-      console.log("Error Occurs" + err);
-      callback(err);
-    } else {
-      callback(null, data);
-    }
-  });
 }
 function initSendSms(phone, otp, res) {
   var msg = "Your OTP is " + otp + ".This OTP is valid for 10 minutes.";
