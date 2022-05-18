@@ -200,3 +200,17 @@ function arrayBufferToBase64(buffer) {
   bytes.forEach((b) => binary += String.fromCharCode(b));
   return window.btoa(binary);
 };
+
+function chnage_patinet_list(){
+    var selected = $("#patient-list :selected").map((_, e) => e.value).get();
+    document.getElementById('patientIDs').value=JSON.stringify(selected);
+    console.log(document.getElementById('patientIDs').value)
+}
+$(document).ready(function(){
+    var multipleCancelButton = new Choices('#patient-list', {
+        removeItemButton: true,
+        maxItemCount:100,
+        searchResultLimit:10,
+        renderChoiceLimit:5
+    });
+});

@@ -153,7 +153,15 @@ exports.get_view_test_created = (req, res) => {
 exports.get_edit_test= (req, res) => {
   Test.findOne({_id:req.params.testid})
   .then((test)=>{
-    res.render("editTest",{ user: req.user,test: test,i18n: global.i18n });
+    User.find({ doctorid: req.user._id }, { _id: 1, name: 1 })
+    .then((patient) => {
+      res.render("editTest",{ user: req.user,test: test,patient:patient,i18n: global.i18n });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err
+      })
+    })
   })
   .catch((err)=>{
     res.status(500).json({
