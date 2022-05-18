@@ -51,31 +51,39 @@ exports.get_home_doctor = (req, res) => {
 };
 
 exports.post_create_test = (req, res) => {
+  /* Function to Create new test
+     Input : req.body.patientIDs is an array of patient IDs
+     Output : Test document added to database
+     steps : 1 - The req.body.patientIDs is a string so convert into array.
+             2 - Create a test Object.
+             3 - Create a field patients array in test object.
+             4 - Push Patientids one by one to that array.
+             5 - Save test object.
+  */
   let patientids = JSON.parse(req.body.patientIDs);
-  let test = []
+  let newTest = Test({
+    doctorid: req.user._id,
+    questions: req.body.questions,
+    level: req.body.level,
+    noofquestion: req.body.questions.length,
+  });
+  newTest.patients = [];
   for (let i = 0; i < patientids.length; i++) {
-    let newTest = Test({
-      doctorid: req.user._id,
+    let patient = {
       patientid: patientids[i],
-      questions: req.body.questions,
-      level: req.body.level,
-      noofquestion: req.body.questions.length,
-
-    });
-    test.push(newTest);
+    };
+    newTest.patients.push(patient);
   }
-  Test.insertMany(test)
+  newTest.save()
     .then((test) => {
       req.flash('success', 'Test created successfully')
       res.status(200)
       res.redirect('/view/tests/' + req.user._id)
     })
     .catch((err) => {
-      res.status(500).json({
-        error: err
-      })
-    })
-};
+      res.status(500).json({error: err})
+  });
+}
 
 exports.get_view_assigned_patient= (req, res) => {
   User.find({doctorid:req.user._id})
