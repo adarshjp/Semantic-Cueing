@@ -99,7 +99,7 @@ exports.get_view_assigned_patient= (req, res) => {
 
 exports.get_patient_details = (req, res) => {
   //get patient details _id is patientid and doctorid is req.user._id
-  User.find({ _id: req.params.patinetId, doctorid: req.user._id })
+  User.find({ _id: req.params.patientId, doctorid: req.user._id })
     .then((patient) => {
       res.status(200).send(patient);
     })
@@ -112,7 +112,7 @@ exports.get_patient_details = (req, res) => {
 
 exports.get_patient_test_details = (req, res) => {
   //get patient test details _id is patientid and doctorid is req.user._id
-  Test.find({ 'patients.$.patientid' : req.params.patinetId, doctorid: req.user._id }, { _id: 0, questions: 0 })
+  Test.find({ 'patients.$.patientid' : req.params.patientId, doctorid: req.user._id }, { _id: 0, questions: 0 })
     .then((test) => {
       res.status(200).send(test);
     })
@@ -187,7 +187,7 @@ exports.delete_test = (req, res) => {
 }
 exports.upgrade_level = (req, res) => {
   /* Updates the level of patient by one */
-  User.findOneAndUpdate({ _id: req.params.patinetId,role:'patient' }, { $inc: { level: 1 } }, { new: true })
+  User.findOneAndUpdate({ _id: req.params.patientId,role:'patient' }, { $inc: { level: 1 } }, { new: true })
     .then((patient) => {
       console.log(patient)
       req.flash('success', 'Level updated successfully')
@@ -202,7 +202,7 @@ exports.upgrade_level = (req, res) => {
 }
 exports.downgrade_level =  (req, res) => {
   /* Updates the level of patient by one */
-  User.findOneAndUpdate({ _id: req.params.patinetId,role:'patient' }, { $inc: { level: -1 } }, { new: true })
+  User.findOneAndUpdate({ _id: req.params.patientId,role:'patient' }, { $inc: { level: -1 } }, { new: true })
     .then((patient) => {
       console.log(patient)
       req.flash('success', 'Level updated successfully')
@@ -218,7 +218,7 @@ exports.downgrade_level =  (req, res) => {
 
 exports.discharge_patient = (req, res) => {
   /* Set the status of the patient to discharged */
-  User.findOneAndUpdate({ _id: req.params.patinetId,role:'patient' }, { $set: { status: 'discharged' } }, { new: true })
+  User.findOneAndUpdate({ _id: req.params.patientId,role:'patient' }, { $set: { status: 'discharged' } }, { new: true })
     .then((patient) => {
       console.log(patient)
       req.flash('success', 'Patient discharged successfully')
