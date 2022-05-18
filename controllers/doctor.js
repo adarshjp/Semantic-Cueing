@@ -174,7 +174,14 @@ exports.get_edit_test= (req, res) => {
 
 
 exports.patch_edit_test = (req, res) => {
-  Test.findOneAndUpdate({ _id: req.params.testid }, { $set: { level: req.body.level, questions: req.body.questions, noofquestion: req.body.questions.length } }, { new: true })
+  let patientids = JSON.parse(req.body.patientIDs);
+  let patients = [];
+  for (let i = 0; i < patientids.length; i++) {
+    patients.push({
+      patientid: patientids[i],
+    });
+  }
+  Test.findOneAndUpdate({ _id: req.params.testid }, { $set:{level: req.body.level, questions: req.body.questions, noofquestion: req.body.questions.length, patients:patients}}, { new: true })
     .then((test) => {
       req.flash('success', 'Test updated successfully')
       res.status(200)
