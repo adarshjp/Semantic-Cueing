@@ -111,10 +111,24 @@ exports.get_patient_details = (req, res) => {
 }
 
 exports.get_patient_test_details = (req, res) => {
-  //get patient test details _id is patientid and doctorid is req.user._id
-  Test.find({ 'patients.$.patientid' : req.params.patientId, doctorid: req.user._id }, { _id: 0, questions: 0 })
-    .then((test) => {
-      res.status(200).send(test);
+  /* Function which returns the test details of patient.
+     Input : req.params.patientId (patient ID)
+     Output : An array of Objects.
+     Steps : 1 - Find all those tests in which req.params.patientId is present.
+             2 - For each test in the array find the test details of req.params.patientId
+             3 - Push that details onto patient_tests array
+  */
+  Test.find({ 'patients.$.patientid' : req.params.patientId, doctorid: req.user._id }, { patients:1 })
+    .then((tests) => {
+      let patient_tests=[];
+      tests.forEach((test) => {
+        test.patients.forEach((patient) => {
+          if (patient.patientid.toString() === req.params.patientId.toString()) {
+            patient_tests.push(patient);
+          }
+        })
+      });
+      res.status(200).send(patient_tests);
     })
     .catch((err) => {
       res.status(500).json({
@@ -122,6 +136,7 @@ exports.get_patient_test_details = (req, res) => {
       })
     })
 }
+
 
 exports.get_view_test_created = (req, res) => {
   Test.find({doctorid:req.user._id})
