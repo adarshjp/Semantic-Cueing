@@ -7,10 +7,6 @@ const testSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
-  patientid: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-  },
   noofquestion: {
     type: Number,
     default: 0,
@@ -25,25 +21,37 @@ const testSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  patients: [
+    {
+      patientid: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+      status: {
+        type: String,
+        default: "pending",
+      },
+      pauesdqno: {
+        type: Number,
+        default: 0,
+      },
+      score: {
+        type: Number,
+        default: 0,
+      },
+      answered: {
+        type: Object,
+        default: {'0':0,'1':0,'2':0,'3':0,'4':0}
+      },
+      unanswered: {
+        type: Object,
+        default: {"0":0,"1":0,"2":0,"3":0,"4":0}
+      }
+    },
+  ],
   status: {
     type: String,
     default: "pending",
-  },
-  pauesdqno: {
-    type: Number,
-    default: 0,
-  },
-  score: {
-    type: Number,
-    default: 0,
-  },
-  answered: {
-    type: String,
-    default: "{\"0\":0,\"1\":0,\"2\":0,\"3\":0,\"4\":0}"
-  },
-  unanswered: {
-    type: String,
-    default: "{\"0\":0,\"1\":0,\"2\":0,\"3\":0,\"4\":0}"
-  },
+  }
 });
 module.exports = mongoose.model("Test", testSchema);
