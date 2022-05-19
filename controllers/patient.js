@@ -1,6 +1,10 @@
 const User = require('../models/user')
 const Test = require('../models/test')
 const Question = require('../models/question')
+let { mailDetails } = require('../setup/nodemailer')
+const { sendMail } = require('../helpers/sendMail')
+const ejs= require("ejs")
+
 exports.get_home_patient = (req, res) => {
     User.findById(req.user._id)
         .then((user) => {
@@ -60,6 +64,7 @@ exports.get_mydoctor = (req, res) => {
             console.log(err)
         })
 }
+
 exports.get_question = (req, res) => {
     Question.findById(req.params.questionid)
         .then((question) => {
@@ -92,6 +97,9 @@ exports.update_test_status = (req, res) => {
         },
         { new: true }
         ).then((test) => {
+            if(req.body.status == 'completed'){
+                send_Test_Result(test,req.user.email,res)
+            }
             res.json({ message: "Success"})
         })
         .catch((err) => {
@@ -113,3 +121,18 @@ exports.get_test_details = (req, res) => {
         })
 }
 
+function send_Test_Result(test,to_emailId,res){
+    ejs.renderFile(__dirname+"\\..\\views\\res_Email.ejs",{test:test},(err,data)=>{
+        if(err){
+            console.log(err);
+            res.status(500).json({
+                message:"Internal server error"
+            })
+        }else{
+            mailDetails.to = to_emailId;
+            mailDetails.html = data;
+            mailDetails.subject = "Test Result";
+            sendMail(mailDetails);
+        }
+    })
+}
