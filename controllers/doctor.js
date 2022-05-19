@@ -263,3 +263,16 @@ exports.discharge_patient = (req, res) => {
       })
     })
 }
+
+exports.get_patient_names = (req, res) => {
+  /* Returns the names of all patients of the doctor with doctorid===req.params.doctorid*/
+  User.find({ doctorid: req.params.doctorid,role:'patient' }, { _id: 1, name: 1 })
+    .then((patients) => {
+      res.status(200).send(patients);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error:err
+    })
+  })
+}

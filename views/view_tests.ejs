@@ -13,28 +13,44 @@
   <%- include("partials/testTabs") %>
   <%- include("partials/no_Test") %>
   <div class="row p-1 justify-content-center" id='test_status'>
-    <div class="offset-2 col-8 offset-sm-1 col-sm-10 offset-lg-0 text-center mb-3">
+    <div class="offset-2 col-8 offset-sm-1 col-sm-10 offset-lg-0 col-lg-11 text-center mb-3">
       <a href="/create/test" class="btn btn-primary btn-lg rounded-pill">Create Test <i class="fa-solid fa-plus"></i></a>
     </div>
-    <% let k=1,c_pending=0,c_paused=0,c_completed=0%>
-    <% tests.forEach((test) => { %>
-    <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-5 p-2 <%=test.status%> test<%=k-1%>" id='test_list'>
-      <div class="card box-shadow p-3">
-        <div class="row align-items-center">
-          <div class="col-sm-6 my-auto">
-            <img
-              src="/images/exam.svg"
-              class="card-img-top rounded-circle p-1 box-shadow"
-              alt="..."
-              style="border: 3px solid #6c63ff"
-            />
-          </div>
-          <div class="col-sm-6">
+    <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0">
+      <div class="row p-0 justify-content-center">
+        <% let k=1,c_pending=0,c_paused=0,c_completed=0%>
+        <% tests.forEach((test) => { %>
+        <div class="col-12 col-sm-9 col-md-8 col-lg-6 col-xl-4 p-2 <%=test.status%> test<%=k-1%>" id='test_list'>
+          <div class="card box-shadow border border-2">
+            <div class="card-header">
+              <div class="row align-items-center">
+                <div class="col-5 mt-2">
+                  <h5 class="card-title">Test <i class="fas fa-bell blue"></i></h5>
+                </div>
+                <div class="col-7 text-end">
+                  <%if(test.status==='pending'){%>
+                    <a class="btn btn-lg btn-primary white mx-1 rounded-pill d-inline-block" href='/edit/test/<%=test._id%>'
+                      ><i class="fas fa-edit"></i></a>
+                      <form action="/delete/test/<%=test._id%>?_method=DELETE" method="POST" class="d-inline-block">
+                        <button class="btn btn-lg btn-danger rounded-pill white" type="submit">
+                          <i class="fas fa-trash-alt"></i>
+                        </button>
+                      </form>
+                      <% c_pending=c_pending+1%>
+                  <%}else if(test.status === 'completed'){%>
+                    <button class="btn btn-lg btn-success rounded-pill white" type="button" disabled>
+                      <i class="fa-solid fa-check-to-slot"></i>
+                    </button>
+                    <% c_completed=c_completed+1%>
+                  <%}else{%>
+                    <% c_paused=c_paused+1%>
+                    <button class="btn btn-lg btn-secondary white rounded-pill" type="button" disabled><i class="fa-solid fa-pause"></i></button>
+                  <%}%>
+                </div>
+              </div>
+            </div>
             <div class="card-body">
-              <h5 class="card-title p-1">Test <i class="fas fa-bell blue"></i></h5>
-              <p class="card-text p-1">
-                <i class="fas fa-question-circle blue"></i> : <%=test.noofquestion%>
-              </p>
+              <p class="card-text p-1"><i class="fas fa-question-circle blue"></i> : <%=test.noofquestion%></p>
               <p class="card-text p-1">Level : 
                 <%for(let i=1;i<=5;i++){%>
                   <%if(i<=test.level){%>
@@ -43,39 +59,53 @@
                     <span class = "fa fa-star unchecked"></span>
                   <%}%>
                 <%}%>
-                </p>
+              </p>
               <p class="card-text p-1">Status : <strong style="text-transform: capitalize;"><%=test.status%></strong></p>
-              <div class="d-flex justify-content-end">
-                <%if(test.status==='completed'){%>
-                  <button class="btn btn-lg btn-success white m-2"  data-bs-toggle="modal" data-bs-target="#viewReport" data-bs-whatever="<%=test._id%>">
-                    <i class="fas fa-poll"></i>
-                  </button>
-                  <% c_completed=c_completed+1%>
-                  <a class="btn btn-lg btn-primary white m-2" href="/chat/<%=test.patientid%>"><i class="fa-solid fa-message"></i></a>
-                <%} else if(test.status==='pending'){%>
-                  <a class="btn btn-lg btn-primary white m-2" href='/edit/test/<%=test._id%>'
-                    ><i class="fas fa-edit"></i></a>
-                  <!-- <a class="btn btn-lg btn-danger white m-2" href='/delete/test/<%=test._id%>'
-                    ><i class="fas fa-trash-alt"></i></a> -->
-                    <form action="/delete/test/<%=test._id%>?_method=DELETE" method="POST">
-                      <button class="btn btn-lg btn-danger white m-2" type="submit">
-                        <i class="fas fa-trash-alt"></i>
-                      </button>
-                    </form>
-                    <% c_pending=c_pending+1%>
-                <%}else{%>
-                  <% c_paused=c_paused+1%>
-                  <button class="btn btn-lg btn-primary white m-2" disabled><i class="fas fa-edit"></i></button>
-                  <button class="btn btn-lg btn-danger white m-2"disabled><i class="fas fa-trash-alt"></i></button>
-                <%}%>
+              <div class="text-center mb-2">
+                <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="collapse" data-bs-target="#test<%=k%>" aria-expanded="false">
+                  View Patients <i class="fa-solid fa-eye"></i>
+                </button>
+              </div>
+              <div class="collapse table-responsive" id="test<%=k%>">
+                <table class="table table-hover table-bordered text-center">
+                  <thead>
+                    <tr>
+                      <th scope="col">Name</th>
+                      <th scope="col">Status</th>
+                      <%if(test.status==='completed'){%>
+                        <th scope="col">View Report</th>
+                      <%}else{%>
+                        <th scope="col">No. Q's attemted</th>
+                      <%}%>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% test.patients.forEach((patient) => { %>
+                      <tr>
+                        <td class="<%=patient.patientid%>"></td>
+                        <td style="text-transform: capitalize;"><%=patient.status%></td>
+                      <%if(test.status==='completed'){%>
+                        <td>
+                          <button class="btn btn-lg btn-success white rounded-pill"  data-bs-toggle="modal" data-bs-target="#viewReport" data-bs-whatever="<%=patient.score%>,<%=test.noofquestion%>">
+                            <i class="fas fa-poll"></i>
+                          </button>
+                          <a class="btn btn-lg btn btn-primary white rounded-pill" href="/chat/<%=patient.patientid%>"><i class="fa-solid fa-message"></i></a>
+                      </td>
+                      <%}else{%>
+                        <td><%=patient.pauesdqno%></td>
+                      <%}%>
+                      </tr>
+                    <%})%>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
         </div>
+        <%k=k+1%>
+        <% }) %>
       </div>
     </div>
-    <%k=k+1%>
-    <% }) %>
   </div>
 </div>
 <%- include("partials/viewReportModal") %>
@@ -88,6 +118,7 @@
     count_number_of_tests('pending',parseInt('<%=c_pending %>'));
     count_number_of_tests('paused',parseInt('<%=c_paused %>'));
     count_number_of_tests('completed',parseInt('<%=c_completed %>'));
+    patient_names()
   });
 
 //------------------RES CHART------------------
@@ -126,13 +157,22 @@ var data = {
   var viewReport = document.getElementById('viewReport')
   viewReport.addEventListener('show.bs.modal', function (event) {
     var button = event.relatedTarget
-    var testid = button.getAttribute('data-bs-whatever')
-    // fetch('/test/'+testid)
-    //   .then(response => response.json())
-    //   .then(test=>{
-    //     test_res(test.score,test.noofquestion)
-    //   });
+    var test_details = button.getAttribute('data-bs-whatever').split(',');
+    test_res(test_details[0], test_details[1]);
   })
+
+  function patient_names(){
+    fetch('/data/patientnames/<%=user._id%>')
+    .then(response => response.json())
+    .then(patients=>{
+      patients.forEach((patient) => {
+        var patient_name = document.getElementsByClassName(patient._id)
+        for(var xy=0;xy<patient_name.length;xy++){
+          patient_name[xy].textContent=patient.name
+        }
+      })
+    });
+  }
 
   function test_res(s,n){
     let total=n*100;
