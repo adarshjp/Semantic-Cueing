@@ -13,6 +13,27 @@ exports.signupTest = () => {
                     done();
                 });
         });
+        // it('should render register page and return 200', (done) => {
+        //     let user=request.agent(app);
+        //     user
+        //         .post('/login')
+        //         .send({
+        //             username: 'admin',
+        //             password: 'admin'
+        //         })
+        //         .set('Accept', 'application/json')
+        //         .set('Content-Type', 'application/json')
+        //         .expect('Location', '/home/admin')
+        //         .end(function (err, res) {
+        //             request(app)
+        //                 .get('/register')
+        //                 .expect(200)
+        //                 .end((err, res) => {
+        //                     if (err) return done(err);
+        //                     done();
+        //                 });
+        //         });
+        // }).timeout(100000);
     });
     // describe('POST /signup ', () => {
     //     it('correct password and username', (done) => {
