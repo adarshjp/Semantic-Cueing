@@ -29,13 +29,13 @@
     "Loading":"ಲೋಡಿಂಗ್",
     "DoctorvsPatient":"ಡಾಕ್ಟರ್ ಮತ್ತು ಪೇಷಂಟ್ ",
     "AssignedvsUnassignedDoctors":"ನಿಯೋಜಿತ ಮತ್ತು ನಿಯೋಜಿಸದ ವೈದ್ಯರು",
-    "ActivevsDischargedPatients":"ಸಕ್ರಿಯ ಮತ್ತು ಬಿಡುಗಡೆಗೊಂಡ ಪೇಷಂಟ್ಗಳು ",
+    "ActivevsDischargedPatients":"ಸಕ್ರಿಯ ಮತ್ತು ಡಿಸ್ಚಾರ್ಜ್ಗೊಂಡ ಪೇಷಂಟ್ಗಳು ",
 
-        "cntofpatientvslvl" :"ರೋಗಿಗಳ ಸಂಖ್ಯೆ ಮತ್ತು ಲೇವಲ್",
+        "CountofPatientVSLevel" :"ರೋಗಿಗಳ ಸಂಖ್ಯೆ ಮತ್ತು ಲೇವಲ್",
         "Assigned":"ನಿಯೋಜಿತ",
-        "Unassigned":"ನಿಯೋಜಿಸಲಾಗಿಲ್ಲ",
+        "Unassigned":"ನಿಯೋಜಿತವಾಗದ",
         "Active":"ಸಕ್ರಿಯ",
-        "Discharged":"ಬಿಡುಗಡೆಗೊಂಡ",
+        "Discharged":"ಡಿಸ್ಚಾರ್ಜ್ಗೊಂಡ",
 
     "3":"changepassword.ejs",
     
@@ -45,8 +45,8 @@
     "ConfirmNewPassword":"ಹೊಸ ಪಾಸ್ವರ್ಡ್ ಖಚಿತಪಡಿಸಿ",
     "Confirm":"ದೃಢೀಕರಿಸಿ",
 
-            "Success":"ಯಶಸ್ಸು..",
-            "PasswordMatch":"ಪಾಸ್ವರ್ಡ್ ಹೊಂದಾಣಿಕೆ",
+            "Success":"ಯಶಸ್ಸು..!",
+            "PasswordMatch":"ಪಾಸ್ವರ್ಡ್ ಹೊಂದಿಕೆಯಾಗಿದೆ",
             "PassworddidnotMatch":"ಪಾಸ್‌ವರ್ಡ್ ಹೊಂದಿಕೆಯಾಗುತ್ತಿಲ್ಲ: ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ...",
             "Failed":"ವಿಫಲವಾಗಿದೆ..!",
 
@@ -115,6 +115,7 @@
     "EntertheOTP":"ಒಟಿಪಿ ನಮೂದಿಸಿ",
     "Enteryournewpassword":"ನಿಮ್ಮ ಹೊಸ ಪಾಸ್ವರ್ಡ ನಮೂದಿಸಿ",
     "SetPassword":"ಸೆಟ್ ಪಾಸ್ವರ್ಡ",
+    "VerifyOTP":"ಒಟಿಪಿ ಪರಿಶೀಲಿಸಿ",
 
             "enteremailaddress":"ದಯವಿಟ್ಟು ನಿಮ್ಮ ಇಮೇಲ್ ವಿಳಾಸ ನಮೂದಿಸಿ",
             "OTPsenttoemail":"ನಿಮ್ಮ ಇಮೇಲ್‌ಗೆ ಒಟಿಪಿ ಕಳುಹಿಸಲಾಗಿದೆ",
@@ -125,7 +126,7 @@
             "OTPnotverified":"ಒಟಿಪಿ ಪರಿಶೀಲಿಸಲಾಗಿಲ್ಲ",
             "enteryournewpassword":"ದಯವಿಟ್ಟು ನಿಮ್ಮ ಹೊಸ ಪಾಸ್‌ವರ್ಡ್ ನಮೂದಿಸಿ",
             "Congratulations":"ಅಭಿನಂದನೆಗಳು..!",
-            "passwordchangedsuccessfully":"ನಿಮ್ಮ ಗುಪ್ತಪದವನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಬದಲಾಯಿಸಲಾಗಿದೆ",
+            "passwordchangedsuccessfully":"ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್ ಅನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಬದಲಾಯಿಸಲಾಗಿದೆ ",
             "Passwordnotset":"ಪಾಸ್ವರ್ಡ್ ಹೊಂದಿಸಲಾಗಿಲ್ಲ",
             "verifyEmailentered":"ನಮೂದಿಸಿದ ಇಮೇಲ್ ಅನ್ನು ಪರಿಶೀಲಿಸಿ...!",
 
@@ -151,16 +152,6 @@
     "Doctor":"ಡಾಕ್ಟರ್",
 
     "12":"otpTemplate.ejs",
-
-    "SemanticCueing":"ಸೆಮಾಂಟಿಕ್ ಕ್ಯೂಯಿಂಗ್",
-    "Changeyourpassword":"ನಿಮ್ಮ ಪಾಸ್ವರ್ಡ್ ಬದಲಿಸಿ",
-    "YourVerificationCode":"ನಿಮ್ಮ ವೆರಿಫಿಕೇಷನ್ ಕೋಡ್",
-    "Belowisyouronetimepasscode":"ಕೆಳಗೆ ನಿಮ್ಮ ಓಟಿಪಿ  ಇದೆ",
-    "Pleaseenterthepasscodeintheapptocompletetheprocess":"ಪ್ರಕ್ರಿಯೆ ಪೂರ್ಣಗೊಳಿಸಲು  ಪಾಸ್‌ಕೋಡ್ ಅನ್ನು ಬರೆಯಿರಿ",
-    "Thispasscodeisvalidfor10minutes":"ಈ ಪಾಸ್ವರ್ಡ್ 10 ನಿಮಿಷ ಮಾನ್ಯ",
-    "Ifyoudidnotrequestapasswordresetpleasecontactusimmediately":"ನೀವು ಪಾಸ್ವರ್ಡ್ ರೀಸೆಟ್ ಮನವಿ ಮಾಡದಿದ್ದರೆ,ದಯವಿಟ್ಟು ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ",
-    "Regards":"ವಂದನೆಗಳು",
-    "TeamSemanticCueing":"ಟೀಮ್ ಸೆಮಾಂಟಿಕ್ ಕ್ಯೂಯಿಂಗ್",
 
     "13":"patient.ejs",
 
@@ -295,7 +286,6 @@
     "Continue":"ಮುಂದುವರಿಸಿ",
 
     "p7":"viewReportModal.ejs",
-
     "Close":"ಕ್ಲೋಸ್",
 
     "p8":"InstructionModal.ejs",
@@ -332,10 +322,7 @@
     "ofObject":"ಮುಚ್ಚಿ",
     "Addhint":"ಹಿಂಟ್ಸ್ ಸೇರಿಸಿ",
     "UploadanImage":"ಚಿತ್ರವನ್ನು ಅಪ್ಲೋಡ್ ಮಾಡಿ",
-    
     "YourMessageHere":"ನಿಮ್ಮ ಸಂದೇಶವನ್ನು ಇಲ್ಲಿ ನಮೂದಿಸಿ",
-
-    
     "All":"ಎಲ್ಲಾ",
  
     "RegisterPatientDoctor":"ರಿಜಿಸ್ಟರ್: ಪೇಷಂಟ್ | ಡಾಕ್ಟರ್",

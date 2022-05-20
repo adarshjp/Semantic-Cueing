@@ -22,7 +22,7 @@
 
     "2":"admin.ejs",
 
-    "NumberofPatients":"पेशेंट की संख्या",
+    "NumberofPatients":"पेशेंटोंकी संख्या",
     "NumberofDoctors":"डॉक्टरों की संख्या",
     "NumberofQuestionscreated":"बनाए गए प्रश्नों संख्या",
     "Numberoftestcreated":"बनाए गए परीक्षण संख्या",
@@ -31,11 +31,11 @@
     "AssignedvsUnassignedDoctors":"असाइन किया गया बनाम असाइन नहीं किया गया",
     "ActivevsDischargedPatients":"एक्टिव वस डिस्चार्ज किए गए मरीज",
 
-       "cntofpatientvslvl" :"पेशेंट की संख्या वस स्तर",
-       "Assigned":"असाइनद",
-       "Unassigned":"ನಿಯೋಜಿಸಲಾಗಿಲ್ಲ",
-       "Active":"ಸಕ್ರಿಯ",
-       "Discharged":"ಬಿಡುಗಡೆಗೊಂಡ",
+       "CountofPatientVSLevel" :"पेशेंट की संख्या वस स्तर",
+       "Assigned":"असाइन किया गए",
+       "Unassigned":"असाइन नहीं गए",
+       "Active":"एक्टिव",
+       "Discharged":"डिस्चार्ज",
 
     "3":"changepassword.ejs",
 
@@ -45,7 +45,7 @@
     "ConfirmNewPassword":"नया पासवर्ड दृढ़ करें",
     "Confirm":"दृढ़ करें",
 
-            "Success":"सफलता..",
+            "Success":"सफलता..!",
             "PasswordMatch":"पासवर्ड मिलान",
             "PassworddidnotMatch":"पासवर्ड मेल नहीं खाता: कृपया पुन: प्रयास करें...",
             "Failed":"विफल..!",
@@ -113,9 +113,9 @@
     "Enteryouremailaddress":"अपना ईमेल लिखिए",
     "SendOTP":"OTP भेजें",
     "EntertheOTP":"OTP लिखिए",
-    "VerifyOTP":"वेरीफाई ओटिप",
     "Enteryournewpassword":"अपना नया पासवर्ड लिखिए",
     "SetPassword":"सेट पासवर्ड",
+    "VerifyOTP":"वेरीफाई ओटिप",
 
             "enteremailaddress":"कृपया अपना ईमेल पता दर्ज करें",
             "OTPsenttoemail":"आपके ईमेल पर भेजा गया ओटीपी",
@@ -152,16 +152,6 @@
     "Doctor":"चिकित्सक",
 
     "12":"otpTemplate.ejs",
-
-    "SemanticCueing":"सिमेंटिक क्यूइंग",
-    "Changeyourpassword":"अपना पासवर्ड बदलें",
-    "YourVerificationCode":"आपका वेरिफिकेशन कोड",
-    "Belowisyouronetimepasscode":"आपका ओटीपी नीचे है",
-    "Pleaseenterthepasscodeintheapptocompletetheprocess":"कृपया पासकोड लिखिए",
-    "Thispasscodeisvalidfor10minutes":"इस पासकोड 10 मिनट तक मान्य है",
-    "Ifyoudidnotrequestapasswordresetpleasecontactusimmediately":"आप पासवर्ड रिसेट ना गुजारिश चाहते हैं, कृपया हमको संपर्क करें",
-    "Regards":"सादर",
-    "TeamSemanticCueing":"टीम सिमेंटिक क्यूइंग",
 
     "13":"patient.ejs",
 
@@ -228,7 +218,6 @@
                 "TestLevel":"टेस्ट स्तर",
                 "ScoreObtained":"प्राप्त अंक",
 
-
                     "Taketestnow":"अभी परीक्षा लो...!",
                     "Takeyourtestnow":"अभी अपना टेस्ट लें। शुभकामनाएं..!",
                     "Warning":"चेतावनी!",
@@ -259,7 +248,6 @@
     "20":"view_tests.ejs",
 
     "Tests":"परीक्षाएँ",
-    "All":"सभी",
 
         "Correctanswerd":"सही उत्तर दिया",
         "Wronganswerd":"गलत उत्तर दिया",
@@ -298,7 +286,6 @@
     "Continue":" कंटिन्यू",
 
     "p7":"viewReportModal.ejs",
-
     "Close":"बंद करें",
 
     "p8":"InstructionModal.ejs",
@@ -336,6 +323,7 @@
     "Addhint":"संकेत जोड़ें",
     "UploadanImage":"अपलोड तस्विर",
     "YourMessageHere":"ये रहा आपका संदेश",
+    "All":"सभी",
     
     "RegisterPatientDoctor":"रजिस्टर: पेशेंट | डॉक्टर",
     "Enteryouranswerhere":"अपना उत्तर यहां दर्ज करें...",
