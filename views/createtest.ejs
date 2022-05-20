@@ -58,7 +58,7 @@
             <input type="text" name="patientIDs" class="d-none" value="[]" id='patientIDs'/>
         </div>
         <div class="offset-2 offset-sm-0 text-center p-2 d-none my-2" id="res_but">
-            <button type="button" class="btn btn-primary rounded-pill btn-lg" onclick="reSet();">Reset <i class="fa fa-refresh" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-primary rounded-pill btn-lg" onclick="reSet();"><%=i18n.Reset%> <i class="fa fa-refresh" aria-hidden="true"></i></button>
             <input type="submit" class="btn btn-primary btn-lg rounded-pill" value="Create Test" id="formsubmit"/>
         </div>
     </form>
@@ -73,11 +73,15 @@
     function noofqval() {
         var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
         if(document.getElementById("patientIDs").value ==="[]"){
-            alert("Please select at least 1 patinet");
+            swal("<%=i18n.Alert%>","<%=i18n.selecatleast1patient%>", "info");
+            document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+            document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
             return false;
         }
         if(checkboxes.length<5){
-            alert("Please select atleast 5 questions..");
+            swal("<%=i18n.Note%>","<%=i18n.selectatleast5que%>", "warning");
+            document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+            document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
             return false;
         }
         else{
@@ -98,7 +102,7 @@
                 {
                     document.getElementById('loader').classList.add('d-none');
                     isCompleted=true;
-                    swal("Completed!", "Sorry..,No more questions...!", "info");
+                    swal("<%=i18n.Completed%>", "<%=i18n.SorryNomorequestions%>", "info");
                     document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
                     document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
                     return

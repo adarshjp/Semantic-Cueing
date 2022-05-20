@@ -50,8 +50,16 @@
               </div>
             </div>
             <div class="card-body">
+<<<<<<< HEAD
               <p class="card-text p-1"><i class="fas fa-question-circle blue"></i> : <%=test.noofquestion%></p>
               <p class="card-text p-1">Level : 
+=======
+              <h5 class="card-title p-1"><%=i18n.Test%> <i class="fas fa-bell blue"></i></h5>
+              <p class="card-text p-1">
+                <i class="fas fa-question-circle blue"></i> : <%=test.noofquestion%>
+              </p>
+              <p class="card-text p-1"><%=i18n.Level%> : 
+>>>>>>> d7276691878eaccf35a1fc332b71ce9fd6bfb962
                 <%for(let i=1;i<=5;i++){%>
                   <%if(i<=test.level){%>
                     <span class = "fa fa-star checked"></span>
@@ -59,6 +67,7 @@
                     <span class = "fa fa-star unchecked"></span>
                   <%}%>
                 <%}%>
+<<<<<<< HEAD
               </p>
               <p class="card-text p-1">Status : <strong style="text-transform: capitalize;"><%=test.status%></strong></p>
               <div class="text-center mb-2">
@@ -98,6 +107,33 @@
                     <%})%>
                   </tbody>
                 </table>
+=======
+                </p>
+              <p class="card-text p-1"><%=i18n.Status%> : <strong style="text-transform: capitalize;"><%=test.status%></strong></p>
+              <div class="d-flex justify-content-end">
+                <%if(test.status==='completed'){%>
+                  <button class="btn btn-lg btn-success white m-2"  data-bs-toggle="modal" data-bs-target="#viewReport" data-bs-whatever="<%=test._id%>">
+                    <i class="fas fa-poll"></i>
+                  </button>
+                  <% c_completed=c_completed+1%>
+                  <a class="btn btn-lg btn-primary white m-2" href="/chat/<%=test.patientid%>"><i class="fa-solid fa-message"></i></a>
+                <%} else if(test.status==='pending'){%>
+                  <a class="btn btn-lg btn-primary white m-2" href='/edit/test/<%=test._id%>'
+                    ><i class="fas fa-edit"></i></a>
+                  <!-- <a class="btn btn-lg btn-danger white m-2" href='/delete/test/<%=test._id%>'
+                    ><i class="fas fa-trash-alt"></i></a> -->
+                    <form action="/delete/test/<%=test._id%>?_method=DELETE" method="POST">
+                      <button class="btn btn-lg btn-danger white m-2" type="submit">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
+                    </form>
+                    <% c_pending=c_pending+1%>
+                <%}else{%>
+                  <% c_paused=c_paused+1%>
+                  <button class="btn btn-lg btn-primary white m-2" disabled><i class="fas fa-edit"></i></button>
+                  <button class="btn btn-lg btn-danger white m-2"disabled><i class="fas fa-trash-alt"></i></button>
+                <%}%>
+>>>>>>> d7276691878eaccf35a1fc332b71ce9fd6bfb962
               </div>
             </div>
           </div>
@@ -124,8 +160,8 @@
 //------------------RES CHART------------------
 var data = {
           labels: [
-              "Correct answerd",
-              "Wrong answerd",
+              "<%=i18n.Correctanswerd%>",
+              "<%=i18n.Wronganswerd%>",
           ],
           datasets: [
               {

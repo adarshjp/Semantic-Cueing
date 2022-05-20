@@ -82,7 +82,7 @@
                 {
                     document.getElementById('loader').classList.add('d-none');
                     isCompleted=true;
-                    swal("Completed!", "Sorry..,No more questions...!", "info");
+                    swal("<%=i18n.Completed%>", "<%=i18n.SorryNomorequestions%>", "info");
                     document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
                     document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
                     return
