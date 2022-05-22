@@ -1,10 +1,10 @@
 <%- include("partials/header") %>
 <% if(user.role==="admin" ) {%>
     <%- include("partials/adminSideBar") %>
-    <%- include("partials/no_patient",{msg:['No Patients','Created yet']})%>
+    <%- include("partials/no_patient",{msg:[i18n.NoPatients0,i18n.Createdyet0]})%>
 <% } else { %>
     <%- include("partials/doctorSideBar") %>
-    <%- include("partials/no_patient",{msg:['No Patients','assigned for you..!']})%>
+    <%- include("partials/no_patient",{msg:[i18n.NoPatients1,i18n.assignedforyou1]})%>
 <% } %>
         <div class="container-fluid" id="view-patients">
             <%- include("partials/flashMsg") %>
@@ -12,11 +12,10 @@
                 <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-6 p-1">
                     <h1 class="text-center p-2 display-3 fw-bold">
                         <% if(user.role==="admin" ) {%>
-                            <%=i18n.Our%>
+                            <%=i18n.Our%> <span class="blue"><%=i18n.Patients1%> </span>
                         <% } else { %>
-                            <%=i18n.view_Listof1%>
+                            <%=i18n.Listof0%> <span class="blue"><%=i18n.Patients0%> </span>
                         <% } %>
-                        <span class="blue"><%=i18n.view_Patients1%> </span>
                         <i class="fas fa-stethoscope blue"></i>
                     </h1>
                 </div>
@@ -49,7 +48,7 @@
                                             <div class="d-flex justify-content-end align-items-end">
                                                 <form action="/discharge/<%=patient._id%>?_method=PUT" method="POST">
                                                     <button class="btn btn-primary white m-1" type="submit">
-                                                    Discharge</button>
+                                                    <%=i18n.Discharge%></button>
                                                 </form>
                                                 <a href="/chat/<%=patient._id%>" class="btn white m-1" id="review"
                                                     ><i class="fa-solid fa-message"></i></a>
@@ -63,10 +62,10 @@
                                                     <button class="btn btn-primary white m-1" type="submit"
                                                         <%if(patient.status === 'active'){%>disabled<%}%>
                                                     >
-                                                    Activate</button>
+                                                    <%=i18n.Activate%></button>
                                                 </form>
 
-                                                <button class="btn btn-primary white m-1 d-none d-md-block" type="button" data-bs-toggle="modal" data-bs-target="#doctorChange" data-bs-whatever='<%=patient._id%>,<%=patient.doctorid%>'>Edit <i class="fas fa-user-md"></i></button>
+                                                <button class="btn btn-primary white m-1 d-none d-md-block" type="button" data-bs-toggle="modal" data-bs-target="#doctorChange" data-bs-whatever='<%=patient._id%>,<%=patient.doctorid%>'><%=i18n.Edit%> <i class="fas fa-user-md"></i></button>
                                                 
                                                 <form action="/delete/<%=patient._id%>?_method=DELETE" method="POST">
                                                     <button class="btn btn-primary  white m-1" type="submit">
@@ -76,7 +75,7 @@
                                             
                                             </div>
                                             <div class="d-flex justify-content-end align-items-end d-block d-md-none">
-                                                <button class="btn btn-primary white m-1" type="button" data-bs-toggle="modal" data-bs-target="#doctorChange" data-bs-whatever='<%=patient._id%>,<%=patient.doctorid%>'>Edit <i class="fas fa-user-md"></i></button>
+                                                <button class="btn btn-primary white m-1" type="button" data-bs-toggle="modal" data-bs-target="#doctorChange" data-bs-whatever='<%=patient._id%>,<%=patient.doctorid%>'><%=i18n.Edit%> <i class="fas fa-user-md"></i></button>
                                             </div>
                                             <%}%>
                                         </div>

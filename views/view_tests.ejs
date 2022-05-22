@@ -50,16 +50,8 @@
               </div>
             </div>
             <div class="card-body">
-<<<<<<< HEAD
               <p class="card-text p-1"><i class="fas fa-question-circle blue"></i> : <%=test.noofquestion%></p>
               <p class="card-text p-1">Level : 
-=======
-              <h5 class="card-title p-1"><%=i18n.Test%> <i class="fas fa-bell blue"></i></h5>
-              <p class="card-text p-1">
-                <i class="fas fa-question-circle blue"></i> : <%=test.noofquestion%>
-              </p>
-              <p class="card-text p-1"><%=i18n.Level%> : 
->>>>>>> d7276691878eaccf35a1fc332b71ce9fd6bfb962
                 <%for(let i=1;i<=5;i++){%>
                   <%if(i<=test.level){%>
                     <span class = "fa fa-star checked"></span>
@@ -67,24 +59,23 @@
                     <span class = "fa fa-star unchecked"></span>
                   <%}%>
                 <%}%>
-<<<<<<< HEAD
               </p>
-              <p class="card-text p-1">Status : <strong style="text-transform: capitalize;"><%=test.status%></strong></p>
+              <p class="card-text p-1"><%=i18n.Status%> : <strong style="text-transform: capitalize;"><%=test.status%></strong></p>
               <div class="text-center mb-2">
                 <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="collapse" data-bs-target="#test<%=k%>" aria-expanded="false">
-                  View Patients <i class="fa-solid fa-eye"></i>
+                  <%=i18n.ViewPatients%> <i class="fa-solid fa-eye"></i>
                 </button>
               </div>
               <div class="collapse table-responsive" id="test<%=k%>">
                 <table class="table table-hover table-bordered text-center">
                   <thead>
                     <tr>
-                      <th scope="col">Name</th>
-                      <th scope="col">Status</th>
+                      <th scope="col"><%=i18n.Name%></th>
+                      <th scope="col"><%=i18n.Status%></th>
                       <%if(test.status==='completed'){%>
-                        <th scope="col">View Report</th>
+                        <th scope="col"><%=i18n.ViewReport%></th>
                       <%}else{%>
-                        <th scope="col">No. Q's attemted</th>
+                        <th scope="col"><%=i18n.NoQsattemted%></th>
                       <%}%>
                     </tr>
                   </thead>
@@ -107,33 +98,6 @@
                     <%})%>
                   </tbody>
                 </table>
-=======
-                </p>
-              <p class="card-text p-1"><%=i18n.Status%> : <strong style="text-transform: capitalize;"><%=test.status%></strong></p>
-              <div class="d-flex justify-content-end">
-                <%if(test.status==='completed'){%>
-                  <button class="btn btn-lg btn-success white m-2"  data-bs-toggle="modal" data-bs-target="#viewReport" data-bs-whatever="<%=test._id%>">
-                    <i class="fas fa-poll"></i>
-                  </button>
-                  <% c_completed=c_completed+1%>
-                  <a class="btn btn-lg btn-primary white m-2" href="/chat/<%=test.patientid%>"><i class="fa-solid fa-message"></i></a>
-                <%} else if(test.status==='pending'){%>
-                  <a class="btn btn-lg btn-primary white m-2" href='/edit/test/<%=test._id%>'
-                    ><i class="fas fa-edit"></i></a>
-                  <!-- <a class="btn btn-lg btn-danger white m-2" href='/delete/test/<%=test._id%>'
-                    ><i class="fas fa-trash-alt"></i></a> -->
-                    <form action="/delete/test/<%=test._id%>?_method=DELETE" method="POST">
-                      <button class="btn btn-lg btn-danger white m-2" type="submit">
-                        <i class="fas fa-trash-alt"></i>
-                      </button>
-                    </form>
-                    <% c_pending=c_pending+1%>
-                <%}else{%>
-                  <% c_paused=c_paused+1%>
-                  <button class="btn btn-lg btn-primary white m-2" disabled><i class="fas fa-edit"></i></button>
-                  <button class="btn btn-lg btn-danger white m-2"disabled><i class="fas fa-trash-alt"></i></button>
-                <%}%>
->>>>>>> d7276691878eaccf35a1fc332b71ce9fd6bfb962
               </div>
             </div>
           </div>
@@ -148,13 +112,18 @@
 <script src='/view_tests.js'></script>
 <script>
   let total_test=parseInt('<%=tests.length %>')
+  let no_test='<%=i18n.NoTest%>';
+  let no_test1='<%=i18n.isAssigned%>'
+  let no_pending='<%=i18n.isPending%>';
+  let no_paused='<%=i18n.isPaused%>';
+  let no_complete='<%=i18n.Completed%>';
   $(window).on('load', function() {
-    create_chart();
-    count_number_of_tests('all',parseInt('<%=tests.length %>'));
-    count_number_of_tests('pending',parseInt('<%=c_pending %>'));
-    count_number_of_tests('paused',parseInt('<%=c_paused %>'));
-    count_number_of_tests('completed',parseInt('<%=c_completed %>'));
-    patient_names()
+    count_number_of_tests('all',parseInt('<%=tests.length %>'),'<%=i18n.All%>');
+    count_number_of_tests('pending',parseInt('<%=c_pending %>'),'<%=i18n.Pending%>');
+    count_number_of_tests('paused',parseInt('<%=c_paused %>'),'<%=i18n.Paused%>');
+    count_number_of_tests('completed',parseInt('<%=c_completed %>'),'<%=i18n.Completed%>');
+    disp_test_or_no_test('all',total_test)
+    patient_names();
   });
 
 //------------------RES CHART------------------

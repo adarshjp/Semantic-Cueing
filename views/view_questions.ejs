@@ -1,6 +1,6 @@
 <%- include("partials/header") %>
 <%- include("partials/adminSideBar") %>
-<%- include("partials/no_patient",{msg:['No questions','Created yet..!']})%>
+<%- include("partials/no_patient",{msg:[<%=i18n.Noquestions%>,<%=i18n.Createdyet%>]})%>
 <div class="container" id='view-question'>
     <%- include("partials/flashMsg") %>
     <div class="row justify-content-center">

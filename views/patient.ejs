@@ -75,10 +75,15 @@
   let total_test=parseInt('<%=tests.length %>')
   $(window).on('load', function() {
     create_chart();
-    count_number_of_tests('all',parseInt('<%=tests.length %>'));
-    count_number_of_tests('pending',parseInt('<%=c_pending %>'));
-    count_number_of_tests('paused',parseInt('<%=c_paused %>'));
-    count_number_of_tests('completed',parseInt('<%=c_completed %>'));
+    let no_test='<%=i18n.NoTest%>';
+    let no_test1='<%=i18n.isAssigned%>'
+    let no_pending='<%=i18n.isPending%>';
+    let no_paused='<%=i18n.isPaused%>';
+    let no_complete='<%=i18n.Completed%>';
+    count_number_of_tests('all',parseInt('<%=tests.length %>'),'<%=i18n.All%>');
+    count_number_of_tests('pending',parseInt('<%=c_pending %>'),'<%=i18n.Pending%>');
+    count_number_of_tests('paused',parseInt('<%=c_paused %>'),'<%=i18n.Paused%>');
+    count_number_of_tests('completed',parseInt('<%=c_completed %>'),'<%=i18n.Completed%>');
   });
 
 //------------------RES CHART------------------

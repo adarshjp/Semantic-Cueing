@@ -82,7 +82,7 @@
     "Percentage":"ಶೇ",
     "NumberofQuestionAnswered":"ಉತ್ತರಿಸಿದ ಪ್ರಶ್ನೆಗಳ ಸಂಖ್ಯೆ",
     "NumberofQuestionsUnanswered":"ಉತ್ತರಿಸದ ಪ್ರಶ್ನೆಗಳ ಸಂಖ್ಯೆ",
-    "Status":"ಸ್ಟೇಟಸ್ : ",
+    "Status":"ಸ್ಟೇಟಸ್",
     "Pending":"ಬಾಕಿಯಿದೆ",
     "Paused":"ವಿರಾಮಗೊಳಿಸಲಾಗಿದೆ",
 
@@ -233,21 +233,34 @@
 
     "Our":"ನಮ್ಮ",
     "Doctors":"ವೈದ್ಯರು",
+    "NoDoctors":"ಇನ್ನೂ ಯಾವುದೇ",
+    "Createdyet":"ವೈದ್ಯರನ್ನು ರಚಿಸಲಾಗಿಲ್ಲ..!",
 
     "18":"view_patients.ejs",
 
-    "view_Listof1":"ಪೇಷಂಟ್ಗಳ",
-    "view_Patients1":"ಪಟ್ಟಿ",
+    "Listof0":"ಪೇಷಂಟ್ಗಳ",
+    "Patients0":"ಪಟ್ಟಿ",
+    "Patients1":"ಪೇಷಂಟ್ಗಳು",
+    "Discharge":"ಡಿಸ್ಚಾರ್ಜ್",
+    "Activate":"ಸಕ್ರಿಯಗೊಳಿಸಿ",
+    "NoPatients0":"ಇನ್ನೂ ಯಾವುದೇ",
+    "Createdyet0":"ರೋಗಿಗಳನ್ನು ರಚಿಸಲಾಗಿಲ್ಲ...!",
+    "NoPatients1":"ನಿಮಗೆ ಯಾವುದೇ",
+    "assignedforyou1":"ರೋಗಿಗಳನ್ನು ನಿಯೋಜಿಸಲಾಗಿಲ್ಲ...!",
 
     "19":"view_questions.ejs",
 
     "Listof":"ರಚಿಸಲಾದ",
     "Questions":"ಪ್ರಶ್ನೆಗಳ",
     "Created":"ಪಟ್ಟಿ",
+    "Noquestions":"ಇನ್ನೂ ಯಾವುದೇ",
+    "Createdyet1":"ಪ್ರಶ್ನೆಗಳನ್ನು ರಚಿಸಲಾಗಿಲ್ಲ..!",
 
     "20":"view_tests.ejs",
 
     "Tests":"ಪರೀಕ್ಷೆ",
+    "ViewPatients":"ಪೇಷಂಟ್ಗಳನ್ನು ವೀಕ್ಷಿಸಿ",
+    "NoQsattemted":"ಸಂ. Q's ಪ್ರಯತ್ನಿಸಲಾಗಿದೆ",
 
         "Correctanswerd":"ಸರಿಯಾಗಿ ಉತ್ತರಿಸಿದೆ",
         "Wronganswerd":"ತಪ್ಪಾಗಿ ಉತ್ತರಿಸಿದೆ",
@@ -333,5 +346,33 @@
     "PatientName":"ಪೇಷಂಟ್ ಹೆಸರು",
     "PatientAge":"ಪೇಷಂಟ್ ವಯಸ್ಸು",
     "PatientEmail":"ಪೇಷಂಟ್ ಇಮೇಲ್",
-    "Welcome":"ವೆಲ್ಕಮ್"
+    "Welcome":"ವೆಲ್ಕಮ್",
+
+    "NoTest":"ಯಾವುದೇ ಪರೀಕ್ಷೆ",
+    "isAssigned":"ನಿಯೋಜಿತ ಆಗಿಲ್ಲ",
+    "isPaused":"ವಿರಾಮಗೊಳಿಸಲಾಗಿಲ್ಲ",
+    "isPending":"ಬಾಕಿ ಇಲ್ಲ",
+    "isCompleted":"ಪೂರ್ಣಗೊಂಡಿಲ್ಲ",
+
+    "flashMsg":"Flash Message",
+
+    "Doctorisdeletedsuccessfully":"Doctor is deleted successfully",
+    "DoctorhaspatientsPleasedeletethemfirst":"Doctor has patients. Please delete them first",
+    "Patientisdeletedsuccessfully":"Patient is deleted successfully",
+    "Userupdated":"User updated!!",
+    "Usernotupdated":"User not updated!!",
+    "Patientactivatedsuccessfully":"Patient activated successfully",
+    "Doctorchangedsuccessfully":"Doctor changed successfully",
+    "Usercreated":"User created!!",
+    "Passwordchanged":"Password changed!!",
+    "Testcreatedsuccessfully":"Test created successfully",
+    "Testupdatedsuccessfully":"Test updated successfully",
+    "Testdeletedsuccessfully":"Test deleted successfully",
+    "Levelupdatedsuccessfully":"Level updated successfully",
+    "Patientdischargedsuccessfully":"Patient discharged successfully",
+    "Questionaddedsuccessfully":"Question added successfully",
+    "Questionupdatedsuccessfully":"Question updated successfully",
+    "Hintupdatedsuccessfully":"Hint updated successfully",
+    "Questiondeletedsuccessfully":"Question deleted successfully",
+    "QuestionisUsedinatest":"Question is Used in a test"
 }
