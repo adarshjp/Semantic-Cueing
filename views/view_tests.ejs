@@ -11,13 +11,11 @@
     </div>
   </div>
   <%- include("partials/testTabs") %>
-  <div class="row p-1 justify-content-center">
-    <div class="offset-2 col-8 offset-sm-1 col-sm-10 offset-lg-0 col-lg-11 text-center mb-2">
-      <a href="/create/test" class="btn btn-primary btn-lg rounded-pill"><%=i18n.CreateTest%> <i class="fa-solid fa-plus"></i></a>
-    </div>
-  </div>
   <%- include("partials/no_Test") %>
   <div class="row p-1 justify-content-center" id='test_status'>
+    <div class="offset-2 col-8 offset-sm-1 col-sm-10 offset-lg-0 col-lg-11 text-center mb-3">
+      <a href="/create/test" class="btn btn-primary btn-lg rounded-pill">Create Test <i class="fa-solid fa-plus"></i></a>
+    </div>
     <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0">
       <div class="row p-0 justify-content-center">
         <% let k=1,c_pending=0,c_paused=0,c_completed=0%>
