@@ -219,16 +219,26 @@ exports.active_patient = (req, res) => {
   }
 
 exports.change_doctor= (req, res) => {
-    // chnage docotr id of the patient
-    User.findOneAndUpdate({ _id: req.params.patientid,role:'patient' }, { $set: { doctorid: req.body.doctorId } }, { new: true })
-    .then((patient) => {
-        req.flash('success', 'Doctor changed successfully')
-        res.status(200)
-        res.redirect('/view/patient/')
-      })
-      .catch((err) => {
-        res.status(500).json({
-          error: err
+    // Pull all the patients array of objects in Test document with patient id===req.params.patientid
+    Test.updateMany({ "patients.patientid": req.params.patientid }, { $pull: { "patients": { "patientid": req.params.patientid } } }, { new: true })
+    .then((test) => {
+        // Patient all test is removed now change the doctor
+        User.findOneAndUpdate({ _id: req.params.patientid,role:'patient' }, { $set: { doctorid: req.body.doctorId } }, { new: true })
+        .then((patient) => {
+            req.flash('success', 'Doctor changed successfully')
+            res.status(200)
+            res.redirect('/view/patient/')
         })
-      })
+        .catch((err) => {
+            res.status(500).json({
+            error: err
+            })
+        })
+    })
+    .catch((err) => {
+        res.status(500).json({
+            error: err
+        })
+    })
+    
 }
