@@ -27,44 +27,72 @@
             <span class="visually-hidden"><%=i18n.Loading%>...</span>
           </div>
         </div>
-        <div class="row justify-content-center card-body" id='patient-details' hidden>
-          <div class="col-sm-10 col-lg-5 my-auto">
-              <img src="/images/profile.jpg" class="img-fluid rounded-lg" alt="..." id='disp-pic'>
+        <div class="row justify-content-center card-body text-center" id='patient-details' hidden>
+          <div class="col-sm-10 col-xl-5 my-auto">
+              <img src="" class="img-fluid rounded-circle" style="max-height:285px;" alt="..." id='disp-pic'>
           </div>
-          <div class="col-sm-10 col-lg-7 mt-2">
+          <div class="col-sm-10 col-xl-7 mt-2">
             <div class="row align-items-center">
-              <div class="col-6 text-start"><p id='name' class='h1 fw-bold ms-0 ms-sm-3'></p></div>
-              <div class="col-6 text-end">
+              <div class="col-7 col-md-10 text-start"><p id='name' class='h1 fw-bold ms-0 ms-sm-3'></p></div>
+              <div class="col-5 col-md-2 text-end">
                 <p id='age' class='h6'></p>
                 <p id='level' class='h6'></p>
               </div>
             </div>
             <hr class="my-2">
-            <div class="row">
-              <p class='h6' id="p_id"></p>
-              <div class="col-md-6 my-auto">
-                <p id='email'>Email : </p>
-                <p id='age'>Age : </p>
-                
-                
+            <div class="row text-center">
+              <div class="col-12 col-lg-6 p-2">
+                <div class="card">
+                  <div class="card-header bg-primary white">
+                    <p class="h5 mb-0"><%=i18n.PatientId%></p>
+                  </div>
+                  <div class="card-body">
+                    <p class='h6' id="p_id"></p>
+                  </div>
+                </div>
               </div>
-              <div class="col-md-6 my-auto">
-               
-                <p id='stroke'>Stroke date : stroke</p>
-                <p id='p_stroke'>Post stroke duration : date</p>
-                <p id='test'>Number of Test Assigned : xy</p>
+              <div class="col-12 col-lg-6 p-2">
+                <div class="card">
+                  <div class="card-header bg-primary white">
+                    <p class="h5 mb-0"><%=i18n.StrokeDate%></p>
+                  </div>
+                  <div class="card-body">
+                    <p class='h6' id='stroke'></p>
+                  </div>
+                </div>
               </div>
-              <div class="text-center my-2">
-                <form action="" method="POST" class="d-inline-block" id='upgrade'>
-                  <button class="btn btn-primary rounded-pill btn-lg white m-1" id='upgrade-but' type="submit">
-                    Upgrade</button>
-                </form>
-                <form action="" method="POST" class="d-inline-block" id='downgrade'>
-                  <button class="btn btn-primary rounded-pill btn-lg white m-1" id='downgrade-but' type="submit" >
-                    Degrade</button>
-                </form>
+              <div class="col-12 col-lg-6 p-2">
+                <div class="card">
+                  <div class="card-header bg-primary white">
+                    <p class="h5 mb-0"><%=i18n.PostStrokeDuration%></p>
+                  </div>
+                  <div class="card-body">
+                    <p class='h6' id='p_storke'></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-6 p-2">
+                <div class="card">
+                  <div class="card-header bg-primary white">
+                    <p class="h5 mb-0"><%=i18n.EmailAddress%></p>
+                  </div>
+                  <div class="card-body">
+                    <p class='h6' id='email'></p>
+                  </div>
+                </div>
               </div>
             </div>
+            <div class="text-center my-2">
+              <form action="" method="POST" class="d-inline-block" id='upgrade'>
+                <button class="btn btn-primary rounded-pill btn-lg white m-1" id='upgrade-but' type="submit">
+                  Upgrade</button>
+              </form>
+              <form action="" method="POST" class="d-inline-block" id='downgrade'>
+                <button class="btn btn-primary rounded-pill btn-lg white m-1" id='downgrade-but' type="submit" >
+                  Degrade</button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -162,8 +190,8 @@
     .then(response => response.json())
     .then(patient =>{
       document.getElementById('name').textContent = patient[0].name;
-      document.getElementById('email').textContent = 'Email : '+patient[0].email;
-      document.getElementById('age').textContent = 'Age : '+patient[0].age;
+      document.getElementById('email').textContent = patient[0].email;
+      document.getElementById('age').textContent = '<%=i18n.Age%> : '+patient[0].age;
       document.getElementById('p_id').textContent = patient[0]._id;
       document.getElementById('level').innerHTML=''
       for(let k=1;k<=3;k++){
@@ -181,9 +209,12 @@
       if(patient[0].level==3){
         document.getElementById('upgrade-but').setAttribute('disabled','')
       }
-      // document.getElementById('disp-pic').src='';
-      // document.getElementById('stroke').textContent = '';
-      // document.getElementById('p_storke').textContent = '';
+      let storke_date=new Date(patient[0].strokeDate);
+      let today=new Date();
+      let diff=parseInt((today.getTime()-storke_date.getTime())/(1000*60*60*24));
+      document.getElementById('disp-pic').src= 'data:image/'+patient[0].displaypic.contentType+';base64,'+arrayBufferToBase64(patient[0].displaypic.data.data);
+      document.getElementById('stroke').textContent = storke_date.toDateString();
+      document.getElementById('p_storke').textContent = diff + ' Days';
       document.getElementById('spinner-0').classList.add('d-none')
       document.getElementById('patient-details').removeAttribute('hidden')
       if(temp){
@@ -238,18 +269,6 @@
         data : data,
         options: {
           responsive: true,
-        //   scales: {
-        //     x: {
-        //       grid: {
-        //         display: false
-        //       }
-        //     },
-        //     y: {
-        //       grid: {
-        //         display: false
-        //       }
-        //     }
-        // }
       }
       });
     }else if(bar_chart_no==='2'){
@@ -351,5 +370,12 @@
     document.getElementById('spinner-'+(parseInt(bar_chart_no)+1)).classList.add('d-none')
     document.getElementById(b_id).removeAttribute('hidden')
   }
+
+  function arrayBufferToBase64(buffer) {
+      var binary = '';
+      var bytes = [].slice.call(new Uint8Array(buffer));
+      bytes.forEach((b) => binary += String.fromCharCode(b));
+      return window.btoa(binary);
+  };
 </script>
 <%- include("partials/footer") %>
