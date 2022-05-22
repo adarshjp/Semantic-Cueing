@@ -1,5 +1,5 @@
 const Question = require('../models/question')
-const Test = require('../models/question')
+const Test = require('../models/test')
 const {convert_img}= require('../helpers/convert_img')
 exports.addquestions_get = (req, res) => {
     res.status(200)
