@@ -23,8 +23,7 @@
               <i class="fa fa-microphone" onclick="startDictation(this)"></i>
             </span> 
           </div>
-          <div class="pids-wrapper d-none">
-            <div class="pid"></div>
+          <div class="pids-wrapper text-center d-none">
             <div class="pid"></div>
             <div class="pid"></div>
             <div class="pid"></div>
@@ -157,8 +156,8 @@
     fetch('/test/<%=testid%>')
     .then(response => response.json())
     .then(test=>{
-      ans=JSON.parse(test.answered)
-      unans=JSON.parse(test.unanswered)
+      ans=test.answered;
+      unans=test.unanswered;
       score=parseInt(test.score);
       curq_no=parseInt(test.pauesdqno);
       document.getElementById('level').textContent='Test Level : '+test.level;
@@ -311,8 +310,8 @@
         body: JSON.stringify({
           status: status,
           score: score,
-          ans : JSON.stringify(ans),
-          unans : JSON.stringify(unans)
+          ans : ans,
+          unans : unans
         })
       })
       .then(response => response.json())

@@ -44,7 +44,7 @@
         <div class="row justify-content-center align-items-center mt-4 d-none" id="sel-pat">
             <div class="offset-2 col-9 offset-sm-1 offset-md-1 col-md-4 offset-lg-0">
                 <label for="patient" class="mb-2"><%=i18n.ChoosePatient%></label>
-                <select name="patientid"  id="patient-list" placeholder="Select patients" class="form-select form-select-lg p-2" aria-label=".form-select-lg" onchange="chnage_patinet_list()" multiple>
+                <select name="patientid"  id="patient-list" class="form-select form-select-lg p-2" aria-label=".form-select-lg" onchange="chnage_patinet_list()" multiple>
                     <% patient.forEach((patient)=> { %>
                         <option value="<%=patient._id%>"><%=patient.name%></option>
                     <% }) %>
@@ -69,20 +69,6 @@
     let li_id=parseInt('<%=i%>'); //used in input and labels
     let isCompleted=false; //true is no more questions
     let temp=isCompleted; 
-
-    function chnage_patinet_list(){
-        var selected = $("#patient-list :selected").map((_, e) => e.value).get();
-        document.getElementById('patientIDs').value=JSON.stringify(selected);
-        console.log(document.getElementById('patientIDs').value)
-    }
-    $(document).ready(function(){
-        var multipleCancelButton = new Choices('#patient-list', {
-            removeItemButton: true,
-            maxItemCount:100,
-            searchResultLimit:10,
-            renderChoiceLimit:5
-        });
-    });
     
     function noofqval() {
         var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {get_home_doctor,get_create_test,post_create_test,get_view_assigned_patient,get_patient_details,get_patient_test_details,get_view_test_created,get_edit_test,patch_edit_test,get_question,delete_test,upgrade_level,discharge_patient,downgrade_level} = require("../controllers/doctor");
+const {get_home_doctor,get_create_test,post_create_test,get_view_assigned_patient,get_patient_details,get_patient_test_details,get_view_test_created,get_edit_test,patch_edit_test,get_question,delete_test,upgrade_level,discharge_patient,downgrade_level,get_patient_names} = require("../controllers/doctor");
 const { isLoggedIn, isDoctor,isMappedDoctor } = require("../middlewares/middlewares");
 router.get("/create/test/:skip?", isLoggedIn, isDoctor, get_create_test);
 router.get("/home/doctor/:id", isLoggedIn, isDoctor, get_home_doctor);
@@ -16,4 +16,5 @@ router.delete("/delete/test/:testid", isLoggedIn, isDoctor, delete_test);
 router.put("/inclevel/:patientId", isLoggedIn, isDoctor, isMappedDoctor,upgrade_level);
 router.put("/drelevel/:patientId", isLoggedIn, isDoctor,isMappedDoctor,downgrade_level);
 router.put("/discharge/:patientId", isLoggedIn, isDoctor,isMappedDoctor, discharge_patient);
+router.get("/data/patientnames/:doctorid", isLoggedIn, isDoctor, get_patient_names);
 module.exports = router;

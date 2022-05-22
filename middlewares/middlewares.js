@@ -86,7 +86,7 @@ function findDoctorIdByPatientId(patientId){
 exports.isTestAssigned = (req, res, next) => {
     //req.params.id is the test id
     //here we check if the test is assigned to the patient
-    Test.findById({ _id: req.params.id, patientid: req.user._id })
+    Test.findOne({ _id: req.params.id, 'patient.$.patientid': req.user._id })
         .then((test) => {
             if (test) {
                 //if the test is assigned to the patient

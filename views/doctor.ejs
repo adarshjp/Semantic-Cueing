@@ -287,11 +287,11 @@
     fetch('/data/testdetails/'+patientid)
     .then(response => response.json())
     .then(test => {
-      create_data_for_charts(test);
+      create_data_for_charts(test.patient_tests,test.noofquestion);
     });
   }
 
-  function create_data_for_charts(test){
+  function create_data_for_charts(test,noofquestion){
     let score=[];   //this store the details of 'completed' test score 
     let percent=[];
     let status={'pending':0,'paused':0,'completed':0}  //to count test statuses
@@ -300,10 +300,10 @@
     for(let i=0;i< test.length;i++){
       if(test[i].status==='completed'){
         score.push(test[i].score);
-        percent.push(test[i].score/test[i].noofquestion)
+        percent.push(test[i].score/noofquestion[i])
         status['completed']++;
-        let t1=JSON.parse(test[i].answered);
-        let t2=JSON.parse(test[i].unanswered)
+        let t1=test[i].answered;
+        let t2=test[i].unanswered;
         for(let j=0;j< 5;j++){
           answered[j+'']=answered[j+'']+t1[j+''];
           unanswered[j+'']=unanswered[j+'']+t2[j+''];
