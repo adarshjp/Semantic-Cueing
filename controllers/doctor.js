@@ -16,7 +16,12 @@ exports.get_create_test = (req, res) => {
       Question.find({}, { hints: 0 }).limit(10).skip(skip)
         .then((question) => {
           if (question.length === 0) {
-            res.status(200).json({ message: 'No more questions' })
+            if(req.params.skip===undefined){
+              res.render('createtest',{question: question, patient: patient,user:req.user,i18n: global.i18n})
+          }else{
+              res.status(200).json({ message: 'No more questions' })
+          }
+            
           } else {
             res.status(200)
             if(req.params.skip!==undefined)
