@@ -241,7 +241,6 @@ exports.downgrade_level =  (req, res) => {
   /* Updates the level of patient by one */
   User.findOneAndUpdate({ _id: req.params.patientId,role:'patient' }, { $inc: { level: -1 } }, { new: true })
     .then((patient) => {
-      console.log(patient)
       req.flash('success', 'Level updated successfully')
       res.status(200)
       res.redirect('/home/doctor/' + req.user._id)
@@ -257,7 +256,6 @@ exports.discharge_patient = (req, res) => {
   /* Set the status of the patient to discharged */
   User.findOneAndUpdate({ _id: req.params.patientId,role:'patient' }, { $set: { status: 'discharged' } }, { new: true })
     .then((patient) => {
-      console.log(patient)
       req.flash('success', 'Patient discharged successfully')
       res.status(200)
       res.redirect('/view/patient/' + req.user._id)
