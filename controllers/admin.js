@@ -57,7 +57,7 @@ exports.view_Oneuser = (req, res) => {
         })
 }
 
-exports.delete_user = (req, res) => {
+exports.delete_user = async(req, res) => {
     //find and delete user with id=req.params.id and role=patient
     User.findOneAndDelete({ _id: req.params.id, role: 'patient' })
     .then((user) => {
@@ -67,6 +67,7 @@ exports.delete_user = (req, res) => {
                 if(user.length===0){
                     User.findOneAndDelete({ _id: req.params.id, role: 'doctor' })
                     .then((user) => {
+                        delete_all_tests_from_doctor(req.params.id)
                         req.flash('success', 'Doctor is deleted successfully')
                         res.status(200)
                         res.redirect('/view/doctor')
@@ -84,6 +85,7 @@ exports.delete_user = (req, res) => {
                 res.send(err)
             });
         }else{
+            unassign_patient_from_all_test(req.params.id)
             req.flash('success', 'Patient is deleted successfully')
             res.status(200)
             res.redirect('/view/patient')
@@ -93,6 +95,25 @@ exports.delete_user = (req, res) => {
         res.status(500)
         res.send(err)
     });
+}
+
+function unassign_patient_from_all_test(patientid){
+    Test.updateMany({ "patients.patientid": patientid }, { $pull: { "patients": { "patientid": req.params.patientid } } }, { new: true })
+        .then((test) => {
+            return;
+        }).catch((err) => {
+            console.log(err)
+            return;
+        })
+}
+
+function delete_all_tests_from_doctor(doctorid){
+    Test.deleteMany({ doctorid: doctorid })
+        .then((test) => {
+            return;
+        }).catch((err) => {
+            return;
+        })
 }
 
 exports.get_edit_user = (req, res) => {
@@ -179,7 +200,6 @@ exports.get_view_questions= (req, res) => {
     }else{
         skip=parseInt(req.params.skip);
     }
-    console.log(skip);
     Question.find({}, { hints: 0 }).limit(10).skip(skip)
     .then((question) => {
         if(question.length===0){
@@ -219,16 +239,26 @@ exports.active_patient = (req, res) => {
   }
 
 exports.change_doctor= (req, res) => {
-    // chnage docotr id of the patient
-    User.findOneAndUpdate({ _id: req.params.patientid,role:'patient' }, { $set: { doctorid: req.body.doctorId } }, { new: true })
-    .then((patient) => {
-        req.flash('success', 'Doctor changed successfully')
-        res.status(200)
-        res.redirect('/view/patient/')
-      })
-      .catch((err) => {
-        res.status(500).json({
-          error: err
+    // Pull all the patients array of objects in Test document with patient id===req.params.patientid
+    Test.updateMany({ "patients.patientid": req.params.patientid }, { $pull: { "patients": { "patientid": req.params.patientid } } }, { new: true })
+    .then((test) => {
+        // Patient all test is removed now change the doctor
+        User.findOneAndUpdate({ _id: req.params.patientid,role:'patient' }, { $set: { doctorid: req.body.doctorId } }, { new: true })
+        .then((patient) => {
+            req.flash('success', 'Doctor changed successfully')
+            res.status(200)
+            res.redirect('/view/patient/')
         })
-      })
+        .catch((err) => {
+            res.status(500).json({
+            error: err
+            })
+        })
+    })
+    .catch((err) => {
+        res.status(500).json({
+            error: err
+        })
+    })
+    
 }
