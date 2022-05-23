@@ -29,7 +29,7 @@ exports.addquestions_post = (req, res, next) => {
         .save()
         .then((result) => {
             //console.log(result);
-            req.flash('success', 'Question added successfully')
+            req.flash('success', global.i18n.Questionaddedsuccessfully)
             res.status(200)
             res.redirect('/view/questions')
         })
@@ -102,7 +102,7 @@ exports.put_edit_question= async (req, res) => {
         newQuestion.question = img[0]
     }
     let updatedQuestion=await updateQuestion(req.params.questionid,newQuestion)
-    req.flash('success', 'Question updated successfully')
+    req.flash('success', global.i18n.Questionupdatedsuccessfully)
     res.status(200)
     res.redirect('/edit/question/'+req.params.questionid)
 }
@@ -136,7 +136,7 @@ exports.put_edit_hint= async(req, res) => {
     }
     // res.send(newHint)
     let updatedHint=await updateHint(req.params.questionid,req.params.hintid,newHint)
-    req.flash('success', 'Hint updated successfully')
+    req.flash('success', global.i18n.Hintupdatedsuccessfully)
     res.status(200)
     res.redirect('/edit/question/'+req.params.questionid)
 }
@@ -186,7 +186,7 @@ exports.delete_question= (req, res) => {
         if(test.length===0){
             Question.findByIdAndDelete({ _id: req.params.questionid })
             .then((question) => {
-                req.flash('success', 'Question deleted successfully')
+                req.flash('success', global.i18n.Questiondeletedsuccessfully)
                 res.status(200)
                 res.redirect('/view/questions')
             })
@@ -196,7 +196,7 @@ exports.delete_question= (req, res) => {
                 console.log(err)
             })
         }else{
-            req.flash('error', 'Question is Used in a test')
+            req.flash('error', global.i18n.QuestionisUsedinatest)
             res.status(200)
             res.redirect('/view/questions')
         }

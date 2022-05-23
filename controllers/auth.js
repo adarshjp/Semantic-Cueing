@@ -60,7 +60,7 @@ exports.register_post = (req, res) => {
       // });
       res.status(200);
       console.log(req.user)
-      req.flash("success", "User created!!")
+      req.flash("success", global.i18n.Usercreated)
       res.redirect("/register");
     }
   });
@@ -74,7 +74,7 @@ exports.login_get = (req, res) => {
 exports.login_post = (req, res) => {
   res.status(200);
   //res.send("login successful");
-  req.flash("success", "Welcome!")
+  req.flash("success", global.i18n.Welcome)
   if (req.user.role === "admin")
     res.redirect("/home/admin")
   else if (req.user.role === "doctor")
@@ -99,7 +99,7 @@ exports.change_password = (req, res) => {
           res.send(err);
         } else {
           res.status(200);
-          req.flash('success', 'Password changed!');
+          req.flash('success', global.i18n.Passwordchanged);
           res.redirect("/changepassword")
         }
       });

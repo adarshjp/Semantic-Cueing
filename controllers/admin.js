@@ -67,14 +67,14 @@ exports.delete_user = (req, res) => {
                 if(user.length===0){
                     User.findOneAndDelete({ _id: req.params.id, role: 'doctor' })
                     .then((user) => {
-                        req.flash('success', 'Doctor is deleted successfully')
+                        req.flash('success', global.i18n.Doctorisdeletedsuccessfully)
                         res.status(200)
                         res.redirect('/view/doctor')
                     }).catch((err) => {
                         console.log(err)
                     });
                 }else{
-                    req.flash('error', 'Doctor has patients. Please delete them first')
+                    req.flash('error', global.i18n.DoctorhaspatientsPleasedeletethemfirst)
                     res.status(200)
                     res.redirect('/view/doctor')
                 }
@@ -84,7 +84,7 @@ exports.delete_user = (req, res) => {
                 res.send(err)
             });
         }else{
-            req.flash('success', 'Patient is deleted successfully')
+            req.flash('success', global.i18n.Patientisdeletedsuccessfully)
             res.status(200)
             res.redirect('/view/patient')
         }
@@ -112,11 +112,11 @@ exports.edit_user = (req, res) => {
     //update patient with id=req.params.id and data=req.body
     User.findByIdAndUpdate({ _id: req.params.id }, req.body)
         .then((user) => {
-            req.flash("success","User updated!!")
+            req.flash("success",global.i18n.Userupdated)
             res.redirect("/view/"+req.user._id)
         })
         .catch((err) => {
-            req.flash("error","User not updated!!")
+            req.flash("error",global.i18n.Usernotupdated)
             res.status(500)
             res.send(err)
             console.log(err)
@@ -207,7 +207,7 @@ exports.active_patient = (req, res) => {
     /* Set the status of the patient to active */
     User.findOneAndUpdate({ _id: req.params.patientid,role:'patient' }, { $set: { status: 'active' } }, { new: true })
       .then((patient) => {
-        req.flash('success', 'Patient activated successfully')
+        req.flash('success', global.i18n.Patientactivatedsuccessfully)
         res.status(200)
         res.redirect('/view/patient/')
       })
@@ -222,7 +222,7 @@ exports.change_doctor= (req, res) => {
     // chnage docotr id of the patient
     User.findOneAndUpdate({ _id: req.params.patientid,role:'patient' }, { $set: { doctorid: req.body.doctorId } }, { new: true })
     .then((patient) => {
-        req.flash('success', 'Doctor changed successfully')
+        req.flash('success', global.i18n.Doctorchangedsuccessfully)
         res.status(200)
         res.redirect('/view/patient/')
       })

@@ -62,11 +62,11 @@
     "ChoosePatient":"पेशेंट चुनें",
     "EnterLevel":"स्तर लिखें(1-5)...",
 
-            "Completed":"पूरा कर लिया",
             "Alert":"चेतावनी",
             "selecatleast1patient":"कृपया कम से कम 1 रोगी का चयन करें",
             "Note":"टिप्पणी",
             "selectatleast5que":"कृपया कम से कम 5 प्रश्नों का चयन करें..",
+            "Completed":"पूरा कर लिया",
             "SorryNomorequestions":"क्षमा करें.., कोई और प्रश्न नहीं...!",
 
     "5":"doctor.ejs",
@@ -79,7 +79,7 @@
     "Strokedate":"स्ट्रोक दिनांक",
     "Poststrokeduration":"पोस्ट स्ट्रोक दुरेशन",
     "EmailAddress":"ईमेल एड्रेस",
-    "NumberofTestAssigned":"परीक्षण सौंपा",
+    "Nooftestscreated":"बनाए गए परीक्षणों की संख्या",
     "Upgrade":"अपग्रेड",
     "Degrade":"डिग्रेड",
     "Percentage":"प्रतिशत",
@@ -251,7 +251,9 @@
     "NoPatients1":"आपको कोई मरीज़",
     "assignedforyou1":"असाइन नहीं किया गया...!",
     "AssignedDoctor":"असाइन किया गया डॉक्टर",
-
+    "yettobeassigned":"अभी तक सौंपा जाना है",
+    "assignedfor":"",
+    "patients":"रोगियों के लिए आवंटित",
 
     "19":"view_questions.ejs",
 
@@ -379,7 +381,5 @@
     "Questionupdatedsuccessfully":"प्रश्न सफलतापूर्वक अपडेट किया गया",
     "Hintupdatedsuccessfully":"संकेत सफलतापूर्वक अपडेट किया गया",
     "Questiondeletedsuccessfully":"प्रश्न सफलतापूर्वक हटाया गया",
-    "QuestionisUsedinatest":"प्रश्न का प्रयोग परीक्षण में किया गया है",
-    "Nooftestscreated":"बनाए गए परीक्षणों की संख्या"
-
+    "QuestionisUsedinatest":"प्रश्न का प्रयोग परीक्षण में किया गया है"
 }

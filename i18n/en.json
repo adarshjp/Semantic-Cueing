@@ -66,7 +66,7 @@
             "selecatleast1patient":"Please select at least 1 patient",
             "Note":"Note",
             "selectatleast5que":"Please select atleast 5 questions..",
-            "Completed":"Completed!",
+            "Completed":"Completed",
             "SorryNomorequestions":"Sorry..,No more questions...!",
 
     "5":"doctor.ejs",
@@ -77,10 +77,9 @@
     "Assignedtestdetails":"Assignedtestdetails",
     "PatientID":"Patient ID : ",
     "Strokedate":"Stroke date",
-    "Strokedatestroke":"Stroke date : stroke",
     "Poststrokeduration":"Post stroke duration ",
     "EmailAddress":"Email Address",
-    "NumberofTestAssigned":"Number of Test Assigned",
+    "Nooftestscreated":"No of tests created",
     "Upgrade":"Upgrade",
     "Degrade":"Degrade",
     "Percentage":"Percentage",
@@ -252,6 +251,9 @@
     "NoPatients1":"No Patients",
     "assignedforyou1":"assigned to you..!",
     "AssignedDoctor":"AssignedDoctor",
+    "yettobeassigned":"yet to be assigned",
+    "assignedfor":"assigned for",
+    "patients":"patients",
 
     "19":"view_questions.ejs",
 
@@ -379,6 +381,5 @@
     "Questionupdatedsuccessfully":"Question updated successfully",
     "Hintupdatedsuccessfully":"Hint updated successfully",
     "Questiondeletedsuccessfully":"Question deleted successfully",
-    "QuestionisUsedinatest":"Question is Used in a test",
-    "Nooftestscreated":"No of tests created"
+    "QuestionisUsedinatest":"Question is Used in a test"
 }

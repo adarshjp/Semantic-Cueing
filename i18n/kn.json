@@ -66,7 +66,7 @@
             "selecatleast1patient":"ದಯವಿಟ್ಟು ಕನಿಷ್ಠ 1 ರೋಗಿಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
             "Note":"ಸೂಚನೆ",
             "selectatleast5que":"ದಯವಿಟ್ಟು ಕನಿಷ್ಠ 5 ಪ್ರಶ್ನೆಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ..",
-            "Completed":"ಪೂರ್ಣಗೊಂಡಿದೆ!",
+            "Completed":"ಪೂರ್ಣಗೊಂಡಿದೆ",
             "SorryNomorequestions":"ಕ್ಷಮಿಸಿ.., ಇನ್ನು ಪ್ರಶ್ನೆಗಳಿಲ್ಲ...!",
 
     "5":"doctor.ejs",
@@ -79,7 +79,7 @@
     "Strokedate":"ಸ್ಟ್ರೋಕ್ ಆದ ದಿನಾಂಕ",
     "Poststrokeduration":"ಸ್ಟ್ರೋಕ್ ನಂತರದ ಅವಧಿ",
     "EmailAddress":"ಇಮೇಲ್ ಎಡ್ರೆಸ್",
-    "NumberofTestAssigned":"ನಿಯೋಜಿಸಿದ ಪರೀಕ್ಷೆಗಳ ಸಂಖ್ಯೆ",
+    "Nooftestscreated":"ರಚಿಸಲಾದ ಪರೀಕ್ಷೆಗಳ ಸಂಖ್ಯೆ",
     "Upgrade":"ಅಪ್ಗ್ರೇಡ್",
     "Degrade":"ಡಿಗ್ರೇಡ್",
     "Percentage":"ಶೇ",
@@ -251,7 +251,9 @@
     "NoPatients1":"ನಿಮಗೆ ಯಾವುದೇ",
     "assignedforyou1":"ರೋಗಿಗಳನ್ನು ನಿಯೋಜಿಸಲಾಗಿಲ್ಲ...!",
     "AssignedDoctor":"ನಿಯೋಜಿತ ವೈದ್ಯರು",
-
+    "yettobeassigned":"ಇನ್ನೂ ನಿಯೋಜಿಸಬೇಕಿದೆ",
+    "assignedfor":"",
+    "patients":"ಪೇಷಂಟ್ಗಳಿಗೆ ನಿಯೋಜಿಸಲಾಗಿದೆ",
 
     "19":"view_questions.ejs",
 
@@ -379,7 +381,5 @@
     "Questionupdatedsuccessfully":"ಪ್ರಶ್ನೆಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ನವೀಕರಿಸಲಾಗಿದೆ",
     "Hintupdatedsuccessfully":"ಸುಳಿವು ಯಶಸ್ವಿಯಾಗಿ ನವೀಕರಿಸಲಾಗಿದೆ",
     "Questiondeletedsuccessfully":"ಪ್ರಶ್ನೆಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಅಳಿಸಲಾಗಿದೆ",
-    "QuestionisUsedinatest":"ಪ್ರಶ್ನೆಯನ್ನು ಪರೀಕ್ಷೆಯಲ್ಲಿ ಬಳಸಲಾಗಿದೆ",
-    "Nooftestscreated":"ರಚಿಸಲಾದ ಪರೀಕ್ಷೆಗಳ ಸಂಖ್ಯೆ"
-
+    "QuestionisUsedinatest":"ಪ್ರಶ್ನೆಯನ್ನು ಪರೀಕ್ಷೆಯಲ್ಲಿ ಬಳಸಲಾಗಿದೆ"
 }

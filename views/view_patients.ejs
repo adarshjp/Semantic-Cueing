@@ -129,9 +129,9 @@
             let option=document.createElement("option");
             option.value=key;
             if(val[1]===0){
-                option.textContent=val[0]+' (yet to be assigned)';
+                option.textContent=val[0]+' (<%=i18n.yettobeassigned)';
             }else{
-                option.textContent=val[0]+' (assigned for '+val[1]+' patients)';
+                option.textContent=val[0]+' (<%=i18n.assignedfor%> '+val[1]+' <%=i18n.patients%>)';
             }
             let patient_card=document.getElementsByClassName(key);
             console.log(patient_card)
