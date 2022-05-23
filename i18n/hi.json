@@ -49,6 +49,7 @@
             "PasswordMatch":"पासवर्ड मिलान",
             "PassworddidnotMatch":"पासवर्ड मेल नहीं खाता: कृपया पुन: प्रयास करें...",
             "Failed":"विफल..!",
+            "Oldandnewpasswordaresame":"पुराना और नया पासवर्ड समान है, कृपया पुन: प्रयास करें...",
 
     "4":"createtest.ejs",
 
@@ -223,7 +224,7 @@
 
                     "Taketestnow":"अभी परीक्षा लो...!",
                     "Takeyourtestnow":"अभी अपना टेस्ट लें। शुभकामनाएं..!",
-                    "Warning":"चेतावनी!",
+                    "Warning":"चेतावनी..!",
                     "readinstructionstoproceed":"आगे बढ़ने के लिए कृपया निर्देश पढ़ें...!",
                     "enteryouranswer":"कृपया ज़वाब इंटर करें...!",
                     "allowaccessyourmicrophone":"कृपया अपना माइक्रोफ़ोन एक्सेस करने दें..!",

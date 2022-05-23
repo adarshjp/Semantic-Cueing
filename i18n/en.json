@@ -49,6 +49,7 @@
             "PasswordMatch":"Password Matched",
             "PassworddidnotMatch":"Password did not match: Please try again...",
             "Failed":"Failed..!",
+            "Oldandnewpasswordaresame":"Old and new password are same, Please try again...",
 
     "4":"createtest.ejs",
 
@@ -223,7 +224,7 @@
 
             "Taketestnow":"Take test now...!",
             "Takeyourtestnow":"Take your test now. All the best..!",
-            "Warning":"Warning!",
+            "Warning":"Warning..!",
             "readinstructionstoproceed":"Please read the instructions to proceed...!",
             "enteryouranswer":"Please enter your answer...!",
             "allowaccessyourmicrophone":"Please allow to access your microphone..!",
