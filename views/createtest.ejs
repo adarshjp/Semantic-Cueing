@@ -2,7 +2,7 @@
 <%- include("partials/doctorSideBar") %>
 <div class="container-fluid">
     <%- include("partials/edit_Create_Test_Tab") %>
-    <%- include("partials/no_Question",{msg:["No Questions","Selected yet..!"]})%>
+    <%- include("partials/no_Question",{msg:[i18n.NoQuestions,i18n.Selectedyet]})%>
     <form action="/create/test" method="POST" id="testForm" onsubmit="return noofqval();">
         <div class="row justify-content-center" id='question-row'>
             <div class="offset-1 col-11 offset-sm-1 col-sm-9 offset-lg-0 col-lg-8 col-xl-6">
@@ -59,7 +59,7 @@
         </div>
         <div class="offset-2 offset-sm-0 text-center p-2 d-none my-2" id="res_but">
             <button type="button" class="btn btn-primary rounded-pill btn-lg" onclick="reSet();"><%=i18n.Reset%> <i class="fa fa-refresh" aria-hidden="true"></i></button>
-            <input type="submit" class="btn btn-primary btn-lg rounded-pill" value="Create Test" id="formsubmit"/>
+            <input type="submit" class="btn btn-primary btn-lg rounded-pill" value="<%=i18n.CreateTest%>" id="formsubmit"/>
         </div>
     </form>
 </div>

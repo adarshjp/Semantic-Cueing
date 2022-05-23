@@ -1,6 +1,6 @@
 <%- include("partials/header") %>
 <%- include("partials/doctorSideBar") %>
-<%- include("partials/no_patient",{msg:['No Patients','assigned for you..!']})%>
+<%- include("partials/no_patient",{msg:[i18n.NoPatients1,i18n.assignedforyou1]})%>
 <div class="container-fluid d-none" id='home'>
   <%- include("partials/flashMsg") %>
 
@@ -41,7 +41,7 @@
               </div>
               <div class="col-md-6 my-auto">
                 <p id="p_id"><%=i18n.PatientID%>   : </p>
-                <p id='stroke'><%=i18n.Strokedatestroke%>:</p>
+                <p id='stroke'><%=i18n.Strokedate%>:</p>
                 <p id='p_stroke'><%=i18n.Poststrokeduration%> : date</p>
                 <p id='test'><%=i18n.NumberofTestAssigned%> : xy</p>
               </div>

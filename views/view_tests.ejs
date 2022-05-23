@@ -14,7 +14,7 @@
   <%- include("partials/no_Test") %>
   <div class="row p-1 justify-content-center" id='test_status'>
     <div class="offset-2 col-8 offset-sm-1 col-sm-10 offset-lg-0 col-lg-11 text-center mb-3">
-      <a href="/create/test" class="btn btn-primary btn-lg rounded-pill">Create Test <i class="fa-solid fa-plus"></i></a>
+      <a href="/create/test" class="btn btn-primary btn-lg rounded-pill"><%=i18n.CreateTest%> <i class="fa-solid fa-plus"></i></a>
     </div>
     <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0">
       <div class="row p-0 justify-content-center">
@@ -25,7 +25,7 @@
             <div class="card-header">
               <div class="row align-items-center">
                 <div class="col-5 mt-2">
-                  <h5 class="card-title">Test <i class="fas fa-bell blue"></i></h5>
+                  <h5 class="card-title"><%=i18n.Test %> <i class="fas fa-bell blue"></i></h5>
                 </div>
                 <div class="col-7 text-end">
                   <%if(test.status==='pending'){%>
@@ -51,7 +51,7 @@
             </div>
             <div class="card-body">
               <p class="card-text p-1"><i class="fas fa-question-circle blue"></i> : <%=test.noofquestion%></p>
-              <p class="card-text p-1">Level : 
+              <p class="card-text p-1"><%=i18n.Level%> : 
                 <%for(let i=1;i<=5;i++){%>
                   <%if(i<=test.level){%>
                     <span class = "fa fa-star checked"></span>

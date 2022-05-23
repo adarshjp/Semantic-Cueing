@@ -56,6 +56,8 @@
     "SelectedQuestions":"Selected Questions",
     "ChooseLevel":"Choose Level",
     "Selectrandomly":"Select randomly",
+    "NoQuestions":"No Questions",
+    "Selectedyet":"Selected yet..!",
     "Question":"Question :",
     "ChoosePatient":"Choose Patient",
     "EnterLevel":"Enter Level(1-5)...",
@@ -74,8 +76,10 @@
     "UnansweredaQuestionvsHintsTaken":"Unanswered a Question vs Hints Taken",
     "Assignedtestdetails":"Assignedtestdetails",
     "PatientID":"Patient ID : ",
+    "Strokedate":"Stroke date",
     "Strokedatestroke":"Stroke date : stroke",
     "Poststrokeduration":"Post stroke duration ",
+    "EmailAddress":"Email Address",
     "NumberofTestAssigned":"Number of Test Assigned",
     "Upgrade":"Upgrade",
     "Degrade":"Degrade",
@@ -247,6 +251,7 @@
     "Createdyet0":"Created yet..!",
     "NoPatients1":"No Patients",
     "assignedforyou1":"assigned to you..!",
+    "AssignedDoctor":"AssignedDoctor",
 
     "19":"view_questions.ejs",
 
@@ -374,5 +379,6 @@
     "Questionupdatedsuccessfully":"Question updated successfully",
     "Hintupdatedsuccessfully":"Hint updated successfully",
     "Questiondeletedsuccessfully":"Question deleted successfully",
-    "QuestionisUsedinatest":"Question is Used in a test"
+    "QuestionisUsedinatest":"Question is Used in a test",
+    "Nooftestscreated":"No of tests created"
 }

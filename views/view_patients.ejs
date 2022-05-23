@@ -39,10 +39,10 @@
                                             <h1 class="card-title"><%=patient.name%></h1>
                                             <hr>
                                             <p class="card-text h5">
-                                                Email : <%=patient.email%>
+                                                <%=i18n.Email%> : <%=patient.email%>
                                             </p>
                                             <p class="card-text h5">
-                                                Age : <%=patient.age%>
+                                                <%=i18n.Age%> : <%=patient.age%>
                                             </p>
                                             <% if(user.role==="doctor") {%>
                                             <div class="d-flex justify-content-end align-items-end">
@@ -136,7 +136,7 @@
             let patient_card=document.getElementsByClassName(key);
             console.log(patient_card)
             for(let xy=0;xy<patient_card.length;xy++){
-                patient_card[xy].textContent='Assigned Doctor : '+val[0];
+                patient_card[xy].textContent='<%=i18n.AssignedDoctor%> : '+val[0];
             }
             document.getElementById('doctor').appendChild(option);
         }
