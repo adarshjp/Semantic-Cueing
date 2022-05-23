@@ -1,6 +1,6 @@
 <%- include("partials/header") %>
 <%- include("partials/doctorSideBar") %>
-<%- include("partials/no_patient",{msg:['No questions','Created yet..!']})%>
+<%- include("partials/no_patient",{msg:[i18n.Noquestions,i18n.Createdyet1,'No questions']})%>
 <div class="container-fluid" id="view-question">
     <%- include("partials/edit_Create_Test_Tab") %>
     <%- include("partials/no_Question",{msg:[i18n.NoQuestions,i18n.Selectedyet]})%>

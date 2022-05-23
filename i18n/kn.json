@@ -250,11 +250,13 @@
     "NoPatients0":"ಇನ್ನೂ ಯಾವುದೇ",
     "Createdyet0":"ರೋಗಿಗಳನ್ನು ರಚಿಸಲಾಗಿಲ್ಲ...!",
     "NoPatients1":"ನಿಮಗೆ ಯಾವುದೇ",
-    "assignedforyou1":"ರೋಗಿಗಳನ್ನು ನಿಯೋಜಿಸಲಾಗಿಲ್ಲ...!",
+    "assignedforyou1":"ರೋಗಿಗಳನ್ನು ನಿಯೋಜಿತ ಆಗಿಲ್ಲ...!",
     "AssignedDoctor":"ನಿಯೋಜಿತ ವೈದ್ಯರು",
     "yettobeassigned":"ಇನ್ನೂ ನಿಯೋಜಿಸಬೇಕಿದೆ",
     "assignedfor":"",
     "patients":"ಪೇಷಂಟ್ಗಳಿಗೆ ನಿಯೋಜಿಸಲಾಗಿದೆ",
+    "CurrentAssignedDoctor":"ಪ್ರಸ್ತುತ ನಿಯೋಜಿತ ವೈದ್ಯರು",
+    "SelecttheDoctor":"ವೈದ್ಯರನ್ನು ಆಯ್ಕೆ ಮಾಡಿ",
 
     "19":"view_questions.ejs",
 

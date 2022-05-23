@@ -106,9 +106,9 @@
 
     "8":"editUser.ejs",
 
-    "Edit":"संपादित करें",
+    "Edit":"एडिट",
     "Profile":"प्रोफ़ाइल",
-    "EditProfile":"प्रोफ़ाइल संपादित करें",
+    "EditProfile":"प्रोफ़ाइल एडिट करें",
 
     "9":"forgotpassword.ejs",
 
@@ -236,7 +236,7 @@
     "17":"view_doctors.ejs",
 
     "Our":"हमारे",
-    "Doctors":"चिकित्सक",
+    "Doctors":"डॉक्टरों",
     "NoDoctors":"अभी तक कोई",
     "Createdyet":"डॉक्टर नहीं बनाया गया..!",
 
@@ -255,6 +255,8 @@
     "yettobeassigned":"अभी तक सौंपा जाना है",
     "assignedfor":"",
     "patients":"रोगियों के लिए आवंटित",
+    "CurrentAssignedDoctor":"वर्तमान में असाइन किया गया डॉक्टर",
+    "SelecttheDoctor":"डॉक्टर का चयन करें",
 
     "19":"view_questions.ejs",
 

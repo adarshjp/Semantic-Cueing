@@ -165,7 +165,7 @@
    let d_patient=0;
    let assigned_doctor=[];
    let total_doctor=[];
-   let patient_level=[0,0,0,0,0]  //index 0 for level 1 and so on....
+   let patient_level=[0,0,0]  //index 0 for level 1 and so on....
 
    function get_test_and_q_count(){
       fetch('/data/testcount')
@@ -213,7 +213,7 @@
    
    function create_data_for_bar_chart(){ 
       let data = {
-         labels : ['1','2','3','4','5'],
+         labels : ['1','2','3'],
          datasets: [{
             label:'<%=i18n.CountofPatientVSLevel%>',
             data: patient_level,

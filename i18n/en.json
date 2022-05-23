@@ -255,6 +255,8 @@
     "yettobeassigned":"yet to be assigned",
     "assignedfor":"assigned for",
     "patients":"patients",
+    "CurrentAssignedDoctor":"Current Assigned Doctor",
+    "SelecttheDoctor":"Select the Doctor",
 
     "19":"view_questions.ejs",
 

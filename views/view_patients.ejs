@@ -39,10 +39,10 @@
                                             <h1 class="card-title"><%=patient.name%></h1>
                                             <hr>
                                             <p class="card-text h5">
-                                                <%=i18n.Email%> : <%=patient.email%>
+                                                <%=patient.email%>
                                             </p>
                                             <p class="card-text h5">
-                                                <%=i18n.Age%> : <%=patient.age%>
+                                                <%=patient.age%>
                                             </p>
                                             <% if(user.role==="doctor") {%>
                                             <div class="d-flex justify-content-end align-items-end">
@@ -129,14 +129,14 @@
             let option=document.createElement("option");
             option.value=key;
             if(val[1]===0){
-                option.textContent=val[0]+' (<%=i18n.yettobeassigned)';
+                option.textContent=val[0]+' (<%=i18n.yettobeassigned%>)';
             }else{
                 option.textContent=val[0]+' (<%=i18n.assignedfor%> '+val[1]+' <%=i18n.patients%>)';
             }
             let patient_card=document.getElementsByClassName(key);
             console.log(patient_card)
             for(let xy=0;xy<patient_card.length;xy++){
-                patient_card[xy].textContent='<%=i18n.AssignedDoctor%> : '+val[0];
+                patient_card[xy].innerHTML='<i class="fas fa-user-md"></i> '+val[0];
             }
             document.getElementById('doctor').appendChild(option);
         }
@@ -146,7 +146,7 @@
     doctorChange.addEventListener('show.bs.modal', function (event) {
       var button = event.relatedTarget
       var Ids = button.getAttribute('data-bs-whatever').split(',');
-      document.getElementById('current-doc').innerHTML = 'Current Assigned Doctor : <strong>'+doctor[Ids[1]][0]+'</strong>';
+      document.getElementById('current-doc').innerHTML = '<%=i18n.CurrentAssignedDoctor%> : <strong>'+doctor[Ids[1]][0]+'</strong>';
       document.getElementById('changeDocForm').action='/change/doctor/'+Ids[0]+'?_method=PATCH';
    });
 </script>
