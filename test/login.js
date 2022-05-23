@@ -19,8 +19,8 @@ exports.loginTest=()=>{
             request(app)
             .post('/login')
             .send({
-                username: 'admin',
-                password: 'admin'
+                username: 'abc',
+                password: 'abc'
             })
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')

@@ -1,5 +1,5 @@
 const Question = require('../models/question')
-const Test = require('../models/question')
+const Test = require('../models/test')
 const {convert_img}= require('../helpers/convert_img')
 exports.addquestions_get = (req, res) => {
     res.status(200)
@@ -98,7 +98,7 @@ exports.put_edit_question= async (req, res) => {
         score:req.body.score,
     }
     if(req.files.length!=0){
-        img = covert_img(req.files)
+        img = convert_img(req.files)
         newQuestion.question = img[0]
     }
     let updatedQuestion=await updateQuestion(req.params.questionid,newQuestion)
@@ -123,7 +123,7 @@ exports.put_edit_hint= async(req, res) => {
         score:req.body.score,
     }
     if(req.files.length!=0){
-        img = covert_img(req.files)
+        img = convert_img(req.files)
         newHint.hint = img[0]
     }
     if(newHint.hint==undefined){
