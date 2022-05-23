@@ -165,7 +165,7 @@
    let d_patient=0;
    let assigned_doctor=[];
    let total_doctor=[];
-   let patient_level=[0,0,0,0,0]  //index 0 for level 1 and so on....
+   let patient_level=[0,0,0]  //index 0 for level 1 and so on....
 
    function get_test_and_q_count(){
       fetch('/data/testcount')
@@ -213,9 +213,9 @@
    
    function create_data_for_bar_chart(){ 
       let data = {
-         labels : ['1','2','3','4','5'],
+         labels : ['1','2','3'],
          datasets: [{
-            label:'count of patient vs level',
+            label:'<%=i18n.CountofPatientVSLevel%>',
             data: patient_level,
             backgroundColor: ['#FF6633','#33FFFC','#9CFF33','#33FF96','#36FF33'],
             borderColor: ['#FF4E33','#FFB433','#33FFB4','#7EFF33','#33FF4E'],
@@ -255,17 +255,17 @@
          document.getElementById('spinner-0').classList.add('d-none');
          document.getElementById('levelChart').removeAttribute('hidden');
 
-         create_data_for_pie_chart('pieChart-1',doc_pat,c_doctor,c_patient,'Doctor','Patient');
+         create_data_for_pie_chart('pieChart-1',doc_pat,c_doctor,c_patient,'<%=i18n.Doctor%>','<%=i18n.Patient%>');
 
          document.getElementById('spinner-1').classList.add('d-none');
          document.getElementById('pieChart-1').removeAttribute('hidden');
 
-         create_data_for_pie_chart('pieChart-2',un_a_doc,a_doctor,u_doctor,'Assigned','Unassigned');
+         create_data_for_pie_chart('pieChart-2',un_a_doc,a_doctor,u_doctor,'<%=i18n.Assigned%>','<%=i18n.Unassigned%>');
 
          document.getElementById('spinner-2').classList.add('d-none');
          document.getElementById('pieChart-2').removeAttribute('hidden');
 
-         create_data_for_pie_chart('pieChart-3',a_d_pat,a_patient,d_patient,'Active','Discharged');
+         create_data_for_pie_chart('pieChart-3',a_d_pat,a_patient,d_patient,'<%=i18n.Active%>','<%=i18n.Discharged%>');
 
          document.getElementById('spinner-3').classList.add('d-none');
          document.getElementById('pieChart-3').removeAttribute('hidden');

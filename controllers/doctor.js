@@ -81,7 +81,7 @@ exports.post_create_test = (req, res) => {
   }
   newTest.save()
     .then((test) => {
-      req.flash('success', 'Test created successfully')
+      req.flash('success', global.i18n.Testcreatedsuccessfully);
       res.status(200)
       res.redirect('/view/tests/' + req.user._id)
     })
@@ -188,7 +188,7 @@ exports.patch_edit_test = (req, res) => {
   }
   Test.findOneAndUpdate({ _id: req.params.testid }, { $set:{level: req.body.level, questions: req.body.questions, noofquestion: req.body.questions.length, patients:patients}}, { new: true })
     .then((test) => {
-      req.flash('success', 'Test updated successfully')
+      req.flash('success', global.i18n.Testupdatedsuccessfully);
       res.status(200)
       res.redirect('/view/tests/' + req.user._id)
     })
@@ -212,7 +212,7 @@ exports.get_question = (req, res) => {
 exports.delete_test = (req, res) => {
   Test.findOneAndDelete({ _id: req.params.testid })
     .then((test) => {
-      req.flash('success', 'Test deleted successfully')
+      req.flash('success', global.i18n.Testdeletedsuccessfully);
       res.status(200)
       res.redirect('/view/tests/' + req.user._id)
     })
@@ -227,7 +227,7 @@ exports.upgrade_level = (req, res) => {
   User.findOneAndUpdate({ _id: req.params.patientId,role:'patient' }, { $inc: { level: 1 } }, { new: true })
     .then((patient) => {
       console.log(patient)
-      req.flash('success', 'Level updated successfully')
+      req.flash('success', global.i18n.Levelupdatedsuccessfully);
       res.status(200)
       res.redirect('/home/doctor/' + req.user._id)
     })
@@ -241,7 +241,7 @@ exports.downgrade_level =  (req, res) => {
   /* Updates the level of patient by one */
   User.findOneAndUpdate({ _id: req.params.patientId,role:'patient' }, { $inc: { level: -1 } }, { new: true })
     .then((patient) => {
-      req.flash('success', 'Level updated successfully')
+      req.flash('success', global.i18n.Levelupdatedsuccessfully)
       res.status(200)
       res.redirect('/home/doctor/' + req.user._id)
     })
@@ -256,7 +256,7 @@ exports.discharge_patient = (req, res) => {
   /* Set the status of the patient to discharged */
   User.findOneAndUpdate({ _id: req.params.patientId,role:'patient' }, { $set: { status: 'discharged' } }, { new: true })
     .then((patient) => {
-      req.flash('success', 'Patient discharged successfully')
+      req.flash('success', global.i18n.Patientdischargedsuccessfully)
       res.status(200)
       res.redirect('/view/patient/' + req.user._id)
     })

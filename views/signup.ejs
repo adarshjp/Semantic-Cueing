@@ -247,7 +247,7 @@
       container.classList.add('my-2');
       sendOTP();
     } else {
-      swal('Invalid!', 'Please enter a valid email address','info');
+      swal('<%=i18n.Invalid%>', '<%=i18n.entervalidemailaddress%>','info');
     }
   }
 
@@ -256,12 +256,12 @@
       verifyOTP();
       email.removeAttribute('disabled')
     }else{
-      swal('Invalid OTP!', 'Please enter proper OTP','info')
+      swal('<%=i18n.InvalidOTP%>', '<%=i18n.enterproperOTP%>','info')
     }
   }
 
   function activities_post_verifyEmail(){
-    swal('OTP Sent','Check your email...!','success')
+    swal('<%=i18n.OTPSent%>','<%=i18n.Checkyouremail%>','success')
     otp_sec.classList.remove('d-none')
     otp.value='';
     let span=document.createElement('span');
@@ -298,7 +298,7 @@
 
   function activities_post_verifyOTP(msg){
     if(msg==="Sucesss") {
-      swal('Email Verified','Your email verified successfully...!','success');
+      swal('<%=i18n.EmailVerified%>','<%=i18n.emailverifiedsuccessfully%>','success');
         isVerified=true;
         timerOn=false;
         verifyemail.textContent='verified';
@@ -310,12 +310,12 @@
         container.classList.add('my-4');
       }else if(msg==="OTP expired"){
         timerOn=false;
-        swal('Expired','OTP is expired try again..!','warning');
+        swal('<%=i18n.Expired%>','<%=i18n.OTPexpiredtryagain%>','warning');
         verifyemail.textContent = 'Resend';
         verifyemail.removeAttribute('disabled');
         document.getElementById('otp-sec').classList.add('d-none');
       }else{
-        swal('Invalid OTP!', 'Please enter proper OTP','info')
+        swal('<%=i18n.InvalidOTP%>', '<%=i18n.enterproperOTP%>','info')
       }
   }
 
@@ -353,7 +353,9 @@
       const fsize = fi.files.item(0).size;
       const file = Math.round((fsize / 1024));
       if (file >= 1024) {
-         alert("File too Big, please select a file less than 1mb");
+        swal("<%=i18n.Filetoobig%>","","warning");
+         document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+         document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');          
          document.getElementById(upload_id).value = '';
          var imagediv= document.getElementById(preview_id);
          var newimg=document.createElement('img');
@@ -390,10 +392,14 @@
 
   function register(){
     if(document.getElementById('upload_file').files.length == 0){
-      swal('Upload..!','Upload Profile Picture..!','info')
+      swal('<%=i18n.Upload%>','<%=i18n.UploadProfilePicture%>','info')
+      document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+      document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');  
       return false;
     }else if(!isVerified){
-      swal('Verify..!','Please verify Email entered...!','info')
+      swal('<%=i18n.Verify%>','<%=i18n.verifyEmailentered%>','info')
+      document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+     document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');  
       return false;
     }
     return true;
