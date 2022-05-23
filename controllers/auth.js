@@ -91,12 +91,16 @@ exports.change_password = (req, res) => {
   User.findById(req.user._id, (err, user) => {
     if (err) {
       res.status(400);
-      res.send(err);
+      req.flash('error', err.message);
+      res.redirect("/changepassword")
+      // res.send(err);
     } else {
       user.changePassword(req.body.oldPassword, req.body.newPassword, (err, user) => {
         if (err) {
           res.status(400);
-          res.send(err);
+          req.flash('error', err.message);
+          res.redirect("/changepassword")
+          // res.send(err);
         } else {
           res.status(200);
           req.flash('success', 'Password changed!');

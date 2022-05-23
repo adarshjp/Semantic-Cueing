@@ -1,6 +1,7 @@
 <%- include("partials/header") %>
 <%- include("partials/doctorSideBar") %>
-<div class="container-fluid">
+<%- include("partials/no_patient",{msg:['No questions','Created yet..!']})%>
+<div class="container-fluid" id="view-question">
     <%- include("partials/edit_Create_Test_Tab") %>
     <%- include("partials/no_Question",{msg:["No Questions","Selected yet..!"]})%>
     <form action="/create/test" method="POST" id="testForm" onsubmit="return noofqval();">
@@ -8,6 +9,7 @@
             <div class="offset-1 col-11 offset-sm-1 col-sm-9 offset-lg-0 col-lg-8 col-xl-6">
                 <div class="row justify-content-center gradient-list mb-2 p-1" id='div_list'>
                     <% var i=1;%>
+                    <% let len=question.length %>
                     <% question.forEach((question)=>{ %>
                         <div class="offset-1 offset-sm-0 col-9 col-sm-10 col-lg-11 col-xl-10 shadow-lg bg-body rounded-lg <%= question.level%>" id="question<%=i%>">
                             <div class="card-image mx-0 p-2">
@@ -63,7 +65,12 @@
         </div>
     </form>
 </div>
-
+<script type="text/javascript">
+    if(parseInt('<%=len%>')===0){
+        document.getElementById('view-question').classList.add('d-none');
+        document.getElementById('no-data').classList.remove('d-none');
+    }
+</script>
 <script>
     let k=1;   //multiplier used to skip questions 5,10,15 so on...
     let li_id=parseInt('<%=i%>'); //used in input and labels
