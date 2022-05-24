@@ -56,13 +56,15 @@ exports.post_messages = (req, res)=> {
             res.json({success:"Message posted"});
     });
 }
-exports.renderChatWindow_patient = (req, res) => {
+exports.renderChatWindow_patient = async (req, res) => {
     /*  Function  to Render the chat window for a patient*/
-    res.render("chatWindow", {role: "patient",patientId:req.user._id,user:req.user});
+    let receiver= await get_receiver(req.user.doctorid)
+    res.render("chatWindow", {role: "patient",patientId:req.user._id,receiver:receiver,user:req.user});
 }
-exports.renderChatWindow_doctor = (req, res) => {
+exports.renderChatWindow_doctor = async (req, res) => {
     /*  Function  to Render the chat window for a doctor*/
-    res.render("chatWindow", {role: "doctor",patientId:req.params.patientId,user:req.user});
+    let receiver= await get_receiver(req.params.patientId)
+    res.render("chatWindow", {role: "doctor",patientId:req.params.patientId,receiver:receiver,user:req.user});
 }
 function findAndSendMessages(conversationId,res) {
     Message.find({conversationId:conversationId},(err,messages)=>{
@@ -74,7 +76,6 @@ function findAndSendMessages(conversationId,res) {
             res.json({error:"No messages found",conversationId:conversationId});
         else{
             messages.forEach(message=>{
-                console.log(message)
                 message.message=decodeMsg(message.message)
             })
             res.json({messages,conversationId});
@@ -149,20 +150,15 @@ function findCoversationId(patientId,doctorId)
     })
 }
 
-exports.get_participants_ids = (req, res) => {
-    Conversation.findById(req.params.conversationId, (err, conversation) => {
-        if (err)
-            res.json({ error: err });
-        else
-            res.json({ participants: conversation.participants });
-    });
-}
-
-exports.get_receivers_name= (req, res) => {
-    User.findById(req.params.receiverId, (err, user) => {
-        if (err)
-            res.json({ error: err });
-        else
-            res.json({ name: user.name });
-    });
+function get_receiver(id) {
+    return new Promise((resolve, reject) => {
+        User.findById(id, (err, user) => {
+            if (err) {
+                reject(err);
+            }
+            else {
+                resolve({name:user.name,displaypic:user.displaypic});
+            }
+        })
+    })
 }
