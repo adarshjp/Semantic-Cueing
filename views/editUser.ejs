@@ -6,12 +6,12 @@
     <% } else { %>
         <%- include("partials/doctorSideBar") %>
     <% } %>
-        <div class="container">
-            <div class="text-center py-2">
+        <div class="container-fluid">
+            <div class="offset-2 offset-sm-0 text-center text-center px-5 pt-2">
                 <p class="display-4 fw-bold"><%=i18n.Edit%> <span class="blue"><%=i18n.Profile%></span></p>
             </div>
             <div class="row justify-content-center p-1">
-                <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-md-0 col-lg-6">
+                <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-xl-7">
                     <div class="text-center border border-2 p-3">
                         <form action="/edit/<%=user._id%>?_method=PUT" method="post">
                             <div class="text-center">
@@ -26,12 +26,18 @@
                                     <i class="fas fa-user blue"></i>
                                 </h1>
                             </div>
-                            <div>
-                                <p class="text-center p-2 display-6 fw-bold">
-                                    <span class="blue">
-                                        <%=user.email%>
-                                    </span>
-                                    <i class="fas fa-envelope blue"></i>
+                            <div style="overflow: auto;flex-wrap: nowrap;white-space: nowrap;">
+                                <p class="text-center p-2 display-6 fw-bold d-none d-md-block">
+                                  <span class="blue">
+                                    <%=user.email%>
+                                  </span>
+                                  <i class="fas fa-envelope blue"></i>
+                                </p>
+                                <p class="text-center fw-bold d-block d-md-none">
+                                  <span class="blue">
+                                    <%=user.email%>
+                                  </span>
+                                  <i class="fas fa-envelope blue"></i>
                                 </p>
                             </div>
                             <div>

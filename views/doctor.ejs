@@ -1,6 +1,6 @@
 <%- include("partials/header") %>
 <%- include("partials/doctorSideBar") %>
-<%- include("partials/no_patient",{msg:['No Patients','assigned for you..!']})%>
+<%- include("partials/no_patient",{msg:[i18n.NoPatients1,i18n.assignedforyou1]})%>
 <div class="container-fluid d-none" id='home'>
   <%- include("partials/flashMsg") %>
 
@@ -242,7 +242,7 @@
       labels: [],
       datasets: [
         {
-            label: 'Percentage',
+            label: '<%=i18n.Percentage%>',
             data: [10,20],
             borderColor: ['#6C63FF'],
             backgroundColor: ['#4941eb'],
@@ -366,17 +366,17 @@
     if(bar_chart_no==='1'){
       bar_chart_1.data.labels=Object.keys(dict);
       bar_chart_1.data.datasets[0].data=Object.values(dict);
-      bar_chart_1.data.datasets[0].label='Number of Questions Answered';
+      bar_chart_1.data.datasets[0].label='<%=i18n.NumberofQuestionAnswered%>';
       bar_chart_1.update();
     }else if(bar_chart_no==='2'){
       bar_chart_2.data.labels=Object.keys(dict);
       bar_chart_2.data.datasets[0].data=Object.values(dict);
-      bar_chart_2.data.datasets[0].label='Number of Questions Unanswered';
+      bar_chart_2.data.datasets[0].label='<%=i18n.NumberofQuestionsUnanswered%>';
       bar_chart_2.update();
     }else{
       bar_chart_3.data.labels=Object.keys(dict);
       bar_chart_3.data.datasets[0].data=Object.values(dict);
-      bar_chart_3.data.datasets[0].label='Status';
+      bar_chart_3.data.datasets[0].label='<%=i18n.Status%>';
       bar_chart_3.data.datasets[0].backgroundColor=['#534bf7','#8c92ac','#39ff14'];
       bar_chart_3.data.datasets[0].borderColor=['#6C63FF','#8c92ac','#32cd32'];
       bar_chart_3.update();

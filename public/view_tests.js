@@ -1,5 +1,4 @@
 document.getElementById('all').addEventListener('click',function(){
-    console.log(total_test)
     disp_test_or_no_test('all',total_test)
     for(var i=0;i<total_test;i++){
         document.getElementsByClassName('test'+i)[0].classList.remove('d-none');
@@ -39,8 +38,8 @@ document.getElementById('completed').addEventListener('click',function(){
     }
 });
 
-function count_number_of_tests(status,count) {
-    document.getElementById(status).innerHTML='<strong style="text-transform: capitalize;">'+status+'</strong><span class="badge bg-danger ms-2">'+count+'</span>';
+function count_number_of_tests(status,count,status_name) {
+    document.getElementById(status).innerHTML='<strong style="text-transform: capitalize;">'+status_name+'</strong><span class="badge bg-danger ms-2">'+count+'</span>';
     if(status === 'all' && count === 0){
       document.getElementById('test_status').classList.add('d-none');
       document.getElementById('no_test').classList.remove('d-none');
@@ -53,9 +52,17 @@ function disp_test_or_no_test(status,count){
       document.getElementById('test_status').classList.add('d-none');
       document.getElementById('no_test').classList.remove('d-none');
       if(status==='all'){
-        document.getElementById('msg').innerHTML="<span class='blue'>No test</span> is assigned.";
+        document.getElementById('msg').innerHTML="<span class='blue'>"+no_test+"</span> "+no_test1+"..!";
       }else{
-        document.getElementById('msg').innerHTML="<span class='blue'>No test</span> is "+status+"..!";
+        if(status==='paused'){
+          document.getElementById('msg').innerHTML="<span class='blue'>"+no_test+"</span> "+no_paused+"..!";
+        }
+        if(status==='pending'){
+          document.getElementById('msg').innerHTML="<span class='blue'>"+no_test+"</span> "+no_pending+"..!";
+        }
+        if(status==='completed'){
+          document.getElementById('msg').innerHTML="<span class='blue'>"+no_test+"</span> "+no_complete+"..!"; 
+        }
       }
     }else{
       document.getElementById('test_status').classList.remove('d-none');
