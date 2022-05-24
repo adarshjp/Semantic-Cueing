@@ -18,8 +18,6 @@ exports.register_get = (req, res) => {
           doctors.push({ id, name })
         }
       })
-      console.log(doctors)
-      console.log(usernames)
       res.render('signup', { doctors: doctors,user:req.user,i18n:global.i18n});
     }
   })
@@ -27,7 +25,6 @@ exports.register_get = (req, res) => {
 };
 
 exports.register_post = (req, res) => {
-  console.log(req.files)
   let img= convert_img(req.files)
   const user = new User({
     username: req.body.username,
@@ -59,7 +56,6 @@ exports.register_post = (req, res) => {
       //   res.redirect("/register");
       // });
       res.status(200);
-      console.log(req.user)
       req.flash("success", "User created!!")
       res.redirect("/register");
     }
