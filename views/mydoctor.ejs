@@ -1,33 +1,27 @@
 <%- include("partials/header") %>
 <%- include("partials/patientSideBar") %>
-        <div class="container  vh-100 align-items-center" id="">
-            <div class="row justify-content-center">
-                <div class="offset-2 col-9 offset-sm-2 col-sm-8 offset-lg-0 col-lg-6 p-1">
-                    <h1 class="p-3 text-center" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+        <div class="container-fluid">
+            <div class="offset-2 offset-sm-0 text-center py-2 px-5">
+                <p class="display-4 fw-bold" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
                         <%=i18n.My%> <span class="blue"><%=i18n.Doctor%> <i class="fas fa-stethoscope"></i></span>
-                    </h1>
-                </div>
+                </p>
             </div>
-            <div class="row d-flex justify-content-center">
-                <div class="offset-2 col-10 offset-sm-2 col-sm-10  offset-lg-0 col-lg-10 p-2">
-                    <div class="card box-shadow mx-3 mx-sm-0">
-                        <div class="row">
-                            <div class="col-md-6 my-auto">
-                                <img src="/images/undraw_doctors_hwty.svg" class="card-img-top rounded-circle"
-                                    alt="..." width="100%"/>
+            <div class="row justify-content-center">
+                <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0">
+                        <div class="row align-items-center border border-2 rounded ms-1 ms-md-0">
+                            <div class="col-md-6">
+                                <img src="data:image/<%=doctor.displaypic.contentType%>;base64,<%=doctor.displaypic.data.toString('base64')%>" class="card-img-top rounded-circle p-5"
+                                    alt="..."/>
                             </div>
-                            <div class="col-md-6 d-flex align-items-center">
-                                <div class="card-body text-center">
-                                    <h3 class="card-title"><%=doctor.name%></h3>
-                                    <p class="card-text h4">
-                                        <span class="blue"><i class="fas fa-phone-alt"></i></span>
-                                        7349492626
-                                    </p>
-                                    <p class="card-text h4">
+                            <div class="col-md-6 align-items-center text-center p-2">
+                                <h3 class=""><%=doctor.name%></h3>
+                                <div style="overflow: auto;flex-wrap: nowrap;white-space: nowrap;">
+                                    <p class="h4">
                                         <span class="blue"><i class="fas fa-envelope"></i></span>
-                                        mailto:<%=doctor.email%>
+                                        <%=doctor.email%>
                                     </p>
                                 </div>
+                                
                             </div>
                         </div>
                     </div>

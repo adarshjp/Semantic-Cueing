@@ -7,9 +7,11 @@
         <div class="col-12 col-md-6 p-2">
           <img src="/images/Empty.png" class='img-fluid'/>
         </div>
-        <div class="text-center">
-          <a href="/create/test" class="btn btn-primary btn-lg rounded-pill"><%=i18n.CreateTest%> <i class="fa-solid fa-plus"></i></a>
-        </div>
+        <% if(user.role=='doctor'){%>
+          <div class="text-center">
+            <a href="/create/test" class="btn btn-primary btn-lg rounded-pill">Create Test <i class="fa-solid fa-plus"></i></a>
+          </div>
+        <%}%>
       </div>
     </div>
 </div>
