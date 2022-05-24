@@ -221,94 +221,6 @@ blockquote cite {
 /* ----------------------------------
       Test Execution Start
 ----------------------------------*/
-/* #myImg {
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-#myImg:hover {
-    opacity: 0.7;
-}
-.field-icon {
-  float: right;
-  margin-left: -25px;
-  margin-top: 25px;
-  position: absolute;
-  z-index: 2;
-}
-/* The Modal (background) */
-
-/* Modal Content (image) 
-.modal-content {
-  margin: auto;
-  display: block;
-  width: 80%;
-  max-width: 550px;
-}
-/* Add Animation 
-.modal-content {    
-  -webkit-animation-name: zoom;
-  -webkit-animation-duration: 0.8s;
-  animation-name: zoom;
-  animation-duration: 0.8s;
-}
-
-@-webkit-keyframes zoom {
-  from {-webkit-transform:scale(0)} 
-  to {-webkit-transform:scale(1)}
-}
-
-@keyframes zoom {
-  from {transform:scale(0)} 
-  to {transform:scale(1)}
-}
-//The Close Button 
-.close {
-  position: absolute;
-  top: 15px;
-  right: 35px;
-  color: #6C63FF;
-  font-size: 40px;
-  font-weight: bold;
-  transition: 0.5s;
-}
-.close:hover,
-.close:focus {
-  color: #382efd;
-  text-decoration: none;
-  cursor: pointer;
-}
-/* 100% Image Width on Smaller Screens 
-@media only screen and (max-width: 700px){
-  .modal-content {
-      width: 100%;
-  }
-}
-.tab {
-  display: none;
-}
-.step {
-  height: 25px;
-  width: 25px;
-  margin: 0 2px;
-  background-color:  #b3abab;
-  border: none;  
-  border-radius: 50%;
-  display: inline-block;
-  opacity: 1;
-}
-.step.active {
-  opacity: 1;
-  background-color: #6C63FF;
-}
-.step.finish {
-  background-color: green;
-  opacity: 1;
-}
-.step.wrong {
-background-color: red;
-opacity: 1;
-} */
 /*------------------------------------
       Test Execution End
 ------------------------------------ */
@@ -388,9 +300,6 @@ opacity: 1;
   height: 100%;
   padding: 10px 0 150px 0;
   overflow: auto;
-}
-.sidebar.close .nav-links {
-  overflow: visible;
 }
 .sidebar .nav-links::-webkit-scrollbar {
   display: none;
@@ -552,16 +461,23 @@ opacity: 1;
   .sidebar.close .nav-links li .sub-menu{
     display: none;
   }
+  .sidebar.close .nav-links {
+    overflow: auto;
+  }
 }
+@media (min-width: 992px) {
+  .sidebar.close .nav-links {
+    overflow: visible;
+  }
+}
+
 /*-----------------------------
           SideBar End 
 ------------------------------*/
 .piegraph { 
    margin-left: 8%;
    margin-top: 3%;
- 
    background-color: #fff;
-    
   }
 
 .login {
@@ -586,10 +502,6 @@ opacity: 1;
 .select-color:focus{
   margin: 0;
 }
-
-/* * {
-  outline: 1px solid red;
-} */
 
 #spinner:not([hidden]) {
   position: fixed;
@@ -713,23 +625,6 @@ opacity: 1;
     box-shadow: inset 50px 15px 300px 320px #7ac142;
   }
 }
-
-/* #pieChart-1,#pieChart-2,#pieChart-3{
-  height: 271px !important;
-}
-
-.pids-wrapper{
-  width: 100%;
-}
-.pid{
-  width: calc(10% - 10px);
-  height: 10px;
-  display: inline-block;
-  margin: 5px;
-} */
-
-
-
 
 .bg-primary{
   background-color: #6C63FF !important;
