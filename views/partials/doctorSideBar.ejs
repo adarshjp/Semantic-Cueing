@@ -74,9 +74,9 @@
     <li>
       <a href="/view/<%=user._id%>">
         <div class="profile-details">
-          <div class="profile-content" onClick="">
+          <div class="profile-content">
             <img
-              src="https://static.remove.bg/remove-bg-web/a6eefcd21dff1bbc2448264c32f7b48d7380cb17/assets/start_remove-c851bdf8d3127a24e2d137a55b1b427378cd17385b01aec6e59d5d4b5f39d2ec.png"
+              src="data:image/<%=user.displaypic.contentType%>;base64,<%=user.displaypic.data.toString('base64')%>"
               alt="profileImg"
             />
           </div>

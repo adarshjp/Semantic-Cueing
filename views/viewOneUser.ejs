@@ -14,7 +14,7 @@
       <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0">
         <div class="text-center border border-2 p-3">
           <div class="text-center">
-            <img src="/images/profile.jpg" alt="" class="img-responsive img-fluid rounded-circle shadow-lg" width="300px">
+            <img src="data:image/<%=user.displaypic.contentType%>;base64,<%=user.displaypic.data.toString('base64')%>" alt="" class="img-responsive img-fluid rounded-circle shadow-lg" style="width: 325px;height: 325px;">
           </div>
           <div>
             <h1 class="text-center p-2 display-5 fw-bold">
