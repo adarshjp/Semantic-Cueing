@@ -115,7 +115,12 @@ exports.update_test_status = (req, res) => {
         ).then((test) => {
             check_all_patients_status(req.params.id)
             if(req.body.status == 'completed'){
-                send_Test_Result(test,req.user.email,res)
+                test.patients.forEach((patient) => {
+                    if (patient.patientid.toString() === req.user._id.toString()) {
+                        Object.assign(patient, {noofquestion: test.noofquestion});
+                        send_Test_Result(patient,req.user.email,res)
+                    }
+                })
             }
             res.json({ message: "Success"})
         })

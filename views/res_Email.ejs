@@ -48,14 +48,14 @@
                 <div style='display: flex;justify-content: center;padding:15px 0px;'>
                   <img src="https://quickchart.io/chart?c={type:'doughnut',data:{labels:['Correct','Wrong'],datasets:[{
     data: [<%= data_pie %>],
-    backgroundColor: ['rgb(99, 255, 108)','	rgb(255, 101, 132)']}]},options:{responsive: true}}"  style="width:100% !important"/>
+    backgroundColor: ['rgb(99, 255, 108)','rgb(245, 81, 114)']}]},options:{responsive: true}}"  style="width:100% !important"/>
                 </div>
                </td>
               </tr>
                 <tr>
               <td style="padding:15px 30px 15px 30px;background-color:#ffffff;border-bottom:1px solid #e6e6e6;border-color:rgba(201,201,207,.35);">
                 <div style='display: flex;justify-content: center;padding:15px 0px;'>
-                  <% let ans=JSON.parse(test.answered);
+                  <% let ans=test.answered;
                      let data_bar_1=[ans['0'],ans['1'],ans['2'],ans['3'],ans['4']];
                   %>
                   <img src="https://quickchart.io/chart?c={type:'bar',data:{labels:['0','1','2','3','4'],datasets:[{label: 'Answered',
@@ -66,7 +66,7 @@
              <tr>
               <td style="padding:15px 30px 15px 30px;background-color:#ffffff;border-bottom:1px solid #e6e6e6;border-color:rgba(201,201,207,.35);">
                 <div style='display: flex;justify-content: center;padding:15px 0px;'>
-                  <% let unans=JSON.parse(test.unanswered);
+                  <% let unans=test.unanswered;
                      let data_bar_2=[unans['0'],unans['1'],unans['2'],unans['3'],unans['4']];
                   %>
                   <img src="https://quickchart.io/chart?c={type:'bar',data:{labels:['0','1','2','3','4'],datasets:[{label: 'Unanswered',

@@ -53,11 +53,10 @@
       <div class="row text-center align-items-center h-25 my-3">
         <div class="col-12">
           <h6 class="my-2"><%=i18n.TestID%> : <%= testid %></h6>
-          <h6 id='level' class="my-2"></h6>
           <h6 id='score' class="my-2"></h6>
         </div>
       </div>
-      <div class="row text-center align-items-center my-5">
+      <div class="row text-center justify-content-center align-items-center my-5">
         <%var i=1%>
         <%questionIds.forEach((questionIds)=>{%>
           <div class="col-3 py-1">
@@ -160,7 +159,6 @@
       unans=test.unanswered;
       score=parseInt(test.score);
       curq_no=parseInt(test.pauesdqno);
-      document.getElementById('level').textContent='<%=i18n.TestLevel%> : '+test.level;
       create_chart();
     });
   }
