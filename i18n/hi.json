@@ -359,7 +359,10 @@
     "Welcome":"वेलकम",
     
     "NoTest":"कोई टेस्ट",
-    "isAssigned":"असाइन नहीं किया गया है",
+    "NoTest_patient":"आपको कोई परीक्षण",
+    "isAssigned_patient":"असाइन नहीं किया गया है",
+    "NoTest_doctor":"आपने कोई परीक्षण",
+    "isAssigned_doctor":"नहीं बनाया है",
     "isPaused":" रोका नहीं गया है",
     "isPending":"पेंडिग नहीं है",
     "isCompleted":"पूरा नहीं हुआ है",

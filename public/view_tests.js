@@ -55,13 +55,13 @@ function disp_test_or_no_test(status,count){
         document.getElementById('msg').innerHTML="<span class='blue'>"+no_test+"</span> "+no_test1+"..!";
       }else{
         if(status==='paused'){
-          document.getElementById('msg').innerHTML="<span class='blue'>"+no_test+"</span> "+no_paused+"..!";
+          document.getElementById('msg').innerHTML="<span class='blue'>"+no_test2+"</span> "+no_paused+"..!";
         }
         if(status==='pending'){
-          document.getElementById('msg').innerHTML="<span class='blue'>"+no_test+"</span> "+no_pending+"..!";
+          document.getElementById('msg').innerHTML="<span class='blue'>"+no_test2+"</span> "+no_pending+"..!";
         }
         if(status==='completed'){
-          document.getElementById('msg').innerHTML="<span class='blue'>"+no_test+"</span> "+no_complete+"..!"; 
+          document.getElementById('msg').innerHTML="<span class='blue'>"+no_test2+"</span> "+no_complete+"..!"; 
         }
       }
     }else{

@@ -358,8 +358,11 @@
     "PatientEmail":"Patient Email",
     "Welcome":"Welcome",
 
-    "NoTest":"No test",
-    "isAssigned":"is Assigned",
+    "NoTest":"No Test",
+    "NoTest_patient":"You have 0 tests",
+    "isAssigned_patient":"assigned to you",
+    "NoTest_doctor":"You have not",
+    "isAssigned_doctor":"created any test",
     "isPaused":"is Paused",
     "isPending":"is Pending",
     "isCompleted":"is Completed",

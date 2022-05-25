@@ -73,17 +73,19 @@
 <script src='/view_tests.js'></script>
 <script type="text/javascript">
   let total_test=parseInt('<%=tests.length %>')
+  let no_test='<%=i18n.NoTest_patient%>';
+  let no_test1='<%=i18n.isAssigned_patient%>';
+  let no_test2='<%=i18n.NoTest%>';
+  let no_pending='<%=i18n.isPending%>';
+  let no_paused='<%=i18n.isPaused%>';
+  let no_complete='<%=i18n.Completed%>';
   $(window).on('load', function() {
     create_chart();
-    let no_test='<%=i18n.NoTest%>';
-    let no_test1='<%=i18n.isAssigned%>'
-    let no_pending='<%=i18n.isPending%>';
-    let no_paused='<%=i18n.isPaused%>';
-    let no_complete='<%=i18n.Completed%>';
     count_number_of_tests('all',parseInt('<%=tests.length %>'),'<%=i18n.All%>');
     count_number_of_tests('pending',parseInt('<%=c_pending %>'),'<%=i18n.Pending%>');
     count_number_of_tests('paused',parseInt('<%=c_paused %>'),'<%=i18n.Paused%>');
     count_number_of_tests('completed',parseInt('<%=c_completed %>'),'<%=i18n.Completed%>');
+    disp_test_or_no_test('all',total_test)
   });
 
 //------------------RES CHART------------------
