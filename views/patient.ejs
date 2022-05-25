@@ -1,5 +1,6 @@
 <%- include("partials/header") %> <%- include("partials/patientSideBar") %>
 <div class="container-fluid patientclass">
+  <%- include("partials/flashMsg") %>
   <div class="row justify-content-center">
     <div class="offset-2 col-9 offset-sm-2 col-sm-8 offset-lg-0 col-lg-6 p-1">
       <h1 class="text-center p-2">
@@ -54,7 +55,7 @@
                     <% c_paused=c_paused+1%>
                   <%}%>
                 <%}else{%>
-                  <button class="btn btn-lg btn-success white"  data-bs-toggle="modal" data-bs-target="#viewReport" data-bs-whatever="<%=test._id%>"><%=i18n.ViewReport%> <i class="fas fa-poll"></i>
+                  <button class="btn btn-lg btn-success white"  data-bs-toggle="modal" data-bs-target="#viewReport" data-bs-whatever="<%=test.score%>,<%=test.noofquestion%>"><%=i18n.ViewReport%> <i class="fas fa-poll"></i>
                   </button>
                   <% c_completed=c_completed+1%>
                 <%}%>
@@ -94,7 +95,7 @@ var data = {
           ],
           datasets: [
               {
-                  data: [0, 100],
+                  data: [0, 0],
                   backgroundColor: [
                       "#10ba00",
                       "#ff3300",
@@ -122,32 +123,28 @@ var data = {
   var viewReport = document.getElementById('viewReport')
   viewReport.addEventListener('show.bs.modal', function (event) {
     var button = event.relatedTarget
-    var testid = button.getAttribute('data-bs-whatever')
-    fetch('/test/'+testid)
-      .then(response => response.json())
-      .then(test=>{
-        test_res(test.score,test.noofquestion)
-      });
+    var test = button.getAttribute('data-bs-whatever').split(',');
+    test_res(test[0],test[1])
   })
   function test_res(s,n){
     let total=n*100;
     let per=(s/total)*100;
     let score=document.getElementById('score');
     let grade=document.getElementById('grade');
-    let msg=document.getElementById('msg');
+    let score_msg=document.getElementById('score_msg');
     score.textContent=s+'/'+total;
     if(per<40){
       grade.textContent='<%=i18n.POOR%>';
-      msg.textContent='<%=i18n.BePatientWorkHardandgetsuccess%>'
+      score_msg.textContent='<%=i18n.BePatientWorkHardandgetsuccess%>'
     }else if(per>=40 && per<60){
       grade.textContent='<%=i18n.AVERAGE%>';
-      msg.textContent='<%=i18n.YourdoinggoodjobKeepitup%>'
+      score_msg.textContent='<%=i18n.YourdoinggoodjobKeepitup%>'
     }else if(per>=60 && per<80){
       grade.textContent='<%=i18n.GOOD%>';
-      msg.textContent='<%=i18n.gettingbettercontinuehardwork%>'
+      score_msg.textContent='<%=i18n.gettingbettercontinuehardwork%>'
     }else{
       grade.textContent='<%=i18n.EXCELLENT%>';
-      msg.textContent='<%=i18n.hardworkpaidoff%>'
+      score_msg.textContent='<%=i18n.hardworkpaidoff%>'
     }
     res_in_chart(per)
   }
@@ -165,12 +162,8 @@ var data = {
   }
 
   function res_in_chart(per){
-    data.datasets[0].data=[per,100-per]
     myDoughnutChart.data.datasets[0].data=[per,100-per];
     myDoughnutChart.update();
   }
-
-
 </script>
-
 <%- include("partials/footer") %>
