@@ -22,6 +22,7 @@ exports.get_home_patient = (req, res) => {
                     if (patient.patientid.toString() === req.params.id.toString()) {
                         patient._id = test._id;
                         Object.assign(patient, {level: test.level});
+                        Object.assign(patient, {noofquestion: test.noofquestion});
                         patient_tests.push(patient);
                     }
                 })
