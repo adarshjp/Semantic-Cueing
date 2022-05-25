@@ -214,9 +214,16 @@
       }
       if(patient[0].level==1){
         document.getElementById('downgrade-but').setAttribute('disabled','')
+        document.getElementById('upgrade-but').removeAttribute('disabled')
+      }
+      if(patient[0].level==2){
+        document.getElementById('upgrade-but').removeAttribute('disabled')
+        document.getElementById('downgrade-but').removeAttribute('disabled')
       }
       if(patient[0].level==3){
         document.getElementById('upgrade-but').setAttribute('disabled','')
+        document.getElementById('downgrade-but').removeAttribute('disabled')
+        
       }
       let storke_date=new Date(patient[0].strokeDate);
       let today=new Date();
@@ -224,8 +231,6 @@
       document.getElementById('disp-pic').src= 'data:image/'+patient[0].displaypic.contentType+';base64,'+arrayBufferToBase64(patient[0].displaypic.data.data);
       document.getElementById('stroke').textContent = storke_date.toDateString();
       document.getElementById('p_storke').textContent = diff + ' Days';
-      document.getElementById('spinner-0').classList.add('d-none')
-      document.getElementById('patient-details').removeAttribute('hidden')
       if(temp){
         create_line_chart();
         create_bar_charts('bar-chart-1');
@@ -315,11 +320,9 @@
     fetch('/data/testdetails/'+patientid)
     .then(response => response.json())
     .then(test => {
-      if(test.length===undefined) {
-        document.getElementById('nooftests').textContent = 0;
-      }else {
-        document.getElementById('nooftests').textContent = test.length;
-      }
+      document.getElementById('nooftests').textContent = test.patient_tests.length;
+      document.getElementById('spinner-0').classList.add('d-none')
+      document.getElementById('patient-details').removeAttribute('hidden')
       create_data_for_charts(test.patient_tests,test.noofquestion);
     });
   }
