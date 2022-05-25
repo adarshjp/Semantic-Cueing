@@ -112,8 +112,9 @@
 <script src='/view_tests.js'></script>
 <script>
   let total_test=parseInt('<%=tests.length %>')
-  let no_test='<%=i18n.NoTest%>';
-  let no_test1='<%=i18n.isAssigned%>'
+  let no_test='<%=i18n.NoTest_doctor%>';
+  let no_test1='<%=i18n.isAssigned_doctor%>';
+  let no_test2='<%=i18n.NoTest%>';
   let no_pending='<%=i18n.isPending%>';
   let no_paused='<%=i18n.isPaused%>';
   let no_complete='<%=i18n.Completed%>';
@@ -124,6 +125,7 @@
     count_number_of_tests('completed',parseInt('<%=c_completed %>'),'<%=i18n.Completed%>');
     disp_test_or_no_test('all',total_test)
     patient_names();
+    create_chart()
   });
 
 //------------------RES CHART------------------
@@ -148,16 +150,6 @@ var data = {
       };
       var myDoughnutChart;
 //------------------END------------------
-
-  function test_execute(id){
-    var win = window.open("/start/test/"+id);
-    var timer = setInterval(function() {
-        if (win.closed) {
-            clearInterval(timer);
-            window.location.reload();
-        }
-    }, 500);
-  }
 
   var viewReport = document.getElementById('viewReport')
   viewReport.addEventListener('show.bs.modal', function (event) {
@@ -200,7 +192,6 @@ var data = {
   }
 
   function res_in_chart(per){
-    data.datasets[0].data=[per,100-per]
     myDoughnutChart.data.datasets[0].data=[per,100-per];
     myDoughnutChart.update();
   }

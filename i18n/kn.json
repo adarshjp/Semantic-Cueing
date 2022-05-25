@@ -268,7 +268,7 @@
 
     "20":"view_tests.ejs",
 
-    "Tests":"ಪರೀಕ್ಷೆ",
+    "Tests":"ಪರೀಕ್ಷೆಗಳು",
     "ViewPatients":"ಪೇಷಂಟ್ಗಳನ್ನು ವೀಕ್ಷಿಸಿ",
     "NoQsattemted":"ಸಂ. Q's ಪ್ರಯತ್ನಿಸಲಾಗಿದೆ",
 
@@ -359,7 +359,10 @@
     "Welcome":"ವೆಲ್ಕಮ್",
 
     "NoTest":"ಯಾವುದೇ ಪರೀಕ್ಷೆ",
-    "isAssigned":"ನಿಯೋಜಿತ ಆಗಿಲ್ಲ",
+    "NoTest_patient":"ನಿಮಗೆ ಯಾವುದೇ",
+    "isAssigned_patient":"ಪರೀಕ್ಷೆಗಳನ್ನು ನೀಡಿಲ್ಲ",
+    "NoTest_doctor":"ನೀವು ಯಾವುದೇ",
+    "isAssigned_doctor":"ಪರೀಕ್ಷೆಯನ್ನು ರಚಿಸಿಲ್ಲ",
     "isPaused":"ವಿರಾಮಗೊಳಿಸಲಾಗಿಲ್ಲ",
     "isPending":"ಬಾಕಿ ಇಲ್ಲ",
     "isCompleted":"ಪೂರ್ಣಗೊಂಡಿಲ್ಲ",

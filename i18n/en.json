@@ -334,7 +334,7 @@
     "Reportreflecteddashboard":"Test Report will be reflected in your dashboard once you are finished taking the test.",
 
     "eithercaseyourtestwillbecontinued":"In either case your test will be continued from the point where you had paused.",
-    "readandunderstoodallinstructions":"I have read and understood the all the instructions.",
+    "readandunderstoodallinstructions":"I have read and understood all the instructions.",
     "havecompletedthemicrophonetest":"I have completed the microphone test.",
 
     "EXTRAS":"EXTRAS",
@@ -358,8 +358,11 @@
     "PatientEmail":"Patient Email",
     "Welcome":"Welcome",
 
-    "NoTest":"No test",
-    "isAssigned":"is Assigned",
+    "NoTest":"No Test",
+    "NoTest_patient":"You have 0 tests",
+    "isAssigned_patient":"assigned to you",
+    "NoTest_doctor":"You have not",
+    "isAssigned_doctor":"created any test",
     "isPaused":"is Paused",
     "isPending":"is Pending",
     "isCompleted":"is Completed",
