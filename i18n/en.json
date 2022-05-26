@@ -191,9 +191,9 @@
     "Verify":"Verify",
     "Otp":"OTP",
     "UsernamealreadyexistsPleasetryanotherone":"Username already exists. Please try another one",
-    "SelectRole":"Select Role:",
-    "Choosedoctor":"Choose doctor:",
-    "StrokeDate":"Stroke Date:",
+    "SelectRole":"Select Role",
+    "Choosedoctor":"Choose doctor",
+    "StrokeDate":"Stroke Date",
     "ChooseProfilePicture":"Choose Profile Picture",
 
             "Invalid":"Invalid!",
