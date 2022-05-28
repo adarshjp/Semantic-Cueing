@@ -8,6 +8,11 @@
             <div class="col-12 col-md-6 p-2">
               <img src="/images/Empty.png" class='img-fluid'/>
             </div>
+            <% if(msg.length ===3 && user.role=='admin'){%>
+              <div class="text-center mt-2 mb-4">
+                <a href="/addquestion" class="btn btn-primary btn-lg rounded-pill">Create Question <i class="fa-solid fa-plus"></i></a>
+              </div>
+            <%}%>
           </div>
         </div>
     </div>

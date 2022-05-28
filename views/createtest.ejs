@@ -1,13 +1,15 @@
 <%- include("partials/header") %>
 <%- include("partials/doctorSideBar") %>
-<div class="container-fluid">
+<%- include("partials/no_patient",{msg:[i18n.Noquestions,i18n.Createdyet1,'No questions']})%>
+<div class="container-fluid" id="view-question">
     <%- include("partials/edit_Create_Test_Tab") %>
-    <%- include("partials/no_Question",{msg:["No Questions","Selected yet..!"]})%>
+    <%- include("partials/no_Question",{msg:[i18n.NoQuestions,i18n.Selectedyet]})%>
     <form action="/create/test" method="POST" id="testForm" onsubmit="return noofqval();">
         <div class="row justify-content-center" id='question-row'>
             <div class="offset-1 col-11 offset-sm-1 col-sm-9 offset-lg-0 col-lg-8 col-xl-6">
                 <div class="row justify-content-center gradient-list mb-2 p-1" id='div_list'>
                     <% var i=1;%>
+                    <% let len=question.length %>
                     <% question.forEach((question)=>{ %>
                         <div class="offset-1 offset-sm-0 col-9 col-sm-10 col-lg-11 col-xl-10 shadow-lg bg-body rounded-lg <%= question.level%>" id="question<%=i%>">
                             <div class="card-image mx-0 p-2">
@@ -44,7 +46,7 @@
         <div class="row justify-content-center align-items-center mt-4 d-none" id="sel-pat">
             <div class="offset-2 col-9 offset-sm-1 offset-md-1 col-md-4 offset-lg-0">
                 <label for="patient" class="mb-2"><%=i18n.ChoosePatient%></label>
-                <select name="patientid"  id="patient-list" placeholder="Select patients" class="form-select form-select-lg p-2" aria-label=".form-select-lg" onchange="chnage_patinet_list()" multiple>
+                <select name="patientid"  id="patient-list" class="form-select form-select-lg p-2" aria-label=".form-select-lg" onchange="chnage_patinet_list()" multiple>
                     <% patient.forEach((patient)=> { %>
                         <option value="<%=patient._id%>"><%=patient.name%></option>
                     <% }) %>
@@ -58,40 +60,35 @@
             <input type="text" name="patientIDs" class="d-none" value="[]" id='patientIDs'/>
         </div>
         <div class="offset-2 offset-sm-0 text-center p-2 d-none my-2" id="res_but">
-            <button type="button" class="btn btn-primary rounded-pill btn-lg" onclick="reSet();">Reset <i class="fa fa-refresh" aria-hidden="true"></i></button>
-            <input type="submit" class="btn btn-primary btn-lg rounded-pill" value="Create Test" id="formsubmit"/>
+            <button type="button" class="btn btn-primary rounded-pill btn-lg" onclick="reSet();"><%=i18n.Reset%> <i class="fa fa-refresh" aria-hidden="true"></i></button>
+            <input type="submit" class="btn btn-primary btn-lg rounded-pill" value="<%=i18n.CreateTest%>" id="formsubmit"/>
         </div>
     </form>
 </div>
-
+<script type="text/javascript">
+    if(parseInt('<%=len%>')===0){
+        document.getElementById('view-question').classList.add('d-none');
+        document.getElementById('no-data').classList.remove('d-none');
+    }
+</script>
 <script>
     let k=1;   //multiplier used to skip questions 5,10,15 so on...
     let li_id=parseInt('<%=i%>'); //used in input and labels
     let isCompleted=false; //true is no more questions
     let temp=isCompleted; 
-
-    function chnage_patinet_list(){
-        var selected = $("#patient-list :selected").map((_, e) => e.value).get();
-        document.getElementById('patientIDs').value=JSON.stringify(selected);
-        console.log(document.getElementById('patientIDs').value)
-    }
-    $(document).ready(function(){
-        var multipleCancelButton = new Choices('#patient-list', {
-            removeItemButton: true,
-            maxItemCount:100,
-            searchResultLimit:10,
-            renderChoiceLimit:5
-        });
-    });
     
     function noofqval() {
         var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
         if(document.getElementById("patientIDs").value ==="[]"){
-            alert("Please select at least 1 patinet");
+            swal("<%=i18n.Alert%>","<%=i18n.selecatleast1patient%>", "info");
+            document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+            document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
             return false;
         }
         if(checkboxes.length<5){
-            alert("Please select atleast 5 questions..");
+            swal("<%=i18n.Note%>","<%=i18n.selectatleast5que%>", "warning");
+            document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+            document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
             return false;
         }
         else{
@@ -112,7 +109,7 @@
                 {
                     document.getElementById('loader').classList.add('d-none');
                     isCompleted=true;
-                    swal("Completed!", "Sorry..,No more questions...!", "info");
+                    swal("<%=i18n.Completed%>", "<%=i18n.SorryNomorequestions%>", "info");
                     document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
                     document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
                     return

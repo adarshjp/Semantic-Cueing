@@ -1,6 +1,6 @@
 <%- include("partials/header") %>
     <%- include("partials/adminSideBar") %>
-    <%- include("partials/no_patient",{msg:['No Doctors','Created yet']})%>
+    <%- include("partials/no_patient",{msg:[i18n.NoDoctors,i18n.Createdyet]})%>
     <div class="container-fluid" id='view-doctor'>
         <%- include("partials/flashMsg") %>
         <div class="row justify-content-center text-center">
@@ -18,17 +18,17 @@
                     <div class="card box-shadow p-3">
                         <div class="row">
                             <div class="col-sm-6 my-auto">
-                                <img src="/images/undraw_doctors_hwty.svg" class="card-img-top rounded-circle p-1 box-shadow"
+                                <img src="data:image/<%=doctor.displaypic.contentType%>;base64,<%=doctor.displaypic.data.toString('base64')%>" class="card-img-top rounded-circle p-1 box-shadow"
                                         alt="..." style="border: 3px solid #6c63ff" />
                             </div>
                             <div class="col-sm-6 my-auto">
                                 <div class="card-body">
                                     <h1 class="card-title"><%=doctor.name%></h1>
                                     <hr>
-                                    <p class="card-text h3">
+                                    <p class="card-text h5">
                                         <%=doctor.email%>
                                     </p>
-                                    <p class="card-text h3">
+                                    <p class="card-text h5">
                                         <%=doctor.age%>
                                     </p>
                                     <div class="d-flex justify-content-end align-items-end">

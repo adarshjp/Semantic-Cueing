@@ -1,6 +1,6 @@
 <%- include("partials/header") %>
 <%- include("partials/doctorSideBar") %>
-<%- include("partials/no_patient",{msg:['No Patients','assigned for you..!']})%>
+<%- include("partials/no_patient",{msg:[i18n.NoPatients1,i18n.assignedforyou1]})%>
 <div class="container-fluid d-none" id='home'>
   <%- include("partials/flashMsg") %>
 
@@ -27,35 +27,82 @@
             <span class="visually-hidden"><%=i18n.Loading%>...</span>
           </div>
         </div>
-        <div class="row mx-3 mx-sm-0 text-center justify-content-center card-body" id='patient-details' hidden>
-          <div class="col-sm-8 col-md-4 my-auto">
-              <img src="/images/profile.jpg" class="img-fluid rounded-lg" alt="..."/ id='disp-pic'>
+        <div class="row justify-content-center card-body text-center" id='patient-details' hidden>
+          <div class="col-sm-10 col-xl-5 my-auto">
+              <img src="" class="img-fluid rounded-circle" style="max-height:285px;" alt="..." id='disp-pic'>
           </div>
-          <div class="col-sm-8 col-md-8 my-auto">
-            <div class="row">
-              <div class="col-md-6 my-auto">
-                <p id='name'>Name : </p>
-                <p id='email'>Email : </p>
-                <p id='age'>Age : </p>
-                <p id='level'>Level : </p>
-              </div>
-              <div class="col-md-6 my-auto">
-                <p id="p_id">Patient ID : </p>
-                <p id='stroke'>Stroke date : stroke</p>
-                <p id='p_stroke'>Post stroke duration : date</p>
-                <p id='test'>Number of Test Assigned : xy</p>
-              </div>
-              <div class="text-center my-2">
-                <form action="" method="POST" class="d-inline-block" id='upgrade'>
-                  <button class="btn btn-primary rounded-pill btn-lg white m-1" id='upgrade-but' type="submit">
-                    Upgrade</button>
-                </form>
-                <form action="" method="POST" class="d-inline-block" id='downgrade'>
-                  <button class="btn btn-primary rounded-pill btn-lg white m-1" id='downgrade-but' type="submit" >
-                    Degrade</button>
-                </form>
+          <div class="col-sm-10 col-xl-7 mt-2">
+            <div class="row align-items-center">
+              <div class="col-7 col-md-10 text-start"><p id='name' class='h1 fw-bold ms-0 ms-sm-3'></p></div>
+              <div class="col-5 col-md-2 text-end">
+                <p id='age' class='h6'></p>
+                <p id='level' class='h6'></p>
               </div>
             </div>
+            <hr class="my-2">
+            <div class="row text-center justify-content-center">
+              <div class="col-12 col-lg-6 p-2">
+                <div class="card">
+                  <div class="card-header bg-primary white">
+                    <p class="h5 mb-0"><%=i18n.PatientId%></p>
+                  </div>
+                  <div class="card-body">
+                    <p class='h6' id="p_id"></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-6 p-2">
+                <div class="card">
+                  <div class="card-header bg-primary white">
+                    <p class="h5 mb-0"><%=i18n.StrokeDate%></p>
+                  </div>
+                  <div class="card-body">
+                    <p class='h6' id='stroke'></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-6 p-2">
+                <div class="card">
+                  <div class="card-header bg-primary white">
+                    <p class="h5 mb-0"><%=i18n.PostStrokeDuration%></p>
+                  </div>
+                  <div class="card-body">
+                    <p class='h6' id='p_storke'></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-6 p-2">
+                <div class="card">
+                  <div class="card-header bg-primary white">
+                    <p class="h5 mb-0"><%=i18n.EmailAddress%></p>
+                  </div>
+                  <div class="card-body">
+                    <p class='h6' id='email'></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-6 p-2">
+                <div class="card">
+                  <div class="card-header bg-primary white">
+                    <p class="h5 mb-0"><%=i18n.Nooftestscreated%></p>
+                  </div>
+                  <div class="card-body">
+                    <p class='h6' id='nooftests'></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="text-center my-2">
+              <form action="" method="POST" class="d-inline-block" id='upgrade'>
+                <button class="btn btn-primary rounded-pill btn-lg white m-1" id='upgrade-but' type="submit">
+                  Upgrade</button>
+              </form>
+              <form action="" method="POST" class="d-inline-block" id='downgrade'>
+                <button class="btn btn-primary rounded-pill btn-lg white m-1" id='downgrade-but' type="submit" >
+                  Degrade</button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -73,39 +120,7 @@
                <span class="visually-hidden"><%=i18n.Loading%>...</span>
              </div>
            </div>
-          <canvas id="line-chart" height="127" hidden></canvas>
-       </div>
-      </div>
-    </div>
-
-    <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-5 p-3">
-      <div class="card shadow">
-        <div class="card-header bg-primary">
-          <h5 class="pt-2 white"><%=i18n.AnsweredaQuestionvsHintsTaken%></h5>
-        </div>
-        <div class="card-body">
-          <div class="d-flex justify-content-center align-items-center blue" id='spinner-2' style="height:250px">
-             <div class="spinner-border" role="status">
-               <span class="visually-hidden"><%=i18n.Loading%>...</span>
-             </div>
-           </div>
-          <canvas id="bar-chart-1" height="127" hidden></canvas>
-       </div>
-      </div>
-    </div>
-
-    <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-5 p-3">
-      <div class="card shadow">
-        <div class="card-header bg-primary">
-          <h5 class="pt-2 white"><%=i18n.UnansweredaQuestionvsHintsTaken%></h5>
-        </div>
-        <div class="card-body">
-          <div class="d-flex justify-content-center align-items-center blue" id='spinner-3' style="height:250px">
-             <div class="spinner-border" role="status">
-               <span class="visually-hidden"><%=i18n.Loading%>...</span>
-             </div>
-           </div>
-          <canvas id="bar-chart-2" height="127" hidden></canvas>
+          <canvas id="line-chart" style="height:250px !important" hidden></canvas>
        </div>
       </div>
     </div>
@@ -121,7 +136,39 @@
                <span class="visually-hidden"><%=i18n.Loading%>...</span>
              </div>
            </div>
-          <canvas id="bar-chart-3" height="127" hidden></canvas>
+          <canvas id="bar-chart-3" style="height:250px !important" hidden></canvas>
+       </div>
+      </div>
+    </div>
+
+    <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-5 p-3">
+      <div class="card shadow">
+        <div class="card-header bg-primary">
+          <h5 class="pt-2 white"><%=i18n.AnsweredaQuestionvsHintsTaken%></h5>
+        </div>
+        <div class="card-body">
+          <div class="d-flex justify-content-center align-items-center blue" id='spinner-2' style="height:250px">
+             <div class="spinner-border" role="status">
+               <span class="visually-hidden"><%=i18n.Loading%>...</span>
+             </div>
+           </div>
+          <canvas id="bar-chart-1" style="height:250px !important" hidden></canvas>
+       </div>
+      </div>
+    </div>
+
+    <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-5 p-3">
+      <div class="card shadow">
+        <div class="card-header bg-primary">
+          <h5 class="pt-2 white"><%=i18n.UnansweredaQuestionvsHintsTaken%></h5>
+        </div>
+        <div class="card-body">
+          <div class="d-flex justify-content-center align-items-center blue" id='spinner-3' style="height:250px">
+             <div class="spinner-border" role="status">
+               <span class="visually-hidden"><%=i18n.Loading%>...</span>
+             </div>
+           </div>
+          <canvas id="bar-chart-2" style="height:250px !important" hidden></canvas>
        </div>
       </div>
     </div>
@@ -151,22 +198,39 @@
     fetch('/data/patientdetails/'+patientid)
     .then(response => response.json())
     .then(patient =>{
-      document.getElementById('name').textContent = 'Name : '+patient[0].name;
-      document.getElementById('email').textContent = 'Email : '+patient[0].email;
-      document.getElementById('age').textContent = 'Age : '+patient[0].age;
-      document.getElementById('p_id').textContent = 'Patient ID : '+patient[0]._id;
-      document.getElementById('level').textContent = 'Level : '+patient[0].level;
+      document.getElementById('name').textContent = patient[0].name;
+      document.getElementById('email').textContent = patient[0].email;
+      document.getElementById('age').textContent = '<%=i18n.Age%> : '+patient[0].age;
+      document.getElementById('p_id').textContent = patient[0]._id;
+      document.getElementById('level').innerHTML=''
+      for(let k=1;k<=3;k++){
+        let span=document.createElement('span');
+        if(k<=patient[0].level){
+          span.className = 'fa fa-star checked';
+        }else{
+          span.className = 'fa fa-star unchecked';
+        }
+        document.getElementById('level').appendChild(span)
+      }
       if(patient[0].level==1){
         document.getElementById('downgrade-but').setAttribute('disabled','')
+        document.getElementById('upgrade-but').removeAttribute('disabled')
+      }
+      if(patient[0].level==2){
+        document.getElementById('upgrade-but').removeAttribute('disabled')
+        document.getElementById('downgrade-but').removeAttribute('disabled')
       }
       if(patient[0].level==3){
         document.getElementById('upgrade-but').setAttribute('disabled','')
+        document.getElementById('downgrade-but').removeAttribute('disabled')
+        
       }
-      // document.getElementById('disp-pic').src='';
-      // document.getElementById('stroke').textContent = '';
-      // document.getElementById('p_storke').textContent = '';
-      document.getElementById('spinner-0').classList.add('d-none')
-      document.getElementById('patient-details').removeAttribute('hidden')
+      let storke_date=new Date(patient[0].strokeDate);
+      let today=new Date();
+      let diff=parseInt((today.getTime()-storke_date.getTime())/(1000*60*60*24));
+      document.getElementById('disp-pic').src= 'data:image/'+patient[0].displaypic.contentType+';base64,'+arrayBufferToBase64(patient[0].displaypic.data.data);
+      document.getElementById('stroke').textContent = storke_date.toDateString();
+      document.getElementById('p_storke').textContent = diff + ' Days';
       if(temp){
         create_line_chart();
         create_bar_charts('bar-chart-1');
@@ -180,10 +244,10 @@
 
   function create_line_chart(){
     let data={
-      labels: [1,2],
+      labels: [],
       datasets: [
         {
-            label: 'Percentage',
+            label: '<%=i18n.Percentage%>',
             data: [10,20],
             borderColor: ['#6C63FF'],
             backgroundColor: ['#4941eb'],
@@ -219,18 +283,6 @@
         data : data,
         options: {
           responsive: true,
-        //   scales: {
-        //     x: {
-        //       grid: {
-        //         display: false
-        //       }
-        //     },
-        //     y: {
-        //       grid: {
-        //         display: false
-        //       }
-        //     }
-        // }
       }
       });
     }else if(bar_chart_no==='2'){
@@ -268,11 +320,14 @@
     fetch('/data/testdetails/'+patientid)
     .then(response => response.json())
     .then(test => {
-      create_data_for_charts(test);
+      document.getElementById('nooftests').textContent = test.patient_tests.length;
+      document.getElementById('spinner-0').classList.add('d-none')
+      document.getElementById('patient-details').removeAttribute('hidden')
+      create_data_for_charts(test.patient_tests,test.noofquestion);
     });
   }
 
-  function create_data_for_charts(test){
+  function create_data_for_charts(test,noofquestion){
     let score=[];   //this store the details of 'completed' test score 
     let percent=[];
     let status={'pending':0,'paused':0,'completed':0}  //to count test statuses
@@ -281,10 +336,10 @@
     for(let i=0;i< test.length;i++){
       if(test[i].status==='completed'){
         score.push(test[i].score);
-        percent.push(test[i].score/test[i].noofquestion)
+        percent.push(test[i].score/noofquestion[i])
         status['completed']++;
-        let t1=JSON.parse(test[i].answered);
-        let t2=JSON.parse(test[i].unanswered)
+        let t1=test[i].answered;
+        let t2=test[i].unanswered;
         for(let j=0;j< 5;j++){
           answered[j+'']=answered[j+'']+t1[j+''];
           unanswered[j+'']=unanswered[j+'']+t2[j+''];
@@ -303,7 +358,7 @@
 
   function update_line_chart(percent) {
     line_chart.data.datasets[0].data = percent;
-    //line_chart.data..labels = [];  labels are yet to decided it will date of test completion.
+    line_chart.data.labels = [...Array(percent.length+1).keys()].slice(1);  //labels are yet to decided it will date of test completion.
     line_chart.update();
     document.getElementById('spinner-1').classList.add('d-none')
     document.getElementById('line-chart').removeAttribute('hidden')
@@ -314,17 +369,17 @@
     if(bar_chart_no==='1'){
       bar_chart_1.data.labels=Object.keys(dict);
       bar_chart_1.data.datasets[0].data=Object.values(dict);
-      bar_chart_1.data.datasets[0].label='Number of Questions Answered';
+      bar_chart_1.data.datasets[0].label='<%=i18n.NumberofQuestionAnswered%>';
       bar_chart_1.update();
     }else if(bar_chart_no==='2'){
       bar_chart_2.data.labels=Object.keys(dict);
       bar_chart_2.data.datasets[0].data=Object.values(dict);
-      bar_chart_2.data.datasets[0].label='Number of Questions Unanswered';
+      bar_chart_2.data.datasets[0].label='<%=i18n.NumberofQuestionsUnanswered%>';
       bar_chart_2.update();
     }else{
       bar_chart_3.data.labels=Object.keys(dict);
       bar_chart_3.data.datasets[0].data=Object.values(dict);
-      bar_chart_3.data.datasets[0].label='Status';
+      bar_chart_3.data.datasets[0].label='<%=i18n.Status%>';
       bar_chart_3.data.datasets[0].backgroundColor=['#534bf7','#8c92ac','#39ff14'];
       bar_chart_3.data.datasets[0].borderColor=['#6C63FF','#8c92ac','#32cd32'];
       bar_chart_3.update();
@@ -332,5 +387,12 @@
     document.getElementById('spinner-'+(parseInt(bar_chart_no)+1)).classList.add('d-none')
     document.getElementById(b_id).removeAttribute('hidden')
   }
+
+  function arrayBufferToBase64(buffer) {
+      var binary = '';
+      var bytes = [].slice.call(new Uint8Array(buffer));
+      bytes.forEach((b) => binary += String.fromCharCode(b));
+      return window.btoa(binary);
+  };
 </script>
 <%- include("partials/footer") %>

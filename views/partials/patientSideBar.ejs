@@ -72,8 +72,8 @@
     <li>
       <a href="/view/<%=user._id%>">
         <div class="profile-details">
-          <div class="profile-content" onClick="">
-            <img src="/images/profile.jpg" alt="profileImg" />
+          <div class="profile-content">
+            <img src="data:image/<%=user.displaypic.contentType%>;base64,<%=user.displaypic.data.toString('base64')%>" alt="profileImg" />
           </div>
           <div class="name-job">
             <div class="profile_name"><%=user.name%></div>

@@ -1,5 +1,6 @@
 <%- include("partials/header") %> <%- include("partials/patientSideBar") %>
 <div class="container-fluid patientclass">
+  <%- include("partials/flashMsg") %>
   <div class="row justify-content-center">
     <div class="offset-2 col-9 offset-sm-2 col-sm-8 offset-lg-0 col-lg-6 p-1">
       <h1 class="text-center p-2">
@@ -31,7 +32,7 @@
               <p class="card-text p-1">
                 <i class="fas fa-question-circle blue"></i> : <%=test.noofquestion%>
               </p>
-              <p class="card-text p-1">Level : 
+              <p class="card-text p-1"><%=i18n.Level%> : 
                 <%for(let i=1;i<=5;i++){%>
                   <%if(i<=test.level){%>
                     <span class = "fa fa-star checked"></span>
@@ -54,7 +55,7 @@
                     <% c_paused=c_paused+1%>
                   <%}%>
                 <%}else{%>
-                  <button class="btn btn-lg btn-success white"  data-bs-toggle="modal" data-bs-target="#viewReport" data-bs-whatever="<%=test._id%>"><%=i18n.ViewReport%> <i class="fas fa-poll"></i>
+                  <button class="btn btn-lg btn-success white"  data-bs-toggle="modal" data-bs-target="#viewReport" data-bs-whatever="<%=test.score%>,<%=test.noofquestion%>"><%=i18n.ViewReport%> <i class="fas fa-poll"></i>
                   </button>
                   <% c_completed=c_completed+1%>
                 <%}%>
@@ -73,23 +74,30 @@
 <script src='/view_tests.js'></script>
 <script type="text/javascript">
   let total_test=parseInt('<%=tests.length %>')
+  let no_test='<%=i18n.NoTest_patient%>';
+  let no_test1='<%=i18n.isAssigned_patient%>';
+  let no_test2='<%=i18n.NoTest%>';
+  let no_pending='<%=i18n.isPending%>';
+  let no_paused='<%=i18n.isPaused%>';
+  let no_complete='<%=i18n.Completed%>';
   $(window).on('load', function() {
     create_chart();
-    count_number_of_tests('all',parseInt('<%=tests.length %>'));
-    count_number_of_tests('pending',parseInt('<%=c_pending %>'));
-    count_number_of_tests('paused',parseInt('<%=c_paused %>'));
-    count_number_of_tests('completed',parseInt('<%=c_completed %>'));
+    count_number_of_tests('all',parseInt('<%=tests.length %>'),'<%=i18n.All%>');
+    count_number_of_tests('pending',parseInt('<%=c_pending %>'),'<%=i18n.Pending%>');
+    count_number_of_tests('paused',parseInt('<%=c_paused %>'),'<%=i18n.Paused%>');
+    count_number_of_tests('completed',parseInt('<%=c_completed %>'),'<%=i18n.Completed%>');
+    disp_test_or_no_test('all',total_test)
   });
 
 //------------------RES CHART------------------
 var data = {
           labels: [
-              "Correct answerd",
-              "Wrong answerd",
+          "<%=i18n.Correctanswerd%>",
+              "<%=i18n.Wronganswerd%>",
           ],
           datasets: [
               {
-                  data: [0, 100],
+                  data: [0, 0],
                   backgroundColor: [
                       "#10ba00",
                       "#ff3300",
@@ -117,32 +125,28 @@ var data = {
   var viewReport = document.getElementById('viewReport')
   viewReport.addEventListener('show.bs.modal', function (event) {
     var button = event.relatedTarget
-    var testid = button.getAttribute('data-bs-whatever')
-    fetch('/test/'+testid)
-      .then(response => response.json())
-      .then(test=>{
-        test_res(test.score,test.noofquestion)
-      });
+    var test = button.getAttribute('data-bs-whatever').split(',');
+    test_res(test[0],test[1])
   })
   function test_res(s,n){
     let total=n*100;
     let per=(s/total)*100;
     let score=document.getElementById('score');
     let grade=document.getElementById('grade');
-    let msg=document.getElementById('msg');
+    let score_msg=document.getElementById('score_msg');
     score.textContent=s+'/'+total;
     if(per<40){
-      grade.textContent='POOR';
-      msg.textContent='Be Patient, Work Hard and you will surely get success'
+      grade.textContent='<%=i18n.POOR%>';
+      score_msg.textContent='<%=i18n.BePatientWorkHardandgetsuccess%>'
     }else if(per>=40 && per<60){
-      grade.textContent='AVERAGE';
-      msg.textContent='Your doing a good job, Keep it up!'
+      grade.textContent='<%=i18n.AVERAGE%>';
+      score_msg.textContent='<%=i18n.YourdoinggoodjobKeepitup%>'
     }else if(per>=60 && per<80){
-      grade.textContent='GOOD';
-      msg.textContent='Your getting better & better, continue the hard work'
+      grade.textContent='<%=i18n.GOOD%>';
+      score_msg.textContent='<%=i18n.gettingbettercontinuehardwork%>'
     }else{
-      grade.textContent='EXCELLENT';
-      msg.textContent='"Congratulations! Your hard work paid off"'
+      grade.textContent='<%=i18n.EXCELLENT%>';
+      score_msg.textContent='<%=i18n.hardworkpaidoff%>'
     }
     res_in_chart(per)
   }
@@ -160,12 +164,8 @@ var data = {
   }
 
   function res_in_chart(per){
-    data.datasets[0].data=[per,100-per]
     myDoughnutChart.data.datasets[0].data=[per,100-per];
     myDoughnutChart.update();
   }
-
-
 </script>
-
 <%- include("partials/footer") %>

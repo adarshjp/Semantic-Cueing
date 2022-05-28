@@ -18,8 +18,6 @@ exports.register_get = (req, res) => {
           doctors.push({ id, name })
         }
       })
-      console.log(doctors)
-      console.log(usernames)
       res.render('signup', { doctors: doctors,user:req.user,i18n:global.i18n});
     }
   })
@@ -27,7 +25,6 @@ exports.register_get = (req, res) => {
 };
 
 exports.register_post = (req, res) => {
-  console.log(req.files)
   let img= convert_img(req.files)
   const user = new User({
     username: req.body.username,
@@ -59,8 +56,7 @@ exports.register_post = (req, res) => {
       //   res.redirect("/register");
       // });
       res.status(200);
-      console.log(req.user)
-      req.flash("success", "User created!!")
+      req.flash("success", global.i18n.Usercreated)
       res.redirect("/register");
     }
   });
@@ -74,7 +70,7 @@ exports.login_get = (req, res) => {
 exports.login_post = (req, res) => {
   res.status(200);
   //res.send("login successful");
-  req.flash("success", "Welcome!")
+  req.flash("success", global.i18n.Welcome)
   if (req.user.role === "admin")
     res.redirect("/home/admin")
   else if (req.user.role === "doctor")
@@ -91,15 +87,19 @@ exports.change_password = (req, res) => {
   User.findById(req.user._id, (err, user) => {
     if (err) {
       res.status(400);
-      res.send(err);
+      req.flash('error', err.message);
+      res.redirect("/changepassword")
+      // res.send(err);
     } else {
       user.changePassword(req.body.oldPassword, req.body.newPassword, (err, user) => {
         if (err) {
           res.status(400);
-          res.send(err);
+          req.flash('error', err.message);
+          res.redirect("/changepassword")
+          // res.send(err);
         } else {
           res.status(200);
-          req.flash('success', 'Password changed!');
+          req.flash('success', global.i18n.Passwordchanged);
           res.redirect("/changepassword")
         }
       });

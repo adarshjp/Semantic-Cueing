@@ -1,10 +1,10 @@
 <%- include("partials/header") %>
 <% if(user.role==="admin" ) {%>
     <%- include("partials/adminSideBar") %>
-    <%- include("partials/no_patient",{msg:['No Patients','Created yet']})%>
+    <%- include("partials/no_patient",{msg:[i18n.NoPatients0,i18n.Createdyet0]})%>
 <% } else { %>
     <%- include("partials/doctorSideBar") %>
-    <%- include("partials/no_patient",{msg:['No Patients','assigned for you..!']})%>
+    <%- include("partials/no_patient",{msg:[i18n.NoPatients1,i18n.assignedforyou1]})%>
 <% } %>
         <div class="container-fluid" id="view-patients">
             <%- include("partials/flashMsg") %>
@@ -12,11 +12,10 @@
                 <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-6 p-1">
                     <h1 class="text-center p-2 display-3 fw-bold">
                         <% if(user.role==="admin" ) {%>
-                            <%=i18n.Our%>
+                            <%=i18n.Our%> <span class="blue"><%=i18n.Patients1%> </span>
                         <% } else { %>
-                            <%=i18n.view_Listof1%>
+                            <%=i18n.Listof0%> <span class="blue"><%=i18n.Patients0%> </span>
                         <% } %>
-                        <span class="blue"><%=i18n.view_Patients1%> </span>
                         <i class="fas fa-stethoscope blue"></i>
                     </h1>
                 </div>
@@ -32,7 +31,7 @@
                             <div class="card box-shadow p-3">
                                 <div class="row d-flex h-100">
                                     <div class="col-sm-6 my-auto">
-                                        <img src="/images/undraw_doctors_hwty.svg" class="card-img-top rounded-circle p-1 box-shadow"
+                                        <img src="data:image/<%=patient.displaypic.contentType%>;base64,<%=patient.displaypic.data.toString('base64')%>" class="card-img-top rounded-circle p-1 box-shadow"
                                             alt="..." style="border: 3px solid #6c63ff" />
                                     </div>
                                     <div class="col-sm-6 my-auto">
@@ -40,16 +39,16 @@
                                             <h1 class="card-title"><%=patient.name%></h1>
                                             <hr>
                                             <p class="card-text h5">
-                                                Email : <%=patient.email%>
+                                                <%=patient.email%>
                                             </p>
                                             <p class="card-text h5">
-                                                Age : <%=patient.age%>
+                                                <%=patient.age%>
                                             </p>
                                             <% if(user.role==="doctor") {%>
                                             <div class="d-flex justify-content-end align-items-end">
                                                 <form action="/discharge/<%=patient._id%>?_method=PUT" method="POST">
                                                     <button class="btn btn-primary white m-1" type="submit">
-                                                    Discharge</button>
+                                                    <%=i18n.Discharge%></button>
                                                 </form>
                                                 <a href="/chat/<%=patient._id%>" class="btn white m-1" id="review"
                                                     ><i class="fa-solid fa-message"></i></a>
@@ -63,10 +62,10 @@
                                                     <button class="btn btn-primary white m-1" type="submit"
                                                         <%if(patient.status === 'active'){%>disabled<%}%>
                                                     >
-                                                    Activate</button>
+                                                    <%=i18n.Activate%></button>
                                                 </form>
 
-                                                <button class="btn btn-primary white m-1 d-none d-md-block" type="button" data-bs-toggle="modal" data-bs-target="#doctorChange" data-bs-whatever='<%=patient._id%>,<%=patient.doctorid%>'>Edit <i class="fas fa-user-md"></i></button>
+                                                <button class="btn btn-primary white m-1 d-none d-md-block" type="button" data-bs-toggle="modal" data-bs-target="#doctorChange" data-bs-whatever='<%=patient._id%>,<%=patient.doctorid%>'><%=i18n.Edit%> <i class="fas fa-user-md"></i></button>
                                                 
                                                 <form action="/delete/<%=patient._id%>?_method=DELETE" method="POST">
                                                     <button class="btn btn-primary  white m-1" type="submit">
@@ -76,7 +75,7 @@
                                             
                                             </div>
                                             <div class="d-flex justify-content-end align-items-end d-block d-md-none">
-                                                <button class="btn btn-primary white m-1" type="button" data-bs-toggle="modal" data-bs-target="#doctorChange" data-bs-whatever='<%=patient._id%>,<%=patient.doctorid%>'>Edit <i class="fas fa-user-md"></i></button>
+                                                <button class="btn btn-primary white m-1" type="button" data-bs-toggle="modal" data-bs-target="#doctorChange" data-bs-whatever='<%=patient._id%>,<%=patient.doctorid%>'><%=i18n.Edit%> <i class="fas fa-user-md"></i></button>
                                             </div>
                                             <%}%>
                                         </div>
@@ -130,14 +129,14 @@
             let option=document.createElement("option");
             option.value=key;
             if(val[1]===0){
-                option.textContent=val[0]+' (yet to be assigned)';
+                option.textContent=val[0]+' (<%=i18n.yettobeassigned%>)';
             }else{
-                option.textContent=val[0]+' (assigned for '+val[1]+' patients)';
+                option.textContent=val[0]+' (<%=i18n.assignedfor%> '+val[1]+' <%=i18n.patients%>)';
             }
             let patient_card=document.getElementsByClassName(key);
             console.log(patient_card)
             for(let xy=0;xy<patient_card.length;xy++){
-                patient_card[xy].textContent='Assigned Doctor : '+val[0];
+                patient_card[xy].innerHTML='<i class="fas fa-user-md"></i> '+val[0];
             }
             document.getElementById('doctor').appendChild(option);
         }
@@ -147,7 +146,7 @@
     doctorChange.addEventListener('show.bs.modal', function (event) {
       var button = event.relatedTarget
       var Ids = button.getAttribute('data-bs-whatever').split(',');
-      document.getElementById('current-doc').innerHTML = 'Current Assigned Doctor : <strong>'+doctor[Ids[1]][0]+'</strong>';
+      document.getElementById('current-doc').innerHTML = '<%=i18n.CurrentAssignedDoctor%> : <strong>'+doctor[Ids[1]][0]+'</strong>';
       document.getElementById('changeDocForm').action='/change/doctor/'+Ids[0]+'?_method=PATCH';
    });
 </script>
