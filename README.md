@@ -1,4 +1,8 @@
 # Semantic-Cueing
+<p align="center"
+<a href="https://nodejs.org/" title="Node.js"><img src="https://github.com/get-icon/geticon/raw/master/icons/nodejs-icon.svg" alt="Node.js" width="41px" height="41px"></a>
+<a href="https://www.mongodb.org/" title="MongoDB"><img src="https://github.com/get-icon/geticon/raw/master/icons/mongodb-icon.svg" alt="MongoDB" width="41px" height="41px"></a>
+</p>
 
 ### Semantic Cueing is a system which helps to provide a speech therapy to patients with cognitive disabilities.
 
