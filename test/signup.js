@@ -86,42 +86,42 @@ exports.signupTest = () => {
                     done();
                 });
         }).timeout(100000);
-        // it('', (done) => {
-        //     let user=request.agent(app);
-        //     user
-        //         .post('/login')
-        //         .send({
-        //             username: process.env.ADMIN_USERNAME,
-        //             password: process.env.ADMIN_PASSWORD
-        //         })
-        //         .set('Accept', 'application/json')
-        //         .set('Content-Type', 'application/json')
-        //         .expect('Location', '/home/admin')
-        //         .end(function (err, res) {
-        //             if (err) return done(err);
-        //             user
-        //                 .post('/register')
-        //                 .send({
-        //                     username: 'admin',
-        //                     password: 'admin',
-        //                     role:'admin',
-        //                     email:'adarsh@gmail.com',
-        //                     name: 'admin',
-        //                     age:24,
-        //                     displaypic: '',
+        it('Validation Error 422', (done) => {
+            let user=request.agent(app);
+            user
+                .post('/login')
+                .send({
+                    username: process.env.ADMIN_USERNAME,
+                    password: process.env.ADMIN_PASSWORD
+                })
+                .set('Accept', 'application/json')
+                .set('Content-Type', 'application/json')
+                .expect('Location', '/home/admin')
+                .end(function (err, res) {
+                    if (err) return done(err);
+                    user
+                        .post('/register')
+                        .send({
+                            username: 'admin',
+                            password: 'admin',
+                            role:'admin',
+                            email:'adarsh@gmail.com',
+                            name: 'admin',
+                            age:24,
+                            displaypic: '',
 
-        //                 })
-        //                 .set('Content-Type', 'application/json')
-        //                 .expect(200)
-        //                 .end((err, res) => {
-        //                     if (err) return done(err);
-        //                     done();
-        //                 });
+                        })
+                        .set('Content-Type', 'application/json')
+                        .expect(422)
+                        .end((err, res) => {
+                            if (err) return done(err);
+                            done();
+                        });
                 
-        //             });
-        //             //done();
-        //         //});
-        // }).timeout(100000);
+                    });
+                    //done();
+                //});
+        }).timeout(100000);
     });
 
 };
