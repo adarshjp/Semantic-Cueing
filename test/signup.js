@@ -101,20 +101,20 @@ exports.signupTest = () => {
                     if (err) return done(err);
                     user
                         .post('/register')
-                        .send({
-                            username: 'admin',
+                        .field({
+                            username: 'admin1',
                             password: 'admin',
                             role:'admin',
                             email:'adarsh@gmail.com',
                             name: 'admin',
                             age:24,
-                            displaypic: '',
 
                         })
+                        .attach('displaypic', './test/dsppic.jpg')
                         .set('Content-Type', 'application/json')
                         .expect(422)
                         .end((err, res) => {
-                            if (err) return done(err);
+                            if (err) return done(err, res);
                             done();
                         });
                 

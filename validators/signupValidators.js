@@ -6,8 +6,8 @@ exports.registerValidator = [
     check('age').not().isEmpty().withMessage('Age is required'),
     check('name').not().isEmpty().withMessage('Name is required'),
     check('role').not().isEmpty().withMessage('Role is required'),
-    check('displaypic').not().isEmpty().withMessage('Displaypic is required'),
-    check('role').isIn(['admin']).withMessage('Role is invalid:Admin user can only be added by the development team'),
+    // check('displaypic').not().isEmpty().withMessage('Displaypic is required'),
+    check('role').not().isIn(['admin']).withMessage('Role is invalid:Admin user can only be added by the development team'),
     check('role').if(check('role').equals('patient')).custom((value, { req }) => {
         if (req.user.role === 'admin') {
             check('strokeDate').not().isEmpty().withMessage('Stroke Date is required'),
