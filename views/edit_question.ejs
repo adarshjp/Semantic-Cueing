@@ -16,6 +16,9 @@
                      </div>
                   </div>
                   <div class="row justify-content-center align-items-center">
+                        <div class="col-10 col-sm-10 col-md-8">
+                           <input type="text" name="" class="login-input" value="<%=question.name%>" disabled>
+                        </div>
                         <ul id='ans_list' class="col-12 col-sm-10 col-md-8 text-center" style="overflow: auto;flex-wrap: nowrap;white-space: nowrap;">
 
                         </ul>
@@ -117,6 +120,7 @@
       disp_image('upload_q','preview-q',image,'cloud-q');
       disp_pill();
       document.getElementById('<%=question.level%>'+'-star-rating').checked=true;
+      document.getElementById('cloud-q').classList.add('d-none');
    });
 
   var editHintModal = document.getElementById('editHintModal')
@@ -126,6 +130,7 @@
       document.getElementById('text').value = hint_details[2];
       document.getElementById('edit-form').action='/edit/hint/'+hint_details[3]+'/'+hint_details[0]+'?_method=PUT';
       disp_image('upload_hint','preview-hint',hint_details[1],'cloud-hint')
+      document.getElementById('cloud-hint').classList.add('d-none');
    });
 
 function disp_image(upload_id,preview_id,image,cloud){
