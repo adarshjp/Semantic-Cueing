@@ -22,8 +22,8 @@
     - ```algorithm``` - The algorithm used to hash the secret key. Examples are aes256, sha256, md5, etc.
     - ```EMAIL_ID``` - The email address of the email account used to send emails.
     - ```PASS``` - The password of the email account used to send emails.
-    - ```key``` - The key used to encrypt and decrypt the email account password, which is of length 32 and alphanumeric.
-    - ```ivstring``` - The initialization vector used to encrypt and decrypt the email account password, which is of length 16 and alphanumeric.
+    - ```key``` - The key used to encrypt and decrypt any string, which is of length 32 and alphanumeric.
+    - ```ivstring``` - The initialization vector used to encrypt and decrypt any string, which is of length 16 and alphanumeric.
     - ```ADMIN_USERNAME``` - The username of the admin account.
     - ```ADMIN_PASSWORD``` - The password of the admin account.
 - To run the server, run the following command in your terminal:
