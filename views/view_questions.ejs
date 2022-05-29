@@ -15,7 +15,7 @@
         <a href="/addquestion" class="btn btn-primary btn-lg rounded-pill">Create Question <i class="fa-solid fa-plus"></i></a>
     </div>
     <div class="row justify-content-center">
-        <div class="offset-1 col-11 offset-sm-1 col-sm-9 offset-lg-0 col-lg-8 col-xl-6">
+        <div class="offset-1 col-11 offset-sm-1 col-sm-10 col-md-11 offset-lg-0 col-lg-9 col-xl-7">
             <div class="row justify-content-center gradient-list mb-2 p-1" id='div_list'>
                 <% let len=question.length %>
                 <% question.forEach((question)=>{ %>
@@ -23,10 +23,10 @@
                         <div class="card-image mx-0 p-2">
                             <div class="row align-items-center p-1 justify-content-center">
                                 <div class="col-12 col-sm-5 col-md-3 col-lg-4">
-                                    <p class="h6 text-center"><%=question.answer%></p>
+                                    <p class="h6 text-center"><%=question.name%></p>
                                 </div>
                                 <div class="col-12 col-sm-7 col-md-5">
-                                    <p class="h6 text-center"><%=i18n.Level%> : 
+                                    <p class="h6 text-center"> 
                                         <%for(let i=1;i<=5;i++){%>
                                           <%if(i<=question.level){%>
                                             <span class = "fa fa-star checked"></span>
@@ -82,9 +82,9 @@
                 {
                     document.getElementById('loader').classList.add('d-none');
                     isCompleted=true;
-                    swal("<%=i18n.Completed%>", "<%=i18n.SorryNomorequestions%>", "info");
-                    document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
-                    document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
+                    // swal("<%=i18n.Completed%>", "<%=i18n.SorryNomorequestions%>", "info");
+                    // document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+                    // document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
                     return
                 }
                 for(let q=0;q<question.question.length;q++) {
@@ -112,7 +112,7 @@
 
         let p=document.createElement('p')
         p.className='h6 text-center';
-        p.textContent=q.answer;
+        p.textContent=q.name;
 
         div_p_1.appendChild(p);
 
@@ -121,7 +121,6 @@
 
         p=document.createElement('p')
         p.className='h6 text-center';
-        p.textContent='Level : '
         for(let x=1;x<=5;x++){
             let span=document.createElement('span');
             span.className='fa fa-star'
