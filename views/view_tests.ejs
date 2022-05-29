@@ -92,7 +92,7 @@
                       <tr>
                         <td class="<%=patient.patientid%>"></td>
                         <td style="text-transform: capitalize;"><%=patient.status%></td>
-                      <%if(test.status==='completed'){%>
+                      <%if(patient.status==='completed'){%>
                         <td>
                           <button class="btn btn-lg btn-success white rounded-pill"  data-bs-toggle="modal" data-bs-target="#viewReport" data-bs-whatever="<%=patient.score%>,<%=test.noofquestion%>">
                             <i class="fas fa-poll"></i>
