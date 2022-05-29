@@ -1,6 +1,6 @@
 # Semantic-Cueing
 
-## Semantic Cueing is a system which helps to provide a speech therapy to patients with cognitive disabilities.
+### Semantic Cueing is a system which helps to provide a speech therapy to patients with cognitive disabilities.
 
 <br>
 
@@ -38,7 +38,7 @@
     ```js
     router.post("/register",upload.array("displaypic", 1), register_post);
     ```
-- Make a `POST` request to `/register' using POSTMAN
+- Make a `POST` request to `/register` using POSTMAN
 - The request body should be:
     ```json
     {
