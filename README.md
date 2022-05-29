@@ -33,7 +33,7 @@
     - ```npm test``` - Start server in QA mode. 
 
 ### Instructions to create a ADMIN account
-- Open ```controllers/admin.js``` in your text editor.
+- Open ```routes/admin.js``` in your text editor.
 - Change the following line of code 
     ```js 
     router.post("/register", upload.array("displaypic", 1), isLoggedIn, isAdmin, registerValidator, register_post);
@@ -55,6 +55,6 @@
         "role": "admin"
     }
     ```
-- After creating the ADMIN account, revert the changes made in `controlllers/admin.js`.
+- After creating the ADMIN account, revert the changes made in `routes/admin.js`.
 
 
