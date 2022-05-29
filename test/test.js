@@ -1,9 +1,11 @@
 const {loginTest}= require('./login')
+const {signupTest}= require('./signup')
 before(function (done) {
     this.timeout(1000000);
     setTimeout(done, 5000);
 });
 loginTest()
+signupTest()
 // describe('GET /login ',() => {
 //     it('should render login page and return 200', (done) => {
 //         request(app)

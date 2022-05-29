@@ -15,12 +15,12 @@ exports.loginTest=()=>{
         });
     });
     describe('POST /login ',() => {
-        it('correct password and username', (done) => {
+        it('ADMIN-correct password and username', (done) => {
             request(app)
             .post('/login')
             .send({
-                username: 'abc',
-                password: 'abc'
+                username: process.env.ADMIN_USERNAME,
+                password: process.env.ADMIN_PASSWORD
             })
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
