@@ -20,6 +20,9 @@
                      <div class="col-12 col-sm-7 col-md-6" id="preview"></div>
                   </div>
                   <div class="row justify-content-center align-items-center">
+                        <div class="col-12 col-md-10 col-lg-8 text-center my-2">
+                           <%- include("partials/starLevel") %>
+                        </div>
                         <div class="col-12 col-sm-10 col-md-8">
                            <input type="text" class='login-input' id='name' placeholder="<%=i18n.TitleofQuestion%>" name="name" required> 
                         </div>
@@ -31,9 +34,6 @@
                         <ul id='ans_list' class="col-12 col-md-10 col-lg-8 text-center" style="overflow: auto;flex-wrap: nowrap;white-space: nowrap;">
 
                         </ul>
-                        <div class="col-12 col-md-10 col-lg-8 text-center my-2">
-                           <%- include("partials/starLevel") %>
-                        </div>
                         <div class="col-12 col-md-10 col-lg-8">
                            <input type="text" name="score" id='desc' class='login-input' placeholder="<%=i18n.Description%>" required>
                         </div>

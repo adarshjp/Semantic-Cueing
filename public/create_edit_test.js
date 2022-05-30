@@ -17,7 +17,7 @@ document.getElementById('sel-q-tab').addEventListener('click', function(){
     document.getElementById('sel-pat').classList.add('d-none');
     document.getElementById('sel-lev').classList.add('d-none');
     document.getElementById('res_but').classList.add('d-none');
-    
+    document.getElementById('title').classList.add('d-none');
     document.getElementById('no_question').classList.add('d-none');
     document.getElementById('question-row').classList.remove('d-none');
     
@@ -31,10 +31,15 @@ document.getElementById('selected-q-tab').addEventListener('click', function(){
     document.getElementById('sel-pat').classList.remove('d-none');
     document.getElementById('sel-lev').classList.remove('d-none');
     document.getElementById('res_but').classList.remove('d-none');
+    document.getElementById('title').classList.remove('d-none');
     var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
     if (checkboxes.length===0){
         document.getElementById('no_question').classList.remove('d-none');
         document.getElementById('question-row').classList.add('d-none');
+        document.getElementById('sel-pat').classList.add('d-none');
+        document.getElementById('sel-lev').classList.add('d-none');
+        document.getElementById('res_but').classList.add('d-none');
+        document.getElementById('title').classList.add('d-none');
     }
 });
 
@@ -147,13 +152,13 @@ function append_div(q,ischecked){
     label.setAttribute('for','option'+li_id);
 
     let strong=document.createElement('strong');
-    strong.textContent=q.answer;
+    strong.textContent=q.name;
     
     label.appendChild(strong);
 
     let p=document.createElement('p');
     p.className='h6';
-    p.textContent='Level : '
+    p.textContent='';
     for(let x=1;x<=5;x++){
         let span=document.createElement('span');
         span.className='fa fa-star'
@@ -204,7 +209,6 @@ function arrayBufferToBase64(buffer) {
 function chnage_patinet_list(){
     var selected = $("#patient-list :selected").map((_, e) => e.value).get();
     document.getElementById('patientIDs').value=JSON.stringify(selected);
-    console.log(document.getElementById('patientIDs').value)
 }
 $(document).ready(function(){
     var multipleCancelButton = new Choices('#patient-list', {
