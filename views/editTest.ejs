@@ -5,7 +5,7 @@
     <%- include("partials/no_Question",{msg:[i18n.NoQuestions,i18n.Selectedyet]})%>
     <form action="/edit/test/<%= test.id %>?_method=PATCH" method="POST" id="testForm" onsubmit="return noofqval();">
         <div class="row justify-content-center" id='question-row'>
-            <div class="offset-1 col-11 offset-sm-1 col-sm-9 offset-lg-0 col-lg-8 col-xl-6">
+            <div class="offset-1 col-11 offset-sm-1 col-sm-10 offset-lg-0 col-lg-9 col-xl-8">
                 <div class="row justify-content-center gradient-list mb-2 p-1" id='div_list'>
                 
                 </div>
@@ -32,6 +32,12 @@
                 </select>
             </div>
         </div>
+        <div class="row justify-content-center align-items-center mt-1 d-none" id="title">
+            <div class="offset-2 col-9 offset-sm-1  col-md-6 col-lg-4 offset-lg-0">
+                <label for="title" class="mt-2">Title of the test</label>
+                <input type="text" name="name" class="login-input" id="title" value="<%=test.name%>" placeholder="Enter title.."/>
+            </div>
+        </div>
         <div class="row justify-content-center align-items-center text-center d-none mt-1" id="sel-lev">
             <div class="offset-2 col-9 offset-sm-1 offset-md-0 col-md-4 text-center mt-2">
                 <%- include("partials/starLevel") %>
@@ -44,7 +50,7 @@
         </div>
     </form>
 </div>
-
+<script src='/create_edit_test.js'></script>
 <script>
     let k=0;   //multiplier used to skip questions 5,10,15 so on...
     let li_id=1; //used in input and labels
@@ -52,6 +58,7 @@
     let temp=isCompleted;
     let selected_q='<%=test.questions%>'.split(',');
     document.getElementById('<%=test.level%>-star-rating').checked=true;
+    chnage_patinet_list();
 
     for(let j=0;j<selected_q.length;j++){
         fetch('/question/'+selected_q[j])
@@ -83,7 +90,6 @@
     }
     
     window.onscroll = function(ev) {
-        console.log(k)
         if (!isCompleted && ((window.innerHeight + window.scrollY+1) >= document.body.offsetHeight)) {
             document.getElementById('loader').classList.remove('d-none')
             fetch('/create/test/'+(k*10))
@@ -93,9 +99,6 @@
                 {
                     document.getElementById('loader').classList.add('d-none');
                     isCompleted=true;
-                    swal("<%=i18n.Completed%>", "<%=i18n.SorryNomorequestions%>", "info");
-                    document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
-                    document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
                     return
                 }
                 for(let q=0;q<question.question.length;q++) {
@@ -115,5 +118,4 @@
         }
     };
 </script>
-<script src='/create_edit_test.js'></script>
 <%- include("partials/footer") %>
