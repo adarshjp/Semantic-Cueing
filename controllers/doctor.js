@@ -227,7 +227,6 @@ exports.upgrade_level = (req, res) => {
   /* Updates the level of patient by one */
   User.findOneAndUpdate({ _id: req.params.patientId,role:'patient' }, { $inc: { level: 1 } }, { new: true })
     .then((patient) => {
-      console.log(patient)
       req.flash('success', global.i18n.Levelupdatedsuccessfully);
       res.status(200)
       res.redirect('/home/doctor/' + req.user._id)

@@ -193,8 +193,8 @@
     "Otp":"ಒಟಿಪಿ",
     "UsernamealreadyexistsPleasetryanotherone":"ಉಸೆರ್ನೇಮ್ ಈಗಾಗಲೇ ಇದೆ.ಮತ್ತೆ ಪ್ರಯತ್ನಿಸು",
     "SelectRole":"ರೋಲ್ ಆಯ್ಕೆ ಮಾಡಿ",
-    "Choosedoctor":"ಡಾಕ್ಟರ್ ಆಯ್ಕೆ ಮಾಡಿ:",
-    "StrokeDate":"ಸ್ಟ್ರೋಕ್ ಆದ ದಿನಾಂಕ ",
+    "Choosedoctor":"ಡಾಕ್ಟರ್ ಆಯ್ಕೆ ಮಾಡಿ",
+    "StrokeDate":"ಸ್ಟ್ರೋಕ್ ಆದ ದಿನಾಂಕ",
     "ChooseProfilePicture":"ಪ್ರೊಫೈಲ್ ಚಿತ್ರ ಆಯ್ಕೆಮಾಡಿ",
 
             "Invalid":"ಅಮಾನ್ಯವಾಗಿದೆ!",
@@ -262,7 +262,7 @@
     "19":"view_questions.ejs",
 
     "Listof":"ರಚಿಸಲಾದ",
-    "Questions":"ಪ್ರಶ್ನೆಗಳ",
+    "Questions":"ಪ್ರಶ್ನೆಗಳು",
     "Created":"ಪಟ್ಟಿ",
     "Noquestions":"ಇನ್ನೂ ಯಾವುದೇ",
     "Createdyet1":"ಪ್ರಶ್ನೆಗಳನ್ನು ರಚಿಸಲಾಗಿಲ್ಲ..!",
