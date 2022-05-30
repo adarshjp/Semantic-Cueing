@@ -67,6 +67,7 @@ exports.post_create_test = (req, res) => {
   */
   let patientids = JSON.parse(req.body.patientIDs);
   let newTest = Test({
+    name:req.body.name,
     doctorid: req.user._id,
     questions: req.body.questions,
     level: req.body.level,
@@ -186,7 +187,7 @@ exports.patch_edit_test = (req, res) => {
       patientid: patientids[i],
     });
   }
-  Test.findOneAndUpdate({ _id: req.params.testid }, { $set:{level: req.body.level, questions: req.body.questions, noofquestion: req.body.questions.length, patients:patients}}, { new: true })
+  Test.findOneAndUpdate({ _id: req.params.testid }, { $set:{name: req.body.name, level: req.body.level, questions: req.body.questions, noofquestion: req.body.questions.length, patients:patients}}, { new: true })
     .then((test) => {
       req.flash('success', global.i18n.Testupdatedsuccessfully);
       res.status(200)
