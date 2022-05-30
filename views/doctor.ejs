@@ -10,10 +10,14 @@
       <select class="form-select form-select-lg my-2 p-2" aria-label=".form-select-lg" onchange="disp_patient_details(this.value)">
         <% let patinetId%>
         <% if(patient.length > 0) {%>
-          <% patinetId=patient[0]._id%>
+          <% patinetId=patientid%>
         <%}%>
         <% patient.forEach((patient)=> { %>
-          <option value="<%=patient._id%>"><%=patient.name%></option>
+          <option value="<%=patient._id%>" 
+            <%if (patient._id.toString() === patinetId.toString()) {%>
+              selected
+            <%}%>
+          ><%=patient.name%></option>
         <% }) %>
       </select>
     </div>
@@ -43,7 +47,7 @@
             <div class="row text-center justify-content-center">
               <div class="col-12 col-lg-6 p-2">
                 <div class="card">
-                  <div class="card-header bg-primary white">
+                  <div class="card-header blue">
                     <p class="h5 mb-0"><%=i18n.PatientId%></p>
                   </div>
                   <div class="card-body">
@@ -53,7 +57,7 @@
               </div>
               <div class="col-12 col-lg-6 p-2">
                 <div class="card">
-                  <div class="card-header bg-primary white">
+                  <div class="card-header blue">
                     <p class="h5 mb-0"><%=i18n.StrokeDate%></p>
                   </div>
                   <div class="card-body">
@@ -63,7 +67,7 @@
               </div>
               <div class="col-12 col-lg-6 p-2">
                 <div class="card">
-                  <div class="card-header bg-primary white">
+                  <div class="card-header blue">
                     <p class="h5 mb-0"><%=i18n.PostStrokeDuration%></p>
                   </div>
                   <div class="card-body">
@@ -73,7 +77,7 @@
               </div>
               <div class="col-12 col-lg-6 p-2">
                 <div class="card">
-                  <div class="card-header bg-primary white">
+                  <div class="card-header blue">
                     <p class="h5 mb-0"><%=i18n.EmailAddress%></p>
                   </div>
                   <div class="card-body">
@@ -83,7 +87,7 @@
               </div>
               <div class="col-12 col-lg-6 p-2">
                 <div class="card">
-                  <div class="card-header bg-primary white">
+                  <div class="card-header blue">
                     <p class="h5 mb-0"><%=i18n.Nooftestscreated%></p>
                   </div>
                   <div class="card-body">
@@ -174,6 +178,17 @@
     </div>
   </div>
 </div>
+<script>
+  let cards=document.getElementsByClassName('card');
+  for(let i=0;i<cards.length;i++){
+    cards[i].addEventListener("mouseenter", function(){
+      this.classList.add('animate__animated', 'animate__pulse')
+    });
+    cards[i].addEventListener("mouseleave", function(){
+      this.classList.remove('animate__animated', 'animate__pulse')
+    });
+  }
+</script>
 <script type="text/javascript">
   let temp=true; // this is used to keep track whether chart is created or not
     
@@ -213,17 +228,16 @@
         document.getElementById('level').appendChild(span)
       }
       if(patient[0].level==1){
-        document.getElementById('downgrade-but').setAttribute('disabled','')
-        document.getElementById('upgrade-but').removeAttribute('disabled')
+        document.getElementById('downgrade-but').classList.add('d-none')
+        document.getElementById('upgrade-but').classList.remove('d-none')
       }
       if(patient[0].level==2){
-        document.getElementById('upgrade-but').removeAttribute('disabled')
-        document.getElementById('downgrade-but').removeAttribute('disabled')
+        document.getElementById('downgrade-but').classList.remove('d-none')
+        document.getElementById('upgrade-but').classList.remove('d-none')
       }
       if(patient[0].level==3){
-        document.getElementById('upgrade-but').setAttribute('disabled','')
-        document.getElementById('downgrade-but').removeAttribute('disabled')
-        
+        document.getElementById('downgrade-but').classList.remove('d-none')
+        document.getElementById('upgrade-but').classList.add('d-none')
       }
       let storke_date=new Date(patient[0].strokeDate);
       let today=new Date();
