@@ -749,5 +749,24 @@ background: #eee;
   border: 1px solid #564dfc;
 }
 .green{
-  color: #63ff6c;
+  color: #11ee29;
+}
+
+.btn-success{
+  background-color: #11ee29;
+  border-color: #11ee29;
+}
+.btn-success:hover{
+  background-color: #0ec422;
+  border-color: #0ec422;
+}
+
+.swal-title{
+  color: #6C63FF;
+}
+.swal-text{
+  text-align: center;
+}
+.swal-footer{
+  text-align: center;
 }
