@@ -20,7 +20,15 @@
       <div class="row p-0 justify-content-center">
         <% let k=1,c_pending=0,c_paused=0,c_completed=0%>
         <% tests.forEach((test) => { %>
-        <div class="col-12 col-sm-9 col-md-8 col-lg-6 col-xl-4 p-2 <%=test.status%> test<%=k-1%>" id='test_list'>
+        <div class="col-12 col-sm-9 col-md-8 col-lg-6 col-xl-4 p-2 <%=test.status%> test<%=k-1%>
+          <% if(test.status === 'pending') {%>
+            order-1
+          <% } else if(test.status === 'paused'){%>
+            order-2
+          <% } else {%>
+            order-3
+          <% } %>
+          " id='test_list'>
           <div class="card box-shadow border border-3 animate__animated animate__bounceInUp">
             <div class="card-header">
               <div class="row align-items-center">
@@ -84,7 +92,7 @@
                       <tr>
                         <td class="<%=patient.patientid%>"></td>
                         <td style="text-transform: capitalize;"><%=patient.status%></td>
-                      <%if(test.status==='completed'){%>
+                      <%if(patient.status==='completed'){%>
                         <td>
                           <button class="btn btn-lg btn-success white rounded-pill"  data-bs-toggle="modal" data-bs-target="#viewReport" data-bs-whatever="<%=patient.score%>,<%=test.noofquestion%>">
                             <i class="fas fa-poll"></i>
