@@ -25,7 +25,7 @@
 
   <div class="row justify-content-center">
     <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-10 p-3">
-      <div class="card shadow">
+      <div class="card shadow border-3 animate__animated animate__bounceInUp">
         <div class="d-flex justify-content-center align-items-center blue" id='spinner-0' style="height:220px">
           <div class="spinner-border" role="status">
             <span class="visually-hidden"><%=i18n.Loading%>...</span>
@@ -114,7 +114,7 @@
   <div class="row justify-content-center mt-2 text-center">
 
     <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-10 col-xl-5 p-3">
-      <div class="card shadow">
+      <div class="card shadow border-3 animate__animated animate__bounceInUp">
         <div class="card-header bg-primary">
           <h5 class="pt-2 white"><%=i18n.Patientstestresult%></h5>
         </div>
@@ -130,7 +130,7 @@
     </div>
 
     <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-5 p-3">
-      <div class="card shadow">
+      <div class="card shadow border-3 animate__animated animate__bounceInUp">
         <div class="card-header bg-primary">
           <h5 class="pt-2 white"><%=i18n.Assignedtestdetails%></h5>
         </div>
@@ -146,7 +146,7 @@
     </div>
 
     <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-5 p-3">
-      <div class="card shadow">
+      <div class="card shadow border-3 animate__animated animate__bounceInUp">
         <div class="card-header bg-primary">
           <h5 class="pt-2 white"><%=i18n.AnsweredaQuestionvsHintsTaken%></h5>
         </div>
@@ -162,7 +162,7 @@
     </div>
 
     <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-5 p-3">
-      <div class="card shadow">
+      <div class="card shadow border-3 animate__animated animate__bounceInUp">
         <div class="card-header bg-primary">
           <h5 class="pt-2 white"><%=i18n.UnansweredaQuestionvsHintsTaken%></h5>
         </div>
@@ -182,12 +182,17 @@
   let cards=document.getElementsByClassName('card');
   for(let i=0;i<cards.length;i++){
     cards[i].addEventListener("mouseenter", function(){
-      this.classList.add('animate__animated', 'animate__pulse')
+      this.classList.add('animate__pulse')
     });
     cards[i].addEventListener("mouseleave", function(){
-      this.classList.remove('animate__animated', 'animate__pulse')
+      this.classList.remove('animate__pulse')
     });
   }
+  setTimeout(function(){
+      for(let i=0;i<cards.length;i++){
+      cards[i].classList.remove('animate__bounceInUp')
+    }
+  },1000);
 </script>
 <script type="text/javascript">
   let temp=true; // this is used to keep track whether chart is created or not

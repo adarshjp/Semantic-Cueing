@@ -3,8 +3,8 @@
 <div class="container-fluid">
   <%- include("partials/flashMsg") %>
   <div class="row justify-content-center">
-    <div class="offset-2 col-9 offset-sm-1 col-sm-9 offset-lg-0 col-lg-6 p-1">
-      <h1 class="text-center p-2">
+    <div class="offset-2 col-9 offset-sm-1 col-sm-9 offset-lg-0 col-lg-6 p-2">
+      <h1 class="text-center display-4 fw-bold p-2">
         <%=i18n.Listof%><span class="blue"> <%=i18n.Tests%></span> 
         <%=i18n.Created%> <i class="fas fa-calendar-check blue"></i>
       </h1>
@@ -21,7 +21,7 @@
         <% let k=1,c_pending=0,c_paused=0,c_completed=0%>
         <% tests.forEach((test) => { %>
         <div class="col-12 col-sm-9 col-md-8 col-lg-6 col-xl-4 p-2 <%=test.status%> test<%=k-1%>" id='test_list'>
-          <div class="card box-shadow border border-2">
+          <div class="card box-shadow border border-3 animate__animated animate__bounceInUp">
             <div class="card-header">
               <div class="row align-items-center">
                 <div class="col-5 mt-2">
@@ -39,7 +39,7 @@
                       <% c_pending=c_pending+1%>
                   <%}else if(test.status === 'completed'){%>
                     <button class="btn btn-lg btn-success rounded-pill white" type="button" disabled>
-                      <i class="fa-solid fa-check-to-slot"></i>
+                      <i class="fa-solid fa-check"></i>
                     </button>
                     <% c_completed=c_completed+1%>
                   <%}else{%>
@@ -109,6 +109,17 @@
   </div>
 </div>
 <%- include("partials/viewReportModal") %>
+<script>
+  let cards=document.getElementsByClassName('card');
+  for(let i=0;i<cards.length;i++){
+    cards[i].addEventListener("mouseenter", function(){
+      this.classList.add('animate__pulse')
+    });
+    cards[i].addEventListener("mouseleave", function(){
+      this.classList.remove('animate__pulse')
+    });
+  }
+</script>
 <script src='/view_tests.js'></script>
 <script>
   let total_test=parseInt('<%=tests.length %>')
@@ -125,7 +136,12 @@
     count_number_of_tests('completed',parseInt('<%=c_completed %>'),'<%=i18n.Completed%>');
     disp_test_or_no_test('all',total_test)
     patient_names();
-    create_chart()
+    create_chart();
+    setTimeout(function(){
+      for(let i=0;i<cards.length;i++){
+      cards[i].classList.remove('animate__bounceInUp')
+    }
+    },1000);
   });
 
 //------------------RES CHART------------------
