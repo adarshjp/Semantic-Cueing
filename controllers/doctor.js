@@ -46,9 +46,12 @@ exports.get_create_test = (req, res) => {
 exports.get_home_doctor = (req, res) => {
     User.find({role:'patient',doctorid:req.user._id,status:'active'},{_id:1, name: 1})
     .then((patients) =>{
-      let patientid = patients[0]._id;
-      if(req.query.patientid!==undefined){
-        patientid = req.query.patientid;
+      let patientid
+      if(patients.length!==0){
+        patientid = patients[0]._id;
+        if(req.query.patientid!==undefined){
+          patientid = req.query.patientid;
+        }
       }
       res.render("doctor",{user:req.user, patient:patients, patientid:patientid, i18n:global.i18n})
     })
