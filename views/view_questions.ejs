@@ -1,54 +1,58 @@
 <%- include("partials/header") %>
 <%- include("partials/adminSideBar") %>
 <%- include("partials/no_patient",{msg:[i18n.Noquestions,i18n.Createdyet1,'No questions']})%>
-<div class="container" id='view-question'>
+<div class="container-fluid" id='view-question'>
     <%- include("partials/flashMsg") %>
     <div class="row justify-content-center">
-        <div class="offset-2 col-9 offset-sm-1 col-sm-9 offset-lg-0 col-lg-6 p-1">
-          <h1 class="text-center p-2">
+        <div class="offset-2 col-10 offset-sm-1 col-sm-10 offset-lg-0 col-lg-8 p-1">
+          <h1 class="text-center display-4 fw-bold p-2">
             <%=i18n.Listof%><span class="blue"> <%=i18n.Questions%></span> 
-            <%=i18n.Created%> <i class="fas fa-calendar-check blue"></i>
+            <%=i18n.Created%>
           </h1>
         </div>
     </div>
-    <div class="offset-2 col-10 offset-sm-1 col-sm-11 offset-lg-0 col-lg-12 text-center my-2">
+    <div class="offset-2 offset-sm-1 offset-lg-0 text-center my-2">
         <a href="/addquestion" class="btn btn-primary btn-lg rounded-pill"><%=i18n.AddQuestion%> <i class="fa-solid fa-plus"></i></a>
     </div>
-    <div class="row justify-content-center">
-        <div class="offset-1 col-11 offset-sm-1 col-sm-10 col-md-11 offset-lg-0 col-lg-9 col-xl-7">
-            <div class="row justify-content-center gradient-list mb-2 p-1" id='div_list'>
+    <div class="row justify-content-center align-items-center mt-4">
+        <div class="offset-2 col-10 offset-sm-1 col-sm-11 offset-lg-0 col-lg-10 col-xl-8">
+            <div class="row justify-content-center align-items-center" id='div_list'>
                 <% let len=question.length %>
                 <% question.forEach((question)=>{ %>
-                    <div class="offset-1 offset-sm-0 col-9 col-sm-12 shadow-lg bg-body rounded-lg">
-                        <div class="card-image mx-0 p-2">
-                            <div class="row align-items-center p-1 justify-content-center">
-                                <div class="col-12 col-sm-5 col-md-3 col-lg-4">
-                                    <p class="h6 text-center"><%=question.name%></p>
+                    <div class="ms-3 ms-md-0 col-11 border border-2 rounded-3 shadow-sm my-2 py-3">
+                        <div class="card-image mx-0 p-sm-2">
+                            <div class="row align-items-center justify-content-center">
+                                <div class="col-7 col-sm-9 col-lg-10">
+                                    <div class="row align-items-center justify-content-center">
+                                        <div class="col-12 col-md-6">
+                                            <p class="h6 text-truncate text-break"><%=question.name%></p>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <p class=""> 
+                                                <%for(let i=1;i<=5;i++){%>
+                                                  <%if(i<=question.level){%>
+                                                    <span class = "fa fa-star checked"></span>
+                                                  <%} else{%>
+                                                    <span class = "fa fa-star unchecked"></span>
+                                                  <%}%>
+                                                <%}%>
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-12 col-sm-7 col-md-5">
-                                    <p class="h6 text-center"> 
-                                        <%for(let i=1;i<=5;i++){%>
-                                          <%if(i<=question.level){%>
-                                            <span class = "fa fa-star checked"></span>
-                                          <%} else{%>
-                                            <span class = "fa fa-star unchecked"></span>
-                                          <%}%>
-                                        <%}%>
-                                    </p>
-                                </div>
-                                <div class="col-7 col-sm-4 col-md-4 col-lg-3 text-center">
+                                <div class="col-5 col-sm-3 col-lg-2 text-center">
                                     <a class="btn btn-primary white" href='/edit/question/<%=question._id%>'
                                             ><i class="fas fa-edit"></i></a>
                                     <form action="/delete/question/<%=question._id%>?_method=DELETE" class="d-inline-block" method="POST">
-                                        <button class="btn btn-danger white m-1" type="submit">
+                                        <button class="btn btn-danger white" type="submit">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </form>
                                 </div>
                             </div>
-                            <div class="hover-img">
-                                <span class="p-1 rounded-lg my-3" id="qimg">
-                                    <img src="data:image/<%=question.question.contentType%>;base64,<%=question.question.data.toString('base64')%>" alt="image" class="img-fluid" style="max-height: 12rem;"/>      
+                            <div class="hover-img text-center">
+                                <span class="p-1 rounded-lg my-3">
+                                    <img src="data:image/<%=question.question.contentType%>;base64,<%=question.question.data.toString('base64')%>" alt="image" class="img-fluid border border-2 rounded-3" style="height: 35vh;" id='qimg'/>      
                                 </span>
                             </div>
                         </div>   
@@ -57,7 +61,7 @@
             </div>
         </div>
     </div>
-    <div class="d-flex justify-content-center d-none blue my-4" id="loader">
+    <div class="offset-2 offset-sm-1 offset-lg-0 text-center blue my-4 d-none" id="loader">
         <div class="spinner-border text-primary" role="status">
           <span class="visually-hidden"><%=i18n.Loading%>...</span>
         </div>
@@ -82,9 +86,6 @@
                 {
                     document.getElementById('loader').classList.add('d-none');
                     isCompleted=true;
-                    // swal("<%=i18n.Completed%>", "<%=i18n.SorryNomorequestions%>", "info");
-                    // document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
-                    // document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
                     return
                 }
                 for(let q=0;q<question.question.length;q++) {
@@ -97,30 +98,37 @@
     };
 
     function append_div(q){
+
         let div=document.createElement("div");
         
-        div.className='offset-1 offset-sm-0 col-9 col-sm-12 shadow-lg bg-body rounded-lg';
+        div.className='ms-3 ms-md-0 col-11 border border-2 rounded-3 shadow-sm  my-2 py-3';
 
         let card_img=document.createElement('div');
-        card_img.className='card-image mx-0 p-2';
+        card_img.className='card-image mx-0 p-sm-2';
 
         let div_row=document.createElement('div');
-        div_row.className='row align-items-center p-1 justify-content-center';
+        div_row.className='row align-items-center justify-content-center';
 
-        let div_p_1=document.createElement('div')
-        div_p_1.className='col-12 col-sm-5 col-md-3 col-lg-4';
+        let div_p=document.createElement('div')
+        div_p.className='col-7 col-sm-9 col-lg-10';
+
+        let div_p_row=document.createElement('div');
+        div_p_row.className='row align-items-center justify-content-center';
+
+        let div_p_row_1=document.createElement('div');
+        div_p_row_1.className='col-12 col-md-6';
 
         let p=document.createElement('p')
-        p.className='h6 text-center';
+        p.className='h6 text-truncate';
         p.textContent=q.name;
 
-        div_p_1.appendChild(p);
+        div_p_row_1.appendChild(p);
 
-        let div_p_2=document.createElement('div')
-        div_p_2.className='col-12 col-sm-7 col-md-5';
+        let div_p_row_2=document.createElement('div');
+        div_p_row_2.className='col-12 col-md-6';
 
         p=document.createElement('p')
-        p.className='h6 text-center';
+        p.className='h6';
         for(let x=1;x<=5;x++){
             let span=document.createElement('span');
             span.className='fa fa-star'
@@ -132,10 +140,15 @@
             p.appendChild(span);
             p.innerHTML +=' '
         }
-        div_p_2.appendChild(p);
+        div_p_row_2.appendChild(p);
+
+        div_p_row.appendChild(div_p_row_1);
+        div_p_row.appendChild(div_p_row_2);
+
+        div_p.appendChild(div_p_row);
 
         let div_a=document.createElement('div')
-        div_a.className='col-7 col-sm-4 col-md-4 col-lg-3 text-center';
+        div_a.className='col-5 col-sm-3 col-lg-2 text-center';
 
         let a=document.createElement('a');
         a.className='btn btn-primary white';
@@ -144,14 +157,6 @@
         let i1=document.createElement('i');
         i1.className='fas fa-edit';
         a.appendChild(i1);
-
-        div_a.appendChild(a);
-
-        div_row.appendChild(div_p_1);
-        div_row.appendChild(div_p_2);
-        div_row.appendChild(div_a);
-
-        card_img.appendChild(div_row)
 
         let form=document.createElement('form');
         form.action='/delete/question/<%=question._id%>?_method=DELETE';
@@ -167,28 +172,33 @@
         button.appendChild(i2);
 
         form.appendChild(button);
+
+        div_a.appendChild(a);
         div_a.appendChild(form);
+
+        div_row.appendChild(div_p);
+        div_row.appendChild(div_a);
+
+        card_img.appendChild(div_row);
 
         let hover_img=document.createElement('div');
         hover_img.className='hover-img';
 
         let span=document.createElement('span');
         span.className='p-1 rounded-lg my-3';
-        span.id='qimg';
 
         let img=document.createElement('img');
-        img.className='img-fluid';
+        img.className='img-fluid  border border-2 rounded-3';
         img.alt='image';
-        img.style.cssText='max-height: 18rem;'
+        img.style.cssText='height: 35vh;';
+        img.id='qimg';
         img.src='data:image/'+q.question.contentType+';base64,'+arrayBufferToBase64(q.question.data.data);
         
         span.appendChild(img);
         hover_img.appendChild(span);
 
         card_img.appendChild(hover_img);
-
         div.appendChild(card_img);
-
         document.getElementById('div_list').append(div);
     }
 
