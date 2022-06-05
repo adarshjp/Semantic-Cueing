@@ -6,25 +6,33 @@
     <%- include("partials/no_Question",{msg:[i18n.NoQuestions,i18n.Selectedyet]})%>
     <form action="/create/test" method="POST" id="testForm" onsubmit="return noofqval();">
         <div class="row justify-content-center" id='question-row'>
-            <div class="offset-1 col-11 offset-sm-1 col-sm-10 offset-lg-0 col-lg-9 col-xl-8">
+            <div class="offset-2 col-10 offset-sm-1 col-sm-11 offset-lg-0 col-lg-10 col-xl-8">
                 <div class="row justify-content-center gradient-list mb-2 p-1" id='div_list'>
                     <% var i=1;%>
                     <% let len=question.length %>
                     <% question.forEach((question)=>{ %>
-                        <div class="offset-1 offset-sm-0 col-9 col-sm-10 col-lg-11 col-xl-10 shadow-lg bg-body rounded-lg <%= question.level%>" id="question<%=i%>">
+                        <div class="ms-3 ms-md-0 col-11 border border-2 rounded-3 shadow-sm my-2 py-3 <%= question.level%>" id="question<%=i%>">
                             <div class="card-image mx-0 p-2">
                                 <div class="inputGroup">
                                     <input id="option<%=i%>" class="form-check-input question<%=i%> op<%=question.level%>" type="checkbox"  value="<%=question._id %>" name="questions" onclick="countQuestion()">
-                                    <label for="option<%=i%>"><strong><%=question.name%></strong></label> 
-                                    <p class="h6"> 
-                                        <%for(let i=1;i<=5;i++){%>
-                                          <%if(i<=question.level){%>
-                                            <span class = "fa fa-star checked"></span>
-                                          <%} else{%>
-                                            <span class = "fa fa-star unchecked"></span>
-                                          <%}%>
-                                        <%}%>
-                                    </p>
+                                    <label for="option<%=i%>">
+                                        <div class="row">
+                                            <div class="col-10 col-sm-11 col-md-5 text-truncate">
+                                                <strong><%=question.name%></strong>
+                                            </div>
+                                            <div class="col-10 col-sm-11 col-md-5 mt-2 mt-md-0">
+                                                <p class="h6"> 
+                                                    <%for(let i=1;i<=5;i++){%>
+                                                      <%if(i<=question.level){%>
+                                                        <span class = "fa fa-star checked"></span>
+                                                      <%} else{%>
+                                                        <span class = "fa fa-star unchecked"></span>
+                                                      <%}%>
+                                                    <%}%>
+                                                </p>   
+                                            </div>
+                                        </div>
+                                    </label> 
                                 </div>
                                 <div class="hover-img">
                                     <span class="p-1 rounded-lg my-3" id="qimg">
@@ -38,7 +46,7 @@
                 </div>
             </div>
         </div>
-        <div class="d-flex justify-content-center d-none blue my-4" id="loader">
+        <div class="offset-2 offset-sm-1 offset-lg-0 text-center d-none blue my-4" id="loader">
             <div class="spinner-border text-primary" role="status">
             <span class="visually-hidden"><%=i18n.Loading%>...</span>
             </div>
