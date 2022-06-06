@@ -33,7 +33,7 @@
                         <ul id='ans_list' class="col-12 col-sm-10 col-md-8 text-center m-0" style="overflow: auto;flex-wrap: nowrap;white-space: nowrap;" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" title="Acceptible answers of the question">
 
                         </ul>
-                        <div class="col-12 col-sm-10 col-md-8" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" title="Description of the question">
+                        <div class="col-12 col-sm-10 col-md-8" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" title="Text of the Question, which is being played while taking test">
                            <input type="text" name="" id="login-input" placeholder="Description..." value="<%=question.score%>" disabled>
                         </div>
                   </div>
@@ -58,7 +58,7 @@
                      <div id="preview-hint<%= i %>" class="my-2 col-11 col-sm-9 col-md-7 text-center">
                         <img src="data:image/<%=question.hints[i].hint.contentType%>;base64,<%=question.hints[i].hint.data.toString('base64')%>" class="img-fluid" width="300" style="height:40vh;border:2px solid #6C63FF;padding:2px">
                      </div>
-                     <div class="col-12" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Description of Hint-<%= i+1 %>">
+                     <div class="col-12" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Text of the Hint-<%= i+1 %>, which is being played while taking test">
                         <input type="text" name="" id="login-input" placeholder="Description..." value="<%=question.hints[i].score%>" disabled>
                      </div>
                   </div>  

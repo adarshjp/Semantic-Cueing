@@ -35,7 +35,7 @@
 
                         </ul>
                         <div class="col-12 col-sm-10">
-                           <input type="text" name="score" id='desc' class='login-input' placeholder="<%=i18n.Description%>" required data-bs-toggle="tooltip" data-bs-placement="right" title="Enter description of the question" />
+                           <input type="text" name="score" id='desc' class='login-input' placeholder="<%=i18n.Description%>" required data-bs-toggle="tooltip" data-bs-placement="right" title="Enter text of the Question, which will be played while taking test" />
                         </div>
                   </div>
                </div>
@@ -56,7 +56,7 @@
                      </div>
                      <div id="preview-hint<%= i %>" class="my-2 col-11 col-sm-9 col-md-7 text-center"></div>
                      <div class="col-12">
-                        <input type="text" name="nscore[<%= i %>]" id='hint_desc<%= i %>' class="login-input" placeholder="<%=i18n.Description%>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Enter description of Hint-<%= i+1 %>" required/>
+                        <input type="text" name="nscore[<%= i %>]" id='hint_desc<%= i %>' class="login-input" placeholder="<%=i18n.Description%>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Enter text of the Hint-<%= i+1 %>, which will be played while taking test" required/>
                      </div>
                   </div>    
                </div>
