@@ -228,10 +228,9 @@ blockquote cite {
           Change Password
 ------------------------------------*/
 .separator {
-  width: 150px;
+  width: 200px;
   height: 4px;
   background-color: #843bc7;
-  margin: 24px;
 }
 .field-icon {
   float: right;
@@ -766,6 +765,7 @@ background: #eee;
 }
 .swal-text{
   text-align: center;
+  color: black;
 }
 .swal-footer{
   text-align: center;
