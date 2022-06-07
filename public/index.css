@@ -748,16 +748,33 @@ background: #eee;
   border: 1px solid #564dfc;
 }
 .green{
-  color: #11ee29;
+  color: #42c69e;
 }
 
 .btn-success{
-  background-color: #11ee29;
-  border-color: #11ee29;
+  background-color: #42c69e;
+  border-color: #42c69e;
 }
 .btn-success:hover{
-  background-color: #0ec422;
-  border-color: #0ec422;
+  background-color: #0fae7f;
+  border-color: #0fae7f;
+}
+.btn-danger{
+  background-color: #FF6584;
+  border-color: #FF6584;
+}
+.btn-danger:hover{
+  background-color: #fc3557;
+  border-color: #fc3557;
+}
+.pointer-none{
+  pointer-events: none;
+}
+.bg-danger{
+  background-color: #FF6584 !important;
+}
+.bg-success{
+  background-color: #42c69e !important;
 }
 
 .swal-title{

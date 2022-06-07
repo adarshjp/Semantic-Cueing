@@ -10,7 +10,7 @@
             <%- include("partials/flashMsg") %>
             <div class="row justify-content-center ms-5">
                 <div class="ms-3 col-11 col-sm-10 col-md-11 p-2">
-                    <h1 class="text-center p-2 display-4 font-monospace">
+                    <h1 class="text-center p-2 display-4 fw-bold font-monospace">
                         <% if(user.role==="admin" ) {%>
                             <%=i18n.Our%> <span class="blue"><%=i18n.Patients1%> </span>
                         <% } else { %>
@@ -36,7 +36,7 @@
                                     </div>
                                     <div class="col-sm-6 my-auto">
                                         <div class="card-body text-truncate">
-                                            <h1 class="card-title"><%=patient.name%></h1>
+                                            <h1 class="card-title text-truncate"><%=patient.name%></h1>
                                             <hr>
                                             <p class="card-text h5 text-truncate">
                                                 <%=patient.email%>
@@ -47,7 +47,7 @@
                                             <% if(user.role==="doctor") {%>
                                             <div class="d-flex justify-content-center justify-content-sm-end align-items-end">
                                                 <form action="/discharge/<%=patient._id%>?_method=PUT" method="POST" id="<%=patient._id%>">
-                                                    <button class="btn btn-lg btn-success white" type="button" onclick="discharge('<%=patient._id%>')">
+                                                    <button class="btn btn-lg btn-danger white" type="button" onclick="discharge('<%=patient._id%>')">
                                                     <%=i18n.Discharge%></button>
                                                 </form>
                                                 <a href="/chat/<%=patient._id%>" class="btn btn-lg btn-primary white ms-2 btn-lg" id="review"
