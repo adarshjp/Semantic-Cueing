@@ -50,8 +50,8 @@ exports.signupTest = () => {
             user
                 .post('/login')
                 .send({
-                    username: 'admin',
-                    password: 'admin'
+                    username: process.env.ADMIN_USERNAME,
+                    password: process.env.ADMIN_PASSWORD
                 })
                 .set('Accept', 'application/json')
                 .set('Content-Type', 'application/json')
