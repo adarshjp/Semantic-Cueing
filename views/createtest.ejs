@@ -6,25 +6,33 @@
     <%- include("partials/no_Question",{msg:[i18n.NoQuestions,i18n.Selectedyet]})%>
     <form action="/create/test" method="POST" id="testForm" onsubmit="return noofqval();">
         <div class="row justify-content-center" id='question-row'>
-            <div class="offset-1 col-11 offset-sm-1 col-sm-9 offset-lg-0 col-lg-8 col-xl-6">
+            <div class="offset-2 col-10 offset-sm-1 col-sm-11 offset-lg-0 col-lg-10 col-xl-8">
                 <div class="row justify-content-center gradient-list mb-2 p-1" id='div_list'>
                     <% var i=1;%>
                     <% let len=question.length %>
                     <% question.forEach((question)=>{ %>
-                        <div class="offset-1 offset-sm-0 col-9 col-sm-10 col-lg-11 col-xl-10 shadow-lg bg-body rounded-lg <%= question.level%>" id="question<%=i%>">
+                        <div class="ms-3 ms-md-0 col-11 border border-2 rounded-3 shadow-sm my-2 py-3 <%= question.level%>" id="question<%=i%>">
                             <div class="card-image mx-0 p-2">
                                 <div class="inputGroup">
                                     <input id="option<%=i%>" class="form-check-input question<%=i%> op<%=question.level%>" type="checkbox"  value="<%=question._id %>" name="questions" onclick="countQuestion()">
-                                    <label for="option<%=i%>"><strong><%=question.answer%></strong></label> 
-                                    <p class="h6"><%=i18n.Level%> : 
-                                        <%for(let i=1;i<=5;i++){%>
-                                          <%if(i<=question.level){%>
-                                            <span class = "fa fa-star checked"></span>
-                                          <%} else{%>
-                                            <span class = "fa fa-star unchecked"></span>
-                                          <%}%>
-                                        <%}%>
-                                    </p>
+                                    <label for="option<%=i%>">
+                                        <div class="row">
+                                            <div class="col-10 col-sm-11 col-md-5 text-truncate">
+                                                <strong><%=question.name%></strong>
+                                            </div>
+                                            <div class="col-10 col-sm-11 col-md-5 mt-2 mt-md-0">
+                                                <p class="h6"> 
+                                                    <%for(let i=1;i<=5;i++){%>
+                                                      <%if(i<=question.level){%>
+                                                        <span class = "fa fa-star checked"></span>
+                                                      <%} else{%>
+                                                        <span class = "fa fa-star unchecked"></span>
+                                                      <%}%>
+                                                    <%}%>
+                                                </p>   
+                                            </div>
+                                        </div>
+                                    </label> 
                                 </div>
                                 <div class="hover-img">
                                     <span class="p-1 rounded-lg my-3" id="qimg">
@@ -38,13 +46,13 @@
                 </div>
             </div>
         </div>
-        <div class="d-flex justify-content-center d-none blue my-4" id="loader">
+        <div class="offset-2 offset-sm-1 offset-lg-0 text-center d-none blue my-4" id="loader">
             <div class="spinner-border text-primary" role="status">
             <span class="visually-hidden"><%=i18n.Loading%>...</span>
             </div>
         </div>
         <div class="row justify-content-center align-items-center mt-4 d-none" id="sel-pat">
-            <div class="offset-2 col-9 offset-sm-1 offset-md-1 col-md-4 offset-lg-0">
+            <div class="offset-2 col-9 offset-sm-1 offset-md-1 col-md-6 col-lg-4 offset-lg-0">
                 <label for="patient" class="mb-2"><%=i18n.ChoosePatient%></label>
                 <select name="patientid"  id="patient-list" class="form-select form-select-lg p-2" aria-label=".form-select-lg" onchange="chnage_patinet_list()" multiple>
                     <% patient.forEach((patient)=> { %>
@@ -53,13 +61,19 @@
                 </select>
             </div>
         </div>
-        <div class="row justify-content-center align-items-center text-center d-none mt-1" id="sel-lev">
-            <div class="offset-2 col-9 offset-sm-1 offset-md-0 col-md-4 text-center mt-2">
+        <div class="row justify-content-center align-items-center mt-1 d-none" id="title">
+            <div class="offset-2 col-9 offset-sm-1  col-md-6 col-lg-4 offset-lg-0">
+                <label for="title" class="mt-2">Title of the test</label>
+                <input type="text" name="name" class="login-input" id="title"  placeholder="Enter title.."/>
+            </div>
+        </div>
+        <div class="row justify-content-center align-items-center text-center mt-1 d-none" id="sel-lev">
+            <div class="offset-2 col-9 offset-sm-1 offset-lg-0 col-md-6 text-center mt-2">
                 <%- include("partials/starLevel") %>
             </div>
             <input type="text" name="patientIDs" class="d-none" value="[]" id='patientIDs'/>
         </div>
-        <div class="offset-2 offset-sm-0 text-center p-2 d-none my-2" id="res_but">
+        <div class="offset-2 offset-sm-1 offset-lg-0 text-center p-2 d-none my-2" id="res_but">
             <button type="button" class="btn btn-primary rounded-pill btn-lg" onclick="reSet();"><%=i18n.Reset%> <i class="fa fa-refresh" aria-hidden="true"></i></button>
             <input type="submit" class="btn btn-primary btn-lg rounded-pill" value="<%=i18n.CreateTest%>" id="formsubmit"/>
         </div>
@@ -71,6 +85,7 @@
         document.getElementById('no-data').classList.remove('d-none');
     }
 </script>
+<script src='/create_edit_test.js'></script>
 <script>
     let k=1;   //multiplier used to skip questions 5,10,15 so on...
     let li_id=parseInt('<%=i%>'); //used in input and labels
@@ -109,9 +124,6 @@
                 {
                     document.getElementById('loader').classList.add('d-none');
                     isCompleted=true;
-                    swal("<%=i18n.Completed%>", "<%=i18n.SorryNomorequestions%>", "info");
-                    document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
-                    document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
                     return
                 }
                 for(let q=0;q<question.question.length;q++) {
@@ -123,5 +135,4 @@
         }
     };
 </script>
-<script src='/create_edit_test.js'></script>
 <%- include("partials/footer") %>

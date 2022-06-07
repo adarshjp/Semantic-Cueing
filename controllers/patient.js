@@ -23,6 +23,7 @@ exports.get_home_patient = (req, res) => {
                         patient._id = test._id;
                         Object.assign(patient, {level: test.level});
                         Object.assign(patient, {noofquestion: test.noofquestion});
+                        Object.assign(patient, {name: test.name});
                         patient_tests.push(patient);
                     }
                 })

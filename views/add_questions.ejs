@@ -1,18 +1,18 @@
 <%- include("partials/header") %>
 <%- include("partials/adminSideBar") %>
-<div class="container mt-3 mb-3">
-   <div class="row justify-content-center">
-      <div class="offset-2 col-8 offset-sm-1 col-sm-10 offset-md-1 col-md-11">
-         <div class="text-center p-3 m-3 font-monospace">
+<div class="container-fluid my-3">
+   <div class="row justify-content-center ms-5 ms-lg-0">
+      <div class="ms-3 ms-lg-0 col-10 offset-sm-1 col-sm-9 offset-md-1 offset-lg-0 col-md-11">
+         <div class="text-center p-3 font-monospace">
             <h1 class="display-4"><%=i18n.Addan%> <span class="blue"><%=i18n.Object%></span> <%=i18n.toidentify1%></h1>
          </div>
          <form action="/addquestion" method="POST" enctype="multipart/form-data" id='add_q_form' onsubmit="return validate()">
             <div class="row justify-content-center">
-               <div class="col-12 col-md-6 card p-4 shadow">
+               <div class="col-12 col-md-8 col-lg-6 p-4 card border-2 rounded-3 shadow-sm">
                   <!-- <h2 class="card-title text-center">Choose the <span class="blue">Image</span> of Object</h2> -->
                   <div class="form-group text-center">
                      <label for="upload_file" id='upload_cloud'>
-                        <i class="fa-solid fa-cloud-arrow-up fa-4x blue"></i>
+                        <i class="fa-solid fa-cloud-arrow-up fa-4x blue" data-bs-toggle="tooltip" data-bs-placement="right" title="Upload Object Image"></i>
                      </label>
                      <input type="file" name="image" class="form-control form-control-lg fi" accept="image/png, image/jpeg" placeholder="<%=i18n.EnterImage%>" id="upload_file" onchange="getImagePreview(event,'preview','upload_file','upload_cloud')" id="login-input" style="display:none;">
                   </div>
@@ -20,40 +20,43 @@
                      <div class="col-12 col-sm-7 col-md-6" id="preview"></div>
                   </div>
                   <div class="row justify-content-center align-items-center">
-                        <div class="col-12 col-sm-10 col-md-8">
-                           <input type="text" class='login-input' id='ans' placeholder="<%=i18n.NameofObject%>" onkeydown="return event.key != 'Enter';"> 
+                        <div class="col-12 col-sm-10 text-center my-2">
+                           <%- include("partials/starLevel") %>
+                        </div>
+                        <div class="col-12 col-sm-10">
+                           <input type="text" class='login-input' id='name' placeholder="<%=i18n.TitleofQuestion%>" name="name" data-bs-toggle="tooltip" data-bs-placement="right" title="Enter name of the question" required> 
+                        </div>
+                        <div class="col-12 col-sm-10">
+                           <input type="text" class='login-input' id='ans' placeholder="<%=i18n.NameofObject%>" onkeydown="return event.key != 'Enter';" data-bs-toggle="tooltip" data-bs-placement="right" title="Enter all acceptible answers here"/> 
 
                            <input type="text" name="answer" class='login-input d-none' id='form_ans'> 
                         </div>
-                        <ul id='ans_list' class="col-12 col-md-10 col-lg-8 text-center" style="overflow: auto;flex-wrap: nowrap;white-space: nowrap;">
+                        <ul id='ans_list' class="col-12 col-md-10 text-center m-0" style="overflow: auto;flex-wrap: nowrap;white-space: nowrap;">
 
                         </ul>
-                        <div class="col-12 col-md-10 col-lg-8 text-center my-2">
-                           <%- include("partials/starLevel") %>
-                        </div>
-                        <div class="col-12 col-md-10 col-lg-8">
-                           <input type="text" name="score" id='desc' class='login-input' placeholder="<%=i18n.Description%>" required>
+                        <div class="col-12 col-sm-10">
+                           <input type="text" name="score" id='desc' class='login-input' placeholder="<%=i18n.Description%>" required data-bs-toggle="tooltip" data-bs-placement="right" title="Enter text of the Question, which will be played while taking test" />
                         </div>
                   </div>
                </div>
             </div>
-            <div class="text-center p-3 m-3 font-monospace">
+            <div class="text-center p-3 font-monospace">
                <h1 class="display-5"><%=i18n.Give%> <span class="blue"><%=i18n.hints%></span> <%=i18n.toidentify2%></h1>
             </div>
-            <div class="row justify-content-center mt-3">
+            <div class="row justify-content-center mt-2">
                <% for (var i = 0; i < 4; i++) { %>
-               <div class="col-12 col-md-5 card shadow m-2 p-4">
+               <div class="col-12 col-md-5 card border-2 rounded-3 shadow-sm m-2 p-4">
                   <!-- <h2 class="card-title text-center">Add hint<%= i+1 %></h2> -->
                   <div class="row justify-content-center">
                      <div class="form-group col-12 text-center">
                         <label for="upload_hint<%= i %>" id='hint_cloud<%= i %>'>
-                           <i class="fa-solid fa-cloud-arrow-up fa-4x blue" data-bs-toggle="tooltip" data-bs-placement="top" title="Upload an Image"></i>
+                           <i class="fa-solid fa-cloud-arrow-up fa-4x blue" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Upload Hint-<%= i+1 %> Image"></i>
                         </label>
                         <input type="file" name="image"  accept="image/png, image/jpeg" class="form-control form-control-lg" placeholder="<%=i18n.EnterImage%>" id="upload_hint<%= i %>" onchange="getImagePreview(event,'preview-hint<%= i %>','upload_hint<%= i %>','hint_cloud<%= i %>')" style="display: none">
                      </div>
                      <div id="preview-hint<%= i %>" class="my-2 col-11 col-sm-9 col-md-7 text-center"></div>
                      <div class="col-12">
-                        <input type="text" name="nscore[<%= i %>]" id='hint_desc<%= i %>' class="login-input" placeholder="<%=i18n.Description%>" required>
+                        <input type="text" name="nscore[<%= i %>]" id='hint_desc<%= i %>' class="login-input" placeholder="<%=i18n.Description%>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Enter text of the Hint-<%= i+1 %>, which will be played while taking test" required/>
                      </div>
                   </div>    
                </div>

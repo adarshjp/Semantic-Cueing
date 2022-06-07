@@ -1,14 +1,14 @@
 <%- include("partials/header") %>
 <%- include("partials/adminSideBar") %>
-<div class="container-fluid mt-3 mb-3">
+<div class="container-fluid my-3">
    <%- include("partials/flashMsg",{msg:'edit-q'}) %>
-   <div class="row justify-content-center">
-      <div class="offset-2 col-8 offset-sm-1 col-sm-9 offset-md-1 offset-lg-0 col-md-11">
-         <div class="text-center p-3 m-3 font-monospace">
+   <div class="row justify-content-center ms-5 ms-lg-0">
+      <div class="ms-3 ms-lg-0 col-10 offset-sm-1 col-sm-9 offset-md-1 offset-lg-0 col-md-11">
+         <div class="text-center p-3 font-monospace">
             <h1 class="display-4"><%=i18n.Updatethe%> <span class="blue"><%=i18n.Objct%></span><%=i18n.toidentify3%></h1>
          </div>
             <div class="row justify-content-center">
-               <div class="col-12 col-md-6 card p-4 shadow">
+               <div class="col-12 col-md-8 col-lg-6 p-4 card border-2 rounded-3 shadow-sm">
                   <!-- <h2 class="card-title text-center">Choose the <span class="blue">Image</span> of Object</h2> -->
                   <div class="row justify-content-center my-2 text-center">
                      <div class="col-12 col-sm-7 col-md-6" id="preview">
@@ -16,21 +16,24 @@
                      </div>
                   </div>
                   <div class="row justify-content-center align-items-center">
-                        <ul id='ans_list' class="col-12 col-sm-10 col-md-8 text-center" style="overflow: auto;flex-wrap: nowrap;white-space: nowrap;">
+                        <div class="col-12 col-sm-10 col-md-8 mt-2" >
+                           <p class="h6 text-center">
+                              <%for(let i=1;i<=5;i++){%>
+                              <%if(i<=question.level){%>
+                                 <span class = "fa fa-star fa-2x checked h5"></span>
+                              <%} else{%>
+                                 <span class = "fa fa-star fa-2x unchecked h5"></span>
+                              <%}%>
+                              <%}%>
+                           </p>
+                        </div>
+                        <div class="col-12 col-sm-10 col-md-8" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" title="Name of the question">
+                           <input type="text" name="" class="login-input" value="<%=question.name%>" disabled>
+                        </div>
+                        <ul id='ans_list' class="col-12 col-sm-10 col-md-8 text-center m-0" style="overflow: auto;flex-wrap: nowrap;white-space: nowrap;" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" title="Acceptible answers of the question">
 
                         </ul>
-                        <div class="col-12 col-sm-10 col-md-8">
-                           <p class="h6 text-center"><%=i18n.Level%> : 
-                              <%for(let i=1;i<=5;i++){%>
-                                <%if(i<=question.level){%>
-                                  <span class = "fa fa-star checked h5"></span>
-                                <%} else{%>
-                                  <span class = "fa fa-star unchecked h5"></span>
-                                <%}%>
-                              <%}%>
-                          </p>
-                        </div>
-                        <div class="col-10 col-sm-10 col-md-8">
+                        <div class="col-12 col-sm-10 col-md-8" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" title="Text of the Question, which is being played while taking test">
                            <input type="text" name="" id="login-input" placeholder="Description..." value="<%=question.score%>" disabled>
                         </div>
                   </div>
@@ -44,18 +47,18 @@
                   </div>
                </div>
             </div>
-            <div class="text-center p-3 m-3 font-monospace">
+            <div class="text-center p-3 font-monospace">
                <h1 class="display-5"><%=i18n.Updatethe%> <span class="blue"><%=i18n.hints%></span> <%=i18n.toidentify3%></h1>
             </div>
-            <div class="row justify-content-center align-items-center mt-3">
+            <div class="row justify-content-center align-items-center mt-2">
                <% for (var i = 0; i < 4; i++) { %>
-               <div class="col-12 col-md-5 card shadow m-1 p-4">
+               <div class="col-12 col-md-5 card border-2 rounded-3 shadow-sm m-2 p-4">
                   <!-- <h2 class="card-title text-center">Add hint<%= i+1 %></h2> -->
                   <div class="row justify-content-center">
                      <div id="preview-hint<%= i %>" class="my-2 col-11 col-sm-9 col-md-7 text-center">
                         <img src="data:image/<%=question.hints[i].hint.contentType%>;base64,<%=question.hints[i].hint.data.toString('base64')%>" class="img-fluid" width="300" style="height:40vh;border:2px solid #6C63FF;padding:2px">
                      </div>
-                     <div class="col-12">
+                     <div class="col-12" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Text of the Hint-<%= i+1 %>, which is being played while taking test">
                         <input type="text" name="" id="login-input" placeholder="Description..." value="<%=question.hints[i].score%>" disabled>
                      </div>
                   </div>  
@@ -117,6 +120,7 @@
       disp_image('upload_q','preview-q',image,'cloud-q');
       disp_pill();
       document.getElementById('<%=question.level%>'+'-star-rating').checked=true;
+      document.getElementById('cloud-q').classList.add('d-none');
    });
 
   var editHintModal = document.getElementById('editHintModal')
@@ -126,6 +130,7 @@
       document.getElementById('text').value = hint_details[2];
       document.getElementById('edit-form').action='/edit/hint/'+hint_details[3]+'/'+hint_details[0]+'?_method=PUT';
       disp_image('upload_hint','preview-hint',hint_details[1],'cloud-hint')
+      document.getElementById('cloud-hint').classList.add('d-none');
    });
 
 function disp_image(upload_id,preview_id,image,cloud){

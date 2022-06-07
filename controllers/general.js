@@ -11,6 +11,7 @@ exports.addquestions_post = (req, res, next) => {
     let img = convert_img(req.files)
     //console.log(img);
     var newQuestion = new Question({
+        name:req.body.name,
         question: img[0],
         answer: JSON.parse(req.body.answer),
         level: req.body.level,

@@ -17,7 +17,7 @@ document.getElementById('sel-q-tab').addEventListener('click', function(){
     document.getElementById('sel-pat').classList.add('d-none');
     document.getElementById('sel-lev').classList.add('d-none');
     document.getElementById('res_but').classList.add('d-none');
-    
+    document.getElementById('title').classList.add('d-none');
     document.getElementById('no_question').classList.add('d-none');
     document.getElementById('question-row').classList.remove('d-none');
     
@@ -31,10 +31,15 @@ document.getElementById('selected-q-tab').addEventListener('click', function(){
     document.getElementById('sel-pat').classList.remove('d-none');
     document.getElementById('sel-lev').classList.remove('d-none');
     document.getElementById('res_but').classList.remove('d-none');
+    document.getElementById('title').classList.remove('d-none');
     var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
     if (checkboxes.length===0){
         document.getElementById('no_question').classList.remove('d-none');
         document.getElementById('question-row').classList.add('d-none');
+        document.getElementById('sel-pat').classList.add('d-none');
+        document.getElementById('sel-lev').classList.add('d-none');
+        document.getElementById('res_but').classList.add('d-none');
+        document.getElementById('title').classList.add('d-none');
     }
 });
 
@@ -123,7 +128,7 @@ function showSelectedQuestion(){
 function append_div(q,ischecked){
     let div=document.createElement("div");
     
-    div.className='offset-1 offset-sm-0 col-9 col-sm-10 col-lg-11 col-xl-10 shadow-lg bg-body rounded-lg '+q.level;
+    div.className='ms-3 ms-md-0 col-11 border border-2 rounded-3 shadow-sm my-2 py-3 '+q.level;
     div.id='question'+li_id;
 
     let card_img=document.createElement('div');
@@ -146,14 +151,24 @@ function append_div(q,ischecked){
     let label=document.createElement('label');
     label.setAttribute('for','option'+li_id);
 
-    let strong=document.createElement('strong');
-    strong.textContent=q.answer;
-    
-    label.appendChild(strong);
+    let div_label_row=document.createElement('div');
+    div_label_row.className='row';
 
+    let div_label_col_1=document.createElement('div');
+    div_label_col_1.className='col-10 col-sm-11 col-md-5 text-truncate';
+
+    let strong=document.createElement('strong');
+    strong.textContent=q.name;
+
+    div_label_col_1.appendChild(strong);
+
+    let div_label_col_2 = document.createElement('div');
+    div_label_col_2.className='col-10 col-sm-11 col-md-5 mt-2 mt-md-0';
+    
     let p=document.createElement('p');
     p.className='h6';
-    p.textContent='Level : '
+    p.textContent='';
+
     for(let x=1;x<=5;x++){
         let span=document.createElement('span');
         span.className='fa fa-star'
@@ -165,6 +180,10 @@ function append_div(q,ischecked){
         p.appendChild(span);
         p.innerHTML +=' '
     }
+    div_label_col_2.appendChild(p);
+    div_label_row.appendChild(div_label_col_1);
+    div_label_row.appendChild(div_label_col_2);
+    label.appendChild(div_label_row);
 
     let hover_img=document.createElement('div');
     hover_img.className='hover-img';
@@ -183,7 +202,6 @@ function append_div(q,ischecked){
     hover_img.appendChild(span);
     inputGroup.appendChild(input);
     inputGroup.appendChild(label);
-    inputGroup.appendChild(p);
 
     card_img.appendChild(inputGroup);
     card_img.appendChild(hover_img);
@@ -204,7 +222,6 @@ function arrayBufferToBase64(buffer) {
 function chnage_patinet_list(){
     var selected = $("#patient-list :selected").map((_, e) => e.value).get();
     document.getElementById('patientIDs').value=JSON.stringify(selected);
-    console.log(document.getElementById('patientIDs').value)
 }
 $(document).ready(function(){
     var multipleCancelButton = new Choices('#patient-list', {
