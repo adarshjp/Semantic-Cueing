@@ -274,7 +274,13 @@ blockquote cite {
   width: 100%;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
+
+.sidebar .logo-details:hover {
+  background-color: #544cf1;
+}
+
 .sidebar .logo-details i {
   font-size: 30px;
   color: #fff;
