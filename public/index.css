@@ -20,9 +20,9 @@ div.gradient-list > div {
   position:absolute; left:-9999px; top:-9999px; z-index:9999;
  }
  .card-image:hover .hover-img span { 
-  top: 20px; 
+  top:0; 
   left:0;
-  transition-delay:  0.5s;
+  transition-delay:  .5s;
  }
 #q-checkbox {
   border: 5px solid #6C63FF;
@@ -30,7 +30,7 @@ div.gradient-list > div {
   width: 25px;
 }
 #qimg{
-    background-color: #bbb8ee;
+    background-color: rgb(201, 201, 201);
 }
 
 .form-select{
@@ -43,7 +43,6 @@ div.gradient-list > div {
   display: block;
 }
 .inputGroup label {
-  padding: 12px 0px;
   width: 100%;
   display: block;
   text-align: left;
@@ -275,7 +274,13 @@ blockquote cite {
   width: 100%;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
+
+.sidebar .logo-details:hover {
+  background-color: #544cf1;
+}
+
 .sidebar .logo-details i {
   font-size: 30px;
   color: #fff;
