@@ -7,53 +7,55 @@
     <%- include("partials/doctorSideBar") %>
   <% } %>
   <div class="container-fluid">
-    <div class="offset-2 offset-sm-0 text-center py-3 px-5">
-      <p class="display-4 fw-bold"><%=i18n.My%> <span class="blue"><%=i18n.Profile%></span></p>
+    <div class="offset-2 offset-sm-1 text-center py-3 px-5">
+      <p class="display-4 fw-bold font-monospace"><%=i18n.My%> <span class="blue"><%=i18n.Profile%></span></p>
     </div>
-    <div class="row justify-content-center">
-      <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0">
-        <div class="text-center border border-2 p-3">
-          <div class="text-center">
-            <img src="data:image/<%=user.displaypic.contentType%>;base64,<%=user.displaypic.data.toString('base64')%>" alt="" class="img-responsive img-fluid rounded-circle shadow-lg" style="width: 325px;height: 325px;">
+    <div class="row justify-content-center align-items-center ms-5">
+      <div class="ms-3 col-11 offset-sm-1 col-sm-10 offset-lg-0 col-xl-9">
+        <div class="card border border-3 rounded-3 shadow-sm animate__animated animate__bounceInUp">
+          <div class="row justify-content-center align-items-center text-center p-3">
+            <div class="col-md-6 p-2">
+              <img src="data:image/<%=user.displaypic.contentType%>;base64,<%=user.displaypic.data.toString('base64')%>" alt="" class="img-fluid rounded-circle" style="height:65vh">
+            </div>
+            <div class="col-md-6 p-2 text-center text-md-start">
+              <h1 class="display-5 fw-bold text-truncate">
+                <span>
+                  <%=user.name%>
+                </span>
+              </h1>
+              <hr class="me-2">
+              <p class="h3 fw-bold text-truncate">
+                <span>
+                  <%=user.email%>
+                </span>
+              </p>
+              <p class="h3 fw-bold">
+                <span>
+                  <%=user.age%>
+                </span>
+              </p>
+              <div class="d-flex ms-1 justify-content-center justify-content-md-end me-md-3">
+                <!-- Give a edit button -->
+                <a href="/edit/<%=user._id%>" class="btn btn-primary btn-lg btn-block">
+                  <i class="fas fa-edit"></i>
+                  <%=i18n.EditProfile%>
+                </a>
+              </div>
+            </div>
           </div>
-          <div>
-            <h1 class="text-center p-2 display-5 fw-bold">
-              <span class="blue">
-                <%=user.name%>
-              </span>
-              <i class="fas fa-user blue"></i>
-            </h1>
-          </div>
-          <div style="overflow: auto;flex-wrap: nowrap;white-space: nowrap;">
-            <p class="text-center p-2 display-6 fw-bold d-none d-sm-block">
-              <span class="blue">
-                <%=user.email%>
-              </span>
-              <i class="fas fa-envelope blue"></i>
-            </p>
-            <p class="text-center fw-bold d-block d-sm-none">
-              <span class="blue">
-                <%=user.email%>
-              </span>
-              <i class="fas fa-envelope blue"></i>
-            </p>
-          </div>
-          <div>
-            <p class="text-center p-2 display-6 fw-bold">
-              <span class="blue">
-                <%=user.age%>
-              </span>
-              <i class="fas fa-birthday-cake blue"></i>
-            </p>
-          </div>
-          <div>
-            <!-- Give a edit button -->
-            <a href="/edit/<%=user._id%>" class="btn btn-primary btn-lg btn-block">
-              <i class="fas fa-edit"></i>
-              <%=i18n.EditProfile%>
-            </a>
-          </div>
+        </div>
       </div>
-      </div>
+    </div>
   </div>
+<script>
+  document.getElementsByClassName('card')[0].addEventListener("mouseenter", function(){
+    this.classList.add('animate__pulse')
+  });
+  document.getElementsByClassName('card')[0].addEventListener("mouseleave", function(){
+    this.classList.remove('animate__pulse')
+  });
+  setTimeout(function(){
+    document.getElementsByClassName('card')[0].classList.remove('animate__bounceInUp')
+  },1000);
+</script>
 <%- include("partials/footer") %>

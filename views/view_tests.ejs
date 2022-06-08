@@ -2,9 +2,9 @@
 <%- include("partials/doctorSideBar") %>
 <div class="container-fluid">
   <%- include("partials/flashMsg") %>
-  <div class="row justify-content-center">
-    <div class="offset-2 col-9 offset-sm-1 col-sm-9 offset-lg-0 col-lg-6 p-1">
-      <h1 class="text-center p-2">
+  <div class="row justify-content-center ms-5">
+    <div class="ms-3 col-11 p-2">
+      <h1 class="text-center display-4 fw-bold font-monospace p-2">
         <%=i18n.Listof%><span class="blue"> <%=i18n.Tests%></span> 
         <%=i18n.Created%> <i class="fas fa-calendar-check blue"></i>
       </h1>
@@ -12,15 +12,13 @@
   </div>
   <%- include("partials/testTabs") %>
   <%- include("partials/no_Test") %>
-  <div class="row p-1 justify-content-center" id='test_status'>
-    <div class="offset-2 col-8 offset-sm-1 col-sm-10 offset-lg-0 col-lg-11 text-center mb-3">
+  <div class="row p-1 justify-content-center ms-5" id='test_status'>
+    <div class="ms-3 col-11 text-center mb-3">
       <a href="/create/test" class="btn btn-primary btn-lg rounded-pill"><%=i18n.CreateTest%> <i class="fa-solid fa-plus"></i></a>
     </div>
-    <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0">
-      <div class="row p-0 justify-content-center">
-        <% let k=1,c_pending=0,c_paused=0,c_completed=0%>
+        <% let k=1,c_pending=0,c_paused=0,c_completed=0,bg;%>
         <% tests.forEach((test) => { %>
-        <div class="col-12 col-sm-9 col-md-8 col-lg-6 col-xl-4 p-2 <%=test.status%> test<%=k-1%>
+        <div class="ms-3 ms-md-2 col-11 col-sm-9 col-md-5 col-lg-5 col-xl-3 p-2 <%=test.status%> test<%=k-1%>
           <% if(test.status === 'pending') {%>
             order-1
           <% } else if(test.status === 'paused'){%>
@@ -29,13 +27,13 @@
             order-3
           <% } %>
           " id='test_list'>
-          <div class="card box-shadow border border-2">
-            <div class="card-header">
+          <div class="card border-2 shadow-sm animate__animated animate__bounceInUp">
+            <div class="card-header bg-white">
               <div class="row align-items-center">
-                <div class="col-5 mt-2">
+                <div class="col-5 col-sm-7 col-md-5 col-lg-7 col-xl-5 mt-2">
                   <h5 class="card-title text-truncate"><%=test.name%> <i class="fas fa-bell blue"></i></h5>
                 </div>
-                <div class="col-7 text-end">
+                <div class="col-7 col-sm-5 col-md-7 col-lg-5 col-xl-7 text-end">
                   <%if(test.status==='pending'){%>
                     <a class="btn btn-lg btn-primary white mx-1 rounded-pill d-inline-block" href='/edit/test/<%=test._id%>'
                       ><i class="fas fa-edit"></i></a>
@@ -45,33 +43,36 @@
                         </button>
                       </form>
                       <% c_pending=c_pending+1%>
+                      <% bg='bg-primary'%>
                   <%}else if(test.status === 'completed'){%>
-                    <button class="btn btn-lg btn-success rounded-pill white" type="button" disabled>
-                      <i class="fa-solid fa-check-to-slot"></i>
+                    <button class="btn btn-lg btn-success rounded-pill white pointer-none" type="button">
+                      <i class="fa-solid fa-check"></i>
                     </button>
                     <% c_completed=c_completed+1%>
+                    <% bg='bg-success'%>
                   <%}else{%>
                     <% c_paused=c_paused+1%>
-                    <button class="btn btn-lg btn-secondary white rounded-pill" type="button" disabled><i class="fa-solid fa-pause"></i></button>
+                    <% bg='bg-secondary'%>
+                    <button class="btn btn-lg btn-secondary white rounded-pill pointer-none" type="button"><i class="fa-solid fa-pause"></i></button>
                   <%}%>
                 </div>
               </div>
             </div>
             <div class="card-body">
-              <p class="card-text p-1"><i class="fas fa-question-circle blue"></i> : <%=test.noofquestion%></p>
-              <p class="card-text p-1"><%=i18n.Level%> : 
+              <p class="card-text p-1 d-flex"><i class="fas fa-question-circle blue fa-2x text-start"></i><span class="ms-auto h4"><%=test.noofquestion%></span></p>
+              <p class="card-text p-1">
                 <%for(let i=1;i<=5;i++){%>
                   <%if(i<=test.level){%>
-                    <span class = "fa fa-star checked"></span>
+                    <span class = "fa fa-star fa-2x checked"></span>
                   <%} else{%>
-                    <span class = "fa fa-star unchecked"></span>
+                    <span class = "fa fa-star fa-2x unchecked"></span>
                   <%}%>
                 <%}%>
               </p>
-              <p class="card-text p-1"><%=i18n.Status%> : <strong style="text-transform: capitalize;"><%=test.status%></strong></p>
-              <div class="text-center mb-2">
-                <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="collapse" data-bs-target="#test<%=k%>" aria-expanded="false">
-                  <%=i18n.ViewPatients%> <i class="fa-solid fa-eye"></i>
+              <div class="text-center mt-4 mb-2 d-flex">
+                <p class="card-text text-center white mt-3"><strong style="text-transform: capitalize;" class="<%=bg%> rounded-pill p-3"><%=test.status%></strong></p>
+                <button class="btn btn-primary btn-lg rounded-pill ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#test<%=k%>" aria-expanded="false">
+                  <img src="https://cdn0.iconfinder.com/data/icons/leading-international-corporate-website-app-collec/16/Expand_accordion-512.png" alt="" style="width:25px;height:25px">
                 </button>
               </div>
               <div class="collapse table-responsive" id="test<%=k%>">
@@ -94,10 +95,12 @@
                         <td style="text-transform: capitalize;"><%=patient.status%></td>
                       <%if(patient.status==='completed'){%>
                         <td>
-                          <button class="btn btn-lg btn-success white rounded-pill"  data-bs-toggle="modal" data-bs-target="#viewReport" data-bs-whatever="<%=patient.score%>,<%=test.noofquestion%>">
-                            <i class="fas fa-poll"></i>
-                          </button>
-                          <a class="btn btn-lg btn btn-primary white rounded-pill" href="/chat/<%=patient.patientid%>"><i class="fa-solid fa-message"></i></a>
+                          <div class="d-flex d-inline-block">
+                            <button class="btn btn-lg btn-success white rounded-pill"  data-bs-toggle="modal" data-bs-target="#viewReport" data-bs-whatever="<%=patient.score%>,<%=test.noofquestion%>">
+                              <i class="fas fa-poll"></i>
+                            </button>
+                            <a class="btn btn-lg btn btn-primary white rounded-pill ms-1" href="/chat/<%=patient.patientid%>"><i class="fa-solid fa-message"></i></a>
+                          </div>
                       </td>
                       <%}else{%>
                         <td><%=patient.pauesdqno%></td>
@@ -112,11 +115,21 @@
         </div>
         <%k=k+1%>
         <% }) %>
-      </div>
-    </div>
+     
   </div>
 </div>
 <%- include("partials/viewReportModal") %>
+<script>
+  let cards=document.getElementsByClassName('card');
+  for(let i=0;i<cards.length;i++){
+    cards[i].addEventListener("mouseenter", function(){
+      this.classList.add('animate__pulse')
+    });
+    cards[i].addEventListener("mouseleave", function(){
+      this.classList.remove('animate__pulse')
+    });
+  }
+</script>
 <script src='/view_tests.js'></script>
 <script>
   let total_test=parseInt('<%=tests.length %>')
@@ -133,7 +146,12 @@
     count_number_of_tests('completed',parseInt('<%=c_completed %>'),'<%=i18n.Completed%>');
     disp_test_or_no_test('all',total_test)
     patient_names();
-    create_chart()
+    create_chart();
+    setTimeout(function(){
+      for(let i=0;i<cards.length;i++){
+      cards[i].classList.remove('animate__bounceInUp')
+    }
+    },1000);
   });
 
 //------------------RES CHART------------------

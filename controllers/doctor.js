@@ -46,7 +46,14 @@ exports.get_create_test = (req, res) => {
 exports.get_home_doctor = (req, res) => {
     User.find({role:'patient',doctorid:req.user._id,status:'active'},{_id:1, name: 1})
     .then((patients) =>{
-      res.render("doctor",{user:req.user,patient:patients, i18n:global.i18n})
+      let patientid
+      if(patients.length!==0){
+        patientid = patients[0]._id;
+        if(req.query.patientid!==undefined){
+          patientid = req.query.patientid;
+        }
+      }
+      res.render("doctor",{user:req.user, patient:patients, patientid:patientid, i18n:global.i18n})
     })
     .catch((err) => {
       console.log(err)
@@ -229,7 +236,7 @@ exports.upgrade_level = (req, res) => {
     .then((patient) => {
       req.flash('success', global.i18n.Levelupdatedsuccessfully);
       res.status(200)
-      res.redirect('/home/doctor/' + req.user._id)
+      res.redirect('/home/doctor/' + req.user._id +'?patientid='+patient._id)
     })
     .catch((err) => {
       res.status(500).json({
@@ -243,7 +250,7 @@ exports.downgrade_level =  (req, res) => {
     .then((patient) => {
       req.flash('success', global.i18n.Levelupdatedsuccessfully)
       res.status(200)
-      res.redirect('/home/doctor/' + req.user._id)
+      res.redirect('/home/doctor/' + req.user._id+'?patientid='+patient._id)
     })
     .catch((err) => {
       res.status(500).json({
