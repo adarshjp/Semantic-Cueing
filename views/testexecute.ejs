@@ -2,10 +2,10 @@
 <%- include("partials/instructionModal") %>
 <div class="container-fluid d-none" id='test'>
   <div class="row justify-content-center p-2 p-md-3" style="height: 100vh">
-    <div class="col-12 col-xl-9 shadow-lg rounded-lg p-md-5">
+    <div class="col-12 col-xl-9 shadow-sm border border-2 rounded-3 p-md-5">
       <div class="row justify-content-center align-items-center">
         <div class="col-10 col-sm-10 col-md-10 col-lg-6 p-1">
-          <img src="" id="img" class="img-fluid" style="width:80vw;height: 49vh;">
+          <img src="" id="img" class="img-fluid animate__animated" style="width:80vw;height: 49vh;">
         </div>
       </div>
       <div class="row pt-2 pt-md-4 justify-content-center text-center align-items-center">
@@ -20,7 +20,7 @@
           <div class="form"> 
             <input type="text" class="form-control form-input" placeholder="Enter your answer here..." id="answer"> 
             <span class="left-pan blue">
-              <i class="fa fa-microphone" onclick="startDictation(this)"></i>
+              <i class="fa fa-microphone" onclick="startDictation(this)" id="mic-button"></i>
             </span> 
           </div>
           <div class="pids-wrapper text-center d-none">
@@ -49,7 +49,7 @@
       </div>
     </div>
 
-    <div class="mx-3 col-2 d-none d-xl-block shadow-lg rounded">
+    <div class="mx-3 col-2 d-none d-xl-block shadow-sm border border-2 rounded-3">
       <div class="row text-center align-items-center h-25 my-3">
         <div class="col-12">
           <h6 class="my-2"><%=i18n.TestID%> : <%= testid %></h6>
@@ -77,11 +77,27 @@
 <%- include("partials/hintModal") %>
 <%- include("partials/testSubModal") %>
 
+<script>
+  document.getElementById("img").addEventListener('mouseenter', function() {
+    this.classList.add('animate__pulse')
+  });
+  document.getElementById("img").addEventListener('mouseleave', function(){
+    this.classList.remove('animate__pulse')
+  });
+  $( "#hintModal" ).on('show.bs.modal', function(){
+    this.classList.remove('animate__rollOut');
+    this.classList.add('animate__rollIn');
+  });
+  $( "#hintModal" ).on('hide.bs.modal', function(){
+    this.classList.remove('animate__rollIn');
+    this.classList.add('animate__rollOut');
+  });
+</script>
 <script type="text/javascript">
   window.onload = function() {
     checkBrowser();
   };
-
+  
   function startTest() {
     if(document.getElementById("instruRead").checked && document.getElementById("micTested").checked) {
       document.getElementById("instructions").classList.add('d-none');
@@ -190,14 +206,6 @@
         return;
       }
     }
-    // for(var i=0;i<val.length;i++){
-    //   if(a.toLowerCase() === val[i]){
-    //     score=score+(100-hints_taken*10)
-    //     ans[hints_taken.toString()]++;
-    //     document.getElementById('score').textContent='Score Obtained : '+score;
-    //     return;
-    //   }
-    // }
     unans[hints_taken.toString()]++;
   }
 
@@ -339,7 +347,7 @@
         recognition.continuous = false;
         recognition.interimResults = false;
         recognition.lang = 'en-US';
-
+  
         recognition.onstart = function(e){
           startAudioRecording('pid');
           document.getElementsByClassName('pids-wrapper')[0].classList.remove('d-none');
@@ -347,6 +355,7 @@
           document.getElementsByClassName('left-pan')[0].classList.add('green');
           ev.classList.add('fa-beat')
         }
+        
         recognition.start();
         recognition.onresult = function (e) {
           document.getElementById('answer').value = e.results[0][0].transcript;
@@ -358,6 +367,13 @@
           document.getElementsByClassName('left-pan')[0].classList.remove('green');
           ev.classList.remove('fa-beat');
         };
+
+        recognition.onspeechend = function() {
+          recognition.stop();
+          document.getElementsByClassName('left-pan')[0].classList.add('blue');
+          document.getElementsByClassName('left-pan')[0].classList.remove('green');
+          ev.classList.remove('fa-beat');
+        }
 
         recognition.onerror = function (e) {
           recognition.stop();
@@ -418,14 +434,20 @@
             })    
             .catch(error => { //on error
               switch (error.name) {
-                case 'NotAllowedError':
-                  swal('<%=i18n.Warning%>',"<%=i18n.allowaccessyourmicrophone%>",'warning')
-                break;
                 default:
-                  console.log("An error occured with the error name " + error.name);
-                  swal('<%=i18n.Errors%>',"<%=i18n.unableaceessyourmicrophone%>",'error');
-                  document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
-                  document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
+                  swal({
+                    title: "ERROR..!",
+                    text: "Unable to access your microphone. Please check your microphone settings.",
+                    icon: "error",
+                    buttons: ['Quit','Proceed']
+                  })
+                  .then((proceed) => {
+                    if (proceed) {
+                      document.getElementById('mic-button').classList.add('d-none');
+                    } else {
+                      close_test();
+                    }
+                  });
               }
               recError();
         });
@@ -503,11 +525,9 @@
     if(curTab===(x.length-1)){
       document.getElementById("nextBtn").innerHTML=`<i class="fas fa-play"></i>`;
       document.getElementById("nextBtn").onclick=function() {startTest();}
-      //document.getElementById("nextBtn").classList.add('d-none');
     } else {
       document.getElementById("nextBtn").innerHTML=`<i class="fa-solid fa-angles-right"></i>`;
       document.getElementById("nextBtn").onclick=function() {nextPrev(1)}
-      //document.getElementById("nextBtn").classList.remove('d-none');
     }
     showTab(curTab);
   }
@@ -521,8 +541,8 @@
   function get_list_of_mic(){
     if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
       swal("<%=i18n.Errors%>","<%=i18n.enumerateDevicesnotsupported%>", "error");
- document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
- document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
+      document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
+      document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
       return;
     }
 
@@ -562,6 +582,8 @@
 
   function recError(){
     clearTimeout(recMic);
+    nextPrev(1);
+    document.getElementById('nextBtn').removeAttribute('disabled')
     document.getElementById('rec').removeAttribute('disabled')
   }
 
@@ -570,14 +592,23 @@
       (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0 ||
       /*@cc_on!@*/false || !!document.documentMode
     ){
-      swal('<%=i18n.Errors%>','<%=i18n.UseChromeorEdgeBrowserstoproceed%>','error')
-      .then(function(){
-        close_test();
+      swal({
+        title: "ERROR..!",
+        text: "This browser is not supported. Some features may not work correctly. Please use Chrome or Edge.",
+        icon: "error",
+        buttons: ['Quit','Proceed']
       })
+      .then((proceed) => {
+        if (proceed) {
+          document.getElementById('instructions').classList.remove('d-none');
+          document.getElementById('mic-button').classList.add('d-none');
+        } else {
+          close_test();
+        }
+      });
     }else{
       document.getElementById('instructions').classList.remove('d-none');
     }
   }
-
 </script>
 <%- include("partials/footer") %>

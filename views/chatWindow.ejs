@@ -5,10 +5,10 @@
     <%- include("partials/doctorSideBar") %>
 <%}%>
 <div class="container-fluid">
-    <div class="row justify-content-center justify-content-md-end justify-content-lg-center py-sm-1" id='chat'>
-        <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-md-0 col-md-11 col-lg-8">
-            <div class="card"> 
-                <div class="card-header d-flex justify-content-start align-items-center bg-light">
+    <div class="row justify-content-center align-items-center ms-5" id='chat' style="height:100vh;">
+        <div class="ms-3 col-11 col-xl-9">
+            <div class="card border-2 shadow-sm"> 
+                <div class="card-header d-flex justify-content-start align-items-center bg-white">
                     <% let contentType0=receiver.displaypic.contentType
                        let data0=receiver.displaypic.data.toString('base64')
                     %>
@@ -25,7 +25,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
+                <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3 bg-white">
                     <% let contentType1=user.displaypic.contentType
                        let data1=user.displaypic.data.toString('base64')
                     %>
