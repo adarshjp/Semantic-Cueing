@@ -1,87 +1,72 @@
 <%- include("partials/header") %>
 <%- include("partials/adminSideBar") %>
-<div class="container ">
-   <div class="row justify-content-center pt-1">
-      <div class="offset-2 col-8 offset-sm-1 col-sm-10 offset-md-1 col-md-8">
-         <% if(message.error){ %>
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-               <strong class="text-center"><%= message.error%></strong>
-               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-         <% } %>
-         <% if(message.success){ %>
-            <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-               <strong class="text-center"><%= message.success%></strong>
-               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-         <% } %>
-      </div>
-   </div>
-   <div class='row justify-content-center pt-1'>
-      <div class="offset-2 col-9 offset-sm-1 col-sm-11 offset-xl-0 col-xl-8">
+<div class="container-fluid">
+   <%- include("partials/flashMsg") %>
+   <div class='row justify-content-center pt-1 ms-5'>
+      <div class="ms-2 col-11 col-xl-7">
          <div class="row">
-            <div class="col-12 col-md-6 m-1 m-md-0 p-2">
-               <div class="card shadow">
-                  <div class="card-header bg-primary text-center">
-                     <h5 class="pt-2 white"><%=i18n.NumberofPatients%></h5>
+            <div class="col-12 col-md-6 p-3">
+               <div class="card border-2 shadow-sm rounded-3 h-100 animate__animated animate__bounceInUp">
+                  <div class="card-header text-center">
+                     <h5 class="pt-2 blue"><%=i18n.NumberofPatients%></h5>
                    </div>
                   <div class="card-body">
-                     <div class="row align-items-center">
-                        <div class="col-8">
+                     <div class="d-flex align-items-center">
+                        <div>
                            <i class="fas fa-procedures fa-5x blue"></i>
                         </div>
-                        <div class="col-4">
+                        <div class="ms-auto me-3">
                            <h1 id='patient'></h1>
                         </div>
                      </div>
                   </div>
                 </div>
             </div>
-            <div class="col-12 col-md-6  m-1 m-md-0 p-2">
-               <div class="card shadow">
-                  <div class="card-header bg-primary text-center">
-                     <h5 class="pt-2 white"><%=i18n.NumberofDoctors%></h5>
+            <div class="col-12 col-md-6 p-3">
+               <div class="card border-2 shadow-sm rounded-3 h-100 animate__animated animate__bounceInUp">
+                  <div class="card-header text-center">
+                     <h5 class="pt-2 blue"><%=i18n.NumberofDoctors%></h5>
                    </div>
                   <div class="card-body">
-                     <div class="row  align-items-center">
-                        <div class="col-8">
+                     <div class="d-flex align-items-center">
+                        <div>
                            <i class="fas fa-user-md fa-5x blue"></i>
                         </div>
-                        <div class="col-4">
+                        <div class="ms-auto me-3">
                            <h1 id='doctor'></h1>
                         </div>
                      </div>
                   </div>
                 </div>
             </div>
-            <div class="col-12 col-md-6  m-1 m-md-0 p-2">
-               <div class="card shadow">
-                  <div class="card-header bg-primary text-center">
-                     <h5 class="pt-2 white"><%=i18n.NumberofQuestionscreated%></h5>
+            <div class="col-12 col-md-6 p-3">
+               <div class="card border-2 shadow-sm rounded-3 h-100 animate__animated animate__bounceInUp">
+                  <div class="card-header text-center">
+                     <h5 class="pt-2 blue"><%=i18n.NumberofQuestionscreated%></h5>
                    </div>
                   <div class="card-body">
-                     <div class="row  align-items-center">
-                        <div class="col-8">
+                     <div class="d-flex align-items-center">
+                        <div>
                            <i class="fa fa-question-circle fa-5x blue" aria-hidden="true"></i>
                         </div>
-                        <div class="col-4">
+                        <div class="ms-auto me-3">
                            <h1 id='question'></h1>
                         </div>
                      </div>
                   </div>
                 </div>
             </div>
-            <div class="col-12 col-md-6  m-1 m-md-0 p-2">
-               <div class="card shadow">
-                  <div class="card-header bg-primary text-center">
-                     <h5 class="pt-2 white"><%=i18n.Numberoftestcreated%></h5>
+            <div class="col-12 col-md-6 p-3">
+               <div class="card border-2 shadow-sm rounded-3 h-100 animate__animated animate__bounceInUp">
+                  <div class="card-header text-center">
+                     <h5 class="pt-2 blue"><%=i18n.Numberoftestcreated%></h5>
                    </div>
                   <div class="card-body">
-                     <div class="row align-items-center">
-                        <div class="col-8">
+                     <div class="d-flex align-items-center">
+                        <div>
                            <i class="far fa-clipboard fa-5x blue" aria-hidden="true"></i>
                         </div>
-                        <div class="col-4">
+                        <div class="ms-auto me-3">
                            <h1 id='test'></h1>
                         </div>
                      </div>
@@ -90,67 +75,87 @@
             </div>
          </div>
       </div>
-      <div class="offset-2 col-9 offset-sm-1 col-sm-11 offset-xl-0 col-xl-4 p-2">
-         <div class="card shadow">
+      <div class="ms-2 ms-xl-0 col-11 col-xl-4 p-3">
+         <div class="card border-2 shadow-sm rounded-3 h-100 animate__animated animate__bounceInUp">
             <div class="card-body">
                <div class="d-flex justify-content-center align-items-center blue" id='spinner-0' style="height:296px">
                   <div class="spinner-border" role="status">
                     <span class="visually-hidden"><%=i18n.Loading%>...</span>
                   </div>
                 </div>
-              <canvas id="levelChart" height="250" hidden></canvas>
+              <canvas id="levelChart" height="245" hidden></canvas>
             </div>
           </div>
       </div>
    </div>
-   <div class="row justify-content-center mt-2 pt-1">
-      <div class="offset-2 col-9 offset-sm-1 col-sm-11 offset-lg-1 col-lg-5 offset-xl-0 col-xl-4 p-2">
-         <div class="card shadow">
-            <div class="card-header bg-primary text-center">
-               <h5 class="pt-2 white"><%=i18n.DoctorvsPatient%></h5>
-             </div>
-            <div class="card-body">
-               <div class="d-flex justify-content-center align-items-center blue" id='spinner-1' style="height:271px">
-                  <div class="spinner-border" role="status">
-                    <span class="visually-hidden"><%=i18n.Loading%>...</span>
+   <div class="row justify-content-center mt-2 ms-5">
+      <div class="ms-2 col-11">
+         <div class="row justify-content-center">
+            <div class="col-12 col-md-6 col-xl-4 p-3">
+               <div class="card shadowborder-2 shadow-sm rounded-3 h-100 animate__animated animate__bounceInUp">
+                  <div class="card-header text-center">
+                     <h5 class="pt-2 blue"><%=i18n.DoctorvsPatient%></h5>
+                   </div>
+                  <div class="card-body">
+                     <div class="d-flex justify-content-center align-items-center blue" id='spinner-1' style="height:271px">
+                        <div class="spinner-border" role="status">
+                          <span class="visually-hidden"><%=i18n.Loading%>...</span>
+                        </div>
+                      </div>
+                     <canvas id="pieChart-1" height="100" hidden></canvas>
                   </div>
-                </div>
-               <canvas id="pieChart-1" height="100" hidden></canvas>
+               </div>
             </div>
-         </div>
-      </div>
-      <div class="offset-2 col-9 offset-sm-1 col-sm-11 offset-lg-0 col-lg-5 offset-xl-0 col-xl-4 p-2">
-         <div class="card shadow">
-            <div class="card-header bg-primary text-center">
-               <h5 class="pt-2 white"><%=i18n.AssignedvsUnassignedDoctors%></h5>
-             </div>
-            <div class="card-body">
-               <div class="d-flex justify-content-center align-items-center blue" id='spinner-2' style="height:271px">
-                  <div class="spinner-border" role="status">
-                    <span class="visually-hidden"><%=i18n.Loading%>...</span>
+            <div class="col-12 col-md-6 col-xl-4 p-3">
+               <div class="card border-2 shadow-sm rounded-3 h-100 animate__animated animate__bounceInUp">
+                  <div class="card-header text-center">
+                     <h5 class="pt-2 blue"><%=i18n.AssignedvsUnassignedDoctors%></h5>
+                   </div>
+                  <div class="card-body">
+                     <div class="d-flex justify-content-center align-items-center blue" id='spinner-2' style="height:271px">
+                        <div class="spinner-border" role="status">
+                          <span class="visually-hidden"><%=i18n.Loading%>...</span>
+                        </div>
+                      </div>
+                     <canvas id="pieChart-2" height="100" hidden></canvas>
                   </div>
-                </div>
-               <canvas id="pieChart-2" height="100" hidden></canvas>
+               </div>
             </div>
-         </div>
-      </div>
-      <div class="offset-2 col-9 offset-sm-1 col-sm-11 offset-lg-1 col-lg-5 offset-xl-0 col-xl-4 p-2">
-         <div class="card shadow">
-            <div class="card-header bg-primary text-center">
-               <h5 class="pt-2 white"><%=i18n.ActivevsDischargedPatients%></h5>
-             </div>
-            <div class="card-body">
-               <div class="d-flex justify-content-center align-items-center blue" id='spinner-3' style="height:271px">
-                  <div class="spinner-border" role="status">
-                    <span class="visually-hidden"><%=i18n.Loading%>...</span>
+            <div class="col-12 col-md-6 col-xl-4 p-3">
+               <div class="card border-2 shadow-sm rounded-3 h-100 animate__animated animate__bounceInUp">
+                  <div class="card-header text-center">
+                     <h5 class="pt-2 blue"><%=i18n.ActivevsDischargedPatients%></h5>
+                   </div>
+                  <div class="card-body">
+                     <div class="d-flex justify-content-center align-items-center blue" id='spinner-3' style="height:271px">
+                        <div class="spinner-border" role="status">
+                          <span class="visually-hidden"><%=i18n.Loading%>...</span>
+                        </div>
+                      </div>
+                     <canvas id="pieChart-3" height="100" hidden></canvas>
                   </div>
-                </div>
-               <canvas id="pieChart-3" height="100" hidden></canvas>
+               </div>
             </div>
          </div>
       </div>
    </div>
 </div>
+<script>
+   let cards=document.getElementsByClassName('card');
+   for(let i=0;i<cards.length;i++){
+      cards[i].addEventListener("mouseenter", function(){
+         this.classList.add('animate__pulse')
+      });
+      cards[i].addEventListener("mouseleave", function(){
+         this.classList.remove('animate__pulse')
+      });
+   }
+   setTimeout(function(){
+         for(let i=0;i<cards.length;i++){
+         cards[i].classList.remove('animate__bounceInUp')
+      }
+   },1000);
+</script>
 <script>
     
    $(window).on('load', function() {
@@ -182,7 +187,6 @@
    }
 
    function count_assigned_unassigned_doctors(){
-      console.log(assigned_doctor);
       let x=assigned_doctor.filter(function(item, pos) {
          return assigned_doctor.indexOf(item) == pos;
       });
@@ -217,17 +221,17 @@
          datasets: [{
             label:'<%=i18n.CountofPatientVSLevel%>',
             data: patient_level,
-            backgroundColor: ['#FF6633','#33FFFC','#9CFF33','#33FF96','#36FF33'],
-            borderColor: ['#FF4E33','#FFB433','#33FFB4','#7EFF33','#33FF4E'],
+            backgroundColor: ['#de5c31','#4bdbd9','#48dbaf'],
+            borderColor: ['#de5c31','#4bdbd9','#48dbaf'],
             borderWidth: 1
          }]
       };
       create_bar_chart(data)
    }
 
-   let doc_pat={'0':['#005299','#03e282'],'1':[' #003b6f','#03b065']}
-   let un_a_doc={'0':['#0073e6',' #9999ff'],'1':['#0066cc','#8080ff']}
-   let a_d_pat={'0':['#34ebbd','#bdeb33'],'1':['#17e8b4','#b4e817']}
+   let doc_pat={'0':['#227cc9','#48dbaf'],'1':['#1c78c7','#3ab08d']}
+   let un_a_doc={'0':['#227cc9','#7b7bdb'],'1':['#1c78c7','#6f6fc7']}
+   let a_d_pat={'0':['#48dbaf','#2eabd1'],'1':['#3ab08d','#2a9cbf']}
 
    function create_data_for_pie_chart(id,color,x,y,u,v){
       let data = {
