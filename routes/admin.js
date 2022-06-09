@@ -13,7 +13,7 @@ router.get("/home/admin", isLoggedIn, isAdmin, admin_get);
 router.get("/view/patient", isLoggedIn, isAdmin, view_patient);
 router.get("/view/doctor", isLoggedIn, isAdmin, view_doctor);
 
-router.get("/view/:id", isLoggedIn, view_Oneuser);
+router.get("/view/:id([\\dA-Fa-f]+)", isLoggedIn, view_Oneuser);
 router.get("/edit/:id", isLoggedIn, get_edit_user)
 router.put("/edit/:id", isLoggedIn, edit_user)
 
