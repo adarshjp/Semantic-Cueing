@@ -3,37 +3,39 @@
     <%- include("partials/no_patient",{msg:[i18n.NoDoctors,i18n.Createdyet]})%>
     <div class="container-fluid" id='view-doctor'>
         <%- include("partials/flashMsg") %>
-        <div class="row justify-content-center text-center">
-            <div class="offset-2 col-9 offset-sm-0 col-sm-11 offset-lg-0 col-lg-12 p-1">
-                <h1 class="p-2 display-3 fw-bold">
+        <div class="row justify-content-center text-center ms-5">
+            <div class="ms-3 col-11 col-sm-10 col-md-11 p-2">
+                <h1 class="text-center p-2 display-4 fw-bold font-monospace">
                     <%=i18n.Our%> <span class="blue"><%=i18n.Doctors%> </span>
                 <i class="fas fa-stethoscope blue"></i>
                 </h1>
             </div>
         </div>
-        <div class="row justify-content-center mx-0 mx-lg-5 p-0 p-lg-3">
+        <div class="row justify-content-center ms-5">
             <% let len=doctors.length %>
             <% doctors.forEach((doctor)=> { %>
-                <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-xl-5 p-1">
-                    <div class="card box-shadow p-3">
+                <div class="ms-3 ms-xl-0 col-11 col-xl-5 py-2">
+                    <div class="card box-shadow p-2 h-100 border-3 animate__animated animate__bounceInUp">
                         <div class="row">
                             <div class="col-sm-6 my-auto">
-                                <img src="data:image/<%=doctor.displaypic.contentType%>;base64,<%=doctor.displaypic.data.toString('base64')%>" class="card-img-top rounded-circle p-1 box-shadow"
+                                <img src="data:image/<%=doctor.displaypic.contentType%>;base64,<%=doctor.displaypic.data.toString('base64')%>" class="card-img-top rounded-circle p-1 box-shadow img-fluid"
                                         alt="..." style="border: 3px solid #6c63ff" />
                             </div>
                             <div class="col-sm-6 my-auto">
                                 <div class="card-body">
-                                    <h1 class="card-title"><%=doctor.name%></h1>
+                                    <h1 class="card-title text-truncate"><%=doctor.name%></h1>
                                     <hr>
-                                    <p class="card-text h5">
-                                        <%=doctor.email%>
+                                    <p class="card-text h5 text-truncate">
+                                        <span>
+                                            <a class="text-dark" href="mailto:<%=doctor.email%>" style="text-decoration:none;"><%=doctor.email%></a>
+                                        </span>
                                     </p>
                                     <p class="card-text h5">
                                         <%=doctor.age%>
                                     </p>
                                     <div class="d-flex justify-content-end align-items-end">
-                                        <form action="/delete/<%=doctor._id%>?_method=DELETE" method="POST">
-                                            <button class="btn btn-primary white m-1" type="submit">
+                                        <form action="/delete/<%=doctor._id%>?_method=DELETE" method="POST" id="<%=doctor._id%>">
+                                            <button class="btn btn-danger btn-lg white m-1" type="button" onclick="delete_doctor('<%=doctor._id%>')">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         </form>
@@ -46,11 +48,44 @@
             <% }) %>
         </div>
     </div>
+    <script>
+        let cards=document.getElementsByClassName('card');
+        for(let i=0;i<cards.length;i++){
+            cards[i].addEventListener("mouseenter", function(){
+            this.classList.add('animate__pulse')
+            });
+            cards[i].addEventListener("mouseleave", function(){
+            this.classList.remove('animate__pulse')
+            });
+        }
+        setTimeout(function(){
+          for(let i=0;i<cards.length;i++){
+          cards[i].classList.remove('animate__bounceInUp')
+        }
+        },1000);
+    </script>
     <script type="text/javascript">
-    if(parseInt('<%=len%>')===0){
-        document.getElementById('view-doctor').classList.add('d-none');
-        document.getElementById('no-data').classList.remove('d-none');
-    }
+        if(parseInt('<%=len%>')===0){
+            document.getElementById('view-doctor').classList.add('d-none');
+            document.getElementById('no-data').classList.remove('d-none');
+        }
+        function delete_doctor(doctorid){
+            swal({
+                title: "Do you want to delete this doctro?",
+                text: "Once delete, you will not be able to recover this doctor details!",
+                icon: "warning",
+                buttons: true,
+                className: "blue"
+            })
+            .then((isdelete) => {
+                if (isdelete) {
+                    document.getElementById(doctorid).submit();
+                    swal("The doctor deletion under progress..!", {
+                    icon: "info",
+                });
+                } 
+            });
+        }
     </script>
 
 <%- include("partials/footer") %>
