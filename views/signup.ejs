@@ -1,16 +1,15 @@
 <%- include("partials/header") %>
 <%- include("partials/adminSideBar") %>
-<div class="container my-4 p-3">
+<div class="container-fluid">
   <%- include("partials/flashMsg") %>
-  <div class="row justify-content-center">
-    <div class="offset-2 col-10 offset-sm-1 col-sm-11 offset-xl-0 col-xl-11">
-      <form action="/register" method="post" class="p-2" enctype="multipart/form-data" onsubmit="return register()">
-          <div class="row justify-content-center vertical-center shadow-lg rounded-3">
-          <h1 class="text-center p-3 blue order-first"><%=i18n.Register%>: <%=i18n.Patient%> | <%=i18n.Doctor%></h1>
+  <div class="row justify-content-center align-items-center ms-5" style="height: 99vh;">
+    <div class="ms-3 col-11 col-xl-10">
+      <form action="/register" method="post" class="" enctype="multipart/form-data" onsubmit="return register()">
+          <div class="row justify-content-center vertical-center shadow-sm border border-2 rounded-3 animate__animated animate__bounceInUp" id="register">
+          <h1 class="text-center p-3 blue order-first font-monospace"><%=i18n.Register%>: <%=i18n.Patient%> | <%=i18n.Doctor%></h1>
           <div class="col-12 col-md-6 text-center my-auto order-last">
             <div class="row">
-              <div class="col-1"></div>
-              <div class="col-10 ">
+              <div class="col-12 col-md-11">
                   <input
                     type="text"
                     name="name"
@@ -76,11 +75,11 @@
                   />
                   <div class="row align-items-center">
                     <div class="col-4">
-                      <label for="role" class="blue h5"><%=i18n.SelectRole%>:</label>
+                      <label for="role" class="blue h5"><%=i18n.SelectRole%></label>
                     </div>
                     <div class="col-8">
                       <select
-                        class="form-select form-select-lg mb-3 select-color"
+                        class="form-select form-select-lg select-color login-input"
                         aria-label=".form-select-lg"
                         id="role"
                         name="role"
@@ -93,13 +92,13 @@
                   </div>
                   <div class="row align-items-center d-none" id="select-doctor">
                     <div class="col-4">
-                      <label for="doctorid" class="blue h5"><%=i18n.Choosedoctor%>:</label>
+                      <label for="doctorid" class="blue h5"><%=i18n.Choosedoctor%></label>
                     </div>
                     <div class="col-8">
                       <select
                         name="doctorid"
                         id="doctorid"
-                        class="form-select form-select-lg mb-3"
+                        class="form-select form-select-lg login-input"
                         aria-label=".form-select-lg"
                       >
                         <% doctors.forEach((doctor) => { %>
@@ -109,8 +108,8 @@
                     </div>
                   </div>
                   <div class="row align-items-center d-none" id="stroke-div">
-                    <div class="col-4 ">
-                      <label for="strokedate" class="blue h5"><%=i18n.StrokeDate%>:</label>
+                    <div class="col-4">
+                      <label for="strokedate" class="blue h5"><%=i18n.StrokeDate%></label>
                     </div>
                     <div class="col-8">
                       <input type="date" class='login-input' id='strokedate' placeholder='<%=i18n.StrokeDate%>' name="strokeDate">
@@ -131,7 +130,7 @@
                 <div class="col-12 col-sm-7 col-md-9" id="preview"></div>
             </div>
           </div>
-          <div class='text-center my-4 order-last col-8 col-md-4'>
+          <div class='text-center my-4 order-last col-10 col-md-3'>
                 <input
                     type="submit"
                     class="btn btn-primary btn-lg rounded-pill p-2"
@@ -153,7 +152,6 @@
   var doctorid = document.getElementById('doctorid')
   var stroke_div=document.getElementById('stroke-div')
   var strokedate=document.getElementById('strokedate')
-  let container=document.getElementsByClassName('container')[0];
   let verifyemail=document.getElementById('verifyEmail');
 
   var email = document.getElementById('email')
@@ -168,13 +166,11 @@
       stroke_div.classList.remove('d-none');
       doctorid.required = true;
       strokedate.required = true;
-      container.classList.remove('my-4', 'p-3');
     } else {
       doctor.classList.add('d-none');
       stroke_div.classList.add('d-none');
       doctorid.required = false;
       strokedate.required = false;
-      container.classList.add('my-4', 'p-3');
     }
   })
   let username = document.getElementById('username')
@@ -243,8 +239,6 @@
     if (email.value.match(validRegex)) {
       verifyemail.setAttribute('disabled','')
       email.setAttribute('disabled','')
-      container.classList.remove('my-4');
-      container.classList.add('my-2');
       sendOTP();
     } else {
       swal('<%=i18n.Invalid%>', '<%=i18n.entervalidemailaddress%>','info');
@@ -301,13 +295,11 @@
       swal('<%=i18n.EmailVerified%>','<%=i18n.emailverifiedsuccessfully%>','success');
         isVerified=true;
         timerOn=false;
-        verifyemail.textContent='verified';
+        verifyemail.innerHTML='<i class="fa-solid fa-check"></i>';
         verifyemail.setAttribute('disabled','')
         verifyemail.classList.remove('btn-primary')
         verifyemail.classList.add('btn-success');
         document.getElementById('otp-sec').classList.add('d-none');
-        container.classList.remove('my-3');
-        container.classList.add('my-4');
       }else if(msg==="OTP expired"){
         timerOn=false;
         swal('<%=i18n.Expired%>','<%=i18n.OTPexpiredtryagain%>','warning');
