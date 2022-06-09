@@ -3,8 +3,8 @@ const router = express.Router();
 const passport = require('passport');
 const upload = require('../setup/multer');
 const{change_password,login_get,login_post,set_password,set_post,get_changepassword}=require('../controllers/auth');
-const {isLoggedIn, isAdmin}=require('../middlewares/middlewares');
-const { addquestions_get,addquestions_post,view_question,view_Onequestion,forgotpassword_get,get_edit_question,put_edit_question,put_edit_hint,delete_question} = require('../controllers/general');
+const {isLoggedIn, isAdmin, isAdminOrDoctor}=require('../middlewares/middlewares');
+const { addquestions_get,addquestions_post,view_question,view_Onequestion,forgotpassword_get,get_edit_question,put_edit_question,put_edit_hint,delete_question,get_view_questions} = require('../controllers/general');
 const {loginValidator}=require('../validators/loginValidators');
 router.post("/login",loginValidator,
   passport.authenticate("local", {
@@ -28,14 +28,17 @@ router.get("/",(req,res)=>{
 })
 router.post("/setpassword",isLoggedIn,set_password);
 router.post("/set",set_post);
-router.get("/addquestion",isLoggedIn,isAdmin,addquestions_get)
-router.post("/addquestion",upload.array("image",5),isLoggedIn,isAdmin,addquestions_post)
+router.get("/addquestion",isLoggedIn,isAdminOrDoctor,addquestions_get)
+router.post("/addquestion",upload.array("image",5),isLoggedIn,isAdminOrDoctor,addquestions_post);
+router.get("/view/questions/:skip?", isLoggedIn, isAdminOrDoctor, get_view_questions);  // to view the list of questions
+
 router.get("/view/question",isAdmin,isLoggedIn,view_question);
-router.get("/view/question/:id",isAdmin,isLoggedIn,view_Onequestion);
+router.get("/view/question/:id",isLoggedIn,isAdmin,view_Onequestion);
+
 router.get("/forgotpassword",forgotpassword_get);
-router.get("/edit/question/:questionid",isLoggedIn,isAdmin,get_edit_question)
-router.put("/edit/question/:questionid",upload.array("question",1),isLoggedIn,isAdmin,put_edit_question)
-router.put("/edit/hint/:questionid/:hintid",upload.array("hint",1),isLoggedIn,isAdmin,put_edit_hint)
-router.delete("/delete/question/:questionid",isAdmin,isLoggedIn,delete_question); // to delete a question
+router.get("/edit/question/:questionid",isLoggedIn,isAdminOrDoctor,get_edit_question)
+router.put("/edit/question/:questionid",upload.array("question",1),isLoggedIn,isAdminOrDoctor,put_edit_question)
+router.put("/edit/hint/:questionid/:hintid",upload.array("hint",1),isLoggedIn,isAdminOrDoctor,put_edit_hint)
+router.delete("/delete/question/:questionid",isLoggedIn,isAdminOrDoctor,delete_question); // to delete a question
 
 module.exports = router;
