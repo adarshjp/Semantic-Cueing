@@ -1,97 +1,96 @@
-<div class="container d-none" id='instructions'>
-  <div class="row justify-content-center align-items-center p-1 p-sm-2" style="height: 100vh">
-    <div class="col-12 col-md-10 col-lg-8 col-xl-6">
-      <div class="card shadow-lg rounded-lg">
-        <div class="card-header p-3">
-          <h4 class="card-title blue text-center"><%=i18n.Instructions %></h4>
+<div class="container-fluid d-none" id='instructions'>
+  <div class="row justify-content-center align-items-center p-sm-2" style="height: 100vh">
+    <div class="col-12 col-md-11 col-lg-10 col-xl-7">
+      <div class="card border-2 shadow-sm p-1 p-sm-3">
+        <div class="bg-white mt-2">
+          <h4 class="card-title blue text-center display-6 font-monospace"><%=i18n.Instructions %></h4>
         </div>
-        <div class="card-body tab d-none mt-4">
-          <div class='text-center'>
-            <select class="form-select form-select-lg" id='list_of_mic'>
+        <div class="card-body tab d-none mt-4 h6 text-center">
+          <div class='d-flex justify-content-center'>
+            <div class="col-12 col-sm-10 col-lg-8 col-xl-7">
+              <select class="form-select form-select-lg" id='list_of_mic'>
 
-            </select>
-          </div>
-          <div class="pids-wrapper1 text-center d-none">
-            <div class="pid1"></div>
-            <div class="pid1"></div>
-            <div class="pid1"></div>
-            <div class="pid1"></div>
-            <div class="pid1"></div>
-            <div class="pid1"></div>
-            <div class="pid1"></div>
-            <div class="pid1"></div>
+              </select>
+              <div class="pids-wrapper1 text-center d-none">
+                <div class="pid1"></div>
+                <div class="pid1"></div>
+                <div class="pid1"></div>
+                <div class="pid1"></div>
+                <div class="pid1"></div>
+                <div class="pid1"></div>
+                <div class="pid1"></div>
+                <div class="pid1"></div>
+              </div>
+            </div>
           </div>
           <div class='text-center pt-3'>
             <button class="btn btn-success btn-lg rounded-circle" onclick="startRec()" id='rec'><i class="fa fa-microphone" aria-hidden="true"></i></button>
           </div>
         </div>
-        <div class="card-body tab d-none">
-          <ul class="list-group p-1">
-            <li class="list-group-item">
+        <div class="card-body tab d-none h6">
+          <ul class="list-group p-1 p-sm-2">
+            <li class="list-group-item border border-2 rounded-3">
               <p class="h5 blue text-start"><%=i18n.ScoresRecieved %></p>
               <ul>
-                <li><%=i18n.answeringeachquestion %></li>
-                <li><%=i18n.skipaquestion %></li>
-                <li><%=i18n.skippedcannotrevisited %></li>
+                <li class="my-3"><%=i18n.answeringeachquestion %></li>
+                <li class="my-3"><%=i18n.skipaquestion %></li>
+                <li class="my-3"><%=i18n.skippedcannotrevisited %></li>
               </ul>
             </li>
           </ul>
-          <ul class="list-group p-1">
-            <li class="list-group-item">
+          <ul class="list-group p-1 p-sm-2">
+            <li class="list-group-item border border-2 rounded-3">
               <p class="h5 blue text-start"><%=i18n.HintsTaken %></p>
               <ul>
-                <li><%=i18n.hints4 %>
-                    </li>
-                    <li><%=i18n.Whenahintistaken %>
-                    </li>
-                    <li><%=i18n.Hintscanberevisited %>
-                    </li>
+                <li class="my-3"><%=i18n.hints4 %></li>
+                <li class="my-3"><%=i18n.Whenahintistaken %></li>
+                <li class="my-3"><%=i18n.Hintscanberevisited %></li>
               </ul>
             </li>
           </ul>
         </div>
-        <div class="card-body tab d-none">
-          <ul class="list-group p-1">
-            <li class="list-group-item">
+        <div class="card-body tab d-none h6">
+          <ul class="list-group p-1 p-sm-2">
+            <li class="list-group-item border border-2 rounded-3">
               <p class="h5 blue text-start"><%=i18n.PauseTest %></p>
               <ul>
-                <li><%=i18n.pauseandtakeitlater %></li>
-                <li><%=i18n.pointyouhadstopped %></li>
-                <li><%=i18n.eithercaseyourtestwillbecontinued %></li>
+                <li class="my-3"><%=i18n.pauseandtakeitlater %></li>
+                <li class="my-3"><%=i18n.pointyouhadstopped %></li>
+                <li class="my-3"><%=i18n.eithercaseyourtestwillbecontinued %></li>
               </ul>
             </li>
           </ul>
-          <ul class="list-group p-1">
-            <li class="list-group-item">
+          <ul class="list-group p-1 p-sm-2">
+            <li class="list-group-item border border-2 rounded-3">
               <p class="h5 blue text-start"><%=i18n.SpeechToText %></p>
               <ul>
-                <li><%=i18n.Apartfromtyping %></li>
-                <li><%=i18n.TaketheMicrophoneCheck %></li>
+                <li class="my-3"><%=i18n.Apartfromtyping %></li>
+                <li class="my-3"><%=i18n.TaketheMicrophoneCheck %></li>
               </ul>
             </li>
           </ul>
         </div>
-        <div class="card-body tab d-none">
-          <ul class="list-group p-1">
-            <li class="list-group-item">
+        <div class="card-body tab d-none h6">
+          <ul class="list-group p-1 p-sm-2">
+            <li class="list-group-item border border-2 rounded-3">
               <p class="h5 blue text-start"><%=i18n.FinalScore %></p>
               <ul>
-                <li><%=i18n.numberofcorrectanswers %></li>
-                <li><%=i18n.testreportgenerated %></li>
-                <li><%=i18n.Reportreflecteddashboard %></li>
+                <li class="my-3"><%=i18n.numberofcorrectanswers %></li>
+                <li class="my-3"><%=i18n.testreportgenerated %></li>
+                <li class="my-3"><%=i18n.Reportreflecteddashboard %></li>
               </ul>
             </li>
           </ul>
-          <ul class="list-group p-1 h6 text-center">
-            <li class="list-group-item">
+          <ul class="list-group h6 text-center p-1 p-sm-2 ">
+            <li class="list-group-item border border-2 rounded-3 mt-1 mt-sm-0">
               <input class="form-check-input me-1" type="checkbox" id='instruRead'><label for="instruRead"> <%=i18n.readandunderstoodallinstructions %></label>
             </li>
-            <li class="list-group-item">
+            <li class="list-group-item border border-2 rounded-3 mt-2 mt-sm-3">
               <input class="form-check-input me-1" type="checkbox" id='micTested'><label for="micTested"> <%=i18n.havecompletedthemicrophonetest %></label>
             </li>
           </ul>
         </div>
-        <div class="card-footer">
+        <div class=" my-2">
           <div class="p-1 text-center">
             <button type="button" id="prevBtn" class="btn btn-secondary btn-lg" onclick="nextPrev(-1)"><i class="fa-solid fa-angles-left"></i></button>
             <button type="button" id="nextBtn" class="btn btn-primary btn-lg" onclick="nextPrev(1)" disabled><i class="fa-solid fa-angles-right"></i></button>

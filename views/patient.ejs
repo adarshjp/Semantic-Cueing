@@ -1,9 +1,9 @@
 <%- include("partials/header") %> <%- include("partials/patientSideBar") %>
 <div class="container-fluid patientclass">
   <%- include("partials/flashMsg") %>
-  <div class="row justify-content-center">
-    <div class="offset-2 col-9 offset-sm-2 col-sm-8 offset-lg-0 col-lg-6 p-1">
-      <h1 class="text-center p-2">
+  <div class="row justify-content-center ms-5">
+    <div class="ms-3 col-11 py-2">
+      <h1 class="text-center p-2 display-4 fw-bold font-monospace">
         <%=i18n.Takeyour %> <span class="blue"><%=i18n.tests %></span> <%=i18n.now %>
         <i class="fas fa-calendar-check blue"></i>
       </h1>
@@ -12,10 +12,10 @@
 
   <%- include("partials/testTabs") %>
   <%- include("partials/no_Test") %>
-  <div class="row p-1 justify-content-center" id='test_status'>
+  <div class="row justify-content-center ms-5" id='test_status'>
     <% let i=0,c_pending=0,c_paused=0,c_completed=0%>
     <% tests.forEach((test) => { %>
-    <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-lg-5 p-2 <%=test.status%> test<%=i%>
+    <div class="ms-3 ms-xl-1 col-11 col-md-10 col-lg-9 col-xl-5 p-3 <%=test.status%> test<%=i%>
       <% if(test.status === 'pending') {%>
         order-1
       <% } else if(test.status === 'paused'){%>
@@ -24,32 +24,39 @@
         order-3
       <% } %>
       " id='test_list'>
-      <div class="card box-shadow p-3">
-        <div class="row align-items-center">
-          <div class="col-sm-6 my-auto">
+      <div class="card border-2 shadow-sm p-2 animate__animated animate__bounceInUp">
+        <div class="row align-items-center h-100">
+          <div class="col-md-6 my-auto">
             <img
               src="/images/exam.svg"
-              class="card-img-top rounded-circle p-1 box-shadow"
+              class="card-img-top rounded-circle p-1 box-shadow img-fluid"
               alt="..."
-              style="border: 3px solid #6c63ff"
+              style="border: 3px solid #6c63ff;"
             />
           </div>
-          <div class="col-sm-6">
+          <div class="col-md-6">
             <div class="card-body">
-              <h5 class="card-title p-1"><%=test.name%>  <i class="fas fa-bell blue"></i></h5>
-              <p class="card-text p-1">
-                <i class="fas fa-question-circle blue"></i> : <%=test.noofquestion%>
+              <div class="row align-items-center">
+                <div class="col-9 col-sm-10">
+                  <h4 class="card-title text-truncate ms-0"><%=test.name%></h4>
+                </div>
+                <div class="col-3 col-sm-2 text-end">
+                  <i class="fas fa-bell fa-2x blue"></i>
+                </div>
+              </div>
+              <p class=" mt-3 d-flex">
+                <i class="fas fa-question-circle blue h4"></i><span class="ms-auto me-2 me-xl-0 h5"><%=test.noofquestion%></span>
               </p>
-              <p class="card-text p-1"><%=i18n.Level%> : 
+              <p class="">
                 <%for(let i=1;i<=5;i++){%>
                   <%if(i<=test.level){%>
-                    <span class = "fa fa-star checked"></span>
+                    <span class = "fa fa-star  checked"></span>
                   <%} else{%>
                     <span class = "fa fa-star unchecked"></span>
                   <%}%>
                 <%}%>
                 </p>
-              <div class="d-flex justify-content-end">
+              <div class="d-flex justify-content-center justify-content-sm-end">
                 <% if(test.status != 'completed') { %>
                   <% if(test.status == "pending") {%>
                     <button class="btn btn-lg btn-primary white" onclick="test_execute('<%=test._id%>')">
@@ -80,6 +87,17 @@
 
 <%- include("partials/viewReportModal") %>
 <script src='/view_tests.js'></script>
+<script>
+  let cards=document.getElementsByClassName('card');
+  for(let i=0;i<cards.length;i++){
+    cards[i].addEventListener("mouseenter", function(){
+      this.classList.add('animate__pulse')
+    });
+    cards[i].addEventListener("mouseleave", function(){
+      this.classList.remove('animate__pulse')
+    });
+  }
+</script>
 <script type="text/javascript">
   let total_test=parseInt('<%=tests.length %>')
   let no_test='<%=i18n.NoTest_patient%>';
@@ -95,6 +113,11 @@
     count_number_of_tests('paused',parseInt('<%=c_paused %>'),'<%=i18n.Paused%>');
     count_number_of_tests('completed',parseInt('<%=c_completed %>'),'<%=i18n.Completed%>');
     disp_test_or_no_test('all',total_test)
+    setTimeout(function(){
+      for(let i=0;i<cards.length;i++){
+      cards[i].classList.remove('animate__bounceInUp')
+    }
+    },1000);
   });
 
 //------------------RES CHART------------------

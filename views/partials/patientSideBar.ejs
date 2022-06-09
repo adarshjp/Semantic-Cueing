@@ -16,17 +16,8 @@
       </ul>
     </li>
     <li>
-      <a href="/view/<%=user._id%>" onClick="showAddQuestion()">
-        <i class="fas fa-user"></i>
-        <span class="link_name"><%=i18n.MyProfile%></span>
-      </a>
-      <ul class="sub-menu blank">
-        <li><a class="link_name" href="/view/<%=user._id%>"><%=i18n.MyProfile%></a></li>
-      </ul>
-    </li>
-    <li>
       <a href="/chat">
-        <i class="fa-solid fa-comment-sms"></i>
+        <i class="fa-solid fa-comment-dots"></i>
         <span class="link_name"><%=i18n.Chat%></span>
       </a>
       <ul class="sub-menu blank">
@@ -40,6 +31,15 @@
       </a>
       <ul class="sub-menu blank">
         <li><a class="link_name" href="/mydoctor"><%=i18n.Doctor%></a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="/view/<%=user._id%>" onClick="showAddQuestion()">
+        <i class="fas fa-user"></i>
+        <span class="link_name"><%=i18n.MyProfile%></span>
+      </a>
+      <ul class="sub-menu blank">
+        <li><a class="link_name" href="/view/<%=user._id%>"><%=i18n.MyProfile%></a></li>
       </ul>
     </li>
     <li>

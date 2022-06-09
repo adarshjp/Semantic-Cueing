@@ -45,7 +45,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 app.use(i18n);
-app.use(adminRoutes)
+app.use(adminRoutes);
 app.use(generalRoutes)
 app.use(doctorRoutes)
 app.use(patientRoutes)

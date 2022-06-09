@@ -133,3 +133,13 @@ exports.isQuestionInTest = (req, res, next) => {
             }
         })
 }
+
+exports.isAdminOrDoctor = (req, res, next) => {
+    //Check if the user is doctor or admin
+    if (req.user.role === 'admin' || req.user.role === 'doctor') {
+        return next()
+    } else {
+        res.status(401)
+        res.send('You are not authorized to do that!')
+    }
+}

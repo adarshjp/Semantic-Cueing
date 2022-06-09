@@ -207,5 +207,34 @@ exports.delete_question= (req, res) => {
         res.send(err)
         console.log(err)
     })
-
-}           
+} 
+       
+exports.get_view_questions= (req, res) => {
+    let skip=0;
+    if(req.params.skip===undefined){
+        skip=0;
+    }else{
+        skip=parseInt(req.params.skip);
+    }
+    Question.find({}, { hints: 0 }).limit(10).skip(skip)
+    .then((question) => {
+        if(question.length===0){
+            if(req.params.skip===undefined){
+                res.render('view_questions',{question: question,user:req.user,i18n: global.i18n})
+            }else{
+                res.status(200).json({message: 'No more questions'})
+            }
+        }else{
+            res.status(200)
+            if(req.params.skip!==undefined)
+              res.json({question: question})
+            else 
+              res.render('view_questions',{question: question,user:req.user,i18n: global.i18n})
+          }
+    })
+    .catch((err) => {
+        res.status(500).json({
+            error: err,
+        });
+    });
+}   
