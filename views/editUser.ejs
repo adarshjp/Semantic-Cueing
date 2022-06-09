@@ -7,57 +7,55 @@
         <%- include("partials/doctorSideBar") %>
     <% } %>
         <div class="container-fluid">
-            <div class="offset-2 offset-sm-0 text-center text-center px-5 pt-2">
-                <p class="display-4 fw-bold"><%=i18n.Edit%> <span class="blue"><%=i18n.Profile%></span></p>
+            <div class="offset-2 offset-sm-1 text-center py-3 px-5">
+                <p class="display-4 fw-bold font-monospace"><%=i18n.Edit%> <span class="blue"><%=i18n.Profile%></span></p>
             </div>
-            <div class="row justify-content-center p-1">
-                <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0 col-xl-7">
-                    <div class="text-center border border-2 p-3">
-                        <form action="/edit/<%=user._id%>?_method=PUT" method="post">
-                            <div class="text-center">
-                                <img src="data:image/<%=user.displaypic.contentType%>;base64,<%=user.displaypic.data.toString('base64')%>" alt=""
-                                    class="img-responsive img-fluid rounded-circle shadow-lg" style="width: 325px;height: 325px;">
+            <div class="row justify-content-center align-items-center ms-5">
+                <div class="ms-3 col-11 col-xl-10">
+                    <div class="card border border-3 rounded-3 shadow-sm animate__animated animate__bounceInUp">
+                        <div class="row justify-content-center align-items-center text-center p-3">
+                            <div class="col-md-6 p-2">
+                              <img src="data:image/<%=user.displaypic.contentType%>;base64,<%=user.displaypic.data.toString('base64')%>" alt="" class="img-fluid rounded-circle" style="height:65vh">
                             </div>
-                            <div>
-                                <h1 class="text-center p-2 display-5 fw-bold">
-                                    <span class="blue">
-                                        <input type="text" value="<%=user.name%>" class="form-control" id="name" name="name">
-                                    </span>
-                                    <i class="fas fa-user blue"></i>
-                                </h1>
+                            <div class="col-md-6 p-2 text-center text-md-start">
+                                <form action="/edit/<%=user._id%>?_method=PUT" method="post">
+                                    <p class="h3">
+                                        <span class="blue">
+                                            <input type="text" value="<%=user.name%>" class="login-input" id="name" name="name">
+                                        </span>
+                                    </p>
+                                    <p class="h3">
+                                        <span class="blue">
+                                            <input type="text" name="age" value="<%=user.age%>"
+                                                class="login-input" id="age">
+                                        </span>
+                                    </p>
+                                    <p class="h3 fw-bold text-truncate text-center">
+                                        <span>
+                                          <%=user.email%>
+                                        </span>
+                                    </p>
+                                    <div class="text-md-center mt-4">
+                                        <button type="submit" class="btn btn-primary btn-lg btn-block">
+                                            Update Profile <i class="fas fa-edit"></i>
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
-                            <div style="overflow: auto;flex-wrap: nowrap;white-space: nowrap;">
-                                <p class="text-center p-2 display-6 fw-bold d-none d-md-block">
-                                  <span class="blue">
-                                    <%=user.email%>
-                                  </span>
-                                  <i class="fas fa-envelope blue"></i>
-                                </p>
-                                <p class="text-center fw-bold d-block d-md-none">
-                                  <span class="blue">
-                                    <%=user.email%>
-                                  </span>
-                                  <i class="fas fa-envelope blue"></i>
-                                </p>
-                            </div>
-                            <div>
-                                <p class="text-center p-2 display-6 fw-bold">
-                                    <span class="blue">
-                                        <input type="text" name="age" value="<%=user.age%>"
-                                            class="form-control" id="age">
-                                    </span>
-                                    <i class="fas fa-birthday-cake blue"></i>
-                                </p>
-                            </div>
-                            <div>
-                                <button type="submit" class="btn btn-primary btn-lg btn-block">
-                                    <i class="fas fa-edit"></i>
-                                    <%=i18n.EditProfile%>
-                                </button>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <script>
+            document.getElementsByClassName('card')[0].addEventListener("mouseenter", function(){
+              this.classList.add('animate__pulse')
+            });
+            document.getElementsByClassName('card')[0].addEventListener("mouseleave", function(){
+              this.classList.remove('animate__pulse')
+            });
+            setTimeout(function(){
+              document.getElementsByClassName('card')[0].classList.remove('animate__bounceInUp')
+            },1000);
+        </script>
 <%- include("partials/footer") %>

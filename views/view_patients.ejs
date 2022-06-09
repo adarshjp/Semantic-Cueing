@@ -62,8 +62,8 @@
                                             <div class="d-flex justify-content-end align-items-end">
                                                 <form action="/active/<%=patient._id%>?_method=PUT" method="POST">
                                                     <button class="btn btn-success white btn-lg
-                                                        <%if(patient.status === 'active'){%><%}%>
-                                                    " type="button"  
+                                                        <%if(patient.status === 'active'){%>d-none<%}%>
+                                                    " type="submit"  
                                                     >
                                                     <%=i18n.Activate%></button>
                                                 </form>
@@ -153,7 +153,7 @@
             }
             let patient_card=document.getElementsByClassName(key);
             for(let xy=0;xy<patient_card.length;xy++){
-                patient_card[xy].innerHTML='<i class="fas fa-user-md"></i> '+val[0];
+                patient_card[xy].innerHTML=val[0]+' <i class="fas fa-user-md"></i>';
             }
             document.getElementById('doctor').appendChild(option);
         }
