@@ -169,6 +169,7 @@
   //------------ End -----------------------//
 
   function get_initial_test_details(){
+    spinner.removeAttribute('hidden');
     fetch('/test/<%=testid%>')
     .then(response => response.json())
     .then(test=>{

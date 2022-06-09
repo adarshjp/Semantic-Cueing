@@ -525,19 +525,23 @@ blockquote cite {
   content: "";
   width: 80px;
   height: 80px;
-  border-top: 5px solid #6C63FF;
-  border-radius: 100%;
+  border: 8px solid #dfdede;
+  border-top: 8px solid #6C63FF;
+  border-radius: 50%;
   will-change: transform;
-  animation: spin 1s infinite linear
+  -webkit-animation: spin .75s linear infinite; /* Safari */
+  animation: spin .75s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
 }
 
 @keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .form {
