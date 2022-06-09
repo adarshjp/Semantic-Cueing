@@ -73,11 +73,11 @@
         </div>
       </div>
     </div> -->
+    
   </div>
 </div>
 <div hidden id="spinner"></div>
 <%- include("partials/hintModal") %>
-<%- include("partials/testSubModal") %>
 
 <script>
   document.getElementById("img").addEventListener('mouseenter', function() {
@@ -615,9 +615,9 @@
       /*@cc_on!@*/false || !!document.documentMode
     ){
       swal({
-        title: "ERROR..!",
+        title: "Unsupported Browser..!",
         text: "This browser is not supported. Some features may not work correctly. Please use Chrome or Edge.",
-        icon: "error",
+        icon: "warning",
         buttons: ['Quit','Proceed']
       })
       .then((proceed) => {
