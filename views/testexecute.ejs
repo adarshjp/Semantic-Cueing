@@ -1,22 +1,27 @@
 <%- include("partials/header") %>
 <%- include("partials/instructionModal") %>
 <div class="container-fluid d-none" id='test'>
-  <div class="row justify-content-center p-2 p-md-3" style="height: 100vh">
-    <div class="col-12 col-xl-9 shadow-sm border border-2 rounded-3 p-md-5">
-      <div class="row justify-content-center align-items-center">
-        <div class="col-10 col-sm-10 col-md-10 col-lg-6 p-1">
+  <div class="row justify-content-center p-1 p-md-3" style="height: 100vh">
+    <div class="col-12 col-xl-10 shadow-sm border border-2 rounded-3 p-md-2">
+      <div class="d-flex justify-content-center p-1">
+        <div class="bg-light border border-1 rounded-3 p-md-2">
+          <p class="h3 mt-1 font-monospace p-1 p-md-2">Questions <span class="ms-5 blue" id="q-num"></span></p>
+        </div>
+      </div>
+      <div class="row justify-content-center align-items-center mt-md-2">
+        <div class="col-10 col-sm-9 col-md-10 col-lg-6">
           <img src="" id="img" class="img-fluid animate__animated" style="width:80vw;height: 49vh;">
         </div>
       </div>
       <div class="row pt-2 pt-md-4 justify-content-center text-center align-items-center">
         <%for (var i = 0;i< 4;i++){%>
-          <div class="col-6 col-sm-2 py-1">
+          <div class="col-6 col-sm-2 pt-1 pt-md-0 py-md-1">
             <button type="button" class="btn btn-warning btn-lg" data-bs-toggle="modal" data-bs-target="#hintModal" id="hint_<%=i%>" data-bs-whatever="<%=i%>"><i class="fa fa-light fa-lightbulb"></i></button>
           </div>
         <%}%>
       </div>
-      <div class="row justify-content-center py-2 py-md-4 text-center align-items-center">
-        <div class="col-11 col-md-5 col-lg-4 pt-2">
+      <div class="row justify-content-center py-1 py-md-4 text-center align-items-center">
+        <div class="col-11 col-sm-10 col-md-5 col-lg-4 pt-2">
           <div class="form"> 
             <input type="text" class="form-control form-input" placeholder="Enter your answer here..." id="answer"> 
             <span class="left-pan blue">
@@ -34,22 +39,19 @@
             <div class="pid"></div>
           </div>
         </div>
-        <div class="col-6 col-sm-4 col-lg-2 pt-2">
+        <div class="col-4 col-sm-4 col-md-3 col-lg-2 pt-2">
           <button type='button' class="btn btn-dark btn-lg" onclick="repeatAudio('q')"><b><%=i18n.Audio%> </b><i class="fa-solid fa-repeat"></i></button>
         </div>
-        <div class="col-6 col-sm-4 col-lg-2 pt-2">
-          <button class="btn btn-success btn-lg" onclick="next_q('next')" id='next'><%=i18n.Next%> <i class="fa-solid fa-angles-right"></i></button>
+        <div class="col-4 col-sm-4 col-md-3 col-lg-2 pt-2">
+          <button class="btn btn-success btn-lg" onclick="next_q()" id='next'><%=i18n.Next%> <i class="fa-solid fa-angles-right"></i></button>
         </div>
-        <div class="col-5 col-sm-4 col-lg-2 pt-2">
-          <button class="btn btn-info btn-lg" onclick="next_q('skip')"><b><%=i18n.Skip%> </b><i class="fa-solid fa-forward"></i></button>
-        </div>
-        <div class="col-5 col-sm-4 col-lg-2 pt-2">
+        <div class="col-4 col-sm-4 col-md-3 col-lg-2 pt-2">
           <button class="btn btn-primary btn-lg" onclick="close_test()"><b><%=i18n.Pause%></b> <i class="fa fa-pause"></i></button>
         </div>
       </div>
     </div>
 
-    <div class="mx-3 col-2 d-none d-xl-block shadow-sm border border-2 rounded-3">
+    <!-- <div class="mx-3 col-2 d-none d-xl-block shadow-sm border border-2 rounded-3">
       <div class="row text-center align-items-center h-25 my-3">
         <div class="col-12">
           <h6 class="my-2"><%=i18n.TestID%> : <%= testid %></h6>
@@ -70,7 +72,7 @@
           <canvas id="myChart"></canvas>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>
 <div hidden id="spinner"></div>
@@ -97,7 +99,6 @@
   window.onload = function() {
     checkBrowser();
   };
-  
   function startTest() {
     if(document.getElementById("instruRead").checked && document.getElementById("micTested").checked) {
       document.getElementById("instructions").classList.add('d-none');
@@ -130,26 +131,26 @@
   //------------ End -----------------------//
 
   //------------ Progress Chart -------------//
-  var data = {
-          labels: [
-              "<%=i18n.Attempted%>",
-              "<%=i18n.Tobeattemted%>",
-          ],
-          datasets: [
-              {
-                  data: [curq_no, q.length-curq_no],
-                  backgroundColor: [
-                      "#10ba00",
-                      "#9ca3af",
+  // var data = {
+  //         labels: [
+  //             "<%=i18n.Attempted%>",
+  //             "<%=i18n.Tobeattemted%>",
+  //         ],
+  //         datasets: [
+  //             {
+  //                 data: [curq_no, q.length-curq_no],
+  //                 backgroundColor: [
+  //                     "#10ba00",
+  //                     "#9ca3af",
                       
-                  ],
-                  hoverBackgroundColor: [
-                      "#0b8000",
-                      "#9ba5b6",
-                  ]
-              }]
-      };
-      var myDoughnutChart;
+  //                 ],
+  //                 hoverBackgroundColor: [
+  //                     "#0b8000",
+  //                     "#9ba5b6",
+  //                 ]
+  //             }]
+  //     };
+  //     var myDoughnutChart;
   //------------------ End -----------------------//
 
   //------------ Text to speech -----------------------//
@@ -175,22 +176,23 @@
       unans=test.unanswered;
       score=parseInt(test.score);
       curq_no=parseInt(test.pauesdqno);
-      create_chart();
+      disp_question();
+      //create_chart();
     });
   }
 
-  function create_chart(){
-      var ctx = document.getElementById("myChart");
-      myDoughnutChart = new Chart(ctx, {
-          type: 'doughnut',
-          data: data,
-          options: {
-            rotation:  86* Math.PI,
-            circumference: 57.25 * Math.PI
-          }
-      });
-      disp_question();
-  }
+  // function create_chart(){
+  //     var ctx = document.getElementById("myChart");
+  //     myDoughnutChart = new Chart(ctx, {
+  //         type: 'doughnut',
+  //         data: data,
+  //         options: {
+  //           rotation:  86* Math.PI,
+  //           circumference: 57.25 * Math.PI
+  //         }
+  //     });
+  //     disp_question();
+  // }
 
   function check_ans(a){
     var val=document.getElementById('answer').value.toLowerCase().split(' ')
@@ -202,7 +204,7 @@
       if(a.indexOf(val[i]) >=0){
         score=score+(100-hints_taken*10)
         ans[hints_taken.toString()]++;
-        document.getElementById('score').textContent='<%=i18n.ScoreObtained%> : '+score;
+        // document.getElementById('score').textContent='<%=i18n.ScoreObtained%> : '+score;
         return;
       }
     }
@@ -220,7 +222,8 @@
   }
   
   function disp_question(){
-    document.getElementById('score').textContent='<%=i18n.ScoreObtained%> : '+score;
+    document.getElementById('q-num').textContent = (curq_no+1)+'/'+q.length;
+    //document.getElementById('score').textContent='<%=i18n.ScoreObtained%> : '+score;
     test.classList.add('d-none')
     spinner.removeAttribute('hidden');
     if(curq_no<q.length && curq!=null){
@@ -232,11 +235,19 @@
         check_ans(curq.answer);
         update_test('completed');
         spinner.setAttribute('hidden', '');
-        $('#testSub').modal('show');
-        setTimeout(setTimeout(close_test, 5000))
+        swal({
+          title: "Test Completed..!",
+          text: "You have successfully completed the test. The test results is sent to your mail. Thank you for taking this test.",
+          icon: "success",
+          button: "OK",
+        })
+        .then(function(){
+          close_test();
+        });
+        setTimeout(setTimeout(close_test, 10000));
         return;
     }
-    progress_chart();
+    //progress_chart();
     fetch('/question/<%=testid%>/'+q[curq_no])
     .then(response => response.json())
     .then(question => {
@@ -331,13 +342,24 @@
   }
 
   function next_q(val){
-    if(val==='next' && document.getElementById('answer').value===''){
-      swal("<%=i18n.Note%>","<%=i18n.enteryouranswer%>", "info");
-      document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
-      document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
-      return;
+    if(document.getElementById('answer').value===''){
+      play_audio('You have not answered this question. Do you want to skip this question?')
+      swal({
+        title: "You have not answered this question",
+        text: "You won't be able to revisit. Do you want to skip this question?",
+        icon: "warning",
+        buttons: ['No', 'Yes'],
+      }).
+      then(yes => {
+        if(!yes) {
+          return;
+        }else{
+          disp_question();
+        }
+      })
+    }else{
+      disp_question();
     }
-    disp_question()
   }
 
   function startDictation(ev) {
@@ -384,11 +406,11 @@
       }
     }
 
-    function progress_chart(){
-      data.datasets[0].data=[curq_no,q.length-curq_no]
-      myDoughnutChart.data.datasets[0].data=[curq_no,q.length-curq_no];
-      myDoughnutChart.update();
-    }
+    // function progress_chart(){
+    //   data.datasets[0].data=[curq_no,q.length-curq_no]
+    //   myDoughnutChart.data.datasets[0].data=[curq_no,q.length-curq_no];
+    //   myDoughnutChart.update();
+    // }
 
     var audioRecorder = {
       mediaRecorder: null,
@@ -584,7 +606,7 @@
     clearTimeout(recMic);
     nextPrev(1);
     document.getElementById('nextBtn').removeAttribute('disabled')
-    document.getElementById('rec').removeAttribute('disabled')
+    document.getElementById('rec').setAttribute('disabled','')
   }
 
   function checkBrowser(){
@@ -602,6 +624,7 @@
         if (proceed) {
           document.getElementById('instructions').classList.remove('d-none');
           document.getElementById('mic-button').classList.add('d-none');
+          recError();
         } else {
           close_test();
         }
