@@ -98,7 +98,7 @@ exports.delete_user = async(req, res) => {
 }
 
 function unassign_patient_from_all_test(patientid){
-    Test.updateMany({ "patients.patientid": patientid }, { $pull: { "patients": { "patientid": req.params.patientid } } }, { new: true })
+    Test.updateMany({ "patients.patientid": patientid }, { $pull: { "patients": { "patientid": patientid } } }, { new: true })
         .then((test) => {
             return;
         }).catch((err) => {
