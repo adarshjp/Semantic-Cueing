@@ -1,27 +1,41 @@
 <%- include("partials/header") %>
 <%- include("partials/patientSideBar") %>
         <div class="container-fluid">
-            <div class="offset-2 offset-sm-0 text-center py-2 px-5">
-                <p class="display-4 fw-bold" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+            <div class=" offset-2 offset-sm-1 text-center py-3 px-5">
+                <p class="display-4 font-monospace fw-bold">
                         <%=i18n.My%> <span class="blue"><%=i18n.Doctor%> <i class="fas fa-stethoscope"></i></span>
                 </p>
             </div>
-            <div class="row justify-content-center">
-                <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-lg-0">
-                        <div class="row align-items-center border border-2 rounded ms-1 ms-md-0">
-                            <div class="col-md-6">
-                                <img src="data:image/<%=doctor.displaypic.contentType%>;base64,<%=doctor.displaypic.data.toString('base64')%>" class="card-img-top rounded-circle p-5"
-                                    alt="..."/>
+            <div class="row justify-content-center align-items-center ms-5">
+                <div class="ms-3 col-11 offset-sm-1 col-sm-10 offset-lg-0 col-xl-9">
+                    <div class="card border border-3 rounded-3 shadow-sm animate__animated animate__bounceInUp">
+                        <div class="row justify-content-center align-items-center text-center p-3">
+                            <div class="col-md-6 p-2">
+                                <img src="data:image/<%=doctor.displaypic.contentType%>;base64,<%=doctor.displaypic.data.toString('base64')%>" alt="" class="img-fluid rounded-circle" style="height:65vh">
                             </div>
-                            <div class="col-md-6 align-items-center text-center p-2">
-                                <h3 class=""><%=doctor.name%></h3>
-                                <div style="overflow: auto;flex-wrap: nowrap;white-space: nowrap;">
-                                    <p class="h4">
-                                        <span class="blue"><i class="fas fa-envelope"></i></span>
-                                        <%=doctor.email%>
-                                    </p>
+                            <div class="col-md-6 p-2 text-center text-md-start">
+                                <h1 class="display-5 fw-bold text-truncate">
+                                <span>
+                                    <%=doctor.name%>
+                                </span>
+                                </h1>
+                                <hr class="me-2">
+                                <p class="h3 fw-bold text-truncate">
+                                <span>
+                                    <a class="text-dark" href="mailto:<%=doctor.email%>" style="text-decoration:none;"><%=doctor.email%></a>
+                                </span>
+                                </p>
+                                <p class="h3 fw-bold">
+                                <span>
+                                    <%=doctor.age%>
+                                </span>
+                                </p>
+                                <div class="d-flex ms-1 justify-content-center justify-content-md-end me-md-3">
+                                    <!-- Give a edit button -->
+                                    <a href="/chat" class="btn btn-primary btn-lg btn-block">
+                                        <i class="fa-solid fa-comment-dots"></i>
+                                    </a>
                                 </div>
-                                
                             </div>
                         </div>
                     </div>
