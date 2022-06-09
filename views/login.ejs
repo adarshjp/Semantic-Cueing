@@ -2,11 +2,12 @@
 <div class="container my-5 p-md-1">
     <div class="row justify-content-center vertical-center shadow-lg rounded p-2 p-md-0">
         <div class="col-11 col-md-5 col-lg-4" style="background-color: #6c63ff">
-            <div class="my-5 p-3">
+            <div class="my-5 py-3">
                 <div class="row my-3 align-items-center">
                     <div class="col-1"></div>
                     <div class="col-10 p-2 justify-content-center" >
                         <form
+                            onsubmit="return validateForm()"
                             action="/login"
                             method="post"
                             class="p-3"
@@ -35,23 +36,22 @@
                                 type="text"
                                 name="username"
                                 placeholder="<%=i18n.Username%>"
-                                id="login-input"
-                                class="outline-color"
+                                class="outline-color login-input"
                                 required
                             />
                             <input
                                 type="password"
                                 name="password"
                                 placeholder="<%=i18n.Password%>"
-                                id="login-input"
-                                class="outline-color"
+                                class="outline-color login-input"
                                 required
                             />
-                            <a href="/forgotpassword" id="login-a" class="p-2"
-                                ><%=i18n.ForgotYourPassword%> </a
-                            >
-                            <div class='text-center'>
-                                <input
+                            <span class="d-flex">
+                                <a href="/forgotpassword" id="login-a" class="p-2"
+                                ><%=i18n.ForgotYourPassword%> </a>
+                            </span>
+                            <div class='text-center d-flex'>
+                                <button
                                 type="submit"
                                 class="
                                     btn btn-lg
@@ -60,12 +60,12 @@
                                     mt-1
                                     shadow
                                     blue
+                                    bg-white
                                 "
-                                value=" <%=i18n.Login%>     "
-                                onClick="this.form.submit(); this.disabled=true; this.value='<%=i18n.Loggingin%>…';this.style='color:black;background-color:white;margin-top:2px;padding:2px'"
-                                style="width: 50%; background-color: white"
-                                />
-                                <button type="button" class="btn btn-lg btn-light rounded-pill blue ms-1 mt-1" data-bs-toggle="modal" data-bs-target="#langModal"> <i class="fa fa-language" aria-hidden="true"></i> </button>
+                                id="login-btn"
+                                style="width:90px;"
+                                ><%=i18n.Login%></button>
+                                <button type="button" class="btn btn-lg btn-light rounded-pill shadow-lg blue ms-2 p-2 mt-1" data-bs-toggle="modal" data-bs-target="#langModal" style="width:60px;"> <i class="fa fa-language" aria-hidden="true"></i> </button>
                             </div>
                         </form>
                     </div>
@@ -197,5 +197,14 @@
         </div>
     </div>
 </div>
+<script>
+    function validateForm(){
+        let login_btn= document.getElementById("login-btn");
+        login_btn.style.width="150px";
+        login_btn.disabled=true;
+        login_btn.textContent="<%=i18n.Loggingin%>...";
+        return true;
+    }
+</script>
 <%- include("partials/langModal") %>
 <%- include("partials/footer") %>
