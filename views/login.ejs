@@ -2,18 +2,19 @@
 <div class="container my-5 p-md-1">
     <div class="row justify-content-center vertical-center shadow-lg rounded p-2 p-md-0">
         <div class="col-11 col-md-5 col-lg-4" style="background-color: #6c63ff">
-            <div class="my-5 p-3">
+            <div class="my-5 py-3 px-md-0 px-xl-3">
                 <div class="row my-3 align-items-center">
                     <div class="col-1"></div>
                     <div class="col-10 p-2 justify-content-center" >
                         <form
+                            onsubmit="return validateForm()"
                             action="/login"
                             method="post"
                             class="p-3"
                             id="login-form"
                         >
                             <h1 class="p-3 white"><b><%=i18n.Login%></b></h1>
-                            <% if(message.error){ %>
+                            <!-- <% if(message.error){ %>
                             <div
                                 class="
                                     alert alert-warning alert-dismissible
@@ -30,28 +31,27 @@
                                     aria-label="Close"
                                 ></button>
                             </div>
-                            <% } %>
+                            <% } %> -->
                             <input
                                 type="text"
                                 name="username"
                                 placeholder="<%=i18n.Username%>"
-                                id="login-input"
-                                class="outline-color"
+                                class="outline-color login-input"
                                 required
                             />
                             <input
                                 type="password"
                                 name="password"
                                 placeholder="<%=i18n.Password%>"
-                                id="login-input"
-                                class="outline-color"
+                                class="outline-color login-input"
                                 required
                             />
-                            <a href="/forgotpassword" id="login-a" class="p-2"
-                                ><%=i18n.ForgotYourPassword%> </a
-                            >
-                            <div class='text-center'>
-                                <input
+                            <span class="d-flex">
+                                <a href="/forgotpassword" id="login-a" class="p-2"
+                                ><%=i18n.ForgotYourPassword%> </a>
+                            </span>
+                            <div class='text-center d-flex'>
+                                <button
                                 type="submit"
                                 class="
                                     btn btn-lg
@@ -60,12 +60,12 @@
                                     mt-1
                                     shadow
                                     blue
+                                    bg-white
                                 "
-                                value=" <%=i18n.Login%>     "
-                                onClick="this.form.submit(); this.disabled=true; this.value='<%=i18n.Loggingin%>…';this.style='color:black;background-color:white;margin-top:2px;padding:2px'"
-                                style="width: 50%; background-color: white"
-                                />
-                                <button type="button" class="btn btn-lg btn-light rounded-pill blue ms-1 mt-1" data-bs-toggle="modal" data-bs-target="#langModal"> <i class="fa fa-language" aria-hidden="true"></i> </button>
+                                id="login-btn"
+                                style="width:90px;"
+                                ><%=i18n.Login%></button>
+                                <button type="button" class="btn btn-lg btn-light rounded-pill shadow-lg blue ms-2 p-2 mt-1" data-bs-toggle="modal" data-bs-target="#langModal" style="width:60px;"> <i class="fa fa-language" aria-hidden="true"></i> </button>
                             </div>
                         </form>
                     </div>
@@ -107,19 +107,19 @@
                     ></button>
                 </div>
                 <div class="carousel-inner my-auto">
-                    <div class="carousel-item active" data-bs-interval="10000">
+                    <div class="carousel-item active" data-bs-interval="5000">
                         <div class="row justify-content-center">
                             <div class="col-lg-5 text-center my-auto d-md-none d-lg-block">
                                 <img
-                                    src="http://img.timeinc.net/time/daily/2010/1007/edison_electric_0705.jpg"
+                                    src="https://i.pinimg.com/originals/3f/3f/0b/3f3f0b1e7570676e4b3e686e54608328.jpg"
                                     alt=""
-                                    width="80%"
-                                    class="rounded-circle d-inline-block"
+                                    width="85%"
+                                    class="rounded-circle d-inline-block border border-3"
                                     height="325px"
                                 />
                             </div>
-                            <div class="col-md-10 col-lg-6 text-center my-auto">
-                                <div class="shadow rounded p-2 text-center" style="background-color: rgb(241, 241, 241)">
+                            <div class="col-md-10 col-lg-7 text-center my-auto">
+                                <div class="rounded-2 p-2 text-center">
                                     <blockquote>  
                                         <p><strong><%=i18n.EdisonQuote%></strong></p>
                                         <br>
@@ -129,19 +129,19 @@
                             </div>
                         </div>
                     </div>
-                    <div class="carousel-item" data-bs-interval="10000">
+                    <div class="carousel-item" data-bs-interval="5000">
                         <div class="row justify-content-center">
                             <div class="col-lg-5 text-center my-auto d-md-none d-lg-block">
                                 <img
                                     src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/a-a-milne-literary-legend-john-springfield.jpg"
                                     alt=""
-                                    width="80%"
-                                    class="rounded-circle d-inline-block"
+                                    width="85%"
+                                    class="rounded-circle d-inline-block border border-3"
                                     height="325px"
                                 />
                             </div>
-                            <div class="col-md-10 col-lg-6 text-center my-auto">
-                                <div class="shadow rounded p-2 text-center" style="background-color: rgb(241, 241, 241)">
+                            <div class="col-md-10 col-lg-7 text-center my-auto">
+                                <div class="rounded-2 p-2 text-center">
                                     <blockquote>  
                                         <p><strong><%=i18n.MilneQuote%></strong></p>
                                         <cite><%=i18n.MilneName%></cite>
@@ -150,19 +150,19 @@
                             </div>
                         </div>
                     </div>
-                    <div class="carousel-item" data-bs-interval="10000">
+                    <div class="carousel-item" data-bs-interval="5000">
                         <div class="row justify-content-center">
                             <div class="col-lg-5 text-center my-auto d-md-none d-lg-block">
                                 <img
-                                    src="https://img1.wsimg.com/isteam/ip/3dc8fe23-d247-4bed-82ec-106e5f9d9831/5a4726bd-f1bf-4b78-9448-a8a55ec1ef00.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:400,cg:true"
+                                    src="https://www.dale-carnegie.co.jp/assets/images/achievements/img03_colour.png"
                                     alt=""
-                                    width="80%"
-                                    class="rounded-circle d-inline-block"
+                                    width="85%"
+                                    class="rounded-circle d-inline-block  border border-3"
                                     height="325px"
                                 />
                             </div>
-                            <div class="col-md-10 col-lg-6 text-center my-auto">
-                                <div class="shadow p-2 text-center rounded" style="background-color:rgb(241, 241, 241);">
+                            <div class="col-md-10 col-lg-7 text-center my-auto">
+                                <div class="p-2 text-center rounded-2">
                                     <blockquote>  
                                         <p><strong><%=i18n.CarnegieQuote%></strong></p>
                                         <cite><%=i18n.CarnegieName%></cite>
@@ -171,19 +171,19 @@
                             </div>
                         </div>
                     </div>
-                    <div class="carousel-item" data-bs-interval="10000">
+                    <div class="carousel-item" data-bs-interval="5000">
                         <div class="row justify-content-center">
                             <div class="col-lg-5 text-center my-auto d-md-none d-lg-block">
                                 <img
-                                    src="https://moralyluces.files.wordpress.com/2013/04/linda-poindexter-2000.jpg?w=584"
+                                    src="https://chnetwork.org/wp-content/uploads/2015/12/Screen-Shot-2015-12-18-at-12.57.37-PM.png"
                                     alt=""
-                                    width="80%"
-                                    class="rounded-circle d-inline-block"
+                                    width="85%"
+                                    class="rounded-circle d-inline-block  border border-3"
                                     height="325px"
                                 />
                             </div>
-                            <div class="col-md-10 col-lg-6 text-center my-auto">
-                                <div class="shadow p-2 text-center rounded" style="background-color:rgb(241, 241, 241);">
+                            <div class="col-md-10 col-lg-7 text-center my-auto">
+                                <div class="p-2 text-center rounded-2">
                                     <blockquote>  
                                         <p><strong><%=i18n.PoindexterQuote%></strong></p>
                                         <cite><%=i18n.PoindexterName%></cite>
@@ -199,3 +199,20 @@
 </div>
 <%- include("partials/langModal") %>
 <%- include("partials/footer") %>
+<script>
+    function validateForm(){
+        let login_btn= document.getElementById("login-btn");
+        login_btn.style.width="150px";
+        login_btn.disabled=true;
+        login_btn.textContent="<%=i18n.Loggingin%>...";
+        return true;
+    }
+    if('<%=message.error%>'){
+        swal({
+            title:'Invalid Credentials..!',
+            text:'<%=message.error%>. Please enter valid credentials.',
+            icon:'error',
+            button:'Try Again'
+        })
+    }
+</script>

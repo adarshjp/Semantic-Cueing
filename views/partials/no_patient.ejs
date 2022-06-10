@@ -1,16 +1,16 @@
-<div class="container-fluid my-4 p-4 d-none" id='no-data'>
-    <div class="row justify-content-center align-items-center" style="height:85vh">
-        <div class="offset-2 col-9 offset-sm-1 col-sm-10 offset-xl-0 col-xl-10 border">
-          <div class="row justify-content-center align-items-center">
+<div class="container-fluid d-none" id='no-data'>
+    <div class="row justify-content-center align-items-center ms-5 p-1" style="height:100vh">
+        <div class="ms-3 ms-sm-2 col-11 col-sm-10">
+          <div class="row justify-content-center align-items-center border border-2 shadow-sm rounded-3 py-3 animate__animated animate__bounceInUp">
             <div class="col-12 col-md-6 text-center p-3">
-              <h2 class="display-4 fw-bold"><span class="blue"><%=msg[0]%></span> <%=msg[1]%> </h2>
+              <h2 class="display-4 fw-bold font-monospace text-break"><span class="blue"><%=msg[0]%></span> <%=msg[1]%> </h2>
             </div>
             <div class="col-12 col-md-6 p-2">
               <img src="/images/Empty.png" class='img-fluid'/>
             </div>
-            <% if(msg.length ===3 && user.role=='admin'){%>
+            <% if(msg.length ===3 && user.role=='admin' || user.role=='doctor'){%>
               <div class="text-center mt-2 mb-4">
-                <a href="/addquestion" class="btn btn-primary btn-lg rounded-pill">Create Question <i class="fa-solid fa-plus"></i></a>
+                <a href="/addquestion" class="btn btn-primary btn-lg rounded-pill">Add Question <i class="fa-solid fa-plus"></i></a>
               </div>
             <%}%>
           </div>
