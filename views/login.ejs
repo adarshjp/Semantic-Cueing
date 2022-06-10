@@ -14,7 +14,7 @@
                             id="login-form"
                         >
                             <h1 class="p-3 white"><b><%=i18n.Login%></b></h1>
-                            <% if(message.error){ %>
+                            <!-- <% if(message.error){ %>
                             <div
                                 class="
                                     alert alert-warning alert-dismissible
@@ -31,7 +31,7 @@
                                     aria-label="Close"
                                 ></button>
                             </div>
-                            <% } %>
+                            <% } %> -->
                             <input
                                 type="text"
                                 name="username"
@@ -107,14 +107,14 @@
                     ></button>
                 </div>
                 <div class="carousel-inner my-auto">
-                    <div class="carousel-item active" data-bs-interval="10000">
+                    <div class="carousel-item active" data-bs-interval="5000">
                         <div class="row justify-content-center">
                             <div class="col-lg-5 text-center my-auto d-md-none d-lg-block">
                                 <img
                                     src="https://i.pinimg.com/originals/3f/3f/0b/3f3f0b1e7570676e4b3e686e54608328.jpg"
                                     alt=""
                                     width="85%"
-                                    class="rounded-circle d-inline-block"
+                                    class="rounded-circle d-inline-block border border-3"
                                     height="325px"
                                 />
                             </div>
@@ -129,14 +129,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="carousel-item" data-bs-interval="10000">
+                    <div class="carousel-item" data-bs-interval="5000">
                         <div class="row justify-content-center">
                             <div class="col-lg-5 text-center my-auto d-md-none d-lg-block">
                                 <img
                                     src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/a-a-milne-literary-legend-john-springfield.jpg"
                                     alt=""
                                     width="85%"
-                                    class="rounded-circle d-inline-block"
+                                    class="rounded-circle d-inline-block border border-3"
                                     height="325px"
                                 />
                             </div>
@@ -150,14 +150,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="carousel-item" data-bs-interval="10000">
+                    <div class="carousel-item" data-bs-interval="5000">
                         <div class="row justify-content-center">
                             <div class="col-lg-5 text-center my-auto d-md-none d-lg-block">
                                 <img
                                     src="https://www.dale-carnegie.co.jp/assets/images/achievements/img03_colour.png"
                                     alt=""
                                     width="85%"
-                                    class="rounded-circle d-inline-block"
+                                    class="rounded-circle d-inline-block  border border-3"
                                     height="325px"
                                 />
                             </div>
@@ -171,14 +171,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="carousel-item" data-bs-interval="10000">
+                    <div class="carousel-item" data-bs-interval="5000">
                         <div class="row justify-content-center">
                             <div class="col-lg-5 text-center my-auto d-md-none d-lg-block">
                                 <img
                                     src="https://chnetwork.org/wp-content/uploads/2015/12/Screen-Shot-2015-12-18-at-12.57.37-PM.png"
                                     alt=""
                                     width="85%"
-                                    class="rounded-circle d-inline-block"
+                                    class="rounded-circle d-inline-block  border border-3"
                                     height="325px"
                                 />
                             </div>
@@ -197,6 +197,8 @@
         </div>
     </div>
 </div>
+<%- include("partials/langModal") %>
+<%- include("partials/footer") %>
 <script>
     function validateForm(){
         let login_btn= document.getElementById("login-btn");
@@ -205,6 +207,12 @@
         login_btn.textContent="<%=i18n.Loggingin%>...";
         return true;
     }
+    if('<%=message.error%>'){
+        swal({
+            title:'Invalid Credentials..!',
+            text:'<%=message.error%>. Please enter valid credentials.',
+            icon:'error',
+            button:'Try Again'
+        })
+    }
 </script>
-<%- include("partials/langModal") %>
-<%- include("partials/footer") %>
