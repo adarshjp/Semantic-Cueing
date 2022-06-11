@@ -1,14 +1,18 @@
 <%- include("partials/header") %>
-<%- include("partials/adminSideBar") %>
+<% if(user.role==="admin"){ %>
+   <%- include("partials/adminSideBar") %>
+<%}else{%>
+   <%- include("partials/doctorSideBar") %>
+<%}%>
 <div class="container-fluid my-3">
-   <div class="row justify-content-center ms-5 ms-lg-0">
-      <div class="ms-3 ms-lg-0 col-10 offset-sm-1 col-sm-9 offset-md-1 offset-lg-0 col-md-11">
+   <div class="row justify-content-center ms-5">
+      <div class="ms-3 col-11">
          <div class="text-center p-3 font-monospace">
             <h1 class="display-4"><%=i18n.Addan%> <span class="blue"><%=i18n.Object%></span> <%=i18n.toidentify1%></h1>
          </div>
          <form action="/addquestion" method="POST" enctype="multipart/form-data" id='add_q_form' onsubmit="return validate()">
             <div class="row justify-content-center">
-               <div class="col-12 col-md-8 col-lg-6 p-4 card border-2 rounded-3 shadow-sm">
+               <div class="col-12 col-md-10 col-lg-8 col-xl-6 p-4 card border-2 rounded-3 shadow-sm">
                   <!-- <h2 class="card-title text-center">Choose the <span class="blue">Image</span> of Object</h2> -->
                   <div class="form-group text-center">
                      <label for="upload_file" id='upload_cloud'>
@@ -40,12 +44,12 @@
                   </div>
                </div>
             </div>
-            <div class="text-center p-3 font-monospace">
+            <div class="text-center mt-2 pt-3 font-monospace">
                <h1 class="display-5"><%=i18n.Give%> <span class="blue"><%=i18n.hints%></span> <%=i18n.toidentify2%></h1>
             </div>
             <div class="row justify-content-center mt-2">
                <% for (var i = 0; i < 4; i++) { %>
-               <div class="col-12 col-md-5 card border-2 rounded-3 shadow-sm m-2 p-4">
+               <div class="col-12 col-md-5 card border-2 rounded-3 shadow-sm m-2 m-md-4 p-4">
                   <!-- <h2 class="card-title text-center">Add hint<%= i+1 %></h2> -->
                   <div class="row justify-content-center">
                      <div class="form-group col-12 text-center">
