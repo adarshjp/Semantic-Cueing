@@ -4,7 +4,8 @@ const Test = require("../models/test");
 const { findUserByRole } = require('../helpers/findUserByRole')
 const { findUserById } = require('../helpers/findUserById')
 const { findAndDeleteUserById } = require('../helpers/findAndDeleteUserById')
-const { findPatientsByDoctorId}= require('../helpers/findPatientsByDoctorId')
+const { findPatientsByDoctorId } = require('../helpers/findPatientsByDoctorId')
+const {findAndUpdateUserById}= require('../helpers/findAndUpdateUserById')
 exports.admin_get = async (req, res) => {
     //Function to render the admin home page
     res.render('admin', { user: req.user, i18n: global.i18n })
@@ -118,31 +119,22 @@ function delete_all_tests_from_doctor(doctorid) {
 }
 
 exports.get_edit_user = (req, res) => {
-    //fetch one patient given id and send it
-    User.findById({ _id: req.params.id })
-        .then((user) => {
-            res.render("editUser", { user: user, i18n: global.i18n })
-        })
-        .catch((err) => {
-            console.log(err)
-            res.status(500)
-            res.send(err)
-        })
+    //Function to render edit user page
+    res.render("editUser", { user: req.user, i18n: global.i18n })
 }
 
-exports.edit_user = (req, res) => {
-    //update patient with id=req.params.id and data=req.body
-    User.findByIdAndUpdate({ _id: req.params.id }, req.body)
-        .then((user) => {
-            req.flash("success", global.i18n.Userupdated)
-            res.redirect("/view/" + req.user._id)
-        })
-        .catch((err) => {
-            req.flash("error", global.i18n.Usernotupdated)
-            res.status(500)
-            res.send(err)
-            console.log(err)
-        })
+exports.edit_user = async (req, res) => {
+    //Function to update user with id=req.params.id and data=req.body
+    try {
+        await findAndUpdateUserById(req.params.id, req.body)
+        req.flash("success", global.i18n.Userupdated)
+        res.redirect("/view/" + req.user._id)
+    } catch (err) {
+        req.flash("error", global.i18n.Usernotupdated)
+        res.status(500)
+        res.send(err)
+        console.log(err)
+    }
 }
 
 exports.checkusername = (req, res) => {
