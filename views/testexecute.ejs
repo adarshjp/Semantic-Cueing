@@ -16,7 +16,9 @@
       <div class="row pt-2 pt-md-4 justify-content-center text-center align-items-center">
         <%for (var i = 0;i< 4;i++){%>
           <div class="col-6 col-sm-2 pt-1 pt-md-0 py-md-1">
-            <button type="button" class="btn btn-warning btn-lg" data-bs-toggle="modal" data-bs-target="#hintModal" id="hint_<%=i%>" data-bs-whatever="<%=i%>"><i class="fa fa-light fa-lightbulb"></i></button>
+            <button type="button" class="btn btn-warning btn-lg" data-bs-toggle="modal" data-bs-target="#hintModal" id="hint_<%=i%>" data-bs-whatever="<%=i%>"
+              <% if(i!==0){%>disabled<%}%>
+              ><i class="fa fa-light fa-lightbulb"></i></button>
           </div>
         <%}%>
       </div>
@@ -96,9 +98,24 @@
   });
 </script>
 <script type="text/javascript">
+  window.addEventListener('beforeunload', function (e) {
+    fetch('/test/update_hints/<%=testid%>', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        hints_taken: hints_taken
+      })
+    })
+    e.preventDefault();
+    e.returnValue = '';
+  });
+
   window.onload = function() {
     checkBrowser();
   };
+
   function startTest() {
     if(document.getElementById("instruRead").checked && document.getElementById("micTested").checked) {
       document.getElementById("instructions").classList.add('d-none');
@@ -176,6 +193,7 @@
       ans=test.answered;
       unans=test.unanswered;
       score=parseInt(test.score);
+      hints_taken=parseInt(test.paused_hint);
       curq_no=parseInt(test.pauesdqno);
       disp_question();
       //create_chart();
@@ -212,6 +230,17 @@
     unans[hints_taken.toString()]++;
   }
 
+  function hint_button_update(){
+    console.log(hints_taken)
+    for(var i=0;i<hints_taken;i++){
+      console.log('hello')
+      document.getElementById('hint_'+i).classList.remove('btn-warning');
+      document.getElementById('hint_'+i).classList.add('btn-secondary');
+      document.getElementById('hint_'+i).disabled=false;
+      document.getElementById('hint_'+(i+1)).disabled=false;
+    }
+  }
+
   function hint_but_change(){
     for(var i=0;i<4;i++){
       document.getElementById('hint_'+i).classList.remove('btn-secondary');
@@ -229,8 +258,9 @@
     spinner.removeAttribute('hidden');
     if(curq_no<q.length && curq!=null){
         check_ans(curq.answer);
-        hints_taken=0;
+        //hints_taken=0;
         hint_status={'1':0,'2':0,'3':0,'4':0}
+        hint_button_update();
         update_test('paused');
     }else if(curq_no==q.length){
         check_ans(curq.answer);
@@ -264,7 +294,6 @@
       if(curq_no==q.length){
         document.getElementById('next').innerHTML=`<b>Submit </b><i class="fa-solid fa-paper-plane"></i>`;
       }
-      hint_but_change();
     });
   }
 
@@ -359,6 +388,7 @@
         }
       })
     }else{
+      hint_but_change();
       disp_question();
     }
   }
