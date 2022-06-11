@@ -128,7 +128,7 @@ function showSelectedQuestion(){
 function append_div(q,ischecked){
     let div=document.createElement("div");
     
-    div.className='ms-3 ms-md-0 col-11 border border-2 rounded-3 shadow-sm my-2 py-3 '+q.level;
+    div.className='col-12 border border-2 rounded-3 shadow-sm my-2 py-3 '+q.level;
     div.id='question'+li_id;
 
     let card_img=document.createElement('div');
