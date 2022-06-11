@@ -16,7 +16,9 @@
       <div class="row pt-2 pt-md-4 justify-content-center text-center align-items-center">
         <%for (var i = 0;i< 4;i++){%>
           <div class="col-6 col-sm-2 pt-1 pt-md-0 py-md-1">
-            <button type="button" class="btn btn-warning btn-lg" data-bs-toggle="modal" data-bs-target="#hintModal" id="hint_<%=i%>" data-bs-whatever="<%=i%>"><i class="fa fa-light fa-lightbulb"></i></button>
+            <button type="button" class="btn btn-warning btn-lg" data-bs-toggle="modal" data-bs-target="#hintModal" id="hint_<%=i%>" data-bs-whatever="<%=i%>"
+              <% if(i!==0){%>disabled<%}%>
+              ><i class="fa fa-light fa-lightbulb"></i></button>
           </div>
         <%}%>
       </div>
@@ -46,7 +48,7 @@
           <button class="btn btn-success btn-lg" onclick="next_q()" id='next'><%=i18n.Next%> <i class="fa-solid fa-angles-right"></i></button>
         </div>
         <div class="col-4 col-sm-4 col-md-3 col-lg-2 pt-2">
-          <button class="btn btn-primary btn-lg" onclick="close_test()"><b><%=i18n.Pause%></b> <i class="fa fa-pause"></i></button>
+          <button class="btn btn-primary btn-lg" onclick="pause_test()"><b><%=i18n.Pause%></b> <i class="fa fa-pause"></i></button>
         </div>
       </div>
     </div>
@@ -80,6 +82,7 @@
 <%- include("partials/hintModal") %>
 
 <script>
+  /* Animate Test Execution */
   document.getElementById("img").addEventListener('mouseenter', function() {
     this.classList.add('animate__pulse')
   });
@@ -95,23 +98,41 @@
     this.classList.add('animate__rollOut');
   });
 </script>
+
 <script type="text/javascript">
+  window.addEventListener('beforeunload', async function (e) {
+    e.preventDefault();
+    $(window).unbind();
+    if(hints_taken!==0){
+      await fetch('/test/update_hints/<%=testid%>', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          hints_taken: hints_taken,
+        }),
+        keepalive: true
+      });
+    }
+    e.returnValue = '';
+  });
+
   window.onload = function() {
+    get_initial_test_details();
     checkBrowser();
   };
+
   function startTest() {
     if(document.getElementById("instruRead").checked && document.getElementById("micTested").checked) {
       document.getElementById("instructions").classList.add('d-none');
       swal('<%=i18n.Taketestnow%>','<%=i18n.Takeyourtestnow%>','success')
       .then(function(){
-        get_initial_test_details()
-      })
-      document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
-      document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
+        disp_question();
+        //get_initial_test_details()
+      });
     }else{
       swal("<%=i18n.Warning%>", "<%=i18n.readinstructionstoproceed%>", "warning");
-      document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
-      document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
     }
   }
 
@@ -169,15 +190,17 @@
   //------------ End -----------------------//
 
   function get_initial_test_details(){
-    spinner.removeAttribute('hidden');
+    //spinner.removeAttribute('hidden');
     fetch('/test/<%=testid%>')
     .then(response => response.json())
     .then(test=>{
       ans=test.answered;
       unans=test.unanswered;
       score=parseInt(test.score);
+      hints_taken=parseInt(test.paused_hint);
       curq_no=parseInt(test.pauesdqno);
-      disp_question();
+      //disp_question();
+
       //create_chart();
     });
   }
@@ -203,13 +226,29 @@
     document.getElementById('answer').value='';
     for(var i in val){
       if(a.indexOf(val[i]) >=0){
-        score=score+(100-hints_taken*10)
+        score=score+(100-(hints_taken*10));
         ans[hints_taken.toString()]++;
         // document.getElementById('score').textContent='<%=i18n.ScoreObtained%> : '+score;
+        hint_status={'1':0,'2':0,'3':0,'4':0}
+        hints_taken=0;
         return;
       }
     }
+    hint_status={'1':0,'2':0,'3':0,'4':0}
+    hints_taken=0;
     unans[hints_taken.toString()]++;
+  }
+
+  function hint_button_update(){
+    for(var i=0;i<hints_taken;i++){
+      hint_status[''+(i+1)]=1;
+      document.getElementById('hint_'+i).classList.remove('btn-warning');
+      document.getElementById('hint_'+i).classList.add('btn-secondary');
+      document.getElementById('hint_'+i).disabled=false;
+      if(i!==3){
+        document.getElementById('hint_'+(i+1)).disabled=false;
+      }
+    }
   }
 
   function hint_but_change(){
@@ -229,8 +268,7 @@
     spinner.removeAttribute('hidden');
     if(curq_no<q.length && curq!=null){
         check_ans(curq.answer);
-        hints_taken=0;
-        hint_status={'1':0,'2':0,'3':0,'4':0}
+        //hint_status={'1':0,'2':0,'3':0,'4':0}
         update_test('paused');
     }else if(curq_no==q.length){
         check_ans(curq.answer);
@@ -249,6 +287,7 @@
         return;
     }
     //progress_chart();
+    hint_button_update();
     fetch('/question/<%=testid%>/'+q[curq_no])
     .then(response => response.json())
     .then(question => {
@@ -259,12 +298,10 @@
       setTimeout(function() {
         play_audio(curq.score);
       },1000);
-
       curq_no++;
       if(curq_no==q.length){
         document.getElementById('next').innerHTML=`<b>Submit </b><i class="fa-solid fa-paper-plane"></i>`;
       }
-      hint_but_change();
     });
   }
 
@@ -284,6 +321,8 @@
       hint_status[''+(hint+1)]=1;
       hints_taken++;
     }
+    console.log(hint_status)
+    console.log(hints_taken)
   }
 
   var hintModal = document.getElementById('hintModal')
@@ -338,13 +377,29 @@
       });
   }
 
+  function pause_test(){
+    swal({
+      title: "Do you want to pause?",
+      text: "The test will be paused and you will be able to resume this test later.",
+      icon: "info",
+      buttons: true,
+    })
+    .then(isPaused => {
+      if (isPaused) {
+        close_test();
+      }
+      else {
+        return;
+      }
+    })
+  }
   function close_test(){
     window.close();
   }
 
   function next_q(val){
     if(document.getElementById('answer').value===''){
-      play_audio('You have not answered this question. Do you want to skip this question?')
+      //play_audio('You have not answered this question. Do you want to skip this question?')
       swal({
         title: "You have not answered this question",
         text: "You won't be able to revisit. Do you want to skip this question?",
@@ -355,10 +410,12 @@
         if(!yes) {
           return;
         }else{
+          hint_but_change();
           disp_question();
         }
       })
     }else{
+      hint_but_change();
       disp_question();
     }
   }
@@ -484,8 +541,6 @@
         })
         .catch(error => {
             swal("<%=i18n.Errors%>", "<%=i18n.unableaceessyourmicrophone%>", "error");
-            document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
-            document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
         });
     }
 
@@ -564,8 +619,6 @@
   function get_list_of_mic(){
     if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
       swal("<%=i18n.Errors%>","<%=i18n.enumerateDevicesnotsupported%>", "error");
-      document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
-      document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
       return;
     }
 

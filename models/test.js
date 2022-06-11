@@ -35,6 +35,10 @@ const testSchema = new mongoose.Schema({
         type: Number,
         default: 0,
       },
+      paused_hint: {
+        type: Number,
+        default: 0,
+      },
       score: {
         type: Number,
         default: 0,
@@ -46,7 +50,7 @@ const testSchema = new mongoose.Schema({
       unanswered: {
         type: Object,
         default: {"0":0,"1":0,"2":0,"3":0,"4":0}
-      }
+      },
     },
   ],
   status: {

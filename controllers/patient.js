@@ -111,6 +111,7 @@ exports.update_test_status = (req, res) => {
             'patients.$.score':req.body.score,
             'patients.$.answered':req.body.ans,
             'patients.$.unanswered':req.body.unans,
+            'patients.$.paused_hint':0,
              status:'paused'
         },
         { new: true }
@@ -198,4 +199,24 @@ function send_Test_Result(test,to_emailId,res){
             sendMail(mailDetails);
         }
     })
+}
+
+exports.update_paused_hint = (req, res) => {
+    Test.findOneAndUpdate(
+        {   _id:req.params.id,
+            'patients.patientid':req.user._id
+        },
+        {
+            'patients.$.paused_hint':req.body.hints_taken,
+            'patients.$.status':'paused',
+             status:'paused'
+        },
+        { new: true }
+    ).then((test) => {
+        res.json({ message: "Done"})
+    }).catch((err) => {
+        res.status(500)
+        res.send(err)
+        console.log(err)
+    });
 }
