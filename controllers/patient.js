@@ -202,7 +202,6 @@ function send_Test_Result(test,to_emailId,res){
 }
 
 exports.update_paused_hint = (req, res) => {
-    console.log(req.body)
     Test.findOneAndUpdate(
         {   _id:req.params.id,
             'patients.patientid':req.user._id
@@ -210,6 +209,7 @@ exports.update_paused_hint = (req, res) => {
         {
             'patients.$.paused_hint':req.body.hints_taken,
             'patients.$.status':'paused',
+             status:'paused'
         },
         { new: true }
     ).then((test) => {
