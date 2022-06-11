@@ -182,7 +182,7 @@ function fetchImg(questionid,hintid)
 }
 
 exports.delete_question= (req, res) => {
-    Test.find({questions:req.params.questionid},{_id:1})
+    Test.find({questions:req.params.questionid,status:{$in:['paused','pending']}},{_id:1})
     .then(test => {
         if(test.length===0){
             Question.findByIdAndDelete({ _id: req.params.questionid })

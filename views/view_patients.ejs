@@ -146,6 +146,7 @@
         for([key, val] of Object.entries(doctor)) {
             let option=document.createElement("option");
             option.value=key;
+            option.id=key;
             if(val[1]===0){
                 option.textContent=val[0]+' (<%=i18n.yettobeassigned%>)';
             }else{
@@ -163,6 +164,13 @@
     doctorChange.addEventListener('show.bs.modal', function (event) {
       var button = event.relatedTarget
       var Ids = button.getAttribute('data-bs-whatever').split(',');
+      for([key, val] of Object.entries(doctor)) {
+          if(Ids[1]===key){
+            document.getElementById(Ids[1]).setAttribute('disabled','');
+          }else{
+            document.getElementById(key).removeAttribute('disabled');
+          }
+      }
       document.getElementById('current-doc').innerHTML = '<%=i18n.CurrentAssignedDoctor%> : <strong>'+doctor[Ids[1]][0]+'</strong>';
       document.getElementById('changeDocForm').action='/change/doctor/'+Ids[0]+'?_method=PATCH';
    });

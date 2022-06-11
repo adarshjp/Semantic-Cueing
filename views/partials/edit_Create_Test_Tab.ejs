@@ -1,17 +1,17 @@
-<div class="row justify-content-center">
-    <div class="offset-2 col-9 offset-sm-1 col-sm-9 offset-lg-0 col-xl-8">
+<div class="row justify-content-center ms-5">
+    <div class="ms-3 col-11 col-lg-10 col-xl-8">
         <ul class="nav nav-pills my-3 nav-justified" role="tablist" style="overflow: auto;flex-wrap: nowrap;white-space: nowrap;">
             <li class="nav-item p-2" role="presentation">
-              <button class="nav-link active border border-2 py-2" id="sel-q-tab" data-bs-toggle="pill" data-bs-target="#div_list" type="button" role="tab" aria-controls="pills-home" aria-selected="true"><strong><%=i18n.SelectQuestions%></strong></button>
+              <button class="nav-link active border border-3 py-2" id="sel-q-tab" data-bs-toggle="pill" data-bs-target="#div_list" type="button" role="tab" aria-controls="pills-home" aria-selected="true"><strong><%=i18n.SelectQuestions%></strong></button>
             </li>
             <li class="nav-item p-2" role="presentation">
-              <button class="nav-link border py-2" id="selected-q-tab" data-bs-toggle="pill" data-bs-target="#div_list" type="button" role="tab" aria-controls="pills-profile" aria-selected="false"><strong><%=i18n.SelectedQuestions%></strong></button>
+              <button class="nav-link border border-3 py-2" id="selected-q-tab" data-bs-toggle="pill" data-bs-target="#div_list" type="button" role="tab" aria-controls="pills-profile" aria-selected="false"><strong><%=i18n.SelectedQuestions%></strong></button>
             </li>
         </ul>
     </div>
 </div>
-<div class="row justify-content-center text-center mb-4" id='sel-row'>
-  <div class="offset-2 col-9 offset-sm-1 col-sm-8 offset-md-1 col-md-3 offset-lg-0 mt-sm-2">
+<div class="row justify-content-center text-center ms-5 mb-4" id='sel-row'>
+  <div class="ms-3 col-10 col-sm-10 col-md-5 col-lg-4 col-xl-3 mt-sm-2">
       <label for="level"><%=i18n.ChooseLevel%> <i class="fa fa-filter" aria-hidden="true"></i></label>
       <select  class="form-select form-select-lg my-2 p-2" id="level" aria-label=".form-select-lg" onclick="levelfilter()">
           <option value="all">All</option>
@@ -22,10 +22,10 @@
           <option value="5">5</option>
       </select>
   </div>
-  <div class="offset-1 offset-md-0 col-4 col-sm-4 col-md-4 col-xl-3" style="margin-top:30px">
+  <div class="ms-3 ms-md-0 col-5 col-md-4 col-lg-4 col-xl-3" style="margin-top:30px">
       <button class="btn btn-primary rounded-pill btn-lg" onclick="selRandom();"><span class="d-none d-lg-inline"><%=i18n.Selectrandomly%></span> <i class="fa fa-random" aria-hidden="true"></i></button>
   </div>
-  <div class="col-2 col-sm-4 col-md-1" style="margin-top:30px">
+  <div class="col-6 col-md-1" style="margin-top:30px">
       <button type="button" class="btn btn-primary btn-lg position-relative rounded-pill" onclick="cart()">
           <i class="fas fa-shopping-cart"></i>
           <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="count">0</span>

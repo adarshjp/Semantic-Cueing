@@ -4,9 +4,9 @@
     <%- include("partials/edit_Create_Test_Tab") %>
     <%- include("partials/no_Question",{msg:[i18n.NoQuestions,i18n.Selectedyet]})%>
     <form action="/edit/test/<%= test.id %>?_method=PATCH" method="POST" id="testForm" onsubmit="return noofqval();">
-        <div class="row justify-content-center" id='question-row'>
-            <div class="offset-2 col-10 offset-sm-1 col-sm-11 offset-lg-0 col-lg-10 col-xl-8">
-                <div class="row justify-content-center gradient-list mb-2 p-1" id='div_list'>
+        <div class="row justify-content-center ms-5" id='question-row'>
+            <div class="ms-3 col-11 col-lg-10 col-xl-8">
+                <div class="row justify-content-center gradient-list p-1" id='div_list'>
                 
                 </div>
             </div>
