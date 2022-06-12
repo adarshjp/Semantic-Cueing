@@ -121,19 +121,19 @@
     "Enteryournewpassword":"Enter your new password",
     "SetPassword":"Set Password",
     "VerifyOTP":"Verify OTP",
-
-            "enteremailaddress":"Please enter your email address",
-            "OTPsenttoemail":"OTP sent to your email",
-            "Errors":"Error..",
-            "Emailnotfound":"Email not found",
-            "PleaseenterOTP":"Please enter the OTP",
-            "OTPverified":"OTP verified",
-            "OTPnotverified":"OTP not verified",
-            "enteryournewpassword":"Please enter your new password",
-            "Congratulations":"Congratulations..!",
-            "passwordchangedsuccessfully":"Your password has been changed successfully",
-            "Passwordnotset":"Password not set",
-            "verifyEmailentered":"Please verify Email entered...!",
+    
+    "enteremailaddress":"Please enter your email address",
+    "OTPsenttoemail":"OTP sent to your email",
+    "Errors":"Error..",
+    "Emailnotfound":"Email not found",
+    "PleaseenterOTP":"Please enter the OTP",
+    "OTPverified":"OTP verified",
+    "OTPnotverified":"OTP not verified",
+    "enteryournewpassword":"Please enter your new password",
+    "Congratulations":"Congratulations..!",
+    "passwordchangedsuccessfully":"Your password has been changed successfully",
+    "Passwordnotset":"Password not set",
+    "verifyEmailentered":"Please verify Email entered...!",
             
     "10":"login.ejs",
 
@@ -150,6 +150,9 @@
     "CarnegieName":"— Dale Carnegie",
     "PoindexterQuote":"One small crack does not mean that you are broken,it means that you were put to the test and  you didn’t fall apart.",
     "PoindexterName":"-Linda Poindexter",
+    "InvalidCredentials":"Invalid Credentials",
+    "Pleaseentervalidcredentials":"Please enter valid credentials.",
+    "Passwordorusernameisincorrect":"Password or username is incorrect.",
 
     "11":"mydoctor.ejs",
 

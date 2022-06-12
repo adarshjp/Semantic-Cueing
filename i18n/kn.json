@@ -121,19 +121,19 @@
     "Enteryournewpassword":"ನಿಮ್ಮ ಹೊಸ ಪಾಸ್ವರ್ಡ ನಮೂದಿಸಿ",
     "SetPassword":"ಸೆಟ್ ಪಾಸ್ವರ್ಡ",
     "VerifyOTP":"ಒಟಿಪಿ ಪರಿಶೀಲಿಸಿ",
-
-            "enteremailaddress":"ದಯವಿಟ್ಟು ನಿಮ್ಮ ಇಮೇಲ್ ವಿಳಾಸ ನಮೂದಿಸಿ",
-            "OTPsenttoemail":"ನಿಮ್ಮ ಇಮೇಲ್‌ಗೆ ಒಟಿಪಿ ಕಳುಹಿಸಲಾಗಿದೆ",
-            "Errors":"ತಪ್ಪು....",
-            "Emailnotfound":"ಇಮೇಲ್ ಕಂಡುಬಂದಿಲ್ಲ",
-            "PleaseenterOTP":"ದಯವಿಟ್ಟು ಒಟಿಪಿ ನಮೂದಿಸಿ",
-            "OTPverified":"ಒಟಿಪಿ ಪರಿಶೀಲಿಸಲಾಗಿದೆ",
-            "OTPnotverified":"ಒಟಿಪಿ ಪರಿಶೀಲಿಸಲಾಗಿಲ್ಲ",
-            "enteryournewpassword":"ದಯವಿಟ್ಟು ನಿಮ್ಮ ಹೊಸ ಪಾಸ್‌ವರ್ಡ್ ನಮೂದಿಸಿ",
-            "Congratulations":"ಅಭಿನಂದನೆಗಳು..!",
-            "passwordchangedsuccessfully":"ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್ ಅನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಬದಲಾಯಿಸಲಾಗಿದೆ ",
-            "Passwordnotset":"ಪಾಸ್ವರ್ಡ್ ಹೊಂದಿಸಲಾಗಿಲ್ಲ",
-            "verifyEmailentered":"ನಮೂದಿಸಿದ ಇಮೇಲ್ ಅನ್ನು ಪರಿಶೀಲಿಸಿ...!",
+    
+    "enteremailaddress":"ದಯವಿಟ್ಟು ನಿಮ್ಮ ಇಮೇಲ್ ವಿಳಾಸ ನಮೂದಿಸಿ",
+    "OTPsenttoemail":"ನಿಮ್ಮ ಇಮೇಲ್‌ಗೆ ಒಟಿಪಿ ಕಳುಹಿಸಲಾಗಿದೆ",
+    "Errors":"ತಪ್ಪು....",
+    "Emailnotfound":"ಇಮೇಲ್ ಕಂಡುಬಂದಿಲ್ಲ",
+    "PleaseenterOTP":"ದಯವಿಟ್ಟು ಒಟಿಪಿ ನಮೂದಿಸಿ",
+    "OTPverified":"ಒಟಿಪಿ ಪರಿಶೀಲಿಸಲಾಗಿದೆ",
+    "OTPnotverified":"ಒಟಿಪಿ ಪರಿಶೀಲಿಸಲಾಗಿಲ್ಲ",
+    "enteryournewpassword":"ದಯವಿಟ್ಟು ನಿಮ್ಮ ಹೊಸ ಪಾಸ್‌ವರ್ಡ್ ನಮೂದಿಸಿ",
+    "Congratulations":"ಅಭಿನಂದನೆಗಳು..!",
+    "passwordchangedsuccessfully":"ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್ ಅನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಬದಲಾಯಿಸಲಾಗಿದೆ ",
+    "Passwordnotset":"ಪಾಸ್ವರ್ಡ್ ಹೊಂದಿಸಲಾಗಿಲ್ಲ",
+    "verifyEmailentered":"ನಮೂದಿಸಿದ ಇಮೇಲ್ ಅನ್ನು ಪರಿಶೀಲಿಸಿ...!",
 
     "10":"login.ejs",
 
@@ -150,6 +150,9 @@
     "CarnegieName":"- ಡೇಲ್ ಕಾರ್ನೆಗೀ",
     "PoindexterQuote":"ಒಂದು ಸಣ್ಣ ಬಿರುಕು ವಿಫಲ ಎಂದು ಅರ್ಥವಲ್ಲ,ಬದಲಿಗೆ ನಿಮ್ಮನ್ನು ಪರೀಕ್ಷೆಗೆ ಒಳಪಡಿಸಲಾಗಿದೆ ಮತ್ತು ನೀವು ವಿಫಲವಾಗಿಲ್ಲ",
     "PoindexterName":"- ಲಿಂಡಾ ಪಾಯಿಂಡೆಕ್ಸ್ಟರ್",
+    "InvalidCredentials":"ಅಮಾನ್ಯ ರುಜುವಾತುಗಳು",
+    "Pleaseentervalidcredentials":"ದಯವಿಟ್ಟು ಮಾನ್ಯ ರುಜುವಾತುಗಳನ್ನು ನಮೂದಿಸಿ.",
+    "Passwordorusernameisincorrect":"ಪಾಸ್ವರ್ಡ್ ಅಥವಾ ಬಳಕೆದಾರರ ಹೆಸರು ತಪ್ಪಾಗಿದೆ.",
 
     "11":"mydoctor.ejs",
 
