@@ -65,7 +65,23 @@ const userSchema = new mongoose.Schema({
   },
   diagnosis: {
     type: String,
-  }
+  },
+  test: [
+    {
+      score: {
+        type: Number,
+      },
+      answered: {
+        type: Object
+      },
+      unanswered: {
+        type: Object
+      },
+      patient_level: {
+        type: Number
+      }
+    }
+  ]
 });
 userSchema.plugin(passportLocalMongoose);
 module.exports = new mongoose.model("User", userSchema);
