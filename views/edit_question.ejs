@@ -31,13 +31,13 @@
                               <%}%>
                            </p>
                         </div>
-                        <div class="col-12 col-sm-10 col-md-8" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" title="Name of the question">
+                        <div class="col-12 col-sm-10 col-md-8" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" title="<%=i18n.Nameofthequestion%>">
                            <input type="text" name="" class="login-input" value="<%=question.name%>" disabled>
                         </div>
-                        <ul id='ans_list' class="col-12 col-sm-10 col-md-8 text-center m-0" style="overflow: auto;flex-wrap: nowrap;white-space: nowrap;" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" title="Acceptible answers of the question">
+                        <ul id='ans_list' class="col-12 col-sm-10 col-md-8 text-center m-0" style="overflow: auto;flex-wrap: nowrap;white-space: nowrap;" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" title="<%=i18n.Acceptibleanswersofthequestion%>">
 
                         </ul>
-                        <div class="col-12 col-sm-10 col-md-8" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" title="Text of the Question, which is being played while taking test">
+                        <div class="col-12 col-sm-10 col-md-8" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" title="<%=i18n.TextoftheQuestionwhichisbeingplayedwhiletakingtest%>">
                            <input type="text" name="" id="login-input" placeholder="Description..." value="<%=question.score%>" disabled>
                         </div>
                   </div>
@@ -62,7 +62,7 @@
                      <div id="preview-hint<%= i %>" class="my-2 col-11 col-sm-9 col-md-7 text-center">
                         <img src="data:image/<%=question.hints[i].hint.contentType%>;base64,<%=question.hints[i].hint.data.toString('base64')%>" class="img-fluid" width="300" style="height:40vh;border:2px solid #6C63FF;padding:2px">
                      </div>
-                     <div class="col-12" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Text of the Hint-<%= i+1 %>, which is being played while taking test">
+                     <div class="col-12" data-bs-toggle="tooltip" data-bs-placement="bottom" title="<%=i18n.TextoftheHint%>-<%= i+1 %>, <%=i18n.whichisbeingplayedwhiletakingtest%>">
                         <input type="text" name="" id="login-input" placeholder="Description..." value="<%=question.hints[i].score%>" disabled>
                      </div>
                   </div>  
@@ -101,9 +101,7 @@
       const fsize = fi.files.item(0).size;
       const file = Math.round((fsize / 1024));
       if (file >= 1024) {
-         swal("<%=i18n.Filetoobig%>","","warning");
-         document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
-         document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');         
+         swal("<%=i18n.Filetoobig%>","","warning");   
          document.getElementById(upload_id).value = '';
          var imagediv= document.getElementById(preview_id);
          var newimg=document.createElement('img');
@@ -167,9 +165,7 @@ function disp_image(upload_id,preview_id,image,cloud){
          let val=ans.value.charAt(0).toUpperCase() + ans.value.toLowerCase().slice(1);
          if(val!==''){
             if(entered_ans.indexOf(val)>=0){
-               swal('<%=i18n.Duplicate%>','<%=i18n.Enteredanswerduplicate%>','error');
-               document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
-               document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');            
+               swal('<%=i18n.Duplicate%>','<%=i18n.Enteredanswerduplicate%>','error');           
             }else{
                entered_ans.push(val);
                disp_pill();
@@ -177,9 +173,7 @@ function disp_image(upload_id,preview_id,image,cloud){
                ans.focus();
             }
          }else{
-            swal("<%=i18n.typetheanswer%>","", "info");
-            document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
-            document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');            
+            swal("<%=i18n.typetheanswer%>","", "info");  
             ans.value='';
             ans.focus();
          }
@@ -205,9 +199,7 @@ function disp_image(upload_id,preview_id,image,cloud){
 
    function validate(){
       if(document.getElementById('form_ans').value===''){
-         swal("<%=i18n.enternamesoobject%>","", "info");
-         document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
-         document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');      
+         swal("<%=i18n.enternamesoobject%>","", "info");   
          return false;
       }
       return true;

@@ -12,14 +12,21 @@
     "toidentify2":"ನೀಡಿ",
     "Submit":"ಸಲ್ಲಿಸಿ",
     "TitleofQuestion":"ಪ್ರಶ್ನೆಯ ಶೀರ್ಷಿಕೆ",
-
-            "Filetoobig":"ಫೈಲ್ ತುಂಬಾ ದೊಡ್ಡದಾಗಿದೆ, ದಯವಿಟ್ಟು 1mb ಗಿಂತ ಕಡಿಮೆ ಫೈಲ್ ಅನ್ನು ಆಯ್ಕೆಮಾಡಿ",
-            "Duplicate":"ನಕಲಿ",
-            "Enteredanswerduplicate":"ನಮೂದಿಸಿದ ಉತ್ತರವು ನಕಲು ಆಗಿದೆ",
-            "typetheanswer":"ದಯವಿಟ್ಟು ಉತ್ತರವನ್ನು ಟೈಪ್ ಮಾಡಿ",
-            "enternamesoobject":"ದಯವಿಟ್ಟು ವಸ್ತುವಿನ ಹೆಸರುಗಳನ್ನು ನಮೂದಿಸಿ",
-            "uploadobjectimg":"ದಯವಿಟ್ಟು ವಸ್ತುವಿನ ಚಿತ್ರವನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
-            "uploadhint":"ದಯವಿಟ್ಟು ಹಿಂಟ್ಸ್ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
+    "Filetoobig":"ಫೈಲ್ ತುಂಬಾ ದೊಡ್ಡದಾಗಿದೆ, ದಯವಿಟ್ಟು 1MB ಗಿಂತ ಕಡಿಮೆ ಫೈಲ್ ಅನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+    "Duplicate":"ನಕಲಿ",
+    "Enteredanswerduplicate":"ನಮೂದಿಸಿದ ಉತ್ತರವು ನಕಲು ಆಗಿದೆ",
+    "typetheanswer":"ದಯವಿಟ್ಟು ಉತ್ತರವನ್ನು ಟೈಪ್ ಮಾಡಿ",
+    "enternamesoobject":"ದಯವಿಟ್ಟು ವಸ್ತುವಿನ ಹೆಸರುಗಳನ್ನು ನಮೂದಿಸಿ",
+    "uploadobjectimg":"ದಯವಿಟ್ಟು ವಸ್ತುವಿನ ಚಿತ್ರವನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
+    "uploadhint":"ದಯವಿಟ್ಟು ಹಿಂಟ್ಸ್ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
+    "Enternameofthequestion":"ಪ್ರಶ್ನೆಯ ಹೆಸರನ್ನು ನಮೂದಿಸಿ",
+    "Enterallacceptibleanswershere":"ಎಲ್ಲಾ ಸ್ವೀಕಾರಾರ್ಹ ಉತ್ತರಗಳನ್ನು ಇಲ್ಲಿ ನಮೂದಿಸಿ",
+    "EntertextoftheQuestionwhichwillbeplayedwhiletakingtest":"ಪರೀಕ್ಷೆಯನ್ನು ತೆಗೆದುಕೊಳ್ಳುವಾಗ ಆಡಲಾಗುವ ಪ್ರಶ್ನೆಯ ಪಠ್ಯವನ್ನು ನಮೂದಿಸಿ",
+    "UploadObjectImage":"ವಸ್ತುವಿನ ಚಿತ್ರವನ್ನು ಅಪ್ಲೋಡ್ ಮಾಡಿ",
+    "EnterthetextoftheHint":"ಪರೀಕ್ಷೆಯನ್ನು ತೆಗೆದುಕೊಳ್ಳುವಾಗ ಪ್ಲೇ ಆಗುವ ಸುಳಿವು",
+    "whichwillbeplayedwhiletakingtest":"ನ ಪಠ್ಯವನ್ನು ನಮೂದಿಸಿ",
+    "UploadHint":"ಸುಳಿವು",
+    "Image1":"ಚಿತ್ರವನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
 
     "2":"admin.ejs",
     
@@ -98,6 +105,13 @@
     "Objejct":"ಆಬ್ಜೆಕ್ಟ್",
     "toidentify3":"ಅಪ್ಡೇಟ್ ಮಾಡಿ",
     "Level":"ಲೇವಲ್",
+    "EnterthetextoftheHintwhichwillbeplayedwhiletakingtest":"ಸುಳಿವು ಪಠ್ಯವನ್ನು ನಮೂದಿಸಿ, ಪರೀಕ್ಷೆಯನ್ನು ತೆಗೆದುಕೊಳ್ಳುವಾಗ ಅದನ್ನು ಪ್ಲೇ ಮಾಡಲಾಗುತ್ತದೆ",
+    "UploadtheHintimage":"ಸುಳಿವು ಚಿತ್ರವನ್ನು ಅಪ್ಲೋಡ್ ಮಾಡಿ",
+    "Nameofthequestion":"ಪ್ರಶ್ನೆಯ ಹೆಸರು",
+    "Acceptibleanswersofthequestion":"ಪ್ರಶ್ನೆಗೆ ಸ್ವೀಕಾರಾರ್ಹ ಉತ್ತರಗಳು",
+    "TextoftheQuestionwhichisbeingplayedwhiletakingtest":"ಪರೀಕ್ಷೆಯನ್ನು ತೆಗೆದುಕೊಳ್ಳುವಾಗ ಪ್ಲೇ ಆಗುತ್ತಿರುವ ಪ್ರಶ್ನೆಯ ಪಠ್ಯ",
+    "TextoftheHint":"ಪರೀಕ್ಷೆಯನ್ನು ತೆಗೆದುಕೊಳ್ಳುವಾಗ ಪ್ಲೇ ಆಗುತ್ತಿರುವ ಸುಳಿವು",
+    "whichisbeingplayedwhiletakingtest":"ನ ಪಠ್ಯ",
 
     "7":"editTest.ejs",
 
@@ -269,6 +283,9 @@
     "Created":"ಪಟ್ಟಿ",
     "Noquestions":"ಇನ್ನೂ ಯಾವುದೇ",
     "Createdyet1":"ಪ್ರಶ್ನೆಗಳನ್ನು ರಚಿಸಲಾಗಿಲ್ಲ..!",
+    "Doyouwanttodeletethisquestion":"ನೀವು ಈ ಪ್ರಶ್ನೆಯನ್ನು ಅಳಿಸಲು ಬಯಸುವಿರಾ?",
+    "Oncedeleteyouwillnotbeabletorecoverthisquestion":"ಒಮ್ಮೆ ಅಳಿಸಿದರೆ, ಈ ಪ್ರಶ್ನೆಯನ್ನು ಮರುಪಡೆಯಲು ನಿಮಗೆ ಸಾಧ್ಯವಾಗುವುದಿಲ್ಲ!",
+    "Thequestiondeletionisunderprogress":"ಪ್ರಶ್ನೆ ಅಳಿಸುವಿಕೆ ಪ್ರಗತಿಯಲ್ಲಿದೆ..!",
 
     "20":"view_tests.ejs",
 
