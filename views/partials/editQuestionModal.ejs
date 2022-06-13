@@ -11,7 +11,7 @@
                      <div class="row justify-content-center">
                         <div class="form-group col-6 text-center">
                            <label for="upload_q" id='cloud-q' class="d-none">
-                              <i class="fa-solid fa-cloud-arrow-up fa-4x blue" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Upload the question image"></i>
+                              <i class="fa-solid fa-cloud-arrow-up fa-4x blue" data-bs-toggle="tooltip" data-bs-placement="bottom" title="<%=i18n.UploadObjectImage%>"></i>
                            </label>
                            <input type="file" name="question" accept="image/png, image/jpeg" class="form-control form-control-lg" placeholder="Enter Image" id="upload_q" onchange="getImagePreview(event,'preview-q','upload_q','cloud-q')" style="display: none">
                         </div>
@@ -26,17 +26,17 @@
                            <%- include("starLevel") %>
                         </div>
                         <div class="col-12 col-sm-10">
-                           <input type="text" name="name" class="login-input" value="<%=question.name%>" placeholder="<%=i18n.TitleofQuestion%>" data-bs-toggle="tooltip" data-bs-placement="right" title="Enter name of the question here" required>
+                           <input type="text" name="name" class="login-input" value="<%=question.name%>" placeholder="<%=i18n.TitleofQuestion%>" data-bs-toggle="tooltip" data-bs-placement="right" title="<%=i18n.Enternameofthequestion%>" required>
                         </div>
                         <div class="col-12 col-sm-10">
-                           <input type="text" class="login-input" value="" id='ans'  placeholder="<%=i18n.NameofObject%>" onkeydown="return event.key != 'Enter';" data-bs-toggle="tooltip" data-bs-toggle="tooltip" data-bs-placement="right" title="Enter all acceptible answers here"> 
+                           <input type="text" class="login-input" value="" id='ans'  placeholder="<%=i18n.NameofObject%>" onkeydown="return event.key != 'Enter';" data-bs-toggle="tooltip" data-bs-toggle="tooltip" data-bs-placement="right" title="<%=i18n.Enterallacceptibleanswershere%>"> 
                            <input type="text" name="answer" class='login-input d-none' id='form_ans'>
                         </div>
                         <ul id='ans_list_modal' class="col-12 col-sm-10 text-center m-0" style="overflow: auto;flex-wrap: nowrap;white-space: nowrap;">
 
                         </ul>
                         <div class="col-12 col-sm-10">
-                           <input type="text" name="score" class="login-input" value="<%=question.score%>" placeholder="<%=i18n.Description%>" data-bs-toggle="tooltip" data-bs-placement="right" title="Enter text of the Question, which will be played while taking test"  required>
+                           <input type="text" name="score" class="login-input" value="<%=question.score%>" placeholder="<%=i18n.Description%>" data-bs-toggle="tooltip" data-bs-placement="right" title="<%=i18n.EntertextoftheQuestionwhichwillbeplayedwhiletakingtest%>"  required>
                         </div>
                      </div>
                   </div>

@@ -71,16 +71,16 @@
         }
         function delete_doctor(doctorid){
             swal({
-                title: "Do you want to delete this doctro?",
-                text: "Once delete, you will not be able to recover this doctor details!",
+                title: "<%=i18n.Doyouwanttodeletethisdoctor%>",
+                text: "<%=i18n.Oncedeletedoctordetails%>",
                 icon: "warning",
-                buttons: true,
+                buttons: ['<%=i18n.Cancel%>', '<%=i18n.Delete%>'],
                 className: "blue"
             })
             .then((isdelete) => {
                 if (isdelete) {
                     document.getElementById(doctorid).submit();
-                    swal("The doctor deletion under progress..!", {
+                    swal("<%=i18n.Thedoctordeletion%>", {
                     icon: "info",
                 });
                 } 

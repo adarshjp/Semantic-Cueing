@@ -209,8 +209,8 @@
     }
     if('<%=message.error%>'){
         swal({
-            title:'Invalid Credentials..!',
-            text:'<%=message.error%>. Please enter valid credentials.',
+            title:'<%=i18n.InvalidCredentials%>..!',
+            text:'<%=i18n.Passwordorusernameisincorrect%> <%=i18n.Pleaseentervalidcredentials%>',
             icon:'error',
             button:'Try Again'
         })
