@@ -30,18 +30,18 @@
 
     "2":"admin.ejs",
     
-    "NumberofPatients":"ಪೇಷಂಟ್ಗಳ ಸಂಖ್ಯೆ",
-    "NumberofDoctors":"ಡಾಕ್ಟರ್ಗಳ ಸಂಖ್ಯೆ",
+    "NumberofPatients":"ರೋಗಿಗಳ ಸಂಖ್ಯೆ",
+    "NumberofDoctors":"ವೈದ್ಯರ ಸಂಖ್ಯೆ",
     "NumberofQuestionscreated":"ರಚಿಸಲಾದ ಪ್ರಶ್ನೆಗಳ ಸಂಖ್ಯೆ",
     "Numberoftestcreated":"ರಚಿಸಲಾದ ಪರೀಕ್ಷೆಗಳ ಸಂಖ್ಯೆ",
     "Loading":"ಲೋಡಿಂಗ್",
-    "DoctorvsPatient":"ಡಾಕ್ಟರ್ ಮತ್ತು ಪೇಷಂಟ್ ",
+    "DoctorvsPatient":"ವೈದ್ಯರು ಮತ್ತು ರೋಗಿ ",
     "AssignedvsUnassignedDoctors":"ನಿಯೋಜಿತ ಮತ್ತು ನಿಯೋಜಿಸದ ವೈದ್ಯರು",
-    "ActivevsDischargedPatients":"ಸಕ್ರಿಯ ಮತ್ತು ಡಿಸ್ಚಾರ್ಜ್ಗೊಂಡ ಪೇಷಂಟ್ಗಳು ",
+    "ActivevsDischargedPatients":"ಸಕ್ರಿಯ ಮತ್ತು ಡಿಸ್ಚಾರ್ಜ್ಗೊಂಡ ರೋಗಿಗಳು ",
 
         "CountofPatientVSLevel" :"ರೋಗಿಗಳ ಸಂಖ್ಯೆ ಮತ್ತು ಲೇವಲ್",
-        "Assigned":"ನಿಯೋಜಿತ",
-        "Unassigned":"ನಿಯೋಜಿತವಾಗದ",
+        "Assigned":"ನಿಯೋಜಿಸಲಾದ",
+        "Unassigned":"ನಿಯೋಜಿಸಲಾಗಿಲ್ಲದ",
         "Active":"ಸಕ್ರಿಯ",
         "Discharged":"ಡಿಸ್ಚಾರ್ಜ್ಗೊಂಡ",
 
@@ -53,9 +53,9 @@
     "ConfirmNewPassword":"ಹೊಸ ಪಾಸ್ವರ್ಡ್ ಖಚಿತಪಡಿಸಿ",
     "Confirm":"ದೃಢೀಕರಿಸಿ",
 
-            "Success":"ಯಶಸ್ಸು..!",
+            "Success":"ಯಶಸ್ವಿಯಾಗಿದೆ..!",
             "PasswordMatch":"ಪಾಸ್ವರ್ಡ್ ಹೊಂದಿಕೆಯಾಗಿದೆ",
-            "PassworddidnotMatch":"ಪಾಸ್‌ವರ್ಡ್ ಹೊಂದಿಕೆಯಾಗುತ್ತಿಲ್ಲ: ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ...",
+            "PassworddidnotMatch":"ಪಾಸ್‌ವರ್ಡ್ ಹೊಂದಿಕೆಯಾಗುತ್ತಿಲ್ಲ: ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ..!",
             "Failed":"ವಿಫಲವಾಗಿದೆ..!",
             "Oldandnewpasswordaresame":"ಹಳೆಯ ಮತ್ತು ಹೊಸ ಪಾಸ್‌ವರ್ಡ್ ಒಂದೇ ಆಗಿರುತ್ತದೆ, ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ...",
 
@@ -80,23 +80,24 @@
 
     "5":"doctor.ejs",
 
-    "Patientstestresult":"ಪೇಷಂಟ್ಟಿನ ಟೆಸ್ಟ್ ರಿಸಲ್ಟ್",
+    "Patientstestresult":"ರೋಗಿಯ ಪರೀಕ್ಷೆಯ ಫಲಿತಾಂಶ",
     "AnsweredaQuestionvsHintsTaken":"ಉತ್ತರಿಸಿದ ಪ್ರಶ್ನೆ ಮತ್ತು ತೆಗೆದುಕೊಂಡ ಸುಳಿವುಗಳು ",
-    "UnansweredaQuestionvsHintsTaken":"ಉತ್ತರಿಸಲಿಲ್ಲದ ಪ್ರಶ್ನೆ ಮತ್ತು ತೆಗೆದುಕೊಂಡ ಸುಳಿವುಗಳು",
+    "UnansweredaQuestionvsHintsTaken":"ಉತ್ತರಿಸದ ಪ್ರಶ್ನೆ ಮತ್ತು ತೆಗೆದುಕೊಂಡ ಸುಳಿವುಗಳು",
     "Assignedtestdetails":"ನಿಯೋಜಿಸಿದ ಪರೀಕ್ಷೆಗಳ ವಿವರ",
-    "PatientId":"ಪೇಷಂಟ್ ಐಡಿ",
+    "PatientId":"ರೋಗಿಯ ಐಡಿ",
     "Strokedate":"ಸ್ಟ್ರೋಕ್ ಆದ ದಿನಾಂಕ",
     "PostStrokeDuration":"ಸ್ಟ್ರೋಕ್ ನಂತರದ ಅವಧಿ",
     "EmailAddress":"ಇಮೇಲ್ ಎಡ್ರೆಸ್",
     "Nooftestscreated":"ರಚಿಸಲಾದ ಪರೀಕ್ಷೆಗಳ ಸಂಖ್ಯೆ",
-    "Upgrade":"ಅಪ್ಗ್ರೇಡ್",
-    "Degrade":"ಡಿಗ್ರೇಡ್",
+    "Upgrade":"ಅಪ್‌ಗ್ರೇಡ್ ಮಾಡಿ",
+    "Degrade":"ಡೌನ್‌ಗ್ರೇಡ್ ಮಾಡಿ",
     "Percentage":"ಶೇ",
     "NumberofQuestionAnswered":"ಉತ್ತರಿಸಿದ ಪ್ರಶ್ನೆಗಳ ಸಂಖ್ಯೆ",
     "NumberofQuestionsUnanswered":"ಉತ್ತರಿಸದ ಪ್ರಶ್ನೆಗಳ ಸಂಖ್ಯೆ",
     "Status":"ಸ್ಟೇಟಸ್",
-    "Pending":"ಬಾಕಿಯಿದೆ",
-    "Paused":"ವಿರಾಮಗೊಳಿಸಲಾಗಿದೆ",
+    "Pending":"ಬಾಕಿಯಿರುವ ಪರೀಕ್ಷೆಗಳು",
+    "Paused":"ವಿರಾಮಗೊಳಿಸಲಾದ ಪರೀಕ್ಷೆಗಳು",
+    "Completed1":"ಪೂರ್ಣಗೊಂಡಿರುವ ಪರೀಕ್ಷೆಗಳು",
 
     "6":"edit_question.ejs",
 
@@ -115,15 +116,16 @@
 
     "7":"editTest.ejs",
 
-    "Patient":"ಪೇಷಂಟ್",
+    "Patient":"ರೋಗಿ",
     "Selectpatients":"ರೋಗಿಗಳನ್ನು ಆಯ್ಕೆ ಮಾಡಿ",
     "Reset":"ಮರುಹೊಂದಿಸಿ",
 
     "8":"editUser.ejs",
 
-    "Edit":"ಎಡಿಟ್",
-    "Profile":"ಪ್ರೊಫೈಲ್",
-    "EditProfile":"ಎಡಿಟ್ ಪ್ರೊಫೈಲ್",
+    "Edit":"ಪ್ರೊಫೈಲ್",
+    "Profile":"ಬದಲಿಸು",
+    "EditProfile":"ಪ್ರೊಫೈಲ್ ಬದಲಿಸು",
+    "Profile1":"ಪ್ರೊಫೈಲ್",
 
     "9":"forgotpassword.ejs",
 
@@ -152,10 +154,10 @@
     "10":"login.ejs",
 
     "Login":"ಲಾಗಿನ್",
-    "Username":"ಯೂಸರ್ನೇಮ್",
+    "Username":"ಬಳಕೆದಾರರ ಹೆಸರು",
     "Password":"ಪಾಸ್ವರ್ಡ್",
     "ForgotYourPassword":"ನಿಮ್ಮ ಪಾಸ್ವರ್ಡ್ ಮರೆತಿರಾ?",
-    "Loggingin":"ಲಾಗಿಂಗ್ ಇನ್",
+    "Loggingin":"ಲಾಗಿನ್ ಆಗುತ್ತಿದೆ",
     "EdisonQuote":"ಜೀವನದಲ್ಲಿ ವೈಫಲ್ಯ ಗೊಂಡ ಜನರು ಅರಿತು ಕೊಳ್ಳುವುದಿಲ್ಲ ಏನೆಂದರೆ ಅವರು ಸೋಲುವ ಮುನ್ನ,ಯಶಸ್ವಿಗೆ ಎಷ್ಟು ಸಮೀಪವಿದ್ದರು ಎಂದು", 
     "EdisonName":"— ಥಾಮಸ್ ಎಡಿಸನ್",
     "MilneQuote":"ಯಾವಾಗಲೂ ನೆನಪಿಟ್ಟುಕೊಳ್ಳಿ:ನೀವು ನಿಮ್ಮ ನಂಬಿಕೆಗಿಂತ ಹೆಚ್ಚು ಶಕ್ತಿಶಾಲಿ ಮತ್ತು ಧೈರ್ಯವಂತರೂ",
@@ -170,8 +172,8 @@
 
     "11":"mydoctor.ejs",
 
-    "My":"ಮೈ",
-    "Doctor":"ಡಾಕ್ಟರ್",
+    "My":"ನನ್ನ",
+    "Doctor":"ವೈದ್ಯರು",
 
     "12":"otpTemplate.ejs",
 
@@ -182,17 +184,17 @@
     "now":"ತೆಗೆದುಕೊಳ್ಳಿ",
     "Test":"ಪರೀಕ್ಷೆ",
     "Starttest":"ಪರೀಕ್ಷೆ ಪ್ರಾರಂಭಿಸಿ",
-    "Resume":"ರೆಸೂಮ್",
-    "ViewReport":"ವರದಿ ವೀಕ್ಷಿಸಿ",
+    "Resume":"ಪುನರಾರಂಭಿಸಿ",
+    "ViewReport":"ಫಲಿತಾಂಶ ವೀಕ್ಷಿಸಿ",
 
-    "BePatientWorkHardandgetsuccess":"ತಾಳ್ಮೆಯಿಂದಿರಿ, ಕಷ್ಟಪಟ್ಟು ಕೆಲಸ ಮಾಡಿ ಮತ್ತು ನೀವು ಖಂಡಿತವಾಗಿಯೂ ಯಶಸ್ಸನ್ನು ಪಡೆಯುತ್ತೀರಿ",
+    "BePatientWorkHardandgetsuccess":"ತಾಳ್ಮೆಯಿಂದಿರಿ ಪ್ರಯತ್ನಿಸಿ. ನೀವು ಖಂಡಿತವಾಗಿಯೂ ಯಶಸ್ಸನ್ನು ಪಡೆಯುತ್ತೀರಿ",
     "YourdoinggoodjobKeepitup":"ನೀವು ಉತ್ತಮ ಕೆಲಸ ಮಾಡುತ್ತಿದ್ದೀರಿ, ಅದನ್ನು ಮುಂದುವರಿಸಿ!",
-    "gettingbettercontinuehardwork":"ನೀವು ಉತ್ತಮ ಮತ್ತು ಉತ್ತಮವಾಗುತ್ತಿದ್ದೀರಿ, ಕಠಿಣ ಕೆಲಸವನ್ನು ಮುಂದುವರಿಸಿ",
+    "gettingbettercontinuehardwork":"ನೀವು ಉತ್ತಮವಾಗುತ್ತಿದ್ದೀರಿ, ಪ್ರಯತ್ನವನ್ನು ಮುಂದುವರಿಸಿ",
     "hardworkpaidoff":"ಅಭಿನಂದನೆಗಳು! ನಿಮ್ಮ ಶ್ರಮಕ್ಕೆ ತಕ್ಕ ಫಲ ಸಿಕ್ಕಿದೆ",
-    "POOR":"ಕಳಪೆ ಪ್ರದರ್ಶನ",
-    "AVERAGE":"ಸರಾಸರಿ ಪ್ರದರ್ಶನ",
-    "GOOD":"ಒಳ್ಳೆಯ ಪ್ರದರ್ಶನ",
-    "EXCELLENT":"ಅತ್ಯುತ್ತಮ ಪ್ರದರ್ಶನ",
+    "POOR":"ತೃಪ್ತಿದಾಯಕ ಫಲಿತಾಂಶ",
+    "AVERAGE":"ಒಳ್ಳೆಯ ಫಲಿತಾಂಶ",
+    "GOOD":"ಬಹಳ ಒಳ್ಳೆಯ ಫಲಿತಾಂಶ",
+    "EXCELLENT":"ಅತ್ಯುತ್ತಮ ಫಲಿತಾಂಶ",
 
     "14":"setPassword.ejs",
 
@@ -210,7 +212,7 @@
     "Otp":"ಒಟಿಪಿ",
     "UsernamealreadyexistsPleasetryanotherone":"ಉಸೆರ್ನೇಮ್ ಈಗಾಗಲೇ ಇದೆ.ಮತ್ತೆ ಪ್ರಯತ್ನಿಸು",
     "SelectRole":"ರೋಲ್ ಆಯ್ಕೆ ಮಾಡಿ",
-    "Choosedoctor":"ಡಾಕ್ಟರ್ ಆಯ್ಕೆ ಮಾಡಿ",
+    "Choosedoctor":"ವೈದ್ಯರನ್ನು ಆಯ್ಕೆ ಮಾಡಿ",
     "StrokeDate":"ಸ್ಟ್ರೋಕ್ ಆದ ದಿನಾಂಕ",
     "ChooseProfilePicture":"ಪ್ರೊಫೈಲ್ ಚಿತ್ರ ಆಯ್ಕೆಮಾಡಿ",
 
@@ -229,12 +231,32 @@
 
     "16":"testexecute.ejs",
 
-    "Next":"ಮುಂದೆ",
+    "Next":"ಮುಂದಿನ ?",
     "Skip":"ಸ್ಕಿಪ್",
-    "Pause":"ಪೌಜ್",
+    "Pause":"ಪೌಸ್ ಮಾಡಿ",
     "TestID":"ಟೆಸ್ಟ್ ಐಡಿ",
     "Audio":"ಆಡಿಯೋ",
+    "Close1":"ಕ್ಲೋಸ್",
 
+    "TestCompleted":"ಪರೀಕ್ಷೆ ಪೂರ್ಣಗೊಂಡಿದೆ..!",
+    "testSubmitted":"ನೀವು ಪರೀಕ್ಷೆಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಪೂರ್ಣಗೊಳಿಸಿದ್ದೀರಿ. ಪರೀಕ್ಷಾ ಫಲಿತಾಂಶಗಳನ್ನು ನಿಮ್ಮ ಮೇಲ್‌ಗೆ ಕಳುಹಿಸಲಾಗುತ್ತದೆ. ಈ ಪರೀಕ್ಷೆಯನ್ನು ತೆಗೆದುಕೊಂಡಿದ್ದಕ್ಕಾಗಿ ಧನ್ಯವಾದಗಳು.",
+    "ok":"ಸರಿ",
+
+    "Doyouwanttopausethetest":"ನೀವು ಪರೀಕ್ಷೆಯನ್ನು ವಿರಾಮಗೊಳಿಸಲು ಬಯಸುವಿರಾ?",
+    "pausetest":"ಪರೀಕ್ಷೆಯನ್ನು ವಿರಾಮಗೊಳಿಸಲಾಗುತ್ತದೆ ಮತ್ತು ನೀವು ನಂತರ ಈ ಪರೀಕ್ಷೆಯನ್ನು ಪುನರಾರಂಭಿಸಲು ಸಾಧ್ಯವಾಗುತ್ತದೆ.",
+    "Yes":"ಹೌದು",
+    "No":"ಇಲ್ಲ",
+
+    "Youhavenotansweredthisquestion":"ಈ ಪ್ರಶ್ನೆಗೆ ನೀವು ಉತ್ತರಿಸಿಲ್ಲ..!",
+    "skipmsg":"ನೀವು ಮರುಭೇಟಿ ಮಾಡಲು ಸಾಧ್ಯವಾಗುವುದಿಲ್ಲ. ನೀವು ಈ ಪ್ರಶ್ನೆಯನ್ನು ಬಿಟ್ಟುಬಿಡಲು ಬಯಸುವಿರಾ?",
+
+    "Error": "ದೋಷ ಸಂಭವಿಸಿದೆ..!",
+    "Unabletoaccessyourmicrophone": "ನಿಮ್ಮ ಮೈಕ್ರೋಫೋನ್ ಅನ್ನು ಪ್ರವೇಶಿಸಲು ಸಾಧ್ಯವಾಗುತ್ತಿಲ್ಲ. ದಯವಿಟ್ಟು ನಿಮ್ಮ ಮೈಕ್ರೊಫೋನ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಪರಿಶೀಲಿಸಿ.",
+    "Quit": "ಹಿಂದೆ ಹೋಗಿ",
+
+    "UnsupportedBrowser": "ಬೆಂಬಲಿತವಲ್ಲದ ಬ್ರೌಸರ್..!",
+    "UnsupportedBrowserMSg": "ನಿಮ್ಮ ಬ್ರೌಸರ್ ಬೆಂಬಲಿತವಾಗಿಲ್ಲ. ಕೆಲವು ವೈಶಿಷ್ಟ್ಯಗಳು ಸರಿಯಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸದೇ ಇರಬಹುದು. ದಯವಿಟ್ಟು Chrome ಅಥವಾ Edge ನ ಇತ್ತೀಚಿನ ಆವೃತ್ತಿಯನ್ನು ಬಳಸಿ.",
+        
         "Attempted":"ಪ್ರಯತ್ನಿಸಿದೆ",
         "Tobeattemted":"ಪ್ರಯತ್ನಿಸಬೇಕಾದ",
         "TestLevel":"ಪರೀಕ್ಷಾ ಮಟ್ಟ",
@@ -248,33 +270,46 @@
             "allowaccessyourmicrophone":"ದಯವಿಟ್ಟು ನಿಮ್ಮ ಮೈಕ್ರೊಫೋನ್ ಅನ್ನು ಪ್ರವೇಶಿಸಲು ಅನುಮತಿಸಿ..!",
             "unableaceessyourmicrophone":"ಕ್ಷಮಿಸಿ...!, ನಿಮ್ಮ ಮೈಕ್ರೊಫೋನ್ ಅನ್ನು ಪಡೆಯಲು ನಮಗೆ ಸಾಧ್ಯವಾಗುತ್ತಿಲ್ಲ",
             "enumerateDevicesnotsupported.":"ಎಣಿಕೆ ಸಾಧನಗಳು() ಬೆಂಬಲಿತವಾಗಿಲ್ಲ.",
-            "Microphonetestedsuccessfully":"ಮೈಕ್ರೋಫೋನ್ ಪರೀಕ್ಷೆ ಯಶಸ್ವಿಯಾಗಿ...!",
+            "Microphonetestedsuccessfully":"ಎಲ್ಲಾ ಸಿಸ್ಟಂ ಪರಿಶೀಲನೆಗಳು ಪೂರ್ಣಗೊಂಡಿವೆ ಮತ್ತು ನೀವು ಮುಂದುವರಿಯಬಹುದು..!",
             "UseChromeorEdgeBrowserstoproceed":"ಮುಂದುವರಿಯಲು ದಯವಿಟ್ಟು ಕ್ರೋಮ್ ಅಥವಾ ಎಡ್ಜ್ ಬ್ರೌಸರ್‌ಗಳನ್ನು ಬಳಸಿ...!",
 
     "17":"view_doctors.ejs",
 
     "Our":"ನಮ್ಮ",
     "Doctors":"ವೈದ್ಯರು",
-    "NoDoctors":"ಇನ್ನೂ ಯಾವುದೇ",
-    "Createdyet":"ವೈದ್ಯರನ್ನು ರಚಿಸಲಾಗಿಲ್ಲ..!",
+    "NoDoctors":"ನೀವು ಇನ್ನೂ ಯಾವುದೇ",
+    "Createdyet":"ವೈದ್ಯರನ್ನು ರಚಿಸಿಲ್ಲ..!",
+    "Doyouwanttodeletethisdoctor":"ನೀವು ಈ ವೈದ್ಯರನ್ನು ಅಳಿಸಲು ಬಯಸುವಿರಾ?",
+    "Oncedeletedoctordetails":"ಒಮ್ಮೆ ಅಳಿಸಿದರೆ, ಈ ವೈದ್ಯರ ವಿವರಗಳನ್ನು ಮರುಪಡೆಯಲು ನಿಮಗೆ ಸಾಧ್ಯವಾಗುವುದಿಲ್ಲ!",
+    "Cancel":"ರದ್ದುಮಾಡಿ",
+    "Delete":"ಅಳಿಸಿ",
+    "Thedoctordeletion":"ವೈದ್ಯರ ಅಳಿಸುವಿಕೆ ಪ್ರಗತಿಯಲ್ಲಿದೆ..!",
 
     "18":"view_patients.ejs",
 
-    "Listof0":"ಪೇಷಂಟ್ಗಳ",
+    "Listof0":"ರೋಗಿಗಳ",
     "Patients0":"ಪಟ್ಟಿ",
-    "Patients1":"ಪೇಷಂಟ್ಗಳು",
+    "Patients1":"ರೋಗಿಗಳು",
     "Discharge":"ಡಿಸ್ಚಾರ್ಜ್",
     "Activate":"ಸಕ್ರಿಯಗೊಳಿಸಿ",
-    "NoPatients0":"ಇನ್ನೂ ಯಾವುದೇ",
-    "Createdyet0":"ರೋಗಿಗಳನ್ನು ರಚಿಸಲಾಗಿಲ್ಲ...!",
+    "NoPatients0":"ನೀವು ಇನ್ನೂ ಯಾವುದೇ",
+    "Createdyet0":"ರೋಗಿಗಳನ್ನು ಸೇರಿಸಿಲ್ಲ..!",
     "NoPatients1":"ನಿಮಗೆ ಯಾವುದೇ",
     "assignedforyou1":"ರೋಗಿಗಳನ್ನು ನಿಯೋಜಿತ ಆಗಿಲ್ಲ...!",
     "AssignedDoctor":"ನಿಯೋಜಿತ ವೈದ್ಯರು",
     "yettobeassigned":"ಇನ್ನೂ ನಿಯೋಜಿಸಬೇಕಿದೆ",
     "assignedfor":"",
-    "patients":"ಪೇಷಂಟ್ಗಳಿಗೆ ನಿಯೋಜಿಸಲಾಗಿದೆ",
-    "CurrentAssignedDoctor":"ಪ್ರಸ್ತುತ ನಿಯೋಜಿತ ವೈದ್ಯರು",
+    "patients":"ರೋಗಿಗಳಿಗೆ ನಿಯೋಜಿಸಲಾಗಿದೆ",
+    "CurrentAssignedDoctor":"ಪ್ರಸ್ತುತ ವೈದ್ಯರು",
     "SelecttheDoctor":"ವೈದ್ಯರನ್ನು ಆಯ್ಕೆ ಮಾಡಿ",
+
+    "Doyouwanttodischarge":"ನೀವು ಈ ರೋಗಿಯನ್ನು ಡಿಸ್ಚಾರ್ಜ್ ಮಾಡಲು ಬಯಸುವಿರಾ?",
+    "Oncedischargedaccessthispatient":"ಒಮ್ಮೆ ಡಿಸ್ಚಾರ್ಜ್ ಆದ ನಂತರ, ನೀವು ಈ ರೋಗಿಯನ್ನು ಮಾನಿಟರ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗುವುದಿಲ್ಲ!",
+    "Thepatienthasbeendischargedsuccessfully":"ರೋಗಿಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಡಿಸ್ಚಾರ್ಜ್ ಮಾಡಲಾಗಿದೆ",
+
+    "Doyouwantpatient":"ನೀವು ಈ ರೋಗಿಯನ್ನು ಅಳಿಸಲು ಬಯಸುವಿರಾ?",
+    "Oncedeletthispatientdetails":"ಒಮ್ಮೆ ಅಳಿಸಿದರೆ, ಈ ರೋಗಿಯ ವಿವರಗಳನ್ನು ಮರುಪಡೆಯಲು ನಿಮಗೆ ಸಾಧ್ಯವಾಗುವುದಿಲ್ಲ!",
+    "Thepatienprogress":"ರೋಗಿಯ ಅಳಿಸುವಿಕೆ ಪ್ರಗತಿಯಲ್ಲಿದೆ..!",
 
     "19":"view_questions.ejs",
 
@@ -308,7 +343,7 @@
     "p2":"doctorSidebar.ejs",
 
     "Dashboard":"ಡ್ಯಾಶ್ಬೋರ್ಡ್",
-    "Patients":"ಪೇಷಂಟ್",
+    "Patients":"ರೋಗಿಗಳು",
     "CreateTest":"ಟೆಸ್ಟ್ ರಚಿಸಿ",
 
     "p3":"editQuestionModal.ejs",
@@ -318,7 +353,7 @@
     "p4":"languageModal.ejs",
 
     "SelectRequiredLanguage":"ಅಗತ್ಯವಿರುವ ಭಾಷೆ ಆಯ್ಕೆಮಾಡಿ",
-    "Proceed":"ಮುಂದುವರಿಸಿ",
+    "Proceed":"ಮುಂದುವರೆಯಿರಿ",
 
     "p5":"patientSidebar.ejs",
 
@@ -367,7 +402,7 @@
     "Addhint":"ಹಿಂಟ್ಸ್ ಸೇರಿಸಿ",
     "UploadanImage":"ಚಿತ್ರವನ್ನು ಅಪ್ಲೋಡ್ ಮಾಡಿ",
     "YourMessageHere":"ನಿಮ್ಮ ಸಂದೇಶವನ್ನು ಇಲ್ಲಿ ನಮೂದಿಸಿ",
-    "All":"ಎಲ್ಲಾ",
+    "All":"ಪರೀಕ್ಷೆಗಳು",
  
     "RegisterPatientDoctor":"ರಿಜಿಸ್ಟರ್: ಪೇಷಂಟ್ | ಡಾಕ್ಟರ್",
     "Enteryouranswerhere":"ನಿಮ್ಮ ಉತ್ತರವನ್ನು ಇಲ್ಲಿ ನಮೂದಿಸಿ...",
@@ -377,7 +412,7 @@
     "PatientName":"ಪೇಷಂಟ್ ಹೆಸರು",
     "PatientAge":"ಪೇಷಂಟ್ ವಯಸ್ಸು",
     "PatientEmail":"ಪೇಷಂಟ್ ಇಮೇಲ್",
-    "Welcome":"ವೆಲ್ಕಮ್",
+    "Welcome":"ಸುಸ್ವಾಗತ",
 
     "NoTest":"ಯಾವುದೇ ಪರೀಕ್ಷೆ",
     "NoTest_patient":"ನಿಮಗೆ ಯಾವುದೇ",

@@ -95,8 +95,9 @@
     "NumberofQuestionAnswered":"उत्तर दिए गए प्रश्नों की संख्या",
     "NumberofQuestionsUnanswered":"अनुत्तरित प्रश्नों की संख्या",
     "Status":"स्टेटस",
-    "Pending":"पेंडिंग",
-    "Paused":"रोके गए",
+    "Pending":"लंबित परीक्षण",
+    "Paused":"रुके हुए परीक्षण",
+    "Completed1":"पूर्ण  किया गया परीक्षण",
 
     "6":"edit_question.ejs",
 
@@ -124,6 +125,7 @@
     "Edit":"एडिट",
     "Profile":"प्रोफ़ाइल",
     "EditProfile":"प्रोफ़ाइल एडिट करें",
+    "Profile1":"प्रोफ़ाइल",
 
     "9":"forgotpassword.ejs",
 
@@ -229,11 +231,31 @@
 
     "16":"testexecute.ejs",
 
-    "Next":"अगला",
+    "Next":"अगले प्रश्न",
     "Skip":"छोड़ें",
     "Pause":"रोकें",
     "TestID":"टेस्ट ईद",
     "Audio":"ऑडियो",
+    "Close1":"बंद करें",
+
+    "TestCompleted":"परीक्षण पूर्ण हो गया..!",
+    "testSubmitted":"आपने सफलतापूर्वक परीक्षण पूरा कर लिया है। परीक्षा परिणाम आपके मेल पर भेजे जाते हैं। यह परीक्षा देने के लिए धन्यवाद।",
+    "ok":"ठीक है",
+
+    "Doyouwanttopausethetest":"क्या आप परीक्षण रोकना चाहते हैं?",
+    "pausetest":"परीक्षण रोक दिया जाएगा और आप बाद में इस परीक्षण को फिर से शुरू करने में सक्षम होंगे।",
+    "Yes":"हाँ",
+    "No":"नहीं",
+
+    "Youhavenotansweredthisquestion":"आपने इस प्रश्न का उत्तर नहीं दिया है..!",
+    "skipmsg":"आप फिर से नहीं जा पाएंगे। क्या आप इस प्रश्न को छोड़ना चाहते हैं?",
+
+    "Error": "एरर हो गई..!",
+    "Unabletoaccessyourmicrophone": "आपके माइक्रोफ़ोन तक पहुंचने में असमर्थ. कृपया अपनी माइक्रोफ़ोन सेटिंग जांचें.",
+    "Quit": "छोड़ना",
+
+    "UnsupportedBrowser": "असमर्थित ब्राउज़र..!",
+    "UnsupportedBrowserMSg": "आपका ब्राउज़र समर्थित नहीं है। कुछ सुविधाएं संभवतः ठीक से न कार्य करें। कृपया क्रोम या एज के नवीनतम संस्करण का उपयोग करें।",
 
                 "Attempted":"प्रयास किए गए ",
                 "Tobeattemted":"प्रयास करने के लिए",
@@ -248,15 +270,20 @@
                     "allowaccessyourmicrophone":"कृपया अपना माइक्रोफ़ोन एक्सेस करने दें..!",
                     "unableaceessyourmicrophone":"क्षमा करें...!, हम आपके माइक्रोफ़ोन तक पहुँचने में असमर्थ हैं",
                     "enumerateDevicesnotsupported.":"एन्यूमरेटडिवाइस() समर्थित नहीं है।",
-                    "Microphonetestedsuccessfully":"माइक्रोफ़ोन का सफलतापूर्वक परीक्षण किया गया...!",
+                    "Microphonetestedsuccessfully":"सभी सिस्टम जांच पूरी हो गई हैं और आप आगे बढ़ सकते हैं..!",
                     "UseChromeorEdgeBrowserstoproceed":"आगे बढ़ने के लिए कृपया क्रोम या एज ब्राउज़र का उपयोग करें...!",
 
     "17":"view_doctors.ejs",
 
     "Our":"हमारे",
     "Doctors":"डॉक्टरों",
-    "NoDoctors":"अभी तक कोई",
-    "Createdyet":"डॉक्टर नहीं बनाया गया..!",
+    "NoDoctors":"आपने अभी तक",
+    "Createdyet":"कोई डॉक्टर नहीं बनाया है..!",
+    "Doyouwanttodeletethisdoctor":"क्या आप इस डॉक्टर को हटाना चाहते हैं?",
+    "Oncedeletedoctordetails":"एक बार हटाए जाने के बाद, आप इस डॉक्टर के विवरण को पुनर्प्राप्त नहीं कर पाएंगे!",
+    "Cancel":"रद्द करना",
+    "Delete":"मिटाना",
+    "Thedoctordeletion":"डॉक्टर को हटाने का काम चल रहा है..!",
 
     "18":"view_patients.ejs",
 
@@ -275,6 +302,14 @@
     "patients":"रोगियों के लिए आवंटित",
     "CurrentAssignedDoctor":"वर्तमान में असाइन किया गया डॉक्टर",
     "SelecttheDoctor":"डॉक्टर का चयन करें",
+
+    "Doyouwanttodischarge":"क्या आप इस मरीज को छुट्टी देना चाहते हैं?",
+    "Oncedischargedaccessthispatient":"एक बार डिस्चार्ज होने के बाद, आप इस मरीज तक नहीं पहुंच पाएंगे!",
+    "Thepatienthasbeendischargedsuccessfully":"मरीज को सफलतापूर्वक छुट्टी दे दी गई है",
+
+    "Doyouwantpatient":"क्या आप इस मरीज को हटाना चाहते हैं?",
+    "Oncedeletthispatientdetails":"एक बार हटाए जाने के बाद, आप इस रोगी विवरण को पुनर्प्राप्त नहीं कर पाएंगे!",
+    "Thepatienprogress":"मरीज को हटाया जा रहा है..!",
 
     "19":"view_questions.ejs",
 
@@ -367,7 +402,7 @@
     "Addhint":"संकेत जोड़ें",
     "UploadanImage":"अपलोड तस्विर",
     "YourMessageHere":"ये रहा आपका संदेश",
-    "All":"सभी",
+    "All":"सभी परीक्षण",
     
     "RegisterPatientDoctor":"रजिस्टर: पेशेंट | डॉक्टर",
     "Enteryouranswerhere":"अपना उत्तर यहां दर्ज करें...",
@@ -377,7 +412,7 @@
     "PatientName":"पेशेंट का नाम",
     "PatientAge":"पेशेंट की उम्र",
     "PatientEmail":"पेशेंट का ईमेल",
-    "Welcome":"वेलकम",
+    "Welcome":"सुस्वागत",
     
     "NoTest":"कोई टेस्ट",
     "NoTest_patient":"आपको कोई परीक्षण",

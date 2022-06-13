@@ -5,7 +5,7 @@
     <div class="col-12 col-xl-10 shadow-sm border border-2 rounded-3 p-md-2">
       <div class="d-flex justify-content-center p-1">
         <div class="bg-light border border-1 rounded-3 p-md-2">
-          <p class="h3 mt-1 font-monospace p-1 p-md-2">Questions <span class="ms-5 blue" id="q-num"></span></p>
+          <p class="h3 mt-1 font-monospace p-1 p-md-2"><%=i18n.Questions%> <span class="ms-5 blue" id="q-num"></span></p>
         </div>
       </div>
       <div class="row justify-content-center align-items-center mt-md-2">
@@ -25,7 +25,7 @@
       <div class="row justify-content-center py-1 py-md-4 text-center align-items-center">
         <div class="col-11 col-sm-10 col-md-5 col-lg-4 pt-2">
           <div class="form"> 
-            <input type="text" class="form-control form-input" placeholder="Enter your answer here..." id="answer"> 
+            <input type="text" class="form-control form-input" placeholder="<%=i18n.Enteryouranswerhere%>" id="answer"> 
             <span class="left-pan blue">
               <i class="fa fa-microphone" onclick="startDictation(this)" id="mic-button"></i>
             </span> 
@@ -275,10 +275,10 @@
         update_test('completed');
         spinner.setAttribute('hidden', '');
         swal({
-          title: "Test Completed..!",
-          text: "You have successfully completed the test. The test results is sent to your mail. Thank you for taking this test.",
+          title: "<%=i18n.TestCompleted%>",
+          text: "<%=i18n.testSubmitted%>",
           icon: "success",
-          button: "OK",
+          button: "<%=i18n.ok%>",
         })
         .then(function(){
           close_test();
@@ -300,7 +300,7 @@
       },1000);
       curq_no++;
       if(curq_no==q.length){
-        document.getElementById('next').innerHTML=`<b>Submit </b><i class="fa-solid fa-paper-plane"></i>`;
+        document.getElementById('next').innerHTML=`<b><%=i18n.submit%> </b><i class="fa-solid fa-paper-plane"></i>`;
       }
     });
   }
@@ -321,8 +321,6 @@
       hint_status[''+(hint+1)]=1;
       hints_taken++;
     }
-    console.log(hint_status)
-    console.log(hints_taken)
   }
 
   var hintModal = document.getElementById('hintModal')
@@ -379,10 +377,10 @@
 
   function pause_test(){
     swal({
-      title: "Do you want to pause?",
-      text: "The test will be paused and you will be able to resume this test later.",
+      title: "<%=i18n.Doyouwanttopausethetest%>",
+      text: "<%=i18n.pausetest%>",
       icon: "info",
-      buttons: true,
+      buttons: ['<%=i18n.No%>','<%=i18n.Yes%>'],
     })
     .then(isPaused => {
       if (isPaused) {
@@ -401,10 +399,10 @@
     if(document.getElementById('answer').value===''){
       //play_audio('You have not answered this question. Do you want to skip this question?')
       swal({
-        title: "You have not answered this question",
-        text: "You won't be able to revisit. Do you want to skip this question?",
+        title: "<%=i18n.Youhavenotansweredthisquestion%>",
+        text: "<%=i18n.skipmsg%>",
         icon: "warning",
-        buttons: ['No', 'Yes'],
+        buttons: ['<%=i18n.No%>','<%=i18n.Yes%>'],
       }).
       then(yes => {
         if(!yes) {
@@ -516,10 +514,10 @@
               switch (error.name) {
                 default:
                   swal({
-                    title: "ERROR..!",
-                    text: "Unable to access your microphone. Please check your microphone settings.",
+                    title: "<%=i18n.Error%>",
+                    text: "<%=i18n.Unabletoaccessyourmicrophone%>",
                     icon: "error",
-                    buttons: ['Quit','Proceed']
+                    buttons: ['<%=i18n.Quit%>','<%=i18n.Proceed%>'],
                   })
                   .then((proceed) => {
                     if (proceed) {
@@ -669,10 +667,10 @@
       /*@cc_on!@*/false || !!document.documentMode
     ){
       swal({
-        title: "Unsupported Browser..!",
-        text: "This browser is not supported. Some features may not work correctly. Please use Chrome or Edge.",
+        title: "<%=i18n.UnsupportedBrowser%>..!",
+        text: "<%=i18n.UnsupportedBrowserMSg%>",
         icon: "warning",
-        buttons: ['Quit','Proceed']
+        buttons: ['<%=i18n.Quit%>','<%=i18n.Proceed%>'],
       })
       .then((proceed) => {
         if (proceed) {

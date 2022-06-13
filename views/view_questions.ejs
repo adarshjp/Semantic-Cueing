@@ -220,7 +220,7 @@
             title: "<%=i18n.Doyouwanttodeletethisquestion%>",
             text: "<%=i18n.Oncedeleteyouwillnotbeabletorecoverthisquestion%>",
             icon: "warning",
-            buttons: true,
+            buttons: ['<%=i18n.Cancel%>', '<%=i18n.Delete%>'],
             className: "blue"
         })
         .then((isdelete) => {
