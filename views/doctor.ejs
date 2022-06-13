@@ -396,7 +396,7 @@
       bar_chart_2.data.datasets[0].label='<%=i18n.NumberofQuestionsUnanswered%>';
       bar_chart_2.update();
     }else{
-      bar_chart_3.data.labels=Object.keys(dict);
+      bar_chart_3.data.labels=['<%=i18n.Pending%>','<%=i18n.Paused%>','<%=i18n.Completed1%>'];
       bar_chart_3.data.datasets[0].data=Object.values(dict);
       bar_chart_3.data.datasets[0].label='<%=i18n.Status%>';
       bar_chart_3.data.datasets[0].backgroundColor=['#6C63FF','#ABB2B9','#00FFCC'];
