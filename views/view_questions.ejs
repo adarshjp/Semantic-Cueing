@@ -47,8 +47,8 @@
                                 <div class="col-5 col-sm-3 col-lg-2 text-center">
                                     <a class="btn btn-primary white" href='/edit/question/<%=question._id%>'
                                             ><i class="fas fa-edit"></i></a>
-                                    <form action="/delete/question/<%=question._id%>?_method=DELETE" class="d-inline-block" method="POST">
-                                        <button class="btn btn-danger white" type="submit">
+                                    <form action="/delete/question/<%=question._id%>?_method=DELETE" class="d-inline-block" method="POST" id="<%=question._id%>">
+                                        <button class="btn btn-danger white" type="button" onclick="delete_question()">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </form>
@@ -163,13 +163,15 @@
         a.appendChild(i1);
 
         let form=document.createElement('form');
-        form.action='/delete/question/<%=question._id%>?_method=DELETE';
+        form.action='/delete/question/'+q._id+'?_method=DELETE';
         form.method='POST'
         form.className='d-inline-block';
+        form.id=q._id;
 
         let button = document.createElement('button');
         button.className='btn btn-danger white m-1'
         button.type='submit';
+        button.onclick='delete_question()';
 
         let i2=document.createElement('i');
         i2.className='fas fa-trash-alt';
@@ -212,5 +214,23 @@
       bytes.forEach((b) => binary += String.fromCharCode(b));
       return window.btoa(binary);
     };
+
+    function delete_question(){
+        swal({
+            title: "<%=i18n.Doyouwanttodeletethisquestion%>",
+            text: "<%=i18n.Oncedeleteyouwillnotbeabletorecoverthisquestion%>",
+            icon: "warning",
+            buttons: ['<%=i18n.Cancel%>', '<%=i18n.Delete%>'],
+            className: "blue"
+        })
+        .then((isdelete) => {
+            if (isdelete) {
+                document.getElementById('del-'+patientId).submit();
+                swal("<%=i18n.Thequestiondeletionisunderprogress%>", {
+                    icon: "info",
+                });
+            } 
+        });
+    }
 </script>
 <%- include("partials/footer") %>

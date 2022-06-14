@@ -16,7 +16,7 @@
                   <!-- <h2 class="card-title text-center">Choose the <span class="blue">Image</span> of Object</h2> -->
                   <div class="form-group text-center">
                      <label for="upload_file" id='upload_cloud'>
-                        <i class="fa-solid fa-cloud-arrow-up fa-4x blue" data-bs-toggle="tooltip" data-bs-placement="right" title="Upload Object Image"></i>
+                        <i class="fa-solid fa-cloud-arrow-up fa-4x blue" data-bs-toggle="tooltip" data-bs-placement="right" title="<%=i18n.UploadObjectImage%>"></i>
                      </label>
                      <input type="file" name="image" class="form-control form-control-lg fi" accept="image/png, image/jpeg" placeholder="<%=i18n.EnterImage%>" id="upload_file" onchange="getImagePreview(event,'preview','upload_file','upload_cloud')" id="login-input" style="display:none;">
                   </div>
@@ -28,10 +28,10 @@
                            <%- include("partials/starLevel") %>
                         </div>
                         <div class="col-12 col-sm-10">
-                           <input type="text" class='login-input' id='name' placeholder="<%=i18n.TitleofQuestion%>" name="name" data-bs-toggle="tooltip" data-bs-placement="right" title="Enter name of the question" required> 
+                           <input type="text" class='login-input' id='name' placeholder="<%=i18n.TitleofQuestion%>" name="name" data-bs-toggle="tooltip" data-bs-placement="right" title="<%=i18n.Enternameofthequestion%>" required> 
                         </div>
                         <div class="col-12 col-sm-10">
-                           <input type="text" class='login-input' id='ans' placeholder="<%=i18n.NameofObject%>" onkeydown="return event.key != 'Enter';" data-bs-toggle="tooltip" data-bs-placement="right" title="Enter all acceptible answers here"/> 
+                           <input type="text" class='login-input' id='ans' placeholder="<%=i18n.NameofObject%>" onkeydown="return event.key != 'Enter';" data-bs-toggle="tooltip" data-bs-placement="right" title="<%=i18n.Enterallacceptibleanswershere%>"/> 
 
                            <input type="text" name="answer" class='login-input d-none' id='form_ans'> 
                         </div>
@@ -39,7 +39,7 @@
 
                         </ul>
                         <div class="col-12 col-sm-10">
-                           <input type="text" name="score" id='desc' class='login-input' placeholder="<%=i18n.Description%>" required data-bs-toggle="tooltip" data-bs-placement="right" title="Enter text of the Question, which will be played while taking test" />
+                           <input type="text" name="score" id='desc' class='login-input' placeholder="<%=i18n.Description%>" required data-bs-toggle="tooltip" data-bs-placement="right" title="<%=i18n.EntertextoftheQuestionwhichwillbeplayedwhiletakingtest%>" />
                         </div>
                   </div>
                </div>
@@ -54,13 +54,13 @@
                   <div class="row justify-content-center">
                      <div class="form-group col-12 text-center">
                         <label for="upload_hint<%= i %>" id='hint_cloud<%= i %>'>
-                           <i class="fa-solid fa-cloud-arrow-up fa-4x blue" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Upload Hint-<%= i+1 %> Image"></i>
+                           <i class="fa-solid fa-cloud-arrow-up fa-4x blue" data-bs-toggle="tooltip" data-bs-placement="bottom" title="<%=i18n.UploadHint%>-<%= i+1 %> <%= i18n.Image1%>"></i>
                         </label>
                         <input type="file" name="image"  accept="image/png, image/jpeg" class="form-control form-control-lg" placeholder="<%=i18n.EnterImage%>" id="upload_hint<%= i %>" onchange="getImagePreview(event,'preview-hint<%= i %>','upload_hint<%= i %>','hint_cloud<%= i %>')" style="display: none">
                      </div>
                      <div id="preview-hint<%= i %>" class="my-2 col-11 col-sm-9 col-md-7 text-center"></div>
                      <div class="col-12">
-                        <input type="text" name="nscore[<%= i %>]" id='hint_desc<%= i %>' class="login-input" placeholder="<%=i18n.Description%>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Enter text of the Hint-<%= i+1 %>, which will be played while taking test" required/>
+                        <input type="text" name="nscore[<%= i %>]" id='hint_desc<%= i %>' class="login-input" placeholder="<%=i18n.Description%>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="<%=i18n.EnterthetextoftheHint%>-<%= i+1 %>, <%=i18n.whichwillbeplayedwhiletakingtest%>" required/>
                      </div>
                   </div>    
                </div>
@@ -80,8 +80,6 @@
       const file = Math.round((fsize / 1024));
       if (file >= 1024) {
          swal("<%=i18n.Filetoobig%>","","warning");
-         document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
-         document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
          document.getElementById(upload_id).value = '';
          var imagediv= document.getElementById(preview_id);
          var newimg=document.createElement('img');
@@ -125,10 +123,7 @@
          let val=ans.value.charAt(0).toUpperCase() + ans.value.toLowerCase().slice(1);
          if(val!==''){
             if(entered_ans.indexOf(val)>=0){
-               
                swal('<%=i18n.Duplicate%>','<%=i18n.Enteredanswerduplicate%>','error');
-               document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
-               document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
             }else{
                entered_ans.push(val);
                disp_pill();
@@ -137,9 +132,6 @@
             }
          }else{
             swal("<%=i18n.typetheanswer%>","", "info");
-            document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
-            document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
-
             ans.value='';
             ans.focus();
          }
@@ -166,21 +158,15 @@
    function validate(){
       if(document.getElementById('form_ans').value===''){
          swal("<%=i18n.enternamesoobject%>","", "info");
-         document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
-         document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
          return false;
       }
       if(document.getElementById('upload_file').files.length==0){
          swal("<%=i18n.uploadobjectimg%>","", "info");
-         document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
-            document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
          return false;
       }
       for(let i=0;i<4;i++){
          if(document.getElementById('upload_hint'+i).files.length===0){
             swal('<%=i18n.uploadhint%>'+ i,"", "info");
-            document.getElementsByClassName('swal-footer')[0].classList.add('text-center');
-            document.getElementsByClassName('swal-button')[0].classList.add('btn','btn-lg','btn-info');
             return false;
          }
       }

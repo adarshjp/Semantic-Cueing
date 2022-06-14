@@ -12,15 +12,22 @@
     "toidentify2":"to identify",
     "Submit":"Submit",
     "TitleofQuestion":"Title of Question",
+    "Filetoobig":"File too Big, please select a file less than 1MB",
+    "Duplicate":"Duplicate",
+    "Enteredanswerduplicate":"Entered answer is duplicate",
+    "typetheanswer":"Please type the answer",
+    "enternamesoobject":"Please enter names of the object",
+    "uploadobjectimg":"Please upload object image",
+    "uploadhint":"Please upload hint",
+    "Enternameofthequestion":"Enter the name of the question",
+    "Enterallacceptibleanswershere":"Enter all acceptible answers here",
+    "EntertextoftheQuestionwhichwillbeplayedwhiletakingtest":"Enter the text of the Question, which will be played while ",
+    "UploadObjectImage":"Upload Object Image",
+    "EnterthetextoftheHint":"Enter the text of the Hint",
+    "whichwillbeplayedwhiletakingtest":"which will be played while taking the test",
+    "UploadHint":"Upload Hint",
+    "Image1":"Image",
 
-            "Filetoobig":"File too Big, please select a file less than 1mb",
-            "Duplicate":"Duplicate",
-            "Enteredanswerduplicate":"Entered answer is duplicate",
-            "typetheanswer":"Please type the answer",
-            "enternamesoobject":"Please enter names of the object",
-            "uploadobjectimg":"Please upload object image",
-            "uploadhint":"Please upload hint",
-    
     "2":"admin.ejs",
 
     "NumberofPatients":"Number of Patients",
@@ -76,20 +83,21 @@
     "Patientstestresult":"Patients test result",
     "AnsweredaQuestionvsHintsTaken":"Answered a Question vs Hints Taken",
     "UnansweredaQuestionvsHintsTaken":"Unanswered a Question vs Hints Taken",
-    "Assignedtestdetails":"Assignedtestdetails",
+    "Assignedtestdetails":"Assigned test details",
     "PatientId":"Patient ID",
     "Strokedate":"Stroke date",
     "PostStrokeDuration":"Post Stroke duration ",
     "EmailAddress":"Email Address",
     "Nooftestscreated":"No of tests created",
     "Upgrade":"Upgrade",
-    "Degrade":"Degrade",
+    "Degrade":"Downgrade",
     "Percentage":"Percentage",
     "NumberofQuestionAnswered":"Number of Question Answered",
     "NumberofQuestionsUnanswered":"Number of Questions Unanswered",
     "Status":"Status",
     "Pending":"Pending",
     "Paused":"Paused",
+    "Completed1":"Completed",
 
     "6":"edit_question.ejs",
 
@@ -98,6 +106,13 @@
     "Objejct":"Object",
     "toidentify3":"to identify",
     "Level":"Level",
+    "EnterthetextoftheHintwhichwillbeplayedwhiletakingtest":"Enter the text of the Hint, which will be played while taking test",
+    "UploadtheHintimage":"Upload the Hint image",
+    "Nameofthequestion":"Name of the question",
+    "Acceptibleanswersofthequestion":"Acceptible answers of the question",
+    "TextoftheQuestionwhichisbeingplayedwhiletakingtest":"Text of the Question, which is being played while taking test",
+    "TextoftheHint":"Text of the Hint",
+    "whichisbeingplayedwhiletakingtest":"which is being played while taking test",
 
     "7":"editTest.ejs",
 
@@ -110,6 +125,7 @@
     "Edit":"Edit",
     "Profile":"Profile",
     "EditProfile":"Edit Profile",
+    "Profile1":"Profile",
 
     "9":"forgotpassword.ejs",
 
@@ -121,19 +137,19 @@
     "Enteryournewpassword":"Enter your new password",
     "SetPassword":"Set Password",
     "VerifyOTP":"Verify OTP",
-
-            "enteremailaddress":"Please enter your email address",
-            "OTPsenttoemail":"OTP sent to your email",
-            "Errors":"Error..",
-            "Emailnotfound":"Email not found",
-            "PleaseenterOTP":"Please enter the OTP",
-            "OTPverified":"OTP verified",
-            "OTPnotverified":"OTP not verified",
-            "enteryournewpassword":"Please enter your new password",
-            "Congratulations":"Congratulations..!",
-            "passwordchangedsuccessfully":"Your password has been changed successfully",
-            "Passwordnotset":"Password not set",
-            "verifyEmailentered":"Please verify Email entered...!",
+    
+    "enteremailaddress":"Please enter your email address",
+    "OTPsenttoemail":"OTP sent to your email",
+    "Errors":"Error..",
+    "Emailnotfound":"Email not found",
+    "PleaseenterOTP":"Please enter the OTP",
+    "OTPverified":"OTP verified",
+    "OTPnotverified":"OTP not verified",
+    "enteryournewpassword":"Please enter your new password",
+    "Congratulations":"Congratulations..!",
+    "passwordchangedsuccessfully":"Your password has been changed successfully",
+    "Passwordnotset":"Password not set",
+    "verifyEmailentered":"Please verify Email entered...!",
             
     "10":"login.ejs",
 
@@ -150,6 +166,9 @@
     "CarnegieName":"— Dale Carnegie",
     "PoindexterQuote":"One small crack does not mean that you are broken,it means that you were put to the test and  you didn’t fall apart.",
     "PoindexterName":"-Linda Poindexter",
+    "InvalidCredentials":"Invalid Credentials",
+    "Pleaseentervalidcredentials":"Please enter valid credentials.",
+    "Passwordorusernameisincorrect":"Password or username is incorrect.",
 
     "11":"mydoctor.ejs",
 
@@ -172,9 +191,9 @@
     "YourdoinggoodjobKeepitup":"Your doing a good job, Keep it up!",
     "gettingbettercontinuehardwork":"Your getting better & better, continue the hard work",
     "hardworkpaidoff":"Congratulations! Your hard work paid off",
-    "POOR":"POOR",
-    "AVERAGE":"AVERAGE",
-    "GOOD":"GOOD",
+    "POOR":"SATISFACTORY WORK",
+    "AVERAGE":"GOOD",
+    "GOOD":"VERY GOOD",
     "EXCELLENT":"EXCELLENT",
 
     "14":"setPassword.ejs",
@@ -217,6 +236,26 @@
     "Pause":"Pause",
     "TestID":"Test ID",
     "Audio":"Audio",
+    "Close1":"Close",
+
+    "TestCompleted":"Test Completed..!",
+    "testSubmitted":"You have successfully completed the test. The test results are sent to your mail. Thank you for taking this test.",
+    "ok":"OK",
+
+    "Doyouwanttopausethetest":"Do you want to pause the test?",
+    "pausetest":"The test will be paused and you will be able to resume this test later.",
+    "Yes":"Yes",
+    "No":"No",
+
+    "Youhavenotansweredthisquestion":"You have not answered this question..!",
+    "skipmsg":"You won't be able to revisit. Do you want to skip this question?",
+
+    "Error": "Error",
+    "Unabletoaccessyourmicrophone": "Unable to access your microphone. Please check your microphone settings.",
+    "Quit": "Quit",
+
+    "UnsupportedBrowser": "Unsupported Browser..!",
+    "UnsupportedBrowserMSg": "Your browser is not supported. Some features may not work correctly. Please use latest version of Chrome or Edge.",
 
         "Attempted":"Attempted",
         "Tobeattemted":"To be attempted",
@@ -231,15 +270,20 @@
             "allowaccessyourmicrophone":"Please allow to access your microphone..!",
             "unableaceessyourmicrophone":"Sorry...!, we are unable to aceess your microphone",
             "enumerateDevicesnotsupported.":"enumerateDevices() not supported.",
-            "Microphonetestedsuccessfully":"Microphone tested successfully...!",
+            "Microphonetestedsuccessfully":"All System Checks are completed and you can proceed to the test..!",
             "UseChromeorEdgeBrowserstoproceed":"Please Use Chrome or Edge Browsers to proceed...!",
 
     "17":"view_doctors.ejs",
 
     "Our":"Our",
     "Doctors":"Doctors",
-    "NoDoctors":"No Doctors",
-    "Createdyet":"Created yet..!",
+    "NoDoctors":"You have not created ",
+    "Createdyet":"any doctors yet..!",
+    "Doyouwanttodeletethisdoctor":"Do you want to delete this doctor?",
+    "Oncedeletedoctordetails":"Once deleted, you will not be able to recover this doctor details!",
+    "Cancel":"Cancel",
+    "Delete":"Delete",
+    "Thedoctordeletion":"The doctor's deletion is in progress..!",
 
     "18":"view_patients.ejs",
 
@@ -258,7 +302,15 @@
     "patients":"patients",
     "CurrentAssignedDoctor":"Current Assigned Doctor",
     "SelecttheDoctor":"Select the Doctor",
+    
+    "Doyouwanttodischarge":"Do you want to discharge this patient?",
+    "Oncedischargedaccessthispatient":"Once discharged, you will not be able to access this patient!",
+    "Thepatienthasbeendischargedsuccessfully":"The patient has been discharged successfully",
 
+    "Doyouwantpatient":"Do you want to delete this patient?",
+    "Oncedeletthispatientdetails":"Once deleted, you will not be able to recover this patient details!",
+    "Thepatienprogress":"The patient deletion under progress..!",
+    
     "19":"view_questions.ejs",
 
     "Listof":"List of",
@@ -266,6 +318,9 @@
     "Created":"Created",
     "Noquestions":"No questions",
     "Createdyet1":"Created yet..!",
+    "Doyouwanttodeletethisquestion":"Do you want to delete this question?",
+    "Oncedeleteyouwillnotbeabletorecoverthisquestion":"Once deleted, you will not be able to recover this question!",
+    "Thequestiondeletionisunderprogress":"The question deletion is in progress..!",
 
     "20":"view_tests.ejs",
 
