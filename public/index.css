@@ -214,6 +214,37 @@ blockquote cite {
 .carousel-indicators .active {
   background-color:#6C63FF;
 }
+
+@media (min-width: 10px){ 
+  #header{
+    height:100vh;
+  }
+  #login-form-div{
+    background-color: #6c63ff;
+    border-radius: .5rem;
+  }
+  #login-h1{
+    font-size: 2.5rem;
+  }
+}
+
+@media (min-width: 768px) { 
+  #login-container{
+    margin-top:8vh;
+  }
+  #header{
+    height:85vh;
+    border-radius: 0 .5rem .5rem 0;
+    box-shadow: 0 1rem 4rem rgba(0,0,0, .175);
+  }
+  #login-form-div{
+    background-color: #6c63ff;
+    border-radius: .5rem 0 0 .5rem;
+  }
+  #login-h1{
+    font-size: 3rem;
+  }
+}
 /*********************************
         LOGIN PAGE end
 **********************************/
