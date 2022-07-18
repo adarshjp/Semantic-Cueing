@@ -215,17 +215,15 @@ blockquote cite {
   background-color:#6C63FF;
 }
 
-@media (min-width: 10px){ 
-  #header{
-    height:100vh;
-  }
-  #login-form-div{
-    background-color: #6c63ff;
-    border-radius: .5rem;
-  }
-  #login-h1{
-    font-size: 2.5rem;
-  }
+#header{
+  height:100vh;
+}
+#login-form-div{
+  background-color: #6c63ff;
+  border-radius: .5rem;
+}
+#login-h1{
+  font-size: 2.5rem;
 }
 
 @media (min-width: 768px) { 
