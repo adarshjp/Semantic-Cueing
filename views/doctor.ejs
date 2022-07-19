@@ -100,11 +100,11 @@
             <div class="text-center my-2">
               <form action="" method="POST" class="d-inline-block" id='upgrade'>
                 <button class="btn btn-primary rounded-pill btn-lg white m-1" id='upgrade-but' type="submit">
-                  Upgrade</button>
+                  <%=i18n.Upgrade%></button>
               </form>
               <form action="" method="POST" class="d-inline-block" id='downgrade'>
                 <button class="btn btn-primary rounded-pill btn-lg white m-1" id='downgrade-but' type="submit" >
-                  Degrade</button>
+                  <%=i18n.Degrade%></button>
               </form>
             </div>
           </div>
@@ -399,7 +399,7 @@
       bar_chart_2.data.datasets[0].label='<%=i18n.NumberofQuestionsUnanswered%>';
       bar_chart_2.update();
     }else{
-      bar_chart_3.data.labels=Object.keys(dict);
+      bar_chart_3.data.labels=['<%=i18n.Pending%>','<%=i18n.Paused%>','<%=i18n.Completed1%>'];
       bar_chart_3.data.datasets[0].data=Object.values(dict);
       bar_chart_3.data.datasets[0].label='<%=i18n.Status%>';
       bar_chart_3.data.datasets[0].backgroundColor=['#6C63FF','#ABB2B9','#00FFCC'];
