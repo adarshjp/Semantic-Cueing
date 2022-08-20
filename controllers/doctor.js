@@ -131,19 +131,20 @@ exports.get_patient_test_details = (req, res) => {
              2 - For each test in the array find the test details of req.params.patientId
              3 - Push that details onto patient_tests array
   */
-  Test.find({ 'patients.$.patientid' : req.params.patientId, doctorid: req.user._id }, { patients:1,noofquestion:1 })
+  Test.find({ 'patients.$.patientid' : req.params.patientId,  doctorid: req.user._id }, { patients:1 })
     .then((tests) => {
-      let patient_tests=[];
-      let noofquestion=[];
+      //let patient_tests=[];
+      //let noofquestion=[];
+      let test_status=[];
       tests.forEach((test) => {
         test.patients.forEach((patient) => {
           if (patient.patientid.toString() === req.params.patientId.toString()) {
-            patient_tests.push(patient);
+            test_status.push(patient.status);
           }
         })
-        noofquestion.push(test.noofquestion)
+        //noofquestion.push(test.noofquestion)
       });
-      res.status(200).send({patient_tests,noofquestion});
+      res.status(200).send({test_status});
     })
     .catch((err) => {
       res.status(500).json({

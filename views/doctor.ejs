@@ -257,7 +257,7 @@
         create_bar_charts('bar-chart-3');
         temp=false;
       }
-      disp_performance_charts(patientid);
+      disp_performance_charts(patient[0].test,patientid);
     });
   }
 
@@ -323,7 +323,7 @@
     }
   }
 
-  function disp_performance_charts(patientid){
+  function disp_performance_charts(test,patientid){
     document.getElementById('spinner-1').classList.remove('d-none')
     document.getElementById('line-chart').setAttribute('hidden', '')
 
@@ -338,32 +338,35 @@
 
     fetch('/data/testdetails/'+patientid)
     .then(response => response.json())
-    .then(test => {
-      document.getElementById('nooftests').textContent = test.patient_tests.length;
+    .then(tests => {
+      document.getElementById('nooftests').textContent = tests.test_status.length;
       document.getElementById('spinner-0').classList.add('d-none')
       document.getElementById('patient-details').removeAttribute('hidden')
-      create_data_for_charts(test.patient_tests,test.noofquestion);
+      create_data_for_charts(test,tests.test_status);
     });
   }
 
-  function create_data_for_charts(test,noofquestion){
-    let score=[];   //this store the details of 'completed' test score 
+  function create_data_for_charts(test,test_status){
+    //let score=[];   //this store the details of 'completed' test score 
     let percent=[];
     let status={'pending':0,'paused':0,'completed':0}  //to count test statuses
     let answered={'0':0,'1':0,'2':0,'3':0,'4':0};
     let unanswered={'0':0,'1':0,'2':0,'3':0,'4':0};
     for(let i=0;i< test.length;i++){
-      if(test[i].status==='completed'){
-        score.push(test[i].score);
-        percent.push(test[i].score/noofquestion[i])
+      //score.push(test[i].score);
+      percent.push(test[i].score)
+      let t1=test[i].answered;
+      let t2=test[i].unanswered;
+      for(let j=0;j< 5;j++){
+        answered[j+'']=answered[j+'']+t1[j+''];
+        unanswered[j+'']=unanswered[j+'']+t2[j+''];
+      }
+    }
+
+    for(let i=0;i<test_status.length;i++){
+      if(test_status[i]==='completed'){
         status['completed']++;
-        let t1=test[i].answered;
-        let t2=test[i].unanswered;
-        for(let j=0;j< 5;j++){
-          answered[j+'']=answered[j+'']+t1[j+''];
-          unanswered[j+'']=unanswered[j+'']+t2[j+''];
-        }
-      }else if(test[i].status==='paused'){
+      }else if(test_status[i].status==='paused'){
         status['paused']++;
       }else{
         status['pending']++;

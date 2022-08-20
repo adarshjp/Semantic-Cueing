@@ -83,7 +83,8 @@ exports.delete_user = async (req, res) => {
 }
 async function findAndDeletePatient(id) {
     await findAndDeleteUserById(id)
-    unassign_patient_from_all_test(id)
+    await find_And_Update_Test_Status(id)
+    await unassign_patient_from_all_test(id)
 }
 async function findAndDeleteDoctor(id) {
     //1.Check whether the doctor has any patients 
@@ -100,13 +101,14 @@ async function findAndDeleteDoctor(id) {
 }
 
 function unassign_patient_from_all_test(patientid) {
-    Test.updateMany({ "patients.patientid": patientid }, { $pull: { "patients": { "patientid": patientid } } }, { new: true })
+    return new Promise((resolve, reject) => {
+        Test.updateMany({ "patients.patientid": patientid }, { $pull: { "patients": { "patientid": patientid } } }, { new: true })
         .then((test) => {
-            return;
+            resolve(test)
         }).catch((err) => {
-            console.log(err)
-            return;
+            reject(err)
         })
+    })
 }
 
 function delete_all_tests_from_doctor(doctorid) {
@@ -201,26 +203,57 @@ exports.active_patient = (req, res) => {
         })
 }
 
-exports.change_doctor = (req, res) => {
-    // Pull all the patients array of objects in Test document with patient id===req.params.patientid
-    Test.updateMany({ "patients.patientid": req.params.patientid }, { $pull: { "patients": { "patientid": req.params.patientid } } }, { new: true })
-        .then((test) => {
-            // Patient all test is removed now change the doctor
-            User.findOneAndUpdate({ _id: req.params.patientid, role: 'patient' }, { $set: { doctorid: req.body.doctorId } }, { new: true })
-                .then((patient) => {
-                    req.flash('success', global.i18n.Doctorchangedsuccessfully)
-                    res.status(200)
-                    res.redirect('/view/patient/')
-                })
-                .catch((err) => {
-                    res.status(500).json({
-                        error: err
+exports.change_doctor = async (req, res) => {
+    /* Change the doctor of the patient 
+        1. Find all the tests with patient id===req.params.patientid
+        2. Check whether all patients.status==='pending' then update test.status='pending'
+        3. Unassign_patient_form_all_tests
+        4. change doctor
+    */
+   await find_And_Update_Test_Status(req.params.patientid)
+   await unassign_patient_from_all_test(req.params.patientid)
+   User.findByIdAndUpdate(req.params.patientid,{doctorid: req.body.doctorId},{ new: true })
+   .then((patient) => {
+        req.flash('success', global.i18n.Doctorchangedsuccessfully)
+        res.status(200)
+        res.redirect('/view/patient/')
+    })
+    .catch((err) => {
+        res.status(500).json({
+            error: err
+        })
+    })
+}
+
+function find_And_Update_Test_Status(patientId){
+    return new Promise((resolve, reject) => {
+        Test.find({'patients.$.patientid':patientId}, {_id:1,patients:1},(err, tests)=>{
+            if (err) {
+                reject(err);
+            }
+            else{
+                let status='pending'
+                let count=0
+                tests.forEach((test)=>{
+                    if(test.patients.length===1){
+                        count=1
+                    }
+                    test.patients.forEach((patient) => {
+                        if (patient.patientid.toString() !== patientId && patient.status !== 'pending') {
+                            status = patient.status
+                        }
                     })
+                    if(status === 'pending' || count===1){
+                        Test.findOneAndUpdate({ _id: test._id }, { $set: { status: 'pending' } }, { new: true })
+                        .then((test) => {
+                            
+                        }).catch((err) => {
+                            console.log(err)
+                        })
+                    }
                 })
+                resolve(tests)
+            }
         })
-        .catch((err) => {
-            res.status(500).json({
-                error: err
-            })
-        })
+    })
 }

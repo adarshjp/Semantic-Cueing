@@ -121,6 +121,7 @@ exports.update_test_status = (req, res) => {
                 test.patients.forEach((patient) => {
                     if (patient.patientid.toString() === req.user._id.toString()) {
                         Object.assign(patient, {noofquestion: test.noofquestion});
+                        add_test_result_in_user(req.user._id,req.user.level,req.body,test.noofquestion)
                         send_Test_Result(patient,req.user.email,res)
                     }
                 })
@@ -199,6 +200,20 @@ function send_Test_Result(test,to_emailId,res){
             sendMail(mailDetails);
         }
     })
+}
+
+function add_test_result_in_user(patientid,level,test,noofquestion){
+    //push level and test to an array  of test in User
+    test.score = test.score/noofquestion;
+    User.findOneAndUpdate({_id:patientid},{$push:{test:{score:test.score,answered:test.ans,unanswered:test.unans,patient_level:level}}},{new:true})
+    .then((user)=>{
+        console.log(user.test);
+        return;
+    })
+    .catch((err)=>{
+        console.log(err);
+        return;
+    });
 }
 
 exports.update_paused_hint = (req, res) => {
