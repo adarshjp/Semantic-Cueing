@@ -34,17 +34,9 @@ exports.register_post = (req, res) => {
   User.register(user, req.body.password, (err, newUser) => {
     if (err) {
       res.status(400);
-      //res.send(err);
       req.flash("error", err.message)
       res.redirect("/register");
     } else {
-      // passport.authenticate("local")(req, res, () => {
-      //   res.status(200);
-      //   //res.send("User created!");
-      //   //console.log(req.user.role);
-      //   req.flash("success", "User created!!")
-      //   res.redirect("/register");
-      // });
       res.status(200);
       req.flash("success", global.i18n.Usercreated)
       res.redirect("/register");
