@@ -105,7 +105,7 @@
 
         let div=document.createElement("div");
         
-        div.className='ms-3 ms-md-0 col-11 border border-2 rounded-3 shadow-sm  my-2 py-3';
+        div.className='col-12 border border-2 rounded-3 shadow-sm my-2 py-3';
 
         let card_img=document.createElement('div');
         card_img.className='card-image mx-0 p-sm-2';
@@ -123,7 +123,7 @@
         div_p_row_1.className='col-12 col-md-6';
 
         let p=document.createElement('p')
-        p.className='h6 text-truncate';
+        p.className='h6 text-truncate text-break';
         p.textContent=q.name;
 
         div_p_row_1.appendChild(p);
@@ -194,7 +194,7 @@
         span.className='p-1 rounded-lg my-3';
 
         let img=document.createElement('img');
-        img.className='img-fluid  border border-2 rounded-3';
+        img.className='img-fluid border border-2 rounded-3';
         img.alt='image';
         img.style.cssText='height: 35vh;';
         img.id='qimg';
