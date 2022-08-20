@@ -1,76 +1,50 @@
 <%- include("partials/header") %>
-<div class="container my-5 p-md-1">
-    <div class="row justify-content-center vertical-center shadow-lg rounded p-2 p-md-0">
-        <div class="col-11 col-md-5 col-lg-4" style="background-color: #6c63ff">
-            <div class="my-5 py-3 px-md-0 px-xl-3">
-                <div class="row my-3 align-items-center">
-                    <div class="col-1"></div>
-                    <div class="col-10 p-2 justify-content-center" >
-                        <form
-                            onsubmit="return validateForm()"
-                            action="/login"
-                            method="post"
-                            class="p-3"
-                            id="login-form"
-                        >
-                            <h1 class="p-3 white"><b><%=i18n.Login%></b></h1>
-                            <!-- <% if(message.error){ %>
-                            <div
-                                class="
-                                    alert alert-warning alert-dismissible
-                                    fade
-                                    show
-                                "
-                                role="alert"
-                            >
-                                <strong> <%= message.error%> </strong>
-                                <button
-                                    type="button"
-                                    class="btn-close"
-                                    data-bs-dismiss="alert"
-                                    aria-label="Close"
-                                ></button>
-                            </div>
-                            <% } %> -->
-                            <input
-                                type="text"
-                                name="username"
-                                placeholder="<%=i18n.Username%>"
-                                class="outline-color login-input"
-                                required
-                            />
-                            <input
-                                type="password"
-                                name="password"
-                                placeholder="<%=i18n.Password%>"
-                                class="outline-color login-input"
-                                required
-                            />
-                            <span class="d-flex">
-                                <a href="/forgotpassword" id="login-a" class="p-2"
-                                ><%=i18n.ForgotYourPassword%> </a>
-                            </span>
-                            <div class='text-center d-flex'>
-                                <button
-                                type="submit"
-                                class="
-                                    btn btn-lg
-                                    rounded-pill
-                                    p-2
-                                    mt-1
-                                    shadow
-                                    blue
-                                    bg-white
-                                "
-                                id="login-btn"
-                                style="width:90px;"
-                                ><%=i18n.Login%></button>
-                                <button type="button" class="btn btn-lg btn-light rounded-pill shadow-lg blue ms-2 p-2 mt-1" data-bs-toggle="modal" data-bs-target="#langModal" style="width:60px;"> <i class="fa fa-language" aria-hidden="true"></i> </button>
-                            </div>
-                        </form>
-                    </div>
+<div class="container" id="login-container">
+    <div class="row justify-content-center align-items-center p-3 p-md-0" id="header" >
+        <div class="col-12 col-md-5 col-lg-4 h-100" style="background-color: #6c63ff" id="login-form-div">
+            <form
+                onsubmit="return validateForm()"
+                action="/login"
+                method="post"
+                class="p-1 p-sm-5 p-md-4"
+                id="login-form">
+                <h1 class="p-2 white" id="login-h1"><b><%=i18n.Login%></b></h1>
+                <input
+                    type="text"
+                    name="username"
+                    placeholder="<%=i18n.Username%>"
+                    class="outline-color login-input"
+                    required
+                />
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="<%=i18n.Password%>"
+                    class="outline-color login-input"
+                    required
+                />
+                <span class="d-flex">
+                        <a href="/forgotpassword" id="login-a" class="p-0 p-md-2"
+                        ><%=i18n.ForgotYourPassword%> </a>
+                </span>
+                <div class='text-center d-flex'>
+                        <button
+                        type="submit"
+                        class="
+                            btn btn-lg
+                            rounded-pill
+                            p-2
+                            mt-1
+                            shadow
+                            blue
+                            bg-white
+                        "
+                        id="login-btn"
+                        style="width:90px;"
+                        ><%=i18n.Login%></button>
+                        <button type="button" class="btn btn-lg btn-light rounded-pill shadow-lg blue ms-2 p-2 mt-1" data-bs-toggle="modal" data-bs-target="#langModal" style="width:60px;"> <i class="fa fa-language" aria-hidden="true"></i> </button>
                 </div>
-            </div>
+            </form>
         </div>
         <div class="col-10 col-md-7 col-lg-8 d-none d-md-block my-auto">
             <div
@@ -78,7 +52,7 @@
                 class="carousel slide"
                 data-bs-ride="carousel"
             >
-                <div class="carousel-indicators blue">
+                <div class="carousel-indicators blue text-center  d-none d-lg-block">
                     <button
                         type="button"
                         data-bs-target="#carouselExampleIndicators"
